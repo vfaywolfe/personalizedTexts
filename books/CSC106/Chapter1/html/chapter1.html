@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Welcome to CSC 106 - The Joy of Programming</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #002147;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #0066cc;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+        .lo-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .lo-item {
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+        .survey-section {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .question {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 4px;
+        }
+        .question-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .question-type {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+        .options {
+            margin-left: 20px;
+        }
+        .option {
+            margin: 5px 0;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea {
+            min-height: 80px;
+            font-family: inherit;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            margin-right: 8px;
+        }
+        .pretest-question {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffb800;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .info-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .next-steps {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        ul {
+            line-height: 1.8;
+        }
+        .chapter-number {
+            color: #0066cc;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><span class="chapter-number">CHAPTER 1</span><br>Welcome to The Joy of Programming</h1>
+        
+        <!-- Part 1: Course Introduction -->
+        <section id="part1">
+            <h2>1.1 Course Introduction</h2>
+            
+            <p>Welcome to CSC 106: The Joy of Programming! This course is your gateway into the exciting world of computer programming. Whether you're pursuing a degree in computer science, exploring programming out of curiosity, or building skills for your future career, this course will give you a solid foundation in fundamental programming concepts.</p>
+            
+            <p>In CSC 106, you'll learn to think like a programmer—breaking down complex problems into manageable pieces, designing solutions before you code, and systematically debugging when things don't work as expected. You'll write programs using JavaScript and the P5.js library, creating everything from simple drawings to interactive animations and even complete games. Along the way, you'll learn how to work effectively with AI tools as tutoring assistants, building the critical thinking skills necessary to use these powerful technologies responsibly and effectively.</p>
+            
+            <div class="lo-box">
+                <h3>Course Learning Objectives</h3>
+                <p>By the end of this course, you will be able to:</p>
+                
+                <div class="lo-item">
+                    <strong>LO1.1: Write Fundamental Programs Independently</strong><br>
+                    You will write simple programs using variables, functions, conditionals, loops, and arrays without external assistance. You will demonstrate mastery of basic programming constructs through individual coding exercises and assessments.
+                </div>
+                
+                <div class="lo-item">
+                    <strong>LO1.2: Design Programs Before Coding</strong><br>
+                    You will analyze problems and create program designs using AI-assisted thought partnering, pseudocode, flowcharts, or other planning tools before implementation. You will apply structured problem-solving approaches to break down complex tasks into manageable components.
+                </div>
+                
+                <div class="lo-item">
+                    <strong>LO1.3: Debug and Test Programs Systematically</strong><br>
+                    You will identify, troubleshoot, and correct syntax, logic, and runtime errors using systematic debugging methods. You will develop and execute test plans to verify program functionality and handle edge cases.
+                </div>
+                
+                <div class="lo-item">
+                    <strong>LO1.4: Utilize AI and External Resources Effectively</strong><br>
+                    You will effectively and responsibly use AI and online resources to solve large programming challenges, understanding when to seek help and how to learn from assistance rather than simply copying solutions.
+                </div>
+                
+                <div class="lo-item">
+                    <strong>LO1.5: Develop a Comprehensive Final Project</strong><br>
+                    You will design and implement a substantial program (such as a game or educational app) that integrates multiple programming concepts. You will manage the complete development process from initial design through final presentation and demonstration.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Part 2: Personal Survey -->
+        <section id="part2">
+            <h2>1.2 Getting to Know You: Personalized Learning Profile</h2>
+            
+            <div class="info-box">
+                <h3>About This Survey</h3>
+                <p>This survey is part of an exciting project at the University of Rhode Island to develop personalized learning experiences. Your responses will help us understand your background, interests, and learning preferences so we can tailor examples, explanations, and content to better match your needs and interests.</p>
+                
+                <p><strong>Important Information:</strong></p>
+                <ul>
+                    <li>All questions are <strong>optional</strong>—answer only what you're comfortable sharing</li>
+                    <li>Your responses are confidential and used only to improve your learning experience</li>
+                    <li>The more you share, the better we can personalize the course content for you</li>
+                    <li>This is part of a research project to improve computer science education</li>
+                </ul>
+                
+                <p><strong>Estimated time:</strong> 10-12 minutes</p>
+            </div>
+            
+            <!-- Section 1: About You -->
+            <div class="survey-section">
+                <h3>Section 1: About You</h3>
+                <p>Basic information to help us understand who you are.</p>
+                
+                <div class="question">
+                    <div class="question-text">Q1. What is your current year in school?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q1" value="A"> A) First-year / Freshman</div>
+                        <div class="option"><input type="radio" name="q1" value="B"> B) Sophomore</div>
+                        <div class="option"><input type="radio" name="q1" value="C"> C) Junior</div>
+                        <div class="option"><input type="radio" name="q1" value="D"> D) Senior</div>
+                        <div class="option"><input type="radio" name="q1" value="E"> E) Graduate student</div>
+                        <div class="option"><input type="radio" name="q1" value="F"> F) High school (concurrent enrollment)</div>
+                        <div class="option"><input type="radio" name="q1" value="G"> G) Other</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q2. What is your declared or intended major?</div>
+                    <div class="question-type">[Dropdown + Text]</div>
+                    <select name="q2">
+                        <option value="">Select your major...</option>
+                        <option value="undecided">Undecided</option>
+                        <option value="cs">Computer Science</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="business">Business</option>
+                        <option value="biology">Biology</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="psychology">Psychology</option>
+                        <option value="math">Mathematics</option>
+                        <option value="education">Education</option>
+                        <option value="nursing">Nursing</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <p style="margin-top: 10px;">If 'Other' or if you want to specify:</p>
+                    <input type="text" name="q2_other" placeholder="Please specify...">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q3. If you are undecided, what majors are you considering? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q3" value="business"> Business</div>
+                        <div class="option"><input type="checkbox" name="q3" value="education"> Education</div>
+                        <div class="option"><input type="checkbox" name="q3" value="engineering"> Engineering</div>
+                        <div class="option"><input type="checkbox" name="q3" value="health"> Health Sciences</div>
+                        <div class="option"><input type="checkbox" name="q3" value="humanities"> Humanities</div>
+                        <div class="option"><input type="checkbox" name="q3" value="natural"> Natural Sciences</div>
+                        <div class="option"><input type="checkbox" name="q3" value="social"> Social Sciences</div>
+                        <div class="option"><input type="checkbox" name="q3" value="arts"> Arts</div>
+                        <div class="option"><input type="checkbox" name="q3" value="tech"> Technology/Computer Science</div>
+                        <div class="option"><input type="checkbox" name="q3" value="other"> Other</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q4. Are you the first person in your immediate family to attend a four-year college?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q4" value="yes"> A) Yes</div>
+                        <div class="option"><input type="radio" name="q4" value="no"> B) No</div>
+                        <div class="option"><input type="radio" name="q4" value="prefer"> C) Prefer not to say</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q5. Where did you grow up? (City/Town, State/Country)</div>
+                    <div class="question-type">[Short Text]</div>
+                    <input type="text" name="q5" placeholder="Example: Providence, RI or London, UK">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q6. How would you describe the community where you spent most of your childhood?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q6" value="urban"> A) Urban (large city)</div>
+                        <div class="option"><input type="radio" name="q6" value="suburban"> B) Suburban (near a city)</div>
+                        <div class="option"><input type="radio" name="q6" value="rural"> C) Rural (small town or countryside)</div>
+                        <div class="option"><input type="radio" name="q6" value="mixed"> D) Mixed / Moved frequently</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 2: Language -->
+            <div class="survey-section">
+                <h3>Section 2: Language</h3>
+                <p>Understanding your language background helps us provide appropriate explanations.</p>
+                
+                <div class="question">
+                    <div class="question-text">Q7. How would you rate your comfort reading academic content in English?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q7" value="native"> A) Native English speaker</div>
+                        <div class="option"><input type="radio" name="q7" value="verycomf"> B) Very comfortable (fluent)</div>
+                        <div class="option"><input type="radio" name="q7" value="comf"> C) Comfortable (can understand most content)</div>
+                        <div class="option"><input type="radio" name="q7" value="somedifficulty"> D) Some difficulty (need extra time or simpler explanations)</div>
+                        <div class="option"><input type="radio" name="q7" value="sigdifficulty"> E) Significant difficulty (prefer support in another language)</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q8. What is the primary language spoken in your home?</div>
+                    <div class="question-type">[Dropdown]</div>
+                    <select name="q8">
+                        <option value="">Select language...</option>
+                        <option value="english">English</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="mandarin">Chinese (Mandarin)</option>
+                        <option value="cantonese">Chinese (Cantonese)</option>
+                        <option value="french">French</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="vietnamese">Vietnamese</option>
+                        <option value="korean">Korean</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q9. What other languages do you speak or understand? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q9" value="english"> English</div>
+                        <div class="option"><input type="checkbox" name="q9" value="spanish"> Spanish</div>
+                        <div class="option"><input type="checkbox" name="q9" value="portuguese"> Portuguese</div>
+                        <div class="option"><input type="checkbox" name="q9" value="mandarin"> Chinese (Mandarin)</div>
+                        <div class="option"><input type="checkbox" name="q9" value="cantonese"> Chinese (Cantonese)</div>
+                        <div class="option"><input type="checkbox" name="q9" value="french"> French</div>
+                        <div class="option"><input type="checkbox" name="q9" value="arabic"> Arabic</div>
+                        <div class="option"><input type="checkbox" name="q9" value="hindi"> Hindi</div>
+                        <div class="option"><input type="checkbox" name="q9" value="vietnamese"> Vietnamese</div>
+                        <div class="option"><input type="checkbox" name="q9" value="korean"> Korean</div>
+                        <div class="option"><input type="checkbox" name="q9" value="none"> None</div>
+                        <div class="option"><input type="checkbox" name="q9" value="other"> Other</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q10. Would you find it helpful to occasionally see key technical terms explained in another language?</div>
+                    <div class="question-type">[Single Select + Conditional]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q10" value="no"> A) No, English only is fine</div>
+                        <div class="option"><input type="radio" name="q10" value="yes"> B) Yes</div>
+                    </div>
+                    <p style="margin-top: 10px;">If yes, which language?</p>
+                    <select name="q10_lang">
+                        <option value="">Select language...</option>
+                        <option value="spanish">Spanish</option>
+                        <option value="portuguese">Portuguese</option>
+                        <option value="mandarin">Chinese (Mandarin)</option>
+                        <option value="cantonese">Chinese (Cantonese)</option>
+                        <option value="french">French</option>
+                        <option value="arabic">Arabic</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="vietnamese">Vietnamese</option>
+                        <option value="korean">Korean</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Section 3: Your Interests -->
+            <div class="survey-section">
+                <h3>Section 3: Your Interests</h3>
+                <p>We'll use your interests to create examples that are more relevant and engaging for you.</p>
+                
+                <div class="question">
+                    <div class="question-text">Q11. Select all interests and hobbies that apply to you:</div>
+                    <div class="question-type">[Multi-Select Checklist]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q11" value="sports"> Sports & Fitness</div>
+                        <div class="option"><input type="checkbox" name="q11" value="music"> Music (listening/playing)</div>
+                        <div class="option"><input type="checkbox" name="q11" value="games"> Video Games</div>
+                        <div class="option"><input type="checkbox" name="q11" value="food"> Cooking/Food</div>
+                        <div class="option"><input type="checkbox" name="q11" value="art"> Art & Design</div>
+                        <div class="option"><input type="checkbox" name="q11" value="nature"> Nature/Outdoors</div>
+                        <div class="option"><input type="checkbox" name="q11" value="travel"> Travel</div>
+                        <div class="option"><input type="checkbox" name="q11" value="tech"> Technology/Gadgets</div>
+                        <div class="option"><input type="checkbox" name="q11" value="fashion"> Fashion/Beauty</div>
+                        <div class="option"><input type="checkbox" name="q11" value="reading"> Reading/Writing</div>
+                        <div class="option"><input type="checkbox" name="q11" value="animals"> Animals/Pets</div>
+                        <div class="option"><input type="checkbox" name="q11" value="social"> Social Media</div>
+                        <div class="option"><input type="checkbox" name="q11" value="business"> Business/Entrepreneurship</div>
+                        <div class="option"><input type="checkbox" name="q11" value="health"> Healthcare/Medicine</div>
+                        <div class="option"><input type="checkbox" name="q11" value="movies"> Movies/TV Shows</div>
+                        <div class="option"><input type="checkbox" name="q11" value="photo"> Photography/Video</div>
+                        <div class="option"><input type="checkbox" name="q11" value="diy"> DIY/Crafts</div>
+                        <div class="option"><input type="checkbox" name="q11" value="cars"> Cars/Automotive</div>
+                        <div class="option"><input type="checkbox" name="q11" value="science"> Science</div>
+                        <div class="option"><input type="checkbox" name="q11" value="history"> History</div>
+                        <div class="option"><input type="checkbox" name="q11" value="finance"> Finance/Investing</div>
+                        <div class="option"><input type="checkbox" name="q11" value="volunteer"> Volunteering/Community Service</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q11_other" placeholder="Please specify...">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q12. Describe any specific hobbies, activities, or topics you're passionate about:</div>
+                    <div class="question-type">[Long Text - 2-3 sentences]</div>
+                    <textarea name="q12" placeholder="Example: I play club soccer and follow Premier League. I'm also really into true crime podcasts."></textarea>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q13. When you want to relax or be entertained, what do you typically do? (Select top 3)</div>
+                    <div class="question-type">[Multi-Select, Max 3]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q13" value="streaming"> A) Watch videos/streaming (YouTube, Netflix, TikTok)</div>
+                        <div class="option"><input type="checkbox" name="q13" value="games"> B) Play video games</div>
+                        <div class="option"><input type="checkbox" name="q13" value="audio"> C) Listen to music or podcasts</div>
+                        <div class="option"><input type="checkbox" name="q13" value="read"> D) Read books or articles</div>
+                        <div class="option"><input type="checkbox" name="q13" value="social"> E) Browse social media</div>
+                        <div class="option"><input type="checkbox" name="q13" value="exercise"> F) Exercise or play sports</div>
+                        <div class="option"><input type="checkbox" name="q13" value="creative"> G) Creative activities (art, music, writing)</div>
+                        <div class="option"><input type="checkbox" name="q13" value="outdoors"> H) Spend time outdoors</div>
+                        <div class="option"><input type="checkbox" name="q13" value="hangout"> I) Hang out with friends/family</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q13_other" placeholder="Please specify...">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q14. What career fields interest you? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q14" value="healthcare"> Healthcare/Medicine</div>
+                        <div class="option"><input type="checkbox" name="q14" value="business"> Business/Finance</div>
+                        <div class="option"><input type="checkbox" name="q14" value="education"> Education/Teaching</div>
+                        <div class="option"><input type="checkbox" name="q14" value="engineering"> Engineering</div>
+                        <div class="option"><input type="checkbox" name="q14" value="arts"> Arts/Entertainment</div>
+                        <div class="option"><input type="checkbox" name="q14" value="science"> Science/Research</div>
+                        <div class="option"><input type="checkbox" name="q14" value="law"> Law/Government</div>
+                        <div class="option"><input type="checkbox" name="q14" value="tech"> Technology/IT</div>
+                        <div class="option"><input type="checkbox" name="q14" value="media"> Communications/Media</div>
+                        <div class="option"><input type="checkbox" name="q14" value="social"> Social Services</div>
+                        <div class="option"><input type="checkbox" name="q14" value="environment"> Environment/Sustainability</div>
+                        <div class="option"><input type="checkbox" name="q14" value="undecided"> Undecided</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q14_other" placeholder="Please specify...">
+                </div>
+            </div>
+            
+            <!-- Section 4: Learning Preferences -->
+            <div class="survey-section">
+                <h3>Section 4: Learning Preferences</h3>
+                <p>Understanding how you prefer to learn helps us present material in ways that work best for you.</p>
+                
+                <div class="question">
+                    <div class="question-text">Q15. Rank how you prefer to learn new information (1 = most preferred, 6 = least preferred):</div>
+                    <div class="question-type">[Ranking]</div>
+                    <div class="options">
+                        <div class="option">Reading text/articles: <input type="number" name="q15_reading" min="1" max="6" style="width: 60px;"></div>
+                        <div class="option">Watching videos: <input type="number" name="q15_video" min="1" max="6" style="width: 60px;"></div>
+                        <div class="option">Listening to audio/podcasts: <input type="number" name="q15_audio" min="1" max="6" style="width: 60px;"></div>
+                        <div class="option">Interactive exercises/tutorials: <input type="number" name="q15_interactive" min="1" max="6" style="width: 60px;"></div>
+                        <div class="option">Visual diagrams/infographics: <input type="number" name="q15_visual" min="1" max="6" style="width: 60px;"></div>
+                        <div class="option">Hands-on projects: <input type="number" name="q15_handson" min="1" max="6" style="width: 60px;"></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q16. Do you regularly listen to audiobooks or podcasts?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q16" value="freq"> A) Yes, frequently (weekly or more)</div>
+                        <div class="option"><input type="radio" name="q16" value="sometimes"> B) Sometimes (a few times a month)</div>
+                        <div class="option"><input type="radio" name="q16" value="rarely"> C) Rarely (a few times a year)</div>
+                        <div class="option"><input type="radio" name="q16" value="never"> D) Never</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q17. When learning a new skill (like a recipe or how to fix something), do you prefer:</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q17" value="written"> A) Step-by-step written instructions</div>
+                        <div class="option"><input type="radio" name="q17" value="video"> B) Video demonstrations</div>
+                        <div class="option"><input type="radio" name="q17" value="both"> C) Both equally</div>
+                        <div class="option"><input type="radio" name="q17" value="neither"> D) Neither — I prefer to figure it out myself</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q18. Do you prefer to study in:</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q18" value="short"> A) Short, frequent sessions (15-30 minutes)</div>
+                        <div class="option"><input type="radio" name="q18" value="medium"> B) Medium sessions (45-60 minutes)</div>
+                        <div class="option"><input type="radio" name="q18" value="long"> C) Long, focused sessions (90+ minutes)</div>
+                        <div class="option"><input type="radio" name="q18" value="varies"> D) It varies depending on the subject</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 5: Goals & Motivation -->
+            <div class="survey-section">
+                <h3>Section 5: Goals & Motivation</h3>
+                <p>Understanding your goals helps us make the course more relevant to you.</p>
+                
+                <div class="question">
+                    <div class="question-text">Q19. Why are you taking this course? (Select the primary reason)</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q19" value="required"> A) Required for my major</div>
+                        <div class="option"><input type="radio" name="q19" value="gened"> B) General education requirement</div>
+                        <div class="option"><input type="radio" name="q19" value="interest"> C) Personal interest in the subject</div>
+                        <div class="option"><input type="radio" name="q19" value="career"> D) Career preparation (want specific skills)</div>
+                        <div class="option"><input type="radio" name="q19" value="exploring"> E) Exploring whether this field might interest me</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q19_other" placeholder="Please specify...">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q20. How relevant do you think the skills taught in this course will be to your future career?</div>
+                    <div class="question-type">[Likert 1-5]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q20" value="1"> 1 - Not relevant at all</div>
+                        <div class="option"><input type="radio" name="q20" value="2"> 2</div>
+                        <div class="option"><input type="radio" name="q20" value="3"> 3 - Somewhat relevant</div>
+                        <div class="option"><input type="radio" name="q20" value="4"> 4</div>
+                        <div class="option"><input type="radio" name="q20" value="5"> 5 - Very relevant</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q21. What do you hope to learn or accomplish in this course?</div>
+                    <div class="question-type">[Long Text - 1-2 sentences]</div>
+                    <textarea name="q21" placeholder="Share your goals and hopes for this course..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Section 6: Prior Learning & Programming Experience -->
+            <div class="survey-section">
+                <h3>Section 6: Prior Learning & Programming Experience</h3>
+                <p>This section helps us understand what you've already learned. Your answers help personalize the difficulty and depth of content. <strong>Be honest — there are no right or wrong answers!</strong></p>
+                
+                <div class="question">
+                    <div class="question-text">Q22. Have you ever taken a programming or computer science course before?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q22" value="never"> A) No, never</div>
+                        <div class="option"><input type="radio" name="q22" value="hs"> B) Yes, in high school</div>
+                        <div class="option"><input type="radio" name="q22" value="college"> C) Yes, in college</div>
+                        <div class="option"><input type="radio" name="q22" value="both"> D) Yes, both in high school and college</div>
+                        <div class="option"><input type="radio" name="q22" value="online"> E) Yes, through online courses or self-study</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q23. If you have taken a programming course before, which programming languages have you used? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q23" value="none"> None—this is my first programming course</div>
+                        <div class="option"><input type="checkbox" name="q23" value="python"> Python</div>
+                        <div class="option"><input type="checkbox" name="q23" value="java"> Java</div>
+                        <div class="option"><input type="checkbox" name="q23" value="javascript"> JavaScript</div>
+                        <div class="option"><input type="checkbox" name="q23" value="cpp"> C++</div>
+                        <div class="option"><input type="checkbox" name="q23" value="c"> C</div>
+                        <div class="option"><input type="checkbox" name="q23" value="scratch"> Scratch or block-based programming</div>
+                        <div class="option"><input type="checkbox" name="q23" value="html"> HTML/CSS</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q23_other" placeholder="Please specify...">
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q24. Have you ever created your own programs or projects outside of a class setting?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q24" value="never"> A) No, never</div>
+                        <div class="option"><input type="radio" name="q24" value="tried"> B) I've tried but didn't complete anything substantial</div>
+                        <div class="option"><input type="radio" name="q24" value="few"> C) Yes, a few small projects</div>
+                        <div class="option"><input type="radio" name="q24" value="several"> D) Yes, several projects</div>
+                        <div class="option"><input type="radio" name="q24" value="many"> E) Yes, many projects or ongoing programming work</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q25. How would you rate your overall programming experience?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q25" value="none"> A) None—I've never programmed before</div>
+                        <div class="option"><input type="radio" name="q25" value="minimal"> B) Minimal—I've seen some code but don't really understand it</div>
+                        <div class="option"><input type="radio" name="q25" value="beginner"> C) Beginner—I can write simple programs with help</div>
+                        <div class="option"><input type="radio" name="q25" value="intermediate"> D) Intermediate—I can write programs on my own for most problems</div>
+                        <div class="option"><input type="radio" name="q25" value="advanced"> E) Advanced—I'm comfortable with complex programming concepts</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 7: Confidence & Mindset -->
+            <div class="survey-section">
+                <h3>Section 7: Confidence & Mindset</h3>
+                
+                <div class="question">
+                    <div class="question-text">Q26. How confident do you feel about learning programming?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q26" value="veryanx"> A) Very anxious — I worry I won't be able to understand</div>
+                        <div class="option"><input type="radio" name="q26" value="someanx"> B) Somewhat anxious — I have some concerns</div>
+                        <div class="option"><input type="radio" name="q26" value="neutral"> C) Neutral — I'm not sure what to expect</div>
+                        <div class="option"><input type="radio" name="q26" value="someconf"> D) Somewhat confident — I think I'll do fine</div>
+                        <div class="option"><input type="radio" name="q26" value="veryconf"> E) Very confident — I'm excited and ready to learn</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q27. When you encounter difficult material, you typically:</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q27" value="frustrated"> A) Feel frustrated and want to give up</div>
+                        <div class="option"><input type="radio" name="q27" value="challenged"> B) Feel challenged but keep trying</div>
+                        <div class="option"><input type="radio" name="q27" value="help"> C) Ask for help immediately</div>
+                        <div class="option"><input type="radio" name="q27" value="break"> D) Take a break and come back to it</div>
+                        <div class="option"><input type="radio" name="q27" value="excited"> E) Feel excited by the challenge</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q28. Which statement best describes your view of learning?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q28" value="natural"> A) You're either naturally good at something or you're not</div>
+                        <div class="option"><input type="radio" name="q28" value="effort"> B) Anyone can learn most things with enough effort and practice</div>
+                        <div class="option"><input type="radio" name="q28" value="both"> C) Some combination of both natural ability and effort matters</div>
+                        <div class="option"><input type="radio" name="q28" value="notsure"> D) Not sure</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q29. How comfortable are you with logical and analytical thinking?</div>
+                    <div class="question-type">[Likert 1-5]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q29" value="1"> 1 - Very uncomfortable</div>
+                        <div class="option"><input type="radio" name="q29" value="2"> 2 - Uncomfortable</div>
+                        <div class="option"><input type="radio" name="q29" value="3"> 3 - Neutral</div>
+                        <div class="option"><input type="radio" name="q29" value="4"> 4 - Comfortable</div>
+                        <div class="option"><input type="radio" name="q29" value="5"> 5 - Very comfortable</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 8: Time & Responsibilities -->
+            <div class="survey-section">
+                <h3>Section 8: Time & Responsibilities</h3>
+                
+                <div class="question">
+                    <div class="question-text">Q30. Approximately how many hours per week do you plan to dedicate to this course (including class time)?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q30" value="less3"> A) Less than 3 hours</div>
+                        <div class="option"><input type="radio" name="q30" value="3to5"> B) 3-5 hours</div>
+                        <div class="option"><input type="radio" name="q30" value="6to9"> C) 6-9 hours</div>
+                        <div class="option"><input type="radio" name="q30" value="10to12"> D) 10-12 hours</div>
+                        <div class="option"><input type="radio" name="q30" value="more12"> E) More than 12 hours</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q31. When do you typically have time to study? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q31" value="earlyam"> Early morning (before 9am)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="lateam"> Late morning (9am-12pm)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="earlypm"> Early afternoon (12pm-3pm)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="latepm"> Late afternoon (3pm-6pm)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="evening"> Evening (6pm-9pm)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="latenight"> Late night (after 9pm)</div>
+                        <div class="option"><input type="checkbox" name="q31" value="weekends"> Weekends</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q32. Do you work while attending school?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q32" value="no"> A) No</div>
+                        <div class="option"><input type="radio" name="q32" value="ptless20"> B) Yes, part-time (less than 20 hours/week)</div>
+                        <div class="option"><input type="radio" name="q32" value="pt20to30"> C) Yes, part-time (20-30 hours/week)</div>
+                        <div class="option"><input type="radio" name="q32" value="ft"> D) Yes, full-time (more than 30 hours/week)</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q33. Do you have significant caregiving responsibilities (children, family members, etc.)?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q33" value="no"> A) No</div>
+                        <div class="option"><input type="radio" name="q33" value="occasional"> B) Yes, occasional responsibilities</div>
+                        <div class="option"><input type="radio" name="q33" value="regular"> C) Yes, regular responsibilities (5-10 hours/week)</div>
+                        <div class="option"><input type="radio" name="q33" value="significant"> D) Yes, significant responsibilities (10+ hours/week)</div>
+                        <div class="option"><input type="radio" name="q33" value="prefer"> E) Prefer not to say</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 9: Technology & Environment -->
+            <div class="survey-section">
+                <h3>Section 9: Technology & Environment</h3>
+                
+                <div class="question">
+                    <div class="question-text">Q34. What device do you primarily use for coursework?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q34" value="laptop"> A) Laptop</div>
+                        <div class="option"><input type="radio" name="q34" value="desktop"> B) Desktop computer</div>
+                        <div class="option"><input type="radio" name="q34" value="tablet"> C) Tablet (iPad, etc.)</div>
+                        <div class="option"><input type="radio" name="q34" value="phone"> D) Smartphone</div>
+                        <div class="option"><input type="radio" name="q34" value="mix"> E) Mix of devices</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q35. How would you rate your internet connection reliability?</div>
+                    <div class="question-type">[Single Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q35" value="veryrel"> A) Very reliable (rarely have issues)</div>
+                        <div class="option"><input type="radio" name="q35" value="mostlyrel"> B) Mostly reliable (occasional issues)</div>
+                        <div class="option"><input type="radio" name="q35" value="someunrel"> C) Somewhat unreliable (frequent issues)</div>
+                        <div class="option"><input type="radio" name="q35" value="veryunrel"> D) Very unreliable (constant issues)</div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Q36. Where do you typically study? (Select all that apply)</div>
+                    <div class="question-type">[Multi-Select]</div>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q36" value="library"> Library</div>
+                        <div class="option"><input type="checkbox" name="q36" value="home"> Home/Dorm room</div>
+                        <div class="option"><input type="checkbox" name="q36" value="coffee"> Coffee shop/Restaurant</div>
+                        <div class="option"><input type="checkbox" name="q36" value="campus"> On campus (other than library)</div>
+                        <div class="option"><input type="checkbox" name="q36" value="onthego"> On the go (commuting, between classes)</div>
+                    </div>
+                    <p style="margin-top: 10px;">Other:</p>
+                    <input type="text" name="q36_other" placeholder="Please specify...">
+                </div>
+            </div>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <h3>Thank You!</h3>
+                <p>Thank you for taking the time to complete this survey. Your responses will help us create a more personalized and effective learning experience for you throughout this course. Remember, you can update your responses at any time during the semester if your situation or preferences change.</p>
+            </div>
+        </section>
+        
+        <!-- Part 3: Pretest -->
+        <section id="part3">
+            <h2>1.3 Knowledge Check: Programming Concepts Pretest</h2>
+            
+            <div class="warning-box">
+                <h3>Important Information About This Assessment</h3>
+                <p><strong>This pretest is graded for completion, not correctness.</strong> If you answer each question sincerely (even if you don't know the answer), you will receive full credit. This assessment helps us understand what you already know so we can better support your learning.</p>
+                
+                <p><strong>Guidelines:</strong></p>
+                <ul>
+                    <li>Answer honestly—there's no penalty for not knowing something</li>
+                    <li>If you're unsure, make your best guess</li>
+                    <li>Don't look up answers—we want to know what you know <em>right now</em></li>
+                    <li>This should take about 10-15 minutes</li>
+                </ul>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 1 (True/False):</strong> A variable in programming is a named storage location that can hold a value.</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt1" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt1" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt1" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 2 (Multiple Choice):</strong> In a Cartesian coordinate system used for computer graphics, where is the point (0, 0) typically located?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt2" value="A"> A) Bottom-left corner</div>
+                    <div class="option"><input type="radio" name="pt2" value="B"> B) Top-left corner</div>
+                    <div class="option"><input type="radio" name="pt2" value="C"> C) Center of the screen</div>
+                    <div class="option"><input type="radio" name="pt2" value="D"> D) Top-right corner</div>
+                    <div class="option"><input type="radio" name="pt2" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 3 (True/False):</strong> A function in programming is a reusable block of code that performs a specific task.</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt3" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt3" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt3" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 4 (Multiple Choice):</strong> What does the following JavaScript code do? <code>let x = 5;</code></div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt4" value="A"> A) Creates a variable named x and assigns it the value 5</div>
+                    <div class="option"><input type="radio" name="pt4" value="B"> B) Prints the number 5 to the screen</div>
+                    <div class="option"><input type="radio" name="pt4" value="C"> C) Creates a function named x</div>
+                    <div class="option"><input type="radio" name="pt4" value="D"> D) Compares x to 5</div>
+                    <div class="option"><input type="radio" name="pt4" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 5 (True/False):</strong> A conditional statement (like an if-statement) allows a program to make decisions and execute different code based on whether a condition is true or false.</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt5" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt5" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt5" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 6 (Multiple Choice):</strong> What is a loop in programming?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt6" value="A"> A) A mistake in your code</div>
+                    <div class="option"><input type="radio" name="pt6" value="B"> B) A way to repeat a block of code multiple times</div>
+                    <div class="option"><input type="radio" name="pt6" value="C"> C) A type of variable</div>
+                    <div class="option"><input type="radio" name="pt6" value="D"> D) A way to store data</div>
+                    <div class="option"><input type="radio" name="pt6" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 7 (True/False):</strong> Parameters are values that you pass into a function when you call it.</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt7" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt7" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt7" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 8 (Multiple Choice):</strong> What is an array?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt8" value="A"> A) A single variable that can store only one value</div>
+                    <div class="option"><input type="radio" name="pt8" value="B"> B) A collection of values stored together in a single variable</div>
+                    <div class="option"><input type="radio" name="pt8" value="C"> C) A type of loop</div>
+                    <div class="option"><input type="radio" name="pt8" value="D"> D) A mathematical operation</div>
+                    <div class="option"><input type="radio" name="pt8" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 9 (True/False):</strong> Global variables can be accessed from anywhere in your program, while local variables can only be accessed within the function where they are defined.</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt9" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt9" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt9" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 10 (Multiple Choice):</strong> What does "debugging" mean in programming?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt10" value="A"> A) Writing new code</div>
+                    <div class="option"><input type="radio" name="pt10" value="B"> B) Finding and fixing errors in your code</div>
+                    <div class="option"><input type="radio" name="pt10" value="C"> C) Deleting all your code and starting over</div>
+                    <div class="option"><input type="radio" name="pt10" value="D"> D) Making your code run faster</div>
+                    <div class="option"><input type="radio" name="pt10" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 11 (True/False):</strong> Object-oriented programming organizes code around "objects" that combine data (properties) and functionality (methods).</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt11" value="true"> True</div>
+                    <div class="option"><input type="radio" name="pt11" value="false"> False</div>
+                    <div class="option"><input type="radio" name="pt11" value="notsure"> Not sure</div>
+                </div>
+            </div>
+            
+            <div class="pretest-question">
+                <div class="question-text"><strong>Question 12 (Multiple Choice):</strong> What is the purpose of the <code>draw()</code> function in animation programming?</div>
+                <div class="options">
+                    <div class="option"><input type="radio" name="pt12" value="A"> A) It runs once when the program starts</div>
+                    <div class="option"><input type="radio" name="pt12" value="B"> B) It runs repeatedly, many times per second, to create animation</div>
+                    <div class="option"><input type="radio" name="pt12" value="C"> C) It only draws shapes, not animations</div>
+                    <div class="option"><input type="radio" name="pt12" value="D"> D) It's used to delete graphics from the screen</div>
+                    <div class="option"><input type="radio" name="pt12" value="E"> E) Not sure</div>
+                </div>
+            </div>
+            
+            <div class="info-box" style="margin-top: 30px;">
+                <h3>Pretest Complete!</h3>
+                <p>Great job completing the pretest. Remember, this is just to help us understand where you're starting from—your answers won't affect your grade (only completion matters). We'll use this information to make sure we're supporting your learning at the right level.</p>
+            </div>
+        </section>
+        
+        <!-- Part 4: What's Next -->
+        <section id="part4">
+            <h2>1.4 What's Next: Your Programming Journey Begins</h2>
+            
+            <div class="next-steps">
+                <h3>🚀 Ready to Start Coding!</h3>
+                
+                <p>Now that we've gotten to know you and assessed your starting point, it's time to dive into the exciting world of programming! In Chapter 2, you'll start writing your first programs using JavaScript and the P5.js library.</p>
+                
+                <h4>What You'll Learn in Chapter 2:</h4>
+                <ul>
+                    <li><strong>Drawing with Code:</strong> You'll learn how to use JavaScript commands to draw shapes, lines, and colors on the screen. Think of it as giving instructions to a computer artist!</li>
+                    
+                    <li><strong>The Coordinate System:</strong> You'll discover how computers use a Cartesian coordinate system (X, Y positions) to place objects on the screen—kind of like a digital treasure map.</li>
+                    
+                    <li><strong>Your First Variables:</strong> You'll learn what variables are and how to use them to store information your programs need. Variables are like labeled boxes where you can keep data.</li>
+                    
+                    <li><strong>Functions and Parameters:</strong> You'll understand how functions work and how to pass information to them using parameters. This is how you'll tell the computer exactly what shapes to draw and where to put them.</li>
+                </ul>
+                
+                <h4>What to Expect:</h4>
+                <p>Chapter 2 is hands-on and interactive. You'll be writing code from the very first lesson, starting with simple commands and gradually building up to more complex programs. Don't worry if things seem confusing at first—programming is a skill that develops with practice, and you'll have plenty of opportunities to experiment and learn.</p>
+                
+                <h4>Tips for Success:</h4>
+                <ul>
+                    <li><strong>Experiment:</strong> Try changing numbers in your code to see what happens. This is one of the best ways to learn!</li>
+                    <li><strong>Make mistakes:</strong> Everyone makes errors in their code. Debugging (finding and fixing errors) is a normal part of programming.</li>
+                    <li><strong>Use the AI tutor:</strong> Remember, CSC 106 has an AI tutor built into CodeLab. Use it to ask questions and get explanations.</li>
+                    <li><strong>Practice regularly:</strong> Programming is like learning a musical instrument—regular practice is more effective than cramming.</li>
+                    <li><strong>Have fun:</strong> You'll be creating visual programs you can share with friends and family. Enjoy the creative process!</li>
+                </ul>
+                
+                <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <h4 style="color: #0066cc; margin-top: 0;">Before You Move On:</h4>
+                    <p style="margin-bottom: 5px;"><strong>✓</strong> Make sure you have access to the CodeLab platform</p>
+                    <p style="margin-bottom: 5px;"><strong>✓</strong> Have a computer with Chrome browser ready for each class</p>
+                    <p style="margin-bottom: 5px;"><strong>✓</strong> Review the syllabus for course policies and schedule</p>
+                    <p style="margin-bottom: 5px;"><strong>✓</strong> Join the course discussion forum on Brightspace</p>
+                    <p style="margin-bottom: 5px;"><strong>✓</strong> Note the office hours and help session times</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px; padding: 30px; background-color: #f0f8ff; border-radius: 8px;">
+                <h3 style="color: #0066cc; margin-top: 0;">You're Ready to Begin!</h3>
+                <p style="font-size: 1.1em; margin-bottom: 20px;">Welcome to the joy of programming. Let's start creating together!</p>
+                <p style="font-size: 1.3em; color: #0066cc; margin: 0;"><strong>→ Continue to Chapter 2: Drawing with Code</strong></p>
+            </div>
+        </section>
+        
+        <div style="margin-top: 50px; padding-top: 20px; border-top: 2px solid #ddd; text-align: center; color: #666;">
+            <p><strong>CSC 106: The Joy of Programming</strong><br>
+            University of Rhode Island | Fall 2025<br>
+            Chapter 1 of 13</p>
+        </div>
+    </div>
+</body>
+</html>
