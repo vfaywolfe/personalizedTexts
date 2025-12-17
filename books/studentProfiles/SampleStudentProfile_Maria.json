@@ -1,0 +1,588 @@
+{
+  "profileMetadata": {
+    "studentId": "STU-2026-00847",
+    "courseId": "CSC101-Spring2026",
+    "sectionId": "CSC101-03",
+    "instructorId": "INST-VIC-001",
+    "profileVersion": "2.0.0",
+    "createdAt": "2026-01-21T09:15:00Z",
+    "lastUpdated": "2026-01-28T16:45:00Z",
+    "dataCompleteness": {
+      "preSurveyCompleted": true,
+      "preSurveyCompletedAt": "2026-01-21T09:45:00Z",
+      "preSurveyPercentComplete": 100,
+      "preTestCompleted": true,
+      "preTestCompletedAt": "2026-01-21T10:05:00Z",
+      "midSemesterSurveyCompleted": false,
+      "midSemesterSurveyCompletedAt": null,
+      "behavioralDataPoints": 23,
+      "lastBehavioralUpdate": "2026-01-28T16:45:00Z"
+    },
+    "consentStatus": {
+      "researchConsent": true,
+      "dataCollectionConsent": true,
+      "consentDate": "2026-01-21T09:12:00Z"
+    }
+  },
+
+  "preSurveyResponses": {
+    "section1_aboutYou": {
+      "q1_yearInSchool": "freshman",
+      "q2_declaredMajor": "Nursing",
+      "q2_majorOther": null,
+      "q3_consideringMajors": [],
+      "q4_firstGeneration": "yes",
+      "q5_wheregrewUp": "Bayamón, Puerto Rico / Providence, Rhode Island",
+      "q6_communityType": "urban"
+    },
+    "section2_language": {
+      "q7_englishProficiency": "very_comfortable",
+      "q8_primaryLanguage": "Spanish",
+      "q9_otherLanguages": ["English"],
+      "q10_multilingualSupport": {
+        "wanted": true,
+        "preferredLanguage": "Spanish"
+      }
+    },
+    "section3_interests": {
+      "q11_interestCategories": [
+        "social_media",
+        "fashion_beauty",
+        "movies_tv",
+        "diy_crafts",
+        "healthcare_medicine"
+      ],
+      "q11_interestOther": null,
+      "q12_hobbiesDescription": "I love scrolling TikTok to find new trends and tutorials. I also really enjoy making costumes for theater productions - I've done costumes for my high school plays and I hope to continue in college. Shopping with friends is one of my favorite things to do, especially at the mall or online. I watch a lot of YouTube videos, mostly beauty tutorials, vlogs, and medical shows. I want to be a nurse so I'm really interested in anything healthcare related.",
+      "q13_entertainmentActivities": [
+        "browse_social_media",
+        "watch_videos_streaming",
+        "hang_out_friends_family"
+      ],
+      "q13_entertainmentOther": null,
+      "q14_careerInterests": [
+        "healthcare_medicine"
+      ],
+      "q14_careerOther": null
+    },
+    "section4_learningPreferences": {
+      "q15_modalityRanking": {
+        "reading_text": 5,
+        "watching_videos": 2,
+        "listening_audio": 1,
+        "interactive_exercises": 3,
+        "visual_diagrams": 4,
+        "hands_on_projects": 6
+      },
+      "q16_audiobookPodcastUsage": "frequently",
+      "q17_instructionPreference": "video_demonstrations",
+      "q18_sessionLengthPreference": "short_15_30"
+    },
+    "section5_goalsMotivation": {
+      "q19_courseMotivation": "general_ed",
+      "q19_motivationOther": null,
+      "q20_careerRelevance": 3,
+      "q21_learningGoals": "I want to understand how technology works, especially AI tools that might be used in healthcare. I also want to learn basic computer skills that will help me in my nursing career. I'm a little nervous about the programming part but I'm willing to try."
+    },
+    "section6_priorLearning": {
+      "aiMachineLearning": {
+        "q22_howLearned": ["high_school"],
+        "q23_understandingLevel": "basic_awareness",
+        "q24_aiToolUsageFrequency": "occasionally",
+        "q25_aiToolUseCases": ["basic_questions", "writing_editing"],
+        "q26_promptConfidence": "slightly_confident"
+      },
+      "programming": {
+        "q27_howLearned": ["high_school"],
+        "q28_conceptsFamiliar": ["variables", "conditionals", "loops"],
+        "q29_languagesUsed": ["block_based"],
+        "q29_languageOther": null,
+        "q30_projectComplexity": "simple_exercises"
+      },
+      "internetCybersecurity": {
+        "q31_howLearned": ["high_school"],
+        "q32_networkingConcepts": ["data_packets_routing", "ip_addresses", "wifi_wireless"],
+        "q33_securityConcepts": ["strong_passwords", "phishing", "pii"],
+        "q34_securityPractices": ["setup_2fa", "identified_phishing"]
+      },
+      "dataAnalysis": {
+        "q35_howLearned": ["high_school"],
+        "q36_dataConcepts": ["data_types", "basic_statistics", "organize_rows_columns"],
+        "q37_spreadsheetExperience": "intermediate",
+        "q38_visualizationExperience": ["basic_charts", "class_presentations"]
+      },
+      "digitalCreation": {
+        "q39_howLearned": ["self_taught"],
+        "q40_artifactsCreated": ["graphics_digital_art", "video_project"],
+        "q41_websiteComfort": "never"
+      },
+      "ethicsSociety": {
+        "q42_howLearned": ["high_school", "personal_reading"],
+        "q43_ethicsTopics": ["privacy", "digital_divide"],
+        "q44_criticalThinking": "sometimes"
+      }
+    },
+    "section7_confidenceMindset": {
+      "q45_computingConfidence": 2,
+      "q46_growthMindset": 4,
+      "q47_mathComfort": "challenging_manageable",
+      "q48_difficultyResponse": "ask_peer_tutor"
+    },
+    "section8_timeResponsibilities": {
+      "q49_weeklyHours": "6_to_9",
+      "q50_studyTimes": ["evening", "late_night"],
+      "q51_employment": "part_time_under_20",
+      "q52_caregiving": "no"
+    },
+    "section9_cultureContext": {
+      "q53_culturalContext": "Puerto Rican / Latina. My family moved from Puerto Rico when I was 12. I'm proud of my heritage and enjoy when examples connect to Latin American culture or Spanish language.",
+      "q54_currentLiving": "on_campus"
+    },
+    "section10_technologyEnvironment": {
+      "q55_primaryDevice": "laptop",
+      "q56_internetReliability": "very_reliable",
+      "q57_studyLocation": "shared_quiet",
+      "q58_accessibilityNeeds": ""
+    }
+  },
+
+  "preTestResponses": {
+    "completedAt": "2026-01-21T10:05:00Z",
+    "timeSpentSeconds": 485,
+    "responses": {
+      "sectionA_aiMl": {
+        "q1_whatIsAI": "B",
+        "q2_whatIsML": "C",
+        "q3_trainingData": "B",
+        "q4_aiExample": "A",
+        "q5_whatIsLLM": "D",
+        "q6_promptEngineering": "C"
+      },
+      "sectionB_programming": {
+        "q7_whatIsProgram": "A",
+        "q8_whatIsVariable": "B",
+        "q9_whatIsLoop": "A",
+        "q10_whatIsDebugging": "C"
+      },
+      "sectionC_internetSecurity": {
+        "q11_whatIsInternet": "A",
+        "q12_whatIsPhishing": "B",
+        "q13_strongestPassword": "D",
+        "q14_whatIsPII": "B"
+      },
+      "sectionD_data": {
+        "q15_whatIsData": "A",
+        "q16_dataVisualization": "C",
+        "q17_dataAnalysisExample": "B"
+      },
+      "sectionE_ethics": {
+        "q18_algorithmicBias": "D",
+        "q19_digitalDivide": "A",
+        "q20_aiEthicalConcern": "C"
+      }
+    },
+    "scores": {
+      "totalCorrect": 11,
+      "totalPercentage": 55,
+      "byLearningObjective": {
+        "lo1_aiMl": {
+          "correct": 2,
+          "total": 5,
+          "percentage": 40
+        },
+        "lo2_programming": {
+          "correct": 3,
+          "total": 4,
+          "percentage": 75
+        },
+        "lo3_internetSecurity": {
+          "correct": 3,
+          "total": 4,
+          "percentage": 75
+        },
+        "lo5_data": {
+          "correct": 2,
+          "total": 3,
+          "percentage": 66.67
+        },
+        "lo6_ethics": {
+          "correct": 1,
+          "total": 3,
+          "percentage": 33.33
+        },
+        "lo8_aiUse": {
+          "correct": 0,
+          "total": 2,
+          "percentage": 0
+        }
+      }
+    }
+  },
+
+  "derivedProfile": {
+    "demographics": {
+      "yearInSchool": "freshman",
+      "firstGeneration": true,
+      "geographicBackground": {
+        "location": "Bayamón, Puerto Rico / Providence, Rhode Island",
+        "communityType": "urban"
+      },
+      "currentLiving": "on_campus"
+    },
+    "academicContext": {
+      "declaredMajor": "Nursing",
+      "majorCategory": "health_sciences",
+      "consideringMajors": [],
+      "careerInterests": ["healthcare_medicine"],
+      "courseMotivation": "general_ed",
+      "careerRelevancePerception": 3,
+      "learningGoals": "I want to understand how technology works, especially AI tools that might be used in healthcare. I also want to learn basic computer skills that will help me in my nursing career. I'm a little nervous about the programming part but I'm willing to try.",
+      "extractedGoals": [
+        "Understand technology fundamentals",
+        "Learn about AI in healthcare",
+        "Develop computer skills for nursing career",
+        "Overcome programming anxiety"
+      ]
+    },
+    "language": {
+      "englishProficiency": "very_comfortable",
+      "primaryLanguage": "Spanish",
+      "otherLanguages": ["English"],
+      "wantsMultilingualSupport": true,
+      "supportLanguage": "Spanish",
+      "recommendedLanguageLevel": "standard"
+    },
+    "interests": {
+      "categories": ["social_media", "fashion_beauty", "movies_tv", "diy_crafts", "healthcare_medicine"],
+      "freeTextDescription": "I love scrolling TikTok to find new trends and tutorials. I also really enjoy making costumes for theater productions - I've done costumes for my high school plays and I hope to continue in college. Shopping with friends is one of my favorite things to do, especially at the mall or online. I watch a lot of YouTube videos, mostly beauty tutorials, vlogs, and medical shows. I want to be a nurse so I'm really interested in anything healthcare related.",
+      "extractedTopics": [
+        "TikTok trends",
+        "costume design",
+        "theater",
+        "fashion",
+        "beauty tutorials",
+        "YouTube vlogs",
+        "medical shows",
+        "healthcare",
+        "nursing"
+      ],
+      "entertainmentActivities": ["browse_social_media", "watch_videos_streaming", "hang_out_friends_family"],
+      "culturalContext": "Puerto Rican / Latina. My family moved from Puerto Rico when I was 12. I'm proud of my heritage and enjoy when examples connect to Latin American culture or Spanish language."
+    },
+    "learningPreferences": {
+      "modalityRanking": [
+        "listening_audio",
+        "watching_videos",
+        "interactive_exercises",
+        "visual_diagrams",
+        "reading_text",
+        "hands_on_projects"
+      ],
+      "topModality": "listening_audio",
+      "likesAudioContent": true,
+      "instructionPreference": "video_demonstrations",
+      "sessionLengthPreference": "short_15_30"
+    },
+    "priorKnowledgeByTopic": {
+      "aiMachineLearning": {
+        "experienceLevel": 2,
+        "experienceLabel": "beginner",
+        "hasFormallLearning": true,
+        "hasPracticalExperience": true,
+        "aiToolUsageLevel": "occasionally",
+        "promptingSkillLevel": "slightly_confident",
+        "preTestScore": 40,
+        "strengthAreas": ["basic AI awareness", "using AI for simple tasks"],
+        "gapAreas": ["how LLMs work", "prompt engineering", "ML concepts"]
+      },
+      "programming": {
+        "experienceLevel": 2,
+        "experienceLabel": "beginner",
+        "hasFormalLearning": true,
+        "conceptsKnown": ["variables", "conditionals", "loops"],
+        "conceptsToLearn": ["functions", "debugging", "events", "lists_arrays"],
+        "languagesUsed": ["block_based"],
+        "projectExperience": "simple_exercises",
+        "preTestScore": 75
+      },
+      "internetCybersecurity": {
+        "experienceLevel": 3,
+        "experienceLabel": "intermediate",
+        "hasFormalLearning": true,
+        "networkingConceptsKnown": ["data_packets_routing", "ip_addresses", "wifi_wireless"],
+        "securityConceptsKnown": ["strong_passwords", "phishing", "pii"],
+        "practicalSecurityExperience": ["setup_2fa", "identified_phishing"],
+        "preTestScore": 75
+      },
+      "dataAnalysis": {
+        "experienceLevel": 3,
+        "experienceLabel": "intermediate",
+        "hasFormalLearning": true,
+        "conceptsKnown": ["data_types", "basic_statistics", "organize_rows_columns"],
+        "spreadsheetLevel": "intermediate",
+        "visualizationExperience": ["basic_charts", "class_presentations"],
+        "preTestScore": 66.67
+      },
+      "digitalCreation": {
+        "experienceLevel": 2,
+        "experienceLabel": "beginner",
+        "hasFormalLearning": false,
+        "artifactsCreated": ["graphics_digital_art", "video_project"],
+        "websiteSkillLevel": "never"
+      },
+      "ethicsSociety": {
+        "experienceLevel": 2,
+        "experienceLabel": "beginner",
+        "hasFormalLearning": true,
+        "topicsKnown": ["privacy", "digital_divide"],
+        "criticalThinkingFrequency": "sometimes",
+        "preTestScore": 33.33
+      }
+    },
+    "confidenceAndMindset": {
+      "computingConfidence": 2,
+      "growthMindset": 4,
+      "mathComfort": "challenging_manageable",
+      "difficultyResponse": "ask_peer_tutor",
+      "needsEncouragement": true,
+      "isIndependentLearner": false
+    },
+    "timeConstraints": {
+      "expectedWeeklyHours": "6_to_9",
+      "preferredStudyTimes": ["evening", "late_night"],
+      "employmentStatus": "part_time_under_20",
+      "hasCaregivingResponsibilities": false,
+      "isTimeConstrained": true
+    },
+    "technologyAccess": {
+      "primaryDevice": "laptop",
+      "internetReliability": "very_reliable",
+      "studyEnvironment": "shared_quiet",
+      "accessibilityNeeds": "",
+      "hasAccessibilityNeeds": false,
+      "needsLowBandwidthMode": false,
+      "isMobileFirst": false
+    }
+  },
+
+  "aiGenerationParameters": {
+    "lastComputed": "2026-01-28T16:45:00Z",
+    "contentComplexity": {
+      "overallLevel": 2,
+      "byTopic": {
+        "aiMl": 2,
+        "programming": 2,
+        "internetSecurity": 3,
+        "data": 3,
+        "digitalCreation": 2,
+        "ethics": 2
+      }
+    },
+    "scaffolding": {
+      "density": "substantial",
+      "stepCount": 6,
+      "workedExamplesNeeded": true,
+      "abstractionLevel": "concrete"
+    },
+    "languageAndTone": {
+      "vocabularyLevel": "standard",
+      "encouragementLevel": "frequent",
+      "supplementaryLanguage": "Spanish"
+    },
+    "personalization": {
+      "prioritizedInterests": [
+        "healthcare_medicine",
+        "social_media",
+        "fashion_beauty",
+        "diy_crafts",
+        "movies_tv"
+      ],
+      "majorContext": "Nursing / Healthcare",
+      "secondaryContexts": ["theater", "costume design"],
+      "culturalContexts": ["Puerto Rican", "Latina", "Spanish-speaking"],
+      "geographicContext": "urban, Rhode Island"
+    },
+    "contentFormat": {
+      "preferredModalities": [
+        "listening_audio",
+        "watching_videos",
+        "interactive_exercises"
+      ],
+      "includeAudioAlternatives": true,
+      "includeVideoAlternatives": true,
+      "chunkSize": "small",
+      "mobileOptimized": false
+    },
+    "tutorBehavior": {
+      "hintStyle": "example_based",
+      "responseLength": "moderate",
+      "checkInFrequency": "frequent"
+    },
+    "skipAndExtend": {
+      "canSkipBasics": {
+        "aiIntroduction": false,
+        "programmingIntroduction": false,
+        "internetBasics": false,
+        "dataBasics": false,
+        "ethicsIntroduction": false
+      },
+      "offerChallengeExtensions": {
+        "aiMl": false,
+        "programming": false,
+        "internetSecurity": false,
+        "data": false,
+        "digitalCreation": false
+      }
+    },
+    "avoidanceFlags": []
+  },
+
+  "ongoingData": {
+    "conceptMastery": [
+      {
+        "conceptId": "intro_computing",
+        "conceptName": "Introduction to Computing",
+        "learningObjective": "LO_Intro",
+        "masteryProbability": 0.72,
+        "masteryLevel": "proficient",
+        "lastAssessed": "2026-01-25T19:30:00Z",
+        "attemptCount": 3,
+        "recentTrend": "improving"
+      },
+      {
+        "conceptId": "what_is_ai",
+        "conceptName": "What is Artificial Intelligence",
+        "learningObjective": "LO1",
+        "masteryProbability": 0.65,
+        "masteryLevel": "developing",
+        "lastAssessed": "2026-01-27T20:15:00Z",
+        "attemptCount": 4,
+        "recentTrend": "improving"
+      },
+      {
+        "conceptId": "ai_applications",
+        "conceptName": "AI Applications in Daily Life",
+        "learningObjective": "LO1",
+        "masteryProbability": 0.78,
+        "masteryLevel": "proficient",
+        "lastAssessed": "2026-01-28T14:20:00Z",
+        "attemptCount": 2,
+        "recentTrend": "stable"
+      }
+    ],
+    "assessmentHistory": [
+      {
+        "assessmentId": "week1-intro-quiz",
+        "lessonId": "week1-intro-computing",
+        "timestamp": "2026-01-25T19:30:00Z",
+        "score": 80,
+        "timeSpent": 420,
+        "hintsUsed": 2,
+        "attemptsBeforeCorrect": 1.4
+      },
+      {
+        "assessmentId": "week1-ai-basics-quiz",
+        "lessonId": "week1-ai-basics",
+        "timestamp": "2026-01-27T20:15:00Z",
+        "score": 70,
+        "timeSpent": 540,
+        "hintsUsed": 4,
+        "attemptsBeforeCorrect": 1.8
+      },
+      {
+        "assessmentId": "week1-ai-applications-check",
+        "lessonId": "week1-ai-applications",
+        "timestamp": "2026-01-28T14:20:00Z",
+        "score": 85,
+        "timeSpent": 360,
+        "hintsUsed": 1,
+        "attemptsBeforeCorrect": 1.2
+      }
+    ],
+    "tutorInteractions": {
+      "totalInteractions": 7,
+      "questionTypes": {
+        "conceptual": 4,
+        "procedural": 1,
+        "clarification": 2,
+        "debugging": 0,
+        "examples": 0
+      },
+      "effectiveInterventions": [
+        "healthcare examples",
+        "step-by-step breakdowns",
+        "Spanish term translations"
+      ],
+      "commonStruggles": [
+        "technical vocabulary",
+        "abstract concepts without examples"
+      ]
+    },
+    "engagementMetrics": {
+      "totalTimeInCourse": 145,
+      "averageSessionLength": 24,
+      "loginFrequency": "4-5 times per week",
+      "contentCompletionRate": 0.92,
+      "discussionParticipation": 2,
+      "lastActive": "2026-01-28T16:45:00Z"
+    },
+    "personalizationFeedback": {
+      "exampleRatings": [
+        {
+          "exampleId": "ai-healthcare-diagnosis",
+          "interestUsed": "healthcare_medicine",
+          "rating": "positive",
+          "timestamp": "2026-01-27T20:10:00Z"
+        },
+        {
+          "exampleId": "ai-tiktok-algorithm",
+          "interestUsed": "social_media",
+          "rating": "positive",
+          "timestamp": "2026-01-28T14:05:00Z"
+        },
+        {
+          "exampleId": "ai-generic-example",
+          "interestUsed": null,
+          "rating": "neutral",
+          "timestamp": "2026-01-25T19:25:00Z"
+        }
+      ],
+      "interestEffectiveness": [
+        {
+          "interest": "healthcare_medicine",
+          "timesUsed": 3,
+          "positiveRatings": 3,
+          "negativeRatings": 0,
+          "effectivenessScore": 1.0
+        },
+        {
+          "interest": "social_media",
+          "timesUsed": 2,
+          "positiveRatings": 2,
+          "negativeRatings": 0,
+          "effectivenessScore": 1.0
+        }
+      ]
+    },
+    "modalityEffectiveness": {
+      "text": {
+        "engagementScore": 0.55,
+        "performanceCorrelation": 0.6
+      },
+      "video": {
+        "engagementScore": 0.85,
+        "performanceCorrelation": 0.78
+      },
+      "interactive": {
+        "engagementScore": 0.75,
+        "performanceCorrelation": 0.72
+      },
+      "audio": {
+        "engagementScore": 0.90,
+        "performanceCorrelation": 0.82
+      }
+    }
+  },
+
+  "midSemesterUpdate": null
+}
