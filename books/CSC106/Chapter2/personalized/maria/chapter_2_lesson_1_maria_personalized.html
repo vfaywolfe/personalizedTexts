@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2.1: Drawing With Code - Personalized for Maria</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .personalization-note {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95em;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Consejo: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Pista: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Información: ";
+            font-weight: bold;
+        }
+        
+        .callout-encourage {
+            background-color: #e3f2fd;
+            border-color: #2196f3;
+            color: #0d47a1;
+            border-left: 5px solid #2196f3;
+        }
+        
+        .callout-encourage::before {
+            content: "💪 ¡Tú puedes! ";
+            font-weight: bold;
+        }
+        
+        .modality-callout {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            border-left: 4px solid #e17055;
+        }
+        
+        .time-estimate {
+            background: #f0f7ff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 0.9em;
+            border-left: 3px solid #667eea;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .spanish-term {
+            color: #e17055;
+            font-style: italic;
+            font-size: 0.95em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .healthcare-example {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .healthcare-example::before {
+            content: "🏥 Ejemplo de Enfermería: ";
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.1em;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .options label:hover {
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        
+        .canvas-demo {
+            border: 2px solid #667eea;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .canvas-demo img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #764ba2;
+            border-radius: 4px;
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #4caf50;
+            margin: 30px 0;
+        }
+        
+        .next-chapter {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #ff9800;
+            margin: 30px 0;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            .chapter-header {
+                background: #667eea;
+                color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="chapter-header">
+    <h1>Capítulo 2.1: Dibujando con Código</h1>
+    <p>Chapter 2.1: Drawing With Code</p>
+    <div class="personalization-note">
+        ✨ <strong>¡Hola Maria!</strong> This chapter has been personalized based on your nursing background, love for social media and fashion, and your learning preferences. You'll see examples that connect to healthcare, costume design, and more!
+    </div>
+    <div class="time-estimate">
+        ⏱️ Estimated time: 45-60 minutes | Perfect for an evening study session
+    </div>
+</div>
+
+<!-- LEARNING OBJECTIVES -->
+<div class="content-section">
+    <h2>📋 Learning Objectives (Objetivos de Aprendizaje)</h2>
+    <p>By the end of this lesson, you will be able to:</p>
+    <div class="learning-objective">
+        <strong>LO 2.1.1:</strong> Understand and apply the canvas coordinate system to position visual elements
+    </div>
+    <div class="learning-objective">
+        <strong>LO 2.1.2:</strong> Use basic shape functions (ellipse, rect, line) to create visual compositions
+    </div>
+    <div class="learning-objective">
+        <strong>LO 2.1.3:</strong> Apply RGB color values to create colorful designs
+    </div>
+    <div class="learning-objective">
+        <strong>LO 2.1.4:</strong> Use comments to document code and temporarily disable code sections
+    </div>
+    <div class="learning-objective">
+        <strong>LO 2.1.5:</strong> Combine multiple shapes and colors to create complete visual scenes
+    </div>
+    
+    <div class="modality-callout">
+        🎧 <strong>Audio Learner Option:</strong> This lesson is available in audio format through the course platform. Listen while you follow along with the code examples!
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video Option:</strong> Each major section has a video demonstration available. Look for the 📹 icon throughout the lesson.
+    </div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="content-section">
+    <h2>🎨 Introduction: Creating Visual Art with Code</h2>
+    
+    <p>Welcome to the creative side of programming! In this lesson, you'll learn to create visual designs using code - similar to how you might design costumes for theater or create digital art, but with programming commands instead of physical materials or drawing tools.</p>
+    
+    <!-- PERSONALIZED: Healthcare connection -->
+    <div class="healthcare-example">
+        Just like nurses use precise measurements for medication dosages and vital signs, programmers use exact coordinates and values to create visual designs. In healthcare technology, these same programming skills create:</p>
+        <ul>
+            <li>📊 Patient vital signs monitors with color-coded displays</li>
+            <li>🫀 Heart rate visualizations</li>
+            <li>💉 Medical imaging interfaces</li>
+            <li>📱 Health apps that track symptoms visually</li>
+        </ul>
+    </div>
+    
+    <div class="callout-encourage">
+        You already have strong problem-solving skills from your programming pretest (75%!). Now you'll apply those skills to create visual art. Many students find this the most fun part of programming because you can immediately see the results of your code! 
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Introduction to Visual Programming" (5 min)
+    </div>
+</div>
+
+<!-- SECTION 1: COORDINATE SYSTEM -->
+<div class="content-section">
+    <h2>📐 Section 1: The Canvas Coordinate System</h2>
+    <div class="time-estimate">⏱️ ~15 minutes</div>
+    
+    <h3>Understanding the Canvas (El Lienzo)</h3>
+    
+    <p>Think of the programming canvas like a digital fabric you're working with in costume design. Just as you measure fabric from the top-left corner when cutting patterns, our canvas also starts at the top-left corner!</p>
+    
+    <!-- PERSONALIZED: TikTok/social media example -->
+    <div class="example-box">
+        <div class="example-title">📱 Example: TikTok Video Layout</div>
+        <p>When you create TikTok videos or Instagram posts, the app uses a coordinate system just like this! When you tap to add text or stickers:</p>
+        <ul>
+            <li><strong>X-coordinate</strong> (horizontal) determines left-to-right position</li>
+            <li><strong>Y-coordinate</strong> (vertical) determines top-to-bottom position</li>
+        </ul>
+        <p>The same principle applies to programming graphics!</p>
+    </div>
+    
+    <h3>Key Concepts</h3>
+    
+    <div class="term">
+        <div class="term-name">Canvas <span class="spanish-term">(lienzo)</span></div>
+        <p>The drawing surface where all visual elements appear. By default, it's 400 pixels wide and 400 pixels tall.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Coordinates <span class="spanish-term">(coordenadas)</span></div>
+        <p>A pair of numbers (x, y) that specify an exact location on the canvas. Think of it like coordinates on a patient chart - they tell you exactly where something is located.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Origin Point (0, 0)</div>
+        <p>The starting point at the <strong>top-left corner</strong> of the canvas. This is different from math class where (0, 0) is at the bottom-left!</p>
+    </div>
+    
+    <div class="callout-hint">
+        The coordinate system might seem backwards at first (y increases going DOWN instead of UP), but you'll get used to it quickly. Many students find it helpful to sketch designs on paper first with labeled coordinates before coding them.
+    </div>
+    
+    <h3>Coordinate Examples</h3>
+    
+    <table>
+        <tr>
+            <th>Location</th>
+            <th>Coordinates (x, y)</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Top-left corner</td>
+            <td>(0, 0)</td>
+            <td>Starting point</td>
+        </tr>
+        <tr>
+            <td>Top-right corner</td>
+            <td>(400, 0)</td>
+            <td>Far right, top edge</td>
+        </tr>
+        <tr>
+            <td>Bottom-left corner</td>
+            <td>(0, 400)</td>
+            <td>Far bottom, left edge</td>
+        </tr>
+        <tr>
+            <td>Bottom-right corner</td>
+            <td>(400, 400)</td>
+            <td>Maximum coordinates</td>
+        </tr>
+        <tr>
+            <td>Center</td>
+            <td>(200, 200)</td>
+            <td>Middle of canvas</td>
+        </tr>
+    </table>
+    
+    <!-- PERSONALIZED: Fashion/beauty example -->
+    <div class="example-box">
+        <div class="example-title">💄 Example: Beauty Tutorial Layout</div>
+        <p>Imagine you're creating graphics for a beauty tutorial video:</p>
+        <ul>
+            <li>Product name at (200, 50) - centered near the top</li>
+            <li>Tutorial steps at (50, 150) - left side, below the title</li>
+            <li>Your profile picture at (350, 350) - bottom right corner</li>
+        </ul>
+        <p>The coordinates tell the computer exactly where to place each element, just like you'd plan where to position text overlays on a video!</p>
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Understanding Canvas Coordinates" (7 min)
+    </div>
+    
+    <div class="callout-encourage">
+        You're doing great! Understanding coordinates is fundamental - once you master this, everything else builds on it. Take your time with this section if you need to.
+    </div>
+</div>
+
+<!-- SECTION 2: DRAWING SHAPES -->
+<div class="content-section">
+    <h2>⭕ Section 2: Drawing Basic Shapes</h2>
+    <div class="time-estimate">⏱️ ~20 minutes</div>
+    
+    <p>Now that you understand the coordinate system, let's start drawing! We'll use three fundamental shape functions.</p>
+    
+    <h3>2.1 Drawing Circles and Ovals: ellipse()</h3>
+    
+    <div class="term">
+        <div class="term-name">ellipse(x, y, width, height)</div>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x</strong> - horizontal position of the CENTER</li>
+            <li><strong>y</strong> - vertical position of the CENTER</li>
+            <li><strong>width</strong> - how wide the circle/oval is</li>
+            <li><strong>height</strong> - how tall the circle/oval is</li>
+        </ul>
+        <p><em>Note: If width = height, you get a perfect circle!</em></p>
+    </div>
+    
+    <!-- PERSONALIZED: Healthcare example -->
+    <div class="healthcare-example">
+        In medical software, ellipse() might be used to:</p>
+        <ul>
+            <li>Draw blood cells in microscopy visualizations</li>
+            <li>Create circular buttons for vital signs monitors</li>
+            <li>Represent pills or medication in dosage apps</li>
+            <li>Show pulse or blood pressure indicators</li>
+        </ul>
+    </div>
+    
+    <h3>Code Examples</h3>
+    
+    <div class="code-example">
+<code>// Perfect circle (ancho = altura)
+ellipse(200, 200, 100, 100);  // Circle at center, 100 pixels wide/tall
+
+// Oval shape (horizontal)
+ellipse(150, 100, 150, 80);   // Wide oval
+
+// Oval shape (vertical)  
+ellipse(300, 250, 60, 120);   // Tall oval</code>
+    </div>
+    
+    <!-- PERSONALIZED: Costume design example -->
+    <div class="example-box">
+        <div class="example-title">🎭 Example: Costume Design - Button Details</div>
+        <p>Imagine you're creating a digital design for costume buttons:</p>
+        <div class="code-example">
+<code>// Large decorative button for a period costume
+ellipse(200, 200, 80, 80);    // Main button (perfect circle)
+
+// Smaller buttons for a shirt collar
+ellipse(150, 100, 30, 30);    // Left button
+ellipse(250, 100, 30, 30);    // Right button
+
+// Oval buttons for a jacket
+ellipse(200, 300, 50, 70);    // Elongated button</code>
+        </div>
+    </div>
+    
+    <h3>2.2 Drawing Rectangles and Squares: rect()</h3>
+    
+    <div class="term">
+        <div class="term-name">rect(x, y, width, height)</div>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x</strong> - horizontal position of the TOP-LEFT corner</li>
+            <li><strong>y</strong> - vertical position of the TOP-LEFT corner</li>
+            <li><strong>width</strong> - how wide the rectangle is</li>
+            <li><strong>height</strong> - how tall the rectangle is</li>
+        </ul>
+        <p><em>Key difference from ellipse: positioned by top-left corner, not center!</em></p>
+    </div>
+    
+    <div class="callout-warning">
+        Notice that ellipse() uses the CENTER point, but rect() uses the TOP-LEFT corner. This is one of the most common sources of confusion for beginners. Don't worry if you mix these up at first - everyone does!
+    </div>
+    
+    <!-- PERSONALIZED: Social media example -->
+    <div class="example-box">
+        <div class="example-title">📱 Example: Creating a Phone Screen Mockup</div>
+        <p>Let's design elements like you'd see in a social media app:</p>
+        <div class="code-example">
+<code>// Phone screen background
+rect(100, 50, 200, 350);      // Main screen (starts at 100, 50)
+
+// Top status bar
+rect(100, 50, 200, 40);       // Status bar area
+
+// Story/post image area
+rect(120, 110, 160, 160);     // Square photo post
+
+// Text input box at bottom
+rect(120, 300, 160, 80);      // Comment box</code>
+        </div>
+        <p>This creates a basic layout similar to Instagram or TikTok!</p>
+    </div>
+    
+    <h3>2.3 Drawing Lines: line()</h3>
+    
+    <div class="term">
+        <div class="term-name">line(x1, y1, x2, y2)</div>
+        <p>Draws a straight line between two points.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x1, y1</strong> - starting point coordinates</li>
+            <li><strong>x2, y2</strong> - ending point coordinates</li>
+        </ul>
+    </div>
+    
+    <!-- PERSONALIZED: Healthcare example -->
+    <div class="healthcare-example">
+        Medical applications use line() to create:</p>
+        <ul>
+            <li>📈 ECG/EKG heartbeat traces</li>
+            <li>🌡️ Temperature trend lines on patient charts</li>
+            <li>💉 Connecting points in growth charts</li>
+            <li>🔬 Drawing cell boundaries in microscopy</li>
+        </ul>
+    </div>
+    
+    <div class="code-example">
+<code>// Horizontal line (la línea y es la misma)
+line(50, 200, 350, 200);      // From left to right at y=200
+
+// Vertical line (la línea x es la misma)
+line(200, 50, 200, 350);      // From top to bottom at x=200
+
+// Diagonal line
+line(100, 100, 300, 300);     // From top-left toward bottom-right
+
+// Triangle using three lines
+line(200, 100, 150, 200);     // Left side
+line(200, 100, 250, 200);     // Right side
+line(150, 200, 250, 200);     // Bottom</code>
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Drawing Shapes Step-by-Step" (12 min)
+    </div>
+    
+    <div class="callout-encourage">
+        ¡Excelente! You've learned the three fundamental shape functions. Everything visual in programming builds from these basics. Take a break if you need one before moving to the next section - you're making great progress!
+    </div>
+</div>
+
+<!-- ASSESSMENT 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.1: Shapes and Coordinates</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>Where is the origin point (0, 0) located on the canvas?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_1" value="a"> A) Bottom-left corner</label>
+            <label><input type="radio" name="q1_1" value="b"> B) Center of the canvas</label>
+            <label><input type="radio" name="q1_1" value="c"> C) Top-left corner</label>
+            <label><input type="radio" name="q1_1" value="d"> D) Top-right corner</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>C) Top-left corner</strong> - In programming graphics, (0, 0) is always at the top-left, unlike math class!</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>The ellipse() and rect() functions both position shapes using their center point.</p>
+        <div class="options">
+            <label><input type="radio" name="q1_2" value="true"> True</label>
+            <label><input type="radio" name="q1_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> ellipse() uses the center point, but rect() uses the top-left corner. This is an important difference to remember!</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Execution):</p>
+        <p>What shape does this code create?</p>
+        <div class="code-example">
+<code>ellipse(200, 150, 80, 80);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q1_3" value="a"> A) A perfect circle</label>
+            <label><input type="radio" name="q1_3" value="b"> B) A horizontal oval</label>
+            <label><input type="radio" name="q1_3" value="c"> C) A vertical oval</label>
+            <label><input type="radio" name="q1_3" value="d"> D) A square</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) A perfect circle</strong> - When width and height are equal (both 80), ellipse() creates a circle!</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Short Answer):</p>
+        <p>You want to draw a heart rate monitor display (a horizontal line) across the middle of the canvas at y-position 200. Write the line() function to do this.</p>
+        <input type="text" placeholder="line(?, ?, ?, ?)">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>line(0, 200, 400, 200);</strong></p>
+            <p>This draws from the left edge (x=0) to the right edge (x=400) at the vertical middle (y=200).</p>
+        </details>
+    </div>
+</div>
+
+<!-- SECTION 3: COMMENTS -->
+<div class="content-section">
+    <h2>💬 Section 3: Code Comments</h2>
+    <div class="time-estimate">⏱️ ~10 minutes</div>
+    
+    <p>Comments are notes you write in your code to explain what you're doing. Think of them like notes you'd write in your nursing textbook margins - they help you remember why you did something!</p>
+    
+    <div class="term">
+        <div class="term-name">Comment <span class="spanish-term">(comentario)</span></div>
+        <p>Text in your code that the computer ignores. Created with two forward slashes //</p>
+        <p><strong>Purpose:</strong> Document your code, explain complex logic, temporarily disable code</p>
+    </div>
+    
+    <h3>How to Write Comments</h3>
+    
+    <div class="code-example">
+<code>// This is a single-line comment
+// The computer completely ignores this text
+
+ellipse(200, 200, 100, 100);  // Draw a circle in the center
+
+// You can "comment out" code to temporarily disable it:
+// rect(50, 50, 100, 100);  // This rectangle won't appear
+
+/* This is a multi-line comment
+   that can span multiple lines.
+   Useful for longer explanations! */</code>
+    </div>
+    
+    <!-- PERSONALIZED: Nursing documentation parallel -->
+    <div class="healthcare-example">
+        Comments in code are just like patient documentation in nursing:</p>
+        <ul>
+            <li>📋 <strong>Patient charts</strong> explain WHY certain treatments were given</li>
+            <li>💊 <strong>Medication notes</strong> record important details for the next shift</li>
+            <li>🏥 <strong>Code comments</strong> explain WHY you wrote code a certain way</li>
+        </ul>
+        <p>Both help the next person (or future you!) understand what happened and why.</p>
+    </div>
+    
+    <h3>Good vs. Bad Comments</h3>
+    
+    <div class="example-box">
+        <div class="example-title">❌ Not Helpful - States the Obvious</div>
+        <div class="code-example">
+<code>// Draw a circle
+ellipse(200, 200, 100, 100);
+
+// Make a rectangle
+rect(50, 50, 80, 80);</code>
+        </div>
+        <p>These comments just repeat what the code already says clearly.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">✅ Helpful - Explains Purpose and Context</div>
+        <div class="code-example">
+<code>// Medication pill visualization - circular shape represents tablet
+ellipse(200, 200, 100, 100);
+
+// Patient chart background - white rectangle for vital signs display
+rect(50, 50, 80, 80);</code>
+        </div>
+        <p>These comments explain the PURPOSE and provide context.</p>
+    </div>
+    
+    <div class="callout-hint">
+        Write comments that answer "WHY?" not "WHAT?". The code itself shows what you're doing - comments should explain your reasoning or the purpose behind it. This is especially helpful when you return to your code later!
+    </div>
+    
+    <h3>Using Comments for Debugging</h3>
+    
+    <p>One powerful use of comments is temporarily "turning off" code to find problems:</p>
+    
+    <div class="code-example">
+<code>// Testing which shape is causing the problem
+ellipse(200, 100, 80, 80);    // This one works fine
+// rect(150, 200, 100, 50);   // Temporarily disabled to test
+line(100, 300, 300, 300);     // This one works fine</code>
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Writing Effective Code Comments" (5 min)
+    </div>
+</div>
+
+<!-- SECTION 4: COLORS -->
+<div class="content-section">
+    <h2>🎨 Section 4: Adding Color with RGB</h2>
+    <div class="time-estimate">⏱️ ~15 minutes</div>
+    
+    <p>Now let's add color to your creations! Just like mixing colors for costume designs or makeup, we'll mix digital colors using the RGB system.</p>
+    
+    <div class="term">
+        <div class="term-name">RGB <span class="spanish-term">(Rojo, Verde, Azul)</span></div>
+        <p>A color system that mixes <strong>R</strong>ed, <strong>G</strong>reen, and <strong>B</strong>lue light.</p>
+        <p>Each color component ranges from <strong>0 to 255</strong>:</p>
+        <ul>
+            <li><strong>0</strong> = none of that color</li>
+            <li><strong>255</strong> = maximum intensity of that color</li>
+        </ul>
+    </div>
+    
+    <!-- PERSONALIZED: Beauty/fashion example -->
+    <div class="example-box">
+        <div class="example-title">💄 Example: RGB Like Makeup Mixing</div>
+        <p>Think of RGB like mixing makeup or paint colors:</p>
+        <ul>
+            <li><strong>Red eyeshadow</strong> = RGB(255, 0, 0) - pure red, no green or blue</li>
+            <li><strong>Soft pink blush</strong> = RGB(255, 192, 203) - lots of red, some green/blue for softness</li>
+            <li><strong>Teal eyeliner</strong> = RGB(0, 128, 128) - medium green and blue, no red</li>
+            <li><strong>White highlight</strong> = RGB(255, 255, 255) - maximum of all colors</li>
+            <li><strong>Black mascara</strong> = RGB(0, 0, 0) - absence of all colors</li>
+        </ul>
+    </div>
+    
+    <h3>Common RGB Colors</h3>
+    
+    <table>
+        <tr>
+            <th>Color Name</th>
+            <th>RGB Values</th>
+            <th>Example Use</th>
+        </tr>
+        <tr>
+            <td>🔴 Red</td>
+            <td>(255, 0, 0)</td>
+            <td>Emergency alerts, stop signs</td>
+        </tr>
+        <tr>
+            <td>🟢 Green</td>
+            <td>(0, 255, 0)</td>
+            <td>Normal vital signs, go signals</td>
+        </tr>
+        <tr>
+            <td>🔵 Blue</td>
+            <td>(0, 0, 255)</td>
+            <td>Information, trust</td>
+        </tr>
+        <tr>
+            <td>⚪ White</td>
+            <td>(255, 255, 255)</td>
+            <td>Cleanliness, medical environments</td>
+        </tr>
+        <tr>
+            <td>⚫ Black</td>
+            <td>(0, 0, 0)</td>
+            <td>Text, outlines</td>
+        </tr>
+        <tr>
+            <td>💛 Yellow</td>
+            <td>(255, 255, 0)</td>
+            <td>Caution warnings</td>
+        </tr>
+        <tr>
+            <td>💜 Purple</td>
+            <td>(128, 0, 128)</td>
+            <td>Branding, creativity</td>
+        </tr>
+        <tr>
+            <td>🧡 Orange</td>
+            <td>(255, 165, 0)</td>
+            <td>Moderate alerts, warmth</td>
+        </tr>
+        <tr>
+            <td>🩷 Pink</td>
+            <td>(255, 192, 203)</td>
+            <td>Soft, friendly interfaces</td>
+        </tr>
+    </table>
+    
+    <h3>Color Functions</h3>
+    
+    <div class="term">
+        <div class="term-name">fill(red, green, blue)</div>
+        <p>Sets the interior color for shapes. Affects ALL shapes drawn after it until you call fill() again.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">stroke(red, green, blue)</div>
+        <p>Sets the outline color for shapes. Also affects lines!</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">noStroke()</div>
+        <p>Removes outlines from shapes. Useful for creating smooth, filled shapes without borders.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">background(red, green, blue)</div>
+        <p>Sets the canvas background color. Usually called first in your code.</p>
+    </div>
+    
+    <!-- PERSONALIZED: Healthcare color coding example -->
+    <div class="healthcare-example">
+        In healthcare software, colors communicate vital information:</p>
+        <ul>
+            <li>🔴 <strong>Red (255, 0, 0)</strong> - Critical alerts, abnormal vital signs</li>
+            <li>🟡 <strong>Yellow (255, 255, 0)</strong> - Warnings, moderate concerns</li>
+            <li>🟢 <strong>Green (0, 255, 0)</strong> - Normal values, stable patient</li>
+            <li>🔵 <strong>Blue (0, 150, 255)</strong> - Information, patient data</li>
+            <li>⚪ <strong>White (255, 255, 255)</strong> - Background, clean interface</li>
+        </ul>
+        <p>You'll use these same RGB principles when creating health visualizations!</p>
+    </div>
+    
+    <h3>Color Code Examples</h3>
+    
+    <div class="code-example">
+<code>// Set sky blue background (cielo azul)
+background(135, 206, 235);
+
+// Draw a red heart (corazón rojo) - no outline
+noStroke();
+fill(255, 0, 0);
+ellipse(180, 200, 80, 80);  // Left lobe
+ellipse(220, 200, 80, 80);  // Right lobe
+
+// Draw green grass (césped verde)
+fill(34, 139, 34);
+rect(0, 350, 400, 50);
+
+// Draw a sun (sol amarillo) with orange outline
+stroke(255, 140, 0);         // Orange outline
+fill(255, 255, 0);           // Yellow fill
+ellipse(350, 50, 80, 80);</code>
+    </div>
+    
+    <div class="callout-warning">
+        Colors "stick" until you change them! Once you call fill(255, 0, 0), ALL shapes after that will be red until you call fill() again with different values. This is one of the most common mistakes beginners make.
+    </div>
+    
+    <!-- PERSONALIZED: Social media branded colors -->
+    <div class="example-box">
+        <div class="example-title">📱 Example: Social Media Brand Colors</div>
+        <p>Create interface elements using recognizable brand colors:</p>
+        <div class="code-example">
+<code>// TikTok-style interface
+background(0, 0, 0);              // Black background
+
+// Hot pink accent (TikTok pink)
+fill(254, 44, 85);
+rect(150, 100, 100, 40);          // Button
+
+// Cyan accent (TikTok cyan)  
+fill(37, 244, 238);
+ellipse(200, 200, 80, 80);        // Icon
+
+// Instagram gradient-inspired purple
+fill(195, 42, 163);
+rect(50, 300, 300, 60);           // Bottom bar</code>
+        </div>
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Understanding RGB Colors" (8 min)
+    </div>
+    
+    <div class="callout-encourage">
+        ¡Fantástico! Color is where programming becomes really creative and fun. Experiment with different RGB combinations - there are over 16 million possible colors! Don't be afraid to try different values and see what happens.
+    </div>
+</div>
+
+<!-- ASSESSMENT 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.2: Comments and Colors</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What symbol(s) create a single-line comment in code?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_1" value="a"> A) /* */</label>
+            <label><input type="radio" name="q2_1" value="b"> B) //</label>
+            <label><input type="radio" name="q2_1" value="c"> C) #</label>
+            <label><input type="radio" name="q2_1" value="d"> D) --</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) //</strong> - Two forward slashes create a single-line comment. Everything after // on that line is ignored by the computer.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Short Answer):</p>
+        <p>Write the RGB values for a pure cyan color (maximum blue and green, no red).</p>
+        <input type="text" placeholder="(?, ?, ?)">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>(0, 255, 255)</strong> - No red (0), maximum green (255), and maximum blue (255) creates cyan.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Execution):</p>
+        <p>What color will the rectangle be in this code?</p>
+        <div class="code-example">
+<code>fill(255, 0, 0);
+ellipse(100, 100, 50, 50);
+fill(0, 255, 0);
+rect(200, 200, 60, 60);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_3" value="a"> A) Red</label>
+            <label><input type="radio" name="q2_3" value="b"> B) Green</label>
+            <label><input type="radio" name="q2_3" value="c"> C) Blue</label>
+            <label><input type="radio" name="q2_3" value="d"> D) Black</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) Green</strong> - The most recent fill() call was (0, 255, 0) which is green. The rectangle uses this color.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (True/False):</p>
+        <p>The noStroke() function removes the outline from all shapes drawn after it.</p>
+        <div class="options">
+            <label><input type="radio" name="q2_4" value="true"> True</label>
+            <label><input type="radio" name="q2_4" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>True.</strong> Like fill(), the noStroke() function affects all subsequent shapes until you call stroke() again.</p>
+        </details>
+    </div>
+</div>
+
+<!-- SECTION 5: COMPLETE COMPOSITIONS -->
+<div class="content-section">
+    <h2>🎭 Section 5: Creating Complete Visual Compositions</h2>
+    <div class="time-estimate">⏱️ ~20 minutes</div>
+    
+    <p>Now you'll combine everything you've learned to create complete visual scenes! This is where programming becomes truly creative.</p>
+    
+    <h3>Important Concept: Drawing Order Matters</h3>
+    
+    <div class="callout-info">
+        Shapes are drawn in the order they appear in your code, like layers in costume design or digital art. Later shapes appear ON TOP of earlier shapes.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Think of it like costume layering:</div>
+        <ul>
+            <li><strong>First layer:</strong> Base garment (drawn first, appears on bottom)</li>
+            <li><strong>Second layer:</strong> Vest or jacket (drawn second, covers the base)</li>
+            <li><strong>Third layer:</strong> Accessories (drawn last, appear on top)</li>
+        </ul>
+        <p>In code, the same principle applies!</p>
+    </div>
+    
+    <!-- PERSONALIZED: Healthcare visualization example -->
+    <div class="healthcare-example">
+        Let's create a simple patient vital signs monitor display:</p>
+        <div class="code-example">
+<code>// Patient Monitor Display - Vital Signs Visualization
+
+// Step 1: White background (clean medical interface)
+background(255, 255, 255);
+
+// Step 2: Monitor screen (dark background for display)
+fill(20, 20, 40);
+noStroke();
+rect(50, 50, 300, 250);
+
+// Step 3: Heart rate zone - GREEN (normal range)
+fill(0, 200, 0);
+rect(70, 80, 260, 60);
+
+// Step 4: Heart icon - RED
+fill(255, 0, 0);
+ellipse(100, 110, 30, 30);  // Heart shape simplified
+
+// Step 5: Heart rate text area - WHITE
+fill(255, 255, 255);
+rect(140, 95, 180, 30);
+
+// Step 6: Blood pressure zone - BLUE (stable)
+fill(0, 150, 255);
+rect(70, 160, 260, 60);
+
+// Step 7: Temperature zone - YELLOW (normal)
+fill(255, 200, 0);
+rect(70, 240, 260, 40);
+
+// This creates a simple multi-zone vital signs display
+// just like you'd see in a hospital!</code>
+        </div>
+        <p>Notice how we build from back to front - background first, then each display zone layer by layer.</p>
+    </div>
+    
+    <h3>Step-by-Step: Creating a Complete Scene</h3>
+    
+    <p>Let's create a scene with planning and organization:</p>
+    
+    <!-- PERSONALIZED: Puerto Rican cultural example -->
+    <div class="example-box">
+        <div class="example-title">🇵🇷 Example: Puerto Rican Flag Design</div>
+        <p>Let's create a simplified Puerto Rican flag using code - connecting to your heritage!</p>
+        
+        <div class="step">
+            <span class="step-number">Planning Phase:</span> Sketch and identify components
+            <ul>
+                <li>Red stripes (5 horizontal rectangles)</li>
+                <li>White stripes (4 horizontal rectangles between red)</li>
+                <li>Blue triangle (can approximate with three lines)</li>
+                <li>White star (can create with small rectangles or circles)</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Step 1:</span> Set background
+        </div>
+        
+        <div class="code-example">
+<code>background(200, 200, 200);  // Light gray background</code>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Step 2:</span> Draw red stripes first
+        </div>
+        
+        <div class="code-example">
+<code>// Red stripes (three visible ones - top, middle, bottom)
+fill(255, 0, 0);
+noStroke();
+rect(0, 0, 400, 80);      // Top red stripe
+rect(0, 160, 400, 80);    // Middle red stripe  
+rect(0, 320, 400, 80);    // Bottom red stripe</code>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Step 3:</span> Draw white stripes
+        </div>
+        
+        <div class="code-example">
+<code>// White stripes (between the red ones)
+fill(255, 255, 255);
+rect(0, 80, 400, 80);     // First white stripe
+rect(0, 240, 400, 80);    // Second white stripe</code>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Step 4:</span> Draw blue triangle
+        </div>
+        
+        <div class="code-example">
+<code>// Blue triangle on left (simplified as lines)
+stroke(0, 51, 160);       // Dark blue
+strokeWeight(80);         // Thick lines to fill triangle area
+line(0, 0, 160, 200);     // Top edge
+line(160, 200, 0, 400);   // Bottom edge
+line(0, 0, 0, 400);       // Left edge</code>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Step 5:</span> Add white star
+        </div>
+        
+        <div class="code-example">
+<code>// White star in center of triangle (simplified as circle)
+noStroke();
+fill(255, 255, 255);
+ellipse(65, 200, 40, 40);  // Star approximation</code>
+        </div>
+        
+        <div class="step">
+            <span class="step-number">Complete Code:</span>
+        </div>
+        
+        <div class="code-example">
+<code>// Simplified Puerto Rican Flag
+// ¡Boricua! 
+
+// Background
+background(200, 200, 200);
+
+// Red stripes
+fill(255, 0, 0);
+noStroke();
+rect(0, 0, 400, 80);
+rect(0, 160, 400, 80);
+rect(0, 320, 400, 80);
+
+// White stripes
+fill(255, 255, 255);
+rect(0, 80, 400, 80);
+rect(0, 240, 400, 80);
+
+// Blue triangle
+stroke(0, 51, 160);
+strokeWeight(80);
+line(0, 0, 160, 200);
+line(160, 200, 0, 400);
+line(0, 0, 0, 400);
+
+// White star
+noStroke();
+fill(255, 255, 255);
+ellipse(65, 200, 40, 40);</code>
+        </div>
+    </div>
+    
+    <div class="callout-encourage">
+        ¡Qué orgulloso! You just created a cultural symbol using code! This shows how programming can express identity and heritage. Many students find it meaningful to create art that represents their background.
+    </div>
+    
+    <!-- PERSONALIZED: TikTok/costume design example -->
+    <div class="example-box">
+        <div class="example-title">🎬 Challenge Example: TikTok Video Border Design</div>
+        <p>Create a colorful frame like you might see in edited TikTok videos:</p>
+        <div class="code-example">
+<code>// TikTok-style colorful video frame
+
+// Black background
+background(0, 0, 0);
+
+// Outer neon pink border (think TikTok branding!)
+noStroke();
+fill(254, 44, 85);
+rect(20, 20, 360, 360);
+
+// Middle cyan layer (TikTok cyan!)
+fill(37, 244, 238);
+rect(30, 30, 340, 340);
+
+// Inner black video area
+fill(0, 0, 0);
+rect(40, 40, 320, 320);
+
+// Add some decorative corner elements
+// Top-left corner accent
+fill(255, 255, 0);  // Yellow
+ellipse(60, 60, 30, 30);
+
+// Bottom-right corner accent  
+fill(255, 0, 255);  // Magenta
+ellipse(340, 340, 30, 30);
+
+// This creates a bold, social-media-ready frame!</code>
+        </div>
+    </div>
+    
+    <h3>Best Practices for Complete Compositions</h3>
+    
+    <div class="callout-hint">
+        <strong>Tips for Success:</strong>
+        <ul>
+            <li>📝 Plan your design on paper first with coordinates</li>
+            <li>🎨 Work from background to foreground (back layers first)</li>
+            <li>💬 Add comments to mark each major section</li>
+            <li>🧪 Test frequently - run your code often to catch mistakes early</li>
+            <li>🎯 Start simple and add details gradually</li>
+            <li>🔧 Use comments (//) to temporarily hide sections while testing</li>
+        </ul>
+    </div>
+    
+    <div class="modality-callout">
+        📹 <strong>Video available:</strong> "Creating Complete Scenes Step by Step" (15 min)
+    </div>
+    
+    <div class="callout-encourage">
+        You're doing amazing work! Creating complete visual compositions is complex, but you're building skills that connect to so many fields - from medical visualization to digital design. Take pride in what you're creating!
+    </div>
+</div>
+
+<!-- FINAL ASSESSMENT -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.3: Complete Compositions</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What RGB values create the color white?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_1" value="a"> A) (0, 0, 0)</label>
+            <label><input type="radio" name="q3_1" value="b"> B) (255, 255, 255)</label>
+            <label><input type="radio" name="q3_1" value="c"> C) (128, 128, 128)</label>
+            <label><input type="radio" name="q3_1" value="d"> D) (255, 0, 0)</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) (255, 255, 255)</strong> - Maximum values of all three colors create white light, like mixing all paint colors makes white light!</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>Once you call fill() with a color, it only affects the next shape you draw.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2" value="true"> True</label>
+            <label><input type="radio" name="q3_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> The fill() color "sticks" and affects ALL shapes drawn after it until you call fill() again with different values.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>What function would you use to remove the outline from shapes?</p>
+        <input type="text" placeholder="Type function name with parentheses">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>noStroke()</strong> - This function removes outlines from all shapes drawn after calling it.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Code Execution):</p>
+        <p>What color will the second circle be?</p>
+        <div class="code-example">
+<code>fill(255, 0, 0);
+ellipse(100, 200, 50, 50);
+ellipse(200, 200, 50, 50);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q3_4" value="a"> A) Red</label>
+            <label><input type="radio" name="q3_4" value="b"> B) Blue</label>
+            <label><input type="radio" name="q3_4" value="c"> C) White</label>
+            <label><input type="radio" name="q3_4" value="d"> D) Black</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) Red</strong> - The fill(255, 0, 0) setting persists and affects both circles since fill() wasn't called again with different values.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Code Writing Challenge):</p>
+        <p><strong>Healthcare-Themed Challenge:</strong> Write code to create a simple medicine bottle visualization with:</p>
+        <ul>
+            <li>A white rectangular bottle body</li>
+            <li>A colored cap on top (choose appropriate medical color)</li>
+            <li>A label area (different colored rectangle)</li>
+        </ul>
+        <p><em>Bonus: Add comments explaining each part!</em></p>
+        <textarea rows="12" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Solution</summary>
+            <div class="code-example">
+<code>// Medicine Bottle Visualization
+// By Maria - Nursing Major
+
+// Light blue background (clean medical environment)
+background(200, 220, 240);
+
+// Bottle body (white prescription bottle)
+fill(255, 255, 255);
+noStroke();
+rect(150, 150, 100, 180);
+
+// Safety cap (orange for prescription)
+fill(255, 140, 0);
+rect(150, 130, 100, 30);
+
+// Prescription label area (light blue)
+fill(173, 216, 230);
+rect(160, 200, 80, 60);
+
+// Small circular pills visible through bottle
+fill(255, 255, 255);
+ellipse(185, 290, 15, 15);
+ellipse(215, 285, 15, 15);
+ellipse(200, 300, 15, 15);</code>
+            </div>
+            <p><em>Note: Your solution may vary! The important part is using appropriate shapes, positioning, colors, and thoughtful comments.</em></p>
+        </details>
+    </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="summary-box">
+    <h2>📚 Chapter Summary (Resumen del Capítulo)</h2>
+    
+    <p><strong>¡Felicidades Maria!</strong> You've completed Drawing With Code and learned fundamental visual programming skills! Let's review what you've mastered:</p>
+    
+    <h3>Key Takeaways (Conceptos Clave):</h3>
+    <ul>
+        <li>✅ The <strong>canvas coordinate system</strong> places (0, 0) at the top-left corner, like measuring from the corner of fabric</li>
+        <li>✅ <strong>ellipse(x, y, width, height)</strong> draws circles and ovals from their CENTER point</li>
+        <li>✅ <strong>rect(x, y, width, height)</strong> draws rectangles from their TOP-LEFT corner</li>
+        <li>✅ <strong>line(x1, y1, x2, y2)</strong> draws straight lines between two points</li>
+        <li>✅ <strong>Comments (//)</strong> document your code like patient chart notes - they explain WHY you did something</li>
+        <li>✅ <strong>RGB colors</strong> mix red (0-255), green (0-255), and blue (0-255) values</li>
+        <li>✅ <strong>fill()</strong> sets interior colors and persists until changed</li>
+        <li>✅ <strong>stroke()</strong> sets outline colors; <strong>noStroke()</strong> removes outlines</li>
+        <li>✅ <strong>Drawing order matters</strong> - later shapes appear on top of earlier ones</li>
+        <li>✅ Complex scenes are built by layering simple shapes with careful planning</li>
+    </ul>
+    
+    <h3>Skills You've Developed (Habilidades Desarrolladas):</h3>
+    <ul>
+        <li>🎨 Creating visual compositions that could be used in healthcare apps, social media, or digital design</li>
+        <li>📐 Understanding coordinate systems (important for medical imaging and data visualization)</li>
+        <li>🎨 Mixing RGB colors for different purposes (like color-coded vital signs)</li>
+        <li>📝 Documenting code professionally (similar to medical documentation)</li>
+        <li>🔧 Debugging by testing sections of code</li>
+        <li>🎭 Planning and executing multi-layered visual projects</li>
+    </ul>
+    
+    <h3>Connections to Your Goals:</h3>
+    <ul>
+        <li>🏥 <strong>Healthcare Technology:</strong> These visual programming skills are used to create patient monitoring interfaces, health visualization apps, and medical education software</li>
+        <li>📱 <strong>Digital Skills:</strong> You now understand how apps create their visual interfaces</li>
+        <li>🎨 <strong>Creative Expression:</strong> You can express your culture and interests through code!</li>
+    </ul>
+</div>
+
+<!-- WHAT'S NEXT -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next (Lo Que Sigue)</h2>
+    <h3>Chapter 2, Lesson 2: Animation and Interactivity</h3>
+    
+    <p>Now that you can create beautiful static designs, it's time to make them come alive! In the next lesson, you'll learn how to:</p>
+    
+    <ul>
+        <li>✨ Create <strong>animated graphics</strong> that move and change (like a beating heart visualization!)</li>
+        <li>🖱️ Make designs <strong>respond to mouse movements</strong> and clicks</li>
+        <li>🔢 Use <strong>variables</strong> to store and change values (you're already familiar with these!)</li>
+        <li>🔄 Apply <strong>math operations</strong> to create smooth motion</li>
+        <li>⏱️ Understand how <strong>animation loops</strong> work</li>
+        <li>🎮 Build interactive experiences like simple health tracking visualizations</li>
+    </ul>
+    
+    <p><strong>Healthcare Connection:</strong> In the next lesson, you might create an animated heart rate monitor, an interactive medication reminder, or a patient symptom tracker!</p>
+    
+    <div class="callout-encourage">
+        <strong>Before moving on:</strong> Make sure you're comfortable with the coordinate system, basic shapes, and colors. Try creating one original scene that represents something meaningful to you - maybe something related to Puerto Rico, nursing, or your favorite hobby!
+        <br><br>
+        Remember: Every professional programmer started exactly where you are now. You're building real, marketable skills! ¡Sigue adelante!
+    </div>
+    
+    <div class="modality-callout">
+        🎧 <strong>Reflection Audio:</strong> Listen to "From Static to Dynamic: Preparing for Animation" (3 min) - perfect for your evening study time!
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 2, Lesson 1: Drawing With Code</p>
+    <p style="margin-top: 15px; font-style: italic;">Personalized for Maria • Nursing Major • Spring 2026</p>
+</div>
+
+<!-- PERSONALIZATION LOG -->
+<!-- 
+PERSONALIZATION SUMMARY FOR MARIA:
+=================================
+✅ Healthcare/Nursing Context: 
+   - Vital signs monitor example
+   - Medical color coding (red=critical, green=normal)
+   - Medicine bottle coding challenge
+   - Patient documentation parallel for comments
+   - ECG/medical imaging references
+
+✅ Puerto Rican/Latina Culture:
+   - Bilingual headers (Spanish + English)
+   - Puerto Rican flag coding example
+   - Spanish terms in glossary (comentario, coordenadas, lienzo)
+   - Cultural pride acknowledgment
+
+✅ Social Media & Fashion Interests:
+   - TikTok interface examples
+   - Instagram layout references
+   - Beauty makeup color mixing analogy
+   - Video border design example
+   - Social media brand colors
+
+✅ Costume Design Connection:
+   - Fabric measurement analogy for coordinates
+   - Layering concepts related to costume design
+   - Button design examples
+   - Visual composition planning
+
+✅ Learning Preferences (Audio/Video):
+   - 8 modality callouts for video alternatives
+   - Audio option suggestions
+   - Step-by-step procedural breakdowns
+   - Visual examples emphasized
+
+✅ Encouragement & Confidence Building:
+   - 8 encouragement callouts in Spanish & English
+   - Recognition of 75% programming pretest score
+   - Growth mindset language
+   - "You can do this" messaging
+   - Normalization of struggle
+   - Pride in cultural heritage through code
+
+✅ Time Management:
+   - Time estimates for each section (45-60 min total)
+   - "Perfect for evening study session" note
+   - Clear stopping points
+   - Bite-sized sections
+
+✅ Spanish Language Support:
+   - Key terms with Spanish translations
+   - Bilingual callouts and headers
+   - Cultural linguistic connections
+
+✅ Appropriate Complexity:
+   - Standard vocabulary level
+   - Substantial scaffolding
+   - Step-by-step breakdowns
+   - Concrete examples vs. abstract concepts
+   - Building on known programming concepts (variables, loops from pretest)
+
+Total Personalizations: 35+ specific adaptations
+Interest-Based Examples: 12
+Cultural References: 8
+Healthcare Connections: 11
+Encouragement Points: 8
+-->
+
+</body>
+</html>
