@@ -1,0 +1,1198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CSC101_StudentProfile",
+  "description": "Comprehensive student profile for AI-powered personalization in CSC 101: Intro to Computing & AI",
+  "version": "2.0.0",
+  "type": "object",
+  "properties": {
+    "profileMetadata": {
+      "type": "object",
+      "description": "Metadata about the profile itself",
+      "properties": {
+        "studentId": {
+          "type": "string",
+          "description": "Unique anonymized identifier for the student"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Course identifier (e.g., CSC101-Spring2026)"
+        },
+        "sectionId": {
+          "type": "string",
+          "description": "Section identifier"
+        },
+        "instructorId": {
+          "type": "string",
+          "description": "Instructor identifier"
+        },
+        "profileVersion": {
+          "type": "string",
+          "default": "2.0.0"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dataCompleteness": {
+          "type": "object",
+          "properties": {
+            "preSurveyCompleted": { "type": "boolean", "default": false },
+            "preSurveyCompletedAt": { "type": "string", "format": "date-time" },
+            "preSurveyPercentComplete": { "type": "number", "minimum": 0, "maximum": 100 },
+            "preTestCompleted": { "type": "boolean", "default": false },
+            "preTestCompletedAt": { "type": "string", "format": "date-time" },
+            "midSemesterSurveyCompleted": { "type": "boolean", "default": false },
+            "midSemesterSurveyCompletedAt": { "type": "string", "format": "date-time" },
+            "behavioralDataPoints": { "type": "integer", "default": 0 },
+            "lastBehavioralUpdate": { "type": "string", "format": "date-time" }
+          }
+        },
+        "consentStatus": {
+          "type": "object",
+          "properties": {
+            "researchConsent": { "type": "boolean" },
+            "dataCollectionConsent": { "type": "boolean" },
+            "consentDate": { "type": "string", "format": "date-time" }
+          }
+        }
+      },
+      "required": ["studentId", "courseId", "profileVersion", "createdAt"]
+    },
+
+    "preSurveyResponses": {
+      "type": "object",
+      "description": "Raw responses from the pre-survey organized by section",
+      "properties": {
+        "section1_aboutYou": {
+          "type": "object",
+          "description": "Section 1: About You (Q1-Q6)",
+          "properties": {
+            "q1_yearInSchool": {
+              "type": "string",
+              "enum": ["freshman", "sophomore", "junior", "senior", "graduate", "high_school_concurrent", "other"],
+              "description": "Q1: Current year in school"
+            },
+            "q2_declaredMajor": {
+              "type": "string",
+              "description": "Q2: Declared or intended major (from dropdown)"
+            },
+            "q2_majorOther": {
+              "type": "string",
+              "description": "Q2: Other/specify text if selected"
+            },
+            "q3_consideringMajors": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["business", "education", "engineering", "health_sciences", "humanities", "natural_sciences", "social_sciences", "arts", "other"]
+              },
+              "description": "Q3: Major categories being considered (if undecided)"
+            },
+            "q4_firstGeneration": {
+              "type": "string",
+              "enum": ["yes", "no", "prefer_not_to_say"],
+              "description": "Q4: First person in family to attend 4-year college"
+            },
+            "q5_wheregrewUp": {
+              "type": "string",
+              "description": "Q5: City/Town, State/Country where grew up"
+            },
+            "q6_communityType": {
+              "type": "string",
+              "enum": ["urban", "suburban", "rural", "mixed"],
+              "description": "Q6: Community type during childhood"
+            }
+          }
+        },
+        "section2_language": {
+          "type": "object",
+          "description": "Section 2: Language (Q7-Q10)",
+          "properties": {
+            "q7_englishProficiency": {
+              "type": "string",
+              "enum": ["native", "very_comfortable", "comfortable", "some_difficulty", "significant_difficulty"],
+              "description": "Q7: Comfort reading academic content in English"
+            },
+            "q8_primaryLanguage": {
+              "type": "string",
+              "description": "Q8: Primary language spoken at home"
+            },
+            "q9_otherLanguages": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Q9: Other languages spoken or understood"
+            },
+            "q10_multilingualSupport": {
+              "type": "object",
+              "properties": {
+                "wanted": { "type": "boolean" },
+                "preferredLanguage": { "type": "string" }
+              },
+              "description": "Q10: Wants key terms in another language"
+            }
+          }
+        },
+        "section3_interests": {
+          "type": "object",
+          "description": "Section 3: Your Interests (Q11-Q14)",
+          "properties": {
+            "q11_interestCategories": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "sports_fitness", "music", "video_games", "cooking_food",
+                  "art_design", "nature_outdoors", "travel", "technology_gadgets",
+                  "fashion_beauty", "reading_writing", "animals_pets", "social_media",
+                  "business_entrepreneurship", "healthcare_medicine", "movies_tv", "photography_video",
+                  "diy_crafts", "cars_automotive", "science", "history",
+                  "finance_investing", "volunteering_community", "other"
+                ]
+              },
+              "description": "Q11: Interest/hobby categories selected"
+            },
+            "q11_interestOther": {
+              "type": "string",
+              "description": "Q11: Other interest specified"
+            },
+            "q12_hobbiesDescription": {
+              "type": "string",
+              "description": "Q12: Free text description of hobbies and passions"
+            },
+            "q13_entertainmentActivities": {
+              "type": "array",
+              "maxItems": 3,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "watch_videos_streaming", "play_video_games", "listen_music_podcasts",
+                  "read_books_articles", "browse_social_media", "exercise_sports",
+                  "creative_activities", "spend_time_outdoors", "hang_out_friends_family", "other"
+                ]
+              },
+              "description": "Q13: Top 3 entertainment/relaxation activities"
+            },
+            "q13_entertainmentOther": {
+              "type": "string",
+              "description": "Q13: Other entertainment activity specified"
+            },
+            "q14_careerInterests": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "healthcare_medicine", "business_finance", "education_teaching", "engineering",
+                  "arts_entertainment", "science_research", "law_government", "technology_it",
+                  "communications_media", "social_services", "environment_sustainability", "undecided", "other"
+                ]
+              },
+              "description": "Q14: Career fields of interest"
+            },
+            "q14_careerOther": {
+              "type": "string",
+              "description": "Q14: Other career interest specified"
+            }
+          }
+        },
+        "section4_learningPreferences": {
+          "type": "object",
+          "description": "Section 4: Learning Preferences (Q15-Q18)",
+          "properties": {
+            "q15_modalityRanking": {
+              "type": "object",
+              "properties": {
+                "reading_text": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "watching_videos": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "listening_audio": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "interactive_exercises": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "visual_diagrams": { "type": "integer", "minimum": 1, "maximum": 6 },
+                "hands_on_projects": { "type": "integer", "minimum": 1, "maximum": 6 }
+              },
+              "description": "Q15: Ranking of learning modalities (1=most preferred)"
+            },
+            "q16_audiobookPodcastUsage": {
+              "type": "string",
+              "enum": ["frequently", "sometimes", "rarely", "never"],
+              "description": "Q16: Frequency of audiobook/podcast listening"
+            },
+            "q17_instructionPreference": {
+              "type": "string",
+              "enum": ["written_instructions", "video_demonstrations", "both_equally", "figure_out_myself"],
+              "description": "Q17: Preference for learning new skills"
+            },
+            "q18_sessionLengthPreference": {
+              "type": "string",
+              "enum": ["short_15_30", "medium_45_60", "long_90_plus", "varies"],
+              "description": "Q18: Preferred study session length"
+            }
+          }
+        },
+        "section5_goalsMotivation": {
+          "type": "object",
+          "description": "Section 5: Goals & Motivation (Q19-Q21)",
+          "properties": {
+            "q19_courseMotivation": {
+              "type": "string",
+              "enum": ["required_major", "general_ed", "personal_interest", "career_prep", "exploring", "other"],
+              "description": "Q19: Primary reason for taking course"
+            },
+            "q19_motivationOther": {
+              "type": "string",
+              "description": "Q19: Other motivation specified"
+            },
+            "q20_careerRelevance": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Q20: Perceived relevance to future career (1-5 Likert)"
+            },
+            "q21_learningGoals": {
+              "type": "string",
+              "description": "Q21: Free text learning goals for the course"
+            }
+          }
+        },
+        "section6_priorLearning": {
+          "type": "object",
+          "description": "Section 6: Prior Learning & Experience by Topic (Q22-Q44)",
+          "properties": {
+            "aiMachineLearning": {
+              "type": "object",
+              "description": "6A: AI & Machine Learning (Q22-Q26)",
+              "properties": {
+                "q22_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "online_tutorial", "self_study", "work_internship", "personal_projects", "none"]
+                  },
+                  "description": "Q22: How learned about AI/ML"
+                },
+                "q23_understandingLevel": {
+                  "type": "string",
+                  "enum": ["no_understanding", "basic_awareness", "some_understanding", "good_understanding", "strong_understanding"],
+                  "description": "Q23: Self-rated understanding of how AI systems work"
+                },
+                "q24_aiToolUsageFrequency": {
+                  "type": "string",
+                  "enum": ["never", "tried_once_twice", "occasionally", "regularly", "frequently"],
+                  "description": "Q24: Frequency of AI tool usage"
+                },
+                "q25_aiToolUseCases": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["not_used", "basic_questions", "writing_editing", "learning_explaining", "image_generation", "coding_technical", "prompting_techniques", "creative_projects"]
+                  },
+                  "description": "Q25: What AI tools have been used for"
+                },
+                "q26_promptConfidence": {
+                  "type": "string",
+                  "enum": ["not_confident", "slightly_confident", "somewhat_confident", "confident", "very_confident"],
+                  "description": "Q26: Confidence in prompt engineering"
+                }
+              }
+            },
+            "programming": {
+              "type": "object",
+              "description": "6B: Programming & Coding (Q27-Q30)",
+              "properties": {
+                "q27_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "online_tutorial", "self_taught", "bootcamp", "work_internship", "none"]
+                  },
+                  "description": "Q27: How learned about programming"
+                },
+                "q28_conceptsFamiliar": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "variables", "conditionals", "loops", "functions", "debugging", "events", "lists_arrays"]
+                  },
+                  "description": "Q28: Programming concepts familiar with"
+                },
+                "q29_languagesUsed": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "block_based", "python", "javascript", "html_css", "java", "c_cpp_csharp", "other"]
+                  },
+                  "description": "Q29: Programming languages used"
+                },
+                "q29_languageOther": {
+                  "type": "string",
+                  "description": "Q29: Other language specified"
+                },
+                "q30_projectComplexity": {
+                  "type": "string",
+                  "enum": ["never_completed", "simple_exercises", "small_project", "medium_project", "complex_project"],
+                  "description": "Q30: Most complex programming project completed"
+                }
+              }
+            },
+            "internetCybersecurity": {
+              "type": "object",
+              "description": "6C: Internet & Cybersecurity (Q31-Q34)",
+              "properties": {
+                "q31_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "online_tutorials", "self_study", "work_internship", "security_training", "none"]
+                  },
+                  "description": "Q31: How learned about internet/cybersecurity"
+                },
+                "q32_networkingConcepts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "data_packets_routing", "ip_addresses", "http_https", "website_hosting", "dns", "wifi_wireless"]
+                  },
+                  "description": "Q32: Networking concepts that can be explained"
+                },
+                "q33_securityConcepts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "strong_passwords", "phishing", "two_factor_auth", "encryption", "pii", "malware_viruses", "vpn"]
+                  },
+                  "description": "Q33: Security concepts familiar with"
+                },
+                "q34_securityPractices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["setup_2fa", "password_manager", "identified_phishing", "checked_breaches", "used_vpn", "none"]
+                  },
+                  "description": "Q34: Security practices performed"
+                }
+              }
+            },
+            "dataAnalysis": {
+              "type": "object",
+              "description": "6D: Data & Data Analysis (Q35-Q38)",
+              "properties": {
+                "q35_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "online_tutorials", "self_study", "work_internship", "none"]
+                  },
+                  "description": "Q35: How learned about data analysis"
+                },
+                "q36_dataConcepts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "data_types", "basic_statistics", "organize_rows_columns", "datasets", "correlation", "data_bias"]
+                  },
+                  "description": "Q36: Data concepts that can be explained"
+                },
+                "q37_spreadsheetExperience": {
+                  "type": "string",
+                  "enum": ["never", "basic", "intermediate", "advanced", "expert"],
+                  "description": "Q37: Experience with spreadsheets"
+                },
+                "q38_visualizationExperience": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["never", "basic_charts", "class_presentations", "infographics", "interactive_dashboards", "code_visualizations"]
+                  },
+                  "description": "Q38: Data visualization experience"
+                }
+              }
+            },
+            "digitalCreation": {
+              "type": "object",
+              "description": "6E: Digital Creation & Multimedia (Q39-Q41)",
+              "properties": {
+                "q39_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "online_tutorials", "self_taught", "work_internship", "none"]
+                  },
+                  "description": "Q39: How learned about digital content creation"
+                },
+                "q40_artifactsCreated": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "website", "blog_portfolio", "graphics_digital_art", "video_project", "multimedia_presentation", "podcast_audio", "mobile_app_game"]
+                  },
+                  "description": "Q40: Digital artifacts created"
+                },
+                "q41_websiteComfort": {
+                  "type": "string",
+                  "enum": ["never", "website_builders", "basic_html_css", "html_css_javascript", "complex_web_apps"],
+                  "description": "Q41: Comfort level with creating websites"
+                }
+              }
+            },
+            "ethicsSociety": {
+              "type": "object",
+              "description": "6F: Ethics & Societal Impact (Q42-Q44)",
+              "properties": {
+                "q42_howLearned": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["high_school", "college_course", "personal_reading", "online_discussions", "work_training", "none"]
+                  },
+                  "description": "Q42: How learned about tech ethics"
+                },
+                "q43_ethicsTopics": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": ["none", "algorithmic_bias", "digital_divide", "privacy", "misinformation_deepfakes", "automation_jobs", "environmental_impact", "copyright_ip", "ai_ethics"]
+                  },
+                  "description": "Q43: Ethics topics familiar with"
+                },
+                "q44_criticalThinking": {
+                  "type": "string",
+                  "enum": ["rarely_never", "occasionally", "sometimes", "often", "very_often"],
+                  "description": "Q44: Frequency of critical thinking about tech's societal impact"
+                }
+              }
+            }
+          }
+        },
+        "section7_confidenceMindset": {
+          "type": "object",
+          "description": "Section 7: Confidence & Mindset (Q45-Q48)",
+          "properties": {
+            "q45_computingConfidence": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Q45: Confidence in learning computing/programming (1-5 Likert)"
+            },
+            "q46_growthMindset": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "Q46: Agreement with 'I can learn computing skills if I put in effort' (1-5 Likert)"
+            },
+            "q47_mathComfort": {
+              "type": "string",
+              "enum": ["enjoy_confident", "okay_not_favorite", "challenging_manageable", "anxious_stressed"],
+              "description": "Q47: Feelings about math"
+            },
+            "q48_difficultyResponse": {
+              "type": "string",
+              "enum": ["keep_trying_own", "look_online", "ask_peer_tutor", "ask_instructor", "stuck_give_up"],
+              "description": "Q48: Typical response to difficult problems"
+            }
+          }
+        },
+        "section8_timeResponsibilities": {
+          "type": "object",
+          "description": "Section 8: Time & Responsibilities (Q49-Q52)",
+          "properties": {
+            "q49_weeklyHours": {
+              "type": "string",
+              "enum": ["less_than_6", "6_to_9", "10_to_12", "more_than_12"],
+              "description": "Q49: Expected weekly hours for course"
+            },
+            "q50_studyTimes": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["early_morning", "morning", "afternoon", "evening", "late_night"]
+              },
+              "description": "Q50: Typical study times"
+            },
+            "q51_employment": {
+              "type": "string",
+              "enum": ["not_employed", "part_time_under_20", "part_time_20_plus", "full_time"],
+              "description": "Q51: Employment status"
+            },
+            "q52_caregiving": {
+              "type": "string",
+              "enum": ["no", "some", "significant", "prefer_not_say"],
+              "description": "Q52: Caregiving responsibilities"
+            }
+          }
+        },
+        "section9_cultureContext": {
+          "type": "object",
+          "description": "Section 9: Culture & Context - Optional (Q53-Q54)",
+          "properties": {
+            "q53_culturalContext": {
+              "type": "string",
+              "description": "Q53: Cultural traditions/communities important for relevance (optional free text)"
+            },
+            "q54_currentLiving": {
+              "type": "string",
+              "enum": ["on_campus", "off_campus_urban", "off_campus_suburban", "off_campus_rural", "prefer_not_say"],
+              "description": "Q54: Current living situation"
+            }
+          }
+        },
+        "section10_technologyEnvironment": {
+          "type": "object",
+          "description": "Section 10: Technology & Environment (Q55-Q58)",
+          "properties": {
+            "q55_primaryDevice": {
+              "type": "string",
+              "enum": ["laptop", "desktop", "tablet", "smartphone", "multiple"],
+              "description": "Q55: Primary device for coursework"
+            },
+            "q56_internetReliability": {
+              "type": "string",
+              "enum": ["very_reliable", "mostly_reliable", "sometimes_unreliable", "often_unreliable"],
+              "description": "Q56: Internet connection reliability"
+            },
+            "q57_studyLocation": {
+              "type": "string",
+              "enum": ["quiet_private", "shared_quiet", "shared_distractions", "varies"],
+              "description": "Q57: Typical study location"
+            },
+            "q58_accessibilityNeeds": {
+              "type": "string",
+              "description": "Q58: Accessibility needs (optional free text)"
+            }
+          }
+        }
+      }
+    },
+
+    "preTestResponses": {
+      "type": "object",
+      "description": "Raw responses and scores from the pre-test",
+      "properties": {
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timeSpentSeconds": {
+          "type": "integer",
+          "description": "Total time spent on pre-test in seconds"
+        },
+        "responses": {
+          "type": "object",
+          "description": "Individual question responses",
+          "properties": {
+            "sectionA_aiMl": {
+              "type": "object",
+              "description": "Section A: AI & ML (Q1-Q6)",
+              "properties": {
+                "q1_whatIsAI": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q2_whatIsML": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q3_trainingData": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q4_aiExample": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q5_whatIsLLM": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q6_promptEngineering": { "type": "string", "enum": ["A", "B", "C", "D"] }
+              }
+            },
+            "sectionB_programming": {
+              "type": "object",
+              "description": "Section B: Programming (Q7-Q10)",
+              "properties": {
+                "q7_whatIsProgram": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q8_whatIsVariable": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q9_whatIsLoop": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q10_whatIsDebugging": { "type": "string", "enum": ["A", "B", "C", "D"] }
+              }
+            },
+            "sectionC_internetSecurity": {
+              "type": "object",
+              "description": "Section C: Internet & Cybersecurity (Q11-Q14)",
+              "properties": {
+                "q11_whatIsInternet": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q12_whatIsPhishing": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q13_strongestPassword": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q14_whatIsPII": { "type": "string", "enum": ["A", "B", "C", "D"] }
+              }
+            },
+            "sectionD_data": {
+              "type": "object",
+              "description": "Section D: Data Basics (Q15-Q17)",
+              "properties": {
+                "q15_whatIsData": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q16_dataVisualization": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q17_dataAnalysisExample": { "type": "string", "enum": ["A", "B", "C", "D"] }
+              }
+            },
+            "sectionE_ethics": {
+              "type": "object",
+              "description": "Section E: Ethics & Society (Q18-Q20)",
+              "properties": {
+                "q18_algorithmicBias": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q19_digitalDivide": { "type": "string", "enum": ["A", "B", "C", "D"] },
+                "q20_aiEthicalConcern": { "type": "string", "enum": ["A", "B", "C", "D"] }
+              }
+            }
+          }
+        },
+        "scores": {
+          "type": "object",
+          "description": "Computed scores from pre-test",
+          "properties": {
+            "totalCorrect": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20
+            },
+            "totalPercentage": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "byLearningObjective": {
+              "type": "object",
+              "properties": {
+                "lo1_aiMl": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 5 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO1: AI/ML basics (Q1-5)"
+                },
+                "lo2_programming": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 4 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO2: Programming (Q7-10)"
+                },
+                "lo3_internetSecurity": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 4 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO3: Internet/Security (Q11-14)"
+                },
+                "lo5_data": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 3 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO5: Data (Q15-17)"
+                },
+                "lo6_ethics": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 3 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO6: Ethics (Q18-20)"
+                },
+                "lo8_aiUse": {
+                  "type": "object",
+                  "properties": {
+                    "correct": { "type": "integer" },
+                    "total": { "type": "integer", "const": 2 },
+                    "percentage": { "type": "number" }
+                  },
+                  "description": "LO8: AI Use (Q5-6)"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "derivedProfile": {
+      "type": "object",
+      "description": "Processed profile data derived from survey/test responses for AI consumption",
+      "properties": {
+        "demographics": {
+          "type": "object",
+          "properties": {
+            "yearInSchool": { "type": "string" },
+            "firstGeneration": { "type": "boolean" },
+            "geographicBackground": {
+              "type": "object",
+              "properties": {
+                "location": { "type": "string" },
+                "communityType": { "type": "string" }
+              }
+            },
+            "currentLiving": { "type": "string" }
+          }
+        },
+        "academicContext": {
+          "type": "object",
+          "properties": {
+            "declaredMajor": { "type": "string" },
+            "majorCategory": {
+              "type": "string",
+              "enum": ["stem_sciences", "stem_engineering", "stem_computing", "health_sciences", "business", "social_sciences", "humanities", "arts", "education", "undecided", "other"]
+            },
+            "consideringMajors": { "type": "array", "items": { "type": "string" } },
+            "careerInterests": { "type": "array", "items": { "type": "string" } },
+            "courseMotivation": { "type": "string" },
+            "careerRelevancePerception": { "type": "integer" },
+            "learningGoals": { "type": "string" },
+            "extractedGoals": { "type": "array", "items": { "type": "string" }, "description": "AI-extracted goals from free text" }
+          }
+        },
+        "language": {
+          "type": "object",
+          "properties": {
+            "englishProficiency": { "type": "string" },
+            "primaryLanguage": { "type": "string" },
+            "otherLanguages": { "type": "array", "items": { "type": "string" } },
+            "wantsMultilingualSupport": { "type": "boolean" },
+            "supportLanguage": { "type": "string" },
+            "recommendedLanguageLevel": {
+              "type": "string",
+              "enum": ["simplified", "standard", "advanced"],
+              "description": "Computed from English proficiency"
+            }
+          }
+        },
+        "interests": {
+          "type": "object",
+          "properties": {
+            "categories": { "type": "array", "items": { "type": "string" } },
+            "freeTextDescription": { "type": "string" },
+            "extractedTopics": { "type": "array", "items": { "type": "string" }, "description": "AI-extracted specific topics" },
+            "entertainmentActivities": { "type": "array", "items": { "type": "string" } },
+            "culturalContext": { "type": "string" }
+          }
+        },
+        "learningPreferences": {
+          "type": "object",
+          "properties": {
+            "modalityRanking": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Modalities in order of preference"
+            },
+            "topModality": { "type": "string" },
+            "likesAudioContent": { "type": "boolean" },
+            "instructionPreference": { "type": "string" },
+            "sessionLengthPreference": { "type": "string" }
+          }
+        },
+        "priorKnowledgeByTopic": {
+          "type": "object",
+          "description": "Computed experience levels by topic area (1-5 scale)",
+          "properties": {
+            "aiMachineLearning": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5,
+                  "description": "1=Novice, 2=Beginner, 3=Intermediate, 4=Advanced, 5=Expert"
+                },
+                "experienceLabel": {
+                  "type": "string",
+                  "enum": ["novice", "beginner", "intermediate", "advanced", "expert"]
+                },
+                "hasFormallLearning": { "type": "boolean" },
+                "hasPracticalExperience": { "type": "boolean" },
+                "aiToolUsageLevel": { "type": "string" },
+                "promptingSkillLevel": { "type": "string" },
+                "preTestScore": { "type": "number" },
+                "strengthAreas": { "type": "array", "items": { "type": "string" } },
+                "gapAreas": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "programming": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "experienceLabel": { "type": "string", "enum": ["novice", "beginner", "intermediate", "advanced", "expert"] },
+                "hasFormalLearning": { "type": "boolean" },
+                "conceptsKnown": { "type": "array", "items": { "type": "string" } },
+                "conceptsToLearn": { "type": "array", "items": { "type": "string" } },
+                "languagesUsed": { "type": "array", "items": { "type": "string" } },
+                "projectExperience": { "type": "string" },
+                "preTestScore": { "type": "number" }
+              }
+            },
+            "internetCybersecurity": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "experienceLabel": { "type": "string", "enum": ["novice", "beginner", "intermediate", "advanced", "expert"] },
+                "hasFormalLearning": { "type": "boolean" },
+                "networkingConceptsKnown": { "type": "array", "items": { "type": "string" } },
+                "securityConceptsKnown": { "type": "array", "items": { "type": "string" } },
+                "practicalSecurityExperience": { "type": "array", "items": { "type": "string" } },
+                "preTestScore": { "type": "number" }
+              }
+            },
+            "dataAnalysis": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "experienceLabel": { "type": "string", "enum": ["novice", "beginner", "intermediate", "advanced", "expert"] },
+                "hasFormalLearning": { "type": "boolean" },
+                "conceptsKnown": { "type": "array", "items": { "type": "string" } },
+                "spreadsheetLevel": { "type": "string" },
+                "visualizationExperience": { "type": "array", "items": { "type": "string" } },
+                "preTestScore": { "type": "number" }
+              }
+            },
+            "digitalCreation": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "experienceLabel": { "type": "string", "enum": ["novice", "beginner", "intermediate", "advanced", "expert"] },
+                "hasFormalLearning": { "type": "boolean" },
+                "artifactsCreated": { "type": "array", "items": { "type": "string" } },
+                "websiteSkillLevel": { "type": "string" }
+              }
+            },
+            "ethicsSociety": {
+              "type": "object",
+              "properties": {
+                "experienceLevel": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "experienceLabel": { "type": "string", "enum": ["novice", "beginner", "intermediate", "advanced", "expert"] },
+                "hasFormalLearning": { "type": "boolean" },
+                "topicsKnown": { "type": "array", "items": { "type": "string" } },
+                "criticalThinkingFrequency": { "type": "string" },
+                "preTestScore": { "type": "number" }
+              }
+            }
+          }
+        },
+        "confidenceAndMindset": {
+          "type": "object",
+          "properties": {
+            "computingConfidence": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "growthMindset": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "mathComfort": { "type": "string" },
+            "difficultyResponse": { "type": "string" },
+            "needsEncouragement": { "type": "boolean", "description": "Computed: low confidence or math anxiety" },
+            "isIndependentLearner": { "type": "boolean", "description": "Computed: prefers self-directed approaches" }
+          }
+        },
+        "timeConstraints": {
+          "type": "object",
+          "properties": {
+            "expectedWeeklyHours": { "type": "string" },
+            "preferredStudyTimes": { "type": "array", "items": { "type": "string" } },
+            "employmentStatus": { "type": "string" },
+            "hasCaregivingResponsibilities": { "type": "boolean" },
+            "isTimeConstrained": { "type": "boolean", "description": "Computed: limited time availability" }
+          }
+        },
+        "technologyAccess": {
+          "type": "object",
+          "properties": {
+            "primaryDevice": { "type": "string" },
+            "internetReliability": { "type": "string" },
+            "studyEnvironment": { "type": "string" },
+            "accessibilityNeeds": { "type": "string" },
+            "hasAccessibilityNeeds": { "type": "boolean" },
+            "needsLowBandwidthMode": { "type": "boolean", "description": "Computed: unreliable internet" },
+            "isMobileFirst": { "type": "boolean", "description": "Computed: primarily uses phone/tablet" }
+          }
+        }
+      }
+    },
+
+    "aiGenerationParameters": {
+      "type": "object",
+      "description": "Computed parameters for AI content generation, updated dynamically",
+      "properties": {
+        "lastComputed": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "contentComplexity": {
+          "type": "object",
+          "properties": {
+            "overallLevel": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5,
+              "description": "1=Very Simple, 5=Advanced"
+            },
+            "byTopic": {
+              "type": "object",
+              "properties": {
+                "aiMl": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "programming": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "internetSecurity": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "data": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "digitalCreation": { "type": "integer", "minimum": 1, "maximum": 5 },
+                "ethics": { "type": "integer", "minimum": 1, "maximum": 5 }
+              }
+            }
+          }
+        },
+        "scaffolding": {
+          "type": "object",
+          "properties": {
+            "density": {
+              "type": "string",
+              "enum": ["minimal", "light", "moderate", "substantial", "extensive"]
+            },
+            "stepCount": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 10,
+              "description": "Recommended number of steps in explanations"
+            },
+            "workedExamplesNeeded": { "type": "boolean" },
+            "abstractionLevel": {
+              "type": "string",
+              "enum": ["very_concrete", "concrete", "balanced", "abstract", "very_abstract"]
+            }
+          }
+        },
+        "languageAndTone": {
+          "type": "object",
+          "properties": {
+            "vocabularyLevel": {
+              "type": "string",
+              "enum": ["simplified", "standard", "technical"]
+            },
+            "encouragementLevel": {
+              "type": "string",
+              "enum": ["minimal", "moderate", "frequent"],
+              "description": "Based on confidence and anxiety levels"
+            },
+            "supplementaryLanguage": {
+              "type": "string",
+              "description": "Language for occasional term explanations, if requested"
+            }
+          }
+        },
+        "personalization": {
+          "type": "object",
+          "properties": {
+            "prioritizedInterests": {
+              "type": "array",
+              "maxItems": 5,
+              "items": { "type": "string" },
+              "description": "Top interests for example generation"
+            },
+            "majorContext": {
+              "type": "string",
+              "description": "Primary major/career context for examples"
+            },
+            "secondaryContexts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Secondary contexts (other majors, career interests)"
+            },
+            "culturalContexts": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Cultural contexts to incorporate"
+            },
+            "geographicContext": {
+              "type": "string",
+              "description": "Geographic context (urban/suburban/rural, region)"
+            }
+          }
+        },
+        "contentFormat": {
+          "type": "object",
+          "properties": {
+            "preferredModalities": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Ordered list of preferred content formats"
+            },
+            "includeAudioAlternatives": { "type": "boolean" },
+            "includeVideoAlternatives": { "type": "boolean" },
+            "chunkSize": {
+              "type": "string",
+              "enum": ["small", "medium", "large"],
+              "description": "Based on session length preference"
+            },
+            "mobileOptimized": { "type": "boolean" }
+          }
+        },
+        "tutorBehavior": {
+          "type": "object",
+          "properties": {
+            "hintStyle": {
+              "type": "string",
+              "enum": ["conceptual", "procedural", "example_based", "socratic", "mixed"]
+            },
+            "responseLength": {
+              "type": "string",
+              "enum": ["brief", "moderate", "detailed"]
+            },
+            "checkInFrequency": {
+              "type": "string",
+              "enum": ["minimal", "occasional", "frequent"]
+            }
+          }
+        },
+        "skipAndExtend": {
+          "type": "object",
+          "description": "Content that can be skipped or extended based on prior knowledge",
+          "properties": {
+            "canSkipBasics": {
+              "type": "object",
+              "properties": {
+                "aiIntroduction": { "type": "boolean" },
+                "programmingIntroduction": { "type": "boolean" },
+                "internetBasics": { "type": "boolean" },
+                "dataBasics": { "type": "boolean" },
+                "ethicsIntroduction": { "type": "boolean" }
+              }
+            },
+            "offerChallengeExtensions": {
+              "type": "object",
+              "properties": {
+                "aiMl": { "type": "boolean" },
+                "programming": { "type": "boolean" },
+                "internetSecurity": { "type": "boolean" },
+                "data": { "type": "boolean" },
+                "digitalCreation": { "type": "boolean" }
+              }
+            }
+          }
+        },
+        "avoidanceFlags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Topics or contexts to avoid based on negative feedback"
+        }
+      }
+    },
+
+    "ongoingData": {
+      "type": "object",
+      "description": "Data collected during course progress (populated over time)",
+      "properties": {
+        "conceptMastery": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "conceptId": { "type": "string" },
+              "conceptName": { "type": "string" },
+              "learningObjective": { "type": "string" },
+              "masteryProbability": { "type": "number", "minimum": 0, "maximum": 1 },
+              "masteryLevel": { "type": "string", "enum": ["not_started", "struggling", "developing", "proficient", "mastered"] },
+              "lastAssessed": { "type": "string", "format": "date-time" },
+              "attemptCount": { "type": "integer" },
+              "recentTrend": { "type": "string", "enum": ["improving", "stable", "declining"] }
+            }
+          }
+        },
+        "assessmentHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "assessmentId": { "type": "string" },
+              "lessonId": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" },
+              "score": { "type": "number" },
+              "timeSpent": { "type": "integer" },
+              "hintsUsed": { "type": "integer" },
+              "attemptsBeforeCorrect": { "type": "integer" }
+            }
+          }
+        },
+        "tutorInteractions": {
+          "type": "object",
+          "properties": {
+            "totalInteractions": { "type": "integer" },
+            "questionTypes": {
+              "type": "object",
+              "properties": {
+                "conceptual": { "type": "integer" },
+                "procedural": { "type": "integer" },
+                "clarification": { "type": "integer" },
+                "debugging": { "type": "integer" },
+                "examples": { "type": "integer" }
+              }
+            },
+            "effectiveInterventions": { "type": "array", "items": { "type": "string" } },
+            "commonStruggles": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "engagementMetrics": {
+          "type": "object",
+          "properties": {
+            "totalTimeInCourse": { "type": "integer", "description": "Minutes" },
+            "averageSessionLength": { "type": "integer", "description": "Minutes" },
+            "loginFrequency": { "type": "string" },
+            "contentCompletionRate": { "type": "number" },
+            "discussionParticipation": { "type": "integer" },
+            "lastActive": { "type": "string", "format": "date-time" }
+          }
+        },
+        "personalizationFeedback": {
+          "type": "object",
+          "properties": {
+            "exampleRatings": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "exampleId": { "type": "string" },
+                  "interestUsed": { "type": "string" },
+                  "rating": { "type": "string", "enum": ["positive", "negative", "neutral"] },
+                  "timestamp": { "type": "string", "format": "date-time" }
+                }
+              }
+            },
+            "interestEffectiveness": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "interest": { "type": "string" },
+                  "timesUsed": { "type": "integer" },
+                  "positiveRatings": { "type": "integer" },
+                  "negativeRatings": { "type": "integer" },
+                  "effectivenessScore": { "type": "number" }
+                }
+              }
+            }
+          }
+        },
+        "modalityEffectiveness": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "object", "properties": { "engagementScore": { "type": "number" }, "performanceCorrelation": { "type": "number" } } },
+            "video": { "type": "object", "properties": { "engagementScore": { "type": "number" }, "performanceCorrelation": { "type": "number" } } },
+            "interactive": { "type": "object", "properties": { "engagementScore": { "type": "number" }, "performanceCorrelation": { "type": "number" } } },
+            "audio": { "type": "object", "properties": { "engagementScore": { "type": "number" }, "performanceCorrelation": { "type": "number" } } }
+          }
+        }
+      }
+    },
+
+    "midSemesterUpdate": {
+      "type": "object",
+      "description": "Data from mid-semester check-in survey",
+      "properties": {
+        "completedAt": { "type": "string", "format": "date-time" },
+        "motivationChange": { "type": "string", "enum": ["increased", "same", "decreased"] },
+        "confidenceChange": { "type": "string", "enum": ["increased", "same", "decreased"] },
+        "currentConfidence": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "personalizationFeedback": { "type": "string" },
+        "whatIsWorking": { "type": "string" },
+        "whatNeedsImprovement": { "type": "string" },
+        "additionalSupport": { "type": "string" }
+      }
+    }
+  },
+  "required": ["profileMetadata"]
+}
