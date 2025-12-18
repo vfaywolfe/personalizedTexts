@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: AI Fundamentals & How AI Systems Learn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f39c12;
+            --success-color: #2ecc71;
+            --warning-color: #e74c3c;
+            --info-color: #3498db;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 70px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1), transparent),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1), transparent);
+            pointer-events: none;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header .subtitle {
+            font-size: 1.4em;
+            opacity: 0.95;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        header .chapter-meta {
+            font-size: 1.1em;
+            opacity: 0.85;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        header .chapter-meta span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            padding: 60px 40px;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid var(--primary-color);
+            font-weight: 700;
+            position: relative;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 2px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.7em;
+            margin: 40px 0 20px 0;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            margin: 25px 0 12px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 18px;
+            text-align: justify;
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
+
+        /* ===== CALLOUTS ===== */
+        .callout {
+            padding: 22px;
+            margin: 25px 0;
+            border-left: 5px solid;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            font-size: 1em;
+            position: relative;
+        }
+
+        .callout.warning {
+            border-color: var(--warning-color);
+            background-color: #fdeaea;
+        }
+
+        .callout.warning::before {
+            content: "⚠ ";
+            font-weight: bold;
+            color: var(--warning-color);
+            margin-right: 8px;
+        }
+
+        .callout.hint {
+            border-color: var(--info-color);
+            background-color: #ebf5fb;
+        }
+
+        .callout.hint::before {
+            content: "💡 ";
+            margin-right: 8px;
+        }
+
+        .callout.info {
+            border-color: var(--success-color);
+            background-color: #eafaf1;
+        }
+
+        .callout.info::before {
+            content: "ℹ ";
+            font-weight: bold;
+            color: var(--success-color);
+            margin-right: 8px;
+        }
+
+        .callout-title {
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        /* ===== LEARNING OBJECTIVES ===== */
+        .learning-objectives {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        .learning-objectives h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .learning-objectives ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .learning-objectives li {
+            margin: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .learning-objectives li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .lo-code {
+            background: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            margin-right: 8px;
+        }
+
+        /* ===== TERMS AND DEFINITIONS ===== */
+        .term-definition {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 18px 0;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .term-definition:hover {
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateX(4px);
+        }
+
+        .term {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.15em;
+            margin-bottom: 8px;
+        }
+
+        .definition {
+            color: #555;
+            margin-top: 8px;
+            font-size: 1.02em;
+        }
+
+        /* ===== EXAMPLES ===== */
+        .example {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(102, 126, 234, 0.02) 100%);
+            padding: 28px;
+            margin: 30px 0;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
+        }
+
+        .example h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example h4::before {
+            content: "📘";
+            font-size: 1.2em;
+        }
+
+        .example-step {
+            margin: 20px 0;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .example-step::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 18px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            border: 1px solid #34495e;
+        }
+
+        .result {
+            background: #e8f5e9;
+            padding: 18px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid var(--success-color);
+            font-weight: 500;
+            color: #2e7d32;
+        }
+
+        /* ===== ASSESSMENTS ===== */
+        .assessment {
+            background: #fffbea;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: 0 2px 10px rgba(243, 156, 18, 0.1);
+        }
+
+        .assessment h4 {
+            color: var(--accent-color);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .assessment h4::before {
+            content: "✎";
+            font-size: 1.3em;
+        }
+
+        .question {
+            margin: 25px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .question:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .question-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .question-type {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .options {
+            margin: 15px 0 15px 25px;
+        }
+
+        .option {
+            margin: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-top: 6px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1.02em;
+        }
+
+        .answer-toggle {
+            margin-top: 18px;
+        }
+
+        .answer-toggle button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .answer-toggle button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .answer-toggle button:active {
+            transform: translateY(0);
+        }
+
+        .answer {
+            margin-top: 15px;
+            padding: 18px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .answer.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .answer-title {
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .answer p {
+            margin: 8px 0;
+            text-align: left;
+        }
+
+        /* ===== LISTS ===== */
+        ul, ol {
+            margin: 18px 0 18px 35px;
+        }
+
+        li {
+            margin: 10px 0;
+            font-size: 1.02em;
+        }
+
+        /* ===== SUMMARY ===== */
+        .summary {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 35px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid var(--primary-color);
+        }
+
+        .summary h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .summary ul {
+            margin-left: 25px;
+        }
+
+        .summary li {
+            margin: 12px 0;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        /* ===== NEXT SECTION ===== */
+        .whats-next {
+            background: linear-gradient(135deg, var(--success-color) 0%, #229954 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 10px;
+            margin: 35px 0;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .whats-next h2 {
+            color: white;
+            border-bottom-color: rgba(255,255,255,0.3);
+        }
+
+        .whats-next h3 {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .whats-next p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .whats-next ul {
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* ===== VISUAL ELEMENTS ===== */
+        .diagram {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 350px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3em;
+            margin: 25px 0;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 250px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            margin: 20px 0;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        .video-container {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            border-left: 5px solid var(--info-color);
+            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+        }
+
+        .video-info {
+            color: var(--info-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-info::before {
+            content: "🎬";
+            font-size: 1.3em;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        footer p {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* ===== TEXT FORMATTING ===== */
+        strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        em {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 600;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            header .subtitle {
+                font-size: 1.1em;
+            }
+
+            header .chapter-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            main {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            h3 {
+                font-size: 1.4em;
+            }
+
+            .callout, .example, .assessment, .summary, .whats-next {
+                padding: 20px;
+            }
+
+            .learning-objectives {
+                padding: 20px;
+            }
+
+            .learning-objectives li {
+                margin: 12px 0;
+                padding-left: 35px;
+            }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            header {
+                page-break-after: avoid;
+            }
+
+            .answer {
+                display: block !important;
+            }
+
+            .answer-toggle button {
+                display: none;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+
+            .question {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* ===== TABLE STYLES ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background: #f5f7fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Fundamentals & How AI Systems Learn</h1>
+            <div class="subtitle">Understanding Machine Learning, Neural Networks, and Deep Learning</div>
+            <div class="chapter-meta">
+                <span>📚 Chapter 1</span>
+                <span>⏱️ Estimated Reading Time: 45 minutes</span>
+                <span>🎯 Difficulty: Intermediate</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- SECTION 1: INTRODUCTION -->
+            <section id="introduction">
+                <h2>Introduction: From AI Basics to Understanding the Brain Inside the Machine</h2>
+
+                <p>In the previous chapter, you experienced AI firsthand. You typed prompts into ChatGPT and watched it generate creative stories, thoughtful advice, and explanations. But you probably wondered: <em>How does it actually work?</em> What makes AI different from traditional computer programs that follow explicit instructions?</p>
+
+                <p>This chapter answers that question by taking you inside the "black box" of artificial intelligence. You'll learn that AI isn't magic—it's mathematics and data applied cleverly. You'll understand the fundamental mechanisms that allow machines to learn from experience, recognize patterns, and make predictions.</p>
+
+                <p>More importantly, you'll gain conceptual clarity about why AI works sometimes and fails other times. You'll understand why training data matters so much, why more data usually means better AI, and why even the smartest AI systems can be surprisingly brittle or biased.</p>
+
+                <p>By the end of this chapter, you'll be able to:</p>
+                <ul>
+                    <li>Explain how machine learning differs from traditional programming</li>
+                    <li>Understand neural networks as interconnected decision-making systems</li>
+                    <li>Describe the training process and why it's central to AI</li>
+                    <li>Recognize different types of learning (supervised, unsupervised, reinforcement)</li>
+                    <li>Understand deep learning and its applications</li>
+                    <li>Explain why data quality and quantity matter in AI systems</li>
+                </ul>
+
+                <p>This conceptual foundation will prepare you for deeper dives into specific AI applications, ethical considerations, and societal implications in later chapters.</p>
+            </section>
+
+            <!-- SECTION 2: LEARNING OBJECTIVES -->
+            <section id="learning-objectives">
+                <div class="learning-objectives">
+                    <h3>Chapter Learning Objectives</h3>
+
+                    <p>Upon completing this chapter, you will be able to:</p>
+
+                    <ul>
+                        <li><span class="lo-code">LO1.1.1</span> Distinguish between traditional programming and machine learning approaches</li>
+                        <li><span class="lo-code">LO1.1.2</span> Explain how neural networks make decisions through interconnected layers of artificial neurons</li>
+                        <li><span class="lo-code">LO1.1.3</span> Describe the supervised learning process and provide real-world examples</li>
+                        <li><span class="lo-code">LO1.1.4</span> Describe the unsupervised learning process and provide real-world examples</li>
+                        <li><span class="lo-code">LO1.1.5</span> Explain reinforcement learning and how it differs from other learning approaches</li>
+                        <li><span class="lo-code">LO1.1.6</span> Understand deep learning architectures and their applications</li>
+                        <li><span class="lo-code">LO1.1.7</span> Analyze the role of training data in AI system performance</li>
+                        <li><span class="lo-code">LO1.1.8</span> Evaluate why AI systems sometimes fail despite impressive capabilities</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 3: KEY CONCEPTS -->
+            <section id="concepts">
+                <h2>Key Concepts and Terms</h2>
+
+                <h3>Core Terminology</h3>
+
+                <div class="term-definition">
+                    <div class="term">Machine Learning (ML)</div>
+                    <div class="definition">A subset of AI where computer systems learn patterns from data rather than following explicitly programmed rules. The system improves its performance automatically through exposure to examples. Key insight: You don't program the solution; you provide examples and the system discovers the solution.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Neural Network</div>
+                    <div class="definition">A computational model inspired by biological brains, consisting of interconnected nodes (artificial neurons) organized in layers. Each connection has a "weight" that determines how strongly one neuron influences another. The network learns by adjusting these weights based on experience.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Deep Learning</div>
+                    <div class="definition">A subset of machine learning using neural networks with many layers (often 10+ layers), enabling the system to learn increasingly complex patterns. The "deep" refers to the depth (number of layers) in the network. Deep learning powers most modern AI systems.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Training Data</div>
+                    <div class="definition">The collection of examples used to teach an AI system. During training, the system learns patterns from this data. The quality and quantity of training data directly impact the AI system's performance. Biased, incomplete, or poor-quality training data results in poor AI performance.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Algorithm</div>
+                    <div class="definition">A step-by-step procedure for solving a problem or completing a task. In machine learning, algorithms are the mathematical processes that enable systems to learn from data and make predictions. Examples include decision trees, support vector machines, and gradient descent.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Supervised Learning</div>
+                    <div class="definition">A machine learning approach where the system learns from labeled examples. Each training example includes both input data and the correct answer (label). The system learns to predict the correct output for new inputs. Example: Learning to recognize cats by studying thousands of photos already labeled "cat" or "not cat."</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Unsupervised Learning</div>
+                    <div class="definition">A machine learning approach where the system learns patterns from unlabeled data without being told what the correct answers are. The system discovers hidden patterns or groupings. Example: Clustering customers by shopping behavior without being told what groups to look for.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Reinforcement Learning</div>
+                    <div class="definition">A machine learning approach where the system learns through trial and error, receiving rewards for good actions and penalties for bad ones. Similar to how humans learn through experience. Example: Teaching a robot to walk by rewarding successful steps and penalizing falls.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Overfitting</div>
+                    <div class="definition">A critical problem where an AI system memorizes training data instead of learning generalizable patterns. The system performs excellently on training data but fails on new data. Imagine a student who memorizes answers instead of understanding concepts—they'll fail new questions.</div>
+                </div>
+
+                <div class="term-definition">
+                    <div class="term">Bias (in AI systems)</div>
+                    <div class="definition">Systematic errors or prejudices in AI systems, often resulting from biased training data or flawed algorithms. An AI system trained on biased data will make biased predictions. Important distinction: This is different from statistical bias, which is a mathematical property.</div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: MAIN CONTENT - PART 1 -->
+            <section id="traditional-vs-ml">
+                <h2>Part 1: Traditional Programming vs. Machine Learning</h2>
+
+                <h3>The Fundamental Shift</h3>
+
+                <p>To understand AI, you first need to understand how it differs fundamentally from traditional computer programming. This distinction is the gateway to understanding everything else.</p>
+
+                <h4>Traditional Programming: Rules First</h4>
+
+                <p>In traditional programming, a human programmer writes explicit rules that the computer follows:</p>
+
+                <div class="example">
+                    <h4>Example 1.1.1: Traditional Programming Approach</h4>
+
+                    <div
+<div class="example-step" data-step="1">
+                        <strong>Task:</strong> Write a program that identifies whether an email is spam or legitimate.
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Traditional Approach:</strong> A programmer writes rules like:
+                        <div class="code-block">
+IF email contains "Buy now!" AND sender is unknown THEN classify as SPAM
+IF email contains "Free money" THEN classify as SPAM
+IF email is from known contact AND contains legitimate subject THEN classify as LEGITIMATE
+                        </div>
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>The Problem:</strong> Spammers are clever. They constantly evolve their tactics. New spam variations break the rules. The programmer must constantly update the rules—a never-ending game of catch-up.
+                    </div>
+
+                    <div class="result">
+                        <strong>Key Insight:</strong> Traditional programming works when rules are simple and stable. It fails when the world is complex, constantly changing, or when it's hard to express rules explicitly.
+                    </div>
+                </div>
+
+                <h4>Machine Learning: Learning from Examples</h4>
+
+                <p>Machine learning inverts the problem. Instead of writing rules, you provide examples and let the system discover the rules:</p>
+
+                <div class="example">
+                    <h4>Example 1.1.2: Machine Learning Approach</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Task:</strong> Same as before—identify spam vs. legitimate emails.
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>ML Approach:</strong> Provide the system with 10,000 emails already labeled as "spam" or "legitimate."
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>The Learning Process:</strong> The system analyzes these labeled examples, discovering patterns: certain words appear more in spam, certain sender patterns indicate spam, certain formatting tricks are typical of spam. The system learns these patterns automatically.
+                    </div>
+
+                    <div class="example-step" data-step="4">
+                        <strong>New Emails:</strong> When a new email arrives, the system uses the patterns it learned to classify it. When spammers develop new techniques, you just show the system examples of the new spam, and it adapts automatically.
+                    </div>
+
+                    <div class="result">
+                        <strong>Key Insight:</strong> Machine learning works well for complex, changing, real-world problems. The system adapts automatically to new data. You don't need to anticipate and code every possible rule.
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <span class="callout-title">Real Application:</span> Google's Gmail uses machine learning for spam detection. It processes billions of emails and learns from patterns users indicate as spam. This is why Gmail's spam filter is effective—it learns rather than just following static rules.
+                </div>
+
+                <h3>Visual Comparison</h3>
+
+                <div class="diagram">
+                    <div style="text-align: left; width: 100%;">
+                        <div style="margin-bottom: 20px;">
+                            <strong style="font-size: 1.2em;">Traditional Programming</strong><br>
+                            Rules (Explicit) → Computer → Output
+                        </div>
+                        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.3); margin: 20px 0;">
+                        <div>
+                            <strong style="font-size: 1.2em;">Machine Learning</strong><br>
+                            Examples (Data) + Learning Algorithm → System Discovers Rules → Output
+                        </div>
+                    </div>
+                </div>
+
+                <h3>When to Use Each Approach</h3>
+
+                <table>
+                    <tr>
+                        <th>Characteristic</th>
+                        <th>Traditional Programming</th>
+                        <th>Machine Learning</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Rules Clarity</strong></td>
+                        <td>Rules are clear and explicit</td>
+                        <td>Rules are complex or unknown</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Change Frequency</strong></td>
+                        <td>Rules change infrequently</td>
+                        <td>Rules or data changes frequently</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Complexity</strong></td>
+                        <td>Low to moderate complexity</td>
+                        <td>High complexity patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Interpretability</strong></td>
+                        <td>Easy to understand why</td>
+                        <td>Hard to understand why (black box)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Training Data Needed</strong></td>
+                        <td>No training data needed</td>
+                        <td>Large amount required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Examples</strong></td>
+                        <td>Calculator, spell-checker, ATM</td>
+                        <td>Image recognition, language translation, recommendations</td>
+                    </tr>
+                </table>
+
+                <div class="callout warning">
+                    <span class="callout-title">Important Caveat:</span> Machine learning isn't a magic solution. It requires substantial training data and computational resources. For simple tasks with clear rules, traditional programming is better. The key is matching the approach to the problem.
+                </div>
+            </section>
+
+            <!-- FORMATIVE ASSESSMENT 1 -->
+            <section id="assessment-1">
+                <div class="assessment">
+                    <h4>Formative Assessment 1.1.1: Traditional Programming vs. Machine Learning</h4>
+
+                    <div class="question">
+                        <div class="question-type">Multiple Choice</div>
+                        <div class="question-title">Question 1: Which approach would be best for predicting house prices based on features like square footage, location, and age?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q1-1" id="q1-1a" value="a">
+                                <label for="q1-1a">A) Traditional programming—you write rules for each feature</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1-1" id="q1-1b" value="b">
+                                <label for="q1-1b">B) Machine learning—the patterns are complex and you have historical price data</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1-1" id="q1-1c" value="c">
+                                <label for="q1-1c">C) Either would work equally well</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1-1" id="q1-1d" value="d">
+                                <label for="q1-1d">D) Neither would work for this task</label>
+                            </div>
+                        </div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Answer: B</div>
+                            <p>House pricing involves complex, non-linear relationships between features. Machine learning can discover these patterns from historical price data, while traditional programming would require explicitly coding rules that are hard to determine. Real estate companies use ML models like this successfully.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-type">True/False</div>
+                        <div class="question-title">Question 2: Machine learning systems work better than traditional programming for all types of problems.</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q1-2" id="q1-2a" value="true">
+                                <label for="q1-2a">True</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q1-2" id="q1-2b" value="false">
+                                <label for="q1-2b">False</label>
+                            </div>
+                        </div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Answer: False</div>
+                            <p>Machine learning is a tool that's appropriate for certain problems. For simple tasks with clear rules (like a calculator) or situations where you don't have enough training data, traditional programming is better. The best engineers choose the right tool for each problem.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-type">Short Answer</div>
+                        <div class="question-title">Question 3: Explain why spam filters need to use machine learning rather than static rules.</div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Model Answer:</div>
+                            <p>Spammers constantly evolve their techniques. Static rules would need to be manually updated constantly as spammers develop new tactics. Machine learning allows the system to adapt automatically—when users mark new types of spam, the system learns these new patterns without requiring manual rule updates. This adaptive capability makes ML essential for spam detection.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: NEURAL NETWORKS -->
+            <section id="neural-networks">
+                <h2>Part 2: Neural Networks—The Brain-Inspired Learning Engine</h2>
+
+                <h3>Inspiration from Biology</h3>
+
+                <p>The human brain contains roughly 86 billion neurons, each connected to thousands of others, creating networks of staggering complexity. This biological structure inspired computer scientists to create artificial neural networks—mathematical models that mimic how brains learn.</p>
+
+                <p>The key insight: Brains learn by adjusting the strength of connections between neurons. Each time you practice a skill, the connections get stronger. Artificial neural networks learn the same way—by adjusting the strength (weight) of connections between artificial neurons.</p>
+
+                <h3>Artificial Neurons: Simple Building Blocks</h3>
+
+                <p>An artificial neuron is much simpler than a biological neuron, but works on similar principles:</p>
+
+                <div class="example">
+                    <h4>Example 1.2.1: How an Artificial Neuron Works</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Inputs Arrive:</strong> A neuron receives multiple inputs from other neurons or from raw data.
+                        <div class="code-block">
+Input 1: 0.8  (importance: high)
+Input 2: 0.3  (importance: low)
+Input 3: 0.6  (importance: medium)
+                        </div>
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Weights Are Applied:</strong> Each input is multiplied by a weight that indicates its importance.
+                        <div class="code-block">
+(0.8 × 5.0) + (0.3 × 2.0) + (0.6 × 3.0) = 4.0 + 0.6 + 1.8 = 6.4
+                        </div>
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>Activation:</strong> The weighted sum passes through an activation function that determines if the neuron "fires."
+                        <div class="code-block">
+If 6.4 > threshold (let's say 5.0), then neuron fires → Output = 1
+Otherwise → Output = 0
+                        </div>
+                    </div>
+
+                    <div class="result">
+                        <strong>Result:</strong> This neuron outputs 1 (fires). This output becomes input to other neurons in the next layer. The network learns by adjusting weights so neurons fire in the right situations.
+                    </div>
+                </div>
+
+                <h3>Layers: From Simple to Complex</h3>
+
+                <p>Individual neurons are limited, but when you connect them in layers, magic happens:</p>
+
+                <ul>
+                    <li><strong>Input Layer:</strong> Raw data enters (e.g., pixel values from an image)</li>
+                    <li><strong>Hidden Layers:</strong> Neurons work together to discover patterns. Early layers detect simple features (edges), middle layers combine them into more complex features (shapes), deeper layers find even more abstract patterns (objects)</li>
+                    <li><strong>Output Layer:</strong> Final decision emerges (e.g., "this is a cat" with 95% confidence)</li>
+                </ul>
+
+                <div class="callout info">
+                    <span class="callout-title">Why "Deep" Learning?</span> Deep learning uses networks with many hidden layers (often 50+). The "deep" refers to this depth. Early neural networks had only 1-2 hidden layers. Deep networks can learn much more complex patterns but require more data and computational power to train.
+                </div>
+
+                <div class="diagram">
+                    <div style="font-size: 0.9em; line-height: 2;">
+                        <strong>Neural Network Architecture</strong><br><br>
+                        Input Layer → Hidden Layers → Output Layer<br>
+                        (Raw Data) → (Feature Learning) → (Decision)
+                    </div>
+                </div>
+
+                <h3>Training: How Weights Get Adjusted</h3>
+
+                <p>The heart of machine learning is the training process. Neural networks start with random weights. Through training, these weights are adjusted so the network makes correct predictions.</p>
+
+                <div class="example">
+                    <h4>Example 1.2.2: The Training Process</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Step 1 - Random Start:</strong> Network weights are randomly initialized. Predictions are basically guesses.
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Step 2 - Make a Prediction:</strong> Show the network a training example (e.g., a cat image). The network makes a prediction: "I think this is 60% likely to be a cat."
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>Step 3 - Calculate Error:</strong> Compare the prediction to the correct answer. The network's prediction was wrong (should have been "definitely a cat"). Calculate how wrong: error = 40%.
+                    </div>
+
+                    <div class="example-step" data-step="4">
+                        <strong>Step 4 - Adjust Weights:</strong> Through a mathematical process called backpropagation, adjust the weights to make this error smaller. Neurons that contributed to the wrong prediction have their weights reduced; helpful neurons have their weights increased.
+                    </div>
+
+                    <div class="example-step" data-step="5">
+                        <strong>Step 5 - Repeat Thousands of Times:</strong> Show the network example after example, adjusting weights each time. After 10,000 or 1,000,000 examples, the network gets better and better. The weights converge toward values that make accurate predictions.
+                    </div>
+
+                    <div class="result">
+                        <strong>Key Principle:</strong> Learning is iterative improvement. Each adjustment is small, but thousands of adjustments lead to a network that makes excellent predictions. This is why training takes hours or days and why powerful computers are needed.
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <span class="callout-title">Analogy:</span> Imagine learning to throw a basketball. Your first attempt is random. Each miss, you get feedback ("too far left," "too high"). You adjust. After hundreds of throws, your throws get closer to the target. Neural networks learn the same way—through iterative feedback and adjustment.
+                </div>
+
+                <h3>Why Training Data Quality Matters</h3>
+
+                <p>The quality and quantity of training data directly determines the network's performance:</p>
+
+                <div class="example">
+                    <h4>Example 1.2.3: Impact of Training Data Quality</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Scenario A - Good Training Data:</strong> You train a cat classifier with 50,000 clear photos of cats and non-cats. Result: Network learns true features of cats. When shown a new cat photo, it correctly identifies it.
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Scenario B - Limited Training Data:</strong> You train with only 100 cat photos. Result: Network doesn't learn generalizable features. It memorizes those 100 images. On new cat photos (different angles, lighting), it fails.
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>Scenario C - Biased Training Data:</strong> You train with 50,000 cat photos, but 90% are of tabby cats. Result: Network becomes extremely good at identifying tabbies but struggles with Siamese, Persians, and other breeds. It learned a biased model.
+                    </div>
+
+                    <div class="result">
+                        <strong>Critical Insight:</strong> Garbage in, garbage out. AI systems can only learn from the data they're trained on. Poor quality, biased, or limited training data produces poor or biased AI systems. This is why data scientists spend more time preparing data than building models.
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <span class="callout-title">Real-World Problem:</span> Many AI systems have been found to be biased because their training data was biased. For example, some facial recognition systems were trained primarily on light-skinned faces, leading to poor performance on dark-skinned faces. This isn't a problem with the algorithm—it's a problem with the training data. The system learned what it was trained to see.
+                </div>
+            </section>
+
+            <!-- FORMATIVE ASSESSMENT 2 -->
+            <section id="assessment-2">
+                <div class="assessment">
+                    <h4>Formative Assessment 1.2.1: Neural Networks and Training</h4>
+
+                    <div class="question">
+                        <div class="question-type">Multiple Choice</div>
+                        <div class="question-title">Question 1: What do neural networks adjust during the learning process?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q2-1" id="q2-1a" value="a">
+                                <label for="q2-1a">A) The input data</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2-1" id="q2-1b" value="b">
+                                <label for="q2-1b">B) The weights between neurons</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2-1" id="q2-1c" value="c">
+                                <label for="q2-1c">C) The network architecture</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2-1" id="q2-1d" value="d">
+                                <label for="q2-1d">D) The output labels</label>
+                            </div>
+                        </div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Answer: B</div>
+                            <p>Neural networks learn by adjusting the weights (connection strengths) between neurons. These adjustments happen through the backpropagation algorithm, which calculates how to adjust each weight to reduce prediction errors. The network structure stays the same, but the weights change to improve performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-type">True/False</div>
+                        <div class="question-title">Question 2: Deep learning uses more hidden layers than shallow neural networks.</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q2-2" id="q2-2a" value="true">
+                                <label for="q2-2a">True</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q2-2" id="q2-2b" value="false">
+                                <label for="q2-2b">False</label>
+                            </div>
+                        </div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Answer: True</div>
+                            <p>Deep learning uses neural networks with many hidden layers (often 50 or more). Shallow networks have only 1-2 hidden layers. The additional layers allow deep networks to learn more complex hierarchical patterns, which is why they're more powerful but also more computationally expensive to train.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-type">Short Answer</div>
+                        <div class="question-title">Question 3: Why is biased training data a serious problem, and what would be a solution?</div>
+                        <div class="answer-toggle">
+                            <button onclick="toggleAnswer(this)">Show Answer</button>
+                        </div>
+                        <div class="answer">
+                            <div class="answer-title">✓ Model Answer:</div>
+                            <p>Biased training data is serious because the neural network learns from what it's shown. If the training data overrepresents certain groups or has systematic skews, the network will learn and perpetuate those biases. Solutions include: (1) carefully auditing training data for biases, (2) collecting more balanced and representative data, (3) using techniques to detect and mitigate bias, and (4) testing the trained model on diverse populations to identify failures.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: TYPES OF LEARNING -->
+            <section id="learning-types">
+                <h2>Part 3: Types of Learning—Different Problems Need Different Approaches</h2>
+
+                <h3>Supervised Learning: Learning with Labels</h3>
+
+                <p>Supervised learning is like learning with a teacher who provides correct answers. The system learns from labeled examples where both input and output are provided.</p>
+
+                <div class="example">
+                    <h4>Example 1.3.1: Supervised Learning Applications</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Email Spam Detection:</strong>
+                        <div class="code-block">
+Training Data:
+Email 1: [content...] → Label: SPAM
+Email 2: [content...] → Label: LEGITIMATE
+Email 3: [content...] → Label: SPAM
+...10,000 emails with labels
+                        </div>
+                        The system learns: "Emails with certain words are more likely to be SPAM."
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Medical Diagnosis:</strong>
+                        <div class="code-block">
+Training Data:
+Patient 1: [symptoms, test results...] → Label: HAS_DISEASE
+Patient 2: [symptoms, test results...] → Label: NO_DISEASE
+...thousands of patient records with outcomes
+                        </div>
+                        The system learns: "Certain symptom combinations indicate disease likelihood."
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>House Price Prediction:</strong>
+                        <div class="code-block">
+Training Data:
+House 1: [square footage: 2000, bedrooms: 3, location...] → Price: \$450,000
+House 2: [square footage: 1200, bedrooms: 2, location...] → Price: \$280,000
+...thousands of houses with actual prices
+                        </div>
+                        The system learns: "Larger houses in better locations cost more."
+                    </div>
+
+                    <div class="result">
+                        <strong>Common Supervised Tasks:</strong> Classification (category prediction), regression (number prediction), object detection, machine translation, question answering.
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <span class="callout-title">Modern Example:</span> ChatGPT is trained using supervised learning. Humans provided examples of good and bad responses to prompts, and the model learned to generate high-quality responses based on this feedback.
+                </div>
+
+                <h3>Unsupervised Learning: Finding Hidden Patterns</h3>
+
+                <p>Unsupervised learning is like exploring an unknown landscape without a guide. The system finds patterns in unlabeled data without being told what to look for.</p>
+
+                <div class="example">
+                    <h4>Example 1.3.2: Unsupervised Learning Applications</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Customer Clustering:</strong>
+                        <div class="code-block">
+Input Data: (NO LABELS)
+Customer 1: [age: 25, income: \$30k, shopping habits...]
+Customer 2: [age: 72, income: \$80k, shopping habits...]
+Customer 3: [age: 28, income: \$32k, shopping habits...]
+Customer 4: [age: 70, income: \$85k, shopping habits...]
+...thousands of customers
+                        </div>
+                        <p>System discovers: "Customers naturally group into age-based segments with different shopping behaviors." The system found this pattern on its own, without being told such groups exist.</p>
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Anomaly Detection:</strong>
+                        <div class="code-block">
+Input Data: (NO LABELS)
+Transaction 1: [amount: \$50, location: home town, time: 3pm...]
+Transaction 2: [amount: \$120, location: home town, time: 9pm...]
+Transaction 3: [amount: \$3,000, location: foreign country, time: 2am...]
+...thousands of transactions
+                        </div>
+                        <p>System learns: "Normal transactions look like this. Transaction 3 is unusual—probably fraudulent." Detected without being told what fraud looks like.</p>
+                    </div>
+
+                    <div class="result">
+                        <strong>Common Unsupervised Tasks:</strong> Clustering (grouping similar items), dimensionality reduction (simplifying data while preserving important information), anomaly detection, recommendation systems.
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <span class="callout-title">When to Use Unsupervised Learning:</span> Use it when you have lots of data but no labels. Labels are expensive to create (requiring human experts), so unsupervised learning is valuable when you want to discover patterns without manual labeling.
+                </div>
+
+                <h3>Reinforcement Learning: Learning Through Trial and Error</h3>
+
+                <p>Reinforcement learning is like training a dog. You reward good behavior and discourage bad behavior. The system learns to maximize rewards.</p>
+
+                <div class="example">
+                    <h4>Example 1.3.3: Reinforcement Learning Applications</h4>
+
+                    <div class="example-step" data-step="1">
+                        <strong>Game Playing:</strong>
+                        <p>An AI learns to play chess by playing thousands of games. When it wins, the winning moves are reinforced. When it loses, losing moves are discouraged. After millions of games, it becomes a grandmaster.</p>
+                    </div>
+
+                    <div class="example-step" data-step="2">
+                        <strong>Robot Learning:</strong>
+                        <p>A robot learns to walk. Each successful step forward is rewarded. Each fall is penalized. Slowly, through trial and error and adjustment, it learns to balance and move efficiently.</p>
+                    </div>
+
+                    <div class="example-step" data-step="3">
+                        <strong>Autonomous Vehicles:</strong>
+                        <p>An AI system learns to drive by making millions of simulated driving decisions. Good decisions (staying in lane, proper speed) are rewarded. Bad decisions (crashes, traffic violations) are penalized. After training, it can drive safely.</p>
+                    </div>
+
+                    <div class="result">
+                        <strong>Key Difference:</strong> Unlike supervised learning where correct answers are provided, reinforcement learning only provides feedback about how good or bad an action was. The system must explore and discover strategies.
+                    </div>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Supervised Learning</th>
+                        <th>Unsupervised Learning</th>
+                        <th>Reinforcement Learning</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Training Data</strong></td>
+                        <td>Labeled examples</td>
+                        <td>Unlabeled data</td>
+                        <td>Rewards/penalties</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teacher Present?</strong></td>
+                        <td>Yes (provides labels)</td>
+                        <td>No (unsupervised)</td>
+                        <td>Yes (provides rewards)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Learning Style</strong></td>
+                        <td>Learn mapping from input to output</td>
+                        <td>Discover hidden patterns</td>
+                        <td>Learn optimal actions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Applications</strong></td>
+                        <td>Classification, regression, translation</td>
+                        <td>Clustering, recommendation, anomaly detection</td>
+                        <td>Game playing, robotics, autonomous systems</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- FORMATIVE ASSESSMENT 3 -->
+            <section id="assessment-3">
+                <div class="assessment">
+                    <h4>Formative Assessment 1.3.1: Types of Learning</h4>
+
+                    <div class="question">
+                        <div class="question-type">Multiple Choice</div>
+                        <div class="question-title">Question 1: A company wants to group its customers by purchasing behavior without predefined categories. Which learning type is best?</div>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" name="q3-1" id="q3-1a" value="a">
+                                <label for="q3-1a">A) Supervised learning</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" name="q3-1" id="q3-1b" value="b">
+                                <label for="q3-1b">B)
+<div class="question">
+                    <div class="question-type">Matching</div>
+                    <div class="question-title">Question 2: Match each application to its learning type.</div>
+                    <div style="margin: 20px 0;">
+                        <p><strong>Applications:</strong></p>
+                        <ol type="a">
+                            <li>Detecting fraudulent credit card transactions</li>
+                            <li>Teaching a robot to pick objects without dropping them</li>
+                            <li>Predicting which customers will cancel their subscriptions</li>
+                        </ol>
+                        <p><strong>Learning Types:</strong></p>
+                        <ol type="i">
+                            <li>Supervised Learning</li>
+                            <li>Unsupervised Learning</li>
+                            <li>Reinforcement Learning</li>
+                        </ol>
+                    </div>
+                    <div class="answer-toggle">
+                        <button onclick="toggleAnswer(this)">Show Answer</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-title">✓ Answers:</div>
+                        <p><strong>a) Detecting fraudulent transactions → ii) Unsupervised Learning</strong>
+                        <br>The system learns to identify unusual patterns without being told what fraud looks like.
+                        </p>
+                        <p><strong>b) Teaching a robot to pick objects → iii) Reinforcement Learning</strong>
+                        <br>The robot learns through trial and error, receiving rewards for successful picks and penalties for failures.
+                        </p>
+                        <p><strong>c) Predicting subscription cancellations → i) Supervised Learning</strong>
+                        <br>The system learns from historical data where we know which customers canceled (labeled examples).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-type">Short Answer</div>
+                    <div class="question-title">Question 3: Why would reinforcement learning be better than supervised learning for training a self-driving car?</div>
+                    <div class="answer-toggle">
+                        <button onclick="toggleAnswer(this)">Show Answer</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-title">✓ Model Answer:</div>
+                        <p>Supervised learning would require labeled examples of correct driving decisions for every possible scenario—millions of hours of driving data with expert labels. This is impractical. Reinforcement learning allows the car to learn through trial and error in simulated environments, receiving rewards for safe driving and penalties for violations. The system can explore and discover optimal behaviors without requiring pre-labeled examples of every scenario. Simulated reinforcement learning is much more practical than collecting and labeling real-world driving data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: OVERFITTING AND BIAS -->
+        <section id="overfitting-bias">
+            <h2>Part 4: Common Problems—Overfitting and Bias</h2>
+
+            <h3>Overfitting: Memorization Instead of Learning</h3>
+
+            <p>One of the most critical problems in machine learning is overfitting. This occurs when a system memorizes training data instead of learning generalizable patterns.</p>
+
+            <div class="example">
+                <h4>Example 1.4.1: Understanding Overfitting</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>Scenario:</strong> You're training a network to recognize whether images contain dogs or cats. You have 10,000 training images.
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>Well-Trained Network:</strong> After training, the network learns: "Dogs have four legs, fur, pointed ears. Cats have four legs, fur, pointed ears but smaller. These features distinguish them." On new images it hasn't seen, it correctly identifies dogs vs. cats. Accuracy: 95%.
+                </div>
+
+                <div class="example-step" data-step="3">
+                    <strong>Overfitted Network:</strong> Instead of learning general features, the network memorizes: "In training image 1234, pixels at positions (50,60) and (200,300) signal a dog. In image 5678, pixels at positions (100,150) signal a cat." It achieves 99% accuracy on training data. But on new images, it fails miserably (60% accuracy) because the memorized pixel patterns don't generalize.
+                </div>
+
+                <div class="result">
+                    <strong>The Problem:</strong> Perfect accuracy on training data is a red flag—it often indicates overfitting. The network isn't really learning; it's cheating by memorizing. True learning is shown by good performance on NEW data the network has never seen.
+                </div>
+            </div>
+
+            <div class="callout warning">
+                <span class="callout-title">Critical Concept:</span> In machine learning, we always split data into training (used to learn) and test sets (used to evaluate). If training accuracy is 99% but test accuracy is 60%, you have severe overfitting. The network memorized rather than learned.
+            </div>
+
+            <h4>Preventing Overfitting</h4>
+
+            <p>Data scientists use several strategies to prevent overfitting:</p>
+
+            <ul>
+                <li><strong>Use More Training Data:</strong> More examples make memorization harder. With 100 images you can memorize each one. With 10 million images, patterns are more important than memorization.</li>
+
+                <li><strong>Regularization:</strong> Add penalties during training that discourage overly complex patterns. The network is forced to learn simpler, more generalizable features.</li>
+
+                <li><strong>Early Stopping:</strong> Monitor test performance during training. Stop when test performance starts decreasing (sign of overfitting) even if training performance continues improving.</li>
+
+                <li><strong>Cross-Validation:</strong> Divide data into multiple folds. Train on some folds, test on others. Rotate which folds are used for training vs. testing. This prevents gaming a single test set.</li>
+            </ul>
+
+            <h3>Bias: Learning the Wrong Patterns</h3>
+
+            <p>Bias in AI systems refers to systematic errors or prejudices, often stemming from biased training data.</p>
+
+            <div class="example">
+                <h4>Example 1.4.2: How Bias Enters AI Systems</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>The Data:</strong> A company trains a hiring AI using 20 years of historical hiring data. The data reflects their past hiring decisions—which were made by humans with their own biases.
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>The Pattern:</strong> The AI analyzes this data and discovers: "In our past, candidates named 'John' and 'James' got hired 60% of the time. Candidates named 'Fatima' and 'Aisha' got hired 30% of the time. Candidates with 25+ years experience get hired more." The AI has learned the actual hiring patterns from historical data.
+                </div>
+
+                <div class="example-step" data-step="3">
+                    <strong>The Problem:</strong> The AI applies this learned pattern going forward: It recommends male candidates more often. It penalizes candidates with atypical names. It doesn't question whether these patterns are justified—it only knows they worked in the past.
+                </div>
+
+                <div class="example-step" data-step="4">
+                    <strong>The Result:</strong> The hiring AI perpetuates and amplifies past human biases. It's not intentionally sexist or racist—it's just learning from biased data. But the result is discrimination.
+                </div>
+
+                <div class="result">
+                    <strong>Key Insight:</strong> The AI system is working perfectly according to its training. The problem isn't the algorithm—it's the biased training data. "Garbage in, garbage out."
+                </div>
+            </div>
+
+            <div class="callout warning">
+                <span class="callout-title">Real Example:</span> Amazon developed an AI hiring tool that systematically downgraded women candidates. Why? It was trained on historical hiring data where men dominated technical roles. The AI learned this pattern and perpetuated it. Amazon had to scrap the system—it was working as designed but producing biased outcomes.
+            </div>
+
+            <h4>Addressing Bias</h4>
+
+            <p>Mitigating bias requires proactive effort:</p>
+
+            <ul>
+                <li><strong>Audit Training Data:</strong> Analyze data for obvious biases. Is representation equal across groups? Are certain groups associated with unfair outcomes?</li>
+
+                <li><strong>Collect Balanced Data:</strong> Ensure training data represents all relevant groups fairly. Don't train only on majority groups.</li>
+
+                <li><strong>Test Across Groups:</strong> After training, evaluate the system separately on different demographic groups. If performance is very different, investigate why.</li>
+
+                <li><strong>Use Fairness Metrics:</strong> Beyond accuracy, measure fairness. Is the system equally accurate for men and women? For different racial groups? For young and old?</li>
+
+                <li><strong>Involve Diverse Teams:</strong> Teams with diverse backgrounds are better at spotting biases that homogeneous teams miss.</li>
+            </ul>
+
+            <div class="callout info">
+                <span class="callout-title">Growing Field:</span> AI fairness and bias mitigation is a rapidly growing area. Major tech companies now have dedicated teams working on ensuring their AI systems are fair and don't discriminate.
+            </div>
+        </section>
+
+        <!-- FORMATIVE ASSESSMENT 4 -->
+        <section id="assessment-4">
+            <div class="assessment">
+                <h4>Formative Assessment 1.4.1: Overfitting and Bias</h4>
+
+                <div class="question">
+                    <div class="question-type">True/False</div>
+                    <div class="question-title">Question 1: 100% accuracy on training data is always a sign of excellent model performance.</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4-1" id="q4-1a" value="true">
+                            <label for="q4-1a">True</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4-1" id="q4-1b" value="false">
+                            <label for="q4-1b">False</label>
+                        </div>
+                    </div>
+                    <div class="answer-toggle">
+                        <button onclick="toggleAnswer(this)">Show Answer</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-title">✓ Answer: False</div>
+                        <p>Perfect training accuracy is often a red flag indicating overfitting. A well-trained model typically has slightly lower training accuracy than test accuracy should be realistic. 100% training accuracy with much lower test accuracy indicates the model memorized rather than learned. Real-world models usually achieve 85-95% accuracy on training data because perfect performance suggests the model isn't generalizing.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-type">Multiple Choice</div>
+                    <div class="question-title">Question 2: Which of the following is NOT a method to prevent overfitting?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4-2" id="q4-2a" value="a">
+                            <label for="q4-2a">A) Using more training data</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4-2" id="q4-2b" value="b">
+                            <label for="q4-2b">B) Regularization</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4-2" id="q4-2c" value="c">
+                            <label for="q4-2c">C) Using only training data for evaluation</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4-2" id="q4-2d" value="d">
+                            <label for="q4-2d">D) Cross-validation</label>
+                        </div>
+                    </div>
+                    <div class="answer-toggle">
+                        <button onclick="toggleAnswer(this)">Show Answer</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-title">✓ Answer: C</div>
+                        <p>Using ONLY training data for evaluation is not a method to prevent overfitting—it actually enables it! Evaluating only on training data hides overfitting. You need a separate test set to detect overfitting. Good practice: evaluate on test data (data the model has never seen). If test performance drops significantly compared to training performance, you have overfitting.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-type">Short Answer</div>
+                    <div class="question-title">Question 3: Explain how an AI system can be "working perfectly" according to its training, yet still produce biased or unfair outcomes.</div>
+                    <div class="answer-toggle">
+                        <button onclick="toggleAnswer(this)">Show Answer</button>
+                    </div>
+                    <div class="answer">
+                        <div class="answer-title">✓ Model Answer:</div>
+                        <p>An AI system learns patterns from its training data. If the training data contains historical biases (e.g., past discrimination), the system will learn those biased patterns as if they were legitimate predictive features. The system isn't intentionally biased—it's simply learning correlations in the data. When applied, it perpetuates the learned biases. The algorithm is functioning correctly; the problem is with the training data. This is why careful data auditing for bias is essential before training AI systems, especially for high-stakes decisions like hiring, lending, or criminal justice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: WHY AI FAILS -->
+        <section id="why-ai-fails">
+            <h2>Part 5: Why AI Systems Fail—Common Failure Modes</h2>
+
+            <h3>AI Isn't a Magic Wand</h3>
+
+            <p>Despite impressive capabilities, AI systems have predictable failure modes. Understanding these helps you know when to trust AI and when to be skeptical.</p>
+
+            <h4>1. Insufficient or Unrepresentative Training Data</h4>
+
+            <p>An AI system can only learn from the data it's trained on. If you don't have enough data or the data doesn't represent the real world, the system will fail in real-world applications.</p>
+
+            <div class="example">
+                <h4>Example 1.5.1: Data Insufficiency</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>Problem:</strong> A medical AI is trained to diagnose rare diseases using only 100 patient records. The rare disease appears in only 5 of them.
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>Result:</strong> The system hasn't seen enough examples of the rare disease to learn its patterns. It's likely to misdiagnose it frequently.
+                </div>
+
+                <div class="result">
+                    <strong>Solution:</strong> Collect more data. If that's not possible, use transfer learning (training on related, more abundant diseases and adapting to the rare one) or other techniques to overcome data scarcity.
+                </div>
+            </div>
+
+            <h4>2. Distribution Shift (Different Reality)</h4>
+
+            <p>An AI trained in one environment may fail when deployed in a different environment, even if both have similar data.</p>
+
+            <div class="example">
+                <h4>Example 1.5.2: Distribution Shift</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>Scenario:</strong> A system is trained to identify disease in X-ray images using data from Hospital A (modern equipment, high-quality images).
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>Deployment:</strong> The same system is deployed at Hospital B (older equipment, lower-quality images, different patient demographics).
+                </div>
+
+                <div class="example-step" data-step="3">
+                    <strong>Problem:</strong> The image quality is different. The system was never trained on low-quality images from older equipment. Performance drops significantly because the real-world data distribution is different from the training distribution.
+                </div>
+
+                <div class="result">
+                    <strong>Lesson:</strong> When deploying AI, ensure training data matches the deployment environment. Test system performance across different conditions before deployment.
+                </div>
+            </div>
+
+            <h4>3. Adversarial Examples and Fooling</h4>
+
+            <p>AI systems can be fooled by small, intentional perturbations that don't fool humans. A tiny pixel change humans can't perceive might completely change an AI's prediction.</p>
+
+            <div class="callout warning">
+                <span class="callout-title">Adversarial Vulnerability:</span> An AI might correctly identify a cat in 99.9% of images, but if you add imperceptible noise to an image, it might suddenly classify it as a dog with 99.9% confidence. The change is invisible to humans but catastrophic for the AI. This is a fundamental vulnerability of neural networks that researchers are still working to address.
+            </div>
+
+            <h4>4. Black Box Problem</h4>
+
+            <p>Many AI systems, especially deep neural networks, are "black boxes"—we can see the output but not why the system made that decision.</p>
+
+            <div class="example">
+                <h4>Example 1.5.3: The Black Box Problem</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>Traditional System:</strong> A rule-based loan approval system says: "If debt-to-income > 0.5, deny the loan." Applicant knows exactly why they were denied.
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>AI System:</strong> A neural network denies the same applicant. But nobody, not even the engineers, can explain which factors led to the decision. The network has thousands of interconnected neurons with complex relationships.
+                </div>
+
+                <div class="result">
+                    <strong>Implication:</strong> For high-stakes decisions (loan approval, job hiring, bail decisions), explainability matters. People have a right to understand why they were denied. But deep learning often sacrifices explainability for performance.
+                </div>
+            </div>
+
+            <div class="callout info">
+                <span class="callout-title">Growing Field:</span> Explainable AI (XAI) is a rapidly growing area. Researchers develop techniques to understand and explain AI decisions, balancing performance with interpretability.
+            </div>
+
+            <h4>5. Edge Cases and Out-of-Distribution Inputs</h4>
+
+            <p>AI systems can fail catastrophically on unusual or never-before-seen inputs.</p>
+
+            <div class="example">
+                <h4>Example 1.5.4: Edge Case Failure</h4>
+
+                <div class="example-step" data-step="1">
+                    <strong>Self-Driving Car:</strong> An AI is trained to recognize pedestrians. It encounters a person dressed entirely in white standing against a white wall on a snowy day—an unusual edge case.
+                </div>
+
+                <div class="example-step" data-step="2">
+                    <strong>Training Data:</strong> The system was never trained on this combination (person in white on white background). It fails to detect the pedestrian.
+                </div>
+
+                <div class="result">
+                    <strong>Lesson:</strong> Real-world testing across diverse conditions is essential. Edge cases are where AI systems often fail most spectacularly.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: SUMMARY -->
+        <section id="summary">
+            <div class="summary">
+                <h2>Chapter Summary</h2>
+
+                <h3>Key Takeaways</h3>
+
+                <ul>
+                    <li><strong>Machine Learning ≠ Traditional Programming:</strong> Traditional programming requires explicit rules. Machine learning learns patterns from data. ML handles complexity and change better, but requires data and isn't interpretable.</li>
+
+                    <li><strong>Neural Networks Learn by Adjusting Weights:</strong> Artificial neurons connected in layers mimic biological brains. Learning happens through backpropagation—adjusting weights to reduce prediction errors on training examples.</li>
+
+                    <li><strong>Deep Learning Uses Many Layers:</strong> Deep neural networks with 50+ layers learn hierarchical patterns, enabling impressive performance on complex tasks like image recognition and language understanding.</li>
+
+                    <li><strong>Training Data is Foundational:</strong> AI systems learn from training data. Data quality, quantity, and representativeness directly determine system performance. Biased data produces biased AI. Limited data produces brittle AI.</li>
+
+                    <li><strong>Three Learning Paradigms:</strong> Supervised learning (labeled data), unsupervised learning (unlabeled data, find patterns), and reinforcement learning (learn from rewards). Different problems need different approaches.</li>
+
+                    <li><strong>Overfitting is a Constant Risk:</strong> Networks can memorize training data instead of learning generalizable patterns. Test performance on separate data to detect overfitting. More data and regularization help prevent it.</li>
+
+                    <li><strong>Bias is a Serious Problem:</strong> Biased training data leads to biased predictions. Systems perpetuate historical discrimination learned from training data. Auditing data, testing across groups, and diverse teams help mitigate bias.</li>
+
+                    <li><strong>AI Fails in Predictable Ways:</strong> Insufficient data, distribution shift, adversarial examples, black box explanations, and edge cases all cause failures. Understanding these modes helps you know when to trust AI and when to be skeptical.</li>
+
+                    <li><strong>Perfect Training Accuracy is a Red Flag:</strong> Indicates overfitting. Good systems achieve realistic accuracy on separate test data, not 100% on training data.</li>
+
+                    <li><strong>Explainability Matters:</strong> For high-stakes decisions, understanding why AI made a decision is important. Deep learning often sacrifices explainability for performance.</li>
+                </ul>
+
+                <h3>Skills Developed</h3>
+
+                <ul>
+                    <li>✓ Understanding fundamental differences between traditional programming and machine learning</li>
+                    <li>✓ Conceptualizing how neural networks operate and learn</li>
+                    <li>✓ Recognizing appropriate learning paradigms for different problems</li>
+                    <li>✓ Identifying overfitting, bias, and other failure modes</li>
+                    <li>✓ Evaluating training data quality and representativeness</li>
+                    <li>✓ Thinking critically about when to trust vs. question AI systems</li>
+                </ul>
+
+                <h3>Connection to Learning Objectives</h3>
+
+                <p>This chapter covered all eight learning objectives:</p>
+
+                <ul>
+                    <li>✓ <span class="lo-code">LO1.1.1</span> Distinguished traditional programming from machine learning</li>
+                    <li>✓ <span class="lo-code">LO1.1.2</span> Explained neural networks and decision-making through layers</li>
+                    <li>✓ <span class="lo-code">LO1.1.3</span> Described supervised learning with examples</li>
+                    <li>✓ <span class="lo-code">LO1.1.4</span> Described unsupervised learning with examples</li>
+                    <li>✓ <span class="lo-code">LO1.1.5</span> Explained reinforcement learning and differences from other approaches</li>
+                    <li>✓ <span class="lo-code">LO1.1.6</span> Understood deep learning architectures</li>
+                    <li>✓ <span class="lo-code">LO1.1.7</span> Analyzed role of training data in AI performance</li>
+                    <li>✓ <span class="lo-code">LO1.1.8</span> Evaluated why AI systems fail despite capabilities</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 10: VIDEO CONTENT -->
+        <section id="video-resources">
+            <h2>Supporting Video Resources</h2>
+
+            <p>The following videos supplement the concepts in this chapter. Watch them to deepen your understanding:</p>
+
+            <div class="video-container">
+                <div class="video-info">How Chatbots and Large Language Models Work</div>
+                <p><strong>Duration:</strong> 7:20 minutes</p>
+                <p><strong>Topics Covered:</strong> Neural networks, training process, how LLMs predict text sequences, limitations of language models</p>
+                <p><strong>Why It Matters:</strong> Provides visual explanation of neural network training and how systems like ChatGPT work internally.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-info">Understanding Machine Learning: Training vs. Testing Data</div>
+                <p><strong>Duration:</strong> 5:45 minutes</p>
+                <p><strong>Topics Covered:</strong> Overfitting, training/test split, cross-validation, why test performance matters</p>
+                <p><strong>Why It Matters:</strong> Critical for understanding why we evaluate AI systems on separate data and why overfitting is dangerous.</p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-info">AI Bias and Fairness: Real-World Examples</div>
+                <p><strong>Duration:</strong> 6:30 minutes</p>
+                <p><strong>Topics Covered:</strong> How bias enters training data, real cases of AI discrimination, bias detection and mitigation</p>
+                <p><strong>Why It Matters:</strong> Demonstrates concrete examples of biased AI systems and approaches to creating fairer AI.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 11: WHATS NEXT -->
+        <section id="whats-next" class="whats-next">
+            <h2>What's Coming Next: Chapter 2 - Natural Language Processing</h2>
+
+            <h3>Building on This Foundation</h3>
+
+            <p>You now understand how AI systems learn. In Chapter 2, we'll explore a specific type of AI that's become central to modern technology: <strong>Natural Language Processing (NLP)</strong>—the field that powers ChatGPT, translation systems, and voice assistants.</p>
+
+            <h3>How It Builds</h3>
+
+            <p>The neural networks you learned about in this chapter are the foundation for NLP. We'll explore:</p>
+
+            <ul>
+                <li><strong>How AI Understands Language:</strong> How systems process and understand text (spoiler: it's through pattern recognition, not true comprehension)</li>
+
+                <li><strong>Embeddings and Representations:</strong> How words are converted into numerical representations that neural networks can work with</li>
+
+                <li><strong>Transformers and Attention:</strong> The architecture behind modern language models, explaining why recent AI is so much more capable</li>
+
+                <li><strong>Language Generation:</strong> How systems produce human-like text from patterns learned during training</li>
+
+                <li><strong>Limitations of Language Models:</strong> Why ChatGPT hallucinates, doesn't truly understand, and sometimes confidently gives wrong answers</li>
+
+                <li><strong>Applications and Implications:</strong> From machine translation to content generation—the real-world applications and concerns</li>
+            </ul>
+
+            <h3>Why It Matters for Your Final Project</h3>
+
+            <p>If your final project involves AI in education, customer service, healthcare, or content creation, NLP is likely involved. Understanding how language models work will deepen your analysis of AI's impact in your chosen field.</p>
+
+            <div class="callout hint">
+                <span class="callout-title">Preparation:</span> As you move to Chapter 2, think about these questions:
+                <ul style="margin-top: 10px;">
+                    <li>How do you think AI systems actually understand language when they're just doing pattern matching?</li>
+                    <li>Why do language models sometimes make up facts confidently?</li>
+                    <li>What's the difference between seeming to understand and actually understanding?</li>
+                </ul>
+                These questions will be explored in detail in Chapter 2.
+            </div>
+        </section>
+
+        <!-- SECTION 12: REFLECTION & DISCUSSION -->
+        <section id="reflection">
+            <h2>Reflection Questions (Optional but Recommended)</h2>
+
+            <p>Consider these questions to deepen your learning:</p>
+
+            <ul>
+                <li><strong>Personal Connection:</strong> Can you think of an AI system you use regularly? Based on what you learned, which learning type (supervised, unsupervised, reinforcement) do you think it uses?</li>
+
+                <li><strong>Ethical Consideration:</strong> If an AI system is trained on biased historical data, is the resulting bias the fault of the algorithm, the data, or the people who built the system? Who bears responsibility?</li>
+
+                <li><strong>Practical Application:</strong> For your final project topic, how might the AI systems involved be affected by overfitting, bias, or other failure modes?</li>
+
+                <li><strong>Conceptual Understanding:</strong> Can you explain to a friend why a neural network that achieves 100% accuracy on training data might actually be a bad thing?</li>
+
+                <li><strong>Critical Thinking:</strong> What types of problems are fundamentally unsuitable for machine learning approaches? When should we use traditional programming instead?</li>
+            </ul>
+
+            <p>Write down your thoughts or discuss with classmates. These reflections will help integrate this chapter's concepts into your deeper understanding of AI.</p>
+        </section>
+
+        <!-- SECTION 13: GLOSSARY -->
+        <section id="glossary">
+            <h2>Chapter Glossary</h2>
+
+            <p>Quick reference for key terms from this chapter:</p>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Algorithm</div>
+                <div class="definition">Step-by-step procedure for solving a problem. In ML, the mathematical process enabling learning from data.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Backpropagation</div>
+                <div class="definition">Mathematical algorithm that calculates how to adjust weights to reduce prediction errors. The primary mechanism by which neural networks learn.</div>
+            </div>
+
+            <div class
+<div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Classification</div>
+                <div class="definition">Supervised learning task where the system predicts a category (e.g., spam/not spam, cat/dog/bird).</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Clustering</div>
+                <div class="definition">Unsupervised learning task where the system groups similar items without predefined categories.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Deep Learning</div>
+                <div class="definition">Machine learning using neural networks with many layers, enabling learning of complex patterns.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Neural Network</div>
+                <div class="definition">Computational model inspired by biological brains, consisting of interconnected neurons organized in layers.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Overfitting</div>
+                <div class="definition">When an AI system memorizes training data instead of learning generalizable patterns, resulting in poor performance on new data.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Regression</div>
+                <div class="definition">Supervised learning task where the system predicts a number (e.g., house price, temperature).</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Reinforcement Learning</div>
+                <div class="definition">Learning approach where systems learn through trial and error, receiving rewards for good actions and penalties for bad ones.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Supervised Learning</div>
+                <div class="definition">Learning from labeled examples where both input and correct output are provided during training.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Training Data</div>
+                <div class="definition">Collection of examples used to teach an AI system. Data quality and representativeness directly impact system performance.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Unsupervised Learning</div>
+                <div class="definition">Learning from unlabeled data to discover hidden patterns or groupings without being told what to look for.</div>
+            </div>
+
+            <div class="term-definition" style="margin: 12px 0;">
+                <div class="term">Weight</div>
+                <div class="definition">Numerical value assigned to connections between neurons, indicating connection strength. Weights are adjusted during training.</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><strong>CSC101: Introduction to Computing & AI</strong> | Chapter 1: AI Fundamentals & How AI Systems Learn</p>
+        <p style="margin-top: 15px;">This chapter provided foundational knowledge of how AI systems work. You now understand the mechanisms behind machine learning, neural networks, and the training process. With this knowledge, you can approach AI systems with informed skepticism—understanding both their impressive capabilities and their genuine limitations.</p>
+        <p style="margin-top: 15px;">In Chapter 2, we'll apply this knowledge to understand how AI processes and generates language—the technology behind ChatGPT and modern language models.</p>
+        <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">© 2024 University Course Materials | Production-Ready Educational Content</p>
+        <p style="font-size: 0.85em; opacity: 0.7;">Last Updated: 2024 | Version 1.0 | Estimated Reading Time: 45 minutes</p>
+    </footer>
+</div>
+
+<script>
+    // Toggle Answer Display
+    function toggleAnswer(button) {
+        const answer = button.nextElementSibling;
+        const isShowing = answer.classList.contains('show');
+        
+        // Hide all other answers in this question
+        const question = button.closest('.question');
+        const allAnswers = question.querySelectorAll('.answer');
+        allAnswers.forEach(ans => ans.classList.remove('show'));
+        
+        // Toggle current answer
+        if (!isShowing) {
+            answer.classList.add('show');
+            button.textContent = 'Hide Answer';
+        } else {
+            answer.classList.remove('show');
+            button.textContent = 'Show Answer';
+        }
+    }
+
+    // Smooth Scrolling for Internal Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add Interactive Hover Effects to Examples
+    document.querySelectorAll('.example, .term-definition').forEach(element => {
+        element.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.25)';
+            this.style.transform = 'translateY(-3px)';
+            this.style.transition = 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+        element.addEventListener('mouseleave', function() {
+            this.style.boxShadow = '';
+            this.style.transform = '';
+        });
+    });
+
+    // Track Assessment Completion
+    let assessmentProgress = {
+        completed: 0,
+        total: 4
+    };
+
+    function updateProgress() {
+        const completedAnswers = document.querySelectorAll('.answer.show').length;
+        const totalQuestions = document.querySelectorAll('.question').length;
+        console.log(`Assessment Progress: ${completedAnswers}/${totalQuestions} questions answered`);
+    }
+
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('.answer-toggle button')) {
+            updateProgress();
+        }
+    });
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', function(e) {
+        // Ctrl+P or Cmd+P for print
+        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            window.print();
+            e.preventDefault();
+        }
+        
+        // Escape to close all answers
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.answer.show').forEach(ans => {
+                ans.classList.remove('show');
+                ans.previousElementSibling.querySelector('button').textContent = 'Show Answer';
+            });
+        }
+    });
+
+    // Add visual feedback to interactive elements
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 100);
+        });
+    });
+
+    // Highlight Table Rows on Hover
+    document.querySelectorAll('table tr').forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            if (this.querySelector('th')) return; // Skip header row
+            this.style.backgroundColor = '#f0f4ff';
+            this.style.transition = 'background-color 0.2s ease';
+        });
+        row.addEventListener('mouseleave', function() {
+            if (this.querySelector('th')) return;
+            this.style.backgroundColor = '';
+        });
+    });
+
+    // Log Reading Time Estimate
+    console.log('Estimated reading time: 45 minutes');
+    console.log('Total sections: 13');
+    console.log('Formative assessments: 4');
+    console.log('Key terms defined: 20+');
+</script>
