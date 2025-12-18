@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2.1: Drawing Shapes and Comments</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .options label:hover {
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        
+        .canvas-demo {
+            border: 2px solid #667eea;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .canvas-demo img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #764ba2;
+            border-radius: 4px;
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .summary-box ul {
+            line-height: 2;
+        }
+        
+        .next-chapter {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chapter Header -->
+<div class="chapter-header">
+    <h1>Chapter 2, Lesson 1: Drawing Shapes and Comments</h1>
+    <p>Learn to create visual compositions using basic shapes and document your code</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>🎨 Introduction</h2>
+    <p>Welcome to your first lesson in visual programming! In this lesson, you'll learn how to create drawings using code by understanding the canvas coordinate system and mastering three fundamental drawing functions: <code>ellipse()</code>, <code>rect()</code>, and <code>line()</code>. You'll also discover how to use comments to make your code more readable and easier to debug.</p>
+    
+    <p>Just as artists use brushes and paint, programmers use functions and coordinates to create visual compositions. By the end of this lesson, you'll be able to draw circles, rectangles, and lines at precise locations on a digital canvas, and you'll understand how to document your work with comments.</p>
+    
+    <div class="callout callout-info">
+        Think of programming as giving very precise instructions to a computer. Instead of saying "draw a circle over there," we need to specify exactly where "there" is using numbers. This precision is what makes computer graphics possible!
+    </div>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    <p>By the end of this lesson, you will be able to:</p>
+    
+    <div class="learning-objective">
+        <strong>Understand</strong> the canvas coordinate system and how to specify locations using (x, y) coordinates
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>ellipse()</code> function to draw circles and ovals of various sizes
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>rect()</code> function to draw rectangles and squares at specific positions
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>line()</code> function to draw straight lines between two points
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Create</strong> simple compositions by combining multiple shapes
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Use</strong> comments to document code and explain your programming logic
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Debug</strong> code by commenting out lines to isolate problems
+    </div>
+</div>
+
+<!-- Video Introduction -->
+<div class="content-section">
+    <h2>📺 Video Introduction</h2>
+    <div class="video-placeholder">
+        <h3>🎬 Drawing With Code: Your First Shapes</h3>
+        <p>Watch this 8-minute introduction to the canvas coordinate system and basic drawing functions</p>
+        <p><em>[Video content: Instructor demonstrates the coordinate system, shows how ellipse(), rect(), and line() work, and creates a simple face drawing step-by-step]</em></p>
+    </div>
+</div>
+
+<!-- Section 1: The Canvas Coordinate System -->
+<div class="content-section">
+    <h2>📐 Section 1: Understanding the Canvas Coordinate System</h2>
+    
+    <h3>What is a Canvas?</h3>
+    <p>In p5.js (the JavaScript graphics library we'll be using), a <strong>canvas</strong> is your digital drawing surface—think of it as a blank piece of paper on your screen. Every location on this canvas can be identified by two numbers: an <strong>x-coordinate</strong> (horizontal position) and a <strong>y-coordinate</strong> (vertical position).</p>
+    
+    <div class="term">
+        <div class="term-name">Canvas</div>
+        <p>A rectangular area on the screen where graphics are drawn. The default canvas size in p5.js is 400 pixels wide by 400 pixels tall, but this can be customized using the <code>createCanvas()</code> function.</p>
+    </div>
+    
+    <h3>The Coordinate System: A Surprising Twist!</h3>
+    <p>Here's something that surprises many new programmers: in computer graphics, the coordinate system is <strong>upside-down</strong> compared to what you learned in math class!</p>
+    
+    <div class="example-box">
+        <div class="example-title">📍 Key Coordinate System Rules:</div>
+        <ul>
+            <li>The origin point <strong>(0, 0)</strong> is at the <strong>top-left corner</strong> of the canvas</li>
+            <li>The <strong>x-coordinate</strong> increases as you move <strong>right</strong> (just like in math!)</li>
+            <li>The <strong>y-coordinate</strong> increases as you move <strong>down</strong> (opposite of math class!)</li>
+            <li>Coordinates are measured in <strong>pixels</strong>—the tiny dots that make up your screen</li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-warning">
+        Remember: Y increases downward! This is the opposite of the Cartesian coordinate system you learned in math. The point (100, 200) is 100 pixels from the left edge and 200 pixels from the TOP edge—putting it in the lower-left area of a 400×400 canvas.
+    </div>
+    
+    <h3>Visualizing the Coordinate System</h3>
+    <p>Let's look at some example coordinates on a 400×400 pixel canvas:</p>
+    
+    <table>
+        <tr>
+            <th>Point</th>
+            <th>Coordinates (x, y)</th>
+            <th>Location Description</th>
+        </tr>
+        <tr>
+            <td>(0, 0)</td>
+            <td>x = 0, y = 0</td>
+            <td>Top-left corner</td>
+        </tr>
+        <tr>
+            <td>(400, 0)</td>
+            <td>x = 400, y = 0</td>
+            <td>Top-right corner</td>
+        </tr>
+        <tr>
+            <td>(0, 400)</td>
+            <td>x = 0, y = 400</td>
+            <td>Bottom-left corner</td>
+        </tr>
+        <tr>
+            <td>(400, 400)</td>
+            <td>x = 400, y = 400</td>
+            <td>Bottom-right corner</td>
+        </tr>
+        <tr>
+            <td>(200, 200)</td>
+            <td>x = 200, y = 200</td>
+            <td>Center of canvas</td>
+        </tr>
+        <tr>
+            <td>(100, 50)</td>
+            <td>x = 100, y = 50</td>
+            <td>Near the top, slightly left of center</td>
+        </tr>
+        <tr>
+            <td>(300, 350)</td>
+            <td>x = 300, y = 350</td>
+            <td>Near the bottom, right of center</td>
+        </tr>
+    </table>
+    
+    <div class="callout callout-hint">
+        When you're starting out, it helps to sketch your design on graph paper first, labeling key coordinates. This makes it much easier to translate your vision into code!
+    </div>
+</div>
+
+<!-- Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.1: Understanding Coordinates</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>On a 400×400 pixel canvas, which point is in the top-left corner?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_1" value="a"> A) (400, 400)</label>
+            <label><input type="radio" name="q1_1" value="b"> B) (0, 0)</label>
+            <label><input type="radio" name="q1_1" value="c"> C) (0, 400)</label>
+            <label><input type="radio" name="q1_1" value="d"> D) (400, 0)</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) (0, 0)</strong> - The origin point (0, 0) is always at the top-left corner of the canvas.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>In the canvas coordinate system, the y-coordinate increases as you move upward.</p>
+        <div class="options">
+            <label><input type="radio" name="q1_2" value="true"> True</label>
+            <label><input type="radio" name="q1_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> The y-coordinate increases as you move DOWNWARD. This is opposite to the traditional math coordinate system.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>On a 400×400 canvas, what are the coordinates of the center point?</p>
+        <input type="text" placeholder="Format: (x, y)">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>(200, 200)</strong> - The center is at half the width (400/2 = 200) and half the height (400/2 = 200).</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Conceptual):</p>
+        <p>If you want to draw something in the lower-right area of the canvas, should the x and y values be large or small?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_4" value="a"> A) Both large</label>
+            <label><input type="radio" name="q1_4" value="b"> B) Both small</label>
+            <label><input type="radio" name="q1_4" value="c"> C) Large x, small y</label>
+            <label><input type="radio" name="q1_4" value="d"> D) Small x, large y</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) Both large</strong> - To be in the right area, x must be large (far from the left edge). To be in the lower area, y must be large (far from the top edge).</p>
+        </details>
+    </div>
+</div>
+
+<!-- Section 2: Drawing Shapes -->
+<div class="content-section">
+    <h2>🎨 Section 2: Drawing Basic Shapes</h2>
+    
+    <h3>The ellipse() Function: Drawing Circles and Ovals</h3>
+    <p>The <code>ellipse()</code> function is one of the most versatile drawing functions. It can create perfect circles or stretched ovals, depending on the parameters you provide.</p>
+    
+    <div class="term">
+        <div class="term-name">ellipse(x, y, width, height)</div>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x</strong>: x-coordinate of the ellipse's center</li>
+            <li><strong>y</strong>: y-coordinate of the ellipse's center</li>
+            <li><strong>width</strong>: horizontal diameter (in pixels)</li>
+            <li><strong>height</strong>: vertical diameter (in pixels)</li>
+        </ul>
+        <p><strong>Note:</strong> When width and height are equal, you get a perfect circle!</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 Code Examples: Drawing Ellipses</div>
+        
+        <p><strong>Example 1: Perfect Circle</strong></p>
+        <div class="code-example">
+<code>ellipse(200, 200, 100, 100);  // Circle at center with diameter 100</code>
+        </div>
+        <p>This creates a circle centered at (200, 200) with a diameter of 100 pixels.</p>
+        
+        <p><strong>Example 2: Horizontal Oval</strong></p>
+        <div class="code-example">
+<code>ellipse(150, 100, 120, 60);  // Wide oval near top-left</code>
+        </div>
+        <p>This creates an oval that's wider than it is tall, centered at (150, 100).</p>
+        
+        <p><strong>Example 3: Vertical Oval</strong></p>
+        <div class="code-example">
+<code>ellipse(300, 300, 60, 120);  // Tall oval near bottom-right</code>
+        </div>
+        <p>This creates an oval that's taller than it is wide, centered at (300, 300).</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        Remember: The ellipse is positioned by its CENTER point, not its top-left corner. This makes it easier to place circles exactly where you want them!
+    </div>
+    
+    <h3>The rect() Function: Drawing Rectangles and Squares</h3>
+    <p>The <code>rect()</code> function draws rectangles and squares. Unlike ellipses, rectangles are positioned by their top-left corner.</p>
+    
+    <div class="term">
+        <div class="term-name">rect(x, y, width, height)</div>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x</strong>: x-coordinate of the rectangle's top-left corner</li>
+            <li><strong>y</strong>: y-coordinate of the rectangle's top-left corner</li>
+            <li><strong>width</strong>: horizontal width (in pixels)</li>
+            <li><strong>height</strong>: vertical height (in pixels)</li>
+        </ul>
+        <p><strong>Note:</strong> When width and height are equal, you get a perfect square!</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 Code Examples: Drawing Rectangles</div>
+        
+        <p><strong>Example 1: Perfect Square</strong></p>
+        <div class="code-example">
+<code>rect(150, 150, 100, 100);  // Square with top-left at (150, 150)</code>
+        </div>
+        <p>This creates a 100×100 pixel square starting at position (150, 150).</p>
+        
+        <p><strong>Example 2: Horizontal Rectangle</strong></p>
+        <div class="code-example">
+<code>rect(50, 50, 200, 80);  // Wide rectangle near top-left</code>
+        </div>
+        <p>This creates a rectangle 200 pixels wide and 80 pixels tall.</p>
+        
+        <p><strong>Example 3: Vertical Rectangle</strong></p>
+        <div class="code-example">
+<code>rect(300, 100, 60, 180);  // Tall rectangle on right side</code>
+        </div>
+        <p>This creates a rectangle 60 pixels wide and 180 pixels tall.</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        Key Difference: Rectangles use their TOP-LEFT corner for positioning, while ellipses use their CENTER. Keep this in mind when planning your drawings!
+    </div>
+    
+    <h3>The line() Function: Drawing Straight Lines</h3>
+    <p>The <code>line()</code> function draws a straight line between two points. This is perfect for creating connections, geometric designs, or adding details to your drawings.</p>
+    
+    <div class="term">
+        <div class="term-name">line(x1, y1, x2, y2)</div>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>x1</strong>: x-coordinate of the starting point</li>
+            <li><strong>y1</strong>: y-coordinate of the starting point</li>
+            <li><strong>x2</strong>: x-coordinate of the ending point</li>
+            <li><strong>y2</strong>: y-coordinate of the ending point</li>
+        </ul>
+        <p><strong>Note:</strong> The order of points doesn't matter—the line looks the same either way!</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 Code Examples: Drawing Lines</div>
+        
+        <p><strong>Example 1: Horizontal Line</strong></p>
+        <div class="code-example">
+<code>line(50, 200, 350, 200);  // Horizontal line across middle</code>
+        </div>
+        <p>This draws a horizontal line from (50, 200) to (350, 200). Since y-coordinates are the same, the line is perfectly horizontal.</p>
+        
+        <p><strong>Example 2: Vertical Line</strong></p>
+        <div class="code-example">
+<code>line(200, 50, 200, 350);  // Vertical line down the center</code>
+        </div>
+        <p>This draws a vertical line from (200, 50) to (200, 350). Since x-coordinates are the same, the line is perfectly vertical.</p>
+        
+        <p><strong>Example 3: Diagonal Line</strong></p>
+        <div class="code-example">
+<code>line(100, 100, 300, 300);  // Diagonal line from top-left to bottom-right</code>
+        </div>
+        <p>This draws a diagonal line connecting the upper-left area to the lower-right area.</p>
+    </div>
+    
+    <h3>Combining Shapes: Creating a Simple Scene</h3>
+    <p>The real power of these functions comes from combining them! Let's create a simple house:</p>
+    
+    <div class="example-box">
+        <div class="example-title">🏠 Complete Example: Simple House</div>
+        <div class="code-example">
+<code>// Draw a simple house
+rect(150, 200, 100, 100);     // House body (square)
+line(150, 200, 200, 150);     // Left roof line
+line(200, 150, 250, 200);     // Right roof line
+rect(185, 250, 30, 50);       // Door
+ellipse(165, 230, 10, 10);    // Left window
+ellipse(235, 230, 10, 10);    // Right window</code>
+        </div>
+    </div>
+</div>
+
+<!-- Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.2: Drawing Shapes</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What function would you use to draw a perfect circle with a diameter of 80 pixels centered at (150, 200)?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_1" value="a"> A) rect(150, 200, 80, 80)</label>
+            <label><input type="radio" name="q2_1" value="b"> B) ellipse(150, 200, 80, 80)</label>
+            <label><input type="radio" name="q2_1" value="c"> C) circle(150, 200, 80)</label>
+            <label><input type="radio" name="q2_1" value="d"> D) line(150, 200, 80, 80)</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) ellipse(150, 200, 80, 80)</strong> - Use ellipse() with equal width and height to create a circle.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>The rect() function positions rectangles using their center point, just like ellipse() does for circles.</p>
+        <div class="options">
+            <label><input type="radio" name="q2_2" value="true"> True</label>
+            <label><input type="radio" name="q2_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> The rect() function positions rectangles using their TOP-LEFT corner, not their center.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Completion):</p>
+        <p>Complete this code to draw a horizontal line across the entire width of a 400×400 canvas at y-coordinate 250:</p>
+        <div class="code-example">
+<code>line(____, 250, ____, 250);</code>
+        </div>
+        <input type="text" placeholder="Enter the missing values">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>line(0, 250, 400, 250);</strong> - Start at x=0 (left edge) and end at x=400 (right edge), both at y=250.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Prediction):</p>
+        <p>What shape will this code create?</p>
+        <div class="code-example">
+<code>ellipse(200, 200, 150, 50);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_4" value="a"> A) A perfect circle</label>
+            <label><input type="radio" name="q2_4" value="b"> B) A horizontally stretched oval</label>
+            <label><input type="radio" name="q2_4" value="c"> C) A vertically stretched oval</label>
+            <label><input type="radio" name="q2_4" value="d"> D) A rectangle</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) A horizontally stretched oval</strong> - The width (150) is larger than the height (50), creating a wide, flat oval.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Code Writing Challenge):</p>
+        <p>Write code to draw a simple face using one ellipse for the head and two small ellipses for eyes. Place the face in the center of a 400×400 canvas.</p>
+        <textarea rows="6" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Solution</summary>
+            <div class="code-example">
+<code>// Simple face centered on canvas
+ellipse(200, 200, 150, 150);  // Head
+ellipse(175, 190, 20, 20);    // Left eye
+ellipse(225, 190, 20, 20);    // Right eye</code>
+            </div>
+            <p><em>Note: Your solution may vary in exact positions and sizes. The key is having one large ellipse for the head and two smaller ones for eyes!</em></p>
+        </details>
+    </div>
+</div>
+
+<!-- Section 3: Comments -->
+<div class="content-section">
+    <h2>💬 Section 3: Using Comments</h2>
+    
+    <h3>What Are Comments?</h3>
+    <p>Comments are notes that you write in your code that the computer completely ignores. They're for humans (including your future self!) to read and understand what the code is doing.</p>
+    
+    <div class="term">
+        <div class="term-name">Comment</div>
+        <p>Text in your code that is ignored by the computer when the program runs. In JavaScript (and p5.js), comments start with two forward slashes: <code>//</code></p>
+        <p>Everything after <code>//</code> on that line becomes a comment and won't be executed as code.</p>
+    </div>
+    
+    <h3>Why Use Comments?</h3>
+    <p>Comments serve three crucial purposes in programming:</p>
+    
+    <div class="example-box">
+        <div class="example-title">📝 Three Key Uses of Comments:</div>
+        <ol>
+            <li><strong>Documentation:</strong> Explain what your code does and why you made certain choices</li>
+            <li><strong>Planning:</strong> Outline your program structure before writing the actual code</li>
+            <li><strong>Debugging:</strong> Temporarily disable code to test different parts of your program</li>
+        </ol>
+    </div>
+    
+    <h3>Comment Syntax and Examples</h3>
+    
+    <div class="example-box">
+        <div class="example-title">💻 Comment Examples</div>
+        
+        <p><strong>Example 1: Documenting Code</strong></p>
+        <div class="code-example">
+<code>// Draw the sun in the top-left corner
+ellipse(80, 80, 100, 100);
+
+// Draw the ground as a rectangle at the bottom
+rect(0, 300, 400, 100);</code>
+        </div>
+        
+        <p><strong>Example 2: Planning Before Coding</strong></p>
+        <div class="code-example">
+<code>// TODO: Draw a snowman scene
+// 1. Sky background
+// 2. Snowy ground
+// 3. Snowman body (three circles)
+// 4. Face details (eyes, nose, mouth)
+// 5. Arms (lines)</code>
+        </div>
+        
+        <p><strong>Example 3: Commenting Out Code for Debugging</strong></p>
+        <div class="code-example">
+<code>ellipse(200, 200, 100, 100);  // Head
+// ellipse(175, 190, 20, 20);    // Left eye (temporarily disabled)
+ellipse(225, 190, 20, 20);       // Right eye</code>
+        </div>
+    </div>
+    
+    <h3>Best Practices for Writing Comments</h3>
+    
+    <div class="callout callout-hint">
+        <strong>Good comments explain WHY, not WHAT.</strong> Instead of writing <code>// Draw a circle</code> before <code>ellipse(200, 200, 50, 50)</code>, write something more helpful like <code>// Head of the snowman</code> or <code>// Sun in the sky</code>.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">✅ Comment Best Practices:</div>
+        <ul>
+            <li>Write comments that add value—explain the purpose or reasoning behind the code</li>
+            <li>Keep comments concise and clear</li>
+            <li>Update comments when you change code—outdated comments are worse than no comments!</li>
+            <li>Use comments to break your code into logical sections</li>
+            <li>Add a comment at the top of your program explaining what it does overall</li>
+        </ul>
+    </div>
+    
+    <h3>Comments for Debugging</h3>
+    <p>One of the most practical uses of comments is "commenting out" code—temporarily disabling lines to test if they're causing problems. This is much faster than deleting code and retyping it!</p>
+    
+    <div class="example-box">
+        <div class="example-title">🐛 Debugging with Comments</div>
+        <p><strong>Scenario:</strong> Your drawing looks wrong, and you want to test if one shape is causing the problem.</p>
+        
+        <p><strong>Original Code:</strong></p>
+        <div class="code-example">
+<code>ellipse(200, 200, 100, 100);  // Head
+ellipse(175, 190, 20, 20);    // Left eye
+ellipse(225, 190, 20, 20);    // Right eye
+ellipse(200, 210, 30, 15);    // Mouth (this might be wrong)</code>
+        </div>
+        
+        <p><strong>Commented Out for Testing:</strong></p>
+        <div class="code-example">
+<code>ellipse(200, 200, 100, 100);  // Head
+ellipse(175, 190, 20, 20);    // Left eye
+ellipse(225, 190, 20, 20);    // Right eye
+// ellipse(200, 210, 30, 15);    // Mouth (disabled to test)</code>
+        </div>
+        <p>Now when you run the code, the mouth won't appear, helping you determine if it was positioned incorrectly.</p>
+    </div>
+</div>
+
+<!-- Assessment 3 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.1.3: Comments</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What symbol(s) are used to create a comment in JavaScript/p5.js?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_1" value="a"> A) /* comment */</label>
+            <label><input type="radio" name="q3_1" value="b"> B) // comment</label>
+            <label><input type="radio" name="q3_1" value="c"> C) # comment</label>
+            <label><input type="radio" name="q3_1" value="d"> D) -- comment</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) // comment</strong> - In JavaScript and p5.js, single-line comments start with two forward slashes.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>Comments are executed by the computer along with the rest of your code.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2" value="true"> True</label>
+            <label><input type="radio" name="q3_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> Comments are completely ignored by the computer—they're only for human readers.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>Give one example of when you might use comments while debugging code.</p>
+        <textarea rows="3" placeholder="Write your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> You might use comments to temporarily disable a line of code that you suspect is causing an error, allowing you to test if the rest of your program works without it. For example, commenting out a shape that seems misplaced to see if the other shapes display correctly.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Code Analysis):</p>
+        <p>How many shapes will actually be drawn when this code runs?</p>
+        <div class="code-example">
+<code>ellipse(100, 100, 50, 50);  // Circle 1
+// ellipse(200, 100, 50, 50);  // Circle 2
+ellipse(300, 100, 50, 50);  // Circle 3
+// rect(150, 200, 100, 100);   // Square</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q3_4" value="a"> A) 1 shape</label>
+            <label><input type="radio" name="q3_4" value="b"> B) 2 shapes</label>
+            <label><input type="radio" name="q3_4" value="c"> C) 3 shapes</label>
+            <label><input type="radio" name="q3_4" value="d"> D) 4 shapes</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) 2 shapes</strong> - Only the first and third ellipse() commands will execute. The second ellipse and the rect are commented out and will be ignored.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Best Practices):</p>
+        <p>Which comment is more helpful?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_5" value="a"> A) <code>// Draw an ellipse</code> before <code>ellipse(200, 200, 100, 100);</code></label>
+            <label><input type="radio" name="q3_5" value="b"> B) <code>// Snowman's head</code> before <code>ellipse(200, 200, 100, 100);</code></label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) // Snowman's head</strong> - This comment explains the PURPOSE of the shape (what it represents in your drawing), not just what function is being used. Good comments explain WHY or WHAT something represents, not just WHAT technical operation is happening.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    <p>Excellent work! You've learned the foundations of drawing with code. Let's review the key concepts:</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ The <strong>canvas coordinate system</strong> places (0, 0) at the top-left corner, with x increasing to the right and y increasing downward</li>
+        <li>✅ The <strong>ellipse()</strong> function draws circles and ovals, positioning them by their center point</li>
+        <li>✅ The <strong>rect()</strong> function draws rectangles and squares, positioning them by their top-left corner</li>
+        <li>✅ The <strong>line()</strong> function draws straight lines between two coordinate points</li>
+        <li>✅ <strong>Comments</strong> using // help document code and can temporarily disable code lines</li>
+        <li>✅ Complex compositions are built by combining multiple simple shapes with careful positioning</li>
+    </ul>
+    
+    <h3>Skills You've Developed:</h3>
+    <ul>
+        <li>🎨 Creating visual compositions using code</li>
+        <li>📐 Understanding and applying coordinate geometry</li>
+        <li>📝 Documenting code with meaningful comments</li>
+        <li>🔧 Debugging by commenting out code sections</li>
+    </ul>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 2, Lesson 2: Colors and Complete Scenes</h3>
+    <p>Now that you can draw shapes, it's time to add color! In the next lesson, you'll learn how to:</p>
+    <ul>
+        <li>🎨 Understand the <strong>RGB color model</strong> and how computers represent colors</li>
+        <li>🖌️ Use <strong>fill()</strong> to color the interior of shapes</li>
+        <li>✏️ Use <strong>stroke()</strong> to color the outlines of shapes</li>
+        <li>🎭 Apply <strong>background()</strong> to set canvas background colors</li>
+        <li>🚫 Remove outlines with <strong>noStroke()</strong> for cleaner designs</li>
+        <li>🖼️ Create <strong>complete colored scenes</strong> by combining everything you've learned</li>
+    </ul>
+    <p>Get ready to transform your black-and-white drawings into colorful masterpieces!</p>
+    
+    <div class="callout callout-hint">
+        Before moving on, make sure you're comfortable with all the drawing functions covered in this lesson. Try creating your own original scene combining circles, rectangles, and lines. Practice makes perfect!
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 2, Lesson 1: Drawing Shapes and Comments</p>
+</div>
+
+</body>
+</html>

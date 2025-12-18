@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2.2: Colors and Complete Scenes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .options label:hover {
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        
+        .canvas-demo {
+            border: 2px solid #667eea;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .canvas-demo img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #764ba2;
+            border-radius: 4px;
+        }
+        
+        .step-number {
+            font-weight: bold;
+            color: #764ba2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .color-swatch {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #333;
+            border-radius: 4px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .summary-box ul {
+            line-height: 2;
+        }
+        
+        .next-chapter {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chapter Header -->
+<div class="chapter-header">
+    <h1>Chapter 2, Lesson 2: Colors and Complete Scenes</h1>
+    <p>Master the RGB color model and create vibrant, multi-colored compositions</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>🎨 Introduction</h2>
+    <p>Welcome to the world of color! In the previous lesson, you learned how to draw shapes—circles, rectangles, and lines—on a canvas. But so far, everything has been black and white. In this lesson, you'll discover how computers represent millions of colors using just three numbers, and you'll learn how to apply these colors to create stunning visual compositions.</p>
+    
+    <p>Color is one of the most powerful tools in visual design. It can convey emotion, create depth, establish mood, and guide the viewer's attention. By the end of this lesson, you'll understand how to use the RGB color model and apply colors strategically to bring your code-based drawings to life.</p>
+    
+    <div class="callout callout-info">
+        Did you know? Your computer screen creates every color you see by mixing just three colors of light: red, green, and blue. By varying the intensity of each, we can create millions of different colors!
+    </div>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    <p>By the end of this lesson, you will be able to:</p>
+    
+    <div class="learning-objective">
+        <strong>Understand</strong> the RGB color model and how colors are represented using three numeric values
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>fill()</code> function to set interior colors for shapes
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>stroke()</code> function to set outline colors for shapes
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Apply</strong> the <code>background()</code> function to set the canvas background color
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Use</strong> the <code>noStroke()</code> function to create shapes without outlines
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Understand</strong> how drawing order affects visual layering in colored compositions
+    </div>
+    
+    <div class="learning-objective">
+        <strong>Create</strong> complete colored scenes by combining shapes, positions, and colors strategically
+    </div>
+</div>
+
+<!-- Video Introduction -->
+<div class="content-section">
+    <h2>📺 Video Introduction</h2>
+    <div class="video-placeholder">
+        <h3>🎬 Understanding Color in Code</h3>
+        <p>Watch this 10-minute introduction to the RGB color model and color functions in p5.js</p>
+        <p><em>[Video content: Instructor explains RGB color mixing, demonstrates fill(), stroke(), and background() functions, and builds a colorful scene step-by-step]</em></p>
+    </div>
+</div>
+
+<!-- Section 1: RGB Color Model -->
+<div class="content-section">
+    <h2>🌈 Section 1: The RGB Color Model</h2>
+    
+    <h3>How Computers Create Colors</h3>
+    <p>Unlike mixing paints (where combining colors makes them darker), computer screens mix <strong>light</strong>. When you mix red, green, and blue light together at full intensity, you get white! This is called <strong>additive color mixing</strong>.</p>
+    
+    <div class="term">
+        <div class="term-name">RGB Color Model</div>
+        <p>A way of representing colors using three numbers that specify the intensity of <strong>Red</strong>, <strong>Green</strong>, and <strong>Blue</strong> light. Each value ranges from <strong>0</strong> (no light/color) to <strong>255</strong> (maximum intensity).</p>
+    </div>
+    
+    <h3>Understanding RGB Values</h3>
+    <p>Every RGB color is specified by three numbers in this format: <code>(red, green, blue)</code></p>
+    
+    <div class="example-box">
+        <div class="example-title">🔢 RGB Value Ranges:</div>
+        <ul>
+            <li><strong>0</strong> = No light of that color (completely off)</li>
+            <li><strong>128</strong> = Half intensity</li>
+            <li><strong>255</strong> = Maximum intensity (completely on)</li>
+        </ul>
+    </div>
+    
+    <h3>Common RGB Colors</h3>
+    <p>Let's explore some fundamental colors and their RGB values:</p>
+    
+    <table>
+        <tr>
+            <th>Color</th>
+            <th>RGB Values</th>
+            <th>Explanation</th>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(0,0,0);"></span>Black</td>
+            <td>(0, 0, 0)</td>
+            <td>All lights off = black (absence of light)</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(255,255,255);"></span>White</td>
+            <td>(255, 255, 255)</td>
+            <td>All lights at maximum = white</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(255,0,0);"></span>Red</td>
+            <td>(255, 0, 0)</td>
+            <td>Full red, no green or blue</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(0,255,0);"></span>Green</td>
+            <td>(0, 255, 0)</td>
+            <td>Full green, no red or blue</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(0,0,255);"></span>Blue</td>
+            <td>(0, 0, 255)</td>
+            <td>Full blue, no red or green</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(255,255,0);"></span>Yellow</td>
+            <td>(255, 255, 0)</td>
+            <td>Red + Green = Yellow</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(255,0,255);"></span>Magenta</td>
+            <td>(255, 0, 255)</td>
+            <td>Red + Blue = Magenta</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(0,255,255);"></span>Cyan</td>
+            <td>(0, 255, 255)</td>
+            <td>Green + Blue = Cyan</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(128,128,128);"></span>Gray</td>
+            <td>(128, 128, 128)</td>
+            <td>Equal amounts of all three = neutral gray</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(255,165,0);"></span>Orange</td>
+            <td>(255, 165, 0)</td>
+            <td>Full red, some green, no blue</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(128,0,128);"></span>Purple</td>
+            <td>(128, 0, 128)</td>
+            <td>Half red, no green, half blue</td>
+        </tr>
+        <tr>
+            <td><span class="color-swatch" style="background: rgb(165,42,42);"></span>Brown</td>
+            <td>(165, 42, 42)</td>
+            <td>More red, less green, less blue</td>
+        </tr>
+    </table>
+    
+    <div class="callout callout-hint">
+        Pattern Recognition: Notice that when all three RGB values are equal (like 0,0,0 or 128,128,128 or 255,255,255), you always get a shade of gray—from black to white!
+    </div>
+    
+    <h3>Creating Custom Colors</h3>
+    <p>The beauty of RGB is that you can create millions of unique colors by adjusting the three values. Here are some tips for mixing colors:</p>
+    
+    <div class="example-box">
+        <div class="example-title">🎨 Color Mixing Tips:</div>
+        <ul>
+            <li><strong>More red, less blue and green</strong> → Warmer colors (orange, red, pink)</li>
+            <li><strong>More blue, less red and green</strong> → Cooler colors (blue, cyan, purple)</li>
+            <li><strong>More green with some red</strong> → Yellow, lime, olive tones</li>
+            <li><strong>High values overall</strong> → Lighter, brighter colors</li>
+            <li><strong>Low values overall</strong> → Darker, more muted colors</li>
+            <li><strong>Similar but not equal values</strong> → Subtle, sophisticated tones</li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-info">
+        Want to find specific RGB values? Search for "color picker" online, and you'll find tools that let you select colors visually and see their RGB values. Many design programs also include color pickers!
+    </div>
+</div>
+
+<!-- Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.2.1: Understanding RGB Colors</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What RGB values create pure white?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_1" value="a"> A) (0, 0, 0)</label>
+            <label><input type="radio" name="q1_1" value="b"> B) (255, 255, 255)</label>
+            <label><input type="radio" name="q1_1" value="c"> C) (255, 0, 0)</label>
+            <label><input type="radio" name="q1_1" value="d"> D) (128, 128, 128)</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) (255, 255, 255)</strong> - Maximum values of all three colors (red, green, and blue) create white light.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>In the RGB color model, (0, 255, 0) creates the color blue.</p>
+        <div class="options">
+            <label><input type="radio" name="q1_2" value="true"> True</label>
+            <label><input type="radio" name="q1_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> The values are (Red, Green, Blue), so (0, 255, 0) has no red, full green, and no blue—creating pure green, not blue.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Prediction):</p>
+        <p>What color will (255, 255, 0) create?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_3" value="a"> A) Green</label>
+            <label><input type="radio" name="q1_3" value="b"> B) Yellow</label>
+            <label><input type="radio" name="q1_3" value="c"> C) Red</label>
+            <label><input type="radio" name="q1_3" value="d"> D) Purple</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) Yellow</strong> - Mixing full red (255) with full green (255) and no blue (0) creates yellow.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Pattern Recognition):</p>
+        <p>What do you notice about the RGB values for all shades of gray?</p>
+        <textarea rows="3" placeholder="Write your observation..."></textarea>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Sample Answer:</strong> All three RGB values are equal. For example: (0,0,0) is black, (128,128,128) is medium gray, and (255,255,255) is white. Any color where R=G=B will be some shade of gray.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Application):</p>
+        <p>If you wanted to create a light pink color, which of these sets of RGB values would be most appropriate?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_5" value="a"> A) (255, 192, 203)</label>
+            <label><input type="radio" name="q1_5" value="b"> B) (139, 0, 0)</label>
+            <label><input type="radio" name="q1_5" value="c"> C) (0, 100, 200)</label>
+            <label><input type="radio" name="q1_5" value="d"> D) (50, 50, 50)</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) (255, 192, 203)</strong> - Pink is created by high red with moderate green and blue. Option B is dark red, C is blue, and D is dark gray.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Section 2: Color Functions -->
+<div class="content-section">
+    <h2>🖌️ Section 2: Applying Colors with Functions</h2>
+    
+    <h3>The fill() Function: Coloring Shape Interiors</h3>
+    <p>The <code>fill()</code> function sets the interior color for all shapes drawn after it. Think of it as choosing which paint to fill your shapes with.</p>
+    
+    <div class="term">
+        <div class="term-name">fill(red, green, blue)</div>
+        <p>Sets the interior color for all subsequent shapes using RGB values.</p>
+        <p><strong>Parameters:</strong></p>
+        <ul>
+            <li><strong>red</strong>: Red component (0-255)</li>
+            <li><strong>green</strong>: Green component (0-255)</li>
+            <li><strong>blue</strong>: Blue component (0-255)</li>
+        </ul>
+        <p><strong>Important:</strong> The fill color persists—it affects ALL shapes drawn after it until you call fill() again with different values.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 fill() Examples</div>
+        
+        <p><strong>Example 1: Single Red Circle</strong></p>
+        <div class="code-example">
+<code>fill(255, 0, 0);  // Set fill to red
+ellipse(200, 200, 100, 100);  // Draw a red circle</code>
+        </div>
+        
+        <p><strong>Example 2: Multiple Shapes with One Fill</strong></p>
+        <div class="code-example">
+<code>fill(0, 0, 255);  // Set fill to blue
+ellipse(100, 200, 50, 50);   // Blue circle
+ellipse(200, 200, 50, 50);   // Also blue
+ellipse(300, 200, 50, 50);   // Also blue</code>
+        </div>
+        
+        <p><strong>Example 3: Changing Colors Between Shapes</strong></p>
+        <div class="code-example">
+<code>fill(255, 0, 0);  // Red
+ellipse(100, 200, 50, 50);  // Red circle
+
+fill(0, 255, 0);  // Green
+ellipse(200, 200, 50, 50);  // Green circle
+
+fill(0, 0, 255);  // Blue
+ellipse(300, 200, 50, 50);  // Blue circle</code>
+        </div>
+    </div>
+    
+    <div class="callout callout-warning">
+        Common Mistake: Remember that fill() affects ALL shapes after it, not just the next one. If you draw five circles after calling fill(255, 0, 0), all five will be red unless you call fill() again with different values.
+    </div>
+    
+    <h3>The stroke() Function: Coloring Shape Outlines</h3>
+    <p>The <code>stroke()</code> function sets the outline color for all shapes drawn after it. It works just like fill(), but affects the border instead of the interior.</p>
+    
+    <div class="term">
+        <div class="term-name">stroke(red, green, blue)</div>
+        <p>Sets the outline color for all subsequent shapes using RGB values.</p>
+        <p><strong>Parameters:</strong> Same as fill()—red, green, and blue values from 0-255.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 stroke() Examples</div>
+        
+        <p><strong>Example: Red Circle with Blue Outline</strong></p>
+        <div class="code-example">
+<code>fill(255, 0, 0);     // Red interior
+stroke(0, 0, 255);    // Blue outline
+ellipse(200, 200, 100, 100);  // Red circle with blue border</code>
+        </div>
+        
+        <p><strong>Example: Adjusting Stroke Weight</strong></p>
+        <div class="code-example">
+<code>fill(255, 255, 0);    // Yellow interior
+stroke(0, 0, 0);       // Black outline
+strokeWeight(5);       // Make outline thicker (5 pixels)
+rect(150, 150, 100, 100);  // Yellow square with thick black border</code>
+        </div>
+    </div>
+    
+    <h3>The noStroke() Function: Removing Outlines</h3>
+    <p>Sometimes you want shapes without any outline at all—this creates a cleaner, more modern look. The <code>noStroke()</code> function removes outlines from all subsequent shapes.</p>
+    
+    <div class="term">
+        <div class="term-name">noStroke()</div>
+        <p>Removes outlines from all subsequent shapes. Takes no parameters.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 noStroke() Example</div>
+        <div class="code-example">
+<code>noStroke();  // No outlines
+fill(255, 0, 0);  // Red
+ellipse(150, 200, 80, 80);  // Red circle, no outline
+
+fill(0, 255, 0);  // Green
+ellipse(250, 200, 80, 80);  // Green circle, no outline</code>
+        </div>
+    </div>
+    
+    <h3>The background() Function: Setting Canvas Color</h3>
+    <p>The <code>background()</code> function sets the color of the entire canvas. It's typically called at the beginning of your program to establish the backdrop for your drawing.</p>
+    
+    <div class="term">
+        <div class="term-name">background(red, green, blue)</div>
+        <p>Sets the background color of the entire canvas.</p>
+        <p><strong>Parameters:</strong> RGB values from 0-255, just like fill() and stroke().</p>
+        <p><strong>Note:</strong> The background() function fills the ENTIRE canvas, covering anything previously drawn.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">💻 background() Examples</div>
+        
+        <p><strong>Example 1: Sky Blue Background</strong></p>
+        <div class="code-example">
+<code>background(135, 206, 235);  // Light blue sky color</code>
+        </div>
+        
+        <p><strong>Example 2: Black Background</strong></p>
+        <div class="code-example">
+<code>background(0, 0, 0);  // Black background</code>
+        </div>
+        
+        <p><strong>Example 3: Using Grayscale Shorthand</strong></p>
+        <div class="code-example">
+<code>background(200);  // Light gray (equivalent to 200, 200, 200)</code>
+        </div>
+    </div>
+    
+    <div class="callout callout-hint">
+        Grayscale Shorthand: When you only provide one number to background(), fill(), or stroke(), it's interpreted as a gray value. For example, background(128) is the same as background(128, 128, 128)—medium gray.
+    </div>
+</div>
+
+<!-- Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.2.2: Color Functions</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>Once you call fill() with a color, how many shapes will it affect?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_1" value="a"> A) Only the very next shape</label>
+            <label><input type="radio" name="q2_1" value="b"> B) All shapes until you call fill() again</label>
+            <label><input type="radio" name="q2_1" value="c"> C) Only shapes of the same type (all circles or all rectangles)</label>
+            <label><input type="radio" name="q2_1" value="d"> D) All shapes in your entire program</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) All shapes until you call fill() again</strong> - The fill() setting persists and affects all subsequent shapes until you change it.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>The noStroke() function changes the outline color to white.</p>
+        <div class="options">
+            <label><input type="radio" name="q2_2" value="true"> True</label>
+            <label><input type="radio" name="q2_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> The noStroke() function completely removes outlines—it doesn't change them to white, it eliminates them entirely.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Prediction):</p>
+        <p>What color will the rectangle be in this code?</p>
+        <div class="code-example">
+<code>fill(255, 0, 0);
+ellipse(100, 100, 50, 50);
+fill(0, 255, 0);
+rect(200, 200, 60, 60);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_3" value="a"> A) Red</label>
+            <label><input type="radio" name="q2_3" value="b"> B) Green</label>
+            <label><input type="radio" name="q2_3" value="c"> C) Blue</label>
+            <label><input type="radio" name="q2_3" value="d"> D) Black</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) Green</strong> - The first fill(255, 0, 0) makes the circle red, but then fill(0, 255, 0) changes to green before the rectangle is drawn.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Short Answer):</p>
+        <p>What function would you use to remove the outline from shapes?</p>
+        <input type="text" placeholder="Type function name with parentheses">
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>noStroke()</strong> - This function removes strokes from all subsequent shapes.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Application):</p>
+        <p>Write code to draw a yellow circle with a black outline at position (200, 200) with diameter 80.</p>
+        <textarea rows="5" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Solution</summary>
+            <div class="code-example">
+<code>fill(255, 255, 0);     // Yellow interior
+stroke(0, 0, 0);        // Black outline
+ellipse(200, 200, 80, 80);</code>
+            </div>
+            <p><em>Note: You could also add strokeWeight() to adjust the outline thickness if desired.</em></p>
+        </details>
+    </div>
+</div>
+
+<!-- Section 3: Complete Scene Example -->
+<div class="content-section">
+    <h2>🖼️ Section 3: Creating a Complete Colored Scene</h2>
+    
+    <h3>Building Complex Compositions</h3>
+    <p>Now that you understand colors and shapes, let's combine everything to create a complete scene. The key to success is planning your composition and building it systematically, layer by layer.</p>
+    
+    <div class="callout callout-hint">
+        Drawing Order Matters! In p5.js, shapes are drawn in the order they appear in your code. Later shapes appear "on top of" earlier shapes, like stacking pieces of paper. Plan your layers carefully!
+    </div>
+    
+    <h3>Complete Example: Snowy Day with Snowman</h3>
+    <p>Let's walk through creating a winter scene with a snowman, step by step. We'll start with the background and work our way forward, thinking about layers.</p>
+    
+    <div class="step">
+        <span class="step-number">Step 1:</span> Plan the layers (from back to front)
+    </div>
+    
+    <div class="code-example">
+<code>// Layer plan for our scene:
+// 1. Sky (background)
+// 2. Ground (white rectangle)
+// 3. Sun (yellow circle)
+// 4. Snowman body (three white circles)
+// 5. Snowman features (eyes, nose, buttons)</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Step 2:</span> Draw the sky background
+    </div>
+    
+    <div class="code-example">
+<code>background(135, 206, 235);  // Sky blue background</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Step 3:</span> Draw the ground
+    </div>
+    
+    <div class="code-example">
+<code>noStroke();  // No outline needed
+fill(255, 255, 255);  // White snow
+rect(0, 300, 400, 100);  // Ground extending across canvas</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Step 4:</span> Draw the sun
+    </div>
+    
+    <div class="code-example">
+<code>fill(255, 255, 0);  // Bright yellow
+ellipse(80, 64, 100, 100);  // Sun in upper left</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Step 5:</span> Build the snowman (bottom to top)
+    </div>
+    
+    <div class="code-example">
+<code>// Snowman body (white circles, no stroke)
+fill(255, 255, 255);
+ellipse(200, 350, 150, 150);  // Bottom
+ellipse(200, 250, 100, 100);  // Middle
+ellipse(200, 170, 75, 75);    // Head</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Step 6:</span> Add snowman features
+    </div>
+    
+    <div class="code-example">
+<code>// Eyes (black circles)
+fill(0, 0, 0);
+ellipse(190, 165, 8, 8);   // Left eye
+ellipse(210, 165, 8, 8);   // Right eye
+
+// Nose (orange triangle - using a thin rectangle for simplicity)
+fill(255, 140, 0);  // Orange
+rect(198, 175, 4, 15);
+
+// Buttons (black circles)
+fill(0, 0, 0);
+ellipse(200, 240, 10, 10);
+ellipse(200, 260, 10, 10);
+ellipse(200, 280, 10, 10);</code>
+    </div>
+    
+    <div class="step">
+        <span class="step-number">Complete Code:</span>
+    </div>
+    
+    <div class="code-example">
+<code>// Sunny Snowy Day Scene
+
+// Sky background
+background(135, 206, 235);
+
+// Ground
+noStroke();
+fill(255, 255, 255);
+rect(0, 300, 400, 100);
+
+// Sun
+fill(255, 255, 0);
+ellipse(80, 64, 100, 100);
+
+// Snowman body
+fill(255, 255, 255);
+ellipse(200, 350, 150, 150);  // Bottom
+ellipse(200, 250, 100, 100);  // Middle
+ellipse(200, 170, 75, 75);    // Head
+
+// Eyes
+fill(0, 0, 0);
+ellipse(190, 165, 8, 8);
+ellipse(210, 165, 8, 8);
+
+// Nose
+fill(255, 140, 0);
+rect(198, 175, 4, 15);
+
+// Buttons
+fill(0, 0, 0);
+ellipse(200, 240, 10, 10);
+ellipse(200, 260, 10, 10);
+ellipse(200, 280, 10, 10);</code>
+    </div>
+    
+    <div class="callout callout-info">
+        Notice the workflow: We started with the background, added major elements, then added details. We used noStroke() to create clean shapes without outlines, and we carefully changed fill() colors before each element. This systematic approach prevents errors and makes complex scenes manageable!
+    </div>
+</div>
+
+<!-- Final Assessment -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.2.3: Complete Scenes</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>In what order are shapes drawn in a p5.js program?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_1" value="a"> A) Largest shapes first, then smaller shapes</label>
+            <label><input type="radio" name="q3_1" value="b"> B) In the order they appear in the code, from top to bottom</label>
+            <label><input type="radio" name="q3_1" value="c"> C) Background shapes first, regardless of code order</label>
+            <label><input type="radio" name="q3_1" value="d"> D) Alphabetically by function name</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) In the order they appear in the code, from top to bottom</strong> - Shapes drawn later appear on top of shapes drawn earlier, like layering paper.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>You should call background() at the end of your program after drawing all shapes.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2" value="true"> True</label>
+            <label><input type="radio" name="q3_2" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> You should call background() at the BEGINNING of your program because it fills the entire canvas and would cover any shapes already drawn.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Analysis):</p>
+        <p>What will be wrong with this code?</p>
+        <div class="code-example">
+<code>fill(255, 0, 0);
+ellipse(200, 200, 100, 100);
+background(0, 0, 255);
+rect(150, 150, 50, 50);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q3_3" value="a"> A) The circle will be invisible</label>
+            <label><input type="radio" name="q3_3" value="b"> B) The rectangle will be invisible</label>
+            <label><input type="radio" name="q3_3" value="c"> C) The colors are wrong</label>
+            <label><input type="radio" name="q3_3" value="d"> D) Nothing—the code is fine</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) The circle will be invisible</strong> - Calling background() in the middle of your code covers everything drawn before it. The circle is drawn first, then covered by the blue background. Only the rectangle (drawn after background) will be visible.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Planning):</p>
+        <p>If you're creating a scene with a house, trees, and clouds, in what order should these elements be drawn? Why?</p>
+        <textarea rows="4" placeholder="Explain your answer..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> First draw the background (sky), then clouds (behind everything), then trees (behind house), then the house (in front). This creates proper depth—things in the back are drawn first, things in front are drawn last. Each layer covers parts of the previous layers, creating a realistic sense of depth.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Code Writing Challenge):</p>
+        <p>Write code to draw a simple traffic light with: a dark gray rectangular post, and three circles (red, yellow, green) stacked vertically inside. Add appropriate colors and a sky blue background.</p>
+        <textarea rows="12" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Solution</summary>
+            <div class="code-example">
+<code>// Traffic light scene
+background(135, 206, 235);  // Sky blue
+
+// Post (dark gray)
+noStroke();
+fill(64, 64, 64);
+rect(180, 100, 40, 200);
+
+// Red light (top)
+fill(255, 0, 0);
+ellipse(200, 130, 30, 30);
+
+// Yellow light (middle)
+fill(255, 255, 0);
+ellipse(200, 180, 30, 30);
+
+// Green light (bottom)
+fill(0, 255, 0);
+ellipse(200, 230, 30, 30);</code>
+            </div>
+            <p><em>Note: Your solution may vary in positions and sizes. The key is having the background, post, and three appropriately colored circles!</em></p>
+        </details>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    <p>Congratulations! You've mastered color and can now create vibrant, complete scenes. Let's review the key concepts:</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ <strong>RGB color values</strong> range from 0-255 for red, green, and blue components</li>
+        <li>✅ <strong>Additive color mixing</strong> means combining light colors (unlike mixing paint)</li>
+        <li>✅ <strong>Equal RGB values</strong> create shades of gray</li>
+        <li>✅ <strong>fill()</strong> sets interior colors and persists until called again</li>
+        <li>✅ <strong>stroke()</strong> sets outline colors and persists until called again</li>
+        <li>✅ <strong>noStroke()</strong> removes outlines for cleaner designs</li>
+        <li>✅ <strong>background()</strong> sets the canvas background and should be called first</li>
+        <li>✅ <strong>Drawing order matters</strong>—shapes drawn later appear on top of earlier shapes</li>
+        <li>✅ <strong>Systematic planning</strong> (layers, then colors, then details) creates successful complex compositions</li>
+    </ul>
+    
+    <h3>Skills You've Developed:</h3>
+    <ul>
+        <li>🎨 Understanding and applying the RGB color model</li>
+        <li>🖌️ Applying colors strategically using fill() and stroke()</li>
+        <li>📐 Planning visual compositions with proper layering</li>
+        <li>🎭 Understanding visual depth through drawing order</li>
+        <li>🖼️ Creating complete, multi-colored scenes from scratch</li>
+    </ul>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 2, Lesson 3: Animation and Interactivity</h3>
+    <p>Now that you can create colorful static drawings, it's time to bring them to life! In the next lesson, you'll learn how to:</p>
+    <ul>
+        <li>✨ Create <strong>animated graphics</strong> that move and change over time</li>
+        <li>🖱️ Make your drawings <strong>interactive</strong> by responding to mouse movements and clicks</li>
+        <li>🔢 Use <strong>variables</strong> to store and manipulate values</li>
+        <li>🔄 Apply <strong>mathematical operations</strong> to create smooth motion</li>
+        <li>⏱️ Understand the <strong>draw loop</strong> and how animation works</li>
+        <li>🎮 Build simple interactive games and experiences</li>
+    </ul>
+    <p>Get ready to transform your static art into dynamic, engaging experiences!</p>
+    
+    <div class="callout callout-hint">
+        Before moving on, make sure you're comfortable with RGB colors and all the color functions. Try creating your own original colored scene—maybe a sunset, underwater scene, or cityscape. Experiment with different color combinations and layering!
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 2, Lesson 2: Colors and Complete Scenes</p>
+</div>
+
+</body>
+</html>
