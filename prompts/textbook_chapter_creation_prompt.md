@@ -1,7 +1,7 @@
 # Textbook Chapter Creation Instructions
 
 ## Overview
-You are writing a textbook chapter. I will provide some content, and you are to revise and augment it with new material following a specific structure.
+You are writing a textbook chapter. I will provide some content and course syllabus, and you are to revise and augment it with new material following a specific structure. Use the syllabus to represent students understanding before the lesson and what students will be learning later in the course.
 
 ---
 
@@ -108,7 +108,7 @@ Generate an **HTML rendering** of the revised lesson that:
 ## Key Requirements
 
 ### Content Quality
-✅ Revise existing content for clarity and engagement  
+✅ Preserve existing content but revise existing content for clarity and engagement  
 ✅ Augment with new explanatory material where needed  
 ✅ Ensure logical flow and progression  
 ✅ Use appropriate technical vocabulary with clear definitions  
