@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC101 Week 2: Can AI Think Like Us? | Textbook Chapter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+            --info-color: #9b59b6;
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+            --light-text: #555555;
+            --border-color: #bdc3c7;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--dark-text);
+            background-color: #ffffff;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Header and Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        /* Typography */
+        h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(52, 152, 219, 0.05));
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .learning-objectives h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .learning-objectives ol {
+            margin-left: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .learning-objectives li {
+            margin-bottom: 0.75rem;
+            color: var(--light-text);
+        }
+
+        .objective-code {
+            font-family: 'Courier New', monospace;
+            background-color: white;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* Callout Boxes */
+        .callout {
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .callout-warning {
+            border-left-color: var(--warning-color);
+            background-color: rgba(231, 76, 60, 0.08);
+        }
+
+        .callout-warning h4 {
+            color: var(--warning-color);
+            margin-top: 0;
+        }
+
+        .callout-hint {
+            border-left-color: var(--success-color);
+            background-color: rgba(39, 174, 96, 0.08);
+        }
+
+        .callout-hint h4 {
+            color: var(--success-color);
+            margin-top: 0;
+        }
+
+        .callout-info {
+            border-left-color: var(--info-color);
+            background-color: rgba(155, 89, 182, 0.08);
+        }
+
+        .callout-info h4 {
+            color: var(--info-color);
+            margin-top: 0;
+        }
+
+        .callout h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+        }
+
+        /* Definition List */
+        .terms-section {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        .term {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .term:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .term-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.05rem;
+        }
+
+        .term-definition {
+            margin-top: 0.5rem;
+            color: var(--light-text);
+        }
+
+        /* Examples */
+        .example {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .example-step {
+            margin-bottom: 1rem;
+        }
+
+        .example-step strong {
+            color: var(--primary-color);
+        }
+
+        .example-code {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            margin: 0.75rem 0;
+        }
+
+        .example-result {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            font-weight: 500;
+            color: #15803d;
+        }
+
+        /* Formative Assessment */
+        .assessment {
+            background-color: #fef9e7;
+            border: 2px solid #f9d765;
+            border-left: 4px solid #f39c12;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .assessment-title {
+            font-weight: 700;
+            color: #d68910;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .question {
+            margin-bottom: 1.5rem;
+        }
+
+        .question p {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .question-content {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 3px;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: rgba(243, 156, 18, 0.1);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            cursor: pointer;
+        }
+
+        .answer-toggle {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .answer-toggle:hover {
+            background-color: #2980b9;
+        }
+
+        .answer-content {
+            display: none;
+            background-color: #d6eaf8;
+            border: 1px solid #aed6f1;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            color: var(--light-text);
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        .answer-label {
+            font-weight: 600;
+            color: #1f618d;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Two-column layout for comparisons */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: white;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background-color: var(--light-bg);
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--light-text);
+        }
+
+        /* Video Container */
+        .video-container {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .video-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            font-size: 0.95rem;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .video-placeholder {
+            background-color: #2c3e50;
+            width: 100%;
+            max-width: 600px;
+            height: 337px;
+            margin: 0 auto;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Summary Section */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.1), rgba(39, 174, 96, 0.05));
+            border-left: 4px solid var(--success-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+
+        .summary-box h3 {
+            color: var(--success-color);
+            margin-top: 0;
+        }
+
+        .summary-box ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        .summary-box li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .summary-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        /* Next Steps */
+        .next-steps {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(155, 89, 182, 0.05));
+            border-left: 4px solid var(--info-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+
+        .next-steps h3 {
+            color: var(--info-color);
+            margin-top: 0;
+        }
+
+        /* Introduction */
+        .chapter-intro {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.08), rgba(155, 89, 182, 0.08));
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-intro p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+            }
+
+            .video-placeholder {
+                height: 200px;
+            }
+        }
+
+        @media print {
+            header {
+                position: static;
+            }
+
+            .answer-content {
+                display: block;
+            }
+
+            .answer-toggle {
+                display: none;
+            }
+        }
+
+        /* Accessibility */
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        button:focus,
+        input:focus {
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background-color: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+        }
+
+        .toc ul {
+            list-style-position: inside;
+        }
+
+        .toc a {
+            color: var(--secondary-color);
+        }
+
+        /* Emphasis */
+        strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        em {
+            color: var(--primary-color);
+            font-style: italic;
+        }
+
+        code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #e74c3c;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CSC101: Introduction to Computing & AI</h1>
+        <p>Week 2: Can AI Think Like Us? Understanding How Chatbots and Language Models Work</p>
+    </header>
+
+    <main>
+        <!-- Chapter Introduction -->
+        <section class="chapter-intro">
+            <h2 style="border: none; padding: 0; margin: 0 0 1rem 0;">Chapter Overview</h2>
+            <p>
+                Have you ever wondered how ChatGPT can write essays, answer questions, and even code? What makes it seem almost human? This week, we'll peek under the hood of artificial intelligence systems to understand what's really happening when an AI processes your words and generates responses.
+            </p>
+            <p>
+                You'll discover that AI doesn't truly "think" the way humans do—instead, it recognizes patterns and predicts the next word based on massive amounts of training data. But here's the exciting part: understanding these limitations makes you a better AI user. You'll learn how to craft prompts that get better results, when to trust AI's outputs, and most importantly, how to spot when an AI is confidently making things up.
+            </p>
+            <p>
+                By the end of this chapter, you'll be able to communicate effectively with AI tools, understand their capabilities and limitations, and use them responsibly to solve real problems. Let's explore what's really going on inside the AI's "brain."
+            </p>
+        </section>
+
+        <!-- Learning Objectives -->
+        <section>
+            <h2>Learning Objectives</h2>
+            <div class="learning-objectives">
+                <h3>By the end of this lesson, you will be able to:</h3>
+                <ol>
+                    <li><span class="objective-code">LO2.2.1</span> Explain how multimodal AI models process different types of input (text, images, audio)</li>
+                    <li><span class="objective-code">LO2.2.2</span> Describe how Large Language Models (LLMs) work and make predictions about text</li>
+                    <li><span class="objective-code">LO2.2.3</span> Identify the strengths and limitations of AI compared to human capabilities</li>
+                    <li><span class="objective-code">LO2.2.4</span> Apply the five key elements of effective prompt engineering to improve AI responses</li>
+                    <li><span class="objective-code">LO2.2.5</span> Recognize and analyze AI hallucinations and their real-world consequences</li>
+                    <li><span class="objective-code">LO2.2.6</span> Evaluate when to use AI for specific tasks and when to rely on human judgment</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Key Terms and Concepts -->
+        <section>
+            <h2>Key Terms and Concepts</h2>
+            <div class="terms-section">
+                <div class="term">
+                    <div class="term-title">Large Language Model (LLM)</div>
+                    <div class="term-definition">
+                        A type of artificial intelligence trained on enormous amounts of text data to recognize patterns and predict sequences of words. LLMs like ChatGPT, Claude, and Gemini are "large" because they contain billions of parameters (adjustable settings) that were tuned during training.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Multimodal Model</div>
+                    <div class="term-definition">
+                        An AI system that can process and understand multiple types of input data simultaneously—such as text, images, audio, and video. Unlike text-only models, multimodal AI can answer questions about pictures or analyze multimedia content.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Neural Network</div>
+                    <div class="term-definition">
+                        A computational structure inspired by how the human brain works. It consists of interconnected nodes (artificial neurons) organized in layers. Data flows through these layers, getting transformed at each step, allowing the network to recognize complex patterns.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Training Data</div>
+                    <div class="term-definition">
+                        The massive dataset used to teach an AI model. For LLMs, this typically includes billions of words from books, websites, articles, and other text sources. The quality and content of training data heavily influences what the AI learns and how it behaves.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">AI Hallucination</div>
+                    <div class="term-definition">
+                        When an AI generates plausible-sounding but completely false information. The AI isn't lying intentionally—it's making an educated guess based on patterns, and sometimes that guess is entirely wrong. Hallucinations are a major limitation of current AI systems.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Prompt Engineering</div>
+                    <div class="term-definition">
+                        The practice of crafting carefully worded instructions and questions to get better responses from AI. Just like asking a human a vague question gets vague answers, how you phrase your prompt to AI significantly affects the quality of its output.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Tokens</div>
+                    <div class="term-definition">
+                        Small chunks of text that AI models process. A token might be a word, part of a word, or a punctuation mark. When you type a prompt, it gets broken into tokens before the AI processes it. Understanding tokens helps explain why very long prompts become expensive or slow.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Training and Inference</div>
+                    <div class="term-definition">
+                        <strong>Training</strong> is when an AI learns from data—this happens once and requires enormous computational resources. <strong>Inference</strong> is when a trained AI uses what it learned to make predictions on new data—this is what happens when you use ChatGPT or other AI tools.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 1: How AI Sees the World -->
+        <section>
+            <h2>Part 1: How AI "Sees" the World—Beyond Just Text</h2>
+
+            <h3>Introduction to Multimodal AI</h3>
+            <p>
+                Remember when computers could only read text? Those days are long gone. Modern AI systems can now process images, audio, video, and text all at the same time. These are called <strong>multimodal models</strong>, and they're changing how we interact with technology.
+            </p>
+
+            <p>
+                Think about how you understand the world. When you look at a photograph, you don't just read text descriptions—you see colors, shapes, people, objects, and their relationships. You notice context: Is this a beach or a mountain? Are these people happy or sad? Modern AI systems trained on multimodal data can do similar things.
+            </p>
+
+            <div class="callout callout-info">
+                <h4>💡 Why Multimodal AI Matters</h4>
+                <p>
+                    Multimodal AI is revolutionizing accessibility, education, and how we interact with technology. Blind users can get detailed descriptions of images. Students can ask questions about diagrams. Doctors can analyze both patient notes and medical imaging simultaneously. The possibilities are expanding daily.
+                </p>
+            </div>
+
+            <h3>Real-World Example: Multimodal Models in Action</h3>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.1: Multimodal AI in Healthcare</div>
+                <div class="example-step">
+                    <strong>The Scenario:</strong> A dermatologist uses an AI system that accepts both images and text descriptions.
+                </div>
+                <div class="example-step">
+                    <strong>Text Input:</strong> "60-year-old patient, history of sun exposure, new spot on shoulder that's itchy"
+                </div>
+                <div class="example-step">
+                    <strong>Image Input:</strong> A photograph of the suspicious skin lesion
+                </div>
+                <div class="example-step">
+                    <strong>What the AI Does:</strong> It analyzes the visual characteristics (shape, color, borders, texture) AND incorporates the clinical context (age, history, symptoms). Neither input alone tells the full story.
+                </div>
+                <div class="example-result">
+                    <strong>Result:</strong> A more accurate assessment than if the doctor just described it in text, or if the AI just saw the image without context. This is the power of multimodal processing.
+                </div>
+            </div>
+
+            <div class="formative-assessment">
+                <h3>Formative Assessment 2.2.1: Understanding Multimodal AI</h3>
+
+                <div class="assessment">
+                    <div class="assessment-title">Question 1 (Multiple Choice)</div>
+                    <div class="question">
+                        <p>What is a multimodal AI model?</p>
+                        <div class="question-content">
+                            <label class="option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) An AI that can only process text</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) An AI that can process multiple types of input like text, images, and audio simultaneously</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) An AI that requires multiple computers to run</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) An AI that can work in multiple languages but only with text</span>
+                            </label>
+                        </div>
+                        <button class="answer-toggle" onclick="toggleAnswer('a1')">Show Answer</button>
+                        <div id="a1" class="answer-content">
+                            <div class="answer-label">Correct Answer: B</div>
+                            <p>Multimodal models are trained to understand and process different types of data simultaneously. They can accept text, images, audio, and sometimes video, allowing for richer context and more accurate responses.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="assessment">
+                    <div class="assessment-title">Question 2 (Short Answer)</div>
+                    <div class="question">
+                        <p>Why would a multimodal AI system outperform a text-only AI for analyzing a medical image?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer('a2')">Show Answer</button>
+                        <div id="a2" class="answer-content">
+                            <div class="answer-label">Sample Answer:</div>
+                            <p>A multimodal system combines visual analysis (recognizing shapes, colors, and patterns) with contextual information from text (patient history, symptoms, clinical notes). A text-only AI can only read descriptions and might miss important visual details. Together, the AI has a much more complete picture and can make more accurate assessments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3>How AI Analyzes Images: A Different Way of "Seeing"</h3>
+
+            <p>
+                Here's something fascinating: When you look at an image, your brain instantly recognizes objects, people, and context. But AI doesn't see the way you do. Let's explore how AI actually analyzes visual information.
+            </p>
+
+            <div class="video-container">
+                <div class="video-title">How Computer Vision Works</div>
+                <div class="video-description">Learn how AI systems break down images into analyzable components (4:35 minutes)</div>
+                <div class="video-placeholder">
+                    <span class="sr-only">Video: How Computer Vision Works</span>
+                    🎬 Video Content (Embedded in Brightspace)
+                </div>
+            </div>
+
+            <div class="callout callout-hint">
+                <h4>💡 Helpful Tip: Breaking Down Visual Processing</h4>
+                <p>
+                    When an AI processes an image, it doesn't "look at it" the way you do. Instead, it converts the image into numbers (pixel values) and applies mathematical operations. It learns to detect edges, then shapes, then objects. Think of it like building a LEGO structure from tiny blocks—start with basics, then combine them into more complex patterns.
+                </p>
+            </div>
+
+            <h3>Privacy Considerations with Image Analysis
+<h3>Privacy Considerations with Image Analysis</h3>
+
+            <p>
+                Here's something to think carefully about: AI's ability to extract details from images is incredibly powerful—but it raises serious privacy concerns.
+            </p>
+
+            <div class="callout callout-warning">
+                <h4>⚠️ Critical Privacy Warning</h4>
+                <p>
+                    When you upload an image to an AI system, that system might be able to infer personal information you didn't intend to share: your location (from landmarks or street signs), your approximate age and gender, what you own, where you work, and even your health status. Once that data is uploaded, you've lost control of it. Consider this before sharing photos with AI tools.
+                </p>
+            </div>
+
+            <h3>Context Shapes AI Interpretation</h3>
+
+            <p>
+                A fascinating aspect of AI is that it doesn't interpret images in a vacuum. The <strong>context you provide</strong> dramatically changes how the AI analyzes the same image. This is similar to how the same photograph might tell very different stories depending on the context.
+            </p>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.2: How Context Changes AI's Interpretation</div>
+                <div class="example-step">
+                    <strong>The Image:</strong> A photo of a bowl of pasta with tomato sauce and fresh basil.
+                </div>
+                <div class="example-step">
+                    <strong>Prompt 1 (Food Blogger Context):</strong><br>
+                    "I'm a food blogger. Help me write an engaging caption for this pasta dish."<br>
+                    <em>AI Response:</em> "Rustic homemade marinara adorned with fragrant basil leaves... farm-to-table elegance..."
+                </div>
+                <div class="example-step">
+                    <strong>Prompt 2 (Student Context):</strong><br>
+                    "I'm a student struggling with nutrition. What study tips can you suggest based on this image?"<br>
+                    <em>AI Response:</em> "This meal contains carbohydrates (pasta), vitamins (basil and tomato), and demonstrates balanced nutrition. Here's how to study macronutrients..."
+                </div>
+                <div class="example-step">
+                    <strong>Prompt 3 (Vacation Planner Context):</strong><br>
+                    "I'm planning a vacation. What recommendations do you have based on this image?"<br>
+                    <em>AI Response:</em> "This is clearly Italian cuisine. Here are the top destinations for food tourism in Italy..."
+                </div>
+                <div class="example-result">
+                    <strong>Key Insight:</strong> The AI saw the same image, but provided completely different outputs based on context. This shows that AI doesn't have inherent understanding—it responds to patterns and context clues.
+                </div>
+            </div>
+
+            <div class="assessment">
+                <div class="assessment-title">Formative Assessment 2.2.2: Image Analysis and Context</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (True/False):</strong></p>
+                    <p>AI systems interpret images the same way humans do—by visually "seeing" objects and understanding meaning.</p>
+                    <label class="option">
+                        <input type="radio" name="q2a" value="true">
+                        <span>True</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2a" value="false">
+                        <span>False</span>
+                    </label>
+                    <button class="answer-toggle" onclick="toggleAnswer('a2q1')">Show Answer</button>
+                    <div id="a2q1" class="answer-content">
+                        <div class="answer-label">Answer: False</div>
+                        <p>AI converts images to numerical data and applies mathematical operations. While AI can identify objects accurately, it doesn't "see" the way humans do with consciousness and subjective understanding.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (Multiple Choice):</strong></p>
+                    <p>What is the most important factor that influences how an AI interprets an image?</p>
+                    <div class="question-content">
+                        <label class="option">
+                            <input type="radio" name="q2b" value="a">
+                            <span>A) The size of the image file</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2b" value="b">
+                            <span>B) The resolution or quality of the image</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2b" value="c">
+                            <span>C) The context and instructions provided in the prompt</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2b" value="d">
+                            <span>D) The color saturation of the image</span>
+                        </label>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a2q2')">Show Answer</button>
+                    <div id="a2q2" class="answer-content">
+                        <div class="answer-label">Correct Answer: C</div>
+                        <p>The context and instructions you provide in your prompt heavily influence how the AI analyzes the image. The same image can produce vastly different outputs depending on the context you give. This is why prompt engineering is so important.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>Name two pieces of private information that AI could potentially infer from a photograph of you or your surroundings.</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('a2q3')">Show Answer</button>
+                    <div id="a2q3" class="answer-content">
+                        <div class="answer-label">Sample Answers (any two):</div>
+                        <ul>
+                            <li>Your approximate location (from landmarks, street signs, or background details)</li>
+                            <li>Your age and gender</li>
+                            <li>Your approximate wealth or socioeconomic status</li>
+                            <li>Your health status or disabilities</li>
+                            <li>Where you work (visible company logos)</li>
+                            <li>Your hobbies or interests (based on items in the background)</li>
+                            <li>Your relationship status (who's with you in photos)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Part 2: The AI's Brain -->
+        <section>
+            <h2>Part 2: Inside the AI's Brain—How Language Models Actually Work</h2>
+
+            <h3>Understanding Large Language Models (LLMs)</h3>
+
+            <p>
+                When you chat with ChatGPT or another AI, you're interacting with something called a <strong>Large Language Model (LLM)</strong>. But what exactly is it doing behind the scenes?
+            </p>
+
+            <p>
+                Here's the fundamental truth: <strong>AI doesn't understand language the way you do. It predicts the next word.</strong> That's it. That's the core mechanism. When you type a prompt, the AI breaks it into small chunks called tokens, runs them through a neural network that's been trained on billions of words, and predicts what word should come next. Then it predicts the next word. Then the next one. And so on, until it reaches a stopping point.
+            </p>
+
+            <p>
+                This might sound simple, but here's where it gets powerful: when trained on massive amounts of data, this "next word prediction" learns sophisticated patterns about language, logic, math, coding, history, science, and more. It's not conscious, but it's incredibly pattern-matching.
+            </p>
+
+            <div class="video-container">
+                <div class="video-title">How Chatbots and Large Language Models Work</div>
+                <div class="video-description">Understand the architecture and training process behind modern AI systems (7:20 minutes)</div>
+                <div class="video-placeholder">
+                    <span class="sr-only">Video: How Chatbots and Large Language Models Work</span>
+                    🎬 Video Content (Embedded in Brightspace)
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <h4>ℹ️ Key Concept: Neural Networks</h4>
+                <p>
+                    Think of a neural network like a massive web of interconnected nodes (artificial neurons). Data flows through this network, getting transformed at each layer. During training, the connections (weights) between nodes get adjusted based on feedback. Over millions of adjustments, the network learns to recognize patterns. This is how AI learns without being explicitly programmed for each task.
+                </p>
+            </div>
+
+            <h3>The Training Process: Learning from Data</h3>
+
+            <p>
+                An LLM learns through a process called <strong>training</strong>. Here's a simplified version of how it works:
+            </p>
+
+            <ol>
+                <li><strong>Gather massive amounts of text:</strong> Billions of words from books, websites, articles, code repositories, etc.</li>
+                <li><strong>Show the model patterns:</strong> Present the data in chunks: "The cat sat on the..." and ask the model to predict "mat"</li>
+                <li><strong>Compare and adjust:</strong> If the model guesses wrong, adjust its internal parameters slightly to get it right next time</li>
+                <li><strong>Repeat millions of times:</strong> With billions of examples, the model becomes increasingly good at prediction</li>
+                <li><strong>Fine-tune with human feedback:</strong> Have humans rate which responses are better, and adjust the model accordingly</li>
+            </ol>
+
+            <p>
+                This training process is expensive (millions of dollars and enormous computational resources), which is why companies like OpenAI, Google, and Anthropic keep their models proprietary. But once trained, the model can be used (inference) relatively cheaply.
+            </p>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.3: How an LLM Generates a Response</div>
+                <div class="example-step">
+                    <strong>Your Prompt:</strong> "Explain machine learning like I'm five years old."
+                </div>
+                <div class="example-step">
+                    <strong>Step 1 - Tokenization:</strong> Your prompt gets broken into tokens (roughly words). The AI sees: [Explain] [machine] [learning] [like] [I'm] [five] [years] [old]
+                </div>
+                <div class="example-step">
+                    <strong>Step 2 - Processing Through Neural Network:</strong> These tokens flow through billions of parameters in the neural network. Each layer transforms the data, extracting meaning and patterns.
+                </div>
+                <div class="example-step">
+                    <strong>Step 3 - Predicting the First Word:</strong> Based on its training, the AI predicts: "Machine learning is when a computer learns to do things..."
+                </div>
+                <div class="example-step">
+                    <strong>Step 4 - Predicting the Next Word, and the Next:</strong> The AI continues generating word by word: "...like how you learn to catch a ball."
+                </div>
+                <div class="example-step">
+                    <strong>Step 5 - Stopping:</strong> Eventually it reaches a stopping point and returns the complete response.
+                </div>
+                <div class="example-result">
+                    <strong>Result:</strong> A complete explanation tailored to five-year-old level (because the AI was trained on texts explaining concepts for children and learned those patterns).
+                </div>
+            </div>
+
+            <h3>The Career Prompting Challenge: Levels of Refinement</h3>
+
+            <p>
+                Now let's see how dramatically better results become when you provide more context and structure. The same AI, given progressively better prompts, will generate progressively better responses. This is prompt engineering in action.
+            </p>
+
+            <h4>How to Approach This Challenge</h4>
+            <p>
+                You'll test three levels of prompting, starting basic and getting increasingly refined. After each level, observe how the AI's response changes. What new information appears? What becomes clearer? This teaches you how the AI uses structure and context to improve its output.
+            </p>
+
+            <div class="callout callout-hint">
+                <h4>💡 Strategy: Document Carefully</h4>
+                <p>
+                    When you do this exercise, take screenshots or copy the exact responses. Compare them side by side. Look for differences in specificity, depth, actionability, and relevance. These differences show you exactly what improvements in your prompt produced better outputs.
+                </p>
+            </div>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.4: Career Prompting Exercise—Complete Example</div>
+
+                <div class="example-step">
+                    <strong>Career Choice:</strong> Healthcare Professional (Nurse)
+                </div>
+
+                <div class="example-step">
+                    <strong>Level 1: Basic Prompting</strong><br>
+                    <em>Prompt:</em> "Give me career advice for becoming a nurse."<br>
+                    <em>AI Response Summary:</em> Generic advice about nursing—get a degree, work hard, help patients. Useful but not specific to the user's situation.
+                </div>
+
+                <div class="example-step">
+                    <strong>Level 2: Add One Example</strong><br>
+                    <em>Prompt:</em> "I'm a junior in college interested in becoming a nurse. I'm deciding between a traditional BSN program and an accelerated program. Give me career advice."<br>
+                    <em>AI Response Summary:</em> More targeted. Discusses pros/cons of each program type, asks about current background, suggests timeline. Better but still somewhat generic.
+                </div>
+
+                <div class="example-step">
+                    <strong>Level 3: Multiple Examples for Refinement</strong><br>
+                    <em>Prompt:</em> "I'm a 21-year-old junior in college with a major in biology. I have a 3.5 GPA and two years of volunteer experience in a hospital emergency department. I'm deciding between: (1) completing a traditional 4-year BSN here and working as an ED nurse, or (2) doing an accelerated 13-month MSN program at another school to become a nurse practitioner faster. I'm particularly interested in emergency medicine but also curious about leadership roles. What specific path would you recommend and why? Also, what skills should I develop now?"<br>
+                    <em>AI Response Summary:</em> Highly specific advice that considers the user's academic record, experience, timeline preferences, and career goals. Recommends specific steps, discusses trade-offs, explains why, and suggests immediate actions.
+                </div>
+
+                <div class="example-result">
+                    <strong>Key Observation:</strong> The amount of context and specificity in the prompt directly correlated with the usefulness and relevance of the response. Level 3 responses are dramatically more actionable than Level 1.
+                </div>
+            </div>
+
+            <div class="assessment">
+                <div class="assessment-title">Formative Assessment 2.2.3: Understanding LLMs and Prompting</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (True/False):</strong></p>
+                    <p>Large Language Models understand the meaning of words the same way humans do.</p>
+                    <label class="option">
+                        <input type="radio" name="q3a" value="true">
+                        <span>True</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3a" value="false">
+                        <span>False</span>
+                    </label>
+                    <button class="answer-toggle" onclick="toggleAnswer('a3q1')">Show Answer</button>
+                    <div id="a3q1" class="answer-content">
+                        <div class="answer-label">Answer: False</div>
+                        <p>LLMs don't "understand" meaning the way humans do with consciousness. They recognize statistical patterns in training data. They're essentially very sophisticated pattern-matching systems that predict what words should come next based on what came before.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (Multiple Choice):</strong></p>
+                    <p>What is the core mechanism that allows an LLM to generate responses?</p>
+                    <div class="question-content">
+                        <label class="option">
+                            <input type="radio" name="q3b" value="a">
+                            <span>A) It searches a database of pre-written responses</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3b" value="b">
+                            <span>B) It predicts the most likely next word based on patterns learned from training data</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3b" value="c">
+                            <span>C) It accesses the internet in real-time for current information</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3b" value="d">
+                            <span>D) It uses explicit rules programmed by humans</span>
+                        </label>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a3q2')">Show Answer</button>
+                    <div id="a3q2" class="answer-content">
+                        <div class="answer-label">Correct Answer: B</div>
+                        <p>LLMs work by predicting the next token (roughly word) in sequence. This simple mechanism, repeated billions of times during training on massive datasets, results in responses that can seem remarkably intelligent and contextually appropriate.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>Based on the Career Prompting example, what specific information made Level 3 prompts more effective than Level 1?</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('a3q3')">Show Answer</button>
+                    <div id="a3q3" class="answer-content">
+                        <div class="answer-label">Sample Answer:</div>
+                        <p>Level 3 included specific context: age, current GPA, academic major, specific experience, career interests, specific decision they're facing, timeline preferences, and goals. This information allowed the AI to provide targeted advice specific to their situation rather than generic advice that could apply to anyone.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Part 3: Smart or Just Predictable -->
+        <section>
+            <h2>Part 3: Smart or Just Predictable? Evaluating AI Capabilities</h2>
+
+            <h3>The Big Question: When Should We Use AI?</h3>
+
+            <p>
+                Just because AI can do something doesn't mean it should. Or more precisely, just because you have an AI tool doesn't mean every task is best solved with AI. Understanding where AI excels and where it fails is crucial for using it responsibly and effectively.
+            </p>
+
+            <p>
+                Let's evaluate AI on three dimensions:
+            </p>
+
+            <ul>
+                <li><strong>Speed:</strong> How quickly can it produce output? (1 = extremely slow, 5 = extremely fast)</li>
+                <li><strong>Accuracy:</strong> How correct and reliable is the output? (1 = extremely inaccurate, 5 = extremely accurate)</li>
+                <li><strong>Creativity:</strong> How original, novel, and insightful is the output? (1 = not creative, 5 = extremely creative)</li>
+            </ul>
+
+            <h3>Task 1: Solving Mathematical Problems</h3>
+
+            <p>
+                Let's start with something concrete: math problems. Mathematics has definitive right and wrong answers. This should be a strongpoint for AI, right?
+            </p>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.5: Solving a Math Problem</div>
+
+                <div class="example-step">
+                    <strong>The Problem:</strong> "A train travels 240 miles in 3 hours, then travels 180 miles in 2 hours. What is its average speed for the entire trip?"
+                </div>
+
+                <div class="example-step">
+                    <strong>Human Solution Approach:</strong>
+                    <ul>
+                        <li>Total distance = 240 + 180 = 420 miles</li>
+                        <li>Total time = 3 + 2 = 5 hours</li>
+                        <li>Average speed = Total distance ÷ Total time = 420 ÷ 5 = 84 mph</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>AI Approach:</strong> Modern LLMs can solve this same problem and show their work. Many will get it correct because they've learned mathematical patterns from training data.
+                </div>
+
+                <div class="example-result">
+                    <strong>Comparison:</strong>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Human</th>
+                            <th>AI</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>3-5 minutes (reasonable)</td>
+                            <td>5/5 (instant)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accuracy</strong></td>
+                            <td>5/5 (if you know how, it's reliable)</td>
+                            <td>4/5 (usually correct, but can make mistakes with complex problems)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creativity</strong></td>
+                            <td>2/5 (straightforward formula application)</td>
+                            <td>2/5 (follows learned patterns)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best Use?</strong></td>
+                            <td>Learning and verification</td>
+                            <td>Quick checks and complex calculations</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <h4>⚠️ Warning: AI Math Limitations</h4>
+                <p>
+                    While AI is fast at math, it can fail at complex problems, especially those requiring deep logical reasoning or multi-step procedures. Always verify AI math solutions, especially for important work. AI also struggles with very large numbers and can make unexpected errors on seemingly simple problems.
+                </p>
+            </div>
+
+            <h3>Task 2: Providing Personal Advice</h3>
+
+            <p>
+                Now let's consider something less objective: personal advice about managing stress, time, and relationships.
+            </p>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.6: Personal Advice on Time Management</div>
+
+                <div class="example-step">
+                    <strong>The Scenario:</strong> "I'm feeling stressed about balancing school, work, and social life. What advice do you have for managing my time better?"
+                </div>
+
+                <div class="example-step">
+                    <strong>What a Human Friend Would Do:</strong>
+                    <ul>
+                        <li>Ask follow-up questions to understand YOUR specific situation</li>
+                        <li>Draw on personal experience and empathy</li>
+                        <li>Provide nuanced advice that considers your personality, values, and constraints</li>
+                        <li>Listen to your response and adjust their advice</li>
+                        <li>Provide emotional support and encouragement</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>What AI Would Do:</strong>
+                    <ul>
+                        <li>Generate generic time management strategies based on patterns in training data</li>
+                        <li>Provide a bulleted list of tips (prioritization, schedules, saying no, etc.)</li>
+                        <li>Be helpful but not personalized</li>
+                        <li>Cannot truly understand your emotional state or provide real emotional support</li>
+                    </ul>
+                </div>
+
+                <div class="example-result">
+                    <strong>Comparison:</strong>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Human Friend</th>
+                            <th>AI Advisor</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>2/5 (depending on availability)</td>
+                            <td>5/5 (instant)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accuracy</strong></td>
+                            <td>4/5 (knows you well, but biased)</td>
+                            <td>2/5 (generic advice, not suited to your specifics)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creativity</strong></td>
+                            <td>4/5 (can suggest unique solutions)</td>
+                            <td>2/5 (predictable strategies from training data)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best Use?</strong></td>
+                            <td>Real support and personalization</td>
+                            <td>Getting ideas to discuss with someone you trust</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <h4>⚠️ Warning: When NOT to Rely on AI</h4>
+                <p>
+                    Do not rely on AI for mental health advice, medical diagnosis, or advice requiring deep personal understanding. AI cannot replace therapists, doctors, counselors, or trusted people in your life. Use AI to supplement, not replace, human judgment and support for personal matters.
+                </p>
+            </div>
+
+            <h3>Task 3: Fact-Checking and Historical Information</h3>
+
+            <p>
+                Let's examine a task where accuracy is critical: verifying historical facts.
+            </p>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.7: Fact-Checking Historical Events</div>
+
+                <div class="example-step">
+                    <strong>The Question:</strong> "What are three major historical events that happened in 1995?"
+                </div>
+
+                <div class="example-step">
+                    <strong>Human Fact-Checking Process:</strong>
+                    <ul>
+                        <li>Research from reliable sources (academic databases, news archives)</li>
+                        <li>Verify dates and details carefully</li>
+                        <li>Cite sources so information can be checked</li>
+                        <li>Takes time but provides accountability</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>AI Fact-Checking:</strong>
+                    <ul>
+                        <li>Generates plausible-sounding facts based on training data (which has a knowledge cutoff)</li>
+                        <li>Might say events happened correctly, incorrectly, or confuse dates</li>
+                        <li>Sounds confident even when wrong</li>
+                        <li>Cannot cite sources or take accountability for errors</li>
+                    </ul>
+                </div>
+
+                <div class="example-result">
+                    <strong>Comparison:</strong>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Human Research</th>
+                            <th>AI Generation</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Speed</strong></td>
+                            <td>2/5 (can take significant time)</td>
+                            <td>5/5 (instant)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accuracy</strong></td>
+                            <td>5/5 (if you research carefully)</td>
+                            <td>3/5 (often correct but vulnerable to hallucinations)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creativity</strong></td>
+                            <td>1/5 (facts are facts)</td>
+                            <td>2/5 (might confabulate)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best Use?</strong></td>
+                            <td>Any factual claim that matters</td>
+                            <td>Generate ideas to verify with reliable sources</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="callout callout-hint">
+                <h4>💡 Pro Tip: Use AI as a Starting Point, Not an Endpoint</h4>
+                <p>
+                    AI is excellent for generating starting points: drafts, ideas, summaries, brainstorms. But always verify critical information, especially facts, before relying on them. Treat AI output as a rough draft that you then fact-check and refine with authoritative sources.
+                </p>
+            </div>
+
+            <div class="assessment">
+                <div class="assessment-title">Formative Assessment 2.2.4: Evaluating AI for Specific Tasks</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (Multiple Choice):</strong></p>
+                    <p>Based on the tasks evaluated, which situation would you MOST recommend using AI for?</p>
+                    <div class="question-content">
+                        <label class="option">
+                            <input type="radio" name="q4a" value="a">
+                            <span>A) Getting mental health support for anxiety</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4a" value="b">
+                            <span>B) Generating ideas for time management strategies to discuss with a friend</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4a" value="c">
+                            <span>C) Verifying critical historical facts for a research paper</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4a" value="d">
+                            <span>D) Both A and C</span>
+                        </label>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a4q1')">Show Answer</button>
+                    <div id="a4q1" class="answer-content">
+                        <div class="answer-label">Correct Answer: B</div>
+                        <p>AI can generate brainstorm ideas about time management strategies very quickly. These ideas can then be discussed with trusted people. However, AI should not replace mental health professionals (A) or be the sole source for fact-checking (C). Always verify historical facts with reliable sources.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (True/False):</strong></p>
+                    <p>Speed and accuracy are always equally important when choosing whether to use AI for a task.</p>
+                    <label class="option">
+                        <input type="radio" name="q4b" value="true">
+<span>True</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4b" value="false">
+                        <span>False</span>
+                    </label>
+                    <button class="answer-toggle" onclick="toggleAnswer('a4q2')">Show Answer</button>
+                    <div id="a4q2" class="answer-content">
+                        <div class="answer-label">Answer: False</div>
+                        <p>The importance of speed vs. accuracy depends on the context. For routine calculations, speed might be most important. For medical or legal information, accuracy is critical. You must evaluate what matters most for your specific use case.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>Describe one situation where you would NOT recommend using AI, and explain why.</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('a4q3')">Show Answer</button>
+                    <div id="a4q3" class="answer-content">
+                        <div class="answer-label">Sample Answers (any appropriate situation):</div>
+                        <ul>
+                            <li>Medical diagnosis: AI can miss critical details and shouldn't replace doctors</li>
+                            <li>Mental health crisis: Requires human empathy and real support</li>
+                            <li>Legal advice: Could provide incorrect information with serious consequences</li>
+                            <li>Fact-checking for important claims: AI hallucinations could spread misinformation</li>
+                            <li>Personal decisions where values matter: AI can't truly understand what's important to you</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Part 4: AI Hallucinations -->
+        <section>
+            <h2>Part 4: AI's Wild Imagination—When AI Makes Stuff Up</h2>
+
+            <h3>Understanding AI Hallucinations</h3>
+
+            <p>
+                Here's something critical to understand about AI: it can <strong>confidently generate completely false information</strong>. This phenomenon is called an <strong>AI hallucination</strong>, and it's one of the most important limitations to know about.
+            </p>
+
+            <p>
+                An AI hallucination isn't the AI intentionally lying or being deceptive. Instead, it's the AI doing exactly what it was trained to do—predict the next word based on patterns—but producing output that's completely wrong. The AI "knows" only patterns from its training data, not truth. When it doesn't have training examples for something, it might still generate plausible-sounding text that happens to be false.
+            </p>
+
+            <div class="callout callout-warning">
+                <h4>⚠️ Critical Warning: AI Hallucinations</h4>
+                <p>
+                    AI systems can generate false information with complete confidence. They cannot distinguish between real and invented information. A hallucination from ChatGPT might be indistinguishable from a correct answer. This is especially dangerous for factual claims, citations, code, medical information, or legal advice. Always verify critical information independently.
+                </p>
+            </div>
+
+            <h3>Real-World Case Studies: When Hallucinations Had Consequences</h3>
+
+            <p>
+                AI hallucinations aren't just theoretical concerns—they've caused real harm. Let's examine actual cases where AI's incorrect outputs had serious consequences.
+            </p>
+
+            <h4>Case Study 1: Airline Chatbot Misinformation (2024)</h4>
+
+            <div class="example">
+                <div class="example-title">Real-World Hallucination: Airline Customer Service Failure</div>
+
+                <div class="example-step">
+                    <strong>What Happened:</strong> An airline deployed an AI chatbot to answer customer service questions. A passenger asked about bereavement fare policies (special fares when traveling for a funeral).
+                </div>
+
+                <div class="example-step">
+                    <strong>The Hallucination:</strong> The chatbot generated specific bereavement policy details that sounded completely legitimate—but were entirely made up. They didn't match the airline's actual policy.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Consequence:</strong> The passenger followed the false information and purchased a ticket under incorrect assumptions. When they tried to claim the bereavement discount later, it was rejected. The passenger had to contact customer service again to resolve the issue.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Lesson:</strong> The airline was held liable for their AI's hallucination. Even though the AI wasn't intentionally deceptive, customers relied on its output and were harmed. Companies are accountable for their AI systems' mistakes.
+                </div>
+            </div>
+
+            <h4>Case Study 2: Lawyers Cite Fake Court Cases (2023)</h4>
+
+            <div class="example">
+                <div class="example-title">Real-World Hallucination: Legal Research Disaster</div>
+
+                <div class="example-step">
+                    <strong>What Happened:</strong> Lawyers used ChatGPT to research legal precedents for a case. They asked the AI to find relevant court decisions supporting their argument.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Hallucination:</strong> ChatGPT provided specific case citations—case names, court rulings, everything looked legitimate. The lawyers included these cases in their legal brief submitted to a federal judge.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Consequence:</strong> The judge investigated the citations and discovered they were completely fabricated. No such cases existed. The lawyers violated court rules and were each fined \$5,000. They faced potential bar complaints and damage to their professional reputation.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Lesson:</strong> AI can invent official-sounding but entirely fake citations. Even experts can be fooled by confident-sounding hallucinations. Never rely on AI for legal research without independent verification.
+                </div>
+            </div>
+
+            <h4>Case Study 3: Autonomous Vehicle Misinterpretation</h4>
+
+            <div class="example">
+                <div class="example-title">AI Hallucination in Safety-Critical Systems</div>
+
+                <div class="example-step">
+                    <strong>What Happened:</strong> Autonomous vehicles use AI to interpret road scenes. In certain conditions, AI vision systems can "hallucinate" seeing things that aren't there (phantom obstacles) or missing things that are (not detecting a pedestrian).
+                </div>
+
+                <div class="example-step">
+                    <strong>The Challenge:</strong> A self-driving car's perception system might hallucinate an obstacle in the middle of the road, causing it to brake suddenly. Or it might miss a pedestrian entirely because the image conditions aren't perfect.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Consequence:</strong> Safety issues, potential accidents, and liability questions. Even small hallucinations can be dangerous in safety-critical applications.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Lesson:</strong> AI hallucinations are especially dangerous in high-stakes situations. Systems must have safeguards, human oversight, or high accuracy thresholds before deployment in safety-critical roles.
+                </div>
+            </div>
+
+            <h4>Case Study 4: AI Transcription Fabricating Medical Records (2025)</h4>
+
+            <div class="example">
+                <div class="example-title">AI Hallucination in Healthcare Records</div>
+
+                <div class="example-step">
+                    <strong>What Happened:</strong> A medical transcription AI was used to convert doctor-patient conversations into written records. Healthcare providers used these transcripts as official documentation.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Hallucination:</strong> The AI would sometimes "invent" parts of conversations—summarizing things doctors didn't actually say, or creating medical details that weren't discussed.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Consequence:</strong> Inaccurate medical records could lead to misdiagnoses, wrong treatments, or gaps in patient care. Patients' medical history could be incorrect, affecting future care decisions.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Lesson:</strong> AI in healthcare must be carefully validated. Human oversight is essential. Medical records are too critical for AI-only processing without verification.
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <h4>ℹ️ Why Do Hallucinations Happen?</h4>
+                <p>
+                    Hallucinations occur because AI models are trained to predict the next word based on patterns, not to verify truth. When the model encounters situations outside its training data, or when multiple plausible completions exist, it might choose one that seems right statistically but is actually false. It has no way to "check" whether its output is true or false—it just predicts what should come next.
+                </p>
+            </div>
+
+            <div class="assessment">
+                <div class="assessment-title">Formative Assessment 2.2.5: Understanding AI Hallucinations</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (True/False):</strong></p>
+                    <p>When an AI generates false information, it means the AI is being intentionally deceptive.</p>
+                    <label class="option">
+                        <input type="radio" name="q5a" value="true">
+                        <span>True</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5a" value="false">
+                        <span>False</span>
+                    </label>
+                    <button class="answer-toggle" onclick="toggleAnswer('a5q1')">Show Answer</button>
+                    <div id="a5q1" class="answer-content">
+                        <div class="answer-label">Answer: False</div>
+                        <p>AI hallucinations are not intentional deception. They occur because the AI predicts what words should come next based on patterns, without a mechanism to verify whether the output is true or false. The AI has no consciousness or intent to deceive.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (Multiple Choice):</strong></p>
+                    <p>What is the most important lesson from the lawyer hallucination case study?</p>
+                    <div class="question-content">
+                        <label class="option">
+                            <input type="radio" name="q5b" value="a">
+                            <span>A) Lawyers should never use AI for any task</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5b" value="b">
+                            <span>B) AI citations always need independent verification before relying on them</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5b" value="c">
+                            <span>C) ChatGPT is broken and shouldn't be used</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5b" value="d">
+                            <span>D) Judges shouldn't accept briefs from lawyers who used AI</span>
+                        </label>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a5q2')">Show Answer</button>
+                    <div id="a5q2" class="answer-content">
+                        <div class="answer-label">Correct Answer: B</div>
+                        <p>The lesson is that AI can generate official-sounding but completely false information (like fake case citations) with total confidence. Any critical information from AI, especially citations, references, or facts, must be independently verified before use or reliance.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>Why are AI hallucinations especially dangerous in healthcare and legal fields?</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('a5q3')">Show Answer</button>
+                    <div id="a5q3" class="answer-content">
+                        <div class="answer-label">Sample Answer:</div>
+                        <p>In healthcare and legal fields, accuracy is critical because errors can have serious consequences for people. Hallucinated medical information could lead to misdiagnosis or wrong treatment. Hallucinated legal citations could result in lost cases or fines. These fields require high accuracy and verification, making AI hallucinations particularly harmful.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Part 5: Debugging and Refining Outputs -->
+        <section>
+            <h2>Part 5: The Art of Prompt Engineering—Getting Better Outputs</h2>
+
+            <h3>What Is Prompt Engineering?</h3>
+
+            <p>
+                <strong>Prompt engineering</strong> is the practice of crafting your instructions to AI in ways that consistently produce better results. It's becoming a real skill—some companies are hiring "AI Prompt Engineers" at salaries up to \$250,000 per year.
+            </p>
+
+            <p>
+                The basic idea is simple: just as asking a human a clearer, more specific question gets you a better answer, structuring your AI prompts thoughtfully gets you better outputs. This isn't magic—it's understanding how AI works and leveraging that knowledge.
+            </p>
+
+            <div class="video-container">
+                <div class="video-title">5 Essential Elements of Effective AI Prompts</div>
+                <div class="video-description">Learn the framework for crafting prompts that consistently improve AI outputs (6:12 minutes)</div>
+                <div class="video-placeholder">
+                    <span class="sr-only">Video: 5 Essential Elements of Effective AI Prompts</span>
+                    🎬 Video Content (Embedded in Brightspace)
+                </div>
+            </div>
+
+            <h3>The Five Key Elements of Effective Prompting</h3>
+
+            <p>
+                When you craft a prompt, think about these five elements. Including all five dramatically improves the quality of AI responses.
+            </p>
+
+            <h4>1. Task: What Do You Want Done?</h4>
+            <p>
+                <strong>Be specific and actionable.</strong> Instead of "Help me with my homework," say "Explain photosynthesis in a way that a 10-year-old could understand, using an analogy."
+            </p>
+
+            <h4>2. Context: Why Are You Asking?</h4>
+            <p>
+                <strong>Provide relevant background details.</strong> Instead of just asking for advice, explain your situation: "I'm a junior in college considering a career change from engineering to computer science. I've already completed 2 years of engineering coursework but am interested in AI. What should I know?"
+            </p>
+
+            <h4>3. Format: How Should the Response Be Structured?</h4>
+            <p>
+                <strong>Specify the format and tone.</strong> Instead of just asking for ideas, say "Give me 5 marketing ideas in bullet-point format, written in a professional tone, with 1-2 sentences per idea. Make them suitable for a sustainable fashion brand."
+            </p>
+
+            <h4>4. Purpose: Who Is the Audience and Why Are You Asking?</h4>
+            <p>
+                <strong>Explain the intended use.</strong> "I'm creating an explanatory video for high school students about climate change. I need to break down the greenhouse effect into simple, engaging terms that don't oversimplify the science."
+            </p>
+
+            <h4>5. Examples: Provide Reference Material</h4>
+            <p>
+                <strong>Show examples or reference resources.</strong> "Here's an example of the writing style I want: [example]. Generate similar content following this style but about [new topic]."
+            </p>
+
+            <h3>Transforming a Vague Prompt into an Effective One</h3>
+
+            <div class="example">
+                <div class="example-title">Example 2.2.8: Prompt Refinement Exercise</div>
+
+                <div class="example-step">
+                    <strong>Original Vague Prompt:</strong><br>
+                    "Help me with my homework"<br>
+                    <em>This is so generic that AI doesn't know what homework, what level, what class, what you need help with.</em>
+                </div>
+
+                <div class="example-step">
+                    <strong>Refined Prompt Using All 5 Elements:</strong><br>
+                    "I'm writing a 500-word essay for my 10th grade English class about the theme of friendship in 'To Kill a Mockingbird.' I need to write an introduction paragraph that hooks the reader and explains what I'll argue about. My teacher wants literary analysis, not plot summary. Write in a formal but engaging tone suitable for a 10th grader. Here's an example of a strong introduction paragraph from my class: [example]. Can you help me brainstorm 3 different angles I could take for my introduction?"
+                </div>
+
+                <div class="example-step">
+                    <strong>Analysis of the Refined Prompt:</strong>
+                    <ul>
+                        <li><strong>Task:</strong> Write introduction paragraph brainstorm</li>
+                        <li><strong>Context:</strong> 10th grade English, specific book, specific theme, 500-word essay</li>
+                        <li><strong>Format:</strong> 3 different angles, formal but engaging tone</li>
+                        <li><strong>Purpose:</strong> Literary analysis, not summary; audience is 10th grader + teacher</li>
+                        <li><strong>Examples:</strong> Provided example of strong introduction</li>
+                    </ul>
+                </div>
+
+                <div class="example-result">
+                    <strong>Expected Result:</strong> AI provides tailored, grade-appropriate suggestions that actually help with the specific assignment. Compare this to the vague original, where AI might generate generic homework help irrelevant to your actual needs.
+                </div>
+            </div>
+
+            <div class="callout callout-hint">
+                <h4>💡 Pro Tips for Effective Prompting</h4>
+                <ul>
+                    <li>Start specific and add detail based on responses you get</li>
+                    <li>Tell the AI what you DON'T want ("Don't use technical jargon")</li>
+                    <li>Ask follow-up questions rather than trying to perfect the first prompt</li>
+                    <li>Use examples or reference materials when possible</li>
+                    <li>Test your prompts and refine based on output quality</li>
+                    <li>Remember: "Garbage in, garbage out" applies to AI too</li>
+                </ul>
+            </div>
+
+            <h3>Advanced Prompting Techniques</h3>
+
+            <p>
+                Once you master the five elements, you can use more advanced techniques to get even better results:
+            </p>
+
+            <h4>Chain-of-Thought Prompting</h4>
+            <p>
+                Ask the AI to "think step-by-step" or "show your reasoning." This often leads to more accurate outputs, especially for complex problems. Example: "Solve this problem step-by-step, showing your reasoning at each step."
+            </p>
+
+            <h4>Role-Based Prompting</h4>
+            <p>
+                Ask the AI to take on a specific role. Example: "You are an experienced biology teacher. Explain DNA replication to a high school student using analogies."
+            </p>
+
+            <h4>Few-Shot Learning</h4>
+            <p>
+                Provide a few examples of the output style you want, then ask for more in the same style. This helps AI understand patterns in your preferences.
+            </p>
+
+            <h4>Iterative Refinement</h4>
+            <p>
+                Don't expect perfection on the first try. Get a response, then ask follow-up questions: "Can you make this more concise?" or "Can you explain that part more thoroughly?"
+            </p>
+
+            <div class="assessment">
+                <div class="assessment-title">Formative Assessment 2.2.6: Prompt Engineering</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (Multiple Choice):</strong></p>
+                    <p>Which revised prompt would likely produce the best response from an AI?</p>
+                    <div class="question-content">
+                        <label class="option">
+                            <input type="radio" name="q6a" value="a">
+                            <span>A) "Write about climate change"</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6a" value="b">
+                            <span>B) "I'm preparing a 5-minute presentation about climate change for my high school environmental science class. My audience is 15-year-olds with basic science knowledge. Write 3 key points with explanations suitable for a 5-minute talk, using real-world examples. Keep language accessible but accurate."</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6a" value="c">
+                            <span>C) "Tell me everything about climate change"</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6a" value="d">
+                            <span>D) "Write a long article about climate change for a science journal"</span>
+                        </label>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a6q1')">Show Answer</button>
+                    <div id="a6q1" class="answer-content">
+                        <div class="answer-label">Correct Answer: B</div>
+                        <p>Option B includes all five elements: Task (3 key points for presentation), Context (high school, basic knowledge, 5-minute talk), Format (3 bullet points with explanations), Purpose (high school audience, specific grade level), and Examples (note about real-world examples and accessible language). This specificity produces much better results.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (Matching):</strong></p>
+                    <p>Match each prompt element to its description:</p>
+                    <div class="question-content">
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Element</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Task</strong></td>
+                                <td>Background information and situation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Context</strong></td>
+                                <td>Who will read this and why you need it</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Format</strong></td>
+                                <td>The specific action you want done</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Purpose</strong></td>
+                                <td>Structure and tone of the response</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Examples</strong></td>
+                                <td>Reference materials or samples</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button class="answer-toggle" onclick="toggleAnswer('a6q2')">Show Answer</button>
+                    <div id="a6q2" class="answer-content">
+                        <div class="answer-label">Correct Matching:</div>
+                        <ul>
+                            <li><strong>Task</strong> → The specific action you want done</li>
+                            <li><strong>Context</strong> → Background information and situation</li>
+                            <li><strong>Format</strong> → Structure and tone of the response</li>
+                            <li><strong>Purpose</strong> → Who will read this and why you need it</li>
+                            <li><strong>Examples</strong> → Reference materials or samples</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Short Answer):</strong></p>
+                    <p>You're asking an AI to write Python code to analyze data. Using the 5 elements, write an improved version of this vague prompt: "Write Python code to analyze my data"</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('a6q3')">Show Answer</button>
+                    <div id="a6q3" class="answer-content">
+                        <div class="answer-label">Sample Improved Prompt:</div>
+                        <p>"I have a CSV file with customer sales data (columns: date, customer_id, amount_spent, product_category). I'm a beginner in Python and learning from a college course. Write Python code that: (1) loads the CSV file, (2) calculates total sales by product category, (3) identifies the top-selling category. Use pandas library and include comments explaining each step. Make it beginner-friendly with simple variable names and explanations."</p>
+                        <p><strong>This includes:</strong> Task (what the code should do), Context (beginner level, college course), Format (specific steps, simple style), Purpose (learning), Examples (specific data structure).</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Summary -->
+        <section>
+            <div class="summary-box">
+                <h2>Chapter Summary: Key Takeaways</h2>
+                <p>
+                    This week, you've explored how AI systems process information, generate responses, and where they fall short. Let's review the most important concepts:
+                </p>
+
+                <h3>Understanding AI Systems</h3>
+                <ul>
+                    <li>Multimodal AI models can process multiple types of input (text, images, audio) simultaneously, providing richer context and more accurate analysis</li>
+                    <li>Large Language Models (LLMs) work by predicting the most likely next word based on patterns learned from massive training datasets</li>
+                    <li>Neural networks are the computational structure underlying AI, with interconnected nodes that transform data through multiple layers</li>
+                    <li>AI doesn't "understand" language the way humans do—it recognizes statistical patterns and predicts sequences</li>
+                </ul>
+
+                <h3>AI Capabilities and Limitations</h3>
+                <ul>
+                    <li>AI excels at speed for many tasks, but accuracy and creativity vary significantly by task type</li>
+                    <li>Some tasks (math, routine analysis) are well-suited for AI; others (medical diagnosis, mental health support, legal advice) should not rely solely on AI</li>
+                    <li>Context dramatically changes how AI interprets information and generates responses</li>
+                    <li>Privacy concerns arise when uploading images or personal information to AI systems—inferred data is often beyond your control</li>
+                </ul>
+
+                <h3>AI Hallucinations: A Critical Limitation</h3>
+                <ul>
+                    <li>AI can confidently generate completely false information (hallucinations) without any indication that it's wrong</li>
+                    <li>Hallucinations occur because AI predicts patterns, not truth, and has no mechanism to verify accuracy</li>
+                    <li>Real-world consequences include liability for companies, fines for professionals, and harm to individuals</li>
+                    <li>Never rely on AI for critical information without independent verification, especially for facts, citations, medical/legal information</li>
+                </ul>
+
+                <h3>Effective Prompt Engineering</h3>
+                <ul>
+                    <li>The five key elements of effective prompts are: Task, Context, Format, Purpose, and Examples</li>
+                    <li>Specific, structured prompts produce significantly better results than vague, generic ones</li>
+                    <li>Advanced techniques like chain-of-thought prompting and role-based prompting can further improve results</li>
+                    <li>Prompt engineering is an emerging skill that's becoming increasingly valuable in the job market</li>
+                </ul>
+
+                <h3>Critical Thinking About AI</h3>
+                <ul>
+                    <li>Evaluate whether AI is truly the best tool for each task, not just whether it CAN do something</li>
+                    <li>Understand when to trust AI outputs (routine tasks with verification) vs. when to supplement with human judgment (personal decisions, critical information, safety-sensitive applications)</li>
+                    <li>AI is a tool to augment human capabilities, not replace human judgment, especially in fields where accuracy and empathy matter most</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Learning Objectives Review -->
+        <section>
+            <h2>Chapter Learning Objectives—Did You Achieve Them?</h2>
+            <p>
+                Let's verify that you've met all the learning objectives from the beginning of this chapter. You should be able to do each of these:
+            </p>
+
+            <div class="learning-objectives">
+                <ol>
+                    <li>
+                        <span class="objective-code">LO2.2.1</span> <strong>Explain how multimodal AI models process different types of input</strong><br>
+                        <em>Can you describe what a multimodal model is and give an example of how it combines text, images, and/or audio?</em>
+                    </li>
+                    <li>
+                        <span class="objective-code">LO2.2.2</span> <strong>Describe how Large Language Models work and make predictions about text</strong><br>
+                        <em>Can you explain the core mechanism of next-word prediction and how neural networks enable this?</em>
+                    </li>
+                    <li>
+                        <span class="objective-code">LO2.2.3</span> <strong>Identify the strengths and limitations of AI compared to human capabilities</strong><br>
+                        <em>Can you compare human vs. AI performance on specific tasks in terms of speed, accuracy, and creativity?</em>
+                    </li>
+                    <li>
+                        <span class="objective-code">LO2.2.4</span> <strong>Apply the five key elements of effective prompt engineering</strong><br>
+                        <em>Can you write a prompt that includes Task, Context, Format, Purpose, and Examples to get better AI outputs?</em>
+                    </li>
+                    <li>
+                        <span class="objective-code">LO2.2.5</span> <strong>Recognize and analyze AI hallucinations and their real-world consequences</strong><br>
+                        <em>Can you explain what an AI hallucination is and describe real cases where it caused problems?</em>
+                    </li>
+                    <li>
+                        <span class="objective-code">LO2.2.6</span> <strong>Evaluate when to use AI for specific tasks and when to rely on human judgment</strong><br>
+                        <em>Can you argue for or against using AI for a given task based on the task's requirements and consequences?</em>
+                    </li>
+                </ol>
+            </div>
+
+            <p>
+                If you feel confident about all six objectives, you're ready to move forward. If any area feels fuzzy, review that section and try some practice tasks. Remember: understanding limitations is just as important as understanding capabilities.
+            </p>
+        </section>
+
+        <!-- Next Steps -->
+        <section>
+            <div class="next-steps">
+                <h2>What's Coming Next: Week 3</h2>
+
+                <h3>Build with AI—Intelligent Creations</h3>
+
+                <p>
+                    Now that you understand how AI works and its limitations, we're going to get creative. Next week, you'll move beyond just interacting with AI and start <strong>building with it</strong>.
+                </p>
+
+                <h3>Week 3 Preview</h3>
+                <p>
+                    You'll explore:
+                </p>
+                <ul>
+                    <li><strong>Generative AI for Creative Tasks:</strong> How to use AI to help write, design, brainstorm, and create</li>
+                    <li><strong>AI Art and Design:</strong> Explore image generation, understanding its capabilities and ethical considerations</li>
+                    <li><strong>Prompt Engineering for Creativity:</strong> How to guide AI toward original, useful outputs</li>
+<li><strong>Ethical Considerations:</strong> Questions about copyright, authenticity, and responsible use of generative AI</li>
+                    <li><strong>Building an AI Project:</strong> Planning and executing a creative project using AI as a tool</li>
+                </ul>
+
+                <h3>How Week 3 Builds on Week 2</h3>
+                <p>
+                    This week you learned that context and structure dramatically improve AI outputs. Next week, you'll use that knowledge to guide AI toward specific creative goals. You'll learn that <strong>being a good AI user means being a good prompt engineer</strong>—and great prompt engineering is an art form.
+                </p>
+
+                <p>
+                    You'll also grapple with ethical questions: When you use AI to create something, who owns it? Is it authentic? What responsibilities do you have when sharing AI-generated content? These questions matter more as AI becomes more capable.
+                </p>
+
+                <h3>Recommended Preparation</h3>
+                <ul>
+                    <li>Experiment with different prompts this week. Notice what works and what doesn't</li>
+                    <li>Try using the five prompt engineering elements we discussed on tasks that matter to you</li>
+                    <li>Think about a creative project you'd like to try with AI—start brainstorming ideas</li>
+                    <li>Reflect on the ethical questions: copyright, authenticity, credit, and responsible use</li>
+                </ul>
+
+                <p>
+                    You're building skills that are increasingly valuable in the real world. Companies are looking for people who understand AI deeply and can use it responsibly and creatively. Keep going!
+                </p>
+            </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section>
+            <h2>Additional Resources and Further Learning</h2>
+
+            <h3>Tools to Practice With</h3>
+            <div class="callout callout-info">
+                <h4>ℹ️ Recommended AI Tools for Experimentation</h4>
+                <ul>
+                    <li><strong>ChatGPT:</strong> Text-based AI with image support, widely used for general tasks</li>
+                    <li><strong>Claude (by Anthropic):</strong> Text-based AI known for nuanced reasoning and longer contexts</li>
+                    <li><strong>Gemini (by Google):</strong> Multimodal AI with web access and image support</li>
+                    <li><strong>Copilot (by Microsoft):</strong> Integrated AI with search capability</li>
+                    <li><strong>LibreChat:</strong> Open-source alternative allowing access to multiple models</li>
+                </ul>
+                <p>
+                    <strong>Note:</strong> Different tools have different strengths. Experiment with multiple tools to find what works best for your needs. Remember to review privacy policies before uploading sensitive information.
+                </p>
+            </div>
+
+            <h3>Key Concepts Review Table</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Concept</th>
+                    <th>Definition</th>
+                    <th>Why It Matters</th>
+                </tr>
+                <tr>
+                    <td><strong>Multimodal AI</strong></td>
+                    <td>AI that processes multiple input types (text, images, audio)</td>
+                    <td>Enables richer context and more accurate understanding of complex information</td>
+                </tr>
+                <tr>
+                    <td><strong>LLM (Large Language Model)</strong></td>
+                    <td>AI trained on billions of words to predict text sequences</td>
+                    <td>Powers chatbots, writing assistants, and most conversational AI systems</td>
+                </tr>
+                <tr>
+                    <td><strong>Neural Networks</strong></td>
+                    <td>Computational structure inspired by brain neurons, with interconnected layers</td>
+                    <td>Enables AI to learn complex patterns without explicit programming</td>
+                </tr>
+                <tr>
+                    <td><strong>Training vs. Inference</strong></td>
+                    <td>Training = learning from data; Inference = using learned knowledge</td>
+                    <td>Explains why AI creation is expensive (training) but usage is cheaper (inference)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hallucination</strong></td>
+                    <td>AI generating plausible but false information with confidence</td>
+                    <td>Critical limitation—must verify important information independently</td>
+                </tr>
+                <tr>
+                    <td><strong>Prompt Engineering</strong></td>
+                    <td>Crafting instructions to get better AI outputs using five key elements</td>
+                    <td>Practical skill that dramatically improves AI usefulness and accuracy</td>
+                </tr>
+            </table>
+
+            <h3>Reflect and Apply</h3>
+            <div class="callout callout-hint">
+                <h4>💡 Reflection Questions for Personal Learning</h4>
+                <p>
+                    Consider these questions to deepen your understanding beyond the material:
+                </p>
+                <ul>
+                    <li>What surprised you most about how AI actually works versus how you thought it worked?</li>
+                    <li>What task have you considered using AI for, and now that you understand its limitations, would you reconsider?</li>
+                    <li>How comfortable are you with AI making decisions in high-stakes situations (healthcare, finance, law, safety)?</li>
+                    <li>What ethical concerns do you have about AI that we haven't discussed in this chapter?</li>
+                    <li>How do you think AI will change your field of study or career path?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Glossary -->
+        <section>
+            <h2>Quick Reference Glossary</h2>
+            <div class="terms-section">
+                <div class="term">
+                    <div class="term-title">Accuracy</div>
+                    <div class="term-definition">
+                        How correct or reliable output is. In the context of evaluating AI, high accuracy means outputs are dependable and correct more often than not.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Artificial Intelligence (AI)</div>
+                    <div class="term-definition">
+                        Computer systems designed to perform tasks that typically require human intelligence. These include learning from data, recognizing patterns, and making decisions.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Chatbot</div>
+                    <div class="term-definition">
+                        A conversational AI system designed to interact with users through text (or sometimes voice) dialogue. Modern chatbots use language models to generate contextually appropriate responses.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Creativity</div>
+                    <div class="term-definition">
+                        The ability to generate novel, original, or insightful content. In evaluating AI, creativity reflects whether outputs are new ideas or predictable patterns from training data.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Fine-Tuning</div>
+                    <div class="term-definition">
+                        The process of adapting a pre-trained AI model to specific tasks or domains by training it further on specialized data. Makes general-purpose AI more effective for particular uses.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Inference</div>
+                    <div class="term-definition">
+                        The process of using a trained AI model to make predictions on new data. When you use ChatGPT to generate text, that's inference—the model is applying what it learned during training.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Knowledge Cutoff</div>
+                    <div class="term-definition">
+                        The date up to which an AI model was trained on data. Information or events after the knowledge cutoff may not be known to the AI. For example, if ChatGPT was trained until April 2024, it doesn't know about events in June 2024.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Machine Learning</div>
+                    <div class="term-definition">
+                        A subset of AI where systems learn from data and improve their performance through experience, rather than being explicitly programmed for each scenario. "Learning" happens through pattern recognition in training data.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Parameter</div>
+                    <div class="term-definition">
+                        Adjustable settings or weights in a neural network. Large models like ChatGPT have billions of parameters that were tuned during training to improve performance. The number of parameters often indicates model size and capability.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Pattern Recognition</div>
+                    <div class="term-definition">
+                        The AI's ability to identify recurring structures, relationships, or sequences in data. This is the core mechanism enabling AI to make predictions—it learned what typically follows what based on training data.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Prompt</div>
+                    <div class="term-definition">
+                        The instruction or question you give to an AI. Your prompt shapes what the AI does and how it responds. The quality and specificity of your prompt directly affects the quality of the output.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Speed</div>
+                    <div class="term-definition">
+                        How quickly an AI generates output. AI often excels at speed because it can process and generate responses in seconds, whereas humans might need hours or days.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Token</div>
+                    <div class="term-definition">
+                        A small chunk of text that AI processes. Roughly equivalent to a word but not exactly—it can be a word, part of a word, or punctuation. Tokens are important because API costs are often based on token count.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Training</div>
+                    <div class="term-definition">
+                        The process of teaching an AI model by showing it examples from large datasets and adjusting its parameters to improve predictions. Training is expensive but happens once; inference uses the trained model cheaply.
+                    </div>
+                </div>
+
+                <div class="term">
+                    <div class="term-title">Verification</div>
+                    <div class="term-definition">
+                        The process of checking whether AI output is accurate by comparing it to reliable sources. Essential practice for any critical information from AI to ensure hallucinations aren't accepted as fact.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Assessment -->
+        <section>
+            <h2>Chapter Completion Assessment</h2>
+            <p>
+                Before moving to the next chapter, test your overall understanding with these comprehensive questions. These reflect the level of mastery you should have achieved.
+            </p>
+
+            <div class="assessment">
+                <div class="assessment-title">Comprehensive Assessment 2.2</div>
+
+                <div class="question">
+                    <p><strong>Question 1 (Essay/Short Answer):</strong></p>
+                    <p>Explain the difference between how AI processes language and how humans understand language. Include at least two specific examples in your explanation.</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('comp1')">Show Sample Answer</button>
+                    <div id="comp1" class="answer-content">
+                        <div class="answer-label">Sample Answer (your answer may differ):</div>
+                        <p>AI processes language through pattern recognition and next-word prediction, while humans understand language through meaning and consciousness. When AI sees "The sun is..." it predicts "bright" because that word frequently follows that phrase in training data. Humans understand "sun" refers to a star and construct meaning. AI doesn't have consciousness or true comprehension. For example, AI might confidently generate false information (hallucinations) because it predicted plausible words, not because it verified truth. A human would check facts. Second example: AI might use identical words in completely different contexts because it recognizes statistical patterns, while humans understand contextual meaning and can adjust interpretation based on situation.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 2 (Scenario Analysis):</strong></p>
+                    <p>You're a doctor using an AI system to help with diagnosis. The AI suggests a diagnosis with 95% confidence. Should you rely solely on this AI recommendation? Why or why not? What steps should you take?</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('comp2')">Show Sample Answer</button>
+                    <div id="comp2" class="answer-content">
+                        <div class="answer-label">Sample Answer:</div>
+                        <p>No, you should not rely solely on AI diagnosis. Even 95% confidence can mask hallucinations or errors. Medical decisions have serious consequences, so human expert judgment is essential. Steps: (1) Verify the AI's reasoning and check if it aligns with your clinical knowledge, (2) Conduct your own examination and tests to verify, (3) Consider the patient's full medical history and context that AI might not have, (4) Consult with colleagues if uncertain, (5) Use AI as a tool that augments your judgment, not replaces it. AI can help catch things doctors miss or suggest alternatives, but human expertise and accountability matter most in healthcare.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 3 (Practical Application):</strong></p>
+                    <p>Write an effective prompt for an AI using all five key elements to help you study for a biology exam on cellular respiration. Make it specific to your situation (you can invent details).</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('comp3')">Show Sample Answer</button>
+                    <div id="comp3" class="answer-content">
+                        <div class="answer-label">Sample Answer:</div>
+                        <p>"I'm a high school sophomore studying for a biology exam on cellular respiration. The exam will include multiple choice questions and short answer explanations. I understand photosynthesis but struggle with the differences between aerobic and anaerobic respiration. Create 5 practice questions (mix of multiple choice and short answer) that test my understanding of: (1) the stages of cellular respiration, (2) where each stage occurs in the cell, (3) ATP production, and (4) differences from photosynthesis. For each question, provide an answer key with brief explanations. Use language appropriate for a high school student. After the questions, provide a 1-page summary of cellular respiration that I can use for quick review."</p>
+                        <p><strong>This includes all five elements:</strong> Task (create practice questions and summary), Context (high school, struggling with specific concept), Format (5 mixed questions with answer key and summary), Purpose (exam preparation for high school student), Examples (specific topics to cover).</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p><strong>Question 4 (Critical Thinking):</strong></p>
+                    <p>An AI generates a detailed bibliography with 15 citations for your research paper. Without checking, your friend submits the paper with these citations. What could go wrong? What should have been done differently?</p>
+                    <button class="answer-toggle" onclick="toggleAnswer('comp4')">Show Sample Answer</button>
+                    <div id="comp4" class="answer-content">
+                        <div class="answer-label">Sample Answer:</div>
+                        <p>Multiple problems could occur: (1) Some or all citations could be hallucinations (fake sources that don't exist), leading to academic integrity violations and failed citations if checked, (2) The professor could catch the hallucinated citations and accuse the student of dishonesty, (3) The student could face serious academic consequences including failing the assignment or course, (4) Trust is damaged if discovered. What should have been done: (1) Verify each citation exists by looking it up in databases or online, (2) Actually read or skim the cited sources to ensure they're relevant and correctly described, (3) Use AI to generate ideas for sources, then find and verify them independently, (4) Only cite sources you've actually consulted. Never submit AI-generated bibliographies without verification.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; padding: 1rem; background-color: var(--light-bg); border-radius: 4px;">
+                If you can answer these questions thoroughly and explain your reasoning, you've mastered the core concepts of this chapter. You're now ready to move forward with practical applications of AI!
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p><strong>CSC101: Introduction to Computing & AI</strong></p>
+        <p>Week 2: Can AI Think Like Us? Understanding Language Models and Prompt Engineering</p>
+        <p>University of Rhode Island | Spring 2026</p>
+        <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+            This chapter integrates course learning objectives, practical assignments, and real-world case studies to develop critical thinking about AI capabilities and limitations.
+        </p>
+    </footer>
+
+    <script>
+        // Toggle answer visibility
+        function toggleAnswer(elementId) {
+            const answerContent = document.getElementById(elementId);
+            if (answerContent) {
+                answerContent.classList.toggle('show');
+                // Update button text
+                const button = event.target;
+                if (answerContent.classList.contains('show')) {
+                    button.textContent = 'Hide Answer';
+                } else {
+                    button.textContent = 'Show Answer';
+                }
+            }
+        }
+
+        // Optional: Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Optional: Print-friendly adjustments
+        window.addEventListener('beforeprint', function() {
+            // Show all answers before printing
+            document.querySelectorAll('.answer-content').forEach(answer => {
+                answer.classList.add('show');
+            });
+        });
+    </script>
+
+</body>
+</html>
