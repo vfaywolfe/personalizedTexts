@@ -1,0 +1,409 @@
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.13.6/jshint.min.js"
+      integrity="sha512-MCUpdWtSMK1rm+4sWFpfFuz4UTpXEud5p236Otyw1Ea4kdVyNxy+eMHR76u7xfY5DlpDmOzgEhgDq1ZGLHqkCA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/esprima@4.0.1/dist/esprima.js"></script>
+    <script src="https://unpkg.com/@babel/standalone"></script>
+    <style>
+      /* CSS Reset */
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      canvas-container {
+        display: block;
+        top: 0;
+        left: 0px;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #console-area {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 20%;
+        width: 100%;
+        overflow-y: scroll;
+        background: #000;
+        color: #fff;
+        padding: 0px;
+        border-top: 5px solid #738094;
+        display: none;
+      }
+
+      #console-content {
+        color: white;
+        font-family: monospace;
+        padding: 5px;
+      }
+
+      #close-console {
+        position: absolute;
+        color: white;
+        top: 0;
+        right: 0;
+        background: #738094;
+        padding: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <script src="../../P5-runner.js"></script>
+  </head>
+  <body>
+    <div id="console-area">
+      <div id="close-console" onclick="$('#console-area').hide();">X</div>
+      <div id="console-content"></div>
+    </div>
+    <script>
+      let imageCache = {};
+      const getImage = function (path) {
+        if (!path.includes("http")) {
+          path = "../../images/" + path + ".png";
+        }
+        if (!imageCache[path]) {
+          imageCache[path] = loadImage(path);
+        }
+
+        return imageCache[path];
+      };
+
+      const println = (message, color = "white") => {
+        console.log(message);
+        if (typeof message === "object")
+          message = JSON.stringify(message, null, 2);
+        window.parent.postMessage({ event: "console", content: message }, "*");
+        $("#console-content").append(
+          '<span style="color:' + color + '">' + message + "</span><br>",
+        );
+        $("#console-area").show();
+      };
+
+      const httpGet = (() => {
+        const cache = {}; // Initialize an empty object to act as the cache
+
+        return (url) => {
+          // Check if the result for this URL is already in the cache
+          if (cache[url]) {
+            console.log("Returning cached data");
+            return cache[url];
+          }
+
+          const request = new XMLHttpRequest();
+
+          // Open a synchronous GET request
+          request.open("GET", url, false);
+
+          // Send the request
+          request.send(null);
+
+          // Check if the request was successful
+          if (request.status === 200) {
+            // Store the response in the cache
+            cache[url] = request.responseText;
+            return request.responseText; // The body content
+          } else {
+            return "Request failed: " + request.status;
+          }
+        };
+      })();
+
+      function setup() {
+        createCanvas(400, 400);
+
+        p5._friendlyError = function (message, source, lineno, colno, error) {
+          println(message.replace("about:srcdoc, ", ""), "red");
+
+          // Return true to prevent the browser from displaying the error in the console
+          return true;
+        };
+      }
+
+      const workerBlob = new Blob(
+        [
+          `
+        var CENTER = "";
+        var LEFT = "";
+        var RIGHT = "";
+        var TOP = "";
+        var BOTTOM = "";
+        var BASELINE = "";
+        var UP = "";
+        var DOWN = "";
+        var LEFT_ARROW = "";
+        var RIGHT_ARROW = "";
+        var UP_ARROW = "";
+        var DOWN_ARROW = "";
+        var textWidth = function() {};
+        var createVector = function(x, y) { return {x, y}; };
+        var rect = function() {}; 
+        var ellipse = function() {};
+        var imageMode = function() {};
+        var rectMode = function() {};
+        var textLeading = 5;
+        var frameCount = 0;
+        var textAscent = 5;
+        var textDescent = 5;
+        var keyIsPressed = false;
+        var keyIsDown = function() {};
+        var draw = function() {};
+        var color = function() {};
+        var cos = function() {};
+        var sin = function() {};
+        var tan = function() {};
+        var acos = function() {};
+        var asin = function() {};
+        var atan = function() {};
+        var atan2 = function() {};
+        var triangle = function() {};
+        var line = function() {};
+        var point = function() {};
+        var arc = function() {};
+        var bezier = function() {};
+        var quad = function() {};
+        var println = function() {};
+        var print = function() {};
+        var beginShape = function() {};
+        var endShape = function() {};
+        var curveVertex = function() {};
+        var bezierVertex = function() {};
+        var background = function() {};
+        var fill = function() {};
+        var stroke = function() {};
+        var strokeWeight = function() {};
+        var noFill = function() {};
+        var noStroke = function() {};
+        var textSize = function() {};
+        var text = function() {};
+        var textAlign = function() {};
+        var createCanvas = function() {};
+        var createGraphics = function() {};
+        var loadImage = function() {};
+        var image = function() {};
+        var random = function() {};
+        var randomSeed = function() {};
+        var noise = function() {};
+        var noiseSeed = function() {};
+        var frameRate = function() {};
+        var soundFormats = function() {};
+        var loadSound = function() {};
+        var loop = function() {};
+        var noLoop = function() {};
+        var redraw = function() {};
+        var width = 400;
+        var height = 400;
+        var mouseX = 0;
+        var mouseY = 0;
+        
+        class Audio {
+          constructor(src = "") {
+            this.src = src;
+            this.currentTime = 0;
+            this.duration = 100; // Mock duration
+            this.volume = 1.0;
+            this.paused = true;
+            this.loop = false;
+            this._isPlaying = false;
+            this.onplay = null;
+            this.onpause = null;
+            this.onended = null;
+            this.onerror = null;
+          }
+
+          play() {
+          }
+
+          pause() {
+          }
+
+          load() {
+          }
+        }
+
+        var textFont = function() {};
+        var round = function() {};
+        var rotate = function() {};
+        var scale = function() {};
+        var translate = function() {};
+        var mouseIsPressed = false;
+        var mouseClicked = function() {};
+        var mouseReleased = function() {};
+        var mouseDragged = function() {};
+        var mouseOut = function() {};
+        var mousePressed = function() {};
+        var mouseMoved = function() {};
+        var mouseOver = function() {};
+        var key = '';
+        var keyCode = 0;
+        var keyPressed = function() {};
+        var keyReleased = function() {};
+        var keyTyped = function() {};
+        var millis = function() {};
+        var constrain = function() {};
+        var getImage = function() {};
+        var radians = function() {};
+        var year = function() {};
+        var years = function() {};
+        var day = function() {};
+        var month = function() {};
+        var hour = function() {};
+        var minute = function() {};
+        var second = function() {};
+        var PVector = function() {};
+        var ceil = function() {};
+        var floor = function() {};
+        var sq = function() {};
+        var log = function() {};
+        var max = function() {};
+        var dist = function() {};
+        var min = function() {};
+        var abs = function() {};
+        var pow = function() {};
+        var push = function() {};
+        var pop = function() {};
+        var HALF_PI = 0;
+        var PI = 0;
+        var PIE = 0;
+        var QUARTER_PI = 0;
+        var TAU = 0;
+        var TWO_PI = 0;
+        var DEGREES = 0;
+        var RADIANS = 0;
+
+        function httpGet(url) {
+          return true;
+        }
+
+        self.onmessage = function(e) {
+          const ProgramStartTime = Date.now();
+          const timeout = e.data.timeout || 5000; // Default timeout of 5 seconds
+
+          try {
+            eval(e.data.code);
+            eval('draw();mouseClicked();mouseReleased();mouseDragged();mouseOut();mousePressed();mouseMoved();mouseOver();');
+
+            if (Date.now() - ProgramStartTime > timeout) {
+              throw new Error("Potential infinite loop detected");
+            }
+
+            self.postMessage({ status: "success", result: "Code executed successfully" });
+          } catch (err) {
+            self.postMessage({ status: "error", message: err.message });
+          }
+        };
+        `,
+        ],
+        { type: "application/javascript" },
+      );
+
+      const workerURL = URL.createObjectURL(workerBlob);
+      const worker = new Worker(workerURL);
+      let timeoutId;
+      let draw_was_used_for_injections = false;
+
+      const run_untrusted_code = function (code) {
+        // Clear console area on fresh run
+        $("#console-content").html("");
+        $("#console-area").hide();
+        try {
+          // Check the code for errors
+          clearTimeout(timeoutId); // Clear the timeout if it exists
+          worker.postMessage({ code, timeout: 1000 });
+
+          // Set a timeout to terminate the worker after 5 seconds
+          const timeout = 1000;
+          timeoutId = setTimeout(() => {
+            worker.terminate();
+            console.error("Worker terminated due to timeout");
+            $("#console-content").html("");
+            println(
+              "It looks like your code is taking too long to run. Do you have an infinite loop?",
+              "red",
+            );
+          }, timeout);
+
+          // Handle messages from the worker
+          worker.onmessage = function (e) {
+            console.log("Worker message:");
+            if (e.data.status === "error") {
+              println(e.data.message + "<br />", "red");
+            }
+            clearTimeout(timeoutId); // Clear the timeout if the worker finishes before the timeout
+            while (typeof background === typeof undefined) {} // Wait for the background function to be defined (p5.js specific)
+            background(255, 255, 255);
+            stroke(0, 0, 0);
+            strokeWeight(1);
+
+            eval.call(window, code);
+
+            if (code.includes("image")) {
+              // eval.call(window, "draw = function() {" + code + "}");
+              setTimeout(() => {
+                $("#console-content").html("");
+                $("#console-area").hide();
+                eval.call(window, code);
+              }, 1000);
+              // draw_was_used_for_injections = true;
+            }
+          };
+
+          // Handle worker errors
+          worker.onerror = function (e) {
+            clearTimeout(timeoutId); // Clear the timeout on error
+
+            console.error("Worker error:", e.message);
+            println("Error: " + e.message, "red");
+          };
+
+          return;
+
+          if (code.includes("draw") || code.includes("function")) {
+            // Draw function detected, inject code
+            render_student_code(code);
+          } else {
+            background(255, 255, 255);
+            eval.call(window, code);
+          }
+        } catch (e) {
+          println(e.message, "red");
+        }
+      };
+
+      window.addEventListener(
+        "message",
+        function (event) {
+          if (event.data === "reload") {
+            window.location.reload();
+            return;
+          } else {
+            run_untrusted_code(event.data);
+          }
+        },
+        false,
+      );
+
+      $(document).ready(() => {
+        // Load and execute sketch.js using the loadScript helper
+        // You can reference any JS file by its filename
+        if (typeof loadScript !== "undefined") {
+          try {
+            run_untrusted_code(loadScript("sketch.js"));
+          } catch (e) {
+            console.error("Error loading script:", e);
+          }
+        } else {
+          console.error(
+            "loadScript helper not found. Make sure JS files are loaded.",
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
