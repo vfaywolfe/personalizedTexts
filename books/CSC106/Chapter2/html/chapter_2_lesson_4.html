@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2.3: Variables and Data Types</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            padding: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .options label:hover {
+            background: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+        
+        .answer-reveal {
+            background: #e8f5e9;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        details {
+            cursor: pointer;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        
+        summary {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #e1bee7 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #4a148c;
+            border-bottom: 3px solid #4a148c;
+        }
+        
+        .summary-box h3 {
+            color: #6a1b9a;
+        }
+        
+        .next-chapter {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #e65100;
+            border-bottom: 3px solid #e65100;
+        }
+        
+        .next-chapter h3 {
+            color: #f57c00;
+        }
+        
+        ul, ol {
+            line-height: 1.8;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .memory-diagram {
+            background: white;
+            border: 2px solid #764ba2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .diagram-table {
+            width: 200px;
+            margin: 10px auto;
+            border-collapse: collapse;
+        }
+        
+        .diagram-table td {
+            border: 2px solid #333;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .diagram-header {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .content-section {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chapter Header -->
+<div class="chapter-header">
+    <h1>Chapter 2.3: Variables and Data Types</h1>
+    <p>Learn to store and manipulate data in your programs using variables</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>🎯 Chapter Introduction</h2>
+    <p>Imagine trying to build a house where every measurement had to be written down separately—if you wanted to change the size of one room, you'd have to manually update dozens of numbers throughout your blueprints. This would be tedious, error-prone, and frustrating!</p>
+    
+    <p>Variables solve this exact problem in programming. They act as named containers that store information you can use and reuse throughout your code. Want to change the size of all circles in your drawing? With variables, you only need to change one number instead of hunting through hundreds of lines of code.</p>
+    
+    <p>In this lesson, you'll discover how variables make your programs more flexible, easier to understand, and dramatically simpler to modify. You'll learn to create variables, assign them values, and use them to build dynamic, adaptable programs. This fundamental concept will transform how you write code and open the door to creating truly interactive applications.</p>
+    
+    <div class="callout callout-info">
+        Variables are one of the most important concepts in all of programming. Master this lesson, and you'll have unlocked a superpower that makes every program you write significantly more powerful and maintainable!
+    </div>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>📋 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.1:</strong> Define what a variable is and explain why variables are essential in programming
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.2:</strong> Create and initialize variables using proper JavaScript syntax with the <code>var</code> keyword
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.3:</strong> Use variables in expressions and function calls to create flexible, reusable code
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.4:</strong> Update variable values through reassignment and understand how changes propagate through programs
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.5:</strong> Trace code execution using memory diagrams to visualize how variables are stored and modified
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.6:</strong> Apply variables to create maintainable drawings where sizes and positions can be easily adjusted
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO2.3.7:</strong> Distinguish between variable declaration, initialization, and reassignment
+    </div>
+</div>
+
+<!-- Concepts and Terms -->
+<div class="content-section">
+    <h2>📚 Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Variable</div>
+        A named storage location in computer memory that holds a value. Variables allow programmers to store data that can be used and modified throughout a program. Think of a variable as a labeled box where you can put information and retrieve it later by referencing its name.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Declaration</div>
+        The process of creating a new variable using the <code>var</code> keyword. Declaration tells the computer to reserve a space in memory for storing a value. Example: <code>var x;</code>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Initialization</div>
+        Assigning an initial value to a variable when it is declared. This combines declaration and assignment in one step. Example: <code>var x = 5;</code>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Assignment</div>
+        The process of giving a value to a variable using the equals sign (<code>=</code>). The value on the right side is stored in the variable on the left side. Example: <code>x = 10;</code>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Reassignment</div>
+        Changing the value stored in an existing variable. This replaces the old value with a new one. Example: if <code>x</code> was 5, writing <code>x = 9;</code> changes it to 9.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Expression</div>
+        A combination of values, variables, and operators that the computer evaluates to produce a result. Examples: <code>x + 5</code>, <code>width * 2</code>, <code>total + 1</code>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Identifier</div>
+        The name given to a variable. Good identifiers are descriptive and follow naming conventions (start with a letter, use camelCase for multiple words, no spaces). Examples: <code>circleSize</code>, <code>playerScore</code>, <code>x</code>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Memory Diagram</div>
+        A visual tool used to trace program execution by showing variable names (identifiers) and their current values. Memory diagrams help programmers understand how variables change as code runs line by line.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Data Type</div>
+        The kind of value a variable can store. In JavaScript, common data types include numbers (like 42 or 3.14), strings (text like "hello"), and booleans (true or false). JavaScript is dynamically typed, meaning variables can hold any type of value.
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>💻 Understanding Variables</h2>
+    
+    <h3>What is a Variable?</h3>
+    <p>A variable is a fundamental building block of programming—it's a named container that stores a value in your computer's memory. Just as you might use a labeled box to store items in your home, variables let you store and organize data in your programs.</p>
+    
+    <p>The power of variables comes from their flexibility. Instead of writing the number 50 everywhere you need it, you can store 50 in a variable called <code>circleSize</code> and use that variable name instead. Then, if you want all your circles to be larger, you only need to change one number—the value stored in <code>circleSize</code>—and every circle that uses that variable will automatically update.</p>
+    
+    <div class="video-placeholder">
+        <h3>📹 Video: Introduction to Variables</h3>
+        <p><strong>Duration:</strong> 3:52</p>
+        <p>This video provides a clear and engaging explanation of what variables are and why they are essential in programming. It defines a variable as a name that represents an unknown or changeable value and demonstrates how variables allow computer scientists to write general code that can apply to many situations.</p>
+    </div>
+    
+    <h3>Why Variables Matter</h3>
+    <p>Variables transform programming from rigid, repetitive tasks into flexible, powerful problem-solving. Here's why they're essential:</p>
+    
+    <div class="example-box">
+        <div class="example-title">🌟 Benefits of Using Variables:</div>
+        <ul>
+            <li><strong>Maintainability:</strong> Change one value instead of hunting through hundreds of lines of code</li>
+            <li><strong>Readability:</strong> Code with meaningful variable names like <code>eyeSize</code> is much clearer than mysterious numbers</li>
+            <li><strong>Flexibility:</strong> Write code once that works for many different values</li>
+            <li><strong>Reusability:</strong> Use the same value in multiple places by referencing the variable name</li>
+            <li><strong>Experimentation:</strong> Easily test different values by changing just one line</li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-hint">
+        Think of variables as the "Find and Replace" feature in a word processor, but much more powerful. Instead of replacing text, you're giving a meaningful name to a value that can be used throughout your entire program.
+    </div>
+</div>
+
+<!-- Creating and Using Variables -->
+<div class="content-section">
+    <h2>🔧 Creating and Using Variables</h2>
+    
+    <h3>Variable Declaration and Initialization</h3>
+    <p>In JavaScript, we create variables using the <code>var</code> keyword. There are two ways to create a variable:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.1: Declaration Only</div>
+        <p><strong>Step 1:</strong> Declare a variable without assigning a value:</p>
+        <div class="code-example">
+<code>var x;</code>
+        </div>
+        <p><strong>Explanation:</strong> This creates a variable named <code>x</code> but doesn't give it a value yet. The variable exists in memory but contains <code>undefined</code> until we assign it a value.</p>
+        <p><strong>When to use:</strong> Rarely! Usually, you'll want to initialize variables with values right away.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.2: Declaration with Initialization</div>
+        <p><strong>Step 1:</strong> Declare a variable and assign it a value in one statement:</p>
+        <div class="code-example">
+<code>var circleSize = 100;</code>
+        </div>
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li><code>var</code> - The keyword that tells JavaScript we're creating a new variable</li>
+            <li><code>circleSize</code> - The identifier (name) we're giving to this variable</li>
+            <li><code>=</code> - The assignment operator that stores a value in the variable</li>
+            <li><code>100</code> - The initial value being stored</li>
+        </ul>
+        <p><strong>Result:</strong> A variable named <code>circleSize</code> now exists and contains the value 100.</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        The equals sign (<code>=</code>) in programming doesn't mean "equals" like it does in math! Instead, it means "assign the value on the right to the variable on the left." Think of it as an arrow pointing left: <code>circleSize ← 100</code>
+    </div>
+    
+    <h3>Using Variables in Code</h3>
+    <p>Once you've created a variable, you can use its name anywhere you would normally use a value:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.3: Using Variables in Drawing Functions</div>
+        <p><strong>Without Variables:</strong></p>
+        <div class="code-example">
+<code>ellipse(200, 200, 100, 100);  // If we want to change size, we change 4 numbers
+ellipse(300, 200, 100, 100);  // Same size, have to change again
+ellipse(250, 300, 100, 100);  // And again...</code>
+        </div>
+        
+        <p><strong>With Variables:</strong></p>
+        <div class="code-example">
+<code>var circleSize = 100;  // Define size once
+
+ellipse(200, 200, circleSize, circleSize);  // Use the variable
+ellipse(300, 200, circleSize, circleSize);  // Reuse it
+ellipse(250, 300, circleSize, circleSize);  // Much easier!</code>
+        </div>
+        
+        <p><strong>Benefit:</strong> Now if you want all three circles to be size 150 instead of 100, you only change ONE number (the value of <code>circleSize</code>), and all three circles automatically update!</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        When JavaScript sees a variable name in your code, it looks up that variable's current value and uses it. So <code>ellipse(200, 200, circleSize, circleSize)</code> is exactly the same as writing <code>ellipse(200, 200, 100, 100)</code> when <code>circleSize</code> is 100.
+    </div>
+    
+    <h3>Variables in Expressions</h3>
+    <p>Variables become even more powerful when used in mathematical expressions:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.4: Variables in Arithmetic Expressions</div>
+        <div class="code-example">
+<code>var x = 200;
+var y = 250;
+
+// Draw a face using variables
+ellipse(x, y, 200, 200);           // Face centered at (200, 250)
+ellipse(x - 50, y - 50, 40, 40);   // Left eye
+ellipse(x + 50, y - 50, 40, 40);   // Right eye
+ellipse(x, y + 20, 120, 130);      // Mouth</code>
+        </div>
+        
+        <p><strong>Explanation:</strong></p>
+        <ul>
+            <li>All positions are based on <code>x</code> and <code>y</code></li>
+            <li>Eyes are positioned 50 pixels left and right of center</li>
+            <li>To move the entire face, just change <code>x</code> and <code>y</code>!</li>
+        </ul>
+        
+        <p><strong>Power of This Approach:</strong> Change <code>x</code> from 200 to 300, and the entire face (all four shapes) moves 100 pixels to the right automatically!</p>
+    </div>
+</div>
+
+<!-- Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.3.1: Creating and Using Variables</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>Which of the following correctly creates a variable called <code>size</code> with a value of 50?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_1" value="a"> A) <code>size = 50;</code></label>
+            <label><input type="radio" name="q1_1" value="b"> B) <code>var size = 50;</code></label>
+            <label><input type="radio" name="q1_1" value="c"> C) <code>50 = var size;</code></label>
+            <label><input type="radio" name="q1_1" value="d"> D) <code>var 50 = size;</code></label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) var size = 50;</strong> - The <code>var</code> keyword comes first, followed by the variable name, then the equals sign, then the value. Option A would work if the variable already existed, but to create it for the first time, you need <code>var</code>.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Code Analysis):</p>
+        <p>Given the following code:</p>
+        <div class="code-example">
+<code>var w = 20;
+var h = 15;
+rect(10, 10, w, h);
+ellipse(10, 10, w, h);</code>
+        </div>
+        <p>How tall is each shape?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_2" value="a"> A) 20 pixels</label>
+            <label><input type="radio" name="q1_2" value="b"> B) 15 pixels</label>
+            <label><input type="radio" name="q1_2" value="c"> C) 10 pixels</label>
+            <label><input type="radio" name="q1_2" value="d"> D) 25 pixels</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) 15 pixels</strong> - The fourth parameter in both <code>rect()</code> and <code>ellipse()</code> represents height. Since we're passing <code>h</code> as the fourth parameter, and <code>h = 15</code>, both shapes are 15 pixels tall.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (True/False):</p>
+        <p>Once you create a variable and give it a value, that value can never be changed.</p>
+        <div class="options">
+            <label><input type="radio" name="q1_3" value="true"> True</label>
+            <label><input type="radio" name="q1_3" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> Variables are called "variables" because their values can vary (change)! You can reassign new values to variables at any time. That's one of the main reasons they're so useful.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Short Answer):</p>
+        <p>Explain in your own words why using a variable like <code>var circleSize = 100;</code> is better than just writing the number 100 directly in your code multiple times.</p>
+        <textarea rows="3" placeholder="Write your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> Using a variable is better because if you want to change the size, you only have to change it in one place (where the variable is defined) instead of finding and changing every instance of 100 throughout your code. It also makes your code more readable because <code>circleSize</code> tells you what the number represents, while 100 is just a mysterious number.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Code Writing):</p>
+        <p>Write code that creates a variable called <code>rectWidth</code> with a value of 20, then uses it to draw a square (a rectangle with equal width and height).</p>
+        <textarea rows="4" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>var rectWidth = 20;
+rect(10, 10, rectWidth, rectWidth);</code>
+            </div>
+            <p>Note: The position (first two parameters) can be any values. What matters is that both the width and height parameters are <code>rectWidth</code> to make it a square.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Reassigning Variables -->
+<div class="content-section">
+    <h2>🔄 Changing Variable Values</h2>
+    
+    <h3>Reassignment: Updating Variables</h3>
+    <p>One of the most powerful features of variables is that you can change their values after they're created. This is called <strong>reassignment</strong>.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.5: Variable Reassignment</div>
+        <p><strong>Step 1:</strong> Create a variable and use it:</p>
+        <div class="code-example">
+<code>var x = 5;
+println(x);  // Prints: 5</code>
+        </div>
+        
+        <p><strong>Step 2:</strong> Change the variable's value (note: no <code>var</code> keyword!):</p>
+        <div class="code-example">
+<code>x = 9;  // Reassignment - no "var" needed
+println(x);  // Prints: 9</code>
+        </div>
+        
+        <p><strong>Key Point:</strong> When reassigning, you DON'T use <code>var</code> again. The <code>var</code> keyword is only for creating new variables. To change an existing variable, just use the variable name, equals sign, and new value.</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        Using <code>var</code> when reassigning a variable creates a NEW variable with the same name, which can cause confusing bugs! When changing a variable's value, never use <code>var</code> again—just write <code>variableName = newValue;</code>
+    </div>
+    
+    <h3>Variables and Expressions in Assignment</h3>
+    <p>You can use a variable's current value to calculate its new value:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.6: Using Variables in Their Own Reassignment</div>
+        <div class="code-example">
+<code>var score = 10;
+score = score + 5;  // Take current value (10), add 5, store result (15) back in score
+println(score);  // Prints: 15
+
+score = score * 2;  // Take current value (15), multiply by 2, store result (30)
+println(score);  // Prints: 30</code>
+        </div>
+        
+        <p><strong>How This Works:</strong></p>
+        <ol>
+            <li>JavaScript first evaluates the RIGHT side of the equals sign</li>
+            <li>It looks up the current value of <code>score</code> (10)</li>
+            <li>It performs the calculation (10 + 5 = 15)</li>
+            <li>It stores the result (15) back into <code>score</code>, replacing the old value</li>
+        </ol>
+    </div>
+    
+    <div class="callout callout-hint">
+        The pattern <code>x = x + 1;</code> is so common in programming that it has a name: "incrementing." It increases a variable's value by 1. You'll use this constantly when you learn about animation and loops later!
+    </div>
+    
+    <h3>Practical Example: Scalable Drawings</h3>
+    <div class="example-box">
+        <div class="example-title">Example 2.3.7: Creating a Scalable Face</div>
+        <div class="code-example">
+<code>// Define the face size
+var faceSize = 100;
+var mouthSize = 30;
+
+// Draw the face
+ellipse(200, 200, faceSize, faceSize);      // Face
+ellipse(200, 220, mouthSize, mouthSize);    // Mouth
+
+// To make the whole face bigger, just change faceSize!
+// Try changing faceSize to 150 and see what happens</code>
+        </div>
+        
+        <p><strong>Challenge:</strong> What if you want the mouth to always be 30% of the face size? Change the code to:</p>
+        <div class="code-example">
+<code>var faceSize = 100;
+var mouthSize = faceSize * 0.3;  // Always 30% of face size
+
+ellipse(200, 200, faceSize, faceSize);
+ellipse(200, 220, mouthSize, mouthSize);</code>
+        </div>
+        <p>Now when you change <code>faceSize</code>, the mouth automatically scales proportionally!</p>
+    </div>
+</div>
+
+<!-- Video 2 -->
+<div class="content-section">
+    <div class="video-placeholder">
+        <h3>📹 Video: More on Variables</h3>
+        <p><strong>Duration:</strong> 3:33</p>
+        <p>This video expands on the basic idea of variables, demonstrating how they help control different parts of a program such as the size or position of shapes. It shows how assigning values to variables makes code more organized, flexible, and easier to understand—especially when changes are needed.</p>
+    </div>
+</div>
+
+<!-- Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.3.2: Variable Reassignment</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Code Tracing):</p>
+        <p>What will this code print?</p>
+        <div class="code-example">
+<code>var x = 5;
+var y = 7;
+x = 9;
+var total = x + y;
+println(total);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_1" value="a"> A) 12</label>
+            <label><input type="radio" name="q2_1" value="b"> B) 16</label>
+            <label><input type="radio" name="q2_1" value="c"> C) 14</label>
+            <label><input type="radio" name="q2_1" value="d"> D) 21</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) 16</strong> - After <code>x</code> is reassigned to 9, the calculation becomes 9 + 7 = 16. The original value of 5 is replaced by 9 before <code>total</code> is calculated.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>Which line of code correctly reassigns the variable <code>count</code> to a new value?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_2" value="a"> A) <code>var count = 20;</code></label>
+            <label><input type="radio" name="q2_2" value="b"> B) <code>count = 20;</code></label>
+            <label><input type="radio" name="q2_2" value="c"> C) <code>20 = count;</code></label>
+            <label><input type="radio" name="q2_2" value="d"> D) <code>count := 20;</code></label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) count = 20;</strong> - When reassigning an existing variable, you DON'T use <code>var</code>. Option A would create a NEW variable (causing problems), and options C and D use incorrect syntax.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Prediction):</p>
+        <p>After this code runs, what is the value of <code>num</code>?</p>
+        <div class="code-example">
+<code>var num = 10;
+num = num + 5;
+num = num * 2;</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_3" value="a"> A) 10</label>
+            <label><input type="radio" name="q2_3" value="b"> B) 15</label>
+            <label><input type="radio" name="q2_3" value="c"> C) 20</label>
+            <label><input type="radio" name="q2_3" value="d"> D) 30</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>D) 30</strong> - Step by step: <code>num</code> starts at 10, then becomes 15 (10 + 5), then becomes 30 (15 * 2).</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (True/False):</p>
+        <p>This code will cause an error:</p>
+        <div class="code-example">
+<code>var x = 5;
+var x = 10;</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_4" value="true"> True</label>
+            <label><input type="radio" name="q2_4" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> While this code won't cause an error in JavaScript, it creates a NEW variable <code>x</code>, which can lead to confusing behavior. The second <code>var x</code> should just be <code>x = 10;</code> for reassignment. This is a common mistake to avoid!</p>
+        </details>
+    </div>
+</div>
+
+<!-- Memory Diagrams -->
+<div class="content-section">
+    <h2>🧠 Memory Diagrams: Visualizing Variables</h2>
+    
+    <p>Memory diagrams are powerful tools that help you understand how variables work "under the hood." They show you exactly what's happening in your computer's memory as your program runs, line by line.</p>
+    
+    <h3>What are Memory Diagrams?</h3>
+    <p>A memory diagram is a visual representation of your program's variables at a specific moment in time. They're typically hand-drawn with an "inverted T" shape that has two columns:</p>
+    
+    <ul>
+        <li><strong>Identifier (name) column:</strong> The variable names</li>
+        <li><strong>Value (stack) column:</strong> The values stored in those variables</li>
+    </ul>
+    
+    <div class="callout callout-info">
+        Memory diagrams are especially useful when debugging code or when you're trying to understand why a variable doesn't have the value you expected. They're a fundamental tool that professional programmers use when reasoning about code!
+    </div>
+    
+    <h3>How to Create a Memory Diagram</h3>
+    <p>Follow these steps to trace code and create a memory diagram:</p>
+    
+    <div class="example-box">
+        <div class="example-title">📋 Memory Diagram Rules:</div>
+        <ol>
+            <li>Read code from top to bottom, line by line</li>
+            <li>When you see <code>var</code>, add a new row to your diagram from bottom to top</li>
+            <li>When you see an assignment without <code>var</code>, cross out the old value and write the new one</li>
+            <li>To find a variable's current value, read the diagram top to bottom and use the first non-crossed-out value</li>
+        </ol>
+    </div>
+    
+    <h3>Worked Example: Tracing with Memory Diagrams</h3>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.8: Complete Memory Diagram Trace</div>
+        <p>Let's trace this code step by step:</p>
+        <div class="code-example">
+<code>/* Line 1 */ var x = 5;
+/* Line 2 */ var y = 7;
+/* Line 3 */ x = 9;
+/* Line 4 */ var total = x + y;
+/* Line 5 */ println(total);</code>
+        </div>
+        
+        <p><strong>Step 1:</strong> After Line 1 executes:</p>
+        <div class="memory-diagram">
+            <table class="diagram-table">
+                <tr>
+                    <td class="diagram-header">identifier</td>
+                    <td class="diagram-header">value</td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td>5</td>
+                </tr>
+            </table>
+            <p style="text-align: center; margin-top: 10px;"><em>We allocated memory for x and stored 5</em></p>
+        </div>
+        
+        <p><strong>Step 2:</strong> After Line 2 executes:</p>
+        <div class="memory-diagram">
+            <table class="diagram-table">
+                <tr>
+                    <td class="diagram-header">identifier</td>
+                    <td class="diagram-header">value</td>
+                </tr>
+                <tr>
+                    <td>y</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td>5</td>
+                </tr>
+            </table>
+            <p style="text-align: center; margin-top: 10px;"><em>We add new variables from bottom to top</em></p>
+        </div>
+        
+        <p><strong>Step 3:</strong> After Line 3 executes:</p>
+        <div class="memory-diagram">
+            <table class="diagram-table">
+                <tr>
+                    <td class="diagram-header">identifier</td>
+                    <td class="diagram-header">value</td>
+                </tr>
+                <tr>
+                    <td>y</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td><strike>5</strike> 9</td>
+                </tr>
+            </table>
+            <p style="text-align: center; margin-top: 10px;"><em>We cross out the old value and write the new one</em></p>
+        </div>
+        
+        <p><strong>Step 4:</strong> After Line 4 executes:</p>
+        <div class="memory-diagram">
+            <table class="diagram-table">
+                <tr>
+                    <td class="diagram-header">identifier</td>
+                    <td class="diagram-header">value</td>
+                </tr>
+                <tr>
+                    <td>total</td>
+                    <td>16</td>
+                </tr>
+                <tr>
+                    <td>y</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>x</td>
+                    <td><strike>5</strike> 9</td>
+                </tr>
+            </table>
+            <p style="text-align: center; margin-top: 10px;"><em>We calculate x + y = 9 + 7 = 16 and store in total</em></p>
+        </div>
+        
+        <p><strong>Step 5:</strong> Line 5 prints the value of <code>total</code> (which is 16) but doesn't change memory, so the diagram stays the same.</p>
+        
+        <p><strong>Final Answer:</strong> The program prints <strong>16</strong> to the console.</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        Common mistake: If Line 3 had been <code>var x = 9;</code> (with <code>var</code>), it would create a SECOND variable also named x! This creates confusion because now there are two x's in memory. The newer one (at the top) would be used. This wastes memory and is considered a bug. Always use <code>var</code> only when creating a NEW variable.
+    </div>
+    
+    <div class="video-placeholder">
+        <h3>📹 Video: Memory Diagrams with Variables</h3>
+        <p><strong>Duration:</strong> 3:30</p>
+        <p>This video demonstrates the step-by-step creation of a memory diagram from code that uses variables. Watch how each line of code affects the memory state and learn to trace program execution visually.</p>
+    </div>
+</div>
+
+<!-- Assessment 3 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.3.3: Memory Diagrams</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>In a memory diagram, what does it mean when a value is crossed out?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_1" value="a"> A) The variable has been deleted</label>
+            <label><input type="radio" name="q3_1" value="b"> B) The variable's value has been changed</label>
+            <label><input type="radio" name="q3_1" value="c"> C) The variable caused an error</label>
+            <label><input type="radio" name="q3_1" value="d"> D) The variable is no longer usable</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) The variable's value has been changed</strong> - We cross out old values to show the history of changes, but the variable still exists with its new value written next to the crossed-out value.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Code Tracing):</p>
+        <p>After this code runs, what values would appear in a memory diagram?</p>
+        <div class="code-example">
+<code>var a = 10;
+var b = 20;
+a = a + b;</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q3_2" value="a"> A) a = 10, b = 20</label>
+            <label><input type="radio" name="q3_2" value="b"> B) a = 30, b = 20</label>
+            <label><input type="radio" name="q3_2" value="c"> C) a = 20, b = 10</label>
+            <label><input type="radio" name="q3_2" value="d"> D) a = 10, b = 30</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) a = 30, b = 20</strong> - The variable <code>a</code> would show <strike>10</strike> 30 (crossed out 10 with 30 next to it), and <code>b</code> would show 20 (unchanged). The expression <code>a + b</code> calculates to 30 and is stored back in <code>a</code>.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (True/False):</p>
+        <p>In a memory diagram, new variables are added at the top of the diagram.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_3" value="true"> True</label>
+            <label><input type="radio" name="q3_3" value="false"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> New variables are added from the BOTTOM up. As you trace code from top to bottom, variables get stacked from bottom to top in your diagram. This helps you see the order in which variables were created.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Short Answer):</p>
+        <p>Draw a memory diagram for this code (you can describe it in text):</p>
+        <div class="code-example">
+<code>var width = 100;
+var height = 50;
+width = width * 2;</code>
+        </div>
+        <textarea rows="4" placeholder="Describe the memory diagram..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong></p>
+            <p>The memory diagram would show (from top to bottom):</p>
+            <ul>
+                <li>height | 50</li>
+                <li>width | <strike>100</strike> 200</li>
+            </ul>
+            <p>The variable <code>width</code> starts at 100, then gets reassigned to 200 (100 * 2). The original 100 is crossed out with 200 next to it. The variable <code>height</code> remains unchanged at 50.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Naming Conventions -->
+<div class="content-section">
+    <h2>📝 Variable Naming Best Practices</h2>
+    
+    <p>Choosing good variable names is crucial for writing readable, maintainable code. Well-named variables make your code self-documenting—someone reading your code can understand what it does without extensive comments.</p>
+    
+    <h3>Naming Rules (Must Follow)</h3>
+    <div class="example-box">
+        <div class="example-title">✅ JavaScript Variable Naming Rules:</div>
+        <ul>
+            <li>Must start with a letter, underscore (_), or dollar sign ($)</li>
+            <li>Cannot start with a number</li>
+            <li>Can contain letters, numbers, underscores, and dollar signs</li>
+            <li>Cannot use JavaScript reserved words (like <code>var</code>, <code>if</code>, <code>for</code>, etc.)</li>
+            <li>Are case-sensitive (<code>myVar</code> and <code>myvar</code> are different variables)</li>
+            <li>Cannot contain spaces or special characters (@, #, %, etc.)</li>
+        </ul>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">❌ Invalid Variable Names:</div>
+        <div class="code-example">
+<code>var 2cool = 50;          // Can't start with a number
+var my-variable = 10;    // Can't use hyphens
+var user name = "Bob";   // Can't have spaces
+var var = 5;             // Can't use reserved words</code>
+        </div>
+    </div>
+    
+    <h3>Naming Conventions (Should Follow)</h3>
+    <p>Beyond the strict rules, follow these conventions to write professional code:</p>
+    
+    <div class="example-box">
+        <div class="example-title">💼 Best Practices:</div>
+        <ul>
+            <li><strong>Use camelCase:</strong> Start with lowercase, capitalize each new word: <code>circleSize</code>, <code>playerScore</code>, <code>eyeDistance</code></li>
+            <li><strong>Be descriptive:</strong> Use names that clearly describe what the variable stores: <code>studentAge</code> instead of <code>a</code></li>
+            <li><strong>Avoid abbreviations:</strong> Write <code>radius</code> instead of <code>rad</code> (unless the abbreviation is universally understood)</li>
+            <li><strong>Keep it concise:</strong> <code>maxSpeed</code> is better than <code>theMaximumSpeedOfThePlayer</code></li>
+            <li><strong>Use meaningful single letters for coordinates:</strong> <code>x</code>, <code>y</code>, <code>w</code>, <code>h</code> are acceptable for positions and dimensions</li>
+        </ul>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Good vs. Poor Variable Names</div>
+        <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+            <tr style="background: #667eea; color: white;">
+                <th style="padding: 10px; border: 1px solid #ddd;">❌ Poor</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">✅ Good</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Why?</th>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var s = 100;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var circleSize = 100;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Descriptive name is clearer</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var thing = 50;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var eyeWidth = 50;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Specific purpose is clear</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var MYVAR = 200;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var faceX = 200;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Use camelCase, not all caps</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var xyz123 = 75;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;"><code>var mouthHeight = 75;</code></td>
+                <td style="padding: 10px; border: 1px solid #ddd;">Meaningful beats random</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="callout callout-hint">
+        When in doubt, imagine someone else will read your code in six months (or that YOU will read your code in six months after forgetting what it does). Choose variable names that will make sense without any additional context!
+    </div>
+</div>
+
+<!-- Data Types Preview -->
+<div class="content-section">
+    <h2>🔢 Introduction to Data Types</h2>
+    
+    <p>So far, we've primarily worked with numbers in our variables. However, variables can store different <strong>types</strong> of data. Understanding data types helps you know what operations you can perform with your variables.</p>
+    
+    <h3>Common Data Types in JavaScript</h3>
+    
+    <div class="term">
+        <div class="term-name">Number</div>
+        Numeric values, including integers (whole numbers) and decimals (floating-point numbers). Examples: <code>42</code>, <code>3.14</code>, <code>-17</code>, <code>0.5</code>
+        <div class="code-example" style="margin-top: 10px;">
+<code>var age = 25;
+var temperature = 98.6;
+var score = -10;</code>
+        </div>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">String</div>
+        Text data enclosed in quotation marks (single or double quotes). Examples: <code>"Hello"</code>, <code>'JavaScript'</code>, <code>"123"</code>
+        <div class="code-example" style="margin-top: 10px;">
+<code>var playerName = "Alice";
+var message = 'Welcome!';
+var grade = "A+";</code>
+        </div>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Boolean</div>
+        True or false values, used for logic and decision-making. Only two possible values: <code>true</code> or <code>false</code>
+        <div class="code-example" style="margin-top: 10px;">
+<code>var isGameOver = false;
+var playerWon = true;
+var hasKey = false;</code>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        JavaScript is "dynamically typed," which means you don't have to declare what type of data a variable will hold. The same variable can even hold different types at different times (though this isn't recommended for clarity). You'll learn more about data types and how to use them in upcoming lessons!
+    </div>
+    
+    <h3>Type Matters for Operations</h3>
+    <p>Different data types behave differently with operators:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.9: Numbers vs. Strings</div>
+        <div class="code-example">
+<code>// Numbers: addition works as expected
+var num1 = 5;
+var num2 = 3;
+var sum = num1 + num2;  // Result: 8
+
+// Strings: + concatenates (joins) them
+var word1 = "Hello";
+var word2 = "World";
+var phrase = word1 + word2;  // Result: "HelloWorld"
+
+// Mixed: number becomes a string!
+var mixed = "Score: " + 100;  // Result: "Score: 100"</code>
+        </div>
+        
+        <p><strong>Key Insight:</strong> The <code>+</code> operator behaves differently depending on the data types! With numbers, it adds. With strings, it joins them together. This is why choosing the right data type matters.</p>
+    </div>
+</div>
+
+<!-- Practical Applications -->
+<div class="content-section">
+    <h2>🎨 Practical Applications</h2>
+    
+    <h3>Building Flexible, Maintainable Drawings</h3>
+    <p>Let's apply everything you've learned to create a sophisticated, easily-modifiable drawing:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 2.3.10: Complete Flexible Robot Drawing</div>
+        <div class="code-example">
+<code>// Position variables - change these to move the entire robot
+var robotX = 200;
+var robotY = 200;
+
+// Size variables - change these to resize the robot
+var headSize = 100;
+var bodyWidth = 80;
+var bodyHeight = 120;
+
+// Calculate other measurements based on sizes
+var eyeSize = headSize * 0.2;     // Eyes are 20% of head
+var eyeSpacing = headSize * 0.3;  // Eyes are 30% of head apart
+
+// Draw the robot
+// Head
+ellipse(robotX, robotY, headSize, headSize);
+
+// Eyes (positioned relative to robot center)
+ellipse(robotX - eyeSpacing, robotY - 10, eyeSize, eyeSize);  // Left eye
+ellipse(robotX + eyeSpacing, robotY - 10, eyeSize, eyeSize);  // Right eye
+
+// Body (positioned below head)
+rect(robotX - bodyWidth/2, robotY + headSize/2, bodyWidth, bodyHeight);
+
+// Antenna (positioned above head)
+line(robotX, robotY - headSize/2, robotX, robotY - headSize/2 - 30);</code>
+        </div>
+        
+        <p><strong>Benefits of This Approach:</strong></p>
+        <ul>
+            <li>Change <code>robotX</code> and <code>robotY</code> to move the entire robot instantly</li>
+            <li>Change <code>headSize</code> to resize the head—eyes automatically scale proportionally</li>
+            <li>All body parts remain properly positioned relative to each other</li>
+            <li>Easy to understand because variables have clear, descriptive names</li>
+            <li>Simple to modify and experiment with different designs</li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-hint">
+        Professional programmers call this principle "DRY"—Don't Repeat Yourself. By using variables, you avoid repeating the same values throughout your code, making it much easier to maintain and modify.
+    </div>
+</div>
+
+<!-- Final Assessment -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 2.3.4: Comprehensive Variables Practice</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Code Writing):</p>
+        <p>Write code that creates three variables for a snowman: <code>headSize</code>, <code>middleSize</code>, and <code>bottomSize</code>. Make the middle 1.5 times the head size, and the bottom 2 times the head size. Set head size to 60.</p>
+        <textarea rows="5" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>var headSize = 60;
+var middleSize = headSize * 1.5;  // 90
+var bottomSize = headSize * 2;     // 120</code>
+            </div>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>Which variable name follows JavaScript naming conventions best?</p>
+        <div class="options">
+            <label><input type="radio" name="q4_2" value="a"> A) <code>circle_size</code></label>
+            <label><input type="radio" name="q4_2" value="b"> B) <code>CircleSize</code></label>
+            <label><input type="radio" name="q4_2" value="c"> C) <code>circleSize</code></label>
+            <label><input type="radio" name="q4_2" value="d"> D) <code>CIRCLESIZE</code></label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>C) circleSize</strong> - This uses camelCase, which is the standard JavaScript convention: start with lowercase, capitalize each new word. Option A uses snake_case (Python style), B uses PascalCase (typically for classes), and D uses all caps (typically for constants).</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Problem Solving):</p>
+        <p>You have a face drawing with 10 circles. You want to make all the circles larger. Explain why using a variable is better than changing each number individually.</p>
+        <textarea rows="4" placeholder="Write your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> Using a variable means you only change one number (the variable's value) instead of finding and changing 10 different numbers in your code. This is faster, less error-prone (you can't accidentally miss one or mistype), and makes your code easier to understand because the variable name explains what the number represents.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Code Analysis):</p>
+        <p>Will this code work correctly to draw a square?</p>
+        <div class="code-example">
+<code>var size = 100;
+rect(50, 50, size, size);</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q4_4" value="a"> A) Yes, it will draw a 100×100 square</label>
+            <label><input type="radio" name="q4_4" value="b"> B) No, you can't use variables with rect()</label>
+            <label><input type="radio" name="q4_4" value="c"> C) No, size needs quotation marks</label>
+            <label><input type="radio" name="q4_4" value="d"> D) No, you need to write var size both times</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>A) Yes, it will draw a 100×100 square</strong> - This code is perfect! The variable <code>size</code> holds 100, so both the width and height will be 100, making a square positioned at (50, 50).</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 5 (Code Correction):</p>
+        <p>This code has an error. Identify and fix it:</p>
+        <div class="code-example">
+<code>var width = 50;
+var width = 100;  // Changed our mind about the size
+rect(10, 10, width, width);</code>
+        </div>
+        <textarea rows="3" placeholder="Explain the error and write the corrected code..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Error:</strong> The second line shouldn't use <code>var</code> because the variable already exists. Using <code>var</code> again creates a new variable instead of changing the existing one.</p>
+            <p><strong>Corrected Code:</strong></p>
+            <div class="code-example">
+<code>var width = 50;
+width = 100;  // Reassignment - no var needed
+rect(10, 10, width, width);</code>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    <p>Congratulations! You've mastered one of the most important concepts in all of programming. Variables are the foundation upon which all complex programs are built.</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ <strong>Variables</strong> are named containers that store values in computer memory</li>
+        <li>✅ Use <code>var</code> to <strong>declare</strong> new variables, but never use <code>var</code> when reassigning existing ones</li>
+        <li>✅ <strong>Initialization</strong> combines declaration and assignment: <code>var x = 5;</code></li>
+        <li>✅ <strong>Reassignment</strong> changes a variable's value without creating a new variable: <code>x = 10;</code></li>
+        <li>✅ Variables can be used in <strong>expressions</strong> to calculate new values: <code>total = x + y;</code></li>
+        <li>✅ <strong>Memory diagrams</strong> help visualize how variables change as code executes line by line</li>
+        <li>✅ Good variable names use <strong>camelCase</strong> and clearly describe what they store</li>
+        <li>✅ Variables make code more <strong>maintainable, flexible, and readable</strong></li>
+        <li>✅ Different <strong>data types</strong> (numbers, strings, booleans) store different kinds of information</li>
+    </ul>
+    
+    <h3>Skills You've Developed:</h3>
+    <ul>
+        <li>🎯 Creating and initializing variables with appropriate names</li>
+        <li>🔄 Reassigning variables to update their values</li>
+        <li>🧮 Using variables in mathematical expressions</li>
+        <li>📊 Tracing code execution with memory diagrams</li>
+        <li>🎨 Building flexible, scalable drawings using variables</li>
+        <li>📝 Following JavaScript naming conventions and best practices</li>
+        <li>🔍 Debugging code by understanding how variables change over time</li>
+    </ul>
+    
+    <h3>Remember:</h3>
+    <div class="callout callout-info">
+        Variables aren't just a convenience—they're a fundamental way of thinking about programming. Every program you write from now on will use variables extensively. Master this concept, and you've unlocked the ability to create dynamic, interactive, professional-quality programs!
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 2, Lesson 4: Text and Strings</h3>
+    <p>Now that you can store and manipulate numbers with variables, it's time to learn how to work with text! In the next lesson, you'll discover:</p>
+    <ul>
+        <li>📝 How to create and display <strong>text on your canvas</strong> using the <code>text()</code> function</li>
+        <li>🔤 Understanding <strong>strings</strong> as a data type for storing and manipulating text</li>
+        <li>➕ <strong>String concatenation</strong>—joining text together to create messages</li>
+        <li>🎨 Customizing text appearance with <strong>font size, style, and alignment</strong></li>
+        <li>💬 Creating <strong>dynamic text</strong> that changes based on variable values</li>
+        <li>🏷️ Building <strong>labels, captions, and interactive displays</strong> for your drawings</li>
+        <li>✨ Combining text and graphics to create <strong>complete, professional-looking programs</strong></li>
+    </ul>
+    <p>Text is everywhere in programming—user interfaces, game scores, messages, labels, and more. Get ready to add the power of words to your visual creations!</p>
+    
+    <div class="callout callout-hint">
+        Before moving on, make sure you're comfortable creating variables, using them in expressions, and tracing code with memory diagrams. Try creating your own scalable drawing using variables—perhaps a robot, house, or character where you can easily adjust sizes and positions. Practice makes perfect!
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 2, Lesson 3: Variables and Data Types</p>
+</div>
+
+</body>
+</html>
