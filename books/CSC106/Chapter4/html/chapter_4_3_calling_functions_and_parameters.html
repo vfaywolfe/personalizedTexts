@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4.3: Calling Functions and Using Parameters</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #667eea;
+            margin-top: 20px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .code-inline {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+            font-size: 0.9em;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .example-step {
+            margin: 15px 0;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .video-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .video-duration {
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .coding-practice {
+            background: #fff8f0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .coding-practice-title {
+            font-weight: bold;
+            color: #ff9800;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .coding-practice a {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .coding-practice a:hover {
+            background: #f57c00;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        details[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            border: none;
+        }
+        
+        .summary-box ul {
+            line-height: 1.8;
+        }
+        
+        .summary-box table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .summary-box th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .summary-box td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .summary-box tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .next-chapter {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 25px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+        }
+        
+        .next-chapter ul {
+            line-height: 1.8;
+        }
+        
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .chapter-header {
+                background: #667eea;
+                color: white;
+            }
+            
+            details {
+                border: 1px solid #ddd;
+            }
+            
+            summary {
+                display: none;
+            }
+            
+            details > *:not(summary) {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="chapter-header">
+    <h1>Chapter 4, Lesson 3: Calling Functions and Using Parameters</h1>
+    <p>CSC 106: The Joy of Programming</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>📖 Introduction</h2>
+    
+    <p>You've learned what functions are and why they're essential building blocks of programming. You understand that functions help organize code, avoid repetition, and create powerful abstractions. Now it's time to learn how to create your own functions and make them flexible enough to handle different situations.</p>
+    
+    <p>Imagine you're writing a recipe. A basic recipe might say "make a cake," but that's not very useful because it doesn't tell you what kind of cake or what size. A better recipe would be "make a cake" with parameters for flavor and size: "make a chocolate cake, 9 inches" or "make a vanilla cake, 12 inches." The recipe is the same, but the parameters let you customize it.</p>
+    
+    <p>Functions work the same way. In this lesson, you'll learn how to define your own functions using JavaScript's <span class="code-inline">function</span> keyword, how to call those functions to execute their code, and most importantly, how to add <strong>parameters</strong> that make your functions flexible and reusable in different contexts.</p>
+    
+    <p>By the end of this lesson, you'll be able to write functions that can draw shapes at any position, display text with any message, or perform calculations with any numbers—all by using parameters to pass different values into your functions. This is where your programming power really starts to grow!</p>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.1:</strong> Write the correct syntax to define a custom function in JavaScript
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.2:</strong> Call (invoke) user-defined functions to execute their code
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.3:</strong> Explain the difference between function definition and function invocation
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.4:</strong> Create functions with one or more parameters
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.5:</strong> Understand the difference between parameters and arguments
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.6:</strong> Call functions with appropriate arguments to fill in parameters
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.3.7:</strong> Apply parameters to create flexible, reusable functions
+    </div>
+</div>
+
+<!-- Key Terms -->
+<div class="content-section">
+    <h2>📚 Key Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Function Definition</div>
+        <p>The code that creates a function, specifying its name, parameters, and the instructions it will execute. In JavaScript, this begins with the <span class="code-inline">function</span> keyword.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Call (Function Invocation)</div>
+        <p>Executing a function by writing its name followed by parentheses. This runs the code inside the function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Syntax</div>
+        <p>The specific structure and rules for writing function definitions in JavaScript: <span class="code-inline">function name(parameters) { code }</span></p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Parameter</div>
+        <p>A variable listed in a function's definition that acts as a placeholder for values that will be passed in when the function is called.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Argument</div>
+        <p>The actual value passed to a function when calling it. Arguments fill in the parameters defined in the function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Body</div>
+        <p>The code between the curly braces <span class="code-inline">{ }</span> in a function definition. This is what executes when the function is called.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Curly Braces</div>
+        <p>The symbols <span class="code-inline">{ }</span> that enclose the function body, marking the beginning and end of the function's code.</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>📝 Content</h2>
+    
+    <h3>Defining Your First Function</h3>
+    
+    <p>Creating a function in JavaScript follows a specific pattern. Let's learn the exact syntax you need:</p>
+    
+    <div class="code-example">
+<code>function functionName() {
+    // Code to execute goes here
+}</code>
+    </div>
+    
+    <p>Let's break down each component:</p>
+    <ul>
+        <li><strong><span class="code-inline">function</span></strong> — The JavaScript keyword that tells the computer you're defining a function</li>
+        <li><strong><span class="code-inline">functionName</span></strong> — The name you choose for your function (follow the same rules as variable names)</li>
+        <li><strong><span class="code-inline">()</span></strong> — Parentheses that will eventually hold parameters (empty for now)</li>
+        <li><strong><span class="code-inline">{ }</span></strong> — Curly braces that contain the function's code (the "function body")</li>
+    </ul>
+    
+    <div class="callout callout-info">
+        Function names should use camelCase: start with a lowercase letter, then capitalize the first letter of each new word. Examples: <span class="code-inline">drawHouse</span>, <span class="code-inline">calculateTotal</span>, <span class="code-inline">sayHello</span>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.1: Creating a Simple Function</div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 1: Define the function</div>
+            <p>Let's create a function that displays a greeting message:</p>
+            <div class="code-example">
+<code>function sayHello() {
+    fill(0);
+    textSize(24);
+    text("Hello, World!", 100, 200);
+}</code>
+            </div>
+            <p>This function is named <span class="code-inline">sayHello</span>. When called, it will set the fill color to black, set the text size to 24, and display "Hello, World!" at position (100, 200).</p>
+        </div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 2: Understand what we've created</div>
+            <p>Right now, we've only <em>defined</em> the function—we've told JavaScript what <span class="code-inline">sayHello</span> means. The code inside won't run until we <em>call</em> the function.</p>
+        </div>
+    </div>
+    
+    <h3>Calling Functions</h3>
+    
+    <p>Defining a function creates it, but doesn't execute it. To run the code inside a function, you must <strong>call</strong> (or <strong>invoke</strong>) it:</p>
+    
+    <div class="code-example">
+<code>sayHello();</code>
+    </div>
+    
+    <p>When JavaScript sees this line, it looks for a function named <span class="code-inline">sayHello</span>, then executes all the code inside that function's curly braces.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.2: Complete Program with Function Definition and Call</div>
+        
+        <div class="code-example">
+<code>// Function definition
+function sayHello() {
+    fill(0);
+    textSize(24);
+    text("Hello, World!", 100, 200);
+}
+
+// Function call
+sayHello();</code>
+        </div>
+        
+        <p><strong>What happens:</strong></p>
+        <ol>
+            <li>JavaScript reads the function definition and remembers what <span class="code-inline">sayHello</span> means</li>
+            <li>JavaScript encounters <span class="code-inline">sayHello();</span> and executes the function</li>
+            <li>The text "Hello, World!" appears on the canvas</li>
+        </ol>
+    </div>
+    
+    <div class="callout callout-warning">
+        Forgetting to call the function is one of the most common mistakes beginners make! If you define a function but never call it, nothing will happen. The definition is like writing a recipe—calling it is actually cooking the meal.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.3: Calling a Function Multiple Times</div>
+        
+        <p>Once you've defined a function, you can call it as many times as you want:</p>
+        
+        <div class="code-example">
+<code>function drawStar() {
+    fill(255, 255, 0);
+    beginShape();
+    vertex(0, -20);
+    vertex(5, -5);
+    vertex(20, 0);
+    vertex(5, 5);
+    vertex(0, 20);
+    vertex(-5, 5);
+    vertex(-20, 0);
+    vertex(-5, -5);
+    endShape(CLOSE);
+}
+
+translate(100, 100);
+drawStar();
+
+translate(100, 0);
+drawStar();
+
+translate(100, 0);
+drawStar();</code>
+        </div>
+        
+        <p>This draws three identical stars at different positions. Notice how we only defined the star-drawing code once, but we can use it multiple times!</p>
+    </div>
+    
+    <div class="video-placeholder">
+        <div class="video-title">🎥 Video: Introduction to Defining Functions</div>
+        <p>This video explains how to define and call your own functions in JavaScript.</p>
+        <div class="video-duration">Duration: 4:03</div>
+    </div>
+    
+    <div class="assessment">
+        <div class="assessment-title">✏️ Formative Assessment 4.3.1: Function Basics</div>
+        
+        <div class="question">
+            <p class="question-number">Question 1 (True/False):</p>
+            <p>Defining a function automatically executes the code inside it.</p>
+            <div class="options">
+                <label><input type="radio" name="q1_1"> True</label>
+                <label><input type="radio" name="q1_1"> False</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: False</strong></p>
+                <p>Defining a function only tells JavaScript what the function is. You must call the function (by writing its name with parentheses) to execute the code inside.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 2 (Multiple Choice):</p>
+            <p>Which keyword is used to define a function in JavaScript?</p>
+            <div class="options">
+                <label><input type="radio" name="q1_2"> A) def</label>
+                <label><input type="radio" name="q1_2"> B) function</label>
+                <label><input type="radio" name="q1_2"> C) func</label>
+                <label><input type="radio" name="q1_2"> D) define</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: B) function</strong></p>
+                <p>JavaScript uses the <span class="code-inline">function</span> keyword. Other languages use different keywords (like <span class="code-inline">def</span> in Python), but in JavaScript it's always <span class="code-inline">function</span>.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 3 (Code Analysis):</p>
+            <p>What will this code display?</p>
+            <div class="code-example">
+<code>function greet() {
+    text("Good morning!", 50, 50);
+}</code>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q1_3"> A) "Good morning!" at position (50, 50)</label>
+                <label><input type="radio" name="q1_3"> B) Nothing</label>
+                <label><input type="radio" name="q1_3"> C) An error message</label>
+                <label><input type="radio" name="q1_3"> D) "greet" at position (50, 50)</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: B) Nothing</strong></p>
+                <p>This code only defines the function. Since the function is never called, the code inside never executes. To display the message, you would need to add <span class="code-inline">greet();</span></p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 4 (Coding):</p>
+            <p>Write a function called <span class="code-inline">drawCircle</span> that draws a circle at position (200, 200) with a diameter of 100. Then write the line of code that would call this function.</p>
+            <textarea rows="6" placeholder="Write your function definition and function call..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <div class="code-example">
+<code>// Function definition
+function drawCircle() {
+    ellipse(200, 200, 100, 100);
+}
+
+// Function call
+drawCircle();</code>
+                </div>
+                <p>The function definition creates the function, and the function call executes it.</p>
+            </details>
+        </div>
+    </div>
+    
+    <div class="coding-practice">
+        <div class="coding-practice-title">💻 Coding Practice: Say Your Name</div>
+        <p>In this coding practice, you'll create a function and modify a program to say your own name. You'll change a variable to contain your name as a string and display it on the screen using a function.</p>
+        <p><strong>Instructions:</strong> Change the name variable so it says your name instead. Your name should be a string, so make sure you keep it inside "quotation marks".</p>
+        <a href="https://trycodelab.com/lessons/04.3-Defining-and-Calling-Functions/03-Challenge-Say-Your-Name.md" target="_blank">Launch Code Lab →</a>
+    </div>
+    
+    <h3>Adding Parameters to Functions</h3>
+    
+    <p>The functions we've created so far do exactly the same thing every time we call them. While this is useful, functions become much more powerful when they can accept <strong>parameters</strong>—input values that customize their behavior.</p>
+    
+    <p>Parameters are variables you list inside the parentheses when defining a function. They act as placeholders for actual values (called <strong>arguments</strong>) that will be provided when the function is called.</p>
+    
+    <div class="callout callout-info">
+        <strong>Parameters vs. Arguments — Important Distinction!</strong><br>
+        <strong>Parameters</strong> are the placeholder variables in the function definition.<br>
+        <strong>Arguments</strong> are the actual values you pass when calling the function.<br>
+        Think of parameters as empty boxes and arguments as what you put in those boxes.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.4: Function with One Parameter</div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 1: Define a function with a parameter</div>
+            <div class="code-example">
+<code>function greetPerson(name) {
+    fill(0);
+    textSize(20);
+    text("Hello, " + name + "!", 100, 200);
+}</code>
+            </div>
+            <p>The word <span class="code-inline">name</span> in the parentheses is a <strong>parameter</strong>. Inside the function, <span class="code-inline">name</span> acts like a variable that will hold whatever value we pass in.</p>
+        </div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 2: Call the function with different arguments</div>
+            <div class="code-example">
+<code>greetPerson("Alice");   // Displays: "Hello, Alice!"
+greetPerson("Bob");     // Displays: "Hello, Bob!"
+greetPerson("Charlie"); // Displays: "Hello, Charlie!"</code>
+            </div>
+            <p>Each time we call the function, we pass a different <strong>argument</strong> (the actual value). The argument fills in the <span class="code-inline">name</span> parameter.</p>
+        </div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 3: How it works</div>
+            <p>When you call <span class="code-inline">greetPerson("Alice")</span>:</p>
+            <ol>
+                <li>JavaScript assigns "Alice" to the parameter <span class="code-inline">name</span></li>
+                <li>Inside the function, wherever <span class="code-inline">name</span> appears, it has the value "Alice"</li>
+                <li>The function displays "Hello, Alice!"</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="callout callout-hint">
+        Parameters make your functions flexible! Instead of writing separate functions for greeting Alice, Bob, and Charlie, you write one function that can greet anyone by accepting their name as a parameter.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.5: Function with Multiple Parameters</div>
+        
+        <p>Functions can accept multiple parameters, separated by commas:</p>
+        
+        <div class="code-example">
+<code>function drawCustomCircle(x, y, diameter) {
+    ellipse(x, y, diameter, diameter);
+}
+
+// Now we can draw circles anywhere with any size!
+drawCustomCircle(100, 100, 50);   // Small circle at (100, 100)
+drawCustomCircle(300, 200, 150);  // Large circle at (300, 200)
+drawCustomCircle(200, 300, 75);   // Medium circle at (200, 300)</code>
+        </div>
+        
+        <p><strong>How the parameters work:</strong></p>
+        <ul>
+            <li>When we call <span class="code-inline">drawCustomCircle(100, 100, 50)</span></li>
+            <li>The first argument (100) fills the first parameter (<span class="code-inline">x</span>)</li>
+            <li>The second argument (100) fills the second parameter (<span class="code-inline">y</span>)</li>
+            <li>The third argument (50) fills the third parameter (<span class="code-inline">diameter</span>)</li>
+            <li>Arguments are matched to parameters <strong>by position</strong></li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-warning">
+        When calling a function with parameters, you must provide the correct number of arguments in the correct order! If the function expects 3 parameters and you only provide 2 arguments, the missing parameter will be <span class="code-inline">undefined</span> and your function may not work correctly.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.3.6: Building a Flexible Drawing Function</div>
+        
+        <p>Let's create a function that draws a house at any position with any size:</p>
+        
+        <div class="code-example">
+<code>function drawHouse(x, y, size) {
+    // Draw walls
+    fill(165, 42, 42);
+    rect(x, y, size, size);
+    
+    // Draw roof
+    fill(139, 69, 19);
+    triangle(x, y, x + size/2, y - size/2, x + size, y);
+    
+    // Draw door
+    fill(139, 69, 19);
+    var doorWidth = size * 0.3;
+    var doorHeight = size * 0.5;
+    rect(x + size/2 - doorWidth/2, y + size - doorHeight, doorWidth, doorHeight);
+    
+    // Draw window
+    fill(173, 216, 230);
+    var windowSize = size * 0.2;
+    rect(x + size * 0.2, y + size * 0.2, windowSize, windowSize);
+}
+
+// Draw houses of different sizes at different positions
+background(135, 206, 235);
+drawHouse(50, 200, 100);    // Small house
+drawHouse(200, 150, 150);   // Medium house
+drawHouse(400, 180, 120);   // Another house</code>
+        </div>
+        
+        <p>This function is incredibly powerful because everything is based on the parameters. The same function can draw tiny houses, huge houses, or houses anywhere on the canvas!</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        <strong>Naming Parameters:</strong> Choose descriptive parameter names that indicate what values they represent. Use <span class="code-inline">x</span> and <span class="code-inline">y</span> for coordinates, <span class="code-inline">size</span> or <span class="code-inline">width</span> and <span class="code-inline">height</span> for dimensions, <span class="code-inline">color</span> for colors, etc. Good parameter names make your functions self-documenting!
+    </div>
+    
+    <div class="video-placeholder">
+        <div class="video-title">🎥 Video: Function Parameters</div>
+        <p>This video details how function parameters work and how to use them to create flexible, reusable functions.</p>
+        <div class="video-duration">Duration: 3:44</div>
+    </div>
+    
+    <div class="assessment">
+        <div class="assessment-title">✏️ Formative Assessment 4.3.2: Working with Parameters</div>
+        
+        <div class="question">
+            <p class="question-number">Question 1 (Multiple Choice):</p>
+            <p>What is the primary purpose of function parameters?</p>
+            <div class="options">
+                <label><input type="radio" name="q2_1"> A) To make the function run faster</label>
+                <label><input type="radio" name="q2_1"> B) To allow the function to accept different input values</label>
+                <label><input type="radio" name="q2_1"> C) To automatically call the function</label>
+                <label><input type="radio" name="q2_1"> D) To save memory</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: B) To allow the function to accept different input values</strong></p>
+                <p>Parameters enable functions to receive data when called, making them flexible and reusable with different inputs. Without parameters, a function would always perform exactly the same operation.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 2 (Matching Concept):</p>
+            <p>Match each term to its definition:</p>
+            <table>
+                <tr>
+                    <th>Term</th>
+                    <th>Definition</th>
+                </tr>
+                <tr>
+                    <td>Parameter</td>
+                    <td>The placeholder variable in the function definition</td>
+                </tr>
+                <tr>
+                    <td>Argument</td>
+                    <td>The actual value passed when calling the function</td>
+                </tr>
+            </table>
+            <details>
+                <summary>Show Explanation</summary>
+                <p>In the function definition <span class="code-inline">function greet(name)</span>, <span class="code-inline">name</span> is a <strong>parameter</strong>.</p>
+                <p>In the function call <span class="code-inline">greet("Alice")</span>, <span class="code-inline">"Alice"</span> is an <strong>argument</strong>.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 3 (Code Analysis):</p>
+            <p>Given this function: <span class="code-inline">function drawSquare(x, y, size)</span><br>
+            Which function call is correct?</p>
+            <div class="options">
+                <label><input type="radio" name="q2_3"> A) drawSquare();</label>
+                <label><input type="radio" name="q2_3"> B) drawSquare(100, 200);</label>
+                <label><input type="radio" name="q2_3"> C) drawSquare(100, 200, 50);</label>
+                <label><input type="radio" name="q2_3"> D) drawSquare(x, y, size);</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: C) drawSquare(100, 200, 50);</strong></p>
+                <p>The function expects three arguments (x, y, and size). Option C correctly provides all three. Option A has no arguments, option B is missing the third argument, and option D incorrectly tries to use the parameter names instead of actual values.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 4 (Code Writing):</p>
+            <p>Write a function called <span class="code-inline">drawRectangle</span> that accepts four parameters: <span class="code-inline">x</span>, <span class="code-inline">y</span>, <span class="code-inline">width</span>, and <span class="code-inline">height</span>. The function should draw a rectangle using these parameters.</p>
+            <textarea rows="4" placeholder="Write your function here..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <div class="code-example">
+<code>function drawRectangle(x, y, width, height) {
+    rect(x, y, width, height);
+}</code>
+                </div>
+                <p>This function accepts four parameters and uses them to draw a rectangle. You could call it with: <span class="code-inline">drawRectangle(50, 50, 100, 75);</span></p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 5 (Application):</p>
+            <p>Write a complete program that defines a function called <span class="code-inline">displayMessage</span> with two parameters: <span class="code-inline">message</span> and <span class="code-inline">size</span>. The function should display the message at position (100, 200) with the specified text size. Then call the function twice with different messages and sizes.</p>
+            <textarea rows="10" placeholder="Write your complete program..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <div class="code-example">
+<code>// Function definition
+function displayMessage(message, size) {
+    fill(0);
+    textSize(size);
+    text(message, 100, 200);
+}
+
+// Function calls
+displayMessage("Hello!", 24);
+displayMessage("Welcome to programming!", 16);</code>
+                </div>
+                <p>Note: The second message will overwrite the first since they're at the same position. In a real program, you might want to use different y positions!</p>
+            </details>
+        </div>
+    </div>
+    
+    <div class="coding-practice">
+        <div class="coding-practice-title">💻 Coding Practice: Moles in Holes</div>
+        <p>In this coding practice, the grass is filled with holes, but there are no moles! You'll be given a mole-drawing function called <span class="code-inline">drawMole</span>. Your task is to call this function with the correct parameters to put moles in the holes.</p>
+        <p><strong>Learning Goal:</strong> Practice calling functions with parameters to position graphical elements on the canvas.</p>
+        <a href="https://trycodelab.com/lessons/04.3-Defining-and-Calling-Functions/05-Challenge-Moles-in-Holes.md" target="_blank">Launch Code Lab →</a>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    
+    <p>You've learned the fundamental skills for creating and using functions with parameters—one of the most important concepts in all of programming!</p>
+    
+    <h3>Key Concepts Mastered:</h3>
+    <ul>
+        <li>✅ <strong>Function Definition:</strong> Using the <span class="code-inline">function</span> keyword to create custom functions</li>
+        <li>✅ <strong>Function Syntax:</strong> <span class="code-inline">function name(parameters) { code }</span></li>
+        <li>✅ <strong>Function Calls:</strong> Executing functions by writing their name followed by parentheses</li>
+        <li>✅ <strong>Definition vs. Invocation:</strong> Defining creates the function; calling executes it</li>
+        <li>✅ <strong>Parameters:</strong> Placeholder variables in function definitions that make functions flexible</li>
+        <li>✅ <strong>Arguments:</strong> Actual values passed to functions when calling them</li>
+        <li>✅ <strong>Multiple Parameters:</strong> Functions can accept many parameters, separated by commas</li>
+        <li>✅ <strong>Parameter Order:</strong> Arguments are matched to parameters by position</li>
+        <li>✅ <strong>Reusability:</strong> One function with parameters can handle many different situations</li>
+    </ul>
+    
+    <h3>Syntax Reference:</h3>
+    <table>
+        <tr>
+            <th>Concept</th>
+            <th>Syntax</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td>Define function (no parameters)</td>
+            <td><span class="code-inline">function name() { }</span></td>
+            <td><span class="code-inline">function sayHello() { }</span></td>
+        </tr>
+        <tr>
+            <td>Define function (with parameters)</td>
+            <td><span class="code-inline">function name(param1, param2) { }</span></td>
+            <td><span class="code-inline">function greet(name, age) { }</span></td>
+        </tr>
+        <tr>
+            <td>Call function (no arguments)</td>
+            <td><span class="code-inline">name();</span></td>
+            <td><span class="code-inline">sayHello();</span></td>
+        </tr>
+        <tr>
+            <td>Call function (with arguments)</td>
+            <td><span class="code-inline">name(arg1, arg2);</span></td>
+            <td><span class="code-inline">greet("Alice", 25);</span></td>
+        </tr>
+    </table>
+    
+    <h3>Remember:</h3>
+    <div class="callout callout-warning">
+        Defining a function doesn't run it—you must call it! This is like writing a recipe but never cooking.
+    </div>
+    
+    <div class="callout callout-hint">
+        Choose descriptive names for both functions and parameters. Good names make your code self-documenting and easier to understand.
+    </div>
+    
+    <div class="callout callout-info">
+        Parameters are your friends! They transform rigid, single-purpose functions into flexible, multi-purpose tools.
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 4, Lesson 4: Return Values and Variable Scope</h3>
+    
+    <p>You now know how to create functions and pass information <em>into</em> them using parameters. In the next lesson, you'll learn how to get information <em>out</em> of functions using return values!</p>
+    
+    <ul>
+        <li>🔄 <strong>Return Statements:</strong> How functions can send calculated values back to the code that called them</li>
+        <li>📊 <strong>Using Return Values:</strong> Storing and using values that functions return</li>
+        <li>🧮 <strong>Calculator Functions:</strong> Creating functions that perform calculations and return results</li>
+        <li>🌍 <strong>Global Variables:</strong> Variables accessible throughout your entire program</li>
+        <li>🏠 <strong>Local Variables:</strong> Variables that exist only inside functions</li>
+        <li>📏 <strong>Variable Scope:</strong> Understanding where variables can be accessed</li>
+        <li>⚡ <strong>Special ProcessingJS Functions:</strong> Using <span class="code-inline">setup()</span> and <span class="code-inline">draw()</span> for animation</li>
+    </ul>
+    
+    <p>Return values enable functions to do calculations and provide results. Combined with parameters, this makes functions incredibly powerful—they can accept input, process it, and produce output. You'll learn how to create calculator functions, decision-making functions, and more!</p>
+    
+    <div class="callout callout-hint">
+        <strong>Practice Exercise Before Moving On:</strong>
+        <p style="margin-top: 10px;">Try creating these functions to solidify your understanding:</p>
+        <ol style="margin-top: 10px;">
+            <li>A function called <span class="code-inline">drawStar</span> with parameters for x, y, and size</li>
+            <li>A function called <span class="code-inline">displayInfo</span> with parameters for name and age</li>
+            <li>A function called <span class="code-inline">drawTree</span> with parameters for position and height</li>
+        </ol>
+        <p style="margin-top: 10px;">The more you practice with parameters now, the easier return values will be!</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 4, Lesson 3: Calling Functions and Using Parameters</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">
+        © 2025 University of Rhode Island. All rights reserved.
+    </p>
+</div>
+
+</body>
+</html>
