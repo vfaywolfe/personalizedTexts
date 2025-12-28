@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4.1: Introduction to Functions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .summary-box h2 {
+            color: #764ba2;
+            border-bottom: 3px solid #764ba2;
+        }
+        
+        .summary-box ul {
+            line-height: 1.8;
+        }
+        
+        .next-chapter {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            margin-top: 30px;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+        }
+        
+        .next-chapter h3 {
+            color: #764ba2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        table th {
+            background-color: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+        
+        .comparison-item h4 {
+            color: #764ba2;
+            margin-top: 0;
+        }
+        
+        .bad-example {
+            border-color: #dc3545;
+        }
+        
+        .good-example {
+            border-color: #28a745;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chapter Header -->
+<div class="chapter-header">
+    <h1>Chapter 4.1: Introduction to Functions</h1>
+    <p>Understanding the Building Blocks of Organized Code</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>📖 Chapter Introduction</h2>
+    
+    <p>Imagine trying to build a house by personally mixing concrete, cutting every piece of lumber, installing all the plumbing, and wiring all the electricity yourself—all in one continuous process with no help and no specialized tools. The result would be chaotic, exhausting, and nearly impossible to complete. Real construction projects succeed because they break down into specialized tasks: plumbers handle water systems, electricians handle wiring, and carpenters handle framing. Each specialist has tools and techniques specifically designed for their part of the job.</p>
+    
+    <p>Programming works the same way. As programs grow beyond simple exercises, trying to write all the code in one long sequence becomes unmanageable. <strong>Functions are the fundamental tool that allow programmers to organize code into logical, reusable pieces.</strong> Just as a carpenter reaches for a hammer when it's time to drive nails, a programmer reaches for functions when it's time to organize and simplify their code.</p>
+    
+    <p>In this lesson, you'll discover what functions are, why they're essential to programming, and how they make your code more organized, readable, and powerful. You've actually been using functions throughout this entire course—every time you call <code>ellipse()</code>, <code>rect()</code>, or <code>background()</code>, you're using a function! Now it's time to understand what makes functions so powerful and how you'll soon be creating your own.</p>
+    
+    <div class="video-placeholder">
+        <h3>🎥 Chris Bosh Explains Functions</h3>
+        <p>Watch NBA All-Star Chris Bosh explain the concept of functions in programming</p>
+        <p><em>Duration: 2:45</em></p>
+        <p><a href="https://www.youtube.com/watch?v=Yx6HGaCTnGI" style="color: white; text-decoration: underline;">▶ Watch Video</a></p>
+    </div>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO4.1.1:</strong> Explain what a function is and why functions are essential in programming.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.1.2:</strong> Identify functions in code and distinguish between different types of functions.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.1.3:</strong> Recognize functions you've already been using in your programs.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.1.4:</strong> Explain the benefits of organizing code with functions.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.1.5:</strong> Understand the concept of abstraction and how functions provide it.
+    </div>
+</div>
+
+<!-- Key Terms and Concepts -->
+<div class="content-section">
+    <h2>📚 Key Terms and Concepts</h2>
+    
+    <div class="term">
+        <div class="term-name">Function</div>
+        A named block of code that performs a specific task. Functions can be used (called) multiple times throughout a program without rewriting the code. Think of a function as a tool in your programming toolbox—once you have it, you can use it whenever you need it.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Built-in Function</div>
+        A function that is pre-defined and provided by the programming language or library. You can use these functions without creating them yourself. Examples include <code>ellipse()</code>, <code>rect()</code>, <code>fill()</code>, and <code>random()</code> in p5.js.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Custom Function</div>
+        A function that you (the programmer) create yourself to perform specific tasks needed in your program. Also called a "user-defined function."
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Call</div>
+        The act of using a function by writing its name followed by parentheses. When you "call" a function, you're telling the program to execute that function's code.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Abstraction</div>
+        The process of hiding complex details behind a simple interface. Functions provide abstraction by letting you use complex operations with simple commands. For example, <code>ellipse(100, 100, 50, 50)</code> draws a circle without you needing to know the mathematical calculations involved.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Reusability</div>
+        The ability to use the same code multiple times without rewriting it. Functions enable reusability by letting you write code once and use it many times.
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Modularity</div>
+        The practice of breaking a program into separate, independent pieces (modules). Functions are the primary tool for creating modular code, where each function handles one specific task.
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>🔍 What Is a Function?</h2>
+    
+    <h3>The Concept</h3>
+    
+    <p>At its core, a function is a <strong>named sequence of instructions that performs a specific task</strong>. Instead of writing those instructions over and over every time you need that task done, you write them once in a function and then simply use the function's name whenever you need it.</p>
+    
+    <p>Think of functions like appliances in your kitchen. When you want to blend a smoothie, you don't build a blender from scratch each time—you simply use the blender that's already there. The blender hides all the complexity of spinning blades and motor mechanics behind a simple interface: you put ingredients in, press a button, and get a smoothie out. Functions work the same way in programming.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.1: Real-World Function Analogy</div>
+        
+        <p><strong>The Recipe Analogy:</strong></p>
+        
+        <p>Imagine you love making chocolate chip cookies. Instead of memorizing or looking up the complete recipe every time, you might have a recipe card that says:</p>
+        
+        <p style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 15px 0;">
+            <strong>"Chocolate Chip Cookies"</strong><br>
+            → Follow the steps on page 47 of the cookbook
+        </p>
+        
+        <p>The recipe name ("Chocolate Chip Cookies") is like a <strong>function name</strong>. The detailed steps on page 47 are like the <strong>function's code</strong>. When you want cookies, you don't need to remember every step—you just say "I'm making chocolate chip cookies" and follow that recipe.</p>
+        
+        <p><strong>Programming Equivalent:</strong></p>
+        <p>Instead of writing out all the steps to draw a smiley face every time you want one, you create a function called <code>drawSmiley()</code>. Whenever you want a smiley face in your program, you just write <code>drawSmiley()</code> instead of repeating all the drawing code.</p>
+    </div>
+    
+    <div class="callout callout-info">
+        Functions are about <strong>naming</strong> groups of instructions. Once you give a group of instructions a name (by creating a function), you can use that name instead of writing out all the instructions again.
+    </div>
+</div>
+
+<!-- Functions You've Been Using -->
+<div class="content-section">
+    <h2>💡 Functions You've Already Been Using</h2>
+    
+    <p>Great news! You've been using functions since the very first programs you wrote in this course. Every time you write code like this:</p>
+    
+    <div class="code-example">
+<code>ellipse(200, 200, 100, 100);
+rect(50, 50, 150, 200);
+fill(255, 0, 0);
+background(200, 230, 255);</code>
+    </div>
+    
+    <p>You're calling <strong>functions</strong>! Let's examine what's happening:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.2: Recognizing Function Calls</div>
+        
+        <table>
+            <tr>
+                <th>Code</th>
+                <th>Function Name</th>
+                <th>What It Does</th>
+            </tr>
+            <tr>
+                <td><code>ellipse(200, 200, 100, 100)</code></td>
+                <td><code>ellipse</code></td>
+                <td>Draws a circle or ellipse on the canvas</td>
+            </tr>
+            <tr>
+                <td><code>rect(50, 50, 150, 200)</code></td>
+                <td><code>rect</code></td>
+                <td>Draws a rectangle on the canvas</td>
+            </tr>
+            <tr>
+                <td><code>fill(255, 0, 0)</code></td>
+                <td><code>fill</code></td>
+                <td>Sets the fill color for subsequent shapes</td>
+            </tr>
+            <tr>
+                <td><code>background(200, 230, 255)</code></td>
+                <td><code>background</code></td>
+                <td>Sets the background color of the canvas</td>
+            </tr>
+            <tr>
+                <td><code>random(1, 10)</code></td>
+                <td><code>random</code></td>
+                <td>Generates a random number in a range</td>
+            </tr>
+        </table>
+        
+        <p><strong>Pattern Recognition:</strong> Notice that all function calls follow the same pattern:</p>
+        <ul>
+            <li>The <strong>function name</strong> (like <code>ellipse</code> or <code>rect</code>)</li>
+            <li>Followed by <strong>parentheses</strong> <code>( )</code></li>
+            <li>Inside the parentheses: <strong>information</strong> the function needs (we'll learn these are called "arguments" in future lessons)</li>
+        </ul>
+    </div>
+    
+    <div class="callout callout-hint">
+        When you see a word followed by parentheses in code, you're looking at a function call! The parentheses are your visual clue that this is a function being used.
+    </div>
+    
+    <h3>Built-in Functions: Your Programming Toolkit</h3>
+    
+    <p>All the functions we've been using (<code>ellipse</code>, <code>rect</code>, <code>fill</code>, etc.) are <strong>built-in functions</strong> provided by the p5.js library. These functions were written by other programmers and given to you as ready-to-use tools. You don't need to know how <code>ellipse()</code> calculates all the pixels to draw a circle—you just need to know how to use it.</p>
+    
+    <p>This is the power of abstraction! Someone else handled the complex mathematics and low-level graphics code, and wrapped it up in a simple, easy-to-use function.</p>
+</div>
+
+<!-- Formative Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 4.1.1: Identifying Functions</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>Which of the following is a function call?</p>
+        <div class="options">
+            <label><input type="radio" name="q1"> A) var x = 100;</label>
+            <label><input type="radio" name="q1"> B) if (x > 50)</label>
+            <label><input type="radio" name="q1"> C) ellipse(200, 200, 50, 50);</label>
+            <label><input type="radio" name="q1"> D) x = x + 1;</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: C) ellipse(200, 200, 50, 50);</strong></p>
+            <p>Function calls have a name followed by parentheses. Option A is a variable declaration, option B is a conditional statement, and option D is an assignment statement. Only option C follows the pattern of a function call: name + parentheses.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>You need to understand how a function works internally before you can use it.</p>
+        <div class="options">
+            <label><input type="radio" name="q2"> True</label>
+            <label><input type="radio" name="q2"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: False.</strong> This is the beauty of abstraction! You can use functions without knowing their internal implementation. Just like you can drive a car without knowing how the engine works, you can use <code>ellipse()</code> without knowing the mathematics it uses to draw circles. You only need to know what the function does and how to call it.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Identification):</p>
+        <p>In this code, identify all the function calls:</p>
+        <div class="code-example">
+<code>background(255);
+fill(100, 150, 200);
+var size = random(50, 150);
+ellipse(200, 200, size, size);</code>
+        </div>
+        <textarea rows="3" placeholder="List the function calls you found..."></textarea>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Function calls found:</strong></p>
+            <ol>
+                <li><code>background(255)</code></li>
+                <li><code>fill(100, 150, 200)</code></li>
+                <li><code>random(50, 150)</code></li>
+                <li><code>ellipse(200, 200, size, size)</code></li>
+            </ol>
+            <p>All four lines that have a name followed by parentheses are function calls. The line <code>var size = ...</code> includes a variable declaration AND a function call (<code>random</code>).</p>
+        </details>
+    </div>
+</div>
+
+<!-- Why Functions Matter -->
+<div class="content-section">
+    <h2>⚡ Why Do We Need Functions?</h2>
+    
+    <h3>The Problem: Code Without Functions</h3>
+    
+    <p>To understand why functions are so important, let's look at a problem they solve. Imagine you want to draw three smiley faces at different positions on your canvas:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.3: The Problem with Repetitive Code</div>
+        
+        <div class="comparison-box">
+            <div class="comparison-item bad-example">
+                <h4>❌ Without Functions (Repetitive)</h4>
+                <div class="code-example">
+<code>// First smiley at (100, 100)
+fill(255, 255, 0);
+ellipse(100, 100, 100, 100);
+fill(0);
+ellipse(85, 90, 10, 10);
+ellipse(115, 90, 10, 10);
+arc(100, 110, 50, 30, 0, PI);
+
+// Second smiley at (300, 100)
+fill(255, 255, 0);
+ellipse(300, 100, 100, 100);
+fill(0);
+ellipse(285, 90, 10, 10);
+ellipse(315, 90, 10, 10);
+arc(300, 110, 50, 30, 0, PI);
+
+// Third smiley at (200, 300)
+fill(255, 255, 0);
+ellipse(200, 300, 100, 100);
+fill(0);
+ellipse(185, 290, 10, 10);
+ellipse(215, 290, 10, 10);
+arc(200, 310, 50, 30, 0, PI);</code>
+                </div>
+                <p><strong>Problems:</strong></p>
+                <ul>
+                    <li>Same code repeated 3 times</li>
+                    <li>Hard to maintain (change requires updating 3 places)</li>
+                    <li>Easy to make mistakes</li>
+                    <li>Gets worse with more smileys</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-item good-example">
+                <h4>✅ With Functions (Clean & Simple)</h4>
+                <div class="code-example">
+<code>// Later, you'll learn to create this:
+drawSmiley(100, 100);
+drawSmiley(300, 100);
+drawSmiley(200, 300);</code>
+                </div>
+                <p><strong>Benefits:</strong></p>
+                <ul>
+                    <li>Code written once, used many times</li>
+                    <li>Easy to maintain (change in one place)</li>
+                    <li>Clear and readable</li>
+                    <li>Scales easily to 100s of smileys</li>
+                </ul>
+            </div>
+        </div>
+        
+        <p><strong>The Key Insight:</strong> Functions let you write code once and reuse it many times. This follows the <strong>DRY principle</strong>: "Don't Repeat Yourself."</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        Copying and pasting code is usually a sign that you should be using a function instead! If you find yourself copying code, stop and think: "Should this be a function?"
+    </div>
+</div>
+
+<!-- Benefits of Functions -->
+<div class="content-section">
+    <h2>🌟 The Benefits of Functions</h2>
+    
+    <p>Functions provide several crucial benefits that make them essential to programming:</p>
+    
+    <h3>1. Organization and Clarity</h3>
+    
+    <p>Functions help organize code into logical chunks, each with a clear purpose. This makes programs much easier to read and understand.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.4: Organization Through Functions</div>
+        
+        <p><strong>Compare these two approaches to drawing a scene:</strong></p>
+        
+        <div class="comparison-box">
+            <div class="comparison-item bad-example">
+                <h4>❌ Disorganized</h4>
+                <div class="code-example">
+<code>// All code jumbled together
+background(135, 206, 235);
+fill(255, 255, 0);
+ellipse(350, 80, 60, 60);
+fill(34, 139, 34);
+rect(0, 300, 400, 100);
+fill(139, 69, 19);
+rect(90, 280, 20, 50);
+fill(0, 128, 0);
+ellipse(100, 270, 50, 50);
+// ... lots more code ...</code>
+                </div>
+                <p>Hard to see what's being drawn!</p>
+            </div>
+            
+            <div class="comparison-item good-example">
+                <h4>✅ Organized with Functions</h4>
+                <div class="code-example">
+<code>// Crystal clear structure
+drawSky();
+drawSun();
+drawGrass();
+drawTree(100, 280);
+drawTree(250, 280);
+drawHouse(200, 250);</code>
+                </div>
+                <p>Immediately clear what the scene contains!</p>
+            </div>
+        </div>
+    </div>
+    
+    <h3>2. Reusability</h3>
+    
+    <p>Write once, use many times! Functions eliminate the need to copy and paste code.</p>
+    
+    <div class="callout callout-info">
+        Imagine if every time you wanted to draw a circle, you had to write the mathematical equations to calculate which pixels to color. Functions save you from this! Someone wrote those equations once in the <code>ellipse()</code> function, and now everyone can draw circles easily.
+    </div>
+    
+    <h3>3. Abstraction</h3>
+    
+    <p>Functions hide complexity behind simple interfaces. You can use powerful operations without understanding every detail of how they work.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.5: The Power of Abstraction</div>
+        
+        <p>Consider what happens when you call <code>random(1, 10)</code>:</p>
+        
+        <ul>
+            <li><strong>What you see:</strong> One simple function call</li>
+            <li><strong>What's hidden:</strong> Complex random number generation algorithms, seed management, range calculations, and more</li>
+            <li><strong>What you need to know:</strong> Just that it gives you a random number between 1 and 10</li>
+        </ul>
+        
+        <p>This is abstraction—using something powerful without needing to understand its internal complexity.</p>
+    </div>
+    
+    <h3>4. Maintainability</h3>
+    
+    <p>When code is organized in functions, fixing bugs or adding features becomes much easier. You can focus on one function at a time.</p>
+    
+    <h3>5. Testing and Debugging</h3>
+    
+    <p>Functions can be tested independently, making it easier to find and fix problems. If your <code>drawSmiley</code> function works correctly once, you know it will work correctly every time you use it.</p>
+</div>
+
+<!-- Formative Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 4.1.2: Understanding Function Benefits</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>What does the DRY principle stand for in programming?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_1"> A) Debug Repeatedly Yourself</label>
+            <label><input type="radio" name="q2_1"> B) Don't Repeat Yourself</label>
+            <label><input type="radio" name="q2_1"> C) Design Reliable Yields</label>
+            <label><input type="radio" name="q2_1"> D) Delete Redundant Yearly</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: B) Don't Repeat Yourself</strong></p>
+            <p>The DRY principle encourages programmers to avoid duplicating code. Instead of writing the same code multiple times, you should write it once (in a function) and reuse it. This makes code easier to maintain and less prone to errors.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Short Answer):</p>
+        <p>You need to change the color of all smiley faces in your program from yellow to orange. Which approach would be easier and why?</p>
+        <ul>
+            <li><strong>Approach A:</strong> The smiley drawing code is copied in 10 different places</li>
+            <li><strong>Approach B:</strong> All smileys are drawn using a <code>drawSmiley()</code> function</li>
+        </ul>
+        <textarea rows="4" placeholder="Which approach is easier and why?"></textarea>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: Approach B is much easier!</strong></p>
+            <p>With Approach B (using a function), you only need to change the color in ONE place—inside the <code>drawSmiley()</code> function. All 10 smileys will automatically use the new color. With Approach A, you'd have to find and change the color in 10 different places, which is time-consuming and you might miss some locations. This demonstrates why functions make code more maintainable.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (True/False):</p>
+        <p>Abstraction means you must understand every detail of how a function works before you can use it.</p>
+        <div class="options">
+            <label><input type="radio" name="q2_3"> True</label>
+            <label><input type="radio" name="q2_3"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: False.</strong> Abstraction is the exact opposite! It means you can use something without understanding all its internal details. You can drive a car without knowing how the engine works. You can use <code>ellipse()</code> without knowing the pixel calculation algorithms. Abstraction hides complexity and provides a simple interface.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Types of Functions -->
+<div class="content-section">
+    <h2>🎭 Two Types of Functions</h2>
+    
+    <p>There are two main categories of functions you'll work with in programming:</p>
+    
+    <h3>Built-in Functions</h3>
+    
+    <p><strong>Built-in functions</strong> are provided by the programming language or libraries. They're ready to use—you don't need to create them yourself. In p5.js, built-in functions include:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.6: Common Built-in Functions in p5.js</div>
+        
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Functions</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td><strong>Drawing</strong></td>
+                <td>ellipse(), rect(), line(), triangle(), arc()</td>
+                <td>Draw shapes on the canvas</td>
+            </tr>
+            <tr>
+                <td><strong>Color</strong></td>
+                <td>fill(), stroke(), background(), noStroke(), noFill()</td>
+                <td>Control colors</td>
+            </tr>
+            <tr>
+                <td><strong>Math</strong></td>
+                <td>random(), floor(), ceil(), abs(), sqrt()</td>
+                <td>Perform calculations</td>
+            </tr>
+            <tr>
+                <td><strong>Text</strong></td>
+                <td>text(), textSize(), textAlign()</td>
+                <td>Display text</td>
+            </tr>
+            <tr>
+                <td><strong>Output</strong></td>
+                <td>println(), print()</td>
+                <td>Display messages in console</td>
+            </tr>
+        </table>
+        
+        <p><strong>Key Point:</strong> You've been using built-in functions from the very first day of this course!</p>
+    </div>
+    
+    <div class="callout callout-info">
+        Built-in functions are like the tools that come with a new toolbox. They're already there, ready to use. Custom functions are like tools you make yourself for specialized tasks.
+    </div>
+    
+    <h3>Custom Functions</h3>
+    
+    <p><strong>Custom functions</strong> (also called user-defined functions) are functions that you create yourself for specific tasks in your program. In upcoming lessons, you'll learn how to create these!</p>
+    
+    <p>Custom functions let you extend the language with your own operations. Want a <code>drawRobot()</code> function? You can create it! Need a <code>calculateGrade()</code> function? You can build it!</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.7: Built-in vs. Custom Functions</div>
+        
+        <div class="code-example">
+<code>// Built-in functions - already exist
+ellipse(200, 200, 100, 100);    // Provided by p5.js
+random(1, 10);                   // Provided by p5.js
+fill(255, 0, 0);                 // Provided by p5.js
+
+// Custom functions - you will create these
+drawSmiley(100, 100);            // You'll define this
+calculateScore(level, time);     // You'll define this
+isGameOver();                    // You'll define this</code>
+        </div>
+        
+        <p>Notice that both types of functions are used the same way—name followed by parentheses. The only difference is who created them!</p>
+    </div>
+</div>
+
+<!-- Formative Assessment 3 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 4.1.3: Types of Functions</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Matching):</p>
+        <p>Match each function to its type:</p>
+        <table>
+            <tr>
+                <th>Function</th>
+                <th>Type</th>
+            </tr>
+            <tr>
+                <td>rect()</td>
+                <td>Built-in</td>
+            </tr>
+            <tr>
+                <td>drawHouse()</td>
+                <td>Custom (probably)</td>
+            </tr>
+            <tr>
+                <td>background()</td>
+                <td>Built-in</td>
+            </tr>
+            <tr>
+                <td>calculateTotal()</td>
+                <td>Custom (probably)</td>
+            </tr>
+            <tr>
+                <td>random()</td>
+                <td>Built-in</td>
+            </tr>
+        </table>
+        <details>
+            <summary>Show Answer</summary>
+            <p>The table shows the correct matches. Functions like <code>rect()</code>, <code>background()</code>, and <code>random()</code> are built-in p5.js functions. Functions with descriptive names like <code>drawHouse()</code> and <code>calculateTotal()</code> are typically custom functions created by programmers for their specific programs.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>Which statement is true about built-in functions?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2"> A) You must create them before using them</label>
+            <label><input type="radio" name="q3_2"> B) They are already available to use</label>
+            <label><input type="radio" name="q3_2"> C) They can only be used once in a program</label>
+            <label><input type="radio" name="q3_2"> D) They are slower than custom functions</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: B) They are already available to use</strong></p>
+            <p>Built-in functions are provided by the language or library and are ready to use immediately without any setup. You don't create them (option A), they can be used many times (option C), and their speed depends on implementation, not whether they're built-in (option D).</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>Why would you create a custom function instead of just using built-in functions?</p>
+        <textarea rows="4" placeholder="Type your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong></p>
+            <p>You create custom functions for tasks specific to your program that don't have built-in functions. For example, p5.js has no built-in function to draw a house or calculate a game score—these are specific to individual programs. Custom functions let you create your own reusable tools for tasks unique to your project. They also help you combine built-in functions in ways specific to your needs.</p>
+        </details>
+    </div>
+</div>
+
+<!-- How Functions Work Conceptually -->
+<div class="content-section">
+    <h2>⚙️ How Functions Work (Conceptually)</h2>
+    
+    <p>Understanding the basic flow of function execution helps you think about how your programs run. Here's what happens when you use a function:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.8: The Function Execution Flow</div>
+        
+        <p><strong>Imagine your program is following instructions like a recipe:</strong></p>
+        
+        <ol>
+            <li><strong>Your program is running along, executing code line by line</strong>
+                <div class="code-example"><code>var x = 100;
+var y = 200;</code></div>
+            </li>
+            
+            <li><strong>It encounters a function call</strong>
+                <div class="code-example"><code>ellipse(x, y, 50, 50);  // ← Function call!</code></div>
+            </li>
+            
+            <li><strong>The program "jumps" to the function's code</strong>
+                <p style="margin-left: 20px;">→ Executes all the instructions inside the <code>ellipse</code> function</p>
+                <p style="margin-left: 20px;">→ (You don't see this code—it's inside p5.js)</p>
+            </li>
+            
+            <li><strong>When the function finishes, the program "jumps back"</strong>
+                <p style="margin-left: 20px;">→ Continues with the next line after the function call</p>
+            </li>
+            
+            <li><strong>The program continues</strong>
+                <div class="code-example"><code>fill(255, 0, 0);  // ← Execution continues here</code></div>
+            </li>
+        </ol>
+        
+        <p><strong>Visual Representation:</strong></p>
+        <div class="code-example">
+<code>// Step 1: Program starts
+println("Starting program");
+
+// Step 2: Call a function
+ellipse(200, 200, 100, 100);  // ← Jump INTO ellipse function
+                               // ← Execute ellipse's code
+                               // ← Jump BACK here when done
+
+// Step 3: Continue with next instruction
+println("Drew a circle!");     // ← This runs after ellipse finishes</code>
+        </div>
+    </div>
+    
+    <div class="callout callout-hint">
+        Think of function calls like footnotes in a book. When you see a footnote marker¹, you jump down to read the footnote, then jump back to where you were reading. Functions work the same way—jump to the function, execute it, jump back.
+    </div>
+</div>
+
+<!-- Thinking With Functions -->
+<div class="content-section">
+    <h2>🧠 Thinking With Functions</h2>
+    
+    <p>As you advance in programming, you'll start thinking about problems in terms of functions. This is called <strong>functional decomposition</strong>—breaking down complex problems into smaller, function-sized pieces.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.1.9: Breaking Down a Problem</div>
+        
+        <p><strong>Task:</strong> Create a program that draws a forest scene with trees, clouds, and a sun.</p>
+        
+        <p><strong>Without functional thinking:</strong></p>
+        <p style="margin-left: 20px;">"I need to draw lots of shapes for trees and clouds and the sun..."</p>
+        
+        <p><strong>With functional thinking:</strong></p>
+        <ul>
+            <li>"I need a function to draw the sky"</li>
+            <li>"I need a function to draw a single tree"</li>
+            <li>"I need a function to draw a single cloud"</li>
+            <li>"I need a function to draw the sun"</li>
+            <li>"Then I can call these functions to build my scene"</li>
+        </ul>
+        
+        <p><strong>The Result (conceptual—you'll learn to write this soon):</strong></p>
+        <div class="code-example">
+<code>// Main program becomes beautifully simple:
+drawSky();
+drawSun();
+drawCloud(100, 80);
+drawCloud(300, 60);
+drawTree(50, 300);
+drawTree(150, 300);
+drawTree(250, 300);
+drawTree(350, 300);</code>
+        </div>
+        
+        <p>Notice how readable this is! Anyone reading this code immediately understands what the program does.</p>
+    </div>
+    
+    <div class="callout callout-info">
+        Professional programmers spend significant time thinking about how to break problems into functions before writing any code. Good function design makes programs easier to write, understand, and maintain.
+    </div>
+</div>
+
+<!-- Final Assessment -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 4.1.4: Comprehensive Understanding</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Application):</p>
+        <p>You're creating a program that draws playing cards. You need to draw 52 cards arranged in rows. What would be the advantage of creating a <code>drawCard()</code> function versus writing the drawing code 52 times?</p>
+        <textarea rows="5" placeholder="Explain the advantages..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong></p>
+            <ul>
+                <li><strong>Efficiency:</strong> Write the card-drawing code once instead of 52 times</li>
+                <li><strong>Consistency:</strong> All cards will be drawn identically</li>
+                <li><strong>Maintainability:</strong> If you want to change card design, modify one function instead of 52 code blocks</li>
+                <li><strong>Readability:</strong> Your main program becomes much clearer—just 52 function calls</li>
+                <li><strong>Bug fixes:</strong> If there's an error in how cards are drawn, fix it once in the function</li>
+                <li><strong>Flexibility:</strong> Easy to add parameters later for different positions, suits, values, etc.</li>
+            </ul>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Concept Explanation):</p>
+        <p>In your own words, explain what abstraction means in the context of functions.</p>
+        <textarea rows="4" placeholder="Explain abstraction..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> Abstraction means hiding complex details behind a simple interface. With functions, you can use powerful operations without understanding their internal complexity. For example, when you call <code>random(1, 100)</code>, you don't need to know the complex algorithms for generating random numbers—you just need to know it gives you a random number in that range. The complexity is abstracted away, letting you focus on what the function does rather than how it does it.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Multiple Choice):</p>
+        <p>Which best describes the DRY principle as it relates to functions?</p>
+        <div class="options">
+            <label><input type="radio" name="q4_3"> A) Always keep your code files small and compact</label>
+            <label><input type="radio" name="q4_3"> B) Write code once in a function and reuse it rather than copying it</label>
+            <label><input type="radio" name="q4_3"> C) Delete old code regularly to keep projects clean</label>
+            <label><input type="radio" name="q4_3"> D) Avoid using the same variable name twice</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: B) Write code once in a function and reuse it rather than copying it</strong></p>
+            <p>"Don't Repeat Yourself" specifically means avoiding code duplication. Functions are the primary tool for following the DRY principle—they let you write code once and call it multiple times instead of copying and pasting the same code throughout your program.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Design Thinking):</p>
+        <p>You're designing a simple video game. List at least 4 custom functions you might create for your game and explain what each would do.</p>
+        <textarea rows="8" placeholder="List your functions and their purposes..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong></p>
+            <ol>
+                <li><strong>drawPlayer():</strong> Draws the player character on the screen</li>
+                <li><strong>drawEnemy():</strong> Draws an enemy character</li>
+                <li><strong>updateScore():</strong> Updates and displays the player's score</li>
+                <li><strong>checkCollision():</strong> Checks if the player hit an enemy or collected an item</li>
+                <li><strong>resetGame():</strong> Resets all game variables to start a new game</li>
+                <li><strong>drawGameOver():</strong> Displays the game over screen</li>
+            </ol>
+            <p>These functions break the game into manageable, reusable pieces, each handling one specific aspect of the game.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    
+    <p>Congratulations! You've taken your first step into one of the most important concepts in all of programming. Functions are fundamental to writing organized, maintainable, and powerful code.</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ <strong>Functions are named blocks of code</strong> that perform specific tasks and can be reused throughout your program</li>
+        <li>✅ <strong>You've been using functions all along!</strong> Every time you write <code>ellipse()</code>, <code>rect()</code>, or <code>fill()</code>, you're calling a function</li>
+        <li>✅ <strong>Function calls</strong> are identified by a name followed by parentheses: <code>functionName()</code></li>
+        <li>✅ <strong>Built-in functions</strong> are provided by the programming language or libraries (like p5.js)</li>
+        <li>✅ <strong>Custom functions</strong> are ones you create yourself for specific tasks in your programs</li>
+        <li>✅ <strong>The DRY principle</strong> ("Don't Repeat Yourself") encourages using functions instead of copying code</li>
+        <li>✅ <strong>Functions provide organization</strong> by breaking programs into logical, manageable pieces</li>
+        <li>✅ <strong>Functions enable reusability</strong> by letting you write code once and use it many times</li>
+        <li>✅ <strong>Functions offer abstraction</strong> by hiding complexity behind simple interfaces</li>
+        <li>✅ <strong>Functions improve maintainability</strong> by centralizing code in one place</li>
+        <li>✅ <strong>Thinking with functions</strong> means breaking down problems into smaller, function-sized pieces</li>
+    </ul>
+    
+    <h3>Core Concepts Mastered:</h3>
+    <table>
+        <tr>
+            <th>Concept</th>
+            <th>What It Means</th>
+            <th>Why It Matters</th>
+        </tr>
+        <tr>
+            <td>Function</td>
+            <td>Named block of reusable code</td>
+            <td>Fundamental building block of programs</td>
+        </tr>
+        <tr>
+            <td>Function Call</td>
+            <td>Using a function by writing its name</td>
+            <td>How you execute function code</td>
+        </tr>
+        <tr>
+            <td>Built-in Functions</td>
+            <td>Functions provided by libraries</td>
+            <td>Ready-to-use tools for common tasks</td>
+        </tr>
+        <tr>
+            <td>Custom Functions</td>
+            <td>Functions you create yourself</td>
+            <td>Extend the language for your needs</td>
+        </tr>
+        <tr>
+            <td>Abstraction</td>
+            <td>Hiding complexity behind simple interface</td>
+            <td>Use powerful operations easily</td>
+        </tr>
+        <tr>
+            <td>DRY Principle</td>
+            <td>Don't Repeat Yourself</td>
+            <td>Write code once, reuse many times</td>
+        </tr>
+    </table>
+    
+    <h3>Remember:</h3>
+    <div class="callout callout-info">
+        Functions are like tools in a toolbox. Just as a carpenter has different tools for different jobs (hammer for nails, saw for cutting, drill for holes), programmers have different functions for different tasks. The more functions you know and can create, the more powerful your programming toolbox becomes!
+    </div>
+    
+    <div class="callout callout-hint">
+        <strong>Looking Forward:</strong> In the next few lessons, you'll learn how to create your own custom functions, how to give them information to work with, and how to get results back from them. By the end of Chapter 4, you'll be able to design and build complex programs using well-organized functions. This is where programming really becomes powerful!
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 4, Lesson 2: Defining Your Own Functions</h3>
+    
+    <p>Now that you understand <em>what</em> functions are and <em>why</em> they're important, you're ready to learn how to create your own! In the next lesson, you'll discover:</p>
+    
+    <ul>
+        <li>✍️ <strong>Function Definition Syntax:</strong> The exact code structure for creating your own functions</li>
+        <li>🏷️ <strong>Naming Functions:</strong> Best practices for choosing clear, descriptive function names</li>
+        <li>🎯 <strong>Function Scope:</strong> Where your functions can be used in your programs</li>
+        <li>🔄 <strong>Calling Your Functions:</strong> How to use the functions you create</li>
+        <li>🎨 <strong>Creating Drawing Functions:</strong> Building functions that draw custom shapes and scenes</li>
+        <li>🧮 <strong>Creating Calculation Functions:</strong> Building functions that perform computations</li>
+        <li>📦 <strong>Function Organization:</strong> Structuring your code with multiple functions working together</li>
+        <li>🐛 <strong>Debugging Functions:</strong> Finding and fixing problems in your function code</li>
+    </ul>
+    
+    <p>By the end of the next lesson, you'll be able to transform repetitive code into clean, reusable functions. You'll start building your own library of custom tools that make your programs more powerful and easier to write!</p>
+    
+    <div class="callout callout-hint">
+        <strong>Get Ready to Create!</strong>
+        <p style="margin-top: 10px;">Before moving on to the next lesson, take a moment to think about your current and past programs:</p>
+        <ul style="margin-top: 10px;">
+            <li>🤔 What code have you found yourself copying and pasting?</li>
+            <li>🎨 What shapes or patterns do you draw repeatedly?</li>
+            <li>🧮 What calculations do you perform multiple times?</li>
+            <li>🎮 What game elements appear more than once?</li>
+        </ul>
+        <p style="margin-top: 10px;">These are perfect candidates for functions! In the next lesson, you'll learn how to turn these repeated tasks into reusable functions.</p>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Preview: What You'll Be Able to Do</div>
+        <p>After the next lesson, instead of writing repetitive code like this:</p>
+        <div class="code-example">
+<code>// Drawing 5 trees the hard way
+fill(139, 69, 19);
+rect(90, 280, 20, 50);
+fill(0, 128, 0);
+ellipse(100, 270, 50, 50);
+
+fill(139, 69, 19);
+rect(190, 280, 20, 50);
+fill(0, 128, 0);
+ellipse(200, 270, 50, 50);
+
+// ... 3 more times ...</code>
+        </div>
+        
+        <p>You'll be able to write clean, simple code like this:</p>
+        <div class="code-example">
+<code>// Drawing 5 trees with a function
+drawTree(100, 280);
+drawTree(200, 280);
+drawTree(300, 280);
+drawTree(400, 280);
+drawTree(500, 280);</code>
+        </div>
+        
+        <p>And you'll know exactly how to create the <code>drawTree()</code> function yourself! Ready to learn how? Let's move on to Lesson 4.2!</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 4, Lesson 1: Introduction to Functions</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">
+        © 2025 University of Rhode Island. All rights reserved.
+    </p>
+</div>
+
+</body>
+</html>
