@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3.2: Mouse Interaction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .summary-box h3 {
+            color: #764ba2;
+            margin-top: 20px;
+        }
+        
+        .summary-box ul {
+            margin: 10px 0;
+        }
+        
+        .summary-box li {
+            margin: 8px 0;
+        }
+        
+        .next-chapter {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #28a745;
+            margin: 30px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #28a745;
+            border-bottom: 3px solid #28a745;
+        }
+        
+        .next-chapter h3 {
+            color: #155724;
+        }
+        
+        .next-chapter ul {
+            margin: 15px 0;
+        }
+        
+        .next-chapter li {
+            margin: 8px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table th {
+            background-color: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .interactive-demo {
+            background: #f0f7ff;
+            border: 2px dashed #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .practice-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        
+        .practice-link:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="chapter-header">
+    <h1>Chapter 3.2: Mouse Interaction</h1>
+    <p>Making Your Programs Come Alive with User Input</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>Introduction: From Automated to Interactive</h2>
+    <p>In the previous lesson, you learned how to create animations that move and change automatically. But what makes programs truly engaging? <strong>Interactivity</strong>—the ability to respond to what users do in real time!</p>
+    
+    <p>Imagine the difference between watching a movie and playing a video game. Both have moving images, but only one responds to your actions. That's the power of interactivity, and in this lesson, you'll learn how to harness it.</p>
+    
+    <p>When you move your mouse across a web page and buttons light up, or when you click and drag to draw—that's mouse interaction at work. Processing provides simple, built-in variables and functions that let you track the mouse position and detect clicks, making it incredibly easy to create responsive, dynamic programs.</p>
+    
+    <div class="callout callout-info">
+        Mouse interaction bridges the gap between your program and the user. Instead of writing code that does the same thing every time it runs, you'll create programs that adapt and respond based on what the user does. This is a fundamental concept in all interactive software—from simple drawing apps to complex video games!
+    </div>
+    
+    <p>By the end of this lesson, you'll be able to create programs where shapes follow your mouse, drawings appear where you click, and your canvas transforms into an interactive playground. Let's dive in!</p>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>📋 Learning Objectives</h2>
+    <p>After completing this lesson, you will be able to:</p>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.1:</strong> Understand and use the mouseX and mouseY built-in variables to track mouse position in real time.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.2:</strong> Create dynamic graphics that follow and respond to mouse movement.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.3:</strong> Implement mouse event functions including mouseClicked() and mouseDragged() to detect user actions.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.4:</strong> Distinguish between continuous mouse tracking and discrete mouse events.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.5:</strong> Build simple interactive drawing tools and painting applications.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.6:</strong> Combine mouse interaction with animation techniques to create engaging, user-driven programs.
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.2.7:</strong> Apply event-driven programming concepts to create responsive applications.
+    </div>
+</div>
+
+<!-- Concepts and Terms -->
+<div class="content-section">
+    <h2>📚 Key Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Interactivity</div>
+        <p>The ability of a program to respond to user input in real time. Interactive programs change their behavior based on what the user does, such as moving the mouse or clicking buttons.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Built-in Variables</div>
+        <p>Variables that are automatically created and updated by Processing. You don't need to declare them—Processing handles everything behind the scenes. Examples include <code>mouseX</code> and <code>mouseY</code>.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">mouseX</div>
+        <p>A built-in variable that always contains the current x-coordinate (horizontal position) of the mouse pointer on the canvas. Processing updates this value automatically as the mouse moves.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">mouseY</div>
+        <p>A built-in variable that always contains the current y-coordinate (vertical position) of the mouse pointer on the canvas. Like <code>mouseX</code>, this updates automatically.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Mouse Event</div>
+        <p>A specific action performed with the mouse, such as clicking, dragging, or releasing a button. Processing can detect these events and execute code in response.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Event-Driven Programming</div>
+        <p>A programming paradigm where the program's flow is determined by events—actions that occur, such as mouse clicks or key presses. Instead of running sequentially, the program waits for events and responds to them.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">mouseClicked()</div>
+        <p>A special function that runs automatically whenever the user clicks the mouse button on the canvas. You define what happens inside this function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">mouseDragged()</div>
+        <p>A special function that runs continuously while the user holds down the mouse button and moves the mouse. Perfect for creating drawing tools.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Continuous Tracking</div>
+        <p>Monitoring the mouse position every frame (using <code>mouseX</code> and <code>mouseY</code> in the <code>draw()</code> function). This allows objects to follow the mouse smoothly.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Event Handling</div>
+        <p>Writing code that responds to specific user actions. Event handlers (like <code>mouseClicked()</code>) only run when their associated event occurs, not continuously like <code>draw()</code>.</p>
+    </div>
+</div>
+
+<!-- Main Content: Part 1 - Mouse Position Tracking -->
+<div class="content-section">
+    <h2>🖱️ Part 1: Tracking Mouse Position with mouseX and mouseY</h2>
+    
+    <h3>Understanding Built-in Mouse Variables</h3>
+    <p>Processing provides two incredibly useful built-in variables that make mouse interaction effortless:</p>
+    <ul>
+        <li><code>mouseX</code> – the current horizontal position of the mouse</li>
+        <li><code>mouseY</code> – the current vertical position of the mouse</li>
+    </ul>
+    
+    <p>These variables are <em>always</em> up to date. Every time you use them in your code, they contain the most recent position of the mouse pointer. You never need to declare them or update them yourself—Processing handles everything automatically!</p>
+    
+    <div class="callout callout-info">
+        Think of <code>mouseX</code> and <code>mouseY</code> as magical variables that Processing continuously updates for you behind the scenes. They're always ready to use, no setup required. It's like having a GPS tracker for your mouse cursor!
+    </div>
+    
+    <h3>Your First Interactive Program</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.2.1: Shape That Follows the Mouse</div>
+        <p>Let's create a simple program where a circle follows the mouse cursor:</p>
+        
+        <div class="code-example">
+<code>draw = function() {
+    background(200, 200, 255);
+    
+    // Draw a circle at the mouse position
+    fill(0, 150, 255);
+    ellipse(mouseX, mouseY, 30, 30);
+};</code>
+        </div>
+        
+        <p><strong>How it works:</strong></p>
+        <ol>
+            <li>The <code>draw()</code> function runs 60 times per second</li>
+            <li>Each frame, <code>background()</code> clears the canvas</li>
+            <li>The ellipse is drawn at position <code>(mouseX, mouseY)</code></li>
+            <li>As you move your mouse, <code>mouseX</code> and <code>mouseY</code> change</li>
+            <li>The circle appears to follow your cursor smoothly!</li>
+        </ol>
+        
+        <div class="callout callout-hint">
+            Try running this code and moving your mouse around the canvas. Notice how the circle follows your cursor perfectly? That's because <code>draw()</code> constantly redraws the circle at the new mouse position!
+        </div>
+    </div>
+    
+    <div class="video-placeholder">
+        <h3>📹 Video: Introduction to Mouse Interaction</h3>
+        <p>Duration: 1:27</p>
+        <p>In this video, we explore how to make your programs interactive using built-in variables in Processing JS. Learn how <code>mouseX</code> and <code>mouseY</code> track your mouse's position in real time—and how you can use them to create motion and simple drawing tools. From making shapes follow your cursor to turning your canvas into a digital paintbrush, this lesson brings your code to life with dynamic, user-driven visuals.</p>
+    </div>
+</div>
+
+<!-- Formative Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.2.1: Understanding Mouse Variables</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (True/False):</p>
+        <p>You need to declare <code>mouseX</code> and <code>mouseY</code> as variables before you can use them in your program.</p>
+        <div class="options">
+            <label><input type="radio" name="q1"> True</label>
+            <label><input type="radio" name="q1"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: False.</strong> <code>mouseX</code> and <code>mouseY</code> are <em>built-in variables</em> that Processing creates and updates automatically. You can use them directly in your code without declaring them!</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>If the canvas is 400 pixels wide and 400 pixels tall, what are the possible values for <code>mouseX</code>?</p>
+        <div class="options">
+            <label><input type="radio" name="q2"> A) 0 to 400</label>
+            <label><input type="radio" name="q2"> B) 1 to 400</label>
+            <label><input type="radio" name="q2"> C) -400 to 400</label>
+            <label><input type="radio" name="q2"> D) Any number</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: A) 0 to 400.</strong> The leftmost edge of the canvas is x = 0, and the rightmost edge is x = 400 (assuming a 400-pixel-wide canvas). The same logic applies to <code>mouseY</code> for the vertical dimension.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>Explain why we need to call <code>background()</code> inside the <code>draw()</code> function when creating a shape that follows the mouse.</p>
+        <textarea rows="4" placeholder="Type your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> We need <code>background()</code> to clear the previous frame's drawing. Without it, the shape would leave a trail everywhere the mouse moved, creating a messy accumulation of circles. Calling <code>background()</code> each frame gives us a clean canvas to draw the shape at its new position.</p>
+        </details>
+    </div>
+</div>
+
+<!-- More Examples -->
+<div class="content-section">
+    <h2>🎨 Creating Drawing Trails</h2>
+    <p>What if you <em>want</em> shapes to leave trails? Simple—just don't clear the background!</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.2.2: Creating a Drawing Trail</div>
+        <p>By removing <code>background()</code> from the <code>draw()</code> function, shapes will accumulate on the canvas:</p>
+        
+        <div class="code-example">
+<code>// Set background once at the start
+background(255, 255, 255);
+
+draw = function() {
+    // No background() here - shapes will accumulate!
+    fill(255, 0, 150, 100);  // Semi-transparent pink
+    ellipse(mouseX, mouseY, 20, 20);
+};</code>
+        </div>
+        
+        <p><strong>Result:</strong> As you move your mouse, small semi-transparent circles appear wherever the cursor goes, creating a beautiful drawing trail!</p>
+        
+        <div class="callout callout-hint">
+            Notice the fourth parameter in <code>fill(255, 0, 150, 100)</code>? That's the <em>transparency</em> (alpha) value. Using semi-transparent colors (alpha less than 255) creates interesting overlapping effects in your trails!
+        </div>
+    </div>
+    
+    <div class="callout callout-warning">
+        If you don't call <code>background()</code> inside <code>draw()</code>, the canvas will never clear. This is perfect for drawing programs, but make sure it's intentional! Accidentally forgetting <code>background()</code> is a common source of unexpected behavior.
+    </div>
+    
+    <h3>Multiple Interactive Elements</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.2.3: Two Shapes Following the Mouse</div>
+        <p>You can use <code>mouseX</code> and <code>mouseY</code> multiple times in the same program to create complex effects:</p>
+        
+        <div class="code-example">
+<code>draw = function() {
+    background(30, 30, 50);
+    
+    // Main circle follows mouse directly
+    fill(255, 200, 0);
+    ellipse(mouseX, mouseY, 40, 40);
+    
+    // Shadow circle lags behind
+    fill(100, 100, 150, 150);
+    ellipse(mouseX - 15, mouseY + 15, 40, 40);
+};</code>
+        </div>
+        
+        <p><strong>Analysis:</strong> This creates a shadow effect! The second circle is offset by (-15, +15) from the mouse position, making it appear as a shadow to the bottom-right of the main circle.</p>
+    </div>
+</div>
+
+<!-- Formative Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.2.2: Mouse Position Applications</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Matching):</p>
+        <p>Match each code snippet with what it creates:</p>
+        <table>
+            <tr>
+                <th>Code</th>
+                <th>Effect</th>
+            </tr>
+            <tr>
+                <td><code>ellipse(mouseX, mouseY, 30, 30);</code></td>
+                <td>Circle follows mouse with trail</td>
+            </tr>
+            <tr>
+                <td><code>rect(mouseX, 0, 50, 400);</code></td>
+                <td>Vertical line follows mouse horizontally</td>
+            </tr>
+            <tr>
+                <td><code>ellipse(200, mouseY, 40, 40);</code></td>
+                <td>Circle follows mouse vertically at center</td>
+            </tr>
+        </table>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Matches:</strong></p>
+            <ul>
+                <li>First code: Circle follows mouse perfectly</li>
+                <li>Second code: Creates a vertical line (rectangle) that follows the mouse's x-position</li>
+                <li>Third code: Circle stays horizontally centered (x=200) but moves up/down with the mouse</li>
+            </ul>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Code Writing):</p>
+        <p>Write code to create a rectangle that follows your mouse cursor. The rectangle should be 60 pixels wide and 80 pixels tall, filled with blue color.</p>
+        <textarea rows="8" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>draw = function() {
+    background(220, 220, 220);
+    
+    fill(0, 100, 255);
+    rect(mouseX, mouseY, 60, 80);
+};</code>
+            </div>
+            <p><strong>Note:</strong> Remember that for rectangles, <code>mouseX</code> and <code>mouseY</code> specify the <em>top-left corner</em> by default. If you want the rectangle centered on the mouse, you could use <code>rectMode(CENTER)</code> first!</p>
+        </details>
+    </div>
+</div>
+
+<!-- Part 2: Mouse Events -->
+<div class="content-section">
+    <h2>🎯 Part 2: Responding to Mouse Events</h2>
+    
+    <p>While tracking the mouse position is powerful, sometimes you want to respond to <em>specific actions</em> the user takes—like clicking or dragging. That's where <strong>mouse event functions</strong> come in!</p>
+    
+    <h3>Understanding Event-Driven Programming</h3>
+    <p>So far, most of your code has run either once at the start or continuously in the <code>draw()</code> function. Event-driven programming is different—code runs only when <em>specific events occur</em>.</p>
+    
+    <div class="callout callout-info">
+        Think of event functions like alarm bells in your program. They sit quietly, waiting. When the user performs a specific action (like clicking), the "bell rings" and the associated code runs. After it finishes, the function goes back to waiting for the next event.
+    </div>
+    
+    <h3>The mouseClicked() Function</h3>
+    <p>The <code>mouseClicked()</code> function runs automatically every time the user clicks the mouse on your canvas:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.2.4: Placing Circles with Mouse Clicks</div>
+        <p>Let's create a program that draws a circle wherever you click:</p>
+        
+        <div class="code-example">
+<code>// Set white background once
+background(255, 255, 255);
+
+// This function runs ONLY when the mouse is clicked
+mouseClicked = function() {
+    fill(255, 100, 100);
+    ellipse(mouseX, mouseY, 50, 50);
+};</code>
+        </div>
+        
+        <p><strong>How it works:</strong></p>
+        <ol>
+            <li>The background is set once at the start (not in <code>draw()</code>)</li>
+            <li><code>mouseClicked()</code> waits silently for clicks</li>
+            <li>When you click, Processing calls <code>mouseClicked()</code> automatically</li>
+            <li>A circle is drawn at the current mouse position</li>
+            <li>Since there's no <code>background()</code> clearing the canvas, all circles remain visible</li>
+        </ol>
+    </div>
+    
+    <div class="callout callout-warning">
+        Don't call <code>mouseClicked()</code> yourself! Processing calls it automatically when the user clicks. You just define what should happen inside it, similar to how you define what happens in <code>draw()</code> but don't call it manually.
+    </div>
+    
+    <h3>The mouseDragged() Function</h3>
+    <p>The <code>mouseDragged()</code> function is perfect for drawing programs—it runs continuously while the user holds down the mouse button and moves the mouse:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.2.5: Simple Paint Program</div>
+        <p>Create a basic drawing tool that lets users paint by dragging the mouse:</p>
+        
+        <div class="code-example">
+<code>// Start with white canvas
+background(255, 255, 255);
+
+// This runs continuously while dragging
+mouseDragged = function() {
+    fill(50, 50, 200);
+    ellipse(mouseX, mouseY, 15, 15);
+};</code>
+        </div>
+        
+        <p><strong>Result:</strong> Hold down the mouse button and drag to paint! Small blue circles appear along your mouse path, creating smooth lines.</p>
+    </div>
+    
+    <div class="video-placeholder">
+        <h3>📹 Video: More Mouse Events</h3>
+        <p>Duration: 1:29</p>
+        <p>Explore how to take user interaction to the next level using built-in mouse event functions in Processing JS. Building on the previous section where an ellipse followed the mouse using <code>mouseX</code> and <code>mouseY</code>, this video introduces functions like <code>mouseClicked()</code> and <code>mouseDragged()</code> to control <em>when</em> shapes appear. Instead of drawing continuously, you'll learn how to trigger shapes only when the user clicks or drags the mouse—perfect for creating interactive sketches, drawing apps, and more. Get ready to add responsiveness and control to your canvas using a full range of mouse events.</p>
+    </div>
+</div>
+
+<!-- Formative Assessment 3 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.2.3: Mouse Events</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (True/False):</p>
+        <p>The <code>mouseClicked()</code> function runs 60 times per second, just like <code>draw()</code>.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_1"> True</label>
+            <label><input type="radio" name="q3_1"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: False.</strong> Unlike <code>draw()</code>, which runs continuously, <code>mouseClicked()</code> only runs when the user actually clicks the mouse. It's an <em>event function</em> that responds to specific user actions, not a continuously-running loop.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>Which mouse event function would be BEST for creating a drawing program where the user paints by dragging?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2"> A) draw()</label>
+            <label><input type="radio" name="q3_2"> B) mouseClicked()</label>
+            <label><input type="radio" name="q3_2"> C) mouseDragged()</label>
+            <label><input type="radio" name="q3_2"> D) mouseX and mouseY only</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: C) mouseDragged().</strong> The <code>mouseDragged()</code> function runs continuously while the user holds down the mouse button and moves—perfect for painting! <code>mouseClicked()</code> would only place single dots when clicked, and using <code>draw()</code> alone would paint even when the mouse button isn't pressed.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>What's the difference between using <code>mouseX</code> and <code>mouseY</code> in the <code>draw()</code> function versus in the <code>mouseClicked()</code> function?</p>
+        <textarea rows="5" placeholder="Type your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> When used in <code>draw()</code>, <code>mouseX</code> and <code>mouseY</code> create continuous tracking—shapes follow the mouse every frame. When used in <code>mouseClicked()</code>, they capture the mouse position only at the moment of the click—creating a single shape at that location. The <code>draw()</code> version is continuous; the <code>mouseClicked()</code> version is discrete (happens only at specific moments).</p>
+        </details>
+    </div>
+</div>
+
+<!-- Advanced Examples -->
+<div class="content-section">
+    <h2>🚀 Advanced Techniques: Combining Concepts</h2>
+    
+    <h3>Combining draw() with Mouse Events</h3>
+    <p>The real power comes from using <code>draw()</code> and mouse event functions <em>together</em>! Here's a sophisticated example:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.2.6: Interactive Color Picker</div>
+        <p>Create a program where a shape follows the mouse, and clicking changes its color randomly:</p>
+        
+        <div class="code-example">
+<code>// Variables for the circle's color
+var red = 255;
+var green = 100;
+var blue = 100;
+
+// Runs continuously
+draw = function() {
+    background(240, 240, 240);
+    
+    // Circle follows mouse
+    fill(red, green, blue);
+    ellipse(mouseX, mouseY, 60, 60);
+    
+    // Display instructions
+    fill(0);
+    text("Click to change color!", 10, 20);
+};
+
+// Runs only when clicked
+mouseClicked = function() {
+    // Generate random RGB values
+    red = random(0, 255);
+    green = random(0, 255);
+    blue = random(0, 255);
+};</code>
+        </div>
+        
+        <p><strong>How it works:</strong></p>
+        <ol>
+            <li>Color variables are declared outside all functions</li>
+            <li><code>draw()</code> continuously displays a circle at the mouse position using the current color</li>
+            <li>When you click, <code>mouseClicked()</code> generates new random color values</li>
+            <li>The next time <code>draw()</code> runs, it uses the new colors</li>
+        </ol>
+        
+        <div class="callout callout-hint">
+            This pattern—using variables that both <code>draw()</code> and event functions can access—is extremely powerful. The event functions modify the variables, and <code>draw()</code> uses them to display things. This is the foundation of interactive programs!
+        </div>
+    </div>
+    
+    <h3>Creating a Multi-Color Paint Program</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.2.7: Paint with Multiple Colors</div>
+        <p>Let's create a more sophisticated drawing program with multiple brush colors:</p>
+        
+        <div class="code-example">
+<code>// Current brush color
+var brushRed = 0;
+var brushGreen = 0;
+var brushBlue = 0;
+
+// Setup the canvas
+background(255, 255, 255);
+
+// Draw with the current brush
+mouseDragged = function() {
+    noStroke();
+    fill(brushRed, brushGreen, brushBlue, 150);
+    ellipse(mouseX, mouseY, 20, 20);
+};
+
+// Click to cycle through colors
+mouseClicked = function() {
+    if (brushRed === 0 && brushGreen === 0 && brushBlue === 0) {
+        // Change to red
+        brushRed = 255;
+    } else if (brushRed === 255) {
+        // Change to green
+        brushRed = 0;
+        brushGreen = 255;
+    } else if (brushGreen === 255) {
+        // Change to blue
+        brushGreen = 0;
+        brushBlue = 255;
+    } else {
+        // Change back to black
+        brushBlue = 0;
+    }
+};</code>
+        </div>
+        
+        <p><strong>Features:</strong></p>
+        <ul>
+            <li>Drag to paint with the current color</li>
+            <li>Click (without dragging) to cycle through colors: black → red → green → blue → black</li>
+            <li>Semi-transparent brush creates layering effects</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Formative Assessment 4 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.2.4: Combining Techniques</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Code Analysis):</p>
+        <p>What will this program do?</p>
+        <div class="code-example">
+<code>var size = 30;
+
+draw = function() {
+    background(200, 200, 200);
+    ellipse(mouseX, mouseY, size, size);
+};
+
+mouseClicked = function() {
+    size = size + 10;
+};</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q4_1"> A) Draw circles that get larger when you click</label>
+            <label><input type="radio" name="q4_1"> B) Draw multiple circles of increasing size</label>
+            <label><input type="radio" name="q4_1"> C) A circle follows the mouse and grows when you click</label>
+            <label><input type="radio" name="q4_1"> D) Nothing - there's an error</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answer: C) A circle follows the mouse and grows when you click.</strong> The <code>draw()</code> function makes one circle follow the mouse each frame. When you click, <code>size</code> increases by 10, so the next circle drawn will be 10 pixels larger in diameter. The background clears each frame, so only one circle is visible at a time.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Debugging):</p>
+        <p>A student wants to create a program where clicking places a red square and dragging places blue circles. Their code isn't working correctly. What's wrong?</p>
+        <div class="code-example">
+<code>background(255, 255, 255);
+
+mouseClicked = function() {
+    var red = 255;
+    fill(red, 0, 0);
+    rect(mouseX, mouseY, 40, 40);
+};
+
+mouseDragged = function() {
+    fill(0, 0, 255);
+    ellipse(mouseX, mouseY, 20, 20);
+};</code>
+        </div>
+        <textarea rows="6" placeholder="Explain what's wrong and how to fix it..."></textarea>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Problem:</strong> The variable <code>red</code> is declared inside <code>mouseClicked()</code>, which is unnecessary and doesn't cause the actual bug. The real issue is subtle: this code will actually work as intended! However, a potential improvement would be to use <code>noStroke()</code> for cleaner shapes, or to recognize that declaring <code>red</code> as a local variable is unnecessary when you could just use the literal value 255 directly.</p>
+            <p><strong>Better version:</strong></p>
+            <div class="code-example">
+<code>background(255, 255, 255);
+noStroke();
+
+mouseClicked = function() {
+    fill(255, 0, 0);
+    rect(mouseX, mouseY, 40, 40);
+};
+
+mouseDragged = function() {
+    fill(0, 0, 255);
+    ellipse(mouseX, mouseY, 20, 20);
+};</code>
+            </div>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Writing):</p>
+        <p>Write a program that:</p>
+        <ul>
+            <li>Shows a yellow circle that follows the mouse</li>
+            <li>Leaves a trail of small purple dots when you drag the mouse</li>
+        </ul>
+        <textarea rows="12" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>// White background at start
+background(255, 255, 255);
+
+// Yellow circle follows mouse
+draw = function() {
+    // Don't clear - we want trails!
+    
+    // Yellow circle at mouse position
+    fill(255, 255, 0);
+    ellipse(mouseX, mouseY, 30, 30);
+};
+
+// Purple trail when dragging
+mouseDragged = function() {
+    fill(150, 0, 200);
+    ellipse(mouseX, mouseY, 8, 8);
+};</code>
+            </div>
+            <p><strong>Note:</strong> We don't use <code>background()</code> in <code>draw()</code> because we want both the yellow circle trail and the purple dots to remain visible!</p>
+        </details>
+    </div>
+</div>
+
+<!-- Practical Applications -->
+<div class="content-section">
+    <h2>🎮 Practical Applications</h2>
+    
+    <h3>Application 1: Interactive Signature Pad</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.2.8: Digital Signature Capture</div>
+        <p>Create a simple signature pad where users can sign with their mouse:</p>
+        
+        <div class="code-example">
+<code>// White background for signing
+background(255, 255, 255);
+
+// Draw signature line
+stroke(0);
+line(50, 300, 350, 300);
+
+// Instructions
+fill(100);
+noStroke();
+text("Sign above the line", 140, 330);
+
+// Capture signature with black pen
+mouseDragged = function() {
+    stroke(0);
+    strokeWeight(2);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+};</code>
+        </div>
+        
+        <p><strong>New concept:</strong> This code uses <code>pmouseX</code> and <code>pmouseY</code>—these are built-in variables that store the <em>previous</em> mouse position. Drawing a line from the previous position to the current position creates smooth, connected strokes!</p>
+        
+        <div class="callout callout-info">
+            The variables <code>pmouseX</code> and <code>pmouseY</code> (the "p" stands for "previous") let you create smooth lines by connecting consecutive mouse positions. This is much better than drawing individual dots!
+        </div>
+    </div>
+    
+    <h3>Application 2: Interactive Starry Sky</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.2.9: Click to Create Stars</div>
+        <p>Build a program that creates twinkling stars wherever you click:</p>
+        
+        <div class="code-example">
+<code>// Night sky background
+background(10, 10, 40);
+
+mouseClicked = function() {
+    // Random star size
+    var starSize = random(3, 12);
+    
+    // Random brightness
+    var brightness = random(150, 255);
+    
+    // Draw the star
+    fill(brightness, brightness, brightness);
+    noStroke();
+    
+    // Center star
+    ellipse(mouseX, mouseY, starSize, starSize);
+    
+    // Star points (4 small ellipses)
+    ellipse(mouseX - starSize, mouseY, starSize/3, starSize/3);
+    ellipse(mouseX + starSize, mouseY, starSize/3, starSize/3);
+    ellipse(mouseX, mouseY - starSize, starSize/3, starSize/3);
+    ellipse(mouseX, mouseY + starSize, starSize/3, starSize/3);
+};</code>
+        </div>
+        
+        <p><strong>Try it:</strong> Click multiple times to create a beautiful starry sky! Each star has random size and brightness for variety.</p>
+    </div>
+</div>
+
+<!-- Interactive Coding Challenges -->
+<div class="content-section">
+    <h2>💻 Coding Challenges</h2>
+    
+    <div class="interactive-demo">
+        <h3>🍅 Challenge 1: Tasty Tomato</h3>
+        <p>Create a simulation of taking bites out of a tasty tomato. Use mouse events to make the tomato interactive!</p>
+        <a href="https://trycodelab.com/challenge/1-8-tomato/" class="practice-link" target="_blank">Try the Tasty Tomato Challenge</a>
+        <p style="margin-top: 10px;"><em>Click the link to access the interactive coding environment.</em></p>
+    </div>
+    
+    <div class="interactive-demo">
+        <h3>🖱️ Challenge 2: Mouse Mania</h3>
+        <p>Use Processing JS mouse capabilities to play with shapes and create interactive effects!</p>
+        <a href="https://trycodelab.com/challenge/1-9-mouse/" class="practice-link" target="_blank">Try the Mouse Mania Challenge</a>
+        <p style="margin-top: 10px;"><em>Click the link to access the interactive coding environment.</em></p>
+    </div>
+</div>
+
+<!-- Common Patterns -->
+<div class="content-section">
+    <h2>📋 Common Mouse Interaction Patterns</h2>
+    
+    <p>Here are some frequently-used patterns you can apply in your own programs:</p>
+    
+    <h3>Pattern 1: Object Follows Mouse</h3>
+    <div class="code-example">
+<code>draw = function() {
+    background(255);
+    ellipse(mouseX, mouseY, 50, 50);
+};</code>
+    </div>
+    <p><strong>Use when:</strong> You want something to track the cursor continuously.</p>
+    
+    <h3>Pattern 2: Drawing Tool (Painting)</h3>
+    <div class="code-example">
+<code>background(255);
+
+mouseDragged = function() {
+    ellipse(mouseX, mouseY, 10, 10);
+};</code>
+    </div>
+    <p><strong>Use when:</strong> Creating paint programs, signature pads, or any drawing application.</p>
+    
+    <h3>Pattern 3: Place Objects on Click</h3>
+    <div class="code-example">
+<code>background(255);
+
+mouseClicked = function() {
+    ellipse(mouseX, mouseY, 30, 30);
+};</code>
+    </div>
+    <p><strong>Use when:</strong> Users should place objects at specific locations.</p>
+    
+    <h3>Pattern 4: Interactive State Change</h3>
+    <div class="code-example">
+<code>var color = 0;
+
+draw = function() {
+    background(200);
+    fill(color, 0, 255 - color);
+    ellipse(mouseX, mouseY, 50, 50);
+};
+
+mouseClicked = function() {
+    color = (color + 50) % 255;
+};</code>
+    </div>
+    <p><strong>Use when:</strong> Mouse clicks should change program state (colors, modes, levels, etc.).</p>
+    
+    <h3>Pattern 5: Smooth Lines with Previous Position</h3>
+    <div class="code-example">
+<code>background(255);
+
+mouseDragged = function() {
+    stroke(0);
+    strokeWeight(3);
+    line(mouseX, mouseY, pmouseX, pmouseY);
+};</code>
+    </div>
+    <p><strong>Use when:</strong> Drawing smooth, connected lines rather than dots.</p>
+</div>
+
+<!-- Formative Assessment 5 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.2.5: Pattern Recognition</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Matching):</p>
+        <p>Match each programming goal with the best mouse interaction pattern:</p>
+        <table>
+            <tr>
+                <th>Goal</th>
+                <th>Best Pattern</th>
+            </tr>
+            <tr>
+                <td>Create a spotlight that follows the cursor</td>
+                <td>Object follows mouse in draw()</td>
+            </tr>
+            <tr>
+                <td>Let users click to plant flowers in a garden</td>
+                <td>Place objects on click</td>
+            </tr>
+            <tr>
+                <td>Build a whiteboard drawing tool</td>
+                <td>Drawing tool with mouseDragged()</td>
+            </tr>
+            <tr>
+                <td>Toggle between day/night when clicked</td>
+                <td>Interactive state change</td>
+            </tr>
+        </table>
+        <details>
+            <summary>Show Answer</summary>
+            <p>All matches are already shown correctly in the table! The key is understanding which pattern fits each use case.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Design Challenge):</p>
+        <p>You want to create a program where:</p>
+        <ul>
+            <li>A magnifying glass circle follows the mouse</li>
+            <li>Inside the magnifying glass, everything is enlarged</li>
+            <li>Clicking freezes the magnifying glass in place</li>
+        </ul>
+        <p>Which mouse variables and functions would you need? Explain your approach.</p>
+        <textarea rows="8" placeholder="Describe your approach..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong></p>
+            <ul>
+                <li>Use <code>mouseX</code> and <code>mouseY</code> in <code>draw()</code> to position the magnifying glass circle</li>
+                <li>Create variables like <code>glassX</code> and <code>glassY</code> to store the frozen position</li>
+                <li>Use a boolean variable <code>frozen</code> to track whether the glass is frozen</li>
+                <li>In <code>draw()</code>, if not frozen, update <code>glassX = mouseX</code> and <code>glassY = mouseY</code></li>
+                <li>In <code>mouseClicked()</code>, toggle the <code>frozen</code> variable</li>
+                <li>Draw enlarged content based on <code>glassX</code> and <code>glassY</code> positions</li>
+            </ul>
+        </details>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    <p>Congratulations! You've mastered the fundamentals of mouse interaction—one of the most important skills for creating engaging, interactive programs. You can now build applications that respond to user input in real time!</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ <strong>mouseX and mouseY</strong> are built-in variables that always contain the current mouse position—no declaration needed!</li>
+        <li>✅ <strong>Continuous tracking</strong> is achieved by using <code>mouseX</code> and <code>mouseY</code> inside the <code>draw()</code> function</li>
+        <li>✅ <strong>Mouse event functions</strong> like <code>mouseClicked()</code> and <code>mouseDragged()</code> run only when specific user actions occur</li>
+        <li>✅ <strong>Event-driven programming</strong> means code responds to user actions rather than running continuously</li>
+        <li>✅ <code>mouseClicked()</code> runs once per click—perfect for placing objects or changing program state</li>
+        <li>✅ <code>mouseDragged()</code> runs continuously while dragging—ideal for painting and drawing tools</li>
+        <li>✅ <strong>pmouseX and pmouseY</strong> store the previous mouse position, enabling smooth line drawing</li>
+        <li>✅ <strong>Combining draw() with event functions</strong> creates sophisticated interactive programs</li>
+        <li>✅ Variables declared outside functions can be modified by events and used by <code>draw()</code></li>
+        <li>✅ Removing <code>background()</code> from <code>draw()</code> creates persistent drawings and trails</li>
+    </ul>
+    
+    <h3>Skills You've Developed:</h3>
+    <ul>
+        <li>🎯 Creating objects that smoothly follow the mouse cursor</li>
+        <li>🖌️ Building interactive drawing and painting tools</li>
+        <li>👆 Detecting and responding to mouse clicks</li>
+        <li>🎨 Implementing drag-to-draw functionality</li>
+        <li>🔄 Combining multiple mouse interaction techniques</li>
+        <li>💡 Understanding event-driven programming concepts</li>
+        <li>🎮 Designing interactive user experiences</li>
+        <li>🔧 Choosing the right interaction pattern for different goals</li>
+    </ul>
+    
+    <h3>Core Concepts Comparison:</h3>
+    <table>
+        <tr>
+            <th>Technique</th>
+            <th>When It Runs</th>
+            <th>Best For</th>
+        </tr>
+        <tr>
+            <td>mouseX/mouseY in draw()</td>
+            <td>Every frame (60/sec)</td>
+            <td>Continuous tracking, following cursor</td>
+        </tr>
+        <tr>
+            <td>mouseClicked()</td>
+            <td>Once per click</td>
+            <td>Placing objects, state changes</td>
+        </tr>
+        <tr>
+            <td>mouseDragged()</td>
+            <td>While dragging</td>
+            <td>Drawing tools, painting</td>
+        </tr>
+    </table>
+    
+    <h3>Remember:</h3>
+    <div class="callout callout-info">
+        Mouse interaction transforms static programs into dynamic experiences. The difference between a program that just displays information and one that engages users is interactivity. You now have the tools to create programs that people can actually play with, draw in, and control—that's incredibly powerful! Every game, drawing app, and interactive visualization uses these same fundamental concepts.
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 3, Lesson 3: Keyboard Interaction and Text Input</h3>
+    <p>Now that you can respond to mouse input, it's time to add keyboard interaction to your programming toolkit! In the next lesson, you'll discover:</p>
+    <ul>
+        <li>⌨️ How to detect <strong>key presses</strong> and respond to specific keys</li>
+        <li>🔤 Using <strong>keyPressed()</strong> and <strong>keyTyped()</strong> event functions</li>
+        <li>📝 Creating programs with <strong>text input</strong> and keyboard controls</li>
+        <li>🎮 Building <strong>keyboard-controlled games</strong> and interactive art</li>
+        <li>🎹 Combining <strong>keyboard and mouse</strong> input for complex interactions</li>
+        <li>↕️ Implementing <strong>arrow key controls</strong> for navigation</li>
+        <li>✨ Creating <strong>keyboard shortcuts</strong> and hotkeys in your programs</li>
+    </ul>
+    <p>Keyboard interaction opens up new possibilities for user input and control. Combined with what you've learned about mouse interaction, you'll be able to create fully interactive applications with multiple input methods!</p>
+    
+    <div class="callout callout-hint">
+        Before moving on, try creating your own interactive project! Here are some ideas:
+        <ul style="margin-top: 10px;">
+            <li>🎨 A drawing program with multiple brush sizes (click to change size)</li>
+            <li>🌟 A constellation creator (click to place stars, drag to connect them)</li>
+            <li>🎯 A target practice game (click on moving circles)</li>
+            <li>🖼️ An interactive art piece that changes based on mouse position and clicks</li>
+        </ul>
+        The more you practice, the more natural mouse interaction will become. Experiment, play, and create!
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 3, Lesson 2: Mouse Interaction</p>
+</div>
+
+</body>
+</html>
