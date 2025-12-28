@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3.1: Animation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            color: #667eea;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            border: none;
+            margin-top: 0;
+        }
+        
+        .summary-box h3 {
+            color: #764ba2;
+            margin-top: 20px;
+        }
+        
+        .next-chapter {
+            background: #fff3e0;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 5px solid #ff9800;
+        }
+        
+        .next-chapter h2 {
+            color: #ff9800;
+            border: none;
+            margin-top: 0;
+        }
+        
+        .next-chapter h3 {
+            color: #f57c00;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        textarea {
+            width: 100%;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .inline-code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chapter Header -->
+<div class="chapter-header">
+    <h1>Chapter 3, Lesson 1: Animation</h1>
+    <p>Bringing Your Drawings to Life with Code</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>🎬 Introduction</h2>
+    <p>Congratulations on learning how to create drawings using your programming skills! Now, you're ready to take the next step: turning those static drawings into dynamic animations. And the best part? You only need to add a few more lines of code to make it happen.</p>
+    
+    <p>Think about your favorite animated movies, video games, or apps. Everything you see moving on screen—characters running, balls bouncing, clouds floating across the sky—is created using the same fundamental principles you're about to learn. Animation isn't magic; it's a systematic process that programmers use to create the illusion of motion.</p>
+    
+    <p>In this lesson, you'll discover how animations really work and learn to create smooth, professional-looking animations with just a dozen lines of code. By the end of this lesson, you'll be able to make objects move, grow, shrink, and dance across your canvas—all through the power of programming!</p>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.1:</strong> Understand the fundamental concept of animation as a series of rapidly displayed frames
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.2:</strong> Explain how flipbook animation relates to computer animation
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.3:</strong> Use the <code>draw()</code> function to create continuous animation loops
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.4:</strong> Modify variables within the <code>draw()</code> function to create motion
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.5:</strong> Apply increment operators (<code>+=</code>, <code>-=</code>, <code>*=</code>, <code>++</code>) to update variable values efficiently
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.6:</strong> Understand the importance of redrawing the background in each frame
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.7:</strong> Create smooth, multi-property animations by combining position, size, and other variable changes
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO3.1.8:</strong> Debug common animation problems such as trails, stuttering, or unexpected behavior
+    </div>
+</div>
+
+<!-- Concepts and Terms -->
+<div class="content-section">
+    <h2>📖 Key Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Animation</div>
+        <p>The illusion of motion created by displaying a sequence of images (frames) in rapid succession. Each image differs slightly from the previous one, and when shown quickly enough, our eyes perceive smooth, continuous movement instead of individual still pictures.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Frame</div>
+        <p>A single image in an animation sequence. Computer animations typically display 30-60 frames per second (fps) to create smooth motion. Each frame shows the scene at one specific moment in time.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Flipbook Animation</div>
+        <p>A traditional animation technique where sequential images are drawn on separate pages. When you flip through the pages quickly, the images blend together to create the illusion of movement. This is the foundational concept behind all animation.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">draw() Function</div>
+        <p>A special function that executes repeatedly and continuously in a loop, typically 60 times per second. This is the engine that powers animation in programming—each time <code>draw()</code> runs, it creates one frame of your animation.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Increment Operator (+=)</div>
+        <p>A shorthand operator that adds a value to a variable and stores the result back in that same variable. For example, <code>x += 5</code> is equivalent to <code>x = x + 5</code>. This is commonly used in animations to move objects.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Decrement Operator (-=)</div>
+        <p>A shorthand operator that subtracts a value from a variable. For example, <code>y -= 3</code> is equivalent to <code>y = y - 3</code>. Useful for moving objects in the opposite direction or shrinking sizes.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Multiply-Assign Operator (*=)</div>
+        <p>A shorthand operator that multiplies a variable by a value. For example, <code>size *= 1.1</code> is equivalent to <code>size = size * 1.1</code>, which increases the size by 10% each time.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Increment by One (++)</div>
+        <p>The most concise way to add 1 to a variable. <code>count++</code> is equivalent to <code>count += 1</code> or <code>count = count + 1</code>. Often used for counters and simple animations.</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>🎨 Understanding Animation</h2>
+    
+    <h3>What Is Animation Really?</h3>
+    <p>Before jumping into coding animations, let's first understand what an animation really is. How would you create an animation without any programming at all?</p>
+    
+    <p>Imagine drawing a series of pictures on separate pieces of paper—each picture slightly different from the one before it. If you flip through those pages quickly, your eyes blend the images together and you see motion instead of just a series of still pictures. This technique is called <strong>flipbook animation</strong>, and it's the foundation of all animations—from classic Disney movies to modern video games.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.1: Flipbook Animation Concept</div>
+        <p>Imagine a pencil-and-paper animation showing a car driving down the street:</p>
+        <ul>
+            <li><strong>Frame 1:</strong> Car at position x = 0</li>
+            <li><strong>Frame 2:</strong> Car at position x = 10</li>
+            <li><strong>Frame 3:</strong> Car at position x = 20</li>
+            <li><strong>Frame 4:</strong> Car at position x = 30</li>
+            <li>... and so on</li>
+        </ul>
+        <p>When flipped fast enough, it looks like the car is smoothly driving across the page, even though it's just a collection of individual drawings.</p>
+    </div>
+    
+    <div class="callout callout-info">
+        This simple concept helps explain how animations work in programming: by continuously redrawing images with small changes over time, the computer creates the illusion of movement. Once you understand this, you'll be ready to write your own animated programs!
+    </div>
+    
+    <h3>From Paper to Pixels</h3>
+    <p>Creating a flipbook animation probably takes quite a bit of time and effort—and honestly, it's not very smooth. The motion can be shaky, and there's no color or detail to make it visually appealing.</p>
+    
+    <p>But we live in the digital age! With programming, you can create much smoother, more colorful, and complex animations in just a few minutes, using only a dozen lines of code or so.</p>
+    
+    <div class="callout callout-hint">
+        Computer-generated animations look cleaner and more fluid compared to hand-drawn flipbooks—and require far less manual work! Instead of drawing hundreds of frames by hand, you write code once and let the computer generate all the frames automatically.
+    </div>
+</div>
+
+<!-- Formative Assessment 1 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.1.1: Understanding Animation Basics</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (True/False):</p>
+        <p>Animation is created by displaying a single image that continuously changes on the screen.</p>
+        <div class="options">
+            <label><input type="radio" name="q1_1" value="a"> True</label>
+            <label><input type="radio" name="q1_1" value="b"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> Animation is created by displaying many different images (frames) in rapid succession. Each frame is a complete, separate image, and when shown quickly, they create the illusion of continuous motion.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>Why does flipbook animation work to create the illusion of movement?</p>
+        <div class="options">
+            <label><input type="radio" name="q1_2" value="a"> A) The paper is magical</label>
+            <label><input type="radio" name="q1_2" value="b"> B) Our eyes blend rapid sequential images together</label>
+            <label><input type="radio" name="q1_2" value="c"> C) Each page contains multiple images</label>
+            <label><input type="radio" name="q1_2" value="d"> D) The images are drawn in 3D</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) Our eyes blend rapid sequential images together.</strong> When images are displayed quickly enough (typically 24+ frames per second), our visual system perceives them as continuous motion rather than separate still images. This is called "persistence of vision."</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>What is the main advantage of computer-generated animation over traditional flipbook animation?</p>
+        <textarea rows="3" placeholder="Write your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> Computer-generated animation is faster to create, smoother, more colorful, and easier to modify. You write code once and the computer automatically generates all frames, whereas flipbook animation requires manually drawing each frame by hand, which is time-consuming and harder to change.</p>
+        </details>
+    </div>
+</div>
+
+<!-- The draw() Function -->
+<div class="content-section">
+    <h2>⚙️ The draw() Function: Your Animation Engine</h2>
+    
+    <p>Now that you understand the concept of animation, let's learn how to create it with code. The secret to animation in programming is a special function called <code>draw()</code>.</p>
+    
+    <h3>How draw() Works</h3>
+    <p>Unlike regular code that runs once from top to bottom and then stops, the <code>draw()</code> function runs continuously in a loop—typically 60 times per second! Each time <code>draw()</code> executes, it creates one frame of your animation.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.2: Basic Animation Structure</div>
+        <p>Here's the basic structure of an animated program:</p>
+        <div class="code-example">
+<code>// Variables defined outside draw()
+var x = 10;
+
+// This function runs repeatedly
+draw = function() {
+    background(255, 255, 255);  // Clear the canvas
+    
+    ellipse(x, 200, 50, 50);    // Draw a circle
+    
+    x = x + 2;                   // Move the circle
+};</code>
+        </div>
+        <p><strong>What happens:</strong></p>
+        <ol>
+            <li>The variable <code>x</code> starts at 10</li>
+            <li>The <code>draw()</code> function runs automatically</li>
+            <li>It draws a white background, then draws a circle at position (x, 200)</li>
+            <li>It increases <code>x</code> by 2</li>
+            <li>The function runs again, now with x = 12</li>
+            <li>This repeats 60 times per second, making the circle move smoothly to the right</li>
+        </ol>
+    </div>
+    
+    <div class="callout callout-warning">
+        Variables used in animation must be declared <em>outside</em> the <code>draw()</code> function. If you declare them inside <code>draw()</code>, they'll reset to their starting value every frame, and your animation won't work!
+    </div>
+    
+    <h3>The Importance of background()</h3>
+    <p>Notice that we call <code>background()</code> at the beginning of the <code>draw()</code> function. This is crucial for creating clean animations!</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.3: With and Without background()</div>
+        <div class="code-example">
+<code>// WITHOUT background() - leaves trails
+var x = 10;
+
+draw = function() {
+    // No background call here!
+    ellipse(x, 200, 50, 50);
+    x = x + 2;
+};
+
+// WITH background() - clean animation
+var x = 10;
+
+draw = function() {
+    background(255, 255, 255);  // Clears previous frames
+    ellipse(x, 200, 50, 50);
+    x = x + 2;
+};</code>
+        </div>
+        <p><strong>Without background():</strong> Each circle stays on the canvas, creating a trail effect. While this might be intentional for some designs, it's usually not what you want.</p>
+        <p><strong>With background():</strong> Each frame starts fresh with a clean slate, making the circle appear to move smoothly without leaving traces behind.</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        Think of <code>background()</code> as an eraser that wipes the canvas clean before drawing the next frame. Without it, every frame gets drawn on top of all previous frames!
+    </div>
+</div>
+
+<!-- Formative Assessment 2 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.1.2: The draw() Function</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Multiple Choice):</p>
+        <p>How many times does the <code>draw()</code> function typically execute per second?</p>
+        <div class="options">
+            <label><input type="radio" name="q2_1" value="a"> A) 1 time</label>
+            <label><input type="radio" name="q2_1" value="b"> B) 10 times</label>
+            <label><input type="radio" name="q2_1" value="c"> C) 60 times</label>
+            <label><input type="radio" name="q2_1" value="d"> D) 100 times</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>C) 60 times.</strong> The <code>draw()</code> function runs approximately 60 times per second, creating 60 frames per second (fps). This creates smooth animation that looks natural to the human eye.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (True/False):</p>
+        <p>Variables used in animations should be declared inside the <code>draw()</code> function.</p>
+        <div class="options">
+            <label><input type="radio" name="q2_2" value="a"> True</label>
+            <label><input type="radio" name="q2_2" value="b"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>False.</strong> Variables must be declared <em>outside</em> the <code>draw()</code> function so they maintain their values between frames. If declared inside, they would reset every time <code>draw()</code> runs, preventing animation.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Short Answer):</p>
+        <p>What happens if you don't call <code>background()</code> at the beginning of your <code>draw()</code> function?</p>
+        <textarea rows="3" placeholder="Write your answer here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> Without <code>background()</code>, each frame draws on top of the previous frames without erasing them. This creates a trail effect where you see all previous positions of animated objects, rather than seeing them move smoothly from one position to another.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (Code Analysis):</p>
+        <p>Will this code create a moving animation?</p>
+        <div class="code-example">
+<code>draw = function() {
+    var circleX = 100;
+    background(200, 200, 255);
+    ellipse(circleX, 200, 60, 60);
+    circleX = circleX + 3;
+};</code>
+        </div>
+        <div class="options">
+            <label><input type="radio" name="q2_4" value="a"> A) Yes, the circle will move to the right</label>
+            <label><input type="radio" name="q2_4" value="b"> B) No, the circle will stay in the same place</label>
+            <label><input type="radio" name="q2_4" value="c"> C) Yes, but it will leave a trail</label>
+            <label><input type="radio" name="q2_4" value="d"> D) No, the code will cause an error</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) No, the circle will stay in the same place.</strong> The problem is that <code>circleX</code> is declared inside the <code>draw()</code> function with <code>var</code>. This means it resets to 100 every single frame, so the circle never actually moves. To fix it, <code>circleX</code> should be declared outside the <code>draw()</code> function.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Increment Operators -->
+<div class="content-section">
+    <h2>🚀 Shortcut Operators for Efficient Animation</h2>
+    
+    <p>You've seen that we can update variables to create animation using code like <code>x = x + 2</code>. While this works perfectly, programmers love shortcuts! JavaScript provides several operators that make updating variables more concise and easier to read.</p>
+    
+    <h3>The += Operator (Add and Assign)</h3>
+    <p>Instead of writing <code>x = x + 2</code>, you can write <code>x += 2</code>. Both do exactly the same thing, but <code>+=</code> is shorter and clearer about your intent.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.4: Using the += Operator</div>
+        <div class="code-example">
+<code>// Traditional way
+x = x + 5;
+
+// Shortcut way (identical result)
+x += 5;
+
+// In an animation
+var x = 200;
+var y = 150;
+
+draw = function() {
+    background(155, 200, 71);
+    
+    fill(191, 0, 255);
+    ellipse(x, y, 100, 100);
+    
+    // Move diagonally using += shortcuts
+    x += 1;   // Same as: x = x + 1
+    y += 2;   // Same as: y = y + 2
+};</code>
+        </div>
+        <p><strong>What this does:</strong> The purple ball moves diagonally across the screen (1 pixel right and 2 pixels down each frame), creating smooth diagonal motion.</p>
+    </div>
+    
+    <h3>The -= Operator (Subtract and Assign)</h3>
+    <p>Similarly, <code>x -= 3</code> is a shortcut for <code>x = x - 3</code>. This is useful for moving objects in the opposite direction or shrinking sizes.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.5: Moving in Different Directions</div>
+        <div class="code-example">
+<code>var x = 200;
+var y = 350;
+
+draw = function() {
+    background(155, 200, 71);
+    
+    fill(191, 0, 255);
+    ellipse(x, y, 100, 100);
+    
+    x += 1;   // Move right (increase x)
+    y -= 2;   // Move up (decrease y)
+};</code>
+        </div>
+        <p><strong>Result:</strong> The ball moves diagonally up and to the right (right 1 pixel, up 2 pixels each frame).</p>
+    </div>
+    
+    <h3>The *= Operator (Multiply and Assign)</h3>
+    <p>The <code>*=</code> operator multiplies a variable by a value. This is perfect for exponential growth effects like expanding circles or accelerating objects.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.6: Shrinking Ball Animation</div>
+        <div class="code-example">
+<code>var ballWidth = 300;
+var ballHeight = 200;
+
+draw = function() {
+    background(155, 200, 71);
+    
+    fill(191, 0, 255);
+    ellipse(200, 200, ballWidth, ballHeight);
+    
+    // Shrink by 1% each frame
+    ballWidth *= 0.99;   // Same as: ballWidth = ballWidth * 0.99
+    ballHeight *= 0.99;  // Same as: ballHeight = ballHeight * 0.99
+};</code>
+        </div>
+        <p><strong>Result:</strong> The ball gradually shrinks. Each frame, it becomes 99% of its previous size (or shrinks by 1%).</p>
+    </div>
+    
+    <div class="callout callout-info">
+        Multiplying by values less than 1 (like 0.99) makes things shrink. Multiplying by values greater than 1 (like 1.05) makes things grow!
+    </div>
+    
+    <h3>The ++ and -- Operators (Increment and Decrement by 1)</h3>
+    <p>The most common animation update is adding or subtracting 1. For this, there's an even shorter shortcut:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.7: Three Ways to Add 1</div>
+        <div class="code-example">
+<code>// These three lines all do the exact same thing:
+x = x + 1;    // Traditional way
+x += 1;       // Shortcut #1
+x++;          // Shortcut #2 (most concise)
+
+// Similarly, these three lines all subtract 1:
+y = y - 1;    // Traditional way
+y -= 1;       // Shortcut #1
+y--;          // Shortcut #2 (most concise)</code>
+        </div>
+        <p><strong>Which should you use?</strong> All three work identically! Many programmers prefer <code>+=</code> because it's versatile (you can easily change the increment amount from 1 to any other number), but <code>++</code> is perfectly valid and very common in professional code.</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        Choose the style that makes sense to you. If you're incrementing by 1, you can use <code>++</code>. If you're incrementing by any other amount, <code>+=</code> is required. Both are good choices!
+    </div>
+</div>
+
+<!-- Formative Assessment 3 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.1.3: Shortcut Operators</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Matching):</p>
+        <p>Match each shortcut operator to its equivalent long form:</p>
+        <div style="margin-left: 20px;">
+            <p><strong>Shortcuts:</strong></p>
+            <p>1. <code>x += 5</code></p>
+            <p>2. <code>y -= 3</code></p>
+            <p>3. <code>size *= 2</code></p>
+            <p>4. <code>count++</code></p>
+            
+            <p style="margin-top: 15px;"><strong>Long Forms:</strong></p>
+            <p>A. <code>y = y - 3</code></p>
+            <p>B. <code>count = count + 1</code></p>
+            <p>C. <code>x = x + 5</code></p>
+            <p>D. <code>size = size * 2</code></p>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Answers:</strong></p>
+            <p>1 → C: <code>x += 5</code> is the same as <code>x = x + 5</code></p>
+            <p>2 → A: <code>y -= 3</code> is the same as <code>y = y - 3</code></p>
+            <p>3 → D: <code>size *= 2</code> is the same as <code>size = size * 2</code></p>
+            <p>4 → B: <code>count++</code> is the same as <code>count = count + 1</code></p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Multiple Choice):</p>
+        <p>If <code>x = 10</code>, what will be the value of <code>x</code> after executing <code>x *= 3</code>?</p>
+        <div class="options">
+            <label><input type="radio" name="q3_2" value="a"> A) 13</label>
+            <label><input type="radio" name="q3_2" value="b"> B) 30</label>
+            <label><input type="radio" name="q3_2" value="c"> C) 7</label>
+            <label><input type="radio" name="q3_2" value="d"> D) 3</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>B) 30.</strong> The <code>*=</code> operator multiplies the variable by the value on the right. So <code>x *= 3</code> means <code>x = x * 3</code>, which is <code>x = 10 * 3 = 30</code>.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Code Writing):</p>
+        <p>Rewrite this code using shortcut operators:</p>
+        <div class="code-example">
+<code>x = x + 7;
+y = y - 4;
+size = size * 1.1;</code>
+        </div>
+        <textarea rows="4" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>x += 7;
+y -= 4;
+size *= 1.1;</code>
+            </div>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 4 (True/False):</p>
+        <p>The operators <code>x++</code>, <code>x += 1</code>, and <code>x = x + 1</code> all produce exactly the same result.</p>
+        <div class="options">
+            <label><input type="radio" name="q3_4" value="a"> True</label>
+            <label><input type="radio" name="q3_4" value="b"> False</label>
+        </div>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>True.</strong> All three operators add 1 to <code>x</code> and store the result back in <code>x</code>. They are functionally identical, just different ways of writing the same operation. The choice between them is a matter of programmer preference and coding style.</p>
+        </details>
+    </div>
+</div>
+
+<!-- Complex Animation Example -->
+<div class="content-section">
+    <h2>🎪 Creating Complex Animations</h2>
+    
+    <p>Now that you understand the draw() function and shortcut operators, let's combine them to create more sophisticated animations. The real power of animation comes from changing multiple properties at once!</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 3.1.8: Multi-Property Animation - Diagonal Shrinking Ball</div>
+        <p>Let's create a ball that moves diagonally while gradually shrinking:</p>
+        <div class="code-example">
+<code>noStroke();
+
+var x = 200;
+var y = 350;
+var ballWidth = 300;
+var ballHeight = 200;
+
+draw = function() {
+    background(155, 200, 71);
+    
+    fill(191, 0, 255);
+    ellipse(x, y, ballWidth, ballHeight);
+    
+    // Update multiple properties each frame
+    x += 1;              // Move right
+    y -= 2;              // Move up
+    ballWidth *= 0.99;   // Shrink width by 1%
+    ballHeight *= 0.99;  // Shrink height by 1%
+};</code>
+        </div>
+        <p><strong>What happens:</strong> Each frame, four things occur simultaneously:</p>
+        <ol>
+            <li>The ball moves 1 pixel to the right (x increases)</li>
+            <li>The ball moves 2 pixels up (y decreases)</li>
+            <li>The ball's width shrinks to 99% of its previous size</li>
+            <li>The ball's height shrinks to 99% of its previous size</li>
+        </ol>
+        <p>The result: A purple ball that floats diagonally upward while gracefully shrinking until it disappears!</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        You can animate any property that uses numbers: position (x, y), size (width, height), colors (red, green, blue values), rotation angles, transparency—anything! Just update the variable values inside the <code>draw()</code> function.
+    </div>
+    
+    <h3>Practical Example: Animated Sunrise</h3>
+    <div class="example-box">
+        <div class="example-title">Example 3.1.9: Sunrise Animation</div>
+        <p>Let's create a sunrise where the sun rises from the horizon while growing larger:</p>
+        <div class="code-example">
+<code>noStroke();
+
+// Starting size for the sun
+var sunSize = 30;
+
+draw = function() {
+    // Beautiful blue sky
+    background(82, 222, 240);
+    
+    // The sun - starts small near the horizon
+    fill(255, 204, 0);
+    ellipse(200, 290, sunSize, sunSize);
+    
+    // The land, blocking half of the sun
+    fill(76, 168, 67);
+    rect(0, 300, 400, 100);
+    
+    // Make the sun grow larger
+    sunSize += 1;
+};</code>
+        </div>
+        <p><strong>Enhancement idea:</strong> You could add a second variable for the sun's y-position and make it rise while growing!</p>
+    </div>
+</div>
+
+<!-- Formative Assessment 4 -->
+<div class="assessment">
+    <div class="assessment-title">✏️ Formative Assessment 3.1.4: Creating Your Own Animation</div>
+    
+    <div class="question">
+        <p class="question-number">Question 1 (Code Writing):</p>
+        <p>Write code to animate clouds parting. Start with two cloud ellipses close together in the center, and make them move apart horizontally (one left, one right).</p>
+        <textarea rows="10" placeholder="Write your code here..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <div class="code-example">
+<code>var leftX = 150;
+var rightX = 250;
+
+draw = function() {
+    background(184, 236, 255);
+    
+    fill(255, 255, 255);
+    
+    // Left cloud
+    ellipse(leftX, 150, 120, 97);
+    ellipse(leftX + 62, 150, 70, 60);
+    ellipse(leftX - 62, 150, 70, 60);
+    
+    // Right cloud
+    ellipse(rightX, 100, 126, 97);
+    ellipse(rightX + 62, 100, 70, 60);
+    ellipse(rightX - 62, 100, 70, 60);
+    
+    // Move clouds apart
+    leftX -= 2;   // Left cloud moves left
+    rightX += 2;  // Right cloud moves right
+};</code>
+            </div>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 2 (Problem Solving):</p>
+        <p>You want to create a ball that bounces across the screen while changing colors. What variables would you need to declare outside the <code>draw()</code> function?</p>
+        <textarea rows="5" placeholder="List the variables you would need..."></textarea>
+        <details>
+            <summary>Show Sample Answer</summary>
+            <p><strong>Sample Answer:</strong> You would need variables for:</p>
+            <ul>
+                <li><code>x</code> and <code>y</code> for the ball's position</li>
+                <li><code>red</code>, <code>green</code>, and <code>blue</code> for the color values</li>
+                <li>Optionally: <code>size</code> if you want to animate the ball's size</li>
+            </ul>
+            <p>All of these should be declared outside <code>draw()</code> so they maintain their values between frames.</p>
+        </details>
+    </div>
+    
+    <div class="question">
+        <p class="question-number">Question 3 (Debugging):</p>
+        <p>This code is supposed to make a rectangle grow larger, but it's not working. What's wrong?</p>
+        <div class="code-example">
+<code>draw = function() {
+    var rectSize = 50;
+    background(200, 200, 255);
+    rect(100, 100, rectSize, rectSize);
+    rectSize += 2;
+};</code>
+        </div>
+        <textarea rows="4" placeholder="Explain the problem and how to fix it..."></textarea>
+        <details>
+            <summary>Show Answer</summary>
+            <p><strong>Problem:</strong> The variable <code>rectSize</code> is declared inside the <code>draw()</code> function with <code>var</code>, so it resets to 50 every single frame. The rectangle never actually grows.</p>
+            <p><strong>Solution:</strong> Move the declaration outside the <code>draw()</code> function:</p>
+            <div class="code-example">
+<code>var rectSize = 50;  // Declare outside
+
+draw = function() {
+    background(200, 200, 255);
+    rect(100, 100, rectSize, rectSize);
+    rectSize += 2;
+};</code>
+            </div>
+        </details>
+    </div>
+</div>
+
+<!-- Common Pitfalls -->
+<div class="content-section">
+    <h2>⚠️ Common Animation Pitfalls and Solutions</h2>
+    
+    <h3>Pitfall #1: Variables Declared Inside draw()</h3>
+    <div class="callout callout-warning">
+        If you declare variables inside <code>draw()</code>, they reset every frame and your animation won't work. Always declare animation variables outside <code>draw()</code>!
+    </div>
+    
+    <h3>Pitfall #2: Forgetting background()</h3>
+    <div class="callout callout-warning">
+        Without <code>background()</code> at the start of <code>draw()</code>, objects leave trails. While sometimes intentional, this usually creates messy, unreadable animations.
+    </div>
+    
+    <h3>Pitfall #3: Objects Disappearing Off Screen</h3>
+    <div class="callout callout-warning">
+        If objects move off the edge of the canvas, they disappear! In later lessons, you'll learn how to detect edges and make objects bounce back or wrap around.
+    </div>
+    
+    <h3>Pitfall #4: Too Fast or Too Slow</h3>
+    <div class="callout callout-hint">
+        If your animation moves too fast, use smaller increment values (like <code>x += 0.5</code> instead of <code>x += 5</code>). If it's too slow, use larger values. Experiment to find the right speed!
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    <p>Congratulations! You've learned how to bring your drawings to life through animation. You now understand one of the most exciting and fundamental concepts in all of programming!</p>
+    
+    <h3>Key Takeaways:</h3>
+    <ul>
+        <li>✅ <strong>Animation</strong> is created by displaying a sequence of slightly different images (frames) in rapid succession</li>
+        <li>✅ <strong>Flipbook animation</strong> demonstrates the fundamental principle: rapid sequential images create the illusion of motion</li>
+        <li>✅ The <strong>draw() function</strong> runs continuously (60 times per second) and creates one frame each time it executes</li>
+        <li>✅ Variables used in animation must be <strong>declared outside draw()</strong> to maintain their values between frames</li>
+        <li>✅ Call <strong>background()</strong> at the start of draw() to clear the canvas and prevent trails</li>
+        <li>✅ <strong>Increment operators</strong> provide shortcuts for updating variables:
+            <ul style="margin-top: 8px;">
+                <li><code>+=</code> adds to a variable (e.g., <code>x += 5</code>)</li>
+                <li><code>-=</code> subtracts from a variable (e.g., <code>y -= 3</code>)</li>
+                <li><code>*=</code> multiplies a variable (e.g., <code>size *= 1.1</code>)</li>
+                <li><code>++</code> adds exactly 1 (e.g., <code>count++</code>)</li>
+            </ul>
+        </li>
+        <li>✅ You can animate <strong>multiple properties simultaneously</strong> for complex effects</li>
+        <li>✅ Any numeric property can be animated: position, size, color, transparency, etc.</li>
+    </ul>
+    
+    <h3>Skills You've Developed:</h3>
+    <ul>
+        <li>🎯 Creating smooth animations using the <code>draw()</code> function</li>
+        <li>🔄 Using shortcut operators to update variables efficiently</li>
+        <li>📊 Combining multiple variable changes for complex motion</li>
+        <li>🎨 Understanding how frame-by-frame updates create the illusion of movement</li>
+        <li>🔍 Debugging common animation problems</li>
+        <li>💡 Applying animation concepts from traditional media to programming</li>
+    </ul>
+    
+    <h3>Remember:</h3>
+    <div class="callout callout-info">
+        Animation is all about change over time. Every animation you create—whether it's a bouncing ball, a growing sun, or a complex game—follows the same basic principle: update variables inside <code>draw()</code>, and the computer handles the rest. Master this concept, and you've unlocked the ability to create dynamic, engaging, interactive programs!
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 3, Lesson 2: Interactive Programs with Mouse Input</h3>
+    <p>Now that you can create animations that change automatically, it's time to learn how to make programs that respond to user input! In the next lesson, you'll discover:</p>
+    <ul>
+        <li>🖱️ How to use <strong>mouseX and mouseY</strong> to track the mouse position</li>
+        <li>👆 Detecting <strong>mouse clicks</strong> and other mouse events</li>
+        <li>🎮 Creating <strong>interactive drawings</strong> that follow the mouse</li>
+        <li>🎨 Building simple <strong>drawing programs</strong> and paint tools</li>
+        <li>🎯 Combining animation and interactivity for <strong>games and simulations</strong></li>
+        <li>⚡ Understanding <strong>event-driven programming</strong> concepts</li>
+        <li>🌟 Making programs that <strong>respond to user actions</strong> in real-time</li>
+    </ul>
+    <p>Interactivity is what separates simple animations from engaging applications and games. Get ready to create programs that users can actually control and play with!</p>
+    
+    <div class="callout callout-hint">
+        Before moving on, make sure you're comfortable with the <code>draw()</code> function and shortcut operators. Try creating your own animations—perhaps a rocket launching, stars twinkling, or waves rolling. Experiment with different speeds and combinations of movements. The more you practice, the more natural animation will become!
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 3, Lesson 1: Animation</p>
+</div>
+
+</body>
+</html>
