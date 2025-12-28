@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4.4: Function Return Values</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #667eea;
+            margin-top: 20px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .code-inline {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+            font-size: 0.9em;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .example-step {
+            margin: 15px 0;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .video-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .video-duration {
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .coding-practice {
+            background: #fff8f0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .coding-practice-title {
+            font-weight: bold;
+            color: #ff9800;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .coding-practice a {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        
+        .coding-practice a:hover {
+            background: #f57c00;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        details[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            border: none;
+        }
+        
+        .summary-box ul {
+            line-height: 1.8;
+        }
+        
+        .summary-box table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .summary-box th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .summary-box td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .summary-box tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .next-chapter {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 25px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+        }
+        
+        .next-chapter ul {
+            line-height: 1.8;
+        }
+        
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .chapter-header {
+                background: #667eea;
+                color: white;
+            }
+            
+            details {
+                border: 1px solid #ddd;
+            }
+            
+            summary {
+                display: none;
+            }
+            
+            details > *:not(summary) {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="chapter-header">
+    <h1>Chapter 4, Lesson 4: Function Return Values</h1>
+    <p>CSC 106: The Joy of Programming</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>📖 Introduction</h2>
+    
+    <p>You've learned how to create functions and how to pass information <em>into</em> them using parameters. This makes functions flexible—they can accept different inputs and perform operations on that data. But what happens when you need to get information <em>back</em> from a function?</p>
+    
+    <p>Think about asking a friend to calculate something for you. You give them the numbers (parameters), they do the math in their head (the function's code), and then they tell you the answer. That answer is what we call a <strong>return value</strong>. Without return values, functions could only perform actions like drawing shapes or printing text. With return values, functions can calculate results and give them back to you to use however you need.</p>
+    
+    <p>Imagine you're building a game and you need to calculate the distance between the player and an enemy. You could write the distance formula code every time you need it, or you could write a <span class="code-inline">calculateDistance()</span> function that takes two positions as parameters and <em>returns</em> the distance. Then you can use that returned value to decide if the enemy is close enough to attack, if a bullet hit its target, or if the player collected a coin.</p>
+    
+    <p>In this lesson, you'll learn how to use the <span class="code-inline">return</span> statement to send values back from functions. You'll discover how to store these returned values in variables, use them in calculations, and even pass them to other functions. This completes the circle: parameters let data flow into functions, and return values let results flow out. Together, they make functions incredibly powerful!</p>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.1:</strong> Use the <span class="code-inline">return</span> statement to send values back from functions
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.2:</strong> Store values returned by functions in variables
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.3:</strong> Use return values directly in expressions and calculations
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.4:</strong> Understand that <span class="code-inline">return</span> immediately exits the function
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.5:</strong> Create functions that perform calculations and return results
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.4.6:</strong> Distinguish between functions that return values and functions that perform actions
+    </div>
+</div>
+
+<!-- Key Terms -->
+<div class="content-section">
+    <h2>📚 Key Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Return Statement</div>
+        <p>A line of code using the <span class="code-inline">return</span> keyword that sends a value back from a function to the code that called it. The <span class="code-inline">return</span> statement also immediately exits the function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Return Value</div>
+        <p>The value that a function sends back using a return statement. This value can be stored in a variable, used in expressions, displayed, or passed to other functions.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Exit</div>
+        <p>The moment when a function stops executing and control returns to the code that called it. This happens when a <span class="code-inline">return</span> statement is executed or when the function reaches its closing brace.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Expression</div>
+        <p>Any code that produces a value. Return values can be used in expressions, such as <span class="code-inline">var total = add(5, 3) + 10;</span></p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Void Function</div>
+        <p>A function that doesn't return a value—it only performs actions. Drawing functions are often void functions.</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>📝 Content</h2>
+    
+    <h3>What Are Return Values?</h3>
+    
+    <p>So far, most of your functions have performed <em>actions</em>—drawing shapes, displaying text, or changing colors. These functions do their work and then finish. But many functions need to <em>calculate</em> something and give you the result.</p>
+    
+    <p>Consider these built-in functions you've been using:</p>
+    <ul>
+        <li><span class="code-inline">random(1, 100)</span> — returns a random number between 1 and 100</li>
+        <li><span class="code-inline">sqrt(25)</span> — returns 5 (the square root of 25)</li>
+        <li><span class="code-inline">abs(-7)</span> — returns 7 (the absolute value of -7)</li>
+    </ul>
+    
+    <p>These functions calculate values and <strong>return</strong> them. You can use these returned values:</p>
+    
+    <div class="code-example">
+<code>var num = random(1, 100);     // Store the returned value
+var root = sqrt(25);          // Store the returned value
+text(abs(-7), 100, 100);      // Use the returned value directly</code>
+    </div>
+    
+    <p>Now you'll learn to create your own functions that return values!</p>
+    
+    <h3>The Return Statement</h3>
+    
+    <p>To make a function return a value, use the <span class="code-inline">return</span> keyword followed by the value you want to send back:</p>
+    
+    <div class="code-example">
+<code>function functionName() {
+    return value;
+}</code>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.1: Simple Function with Return Value</div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 1: Define a function that returns a value</div>
+            <div class="code-example">
+<code>function add(num1, num2) {
+    return num1 + num2;
+}</code>
+            </div>
+            <p>This function accepts two parameters, calculates their sum, and returns the result using the <span class="code-inline">return</span> keyword.</p>
+        </div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 2: Call the function and use the returned value</div>
+            <div class="code-example">
+<code>var sum = add(5, 3);      // sum now contains 8
+text(sum, 100, 100);      // Displays "8" at position (100, 100)</code>
+            </div>
+            <p>When you call <span class="code-inline">add(5, 3)</span>, the function calculates 5 + 3 and returns 8. That value is then stored in the variable <span class="code-inline">sum</span>.</p>
+        </div>
+        
+        <div class="example-step">
+            <div class="step-title">Step 3: Understanding the flow</div>
+            <ol>
+                <li>The code calls <span class="code-inline">add(5, 3)</span></li>
+                <li>Inside the function, <span class="code-inline">num1</span> is 5 and <span class="code-inline">num2</span> is 3</li>
+                <li>The function calculates <span class="code-inline">5 + 3</span>, which equals 8</li>
+                <li>The <span class="code-inline">return</span> statement sends 8 back to the caller</li>
+                <li>The returned value (8) is stored in the variable <span class="code-inline">sum</span></li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="callout callout-info">
+        Think of <span class="code-inline">return</span> as the function's answer. When you ask the function to do something, the return value is its response.
+    </div>
+    
+    <h3>Return Immediately Exits the Function</h3>
+    
+    <p>Here's something critical to understand: when a function executes a <span class="code-inline">return</span> statement, it <strong>immediately stops and exits</strong>. Any code written after the <span class="code-inline">return</span> will never execute!</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.2: Return Stops Execution</div>
+        
+        <div class="code-example">
+<code>function demonstrateReturn() {
+    text("This will display", 10, 30);
+    return 42;  // Function exits here!
+    text("This will NEVER display", 10, 60);  // This line never runs
+}
+
+var result = demonstrateReturn();
+text("Returned value: " + result, 10, 90);</code>
+        </div>
+        
+        <p><strong>What displays:</strong></p>
+        <ul>
+            <li>"This will display" at (10, 30)</li>
+            <li>"Returned value: 42" at (10, 90)</li>
+            <li>The second <span class="code-inline">text()</span> inside the function never runs!</li>
+        </ul>
+        
+        <p>The function exits immediately when it hits the <span class="code-inline">return</span> statement.</p>
+    </div>
+    
+    <div class="callout callout-warning">
+        Any code after a <span class="code-inline">return</span> statement is unreachable and will never execute. This is important for debugging—if you have code that's not running, check if there's a <span class="code-inline">return</span> statement before it!
+    </div>
+    
+    <h3>Using Return Values</h3>
+    
+    <p>Return values are incredibly versatile. You can:</p>
+    <ul>
+        <li>Store them in variables</li>
+        <li>Use them directly in expressions</li>
+        <li>Pass them to other functions</li>
+        <li>Display them on the screen</li>
+        <li>Use them in conditional statements</li>
+    </ul>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.3: Multiple Ways to Use Return Values</div>
+        
+        <div class="code-example">
+<code>function double(num) {
+    return num * 2;
+}
+
+// Method 1: Store in a variable
+var result = double(5);      // result = 10
+text(result, 10, 30);
+
+// Method 2: Use directly in an expression
+var total = double(3) + double(4);  // 6 + 8 = 14
+text(total, 10, 60);
+
+// Method 3: Pass to another function
+text(double(7), 10, 90);    // Displays "14"
+
+// Method 4: Use in a calculation
+var area = double(5) * double(3);   // 10 * 6 = 60
+text(area, 10, 120);</code>
+        </div>
+        
+        <p>All of these are valid! Return values can be used anywhere you would use a regular value.</p>
+    </div>
+    
+    <h3>Creating Calculation Functions</h3>
+    
+    <p>Return values are perfect for functions that perform calculations. Let's create some useful mathematical functions:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.4: Basic Math Functions</div>
+        
+        <div class="code-example">
+<code>function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    return a / b;
+}
+
+// Using these functions
+var x = 15;
+var y = 3;
+
+text("15 + 3 = " + add(x, y), 10, 30);          // Displays: 18
+text("15 - 3 = " + subtract(x, y), 10, 60);     // Displays: 12
+text("15 × 3 = " + multiply(x, y), 10, 90);     // Displays: 45
+text("15 ÷ 3 = " + divide(x, y), 10, 120);      // Displays: 5</code>
+        </div>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.5: More Advanced Calculations</div>
+        
+        <div class="code-example">
+<code>function square(num) {
+    return num * num;
+}
+
+function cube(num) {
+    return num * num * num;
+}
+
+function average(a, b) {
+    return (a + b) / 2;
+}
+
+function celsiusToFahrenheit(celsius) {
+    return (celsius * 9/5) + 32;
+}
+
+// Using these functions
+text("5 squared = " + square(5), 10, 30);           // 25
+text("3 cubed = " + cube(3), 10, 60);               // 27
+text("Average of 10 and 20 = " + average(10, 20), 10, 90);  // 15
+text("25°C = " + celsiusToFahrenheit(25) + "°F", 10, 120);  // 77°F</code>
+        </div>
+        
+        <p>These functions encapsulate formulas, making your code more readable and reusable!</p>
+    </div>
+    
+    <div class="callout callout-hint">
+        <strong>When to Use Return Values:</strong> If your function calculates something, it should return that value. If your function only performs actions (like drawing or changing state), it doesn't need a return statement.
+    </div>
+    
+    <h3>Return Values in Decision Making</h3>
+    
+    <p>Return values are especially useful in conditional logic. You can create functions that return <span class="code-inline">true</span> or <span class="code-inline">false</span> to help make decisions:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.4.6: Boolean Return Values</div>
+        
+        <div class="code-example">
+<code>function isEven(num) {
+    return num % 2 === 0;
+}
+
+function isPositive(num) {
+    return num > 0;
+}
+
+function isBetween(value, min, max) {
+    return value >= min && value <= max;
+}
+
+// Using boolean return values
+var number = 7;
+
+if (isEven(number)) {
+    text(number + " is even", 10, 30);
+} else {
+    text(number + " is odd", 10, 30);
+}
+
+if (isPositive(number)) {
+    text(number + " is positive", 10, 60);
+}
+
+if (isBetween(number, 1, 10)) {
+    text(number + " is between 1 and 10", 10, 90);
+}</code>
+        </div>
+        
+        <p>These functions return boolean values (<span class="code-inline">true</span> or <span class="code-inline">false</span>) that can be used directly in <span class="code-inline">if</span> statements.</p>
+    </div>
+    
+    <div class="video-placeholder">
+        <div class="video-title">🎥 Video: Function Return Values</div>
+        <p>This video explains how functions can return values when called and how to use those values in your programs.</p>
+        <div class="video-duration">Duration: 5:34</div>
+    </div>
+    
+    <div class="assessment">
+        <div class="assessment-title">✏️ Formative Assessment 4.4.1: Understanding Return Values</div>
+        
+        <div class="question">
+            <p class="question-number">Question 1 (True/False):</p>
+            <p>Code written after a return statement in a function will still execute.</p>
+            <div class="options">
+                <label><input type="radio" name="q1"> True</label>
+                <label><input type="radio" name="q1"> False</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: False</strong></p>
+                <p>When a function executes a <span class="code-inline">return</span> statement, it immediately exits. Any code after the <span class="code-inline">return</span> is unreachable and will never run.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 2 (Code Analysis):</p>
+            <p>What will this code display?</p>
+            <div class="code-example">
+<code>function triple(num) {
+    return num * 3;
+}
+
+var result = triple(4);
+text(result, 100, 100);</code>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q2"> A) 3</label>
+                <label><input type="radio" name="q2"> B) 4</label>
+                <label><input type="radio" name="q2"> C) 12</label>
+                <label><input type="radio" name="q2"> D) Nothing</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: C) 12</strong></p>
+                <p>The function <span class="code-inline">triple(4)</span> calculates 4 × 3 = 12 and returns that value. This value is stored in <span class="code-inline">result</span> and then displayed.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 3 (Multiple Choice):</p>
+            <p>Which statement about return values is TRUE?</p>
+            <div class="options">
+                <label><input type="radio" name="q3"> A) Every function must have a return statement</label>
+                <label><input type="radio" name="q3"> B) Return values can only be stored in variables</label>
+                <label><input type="radio" name="q3"> C) Return values can be used directly in expressions</label>
+                <label><input type="radio" name="q3"> D) Functions can return multiple values at once</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: C) Return values can be used directly in expressions</strong></p>
+                <p>You can use return values in many ways: store them in variables, use them in calculations, pass them to other functions, or use them directly in expressions like <span class="code-inline">var total = add(5, 3) + 10;</span></p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 4 (Coding):</p>
+            <p>Write a function called <span class="code-inline">square</span> that takes one parameter (<span class="code-inline">num</span>) and returns the square of that number (num × num).</p>
+            <textarea rows="4" placeholder="Write your function here..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <div class="code-example">
+<code>function square(num) {
+    return num * num;
+}</code>
+                </div>
+                <p>This function multiplies the parameter by itself and returns the result. Example: <span class="code-inline">square(5)</span> returns 25.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 5 (Application):</p>
+            <p>Write a function called <span class="code-inline">average</span> that takes two parameters and returns their average (the sum divided by 2).</p>
+            <textarea rows="4" placeholder="Write your function here..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <div class="code-example">
+<code>function average(num1, num2) {
+    return (num1 + num2) / 2;
+}</code>
+                </div>
+                <p>This function adds the two numbers and divides by 2. Example: <span class="code-inline">average(10, 20)</span> returns 15.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 6 (Analysis):</p>
+            <p>What's wrong with this function?</p>
+            <div class="code-example">
+<code>function calculateTotal(price, quantity) {
+    var total = price * quantity;
+    text("Total: " + total, 10, 30);
+}</code>
+            </div>
+            <textarea rows="3" placeholder="Explain the issue..."></textarea>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Issue:</strong> This function calculates <span class="code-inline">total</span> but doesn't return it. If you want to use the calculated value elsewhere, you need to add <span class="code-inline">return total;</span> at the end. Currently, the function only displays the value and doesn't make it available for use in other parts of the program.</p>
+            </details>
+        </div>
+    </div>
+    
+    <div class="coding-practice">
+        <div class="coding-practice-title">💻 Coding Practice: Calculator</div>
+        <p>In this exercise, a program displays the results of mathematical operations, but only the addition function works correctly. You'll modify the <span class="code-inline">subtract</span>, <span class="code-inline">multiply</span>, and <span class="code-inline">divide</span> functions so they return the correct calculated values.</p>
+        <p><strong>Learning Goal:</strong> Practice implementing return statements in functions to perform calculations and send results back to the caller.</p>
+        <a href="https://trycodelab.com/lessons/04.3-Defining-and-Calling-Functions/07-Challenge-Calculator.md" target="_blank">Launch Code Lab →</a>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    
+    <p>You've learned one of the most powerful features of functions: the ability to return calculated values! This completes your understanding of how data flows through functions.</p>
+    
+    <h3>Key Concepts Mastered:</h3>
+    <ul>
+        <li>✅ <strong>Return Statement:</strong> Using <span class="code-inline">return value;</span> to send data back from functions</li>
+        <li>✅ <strong>Function Exit:</strong> Understanding that <span class="code-inline">return</span> immediately exits the function</li>
+        <li>✅ <strong>Storing Return Values:</strong> Capturing returned values in variables for later use</li>
+        <li>✅ <strong>Direct Usage:</strong> Using return values directly in expressions and calculations</li>
+        <li>✅ <strong>Calculation Functions:</strong> Creating functions that compute and return mathematical results</li>
+        <li>✅ <strong>Boolean Returns:</strong> Using functions that return true/false for decision making</li>
+        <li>✅ <strong>When to Return:</strong> Knowing when functions should return values vs. just perform actions</li>
+    </ul>
+    
+    <h3>Return Value Patterns:</h3>
+    <table>
+        <tr>
+            <th>Usage Pattern</th>
+            <th>Example</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>Store in variable</td>
+            <td><span class="code-inline">var result = add(5, 3);</span></td>
+            <td>Save for later use</td>
+        </tr>
+        <tr>
+            <td>Use in expression</td>
+            <td><span class="code-inline">var total = add(5, 3) + 10;</span></td>
+            <td>Combine with other operations</td>
+        </tr>
+        <tr>
+            <td>Pass to function</td>
+            <td><span class="code-inline">text(add(5, 3), 10, 30);</span></td>
+            <td>Use result immediately</td>
+        </tr>
+        <tr>
+            <td>Use in condition</td>
+            <td><span class="code-inline">if (isEven(num)) { }</span></td>
+            <td>Make decisions</td>
+        </tr>
+    </table>
+    
+    <h3>Critical Reminders:</h3>
+    <div class="callout callout-warning">
+        Code after a <span class="code-inline">return</span> statement never executes. The function exits immediately!
+    </div>
+    
+    <div class="callout callout-hint">
+        If your function calculates something, return it! If it only performs actions (like drawing), you don't need a return statement.
+    </div>
+    
+    <div class="callout callout-info">
+        Return values make functions more versatile. The same function can be used in many different contexts because you can use its result however you need.
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 4, Lesson 5: Global and Local Variables</h3>
+    
+    <p>Now that you know how to get data in (parameters) and out (return values) of functions, you need to understand where variables can be accessed. In the next lesson, you'll learn about <strong>variable scope</strong>:</p>
+    
+    <ul>
+        <li>🌍 <strong>Global Variables:</strong> Variables accessible throughout your entire program</li>
+        <li>🏠 <strong>Local Variables:</strong> Variables that exist only within specific functions</li>
+        <li>📏 <strong>Variable Scope:</strong> The rules that determine where variables can be used</li>
+        <li>👤 <strong>Variable Shadowing:</strong> What happens when local and global variables have the same name</li>
+        <li>✅ <strong>Best Practices:</strong> When to use global vs. local variables</li>
+        <li>🐛 <strong>Common Scope Errors:</strong> Avoiding mistakes related to variable accessibility</li>
+    </ul>
+    
+    <p>Understanding scope is crucial for writing functions that work correctly and don't interfere with each other. You'll learn how to organize your variables to create clean, bug-free code!</p>
+    
+    <div class="callout callout-hint">
+        <strong>Practice Before Moving On:</strong>
+        <p style="margin-top: 10px;">Solidify your understanding by creating:</p>
+        <ol style="margin-top: 10px;">
+            <li>A function that calculates the area of a rectangle and returns it</li>
+            <li>A function that converts miles to kilometers and returns the result</li>
+            <li>A function that checks if a number is within a range and returns true/false</li>
+        </ol>
+        <p style="margin-top: 10px;">The more comfortable you are with return values, the easier scope will be!</p>
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 4, Lesson 4: Function Return Values</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">
+        © 2025 University of Rhode Island. All rights reserved.
+    </p>
+</div>
+
+</body>
+</html>
