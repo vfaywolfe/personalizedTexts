@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4.5: Global and Local Variables and Scope</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .chapter-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        
+        .chapter-header p {
+            margin: 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+        }
+        
+        h4 {
+            color: #667eea;
+            margin-top: 20px;
+        }
+        
+        .learning-objective {
+            background: #e8eaf6;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        
+        .learning-objective strong {
+            color: #667eea;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        
+        .callout-warning {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        
+        .callout-warning::before {
+            content: "⚠️ Warning: ";
+            font-weight: bold;
+        }
+        
+        .callout-hint {
+            background-color: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .callout-hint::before {
+            content: "💡 Hint: ";
+            font-weight: bold;
+        }
+        
+        .callout-info {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .callout-info::before {
+            content: "ℹ️ Info: ";
+            font-weight: bold;
+        }
+        
+        .term {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        
+        .term-name {
+            font-weight: bold;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+        
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        .code-example code {
+            color: #f8f8f2;
+        }
+        
+        .code-inline {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+            font-size: 0.9em;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .example-step {
+            margin: 15px 0;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .video-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .video-duration {
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .assessment {
+            background: #fff8e1;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .assessment-title {
+            font-weight: bold;
+            color: #f57c00;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #f57c00;
+        }
+        
+        .options {
+            margin: 10px 0 10px 20px;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-top: 10px;
+        }
+        
+        details {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #667eea;
+            padding: 5px;
+        }
+        
+        summary:hover {
+            color: #764ba2;
+        }
+        
+        details[open] summary {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .summary-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        
+        .summary-box h2 {
+            color: #667eea;
+            border: none;
+        }
+        
+        .summary-box ul {
+            line-height: 1.8;
+        }
+        
+        .summary-box table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        .summary-box th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .summary-box td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        .summary-box tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .next-chapter {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 25px 0;
+        }
+        
+        .next-chapter h2 {
+            color: #667eea;
+        }
+        
+        .next-chapter ul {
+            line-height: 1.8;
+        }
+        
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .chapter-header {
+                background: #667eea;
+                color: white;
+            }
+            
+            details {
+                border: 1px solid #ddd;
+            }
+            
+            summary {
+                display: none;
+            }
+            
+            details > *:not(summary) {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="chapter-header">
+    <h1>Chapter 4, Lesson 5: Global and Local Variables and Scope</h1>
+    <p>CSC 106: The Joy of Programming</p>
+</div>
+
+<!-- Introduction -->
+<div class="content-section">
+    <h2>📖 Introduction</h2>
+    
+    <p>You've learned how to create functions, pass data into them with parameters, and get results back with return values. But there's one more critical concept you need to understand: <strong>where</strong> variables can be accessed in your program. This is called <strong>variable scope</strong>.</p>
+    
+    <p>Imagine you have a notebook where you write down information. Some pages are in the main section that everyone can see (like a table of contents), while other pages are in private sections that only specific people can access (like personal notes). Variables in programming work the same way. Some variables are <strong>global</strong>—accessible from anywhere in your program. Others are <strong>local</strong>—accessible only within specific functions.</p>
+    
+    <p>Understanding scope is essential because it determines:</p>
+    <ul>
+        <li>Which parts of your code can read a variable</li>
+        <li>Which parts can modify a variable</li>
+        <li>How long a variable exists in memory</li>
+        <li>Whether variables in different functions interfere with each other</li>
+    </ul>
+    
+    <p>Poor understanding of scope leads to confusing bugs where variables mysteriously have the wrong values, or where changes you make don't seem to work. But once you understand scope, you'll be able to organize your variables properly, write functions that work independently, and avoid a whole class of common programming errors. Let's dive in!</p>
+</div>
+
+<!-- Learning Objectives -->
+<div class="content-section">
+    <h2>🎯 Learning Objectives</h2>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.1:</strong> Distinguish between global variables and local variables
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.2:</strong> Understand where global variables can be accessed (everywhere)
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.3:</strong> Understand where local variables can be accessed (only within their function)
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.4:</strong> Apply the <span class="code-inline">var</span> keyword correctly to create local variables
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.5:</strong> Recognize and avoid variable shadowing problems
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.6:</strong> Choose appropriately between global and local variables
+    </div>
+    
+    <div class="learning-objective">
+        <strong>LO4.5.7:</strong> Debug scope-related errors in programs
+    </div>
+</div>
+
+<!-- Key Terms -->
+<div class="content-section">
+    <h2>📚 Key Concepts and Terms</h2>
+    
+    <div class="term">
+        <div class="term-name">Variable Scope</div>
+        <p>The region of code where a variable can be accessed and used. Scope determines the "visibility" and lifetime of a variable.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Global Variable</div>
+        <p>A variable declared outside of any function. Global variables can be accessed and modified from anywhere in the program—both inside and outside of functions.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Local Variable</div>
+        <p>A variable declared inside a function using the <span class="code-inline">var</span> keyword. Local variables only exist within the function where they're declared and are destroyed when the function finishes.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Function Scope</div>
+        <p>The scope created by a function. Variables declared with <span class="code-inline">var</span> inside a function have function scope—they're local to that function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Global Scope</div>
+        <p>The outermost scope of a program. Variables declared in global scope are accessible throughout the entire program.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Variable Shadowing</div>
+        <p>When a local variable has the same name as a global variable, causing the local variable to "hide" or "shadow" the global one within the function.</p>
+    </div>
+    
+    <div class="term">
+        <div class="term-name">Variable Lifetime</div>
+        <p>How long a variable exists in memory. Global variables exist for the entire program duration. Local variables exist only while their function is executing.</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="content-section">
+    <h2>📝 Content</h2>
+    
+    <h3>Understanding Variable Scope</h3>
+    
+    <p><strong>Scope</strong> is the area of your program where a variable can be accessed. Think of it like access permissions for different areas of a building—some areas are public (anyone can enter), while others are private (only authorized people can enter).</p>
+    
+    <p>In JavaScript, there are two main types of scope:</p>
+    <ul>
+        <li><strong>Global Scope:</strong> Variables accessible everywhere</li>
+        <li><strong>Function Scope (Local Scope):</strong> Variables accessible only within a specific function</li>
+    </ul>
+    
+    <h3>Global Variables</h3>
+    
+    <p>A <strong>global variable</strong> is declared <em>outside</em> of any function. Once declared, it can be accessed and modified from anywhere in your program—both inside and outside of functions.</p>
+    
+    <div class="code-example">
+<code>// Global variable - declared outside any function
+var playerScore = 0;
+
+function increaseScore() {
+    playerScore = playerScore + 10;  // Can access and modify global variable
+}
+
+function displayScore() {
+    text("Score: " + playerScore, 10, 30);  // Can access global variable
+}
+
+// Can also access globally
+increaseScore();
+displayScore();  // Displays: "Score: 10"
+text("Final: " + playerScore, 10, 60);  // Can use it here too</code>
+    </div>
+    
+    <p>The variable <span class="code-inline">playerScore</span> is global because it's declared outside any function. Every part of the program can see it and modify it.</p>
+    
+    <div class="callout callout-info">
+        Global variables are useful for data that needs to be shared across multiple functions, like game scores, player positions, or program settings.
+    </div>
+    
+    <h3>Local Variables</h3>
+    
+    <p>A <strong>local variable</strong> is declared <em>inside</em> a function using the <span class="code-inline">var</span> keyword. It only exists within that function and cannot be accessed from outside.</p>
+    
+    <div class="code-example">
+<code>function calculateArea() {
+    var width = 10;   // Local variable
+    var height = 5;   // Local variable
+    var area = width * height;  // Local variable
+    return area;
+}
+
+var result = calculateArea();  // result = 50
+
+// These would cause errors:
+// text(width, 10, 30);   // ERROR! width doesn't exist here
+// text(height, 10, 60);  // ERROR! height doesn't exist here
+// text(area, 10, 90);    // ERROR! area doesn't exist here</code>
+    </div>
+    
+    <p>The variables <span class="code-inline">width</span>, <span class="code-inline">height</span>, and <span class="code-inline">area</span> are local to the <span class="code-inline">calculateArea</span> function. They're created when the function is called and destroyed when it finishes.</p>
+    
+    <div class="callout callout-warning">
+        Forgetting the <span class="code-inline">var</span> keyword inside a function accidentally creates a global variable instead of a local one! Always use <span class="code-inline">var</span> when declaring variables inside functions.
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.1: Global vs. Local Scope Demonstration</div>
+        
+        <div class="code-example">
+<code>var globalMessage = "I'm global!";  // Global variable
+
+function demonstrateScope() {
+    var localMessage = "I'm local!";  // Local variable
+    
+    // Inside the function, both are accessible
+    text(globalMessage, 10, 30);   // ✓ Works - global is accessible everywhere
+    text(localMessage, 10, 60);    // ✓ Works - local is accessible here
+}
+
+demonstrateScope();
+
+// Outside the function, only global is accessible
+text(globalMessage, 10, 90);   // ✓ Works - global is accessible everywhere
+// text(localMessage, 10, 120);   // ✗ ERROR! local variable doesn't exist here</code>
+        </div>
+        
+        <p><strong>Key Insight:</strong> Inside a function, you can access both global and local variables. Outside the function, you can only access global variables.</p>
+    </div>
+    
+    <h3>Why Local Variables Matter</h3>
+    
+    <p>Local variables provide <strong>encapsulation</strong>—they keep a function's internal workings private. This prevents functions from accidentally interfering with each other.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.2: Functions with Independent Local Variables</div>
+        
+        <div class="code-example">
+<code>function calculateCircleArea(radius) {
+    var area = 3.14159 * radius * radius;
+    return area;
+}
+
+function calculateRectangleArea(width, height) {
+    var area = width * height;  // Different 'area' variable!
+    return area;
+}
+
+var circleArea = calculateCircleArea(5);      // 78.54
+var rectangleArea = calculateRectangleArea(4, 6);  // 24
+
+text("Circle: " + circleArea, 10, 30);
+text("Rectangle: " + rectangleArea, 10, 60);</code>
+        </div>
+        
+        <p>Both functions use a variable named <span class="code-inline">area</span>, but they're <em>different variables</em> because they're local to their respective functions. They don't interfere with each other!</p>
+    </div>
+    
+    <h3>Variable Shadowing</h3>
+    
+    <p>What happens when a local variable has the same name as a global variable? The local variable <strong>shadows</strong> (hides) the global one within the function.</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.3: Variable Shadowing</div>
+        
+        <div class="code-example">
+<code>var count = 5;  // Global variable
+
+function changeCount() {
+    var count = 10;  // Local variable - shadows the global!
+    text("Inside function: " + count, 10, 30);  // Displays 10
+}
+
+changeCount();
+text("Outside function: " + count, 10, 60);  // Displays 5</code>
+        </div>
+        
+        <p><strong>What happens:</strong></p>
+        <ol>
+            <li>The global <span class="code-inline">count</span> is set to 5</li>
+            <li>Inside the function, a <em>new local</em> <span class="code-inline">count</span> is created with value 10</li>
+            <li>Inside the function, <span class="code-inline">count</span> refers to the local version (10)</li>
+            <li>Outside the function, <span class="code-inline">count</span> refers to the global version (5)</li>
+            <li>The global variable is never changed!</li>
+        </ol>
+    </div>
+    
+    <div class="callout callout-warning">
+        Variable shadowing can be very confusing! It's best to avoid using the same name for global and local variables. Choose different names to prevent confusion.
+    </div>
+    
+    <h3>Modifying Global Variables from Functions</h3>
+    
+    <p>If you don't use the <span class="code-inline">var</span> keyword inside a function, you're accessing (and can modify) a global variable:</p>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.4: Function Modifying a Global Variable</div>
+        
+        <div class="code-example">
+<code>var totalPoints = 0;  // Global variable
+
+function addPoints(points) {
+    totalPoints = totalPoints + points;  // Modifying global variable
+    // No 'var' keyword, so this accesses the global totalPoints
+}
+
+addPoints(10);  // totalPoints becomes 10
+addPoints(5);   // totalPoints becomes 15
+addPoints(3);   // totalPoints becomes 18
+
+text("Total Points: " + totalPoints, 10, 30);  // Displays 18</code>
+        </div>
+        
+        <p>Because we didn't use <span class="code-inline">var</span> inside the function, JavaScript looks for an existing variable named <span class="code-inline">totalPoints</span> and finds the global one.</p>
+    </div>
+    
+    <h3>When to Use Global vs. Local Variables</h3>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.5: Good Uses of Global Variables</div>
+        
+        <p><strong>Use global variables for:</strong></p>
+        <ul>
+            <li>Game state that many functions need (score, level, lives)</li>
+            <li>Player position/data accessed by multiple functions</li>
+            <li>Program settings or configuration</li>
+        </ul>
+        
+        <div class="code-example">
+<code>// Global variables - shared across many functions
+var playerX = 200;
+var playerY = 200;
+var playerScore = 0;
+var playerLives = 3;
+
+function movePlayer() {
+    playerX = playerX + 5;
+}
+
+function checkCollision() {
+    // Can access player position
+    if (playerX > 400) {
+        playerLives = playerLives - 1;
+    }
+}
+
+function displayGameInfo() {
+    text("Score: " + playerScore, 10, 20);
+    text("Lives: " + playerLives, 10, 40);
+}</code>
+        </div>
+    </div>
+    
+    <div class="example-box">
+        <div class="example-title">Example 4.5.6: Good Uses of Local Variables</div>
+        
+        <p><strong>Use local variables for:</strong></p>
+        <ul>
+            <li>Temporary calculations within a function</li>
+            <li>Loop counters</li>
+            <li>Intermediate results that aren't needed elsewhere</li>
+        </ul>
+        
+        <div class="code-example">
+<code>function calculateDistance(x1, y1, x2, y2) {
+    // All these are local - only needed for this calculation
+    var deltaX = x2 - x1;
+    var deltaY = y2 - y1;
+    var distance = sqrt(deltaX * deltaX + deltaY * deltaY);
+    return distance;
+}
+
+function convertTemperature(celsius) {
+    // Local variable for intermediate calculation
+    var fahrenheit = (celsius * 9/5) + 32;
+    return fahrenheit;
+}</code>
+        </div>
+    </div>
+    
+    <div class="callout callout-hint">
+        <strong>Best Practice:</strong> Start with local variables by default. Only use global variables when you truly need to share data across multiple functions. This keeps functions independent and easier to debug!
+    </div>
+    
+    <div class="video-placeholder">
+        <div class="video-title">🎥 Video: Global and Local Variables</div>
+        <p>This video explains global variables (accessible everywhere) and local variables (accessible only within their function), and demonstrates how scope works.</p>
+        <div class="video-duration">Duration: 4:32</div>
+    </div>
+    
+    <div class="assessment">
+        <div class="assessment-title">✏️ Formative Assessment 4.5.1: Understanding Variable Scope</div>
+        
+        <div class="question">
+            <p class="question-number">Question 1 (Multiple Choice):</p>
+            <p>Where can a global variable be accessed?</p>
+            <div class="options">
+                <label><input type="radio" name="q1"> A) Only inside functions</label>
+                <label><input type="radio" name="q1"> B) Only outside functions</label>
+                <label><input type="radio" name="q1"> C) Anywhere in the program</label>
+                <label><input type="radio" name="q1"> D) Only in one specific function</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: C) Anywhere in the program</strong></p>
+                <p>Global variables, declared outside any function, can be accessed and modified from anywhere in your code—both inside and outside of functions.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 2 (True/False):</p>
+            <p>A local variable declared in one function can be accessed by another function.</p>
+            <div class="options">
+                <label><input type="radio" name="q2"> True</label>
+                <label><input type="radio" name="q2"> False</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: False</strong></p>
+                <p>Local variables exist only within the function where they're declared. To share data between functions, use global variables, parameters, or return values.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 3 (Code Analysis):</p>
+            <p>What will this code display?</p>
+            <div class="code-example">
+<code>var count = 5;
+
+function changeCount() {
+    var count = 10;
+    text(count, 100, 100);
+}
+
+changeCount();
+text(count, 100, 150);</code>
+            </div>
+            <div class="options">
+                <label><input type="radio" name="q3"> A) 5 at both positions</label>
+                <label><input type="radio" name="q3"> B) 10 at both positions</label>
+                <label><input type="radio" name="q3"> C) 10 at (100,100) and 5 at (100,150)</label>
+                <label><input type="radio" name="q3"> D) Error</label>
+            </div>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer: C) 10 at (100,100) and 5 at (100,150)</strong></p>
+                <p>Inside the function, the local <span class="code-inline">count</span> (10) shadows the global <span class="code-inline">count</span> (5). Outside the function, only the global <span class="code-inline">count</span> (5) is accessible. This demonstrates variable shadowing.</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 4 (Identification):</p>
+            <p>Identify each variable as global or local:</p>
+            <div class="code-example">
+<code>var gameLevel = 1;
+var gameScore = 0;
+
+function startLevel() {
+    var enemyCount = 5;
+    var startTime = millis();
+    gameLevel = gameLevel + 1;
+}</code>
+            </div>
+            <textarea rows="4" placeholder="List which variables are global and which are local..."></textarea>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Answer:</strong></p>
+                <ul>
+                    <li><span class="code-inline">gameLevel</span> - <strong>GLOBAL</strong> (declared outside any function)</li>
+                    <li><span class="code-inline">gameScore</span> - <strong>GLOBAL</strong> (declared outside any function)</li>
+                    <li><span class="code-inline">enemyCount</span> - <strong>LOCAL</strong> (declared inside function with <span class="code-inline">var</span>)</li>
+                    <li><span class="code-inline">startTime</span> - <strong>LOCAL</strong> (declared inside function with <span class="code-inline">var</span>)</li>
+                </ul>
+                <p>Note: Inside the function, <span class="code-inline">gameLevel = gameLevel + 1;</span> modifies the global variable (no <span class="code-inline">var</span> keyword).</p>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 5 (Debugging):</p>
+            <p>This code has a scope-related bug. Identify and explain the problem:</p>
+            <div class="code-example">
+<code>function calculateTotal() {
+    var price = 50;
+    var quantity = 3;
+    var total = price * quantity;
+}
+
+calculateTotal();
+text("Total: " + total, 10, 30);</code>
+            </div>
+            <textarea rows="4" placeholder="Explain the problem and how to fix it..."></textarea>
+            <details>
+                <summary>Show Answer</summary>
+                <p><strong>Problem:</strong> The variable <span class="code-inline">total</span> is local to the <span class="code-inline">calculateTotal</span> function, so it can't be accessed outside the function. The <span class="code-inline">text()</span> call will cause an error because <span class="code-inline">total</span> doesn't exist in that scope.</p>
+                <p><strong>Solution 1:</strong> Return the value:</p>
+                <div class="code-example">
+<code>function calculateTotal() {
+    var price = 50;
+    var quantity = 3;
+    var total = price * quantity;
+    return total;
+}
+
+var result = calculateTotal();
+text("Total: " + result, 10, 30);</code>
+                </div>
+                <p><strong>Solution 2:</strong> Make <span class="code-inline">total</span> global (less recommended):</p>
+                <div class="code-example">
+<code>var total;  // Global
+
+function calculateTotal() {
+    var price = 50;
+    var quantity = 3;
+    total = price * quantity;  // Modify global
+}
+
+calculateTotal();
+text("Total: " + total, 10, 30);</code>
+                </div>
+            </details>
+        </div>
+        
+        <div class="question">
+            <p class="question-number">Question 6 (Conceptual):</p>
+            <p>Why is it generally better to use local variables instead of global variables when possible?</p>
+            <textarea rows="4" placeholder="Explain the benefits of local variables..."></textarea>
+            <details>
+                <summary>Show Sample Answer</summary>
+                <p><strong>Benefits of local variables:</strong></p>
+                <ul>
+                    <li><strong>Encapsulation:</strong> Keeps function internals private and prevents interference</li>
+                    <li><strong>Reusability:</strong> Functions with local variables can be reused without worrying about name conflicts</li>
+                    <li><strong>Debugging:</strong> Easier to track down bugs when variables have limited scope</li>
+                    <li><strong>Memory:</strong> Local variables are automatically cleaned up when the function ends</li>
+                    <li><strong>Independence:</strong> Functions can work independently without affecting other parts of the program</li>
+                </ul>
+                <p>Global variables should be reserved for data that truly needs to be shared across many functions.</p>
+            </details>
+        </div>
+    </div>
+</div>
+
+<!-- Summary -->
+<div class="summary-box">
+    <h2>📚 Lesson Summary</h2>
+    
+    <p>You've mastered variable scope—one of the most important concepts for writing well-organized, bug-free code!</p>
+    
+    <h3>Key Concepts Mastered:</h3>
+    <ul>
+        <li>✅ <strong>Variable Scope:</strong> The region where a variable can be accessed</li>
+        <li>✅ <strong>Global Variables:</strong> Accessible everywhere in the program</li>
+        <li>✅ <strong>Local Variables:</strong> Accessible only within their function</li>
+        <li>✅ <strong>var Keyword:</strong> Essential for creating local variables inside functions</li>
+        <li>✅ <strong>Variable Shadowing:</strong> How local variables can hide global ones</li>
+        <li>✅ <strong>Encapsulation:</strong> Using local variables to keep functions independent</li>
+        <li>✅ <strong>Best Practices:</strong> When to use global vs. local variables</li>
+    </ul>
+    
+    <h3>Scope Rules Summary:</h3>
+    <table>
+        <tr>
+            <th>Variable Type</th>
+            <th>Declared Where?</th>
+            <th>Accessible Where?</th>
+            <th>Lifetime</th>
+        </tr>
+        <tr>
+            <td>Global</td>
+            <td>Outside any function</td>
+            <td>Everywhere</td>
+            <td>Entire program</td>
+        </tr>
+        <tr>
+            <td>Local</td>
+            <td>Inside function (with <span class="code-inline">var</span>)</td>
+            <td>Only in that function</td>
+            <td>While function runs</td>
+        </tr>
+    </table>
+    
+    <h3>Decision Guide:</h3>
+    <table>
+        <tr>
+            <th>Use Global When...</th>
+            <th>Use Local When...</th>
+        </tr>
+        <tr>
+            <td>Multiple functions need the same data</td>
+            <td>Data is only needed for calculation</td>
+        </tr>
+        <tr>
+            <td>Tracking game state (score, level)</td>
+            <td>Storing intermediate results</td>
+        </tr>
+        <tr>
+            <td>Program-wide settings</td>
+            <td>Loop counters</td>
+        </tr>
+        <tr>
+            <td>Player position/status</td>
+            <td>Temporary variables</td>
+        </tr>
+    </table>
+    
+    <h3>Critical Reminders:</h3>
+    <div class="callout callout-warning">
+        Always use <span class="code-inline">var</span> when declaring variables inside functions, or you'll accidentally create global variables!
+    </div>
+    
+    <div class="callout callout-hint">
+        Default to local variables. Only use global variables when you truly need to share data across functions.
+    </div>
+    
+    <div class="callout callout-info">
+        Avoid variable shadowing by using different names for global and local variables—it prevents confusion!
+    </div>
+</div>
+
+<!-- What's Next -->
+<div class="next-chapter">
+    <h2>🔜 What's Coming Next</h2>
+    <h3>Chapter 4, Lesson 6: Practical Applications and ProcessingJS Functions</h3>
+    
+    <p>Now that you understand parameters, return values, and scope, you're ready to apply everything you've learned to build real programs! In the next lesson, you'll explore:</p>
+    
+    <ul>
+        <li>🧮 <strong>Building Calculator Functions:</strong> Creating a complete set of mathematical utilities</li>
+        <li>🔄 <strong>Function Composition:</strong> Using return values from one function in another</li>
+        <li>🎬 <strong>setup() Function:</strong> Initializing your program (runs once at start)</li>
+        <li>🎨 <strong>draw() Function:</strong> Creating animations (runs 60 times per second)</li>
+        <li>⏱️ <strong>The Draw Loop:</strong> Understanding continuous execution for animation</li>
+        <li>🎮 <strong>Animated Programs:</strong> Building programs that move and respond</li>
+        <li>🎯 <strong>Combining Concepts:</strong> Using all function features together</li>
+    </ul>
+    
+    <p>You'll see how parameters, return values, and proper scope management work together to create sophisticated, well-organized programs. The special ProcessingJS functions will let you create animations and interactive graphics!</p>
+    
+    <div class="callout callout-hint">
+        <strong>Review Exercise:</strong>
+        <p style="margin-top: 10px;">Before moving on, make sure you can:</p>
+        <ol style="margin-top: 10px;">
+            <li>Identify whether a variable is global or local just by looking at code</li>
+            <li>Explain what will happen when a local variable shadows a global one</li>
+            <li>Decide whether a variable should be global or local based on how it's used</li>
+            <li>Debug scope errors in your programs</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align: center; padding: 40px 0; color: #666; border-top: 2px solid #ddd; margin-top: 40px;">
+    <p><strong>CSC 106: The Joy of Programming</strong></p>
+    <p>University of Rhode Island • Department of Computer Science</p>
+    <p>Chapter 4, Lesson 5: Global and Local Variables and Scope</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">
+        © 2025 University of Rhode Island. All rights reserved.
+    </p>
+</div>
+
+</body>
+</html>
