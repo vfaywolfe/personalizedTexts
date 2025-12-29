@@ -842,248 +842,298 @@
         </div>
 
         <!-- ACTIVITY 2: TEACHABLE MACHINE - BEFORE ASSESSMENT -->
-        <div class="activity">
-            <h3>Activity 2: Teachable Machine - Train Your Own Neural Network</h3>
-            
-            <p><strong>Scenario:</strong> Now that you understand how neural networks work, you're going to build your own! Google's Teachable Machine makes it easy to train neural networks for image classification without writing any code. You'll train models to recognize different poses, then build a classifier to distinguish between cats and dogs.</p>
+  const CorrectedActivity2 = () => {
+  return (
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '20px', fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif', lineHeight: '1.6', color: '#333' }}>
+      
+      {/* Activity 2: Teachable Machine */}
+      <div style={{ backgroundColor: '#fff9e6', padding: '25px', borderRadius: '8px', margin: '30px 0', borderLeft: '4px solid #ffc107' }}>
+        <h3 style={{ color: '#ff6f00', display: 'flex', alignItems: 'center', marginTop: 0 }}>
+          <span style={{ marginRight: '10px', fontSize: '1.3em' }}>🎯</span>
+          Activity 2: Teachable Machine - Train Your Own Neural Network
+        </h3>
+        
+        <p><strong>Scenario:</strong> Now that you understand how neural networks work, you're going to build your own! Google's Teachable Machine makes it easy to train neural networks for image classification without writing any code. You'll train models to recognize different poses, then build a classifier to distinguish between cats and dogs.</p>
 
-            <div class="activity-instruction">
-                <h4>Part A: Explore Teachable Machine with Poses</h4>
-                <ol style="margin-left: 20px;">
-                    <li>Open the <a href="https://teachablemachine.withgoogle.com/" target="_blank">Teachable Machine</a></li>
-                    <li>Click "Get Started" and then "Image Project"</li>
-                    <li>Choose "Standard image model"</li>
-                    <li>Follow the interactive tutorial using your webcam to train the model to recognize different poses</li>
-                    <li>Experiment with different poses and classes</li>
-                    <li>Answer these questions:</li>
-                </ol>
+        {/* Part A: Poses */}
+        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '4px', margin: '10px 0', borderLeft: '3px solid #ffc107' }}>
+          <h4>Part A: Explore Teachable Machine with Poses</h4>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>Open the <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener noreferrer">Teachable Machine</a></li>
+            <li>Click "Get Started" and then "Image Project"</li>
+            <li>Choose "Standard image model"</li>
+            <li>Follow the interactive tutorial using your webcam to train the model to recognize different poses</li>
+            <li>Experiment with different poses and classes</li>
+            <li>Answer these questions:</li>
+          </ol>
 
-                <div style="margin-top: 20px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question A:</strong> What happens if you only train one class (don't train the other class)?</p>
-                    <div style="margin-top: 10px; background-color: white; padding: 10px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                        <em>Hint: The model needs to learn what both classes look like to distinguish between them.</em>
-                    </div>
-                    <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-
-                <div style="margin-top: 15px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question B:</strong> What happens as you increase your dataset? Make sure both classes have at least 10 images each and describe what you observe.</p>
-                    <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-
-                <div style="margin-top: 15px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question C:</strong> If you trained mostly with one hand but then test with the other hand, what happens? What does this tell you about the importance of diverse training data?</p>
-                    <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
+          <div style={{ marginTop: '20px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question A:</strong> What happens if you only train one class (don't train the other class)?</p>
+            <div style={{ marginTop: '10px', backgroundColor: 'white', padding: '10px', borderRadius: '4px', borderLeft: '3px solid #ffc107' }}>
+              <em>Hint: The model needs to learn what both classes look like to distinguish between them.</em>
             </div>
+            <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
 
-            <div class="activity-instruction">
-                <h4>Part B: Build a Cat vs. Dog Classifier</h4>
-                
-                <h5>Step 1: Prepare Your Data</h5>
-                <ol style="margin-left: 20px;">
-                    <li>Download the <strong>Initial Training Dataset</strong> (provided in your course materials)</li>
-                    <li>Unzip the folder on your computer</li>
-                    <li>Note how many images are in each folder (Dogs and Cats)</li>
-                </ol>
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question B:</strong> What happens as you increase your dataset? Make sure both classes have at least 10 images each and describe what you observe.</p>
+            <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
 
-                <h5>Step 2: Train Your Model with Initial Data</h5>
-                <ol style="margin-left: 20px;">
-                    <li>Open Teachable Machine and create a new Image Project</li>
-                    <li>Select "Standard image model"</li>
-                    <li>Upload dog images to Class 1 (rename to "Dog")</li>
-                    <li>Upload cat images to Class 2 (rename to "Cat")</li>
-                    <li>Click "Train Model" and wait for training to complete</li>
-                </ol>
-
-                <h5>Step 3: Record Training Data Information</h5>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Aspect</th>
-                            <th>Dog Images</th>
-                            <th>Cat Images</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Number of images</strong></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>How similar are they?</strong></td>
-                            <td><textarea style="width: 100%; padding: 6px; border: 1px solid #ddd; height: 60px;"></textarea></td>
-                            <td><textarea style="width: 100%; padding: 6px; border: 1px solid #ddd; height: 60px;"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td><strong>How different are they?</strong></td>
-                            <td><textarea style="width: 100%; padding: 6px; border: 1px solid #ddd; height: 60px;"></textarea></td>
-                            <td><textarea style="width: 100%; padding: 6px; border: 1px solid #ddd; height: 60px;"></textarea></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h5>Step 4: Test Your Model</h5>
-                <ol style="margin-left: 20px;">
-                    <li>Download the <strong>Test Dataset</strong></li>
-                    <li>In Teachable Machine, switch Preview from Webcam to File</li>
-                    <li>For each test image, record: filename, classification, confidence score, and whether it was correct</li>
-                </ol>
-
-                <h5>Test Results Table</h5>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th>Classification (Cat/Dog)</th>
-                            <th>Confidence Score (%)</th>
-                            <th>Correct? (Y/N)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>test1.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test2.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test3.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test4.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test5.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test6.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test7.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 20px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question D:</strong> Which class did your classifier work better on (cats or dogs)? Why do you think that is?</p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-
-                <div style="margin-top: 15px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question E:</strong> How could you improve your model's performance? What changes would you make to your training data?</p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-            </div>
-
-            <div class="activity-instruction">
-                <h4>Part C: Improve Your Model with Curated Data</h4>
-                
-                <p>Now you'll rebuild your model using the <strong>Curated Training Dataset</strong>—a larger, more diverse collection of cat and dog images. This demonstrates how better training data improves neural network performance.</p>
-
-                <ol style="margin-left: 20px;">
-                    <li>Download the Curated Dataset and unzip it</li>
-                    <li>Remove all samples from your current Dog and Cat classes</li>
-                    <li>Upload all dogs from the curated dataset to the Dog class</li>
-                    <li>Upload all cats from the curated dataset to the Cat class</li>
-                    <li>Train the new model</li>
-                    <li>Test it on the same test images as before</li>
-                </ol>
-
-                <p style="margin-top: 20px;"><strong>Updated Test Results Table</strong></p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th>Classification (Cat/Dog)</th>
-                            <th>Confidence Score (%)</th>
-                            <th>Correct? (Y/N)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>test1.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test2.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test3.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test4.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test5.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test6.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                        <tr>
-                            <td>test7.png</td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                            <td><input type="text" style="width: 100%; padding: 6px; border: 1px solid #ddd;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 20px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question F:</strong> Did your classifier work better for both classes? Or, did it work the same for both? What changed?</p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-
-                <div style="margin-top: 15px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question G:</strong> What did you do to make it work better? How did your actions demonstrate the importance of good training data?</p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-
-                <div style="margin-top: 15px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Question H:</strong> How might you find additional images to further improve your dataset? Where would you look?</p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-            </div>
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question C:</strong> If you trained mostly with one hand but then test with the other hand, what happens? What does this tell you about the importance of diverse training data?</p>
+            <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
         </div>
+
+        {/* Part B: Cat vs Dog Classifier - Initial Dataset */}
+        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '4px', margin: '10px 0', borderLeft: '3px solid #ffc107' }}>
+          <h4>Part B: Build a Cat vs. Dog Classifier</h4>
+          
+          <h5>Step 1: Prepare Your Data</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>Download the <strong>Initial Training Dataset</strong> (provided in your course materials)</li>
+            <li>Click the Download button to download the zipped folder with all the images in this data set</li>
+            <li>Unzip the folder on your computer
+              <ul style={{ marginLeft: '20px', marginTop: '5px' }}>
+                <li>Refer to the How to Unzip a File tutorial for your respective operating system if necessary</li>
+              </ul>
+            </li>
+          </ol>
+
+          <h5>Step 2: Set Up Your Model</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>Open Teachable Machine and create a new Image Project</li>
+            <li>In the New Image Project pop-up menu, select "Standard image model"</li>
+            <li>Under <strong>Class 1</strong>, click the Upload button and click "Choose images from your files, or drag and drop here"</li>
+            <li>Inside your unzipped folder for the Initial Training Dataset, click on the <strong>Dogs</strong> folder and select all images to upload</li>
+            <li>Click the Edit button to rename Class 1 to <strong>Dog</strong></li>
+            <li>Under <strong>Class 2</strong>, click the Upload button and click "Choose images from your files, or drag and drop here"</li>
+            <li>Inside your unzipped folder for the Initial Training Dataset, click on the <strong>Cats</strong> folder and select all images to upload</li>
+            <li>Click the Edit button to rename Class 2 to <strong>Cat</strong></li>
+          </ol>
+
+          <h5>Step 3: Record Initial Training Data Information</h5>
+          <p style={{ marginTop: '15px', fontStyle: 'italic' }}>Before training your model, analyze the training data you've uploaded:</p>
+
+          <div style={{ marginTop: '20px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question D:</strong> For the dog training dataset, record the following:</p>
+            <div style={{ marginTop: '10px' }}>
+              <p><strong>How many images are included?</strong></p>
+              <input type="text" style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px', fontFamily: 'Arial', marginTop: '5px' }} />
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images similar?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images different?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question E:</strong> For the cat training dataset, record the following:</p>
+            <div style={{ marginTop: '10px' }}>
+              <p><strong>How many images are included?</strong></p>
+              <input type="text" style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px', fontFamily: 'Arial', marginTop: '5px' }} />
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images similar?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images different?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+            </div>
+          </div>
+
+          <h5 style={{ marginTop: '25px' }}>Step 4: Train Your Model with Initial Data</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>In the Training box, click the <strong>Train Model</strong> button</li>
+            <li>Wait for training to complete (this may take a few minutes)</li>
+          </ol>
+
+          <h5>Step 5: Test Your Model</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>Download the <strong>Test Dataset</strong> (provided in your course materials)</li>
+            <li>Unzip the test dataset folder</li>
+            <li>In Teachable Machine, in the Preview box, click on <strong>Webcam</strong> and change it to <strong>File</strong></li>
+            <li>Click "Choose images from your files, or drag and drop here"</li>
+            <li>Select each test image <strong>one at a time</strong></li>
+            <li>For each test image, record the following information in the table below:</li>
+          </ol>
+
+          <h5 style={{ marginTop: '20px' }}>Initial Test Results Table</h5>
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '15px' }}>
+            <thead>
+              <tr>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Filename</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Classification (Cat/Dog)</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Confidence Score (%)</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Correct? (Y/N)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {['test1.png', 'test2.png', 'test3.png', 'test4.png', 'test5.png', 'test6.png', 'test7.png'].map((filename, idx) => (
+                <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white' }}>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>{filename}</td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div style={{ marginTop: '20px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question F:</strong> Which class did your classifier work better on (cats or dogs)? Why do you think that is?</p>
+            <textarea style={{ width: '100%', height: '80px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
+
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question G:</strong> How could you make it better with your training data?</p>
+            <textarea style={{ width: '100%', height: '80px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
+        </div>
+
+        {/* Part C: Improved Model with Curated Data */}
+        <div style={{ backgroundColor: 'white', padding: '15px', borderRadius: '4px', margin: '10px 0', borderLeft: '3px solid #ffc107' }}>
+          <h4>Part C: Improve Your Model with Curated Data</h4>
+          
+          <p>Now you'll rebuild your model using the <strong>Curated Training Dataset</strong>—a larger, more diverse collection of cat and dog images. This demonstrates how better training data improves neural network performance.</p>
+
+          <h5>Step 1: Replace Your Training Data</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>Download the <strong>Curated Training Dataset</strong> (provided in your course materials)</li>
+            <li>Click the Download button to download the zipped folder</li>
+            <li>Unzip the folder on your computer</li>
+            <li>In Teachable Machine, under <strong>Dog</strong>, click the ellipsis button (⋮) and click "Remove All Samples"</li>
+            <li>Under <strong>Dog</strong>, click the Upload button and click "Choose images from your files, or drag and drop here"</li>
+            <li>Inside your unzipped folder for the Curated Dataset, click on the <strong>Dogs</strong> folder and select all images to upload</li>
+            <li>Under <strong>Cat</strong>, click the ellipsis button (⋮) and click "Remove All Samples"</li>
+            <li>Under <strong>Cat</strong>, click the Upload button and click "Choose images from your files, or drag and drop here"</li>
+            <li>Inside your unzipped folder for the Curated Dataset, click on the <strong>Cats</strong> folder and select all images to upload</li>
+          </ol>
+
+          <h5 style={{ marginTop: '20px' }}>Step 2: Record Curated Training Data Information</h5>
+          <p style={{ marginTop: '10px', fontStyle: 'italic' }}>Before training with the new data, analyze how the curated dataset differs from the initial dataset:</p>
+
+          <div style={{ marginTop: '20px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question H:</strong> For the dog training dataset, record the following:</p>
+            <div style={{ marginTop: '10px' }}>
+              <p><strong>How many images are included?</strong></p>
+              <input type="text" style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px', fontFamily: 'Arial', marginTop: '5px' }} />
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images similar?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images different?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question I:</strong> For the cat training dataset, record the following:</p>
+            <div style={{ marginTop: '10px' }}>
+              <p><strong>How many images are included?</strong></p>
+              <input type="text" style={{ width: '100%', padding: '8px', border: '1px solid #ddd', borderRadius: '4px', fontFamily: 'Arial', marginTop: '5px' }} />
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images similar?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+              
+              <p style={{ marginTop: '15px' }}><strong>How are the images different?</strong></p>
+              <textarea style={{ width: '100%', height: '60px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '5px' }}></textarea>
+            </div>
+          </div>
+
+          <h5 style={{ marginTop: '25px' }}>Step 3: Train Your Improved Model</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>In the Training box, click the <strong>Train Model</strong> button</li>
+            <li>Wait for training to complete</li>
+          </ol>
+
+          <h5>Step 4: Test Your Improved Model</h5>
+          <ol style={{ marginLeft: '20px' }}>
+            <li>In the Preview box, make sure it's still set to <strong>File</strong></li>
+            <li>Test using the <strong>same test images</strong> as before</li>
+            <li>For each test image, record the results in the table below</li>
+          </ol>
+
+          <h5 style={{ marginTop: '20px' }}>Curated Model Test Results Table</h5>
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '15px' }}>
+            <thead>
+              <tr>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Filename</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Classification (Cat/Dog)</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Confidence Score (%)</th>
+                <th style={{ backgroundColor: '#667eea', color: 'white', padding: '12px', textAlign: 'left', border: '1px solid #ddd' }}>Correct? (Y/N)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {['test1.png', 'test2.png', 'test3.png', 'test4.png', 'test5.png', 'test6.png', 'test7.png'].map((filename, idx) => (
+                <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? '#f9f9f9' : 'white' }}>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>{filename}</td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                  <td style={{ padding: '12px', border: '1px solid #ddd' }}>
+                    <input type="text" style={{ width: '100%', padding: '6px', border: '1px solid #ddd', borderRadius: '4px' }} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div style={{ marginTop: '20px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question J:</strong> Did your classifier work better for one class? Or, did it work the same for both classes?</p>
+            <textarea style={{ width: '100%', height: '80px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
+
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question K:</strong> What did you do to make it work better?</p>
+            <textarea style={{ width: '100%', height: '80px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
+
+          <div style={{ marginTop: '15px', backgroundColor: '#f0f4ff', padding: '15px', borderRadius: '4px' }}>
+            <p><strong>Question L:</strong> How might you find images to better curate your dataset?</p>
+            <div style={{ marginTop: '10px', backgroundColor: 'white', padding: '10px', borderRadius: '4px', borderLeft: '3px solid #ffc107' }}>
+              <em>Think about: Where could you find more diverse images of cats and dogs? What sources would give you variety in breeds, poses, lighting, backgrounds, etc.?</em>
+            </div>
+            <textarea style={{ width: '100%', height: '80px', padding: '8px', fontFamily: 'Arial', border: '1px solid #ddd', borderRadius: '4px', marginTop: '10px' }}></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Note about submission */}
+      <div style={{ backgroundColor: '#e3f2fd', padding: '20px', borderRadius: '8px', marginTop: '20px', borderLeft: '4px solid #2196f3' }}>
+        <h4 style={{ color: '#2196f3', marginTop: 0, display: 'flex', alignItems: 'center' }}>
+          <span style={{ marginRight: '10px', fontSize: '1.3em' }}>💡</span>
+          Submission Reminder
+        </h4>
+        <p>Make sure to save all your answers in your answer document. You should have:</p>
+        <ul style={{ marginLeft: '20px' }}>
+          <li>Answers to questions A, B, and C from Part A (poses exploration)</li>
+          <li>Answers to questions D and E about the initial training dataset characteristics</li>
+          <li>Your completed Initial Test Results Table</li>
+          <li>Answers to questions F and G about initial model performance</li>
+          <li>Answers to questions H and I about the curated training dataset characteristics</li>
+          <li>Your completed Curated Model Test Results Table</li>
+          <li>Answers to questions J, K, and L about improved model performance</li>
+        </ul>
+      </div>
+
+    </div>
+  );
+};
+
+export default CorrectedActivity2;
 
         <!-- ASSESSMENT 2: AFTER ACTIVITY -->
         <div class="assessment">
