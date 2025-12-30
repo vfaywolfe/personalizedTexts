@@ -72,7 +72,6 @@
             margin-bottom: 15px;
         }
 
-        /* Lesson Styles */
         .lesson {
             margin-bottom: 60px;
             padding-bottom: 40px;
@@ -143,7 +142,6 @@
             font-size: 0.9em;
         }
 
-        /* Content Sections */
         .content-section {
             margin: 30px 0;
         }
@@ -162,7 +160,6 @@
             line-height: 1.8;
         }
 
-        /* Callout Styles */
         .callout {
             padding: 20px;
             border-radius: 5px;
@@ -212,7 +209,6 @@
             font-size: 1.4em;
         }
 
-        /* Definition Styles */
         .definition-box {
             background-color: #fffbf0;
             border-left: 4px solid var(--accent-color);
@@ -225,7 +221,6 @@
             color: var(--accent-color);
         }
 
-        /* Example Styles */
         .example {
             background-color: #f9f9f9;
             border: 2px solid var(--border-light);
@@ -251,7 +246,72 @@
             color: var(--primary-color);
         }
 
-        /* Formative Assessment Styles */
+        .video-embed {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: var(--background-light);
+            border-radius: 5px;
+            border: 2px solid var(--border-light);
+        }
+
+        .video-playlist {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: var(--background-light);
+            border-radius: 5px;
+            border: 2px solid var(--border-light);
+        }
+
+        .video-item {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .video-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .video-duration {
+            font-size: 0.9em;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #333333, #555555);
+            width: 100%;
+            height: 300px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            margin: 10px 0;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-placeholder-small {
+            background: linear-gradient(135deg, #444444, #666666);
+            width: 100%;
+            height: 180px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.95em;
+            margin: 10px 0;
+            flex-direction: column;
+            gap: 8px;
+        }
+
         .formative-assessment {
             background: linear-gradient(135deg, #f0f4ff, #f9f9ff);
             border: 2px solid var(--info-color);
@@ -339,6 +399,7 @@
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s;
+            margin-top: 10px;
         }
 
         .show-answer-btn:hover {
@@ -356,29 +417,6 @@
             font-family: inherit;
         }
 
-        .matching-pair {
-            display: flex;
-            gap: 15px;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: white;
-            border-radius: 4px;
-        }
-
-        .matching-term, .matching-definition {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid var(--border-light);
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .matching-term:hover, .matching-definition:hover {
-            background-color: #f0f0f0;
-        }
-
-        /* What's Coming Next */
         .whats-coming {
             background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
             border-left: 5px solid var(--secondary-color);
@@ -405,34 +443,6 @@
             color: var(--primary-color);
         }
 
-        .video-embed {
-            margin: 25px 0;
-            padding: 20px;
-            background-color: var(--background-light);
-            border-radius: 5px;
-            border: 2px solid var(--border-light);
-        }
-
-        .video-placeholder {
-            background: linear-gradient(135deg, #333333, #555555);
-            width: 100%;
-            height: 300px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1em;
-            margin: 10px 0;
-        }
-
-        .video-description {
-            font-size: 0.9em;
-            color: var(--text-light);
-            margin-top: 10px;
-            font-style: italic;
-        }
-
         .summary-section {
             background: linear-gradient(135deg, #fff5e6, #ffe8cc);
             padding: 25px;
@@ -455,28 +465,29 @@
             margin: 10px 0;
         }
 
-        .note-box {
-            background-color: #fffacd;
-            border: 2px solid #ffd700;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
+        .matching-pair {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
         }
 
-        .icon {
-            display: inline-block;
-            margin-right: 8px;
+        .matching-term, .matching-definition {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-light);
+            border-radius: 3px;
         }
 
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
             }
-
             .lesson-title {
                 font-size: 1.4em;
             }
-
             .container {
                 padding: 15px;
             }
@@ -523,7 +534,7 @@
             <div class="lesson-header">
                 <div class="lesson-number">Lesson 1 of 5</div>
                 <h2 class="lesson-title">Lesson 1.1: How Neural Networks Learn</h2>
-                <div class="lesson-duration">⏱️ 10-12 minutes</div>
+                <div class="lesson-duration">⏱️ 11-13 minutes</div>
             </div>
 
             <div class="learning-objectives">
@@ -604,11 +615,11 @@
                     </div>
 
                     <div class="example-step">
-                        <strong>Step 3 - Backward Pass:</strong> The error flows backward through the network. Each layer calculates its contribution to the error.
+                        <strong>Step 3 - Backward Pass:</strong> The error flows backward through the network. Each layer calculates how much it contributed to the error.
                     </div>
 
                     <div class="example-step">
-                        <strong>Step 4 - Update Weights:</strong> Adjust the connection strengths to reduce the error. Connections that led to wrong predictions are weakened; those that helped are strengthened.
+                        <strong>Step 4 - Update Weights:</strong> Adjust the connection strengths to reduce error. Connections that led to wrong predictions are weakened; those that helped are strengthened.
                     </div>
 
                     <div class="example-step">
@@ -641,10 +652,21 @@
                     <p>Neural networks don't "understand" in the way humans do. They learn statistical patterns in data. If you show a network a handwritten digit that's slightly distorted or unusual, it might get confused. They can also be fooled by adversarial examples—deliberately manipulated images that humans recognize easily but networks misclassify.</p>
                 </div>
 
-                <div class="video-embed">
-                    <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: How Neural Networks Work</div>
-                    <div class="video-placeholder">▶ How Neural Networks Work - 4:32</div>
-                    <div class="video-description">A visual explanation of how neural networks process information through layers and learn from data. (4 minutes 32 seconds)</div>
+                <!-- VIDEO SECTION -->
+                <div class="video-playlist">
+                    <h3 style="color: var(--primary-color); margin-bottom: 20px;">📹 Videos for This Lesson</h3>
+                    
+                    <div class="video-item">
+                        <div class="video-title">▶ How AI Works</div>
+                        <div class="video-duration">Duration: 1:29</div>
+                        <div class="video-placeholder-small">▶ How AI Works — 1:29</div>
+                    </div>
+
+                    <div class="video-item">
+                        <div class="video-title">▶ How Neural Networks Work</div>
+                        <div class="video-duration">Duration: 5:04</div>
+                        <div class="video-placeholder-small">▶ How Neural Networks Work — 5:04</div>
+                    </div>
                 </div>
             </div>
 
@@ -715,25 +737,24 @@
             <div class="lesson-header">
                 <div class="lesson-number">Lesson 2 of 5</div>
                 <h2 class="lesson-title">Lesson 1.2: Computer Vision—How AI Sees Images</h2>
-                <div class="lesson-duration">⏱️ 12-14 minutes (includes hands-on activity)</div>
+                <div class="lesson-duration">⏱️ 15-17 minutes (includes hands-on activity)</div>
             </div>
 
             <div class="learning-objectives">
                 <h3>Learning Objectives</h3>
                 <ul>
-<li><code>LO1.2.1</code>: Explain what computer vision is and how neural networks enable machines to process images</li>
-                <li><code>LO1.2.2</code>: Understand how Convolutional Neural Networks (CNNs) detect visual patterns at different levels</li>
-                <li><code>LO1.2.3</code>: Describe real-world applications of computer vision</li>
-                <li><code>LO1.2.4</code>: Build and test your own image classification model</li>
-            </ul>
-        </div>
+                    <li><code>LO1.2.1</code>: Explain what computer vision is and how neural networks enable machines to process images</li>
+                    <li><code>LO1.2.2</code>: Understand how Convolutional Neural Networks (CNNs) detect visual patterns at different levels</li>
+                    <li><code>LO1.2.3</code>: Describe real-world applications of computer vision</li>
+                    <li><code>LO1.2.4</code>: Build and test your own image classification model</li>
+                </ul>
+            </div>
 
-        <div class="content-section">
-            <h3>What is Computer Vision?</h3>
+            <div class="content-section">
+                <h3>What is Computer Vision?</h3>
 
-            <p>Humans instantly recognize a dog, a cat, a stop sign, or a friend's face in a photograph. But how can a computer "see" an image? <strong>Computer vision</strong> is the field of AI that enables machines to extract meaningful information from images and videos—to process visual data the way humans process sight.</p>
-
-            <div class="definition-box">
+                <p>Humans instantly recognize a dog, a cat, a stop sign, or a friend's face in a photograph. But how can a computer "see" an image? <strong>Computer vision</strong> is the field of AI that enables machines to extract meaningful information from images and videos—to process visual data the way humans process sight.</p>
+<div class="definition-box">
                 <strong>Computer Vision:</strong> A branch of artificial intelligence that develops systems to automatically extract, analyze, and understand visual information from images and videos, enabling machines to make decisions based on what they "see."
             </div>
 
@@ -807,7 +828,7 @@
                     <span class="callout-icon">ℹ️</span>
                     <span>Why CNNs are Efficient</span>
                 </div>
-                <p>CNNs recognize that images have spatial structure. A detected edge in the top-left corner has similar meaning to an edge in the bottom-right corner. By learning to detect patterns wherever they appear, CNNs are much more efficient than standard neural networks and transfer what they learn more effectively.</p>
+                <p>CNNs recognize that images have spatial structure. A detected edge in the top-left corner has similar meaning to an edge in the bottom-right corner. By learning to detect patterns wherever they appear, CNNs are much more efficient and effective than standard neural networks.</p>
             </div>
 
             <h3>Real-World Applications of Computer Vision</h3>
@@ -821,6 +842,23 @@
                 <p style="margin-top: 10px;"><strong>🎨 Content Moderation:</strong> Identifying inappropriate images on social media</p>
             </div>
 
+            <!-- VIDEO SECTION -->
+            <div class="video-playlist">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">📹 Videos for This Lesson</h3>
+                
+                <div class="video-item">
+                    <div class="video-title">▶ How Computer Vision Works</div>
+                    <div class="video-duration">Duration: 6:24</div>
+                    <div class="video-placeholder-small">▶ How Computer Vision Works — 6:24</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-title">▶ Project Euphoria</div>
+                    <div class="video-duration">Duration: 2:49</div>
+                    <div class="video-placeholder-small">▶ Project Euphoria — 2:49</div>
+                </div>
+            </div>
+
             <h3>Hands-On: Build Your First AI Model</h3>
 
             <p>Now it's your turn! You'll train your own image classifier using the <strong>AI for Oceans</strong> tutorial. This activity demonstrates how the concepts you've learned translate into building working AI systems.</p>
@@ -830,7 +868,7 @@
                     <span class="callout-icon">ℹ️</span>
                     <span>Real-World Impact</span>
                 </div>
-                <p>Computer vision can solve environmental problems. Imagine a robot that automatically sorts trash from fish to clean the ocean. That robot first needs to learn the difference—exactly what you'll do in this activity.</p>
+                <p>Computer vision technology can solve environmental problems. Imagine a robot that automatically sorts trash from fish to clean the ocean. That robot first needs to learn the difference—exactly what you'll do in this activity!</p>
             </div>
 
             <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
@@ -943,7 +981,7 @@
         <div class="lesson-header">
             <div class="lesson-number">Lesson 3 of 5</div>
             <h2 class="lesson-title">Lesson 1.3: Why Training Data is Everything</h2>
-            <div class="lesson-duration">⏱️ 13-15 minutes (includes interactive activity)</div>
+            <div class="lesson-duration">⏱️ 14-17 minutes (includes interactive activity)</div>
         </div>
 
         <div class="learning-objectives">
@@ -1063,6 +1101,35 @@
 
             <p>Now you'll experience firsthand how training data quality affects model performance using Google's <strong>Teachable Machine</strong>. You'll build multiple models, varying dataset size and diversity, and compare results.</p>
 
+            <!-- VIDEO SECTION -->
+            <div class="video-playlist">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">📹 Videos for This Lesson</h3>
+                
+                <div class="video-item">
+                    <div class="video-title">▶ Teachable Machine Overview</div>
+                    <div class="video-duration">Duration: 2:08</div>
+                    <div class="video-placeholder-small">▶ Teachable Machine — 2:08</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-title">▶ Teachable Machine Tutorial 1: Gather Your Data</div>
+                    <div class="video-duration">Duration: 2:15</div>
+                    <div class="video-placeholder-small">▶ Tutorial 1: Gather — 2:15</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-title">▶ Teachable Machine Tutorial 2: Train Your Model</div>
+                    <div class="video-duration">Duration: 0:54</div>
+                    <div class="video-placeholder-small">▶ Tutorial 2: Train — 0:54</div>
+                </div>
+
+                <div class="video-item">
+                    <div class="video-title">▶ Teachable Machine Tutorial 3: Export Your Model</div>
+                    <div class="video-duration">Duration: 0:59</div>
+                    <div class="video-placeholder-small">▶ Tutorial 3: Export — 0:59</div>
+                </div>
+            </div>
+
             <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
                 <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity Part A: Pose Detection Exploration</h4>
                 
@@ -1115,7 +1182,7 @@
 
                 <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 15px;">
                     <strong>📝 Record Results:</strong>
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9em;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85em;">
                         <tr style="background-color: #e8f4f8;">
                             <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Filename</th>
                             <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Classification</th>
@@ -1133,43 +1200,42 @@
                             <td style="border: 1px solid #ccc; padding: 10px;">___</td>
                             <td style="border: 1px solid #ccc; padding: 10px;">___</td>
                             <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ccc; padding: 10px;">test3.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ccc; padding: 10px;">test4.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ccc; padding: 10px;">test5.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ccc; padding: 10px;">test6.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ccc; padding: 10px;">test7.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
-                        </tr>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 10px;">test3.png</td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 10px;">test4.png</td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 10px;">test5.png</td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 10px;">test6.png</td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 10px;">test7.png</td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;"></td>
+<td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
+</tr>
 </table>
-                    <p style="margin-top: 15px;"><em>Q1: Which class (cats or dogs) did your classifier perform better on? Why do you think that is?</em></p>
-                    <p style="margin-top: 10px;"><em>Q2: How could you improve performance with better training data?</em></p>
-                </div>
-
-                <h5 style="margin-top: 25px; color: #ff6b35;">Phase 3: Curated (Improved) Dataset</h5>
+<p style="margin-top: 15px;"><em>Q1: Which class (cats or dogs) did your classifier perform better on? Why do you think that is?</em></p>
+<p style="margin-top: 10px;"><em>Q2: How could you improve performance with better training data?</em></p>
+</div>
+<h5 style="margin-top: 25px; color: #ff6b35;">Phase 3: Curated (Improved) Dataset</h5>
 
                 <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
                     <li>Download the <strong>Curated Training Dataset</strong> (larger, more diverse)</li>
@@ -1287,7 +1353,7 @@
         <div class="lesson-header">
             <div class="lesson-number">Lesson 4 of 5</div>
             <h2 class="lesson-title">Lesson 1.4: AI Bias and Its Consequences</h2>
-            <div class="lesson-duration">⏱️ 14-15 minutes (includes case study analysis)</div>
+            <div class="lesson-duration">⏱️ 13-15 minutes (includes case study analysis)</div>
         </div>
 
         <div class="learning-objectives">
@@ -1444,6 +1510,17 @@
                 <p>Addressing AI bias is not a one-time fix. It requires continuous monitoring, regular audits, and willingness to adjust systems when new biases are discovered. As society and data change, new biases may emerge.</p>
             </div>
 
+            <!-- VIDEO SECTION -->
+            <div class="video-playlist">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">📹 Videos for This Lesson</h3>
+                
+                <div class="video-item">
+                    <div class="video-title">▶ Training Data & Bias</div>
+                    <div class="video-duration">Duration: 2:40</div>
+                    <div class="video-placeholder-small">▶ Training Data & Bias — 2:40</div>
+                </div>
+            </div>
+
             <h3>Hands-On: Research and Analyze AI Bias</h3>
 
             <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
@@ -1480,12 +1557,6 @@
                     <p style="margin-top: 10px;"><strong>Impact (who was affected and how):</strong> ___________________________________</p>
                     <p style="margin-top: 10px;"><strong>How it was addressed:</strong> ___________________________________</p>
                 </div>
-            </div>
-
-            <div class="video-embed">
-                <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: Training Data & Bias</div>
-                <div class="video-placeholder">▶ Training Data & Bias - 2:40</div>
-                <div class="video-description">Explores how bias originates in training data and how machine learning systems can amplify historical discrimination. (2 minutes 40 seconds)</div>
             </div>
         </div>
 
@@ -1578,7 +1649,7 @@
         <div class="lesson-header">
             <div class="lesson-number">Lesson 5 of 5</div>
             <h2 class="lesson-title">Lesson 1.5: AI Learning from Everyone - Quick, Draw!</h2>
-            <div class="lesson-duration">⏱️ 10-12 minutes (includes interactive activity)</div>
+            <div class="lesson-duration">⏱️ 11-13 minutes (includes interactive activity)</div>
         </div>
 
         <div class="learning-objectives">
@@ -1587,10 +1658,9 @@
                 <li><code>LO1.5.1</code>: Understand how neural networks recognize hand-drawn images through pattern recognition</li>
                 <li><code>LO1.5.2</code>: Recognize that every interaction with AI systems contributes to their learning</li>
                 <li><code>LO1.5.3</code>: Reflect on the collective responsibility and impact when contributing to AI training datasets</li>
-            </ul>
-        </div>
-
-        <div class="content-section">
+</ul>
+</div>
+<div class="content-section">
             <h3>Can AI Recognize Your Doodles?</h3>
 
             <p>Neural networks have a remarkable ability: they can learn to recognize patterns in images they've never seen before. In this final lesson, you'll experience this directly by teaching a neural network to recognize your hand-drawn doodles. Along the way, you'll contribute to one of the world's largest drawing datasets and see how collective human effort improves AI.</p>
@@ -1608,7 +1678,6 @@
 
             <div class="definition-box">
                 <strong>Collective Learning:</strong> The process where machine learning systems improve by learning from data contributed by millions of people. Your individual data point is tiny, but millions of similar points create powerful patterns for AI to learn.
-            </strong>
             </div>
 
             <h3>The Power of Collective Data</h3>
@@ -1622,8 +1691,9 @@
 
                 <div class="example-step">
                     <strong>Growing Dataset:</strong> After 10,000 doodles of trees, the network has learned many patterns: "Trees often have a trunk at the bottom," "They might be green," "They have a roughly tree-shaped outline," etc.
-</div>
-<div class="example-step">
+                </div>
+
+                <div class="example-step">
                     <strong>Massive Dataset:</strong> After millions of doodles, the network has learned incredibly nuanced patterns about what makes a "tree," accounting for cultural differences, artistic styles, and individual variations.
                 </div>
 
@@ -1640,6 +1710,17 @@
                     <span>Contributing to Collective Intelligence</span>
                 </div>
                 <p>When you participate in Quick, Draw!, you're not just having fun—you're contributing to AI research. Your drawings help improve machine learning systems. This demonstrates an important principle: AI systems aren't developed in isolation by researchers. They're developed through collective participation, and everyone who shares data plays a role.</p>
+            </div>
+
+            <!-- VIDEO SECTION -->
+            <div class="video-playlist">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;">📹 Videos for This Lesson</h3>
+                
+                <div class="video-item">
+                    <div class="video-title">▶ Quick, Draw! Overview</div>
+                    <div class="video-duration">Duration: 1:40</div>
+                    <div class="video-placeholder-small">▶ Quick, Draw! — 1:40</div>
+                </div>
             </div>
 
             <h3>Hands-On: Play Quick, Draw! and Observe Neural Networks</h3>
@@ -1835,6 +1916,21 @@
             <li><strong>AI for Oceans</strong> (code.org/oceans) — Image classification to classify ocean creatures vs. trash</li>
             <li><strong>Teachable Machine</strong> (teachablemachine.withgoogle.com) — Train pose detectors and image classifiers</li>
             <li><strong>Quick, Draw!</strong> (quickdraw.withgoogle.com) — Neural network doodle recognition</li>
+        </ul>
+
+        <p style="margin-top: 20px;"><strong>All Videos Used in This Chapter:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>How AI Works [1:29]</li>
+            <li>What is Machine Learning [2:55]</li>
+            <li>How Neural Networks Work [5:04]</li>
+            <li>How Computer Vision Works [6:24]</li>
+            <li>Project Euphoria [2:49]</li>
+            <li>Teachable Machine [2:08]</li>
+            <li>Teachable Machine Tutorial 1: Gather [2:15]</li>
+            <li>Teachable Machine Tutorial 2: Train [0:54]</li>
+            <li>Teachable Machine Tutorial 3: Export [0:59]</li>
+            <li>Training Data & Bias [2:40]</li>
+            <li>Quick, Draw! [1:40]</li>
         </ul>
 
         <p style="margin-top: 20px;"><strong>Recommended Further Reading & Viewing:</strong></p>
