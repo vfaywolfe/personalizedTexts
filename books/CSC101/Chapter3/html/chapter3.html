@@ -504,149 +504,147 @@
         <!-- Chapter Introduction -->
         <section class="chapter-intro">
             <h2>Chapter Overview</h2>
-            <p>Artificial Intelligence has become one of the most transformative technologies of our time, yet many people don't fully understand what "AI" actually means or how it works. In this chapter, you'll explore the foundations of artificial intelligence, including machine learning, neural networks, and computer vision. You'll get hands-on experience training your own AI models and learn about the critical importance of training data and bias.</p>
+            <p>Artificial Intelligence has become one of the most transformative technologies of our time. In this chapter, you'll learn how AI actually works by diving straight into the concepts and building your own AI models.</p>
             
             <p><strong>What You'll Learn:</strong></p>
             <ul style="margin-left: 20px; margin-top: 15px;">
-                <li>The difference between AI and machine learning</li>
-                <li>How neural networks and deep learning power modern AI systems</li>
-                <li>Real-world applications of computer vision</li>
-                <li>Why training data matters and how it affects AI performance</li>
-                <li>The critical role of bias in AI systems and its societal impact</li>
+                <li>How neural networks—the engine of modern AI—learn patterns from data</li>
+                <li>How computers use computer vision to "see" and understand images</li>
+                <li>How to build and train your own machine learning models</li>
+                <li>Why the quality and diversity of training data directly determines AI performance</li>
+                <li>The critical ethical issue of bias in AI systems and its real-world consequences</li>
             </ul>
 
             <p style="margin-top: 20px;"><strong>Chapter Duration:</strong> Approximately 1 week of coursework (5 lessons, 8-15 minutes each)</p>
         </section>
 
-        <!-- LESSON 1.1: What is Machine Learning? -->
+        <!-- LESSON 1.1: Neural Networks -->
         <section class="lesson">
             <div class="lesson-header">
                 <div class="lesson-number">Lesson 1 of 5</div>
-                <h2 class="lesson-title">Lesson 1.1: What is Machine Learning?</h2>
+                <h2 class="lesson-title">Lesson 1.1: How Neural Networks Learn</h2>
                 <div class="lesson-duration">⏱️ 10-12 minutes</div>
             </div>
 
             <div class="learning-objectives">
-                <h3>Learning Objective</h3>
+                <h3>Learning Objectives</h3>
                 <ul>
-                    <li><code>LO1.1.1</code>: Define machine learning and explain how it differs from traditional computer programming</li>
-                    <li><code>LO1.1.2</code>: Understand supervised learning and how training data enables machines to learn by example</li>
-                    <li><code>LO1.1.3</code>: Describe real-world applications of machine learning in classification tasks</li>
+                    <li><code>LO1.1.1</code>: Understand what neural networks are and how they're inspired by biological brains</li>
+                    <li><code>LO1.1.2</code>: Explain how neural networks learn by adjusting connections between layers</li>
+                    <li><code>LO1.1.3</code>: Recognize why neural networks are particularly effective for pattern recognition tasks</li>
                 </ul>
             </div>
 
             <div class="content-section">
-                <h3>Understanding Machine Learning</h3>
-                
-                <p>For decades, computers followed explicit instructions: programmers wrote code that told computers exactly what to do in every situation. But what if we could teach computers to learn from examples instead?</p>
+                <h3>What is a Neural Network?</h3>
 
-                <p><strong>Machine Learning</strong> is a fundamental branch of artificial intelligence that enables computers to learn and improve from experience without being explicitly programmed for every scenario.</p>
+                <p>Imagine you're learning to identify dogs. You see thousands of examples: different colors, sizes, breeds. Over time, you recognize patterns—floppy ears, tails, fur texture—and can identify a dog you've never seen before. That's essentially what neural networks do, except they do it with mathematics and data.</p>
 
-                <div class="definition-box">
-                    <strong>Machine Learning (ML):</strong> A method of programming computers to learn patterns from data and make predictions or decisions based on those patterns, rather than following pre-written rules for every scenario.
-                </div>
-
-                <h3>Traditional Programming vs. Machine Learning</h3>
-
-                <p>Let's compare two approaches:</p>
-
-                <div class="example">
-                    <div class="example-title">Example 1.1.1: Detecting Spam Emails</div>
-                    
-                    <div class="example-step">
-                        <strong>Traditional Approach:</strong> A programmer writes rules like "if email contains the word 'URGENT' and comes from an unknown sender, flag as spam." This requires the programmer to think of every possible spam indicator.
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Machine Learning Approach:</strong> Feed the system thousands of examples of spam and legitimate emails. The system learns patterns automatically—like certain word combinations, sender domains, and formatting—that distinguish spam from legitimate mail. When a new email arrives, the system recognizes similar patterns without explicit rules.
-                    </div>
-                </div>
-
-                <div class="callout callout-info">
-                    <div class="callout-title">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Why This Matters</span>
-                    </div>
-                    <p>Machine learning is more flexible than traditional programming. As spammers develop new techniques, a machine learning system adapts automatically by learning from new examples, while traditional rules need to be manually updated.</p>
-                </div>
-
-                <h3>Supervised Learning: Learning by Example</h3>
-
-                <p>The most common type of machine learning used in introductory applications is called <strong>supervised learning</strong>. In supervised learning, the computer learns from labeled examples—data where the correct answer is already known.</p>
+                <p><strong>Neural networks</strong> are computing systems inspired by how biological brains process information. They consist of interconnected nodes (artificial neurons) organized in layers that learn patterns from data.</p>
 
                 <div class="definition-box">
-                    <strong>Supervised Learning:</strong> A machine learning approach where the computer learns from training data that includes both inputs and their correct outputs (labels). The "teacher" (labeled data) supervises the learning process.
+                    <strong>Neural Network:</strong> A computational model consisting of interconnected nodes organized in layers. The network learns by adjusting the strength of connections between nodes based on examples, enabling it to recognize patterns and make predictions.
+                </div>
+
+                <h3>How Neural Networks Are Structured</h3>
+
+                <p>Neural networks have three types of layers:</p>
+
+                <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; border: 2px solid var(--border-light);">
+                    <p><strong>Input Layer:</strong> Receives raw data (e.g., pixels in an image, numbers, text features)</p>
+                    <p style="margin-top: 15px;"><strong>Hidden Layers:</strong> Perform calculations and extract features. Each layer learns increasingly complex patterns. A network with many hidden layers is called "deep."</p>
+                    <p style="margin-top: 15px;"><strong>Output Layer:</strong> Produces the final prediction or classification</p>
                 </div>
 
                 <div class="example">
-                    <div class="example-title">Example 1.1.2: Training a Spam Detector</div>
+                    <div class="example-title">Example 1.1.1: A Neural Network Recognizing Handwritten Digits</div>
                     
                     <div class="example-step">
-                        <strong>Step 1 - Gather Training Data:</strong> Collect 10,000 emails, each labeled as either "SPAM" or "NOT SPAM"
+                        <strong>Input Layer:</strong> Receives a 28×28 pixel image (784 input nodes, one per pixel)
                     </div>
 
                     <div class="example-step">
-                        <strong>Step 2 - Extract Features:</strong> The system analyzes patterns: word frequency, sender information, links, attachments, etc.
+                        <strong>First Hidden Layer:</strong> Detects simple patterns—edges, curves, lines. It learns: "Are there vertical lines?" "Are there curves?"
                     </div>
 
                     <div class="example-step">
-                        <strong>Step 3 - Learn Patterns:</strong> The system identifies which features most strongly correlate with spam vs. legitimate email
+                        <strong>Second Hidden Layer:</strong> Combines simple features into shapes. It learns: "Do I see a loop?" "Is there a stem?"
                     </div>
 
                     <div class="example-step">
-                        <strong>Step 4 - Test and Deploy:</strong> When a new email arrives, the system checks it against learned patterns and makes a prediction
+                        <strong>Output Layer:</strong> Makes the final decision. It outputs 10 predictions (one for each digit 0-9). The strongest output indicates which digit the network believes it's seeing.
                     </div>
 
                     <div class="example-step">
-                        <strong>Result:</strong> An email classifier that continuously improves as it encounters more examples
+                        <strong>Result:</strong> "I'm 97% confident this is a 5"
                     </div>
                 </div>
 
                 <div class="callout callout-hint">
                     <div class="callout-title">
                         <span class="callout-icon">💡</span>
-                        <span>Helpful Tip</span>
+                        <span>Why Layers Matter</span>
                     </div>
-                    <p>Think of supervised learning like learning to play tennis with a coach. The coach (training data) shows you examples of good serves (labeled data). Over time, you learn what makes a good serve and can evaluate new serving attempts you've never seen before.</p>
+                    <p>Each layer in a neural network doesn't learn the final answer—it learns intermediate features that the next layer builds on. This hierarchical learning is what makes neural networks so powerful. Early layers learn simple patterns; deeper layers combine them into increasingly sophisticated understanding.</p>
                 </div>
 
-                <h3>Real-World Classification Tasks</h3>
+                <h3>How Neural Networks Learn: The Training Process</h3>
 
-                <p>Classification is one of the most common machine learning tasks. Here are examples you encounter every day:</p>
+                <p>Neural networks learn through a process called <strong>training</strong>, where they adjust the strength of connections between nodes (called <strong>weights</strong>) based on examples.</p>
 
-                <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                    <p><strong>📧 Email Filtering:</strong> Spam or Not Spam?</p>
-                    <p><strong>🔒 Fraud Detection:</strong> Legitimate or Fraudulent Transaction?</p>
-                    <p><strong>🎬 Content Recommendation:</strong> Will you like this movie? (Like or Dislike)</p>
-                    <p><strong>🏥 Medical Diagnosis:</strong> Disease Present or Absent?</p>
-                    <p><strong>👤 Face Recognition:</strong> Is this face Person A or Person B?</p>
+                <div class="example">
+                    <div class="example-title">Example 1.1.2: Training a Network Step-by-Step</div>
+                    
+                    <div class="example-step">
+                        <strong>Step 1 - Forward Pass:</strong> Feed an example (a handwritten "5") through the network. It makes a prediction, say "I think this is a 3."
+                    </div>
+
+                    <div class="example-step">
+                        <strong>Step 2 - Calculate Error:</strong> Compare the prediction to the correct answer. The error is the difference between what the network said (3) and what it should have said (5).
+                    </div>
+
+                    <div class="example-step">
+                        <strong>Step 3 - Backward Pass:</strong> The error flows backward through the network. Each layer calculates its contribution to the error.
+                    </div>
+
+                    <div class="example-step">
+                        <strong>Step 4 - Update Weights:</strong> Adjust the connection strengths to reduce the error. Connections that led to wrong predictions are weakened; those that helped are strengthened.
+                    </div>
+
+                    <div class="example-step">
+                        <strong>Step 5 - Repeat:</strong> This process repeats thousands or millions of times with different examples until the network consistently makes correct predictions.
+                    </div>
                 </div>
 
-                <h3>Key Components of Machine Learning</h3>
-
-                <p>Every machine learning system needs:</p>
+                <h3>What Makes Neural Networks Powerful?</h3>
 
                 <div style="margin: 20px 0;">
                     <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid var(--primary-color);">
-                        <strong>1. Training Data:</strong> A dataset of examples with known correct answers
+                        <strong>Pattern Recognition:</strong> Neural networks excel at finding patterns in complex data that humans might miss
                     </div>
                     <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid var(--primary-color);">
-                        <strong>2. Features:</strong> Characteristics or patterns the system will learn from
+                        <strong>Adaptability:</strong> They learn from examples rather than following programmed rules, so they adapt to new data
                     </div>
                     <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid var(--primary-color);">
-                        <strong>3. Labels:</strong> The correct answers or categories
+                        <strong>Scalability:</strong> They can handle enormous amounts of data and become better with more examples
                     </div>
                     <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid var(--primary-color);">
-                        <strong>4. Algorithm:</strong> The mathematical process that finds patterns and makes predictions
+                        <strong>Hierarchical Learning:</strong> Each layer learns different levels of abstraction, from simple to complex
                     </div>
                 </div>
 
                 <div class="callout callout-warning">
                     <div class="callout-title">
                         <span class="callout-icon">⚠️</span>
-                        <span>Common Misconception</span>
+                        <span>Important: Networks Learn Patterns, Not Understanding</span>
                     </div>
-                    <p>Machine learning is NOT magic. It doesn't "understand" like humans do. It finds statistical patterns in data. If your training data is biased or incomplete, your machine learning system will learn those biases.</p>
+                    <p>Neural networks don't "understand" in the way humans do. They learn statistical patterns in data. If you show a network a handwritten digit that's slightly distorted or unusual, it might get confused. They can also be fooled by adversarial examples—deliberately manipulated images that humans recognize easily but networks misclassify.</p>
+                </div>
+
+                <div class="video-embed">
+                    <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: How Neural Networks Work</div>
+                    <div class="video-placeholder">▶ How Neural Networks Work - 4:32</div>
+                    <div class="video-description">A visual explanation of how neural networks process information through layers and learn from data. (4 minutes 32 seconds)</div>
                 </div>
             </div>
 
@@ -659,23 +657,23 @@
 
                 <div class="question">
                     <div class="question-type">Question 1 - Multiple Choice</div>
-                    <div class="question-text">What is the primary difference between machine learning and traditional programming?</div>
+                    <div class="question-text">What is the primary function of hidden layers in a neural network?</div>
                     <ul class="options">
-                        <li>A) Machine learning is faster than traditional programming</li>
-                        <li>B) Traditional programming requires explicit rules, while machine learning learns patterns from data</li>
-                        <li>C) Machine learning can only be used for email filtering</li>
-                        <li>D) There is no real difference; they are the same thing</li>
+                        <li>A) To receive input from the user</li>
+                        <li>B) To learn intermediate features and patterns that build toward the final prediction</li>
+                        <li>C) To make the final prediction</li>
+                        <li>D) To store all the data</li>
                     </ul>
                     <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                     <div class="answer-explanation">
                         <strong>Correct Answer: B</strong>
-                        <p>In traditional programming, developers write explicit rules for every scenario. In machine learning, computers learn patterns from examples (training data) and can apply those patterns to new, unseen examples. This makes ML more flexible and adaptable.</p>
+                        <p>Hidden layers are where the actual learning happens. Each hidden layer learns to recognize increasingly complex patterns. Early layers might detect edges; later layers combine these into shapes; the output layer makes the final classification.</p>
                     </div>
                 </div>
 
                 <div class="question">
                     <div class="question-type">Question 2 - True/False</div>
-                    <div class="question-text">In supervised learning, the training data includes labels (correct answers) that teach the machine what to look for.</div>
+                    <div class="question-text">During training, a neural network adjusts the strength of connections (weights) between nodes based on errors to improve its predictions.</div>
                     <ul class="options">
                         <li>A) True</li>
                         <li>B) False</li>
@@ -683,620 +681,372 @@
                     <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                     <div class="answer-explanation">
                         <strong>Correct Answer: A (True)</strong>
-                        <p>The term "supervised" in supervised learning means there is a "teacher" (the labeled data) guiding the learning process. Each training example includes the input AND the correct output, allowing the machine to learn the relationship.</p>
+                        <p>This is the core of how neural networks learn. When a prediction is wrong, the network calculates the error and adjusts weights to reduce that error in future predictions. This iterative process over thousands of examples leads to increasingly accurate predictions.</p>
                     </div>
                 </div>
 
                 <div class="question">
                     <div class="question-type">Question 3 - Short Answer</div>
-                    <div class="question-text">Name one real-world application of machine learning classification that you use or encounter regularly.</div>
+                    <div class="question-text">In your own words, explain what a neural network learns from training data. What is it actually learning?</div>
                     <textarea class="short-answer" placeholder="Your answer here..."></textarea>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Sample Answer</button>
+                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                     <div class="answer-explanation">
-                        <strong>Sample Answers:</strong>
+                        <strong>What Neural Networks Learn:</strong>
+                        <p style="margin-top: 10px;">Neural networks learn <strong>patterns and relationships in data</strong>. Specifically, they learn which features (patterns in the input) correlate with specific outputs. For example:</p>
                         <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Email spam filtering (Gmail, Outlook, etc.)</li>
-                            <li>Social media content recommendations (Instagram, TikTok, Facebook)</li>
-                            <li>Fraud detection on credit cards</li>
-                            <li>Face recognition to unlock phones</li>
-                            <li>Movie or music recommendations (Netflix, Spotify)</li>
+                            <li>An image classifier learns: "Images with these patterns of pixels tend to be dogs; those patterns tend to be cats"</li>
+                            <li>A spam detector learns: "Emails with these word patterns tend to be spam; these other patterns are legitimate"</li>
+                            <li>A recommendation system learns: "Users who like these movies tend to also like these other movies"</li>
                         </ul>
-                        <p style="margin-top: 10px;"><strong>Why these work:</strong> All of these involve a system classifying items into categories (spam/not spam, fraud/legitimate, your face/not your face) based on learned patterns.</p>
+                        <p style="margin-top: 10px;">They don't "understand" the way humans do—they identify statistical correlations in the training data.</p>
                     </div>
                 </div>
             </div>
 
             <div class="whats-coming">
                 <h3>🚀 What's Coming Next</h3>
-                <p>Now that you understand how machines learn from examples, you're ready to explore the engine behind many modern AI systems: <strong>neural networks</strong>. In Lesson 1.2, you'll discover how biological inspiration from the human brain led to powerful AI architectures that can recognize patterns in images, text, and much more.</p>
-                <div class="progress-indicator">Lesson 1 of 5 in Chapter 1: What is AI, Really? | 20% Complete</div>
+                <p>Now you understand the engine of modern AI. Next, you'll see this engine in action through <strong>computer vision</strong>—how neural networks process images to recognize objects, detect faces, and understand visual scenes. You'll even train your own image classifier!</p>
+                <div class="progress-indicator">Lesson 1 of 5 in Chapter 1 | 20% Complete</div>
             </div>
         </section>
 
-        <!-- LESSON 1.2: Understanding Neural Networks -->
+        <!-- LESSON 1.2: Computer Vision -->
         <section class="lesson">
             <div class="lesson-header">
                 <div class="lesson-number">Lesson 2 of 5</div>
-                <h2 class="lesson-title">Lesson 1.2: Understanding Neural Networks</h2>
-                <div class="lesson-duration">⏱️ 12-14 minutes</div>
+                <h2 class="lesson-title">Lesson 1.2: Computer Vision—How AI Sees Images</h2>
+                <div class="lesson-duration">⏱️ 12-14 minutes (includes hands-on activity)</div>
             </div>
 
             <div class="learning-objectives">
                 <h3>Learning Objectives</h3>
                 <ul>
-                    <li><code>LO1.2.1</code>: Explain what a neural network is and how it's inspired by the human brain</li>
-                    <li><code>LO1.2.2</code>: Understand how neural networks process information through layers of interconnected nodes</li>
-                    <li><code>LO1.2.3</code>: Recognize why neural networks are particularly effective at pattern recognition tasks</li>
-                </ul>
+<li><code>LO1.2.1</code>: Explain what computer vision is and how neural networks enable machines to process images</li>
+                <li><code>LO1.2.2</code>: Understand how Convolutional Neural Networks (CNNs) detect visual patterns at different levels</li>
+                <li><code>LO1.2.3</code>: Describe real-world applications of computer vision</li>
+                <li><code>LO1.2.4</code>: Build and test your own image classification model</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h3>What is Computer Vision?</h3>
+
+            <p>Humans instantly recognize a dog, a cat, a stop sign, or a friend's face in a photograph. But how can a computer "see" an image? <strong>Computer vision</strong> is the field of AI that enables machines to extract meaningful information from images and videos—to process visual data the way humans process sight.</p>
+
+            <div class="definition-box">
+                <strong>Computer Vision:</strong> A branch of artificial intelligence that develops systems to automatically extract, analyze, and understand visual information from images and videos, enabling machines to make decisions based on what they "see."
             </div>
 
-            <div class="content-section">
-                <h3>What is a Neural Network?</h3>
+            <h3>How Computers Represent Images</h3>
 
-                <p>You've learned that machine learning systems learn patterns from data. But how do they actually work at a deeper level? The answer lies in <strong>neural networks</strong>, computing systems loosely inspired by how biological brains process information.</p>
-
-                <div class="definition-box">
-                    <strong>Neural Network:</strong> A computational model inspired by biological neural networks that consists of interconnected nodes (artificial neurons) organized in layers. These networks learn by adjusting the strength of connections between nodes based on training data.
-                </div>
-
-                <div class="callout callout-info">
-                    <div class="callout-title">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Biological Inspiration</span>
-                    </div>
-                    <p>The human brain contains approximately 86 billion neurons, each connected to thousands of other neurons. Signals pass between neurons through connections called synaptses. When signals pass frequently through a synapse, that connection strengthens. Similarly, artificial neural networks learn by strengthening connections (called weights) between nodes based on training data.</p>
-                </div>
-
-                <h3>How Neural Networks Are Structured</h3>
-
-                <p>Neural networks are organized into layers, with each layer performing specific transformations on the data:</p>
-
-                <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; border: 2px solid var(--border-light);">
-                    <p><strong>1. Input Layer:</strong> Receives the raw data (e.g., pixels in an image, words in text)</p>
-                    <p style="margin-top: 15px;"><strong>2. Hidden Layers:</strong> Perform calculations and extract features. The network may have one or many hidden layers, each learning increasingly complex patterns</p>
-                    <p style="margin-top: 15px;"><strong>3. Output Layer:</strong> Produces the final prediction or classification</p>
-                </div>
-
-                <div class="example">
-                    <div class="example-title">Example 1.2.1: A Simple Neural Network for Handwriting Recognition</div>
-                    
-                    <div class="example-step">
-                        <strong>Input Layer:</strong> Receives a 28×28 pixel image of a handwritten digit (784 input nodes, one per pixel)
-                    </div>
-
-                    <div class="example-step">
-                        <strong>First Hidden Layer:</strong> Might learn simple features like edges and curves. It detects whether pixels form horizontal lines, vertical lines, or curves.
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Second Hidden Layer:</strong> Combines simple features into more complex shapes. It recognizes parts of digits: loops, stems, corners.
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Output Layer:</strong> Makes the final classification, producing 10 output nodes (one for each digit 0-9). The strongest output indicates which digit the network thinks it sees.
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Result:</strong> The network outputs something like "I'm 98% confident this is a 5"
-                    </div>
-                </div>
-
-                <div class="callout callout-hint">
-                    <div class="callout-title">
-                        <span class="callout-icon">💡</span>
-                        <span>Helpful Analogy</span>
-                    </div>
-                    <p>Think of neural networks like a student learning to identify different dog breeds. First, they learn simple features (ears, tail shape). Then they combine these features (floppy ears + curly tail = Poodle). Eventually, they can identify new dogs they've never seen by recognizing patterns.</p>
-                </div>
-
-                <h3>Deep Learning: Going Deeper</h3>
-
-                <p>When neural networks have many hidden layers (typically more than 3-4), we call them <strong>deep neural networks</strong>, and the process of training them is called <strong>deep learning</strong>.</p>
-
-                <div class="definition-box">
-                    <strong>Deep Learning:</strong> Machine learning using neural networks with multiple hidden layers, allowing the system to learn hierarchical representations of data (simple features → complex features → abstractions).
-                </div>
-
-                <div class="callout callout-info">
-                    <div class="callout-title">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Why Deep Learning Matters</span>
-                    </div>
-                    <p>Deep learning has revolutionized AI. It powers:</p>
-                    <ul style="margin-top: 10px; margin-left: 20px;">
-                        <li>Image recognition (identifying objects in photos)</li>
-                        <li>Natural language processing (understanding and generating text)</li>
-                        <li>Speech recognition (voice assistants)</li>
-                        <li>Game playing (AlphaGo, chess engines)</li>
-                        <li>Medical diagnosis (analyzing X-rays and MRIs)</li>
-                    </ul>
-                </div>
-
-                <h3>Training a Neural Network</h3>
-
-                <p>Neural networks learn through a process called <strong>backpropagation</strong>. Here's the basic process:</p>
-
-                <div class="example">
-                    <div class="example-title">Example 1.2.2: Training Process</div>
-                    
-                    <div class="example-step">
-                        <strong>Step 1 - Forward Pass:</strong> An example (like an image of a handwritten "5") enters the input layer and passes through the network to produce a prediction
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Step 2 - Calculate Error:</strong> Compare the network's prediction to the correct answer. If the network predicted "3" but it's actually "5", the error is significant
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Step 3 - Backward Pass:</strong> The error signal travels backward through the network (hence "backpropagation"). Each layer calculates how much it contributed to the error
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Step 4 - Update Weights:</strong> Adjust the connection strengths (weights) to reduce error. Connections that led to correct predictions are strengthened; those that led to errors are weakened
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Step 5 - Repeat:</strong> This process repeats thousands of times with different training examples until the network's predictions consistently match the correct answers
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Result:</strong> A trained neural network that can recognize handwritten digits with high accuracy
-                    </div>
-                </div>
-
-                <div class="callout callout-warning">
-                    <div class="callout-title">
-                        <span class="callout-icon">⚠️</span>
-                        <span>Important: Networks Learn from Examples, Not Rules</span>
-                    </div>
-                    <p>Neural networks don't "understand" digits the way you do. They learn numerical patterns that distinguish different digits based on training examples. They can be fooled by adversarial examples (slightly modified images) that humans recognize easily.</p>
-                </div>
-
-                <div class="video-embed">
-                    <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: How Neural Networks Work</div>
-                    <div class="video-placeholder">▶ How Neural Networks Work - 4:32</div>
-                    <div class="video-description">This video provides a visual explanation of how neural networks process information and learn from data. (4 minutes 32 seconds)</div>
-                </div>
-            </div>
-
-            <!-- Formative Assessment -->
-            <div class="formative-assessment">
-                <div class="assessment-header">
-                    <div class="target-icon">🎯</div>
-                    <h3>Check Your Understanding: Lesson 1.2</h3>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 1 - Multiple Choice</div>
-                    <div class="question-text">In a neural network, what is the role of hidden layers?</div>
-                    <ul class="options">
-                        <li>A) To store the final answer</li>
-                        <li>B) To perform calculations and extract increasingly complex features from the data</li>
-                        <li>C) To receive input data from the user</li>
-                        <li>D) To prevent the network from overfitting</li>
-                    </ul>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Correct Answer: B</strong>
-                        <p>Hidden layers are where the "learning" happens. Each hidden layer transforms the data, learning progressively more complex patterns. The first hidden layer might learn simple features, while deeper layers learn increasingly abstract features that combine simpler ones.</p>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 2 - True/False</div>
-                    <div class="question-text">Deep learning refers to neural networks with many hidden layers that can learn hierarchical representations of data.</div>
-                    <ul class="options">
-                        <li>A) True</li>
-                        <li>B) False</li>
-                    </ul>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Correct Answer: A (True)</strong>
-                        <p>Deep learning specifically refers to neural networks with multiple hidden layers. The term "deep" indicates the depth or number of layers, and this architecture enables learning hierarchical features—simple patterns combine to form more complex ones.</p>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 3 - Matching</div>
-                    <div class="question-text">Match each component to its function in a neural network:</div>
-                    <div style="margin-top: 15px;">
-                        <div class="matching-pair">
-                            <div class="matching-term"><strong>Input Layer</strong></div>
-                            <div class="matching-definition">Receives raw data (e.g., pixels, words)</div>
-                        </div>
-                        <div class="matching-pair">
-                            <div class="matching-term"><strong>Hidden Layer</strong></div>
-                            <div class="matching-definition">Produces the final prediction or classification</div>
-                        </div>
-                        <div class="matching-pair">
-                            <div class="matching-term"><strong>Output Layer</strong></div>
-                            <div class="matching-definition">Performs calculations and learns patterns</div>
-                        </div>
-                    </div>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Correct Matches:</strong>
-                        <ul style="margin-top: 10px; margin-left: 20px;">
-                            <li><strong>Input Layer</strong> → Receives raw data (e.g., pixels, words)</li>
-                            <li><strong>Hidden Layer</strong> → Performs calculations and learns patterns</li>
-                            <li><strong>Output Layer</strong> → Produces the final prediction or classification</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="whats-coming">
-                <h3>🚀 What's Coming Next</h3>
-                <p>Neural networks are incredibly powerful for tasks involving images. In Lesson 1.3, we'll explore <strong>computer vision</strong>—how AI systems see and understand images. You'll learn how neural networks recognize objects, detect faces, and even describe what they see in images. Plus, you'll get hands-on experience training your own vision model!</p>
-                <div class="progress-indicator">Lesson 2 of 5 in Chapter 1: What is AI, Really? | 40% Complete</div>
-            </div>
-        </section>
-
-        <!-- LESSON 1.3: Computer Vision and Image Recognition -->
-        <section class="lesson">
-            <div class="lesson-header">
-                <div class="lesson-number">Lesson 3 of 5</div>
-                <h2 class="lesson-title">Lesson 1.3: Computer Vision and Image Recognition</h2>
-                <div class="lesson-duration">⏱️ 14-15 minutes (includes hands-on activity)</div>
-            </div>
-
-            <div class="learning-objectives">
-                <h3>Learning Objectives</h3>
-                <ul>
-                    <li><code>LO1.3.1</code>: Explain what computer vision is and how neural networks enable machines to "see"</li>
-                    <li><code>LO1.3.2</code>: Understand how convolutional neural networks (CNNs) process visual information</li>
-                    <li><code>LO1.3.3</code>: Describe real-world applications of computer vision and image classification</li>
-                    <li><code>LO1.3.4</code>: Gain hands-on experience training and testing an image classification model</li>
-                </ul>
-            </div>
-
-            <div class="content-section">
-                <h3>What is Computer Vision?</h3>
-
-                <p>Humans can instantly recognize a dog, a cat, a stop sign, or a friend's face in a photograph. But how does a computer "see" an image? <strong>Computer vision</strong> is the field of AI dedicated to enabling machines to extract meaningful information from images and videos—essentially, to "see" and understand the visual world.</p>
-
-                <div class="definition-box">
-                    <strong>Computer Vision:</strong> A branch of artificial intelligence that develops systems to automatically extract, analyze, and understand visual information from images and videos, enabling machines to make decisions based on what they "see."
-                </div>
-
-                <h3>How Computers Represent Images</h3>
-
-                <p>To understand computer vision, we first need to understand how computers store and process images.</p>
-
-                <p>When a computer displays an image, it breaks it down into tiny colored squares called <strong>pixels</strong> (picture elements). Each pixel has a color represented by numbers. For a color image, each pixel stores three numbers: the intensity of Red, Green, and Blue (RGB).</p>
-
-                <div class="example">
-                    <div class="example-title">Example 1.3.1: Understanding Pixels</div>
-                    
-                    <div class="example-step">
-                        <strong>Simple Image:</strong> A 10×10 pixel image contains 100 pixels
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Color Information:</strong> Each pixel stores RGB values (0-255 for each color):
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Red = (255, 0, 0) — maximum red, no green, no blue</li>
-                            <li>White = (255, 255, 255) — all colors at maximum</li>
-                            <li>Black = (0, 0, 0) — all colors at zero</li>
-                        </ul>
-                    </div>
-
-                    <div class="example-step">
-                        <strong>For Neural Networks:</strong> A 28×28 pixel image (like handwritten digits) gives us 784 input values. A 224×224 pixel image (common for object recognition) gives us over 150,000 input values. Large images mean enormous amounts of data!
-                    </div>
-                </div>
-
-                <div class="callout callout-hint">
-                    <div class="callout-title">
-                        <span class="callout-icon">💡</span>
-                        <span>Helpful Tip</span>
-                    </div>
-                    <p>When you zoom in on any digital image on a computer, you eventually see individual colored squares—those are pixels! The more pixels an image has, the higher its resolution and the more detail it can show.</p>
-                </div>
-
-                <h3>Convolutional Neural Networks (CNNs)</h3>
-
-                <p>Standard neural networks aren't ideal for processing images because they treat each pixel independently. <strong>Convolutional Neural Networks (CNNs)</strong> are specifically designed for image processing and computer vision tasks.</p>
-
-                <div class="definition-box">
-                    <strong>Convolutional Neural Network (CNN):</strong> A specialized neural network architecture designed to process grid-like data (especially images) by using convolutional layers that detect patterns like edges, shapes, and textures.
-                </div>
-
-                <p>The key difference? CNNs use "convolutional" layers that look at small regions of the image at a time, learning local patterns. This is more efficient and effective than looking at all pixels at once.</p>
-
-                <div class="example">
-                    <div class="example-title">Example 1.3.2: How CNNs Process an Image</div>
-                    
-                    <div class="example-step">
-                        <strong>Layer 1 (Early Detection):</strong> Convolutional filters scan the image looking for simple patterns:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Vertical edges (like the side of a cat's ear)</li>
-                            <li>Horizontal edges (like the horizon or a dog's back)</li>
-                            <li>Diagonal lines</li>
-                            <li>Color gradients</li>
-                        </ul>
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Layer 2-3 (Pattern Combination):</strong> Deeper layers combine simple patterns into more complex shapes:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Circles (eyes)</li>
-                            <li>Triangles (ears)</li>
-                            <li>Curves (facial features)</li>
-                        </ul>
-                    </div>
-
-                    <div class="example-step">
-                        <strong>Final Layers (Classification):</strong> The deepest layers combine all learned features to classify the image:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>"This is a CAT" (confidence: 95%)</li>
-                            <li>"This is a DOG" (confidence: 3%)</li>
-                            <li>"This is a BIRD" (confidence: 2%)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="callout callout-info">
-                    <div class="callout-title">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Why CNNs are Brilliant</span>
-                    </div>
-                    <p>CNNs recognize that images have spatial structure. An edge in the top-left corner has similar meaning to an edge in the bottom-right corner. CNNs learn to detect patterns wherever they appear in the image, making them much more efficient and effective than standard neural networks.</p>
-                </div>
-
-                <h3>Real-World Applications of Computer Vision</h3>
-
-                <p>Computer vision powers many technologies you use every day:</p>
-
-                <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                    <p><strong>📱 Face Recognition:</strong> Unlocking phones with your face, organizing photos by faces, security systems</p>
-                    <p><strong>🚗 Autonomous Vehicles:</strong> Self-driving cars use computer vision to recognize pedestrians, read traffic signs, detect lane markings</p>
-                    <p><strong>🏥 Medical Imaging:</strong> AI systems detect tumors, fractures, and diseases in X-rays and MRIs more accurately than humans in some cases</p>
-                    <p><strong>🛒 Retail:</strong> Amazon Go stores use computer vision to track what items customers pick up for automatic checkout</p>
-                    <p><strong>🌾 Agriculture:</strong> Drones use computer vision to detect crop diseases, estimate yields, and optimize farming</p>
-                    <p><strong>🎨 Content Moderation:</strong> Social media platforms use computer vision to identify inappropriate content in images</p>
-                </div>
-
-                <div class="callout callout-warning">
-                    <div class="callout-title">
-                        <span class="callout-icon">⚠️</span>
-                        <span>Bias in Computer Vision</span>
-                    </div>
-                    <p>Computer vision systems can inherit biases from training data. For example, if trained mostly on light skin tones, face recognition systems often perform poorly on darker skin tones. We'll explore AI bias more thoroughly in Lesson 1.5.</p>
-                </div>
-
-                <h3>Hands-On: AI for Oceans Activity</h3>
-
-                <p>Now it's your turn to create a machine learning model! In this activity, you'll train your own image classifier to distinguish between ocean creatures (fish) and ocean trash using the <strong>AI for Oceans</strong> interactive tutorial.</p>
-
-                <div class="callout callout-info">
-                    <div class="callout-title">
-                        <span class="callout-icon">ℹ️</span>
-                        <span>Learning Context</span>
-                    </div>
-                    <p>Computer vision technology can be used to solve real environmental problems. Imagine a robot that could automatically sort trash from fish in the ocean. First, we need to train it to tell the difference—that's what you'll do in this activity!</p>
-                </div>
-
-                <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                    <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity Instructions: AI for Oceans</h4>
-                    
-                    <p><strong>Objective:</strong> Train a machine learning model to classify objects as "fish" or "not fish" to help clean the ocean.</p>
-
-                    <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                        <li><strong>Open the AI for Oceans Tutorial:</strong> Navigate to the Code.org AI for Oceans module at <code>code.org/oceans</code></li>
-                        <li><strong>Complete Steps 1-6:</strong> Follow the tutorial instructions carefully. You'll:
-                            <ul style="margin-left: 20px; margin-top: 10px;">
-                                <li>View examples of fish and trash</li>
-                                <li>Classify objects as "fish" or "trash"</li>
-                                <li>Train your model with these examples</li>
-                                <li>Test your model on new examples it hasn't seen</li>
-                                <li>Observe how accuracy improves with training</li>
-                            </ul>
-                        </li>
-                        <li><strong>Screenshot Step 6:</strong> Once you complete Step 6, take a screenshot showing your training results</li>
-                        <li><strong>Analyze Weaknesses:</strong> Consider these questions:
-                            <ul style="margin-left: 20px; margin-top: 10px;">
-                                <li>What limitations does your training data have?</li>
-                                <li>What types of objects might be misclassified?</li>
-                                <li>How could you improve the training data?</li>
-                            </ul>
-                        </li>
-                    </ol>
-
-                    <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
-                        <strong>📝 Document Your Findings:</strong>
-                        <p style="margin-top: 10px;"><em>Part A: Identify two weaknesses in the training data that could cause errors in classification. For each weakness, provide a specific example of an object that might be misclassified.</em></p>
-                        <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
-                            <li><strong>Weakness 1:</strong> _________________________________</li>
-                            <li><strong>Example 1:</strong> _________________________________</li>
-                            <li><strong>Weakness 2:</strong> _________________________________</li>
-                            <li><strong>Example 2:</strong> _________________________________</li>
-                        </ul>
-                        <p style="margin-top: 15px;"><em>Part B: In 1-3 sentences, describe how AI and machine learning enable computer vision. What specifically allows computers to classify objects in images?</em></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Formative Assessment -->
-            <div class="formative-assessment">
-                <div class="assessment-header">
-                    <div class="target-icon">🎯</div>
-                    <h3>Check Your Understanding: Lesson 1.3</h3>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 1 - Multiple Choice</div>
-                    <div class="question-text">Why are Convolutional Neural Networks (CNNs) better suited for image processing than standard neural networks?</div>
-                    <ul class="options">
-                        <li>A) They process information faster</li>
-                        <li>B) They learn local patterns by examining small regions of images, making them more efficient at detecting spatial features</li>
-                        <li>C) They can handle any type of data, not just images</li>
-                        <li>D) They require less training data</li>
-                    </ul>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Correct Answer: B</strong>
-                        <p>CNNs use convolutional layers that look at small regions of the image at a time, learning patterns like edges and textures. This respects the spatial structure of images—patterns in one region are meaningful regardless of where they appear. Standard neural networks treat each pixel independently, ignoring this spatial relationship.</p>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 2 - True/False</div>
-                    <div class="question-text">Each pixel in a digital image stores RGB values (Red, Green, Blue) that determine its color.</div>
-                    <ul class="options">
-                        <li>A) True</li>
-                        <li>B) False</li>
-                    </ul>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Correct Answer: A (True)</strong>
-                        <p>Color images are stored using RGB values. Each color component (Red, Green, Blue) has an intensity from 0-255. By combining these three components, computers can display any color. For example, pure red is (255, 0, 0) and white is (255, 255, 255).</p>
-                    </div>
-                </div>
-
-                <div class="question">
-                    <div class="question-type">Question 3 - Short Answer</div>
-                    <div class="question-text">Name one real-world application of computer vision that you've encountered or use regularly.</div>
-                    <textarea class="short-answer" placeholder="Your answer here..."></textarea>
-                    <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
-                    <div class="answer-explanation">
-                        <strong>Sample Answers:</strong>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Face recognition to unlock my smartphone</li>
-                            <li>Social media automatically organizing photos by the people in them</li>
-                            <li>Camera apps that apply filters based on what they see</li>
-                            <li>Google Photos or Amazon Photos searching photos by object</li>
-                            <li>Google Lens identifying objects or landmarks from a photo</li>
-                        </ul>
-                        <p style="margin-top: 10px;"><strong>Why these work:</strong> All of these involve a system analyzing images, recognizing patterns, and making decisions based on visual content.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="whats-coming">
-                <h3>🚀 What's Coming Next</h3>
-                <p>You've now trained your own image classifier and experienced how machine learning works firsthand! But there's an important question: where did the patterns your model learned come from? The answer is <strong>training data</strong>. In Lesson 1.4, you'll explore why training data is so critical to AI performance, what happens when data is biased or incomplete, and how you can improve models by collecting better data.</p>
-                <div class="progress-indicator">Lesson 3 of 5 in Chapter 1: What is AI, Really? | 60% Complete</div>
-            </div>
-        </section>
-
-        <!-- LESSON 1.4: Training Data and Its Impact -->
-        <section class="lesson">
-            <div class="lesson-header">
-                <div class="lesson-number">Lesson 4 of 5</div>
-                <h2 class="lesson-title">Lesson 1.4: Training Data and Its Critical Impact</h2>
-                <div class="lesson-duration">⏱️ 13-15 minutes (includes interactive activity)</div>
-            </div>
-
-            <div class="learning-objectives">
-                <h3>Learning Objectives</h3>
-                <ul>
-                    <li><code>LO1.4.1</code>: Understand why training data quality and characteristics directly determine machine learning model performance</li>
-                    <li><code>LO1.4.2</code>: Recognize how dataset size, diversity, and representation affect machine learning outcomes</li>
-                    <li><code>LO1.4.3</code>: Identify weaknesses in training datasets and predict their impact on classification tasks</li>
-                    <li><code>LO1.4.4</code>: Gain hands-on experience building, testing, and improving machine learning models through data curation</li>
-                </ul>
-            </div>
-
-            <div class="content-section">
-                <h3>The Golden Rule of Machine Learning</h3>
-
-                <p>Here's a critical truth about machine learning: <strong>A machine learning model is only as good as the data it learns from.</strong> No matter how sophisticated your neural network architecture is, if your training data is poor, your model will be poor.</p>
-
-                <div class="callout callout-warning">
-                    <div class="callout-title">
-                        <span class="callout-icon">⚠️</span>
-                        <span>Garbage In, Garbage Out</span>
-                    </div>
-                    <p>This is the fundamental principle of machine learning. If you train a model on poor quality, biased, or incomplete data, the model will make poor and biased predictions. There's no way around it.</p>
-                </div>
-
-                <div class="definition-box">
-                    <strong>Training Data:</strong> The collection of examples used to teach a machine learning model. Each example typically includes inputs and their corresponding correct outputs (labels).
-                </div>
-
-                <h3>What Makes Good Training Data?</h3>
-
-                <p>Good training data has several characteristics:</p>
-
-                <div style="margin: 20px 0;">
-                    <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
-                        <strong>1. Size:</strong> Enough examples to learn patterns. Generally, more examples = better learning, though diminishing returns exist. Thousands of examples are common; millions for complex tasks.
-                    </div>
-                    <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
-                        <strong>2. Diversity:</strong> Examples that represent the variety of real-world scenarios. If training only on sunny day photos, the model will fail on cloudy day photos.
-                    </div>
-                    <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
-<strong>3. Accuracy of Labels:</strong> Correct answers. If many examples are mislabeled, the model learns incorrect patterns.
-</div>
-<div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
-<strong>4. Balance:</strong> Roughly equal representation of each category. If 99% of spam emails are in the dataset and only 1% legitimate, the model learns to classify everything as spam.
-</div>
-<div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
-<strong>5. Relevance:</strong> Examples that match real-world conditions. Training on studio photographs but deploying on phone camera photos is problematic.
-</div>
-</div>
-<h3>How Dataset Size Affects Learning</h3>
+            <p>To understand computer vision, we need to know how computers store images. An image is broken down into tiny colored squares called <strong>pixels</strong> (picture elements). Each pixel has a color represented by numbers—typically three numbers for Red, Green, and Blue (RGB).</p>
 
             <div class="example">
-                <div class="example-title">Example 1.4.1: Impact of Training Set Size</div>
+                <div class="example-title">Example 1.2.1: Understanding Pixels</div>
                 
                 <div class="example-step">
-                    <strong>Small Dataset (10 examples of each type):</strong>
+                    <strong>A 10×10 Pixel Image:</strong> Contains 100 individual pixels, each storing color information
+                </div>
+
+                <div class="example-step">
+                    <strong>RGB Color Values (0-255):</strong>
                     <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Model learns few patterns</li>
-                        <li>May memorize specific examples rather than learning general patterns</li>
-                        <li>Poor performance on new examples</li>
-                        <li>Accuracy might be only 60-70%</li>
+                        <li>Red = (255, 0, 0) — maximum red, no green, no blue</li>
+                        <li>White = (255, 255, 255) — all colors at maximum</li>
+                        <li>Black = (0, 0, 0) — all colors at zero</li>
                     </ul>
                 </div>
 
                 <div class="example-step">
-                    <strong>Medium Dataset (1,000 examples of each type):</strong>
+                    <strong>Scale Up:</strong> A 28×28 image (small handwritten digit) = 784 input values. A 224×224 image (typical for AI) = 50,176 input values. That's a lot of data for a neural network to process!
+                </div>
+            </div>
+
+            <h3>Convolutional Neural Networks (CNNs)</h3>
+
+            <p>Regular neural networks struggle with images because they treat each pixel independently. <strong>Convolutional Neural Networks (CNNs)</strong> are specifically designed for image processing. They work by examining small regions of the image at a time, learning local patterns like edges, shapes, and textures.</p>
+
+            <div class="definition-box">
+                <strong>Convolutional Neural Network (CNN):</strong> A specialized neural network architecture designed for processing images. It uses convolutional layers that scan images looking for patterns, learning features like edges, shapes, and textures at multiple levels of abstraction.
+            </div>
+
+            <div class="example">
+                <div class="example-title">Example 1.2.2: How CNNs Process an Image</div>
+                
+                <div class="example-step">
+                    <strong>Early Layers (Simple Feature Detection):</strong> Scan for basic patterns:
                     <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Model learns solid patterns</li>
-                        <li>Better generalization to new examples</li>
-                        <li>Reasonable performance</li>
-                        <li>Accuracy might be 85-90%</li>
+                        <li>Vertical edges (like the side of a cat's ear)</li>
+                        <li>Horizontal edges (like a dog's back)</li>
+                        <li>Diagonal lines</li>
+                        <li>Color gradients</li>
                     </ul>
                 </div>
 
                 <div class="example-step">
-                    <strong>Large Dataset (100,000+ examples of each type):</strong>
+                    <strong>Middle Layers (Pattern Combination):</strong> Combine simple patterns into complex shapes:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Circles (eyes)</li>
+                        <li>Triangles (ears)</li>
+                        <li>Curves (face outlines)</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>Final Layers (Classification):</strong> Use all learned features to classify the image:
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>"This is a CAT" (confidence: 95%)</li>
+                        <li>"This is a DOG" (confidence: 3%)</li>
+                        <li>"This is a BIRD" (confidence: 2%)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">
+                    <span class="callout-icon">ℹ️</span>
+                    <span>Why CNNs are Efficient</span>
+                </div>
+                <p>CNNs recognize that images have spatial structure. A detected edge in the top-left corner has similar meaning to an edge in the bottom-right corner. By learning to detect patterns wherever they appear, CNNs are much more efficient than standard neural networks and transfer what they learn more effectively.</p>
+            </div>
+
+            <h3>Real-World Applications of Computer Vision</h3>
+
+            <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <p><strong>📱 Face Recognition:</strong> Unlocking phones, organizing photos, security systems</p>
+                <p style="margin-top: 10px;"><strong>🚗 Autonomous Vehicles:</strong> Recognizing pedestrians, reading traffic signs, detecting lane markings</p>
+                <p style="margin-top: 10px;"><strong>🏥 Medical Imaging:</strong> Detecting tumors, fractures, and diseases in X-rays and MRIs</p>
+                <p style="margin-top: 10px;"><strong>🛒 Retail:</strong> Amazon Go stores using computer vision for automated checkout</p>
+                <p style="margin-top: 10px;"><strong>🌾 Agriculture:</strong> Detecting crop diseases, estimating yields</p>
+                <p style="margin-top: 10px;"><strong>🎨 Content Moderation:</strong> Identifying inappropriate images on social media</p>
+            </div>
+
+            <h3>Hands-On: Build Your First AI Model</h3>
+
+            <p>Now it's your turn! You'll train your own image classifier using the <strong>AI for Oceans</strong> tutorial. This activity demonstrates how the concepts you've learned translate into building working AI systems.</p>
+
+            <div class="callout callout-info">
+                <div class="callout-title">
+                    <span class="callout-icon">ℹ️</span>
+                    <span>Real-World Impact</span>
+                </div>
+                <p>Computer vision can solve environmental problems. Imagine a robot that automatically sorts trash from fish to clean the ocean. That robot first needs to learn the difference—exactly what you'll do in this activity.</p>
+            </div>
+
+            <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity: AI for Oceans</h4>
+                
+                <p><strong>Objective:</strong> Train your own image classifier to distinguish between ocean creatures (fish) and ocean trash.</p>
+
+                <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Open the Tutorial:</strong> Go to <code>code.org/oceans</code></li>
+                    <li><strong>Complete Steps 1-6:</strong> Follow the on-screen instructions. You will:
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>View examples of fish and trash</li>
+                            <li>Classify objects as "fish" or "trash"</li>
+                            <li>Train your model with your classifications</li>
+                            <li>Test your model on new examples</li>
+                            <li>Observe how accuracy improves with more training data</li>
+                        </ul>
+                    </li>
+                    <li><strong>Take a Screenshot:</strong> Once you complete Step 6, screenshot your training results</li>
+                    <li><strong>Reflect on Limitations:</strong> Think about:
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>What could your model get wrong?</li>
+                            <li>What types of objects might be misclassified?</li>
+                            <li>How could better training data improve it?</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <strong>📝 Assignment - Part A:</strong>
+                    <p style="margin-top: 10px;"><em>Identify two weaknesses in the training data that could cause classification errors. For each weakness, provide a specific example of what might be misclassified.</em></p>
+                    <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                        <li><strong>Weakness 1:</strong> ________________________________</li>
+                        <li><strong>Example 1:</strong> ________________________________</li>
+                        <li><strong>Weakness 2:</strong> ________________________________</li>
+                        <li><strong>Example 2:</strong> ________________________________</li>
+                    </ul>
+                    
+                    <p style="margin-top: 20px;"><em>Part B: In 1-3 sentences, describe how AI uses computer vision to classify objects in images. What enables the computer to "see" and understand?</em></p>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">
+                    <span class="callout-icon">⚠️</span>
+                    <span>Note on Training Data Quality</span>
+                </div>
+                <p>As you complete this activity, you'll notice that your model's accuracy depends directly on the examples you provide. This preview shows why the next lesson—on training data—is so critical. Poor, incomplete, or biased training data limits any AI system, no matter how sophisticated.</p>
+            </div>
+        </div>
+
+        <!-- Formative Assessment -->
+        <div class="formative-assessment">
+            <div class="assessment-header">
+                <div class="target-icon">🎯</div>
+                <h3>Check Your Understanding: Lesson 1.2</h3>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 1 - Multiple Choice</div>
+                <div class="question-text">Why are Convolutional Neural Networks (CNNs) better for image processing than standard neural networks?</div>
+                <ul class="options">
+                    <li>A) They require less computing power</li>
+                    <li>B) They examine small regions of images and learn local patterns efficiently</li>
+                    <li>C) They can process any type of data</li>
+                    <li>D) They are more biologically accurate</li>
+                </ul>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Correct Answer: B</strong>
+                    <p>CNNs use convolutional layers that scan images looking for patterns in local regions. This approach respects the spatial structure of images and is much more efficient than treating each pixel independently as standard neural networks do.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 2 - True/False</div>
+                <div class="question-text">Each pixel in a digital color image stores three numbers (Red, Green, Blue) that determine its color.</div>
+                <ul class="options">
+                    <li>A) True</li>
+                    <li>B) False</li>
+                </ul>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Correct Answer: A (True)</strong>
+                    <p>Color images use the RGB color model. Each pixel stores three values (0-255) representing the intensity of red, green, and blue. By combining these, computers can display millions of different colors.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 3 - Short Answer</div>
+                <div class="question-text">Explain what a CNN learns as it processes an image from the input layer to the output layer. How do the layers work together?</div>
+                <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Sample Answer:</strong>
+                    <p style="margin-top: 10px;">Early CNN layers learn to detect simple visual features like edges, lines, and colors. Middle layers combine these simple features into more complex shapes like circles and rectangles. The deepest layers use all these learned features to make the final classification decision. Each layer builds on what the previous layer learned, creating a hierarchy of increasingly abstract features.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="whats-coming">
+            <h3>🚀 What's Coming Next</h3>
+            <p>You've now trained your first AI model and seen how computer vision works in practice. But you might have noticed something: your model's accuracy depended on the examples you provided. In Lesson 1.3, you'll explore why <strong>training data is everything</strong> in machine learning. You'll experiment with how dataset size, diversity, and quality directly impact model performance.</p>
+            <div class="progress-indicator">Lesson 2 of 5 in Chapter 1 | 40% Complete</div>
+        </div>
+    </section>
+
+    <!-- LESSON 1.3: Training Data and Its Impact -->
+    <section class="lesson">
+        <div class="lesson-header">
+            <div class="lesson-number">Lesson 3 of 5</div>
+            <h2 class="lesson-title">Lesson 1.3: Why Training Data is Everything</h2>
+            <div class="lesson-duration">⏱️ 13-15 minutes (includes interactive activity)</div>
+        </div>
+
+        <div class="learning-objectives">
+            <h3>Learning Objectives</h3>
+            <ul>
+                <li><code>LO1.3.1</code>: Understand why training data quality directly determines machine learning model performance</li>
+                <li><code>LO1.3.2</code>: Recognize how dataset size, diversity, and accuracy of labels affect learning</li>
+                <li><code>LO1.3.3</code>: Predict how training data characteristics will impact model performance</li>
+                <li><code>LO1.3.4</code>: Experiment with curating datasets to improve model accuracy</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h3>The Golden Rule: Garbage In, Garbage Out</h3>
+
+            <p>No matter how sophisticated your neural network, no matter how many layers or nodes it has, there's one absolute truth: <strong>A model is only as good as the data it learns from.</strong></p>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">
+                    <span class="callout-icon">⚠️</span>
+                    <span>Fundamental Principle: GIGO</span>
+                </div>
+                <p>"Garbage In, Garbage Out" is the core principle of machine learning. Poor quality, biased, or incomplete training data produces poor and biased predictions—no algorithm can overcome this fundamental limitation.</p>
+            </div>
+
+            <div class="definition-box">
+                <strong>Training Data:</strong> The collection of examples used to teach a machine learning model. Each example includes inputs and their correct outputs (labels). The quality, size, and diversity of this data directly determines model performance.
+            </div>
+
+            <h3>What Makes Good Training Data?</h3>
+
+            <div style="margin: 20px 0;">
+                <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
+                    <strong>1. Size:</strong> More examples generally lead to better learning. With 10 examples, a model memorizes. With thousands, it learns genuine patterns. There are diminishing returns, but more data is usually helpful.
+                </div>
+                <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
+                    <strong>2. Diversity:</strong> Examples should represent the variety of real-world scenarios. A model trained only on sunny photos fails on cloudy days. Diverse data teaches general patterns, not memorized specifics.
+                </div>
+                <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
+                    <strong>3. Accuracy of Labels:</strong> Correct answers are essential. Mislabeled data teaches the model incorrect patterns. Even 10% mislabeling significantly impacts performance.
+                </div>
+                <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
+                    <strong>4. Balance:</strong> Similar numbers of each category prevent bias. If 99% of examples are spam and 1% are legitimate, the model learns to classify everything as spam.
+                </div>
+                <div style="background-color: #e8f4f8; padding: 15px; border-radius: 5px; margin: 15px 0; border-left: 4px solid var(--info-color);">
+                    <strong>5. Relevance:</strong> Training data should match real-world deployment conditions. Models trained on studio photos fail on phone camera photos.
+                </div>
+            </div>
+
+            <h3>How Dataset Size Affects Performance</h3>
+
+            <div class="example">
+                <div class="example-title">Example 1.3.1: The Impact of Dataset Size</div>
+                
+                <div class="example-step">
+                    <strong>Small Dataset (10 examples per category):</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Model learns few patterns; may memorize specific examples</li>
+                        <li>Poor generalization to new data</li>
+                        <li>Typical accuracy: 60-70%</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>Medium Dataset (1,000 examples per category):</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Model learns solid, generalizable patterns</li>
+                        <li>Better performance on new data</li>
+                        <li>Typical accuracy: 85-90%</li>
+                    </ul>
+                </div>
+
+                <div class="example-step">
+                    <strong>Large Dataset (100,000+ examples per category):</strong>
                     <ul style="margin-left: 20px; margin-top: 10px;">
                         <li>Model learns rich, nuanced patterns</li>
                         <li>Excellent generalization</li>
-                        <li>High performance on new examples</li>
-                        <li>Accuracy might be 95%+</li>
+                        <li>Typical accuracy: 95%+</li>
                     </ul>
                 </div>
             </div>
 
-            <h3>How Dataset Diversity Affects Learning</h3>
+            <h3>How Dataset Diversity Affects Performance</h3>
 
             <div class="example">
-                <div class="example-title">Example 1.4.2: Impact of Training Set Diversity</div>
+                <div class="example-title">Example 1.3.2: Training a Cat Classifier</div>
                 
                 <div class="example-step">
-                    <strong>Problem: Training a Cat Classifier</strong>
-                </div>
-
-                <div class="example-step">
-                    <strong>Homogeneous Dataset (all orange tabbies):</strong>
+                    <strong>Homogeneous Dataset (only orange tabbies):</strong>
                     <ul style="margin-left: 20px; margin-top: 10px;">
                         <li>Model learns: "Cats are orange with stripes"</li>
-                        <li>When shown a black cat → "Not a cat!" (error)</li>
-                        <li>When shown a fluffy white cat → "Not a cat!" (error)</li>
-                        <li>Model has learned specific examples, not the general concept of "cat"</li>
+                        <li>When shown a black cat → "Not a cat!" (Wrong!)</li>
+                        <li>When shown a white fluffy cat → "Not a cat!" (Wrong!)</li>
+                        <li>Model has memorized a specific type, not the concept "cat"</li>
                     </ul>
                 </div>
 
                 <div class="example-step">
-                    <strong>Diverse Dataset (orange, black, white, fluffy, short-haired, different ages):</strong>
+                    <strong>Diverse Dataset (orange, black, white, fluffy, short-haired, young, old):</strong>
                     <ul style="margin-left: 20px; margin-top: 10px;">
                         <li>Model learns: "Cats have whiskers, pointy ears, four legs, a tail..."</li>
-                        <li>Successfully identifies any cat, regardless of appearance</li>
-                        <li>Model has learned the general concept of "cat"</li>
+                        <li>Successfully identifies any cat, regardless of color or fur type</li>
+                        <li>Model learns the general concept of "cat"</li>
                     </ul>
                 </div>
             </div>
@@ -1304,144 +1054,438 @@
             <div class="callout callout-hint">
                 <div class="callout-title">
                     <span class="callout-icon">💡</span>
-                    <span>Why Diversity Matters</span>
+                    <span>Diversity = Generalization</span>
                 </div>
-                <p>Diverse training data teaches models to recognize the essential characteristics of what they're learning, rather than just surface-level patterns. This is why real-world machine learning projects invest heavily in collecting diverse data.</p>
+                <p>Diverse training data teaches models the essential characteristics of what they're learning to recognize, rather than surface-level patterns specific to the training set. This is why real-world ML projects invest heavily in data collection and curation.</p>
             </div>
 
-            <h3>Hands-On: Teachable Machine Activity</h3>
+            <h3>Hands-On: Experiment with Training Data</h3>
 
-            <p>Now you'll experience firsthand how training data affects model performance. Using Google's <strong>Teachable Machine</strong>, you'll train pose detectors and a dog/cat classifier, experimenting with how dataset size and diversity impact accuracy.</p>
+            <p>Now you'll experience firsthand how training data quality affects model performance using Google's <strong>Teachable Machine</strong>. You'll build multiple models, varying dataset size and diversity, and compare results.</p>
 
             <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
                 <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity Part A: Pose Detection Exploration</h4>
                 
-                <p><strong>Objective:</strong> Understand how training data characteristics affect model performance.</p>
+                <p><strong>Objective:</strong> See how dataset size and diversity affect model accuracy.</p>
 
                 <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
                     <li><strong>Open Teachable Machine:</strong> Visit <code>teachablemachine.withgoogle.com</code></li>
-                    <li><strong>Select Pose Project:</strong> Create a new pose detection model</li>
-                    <li><strong>Follow the Tutorial:</strong> Click "Let's go!" and complete the interactive tutorial</li>
-                    <li><strong>Experiment with Dataset Size:</strong> Test what happens when:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>You only train one class (no comparison class)</li>
-                            <li>You gradually increase your dataset from 1-2 images to 10+ images per class</li>
-                        </ul>
-                    </li>
-                    <li><strong>Test with Different Data:</strong> If you trained with one hand, test with your other hand and observe differences</li>
+                    <li><strong>Create a Pose Project:</strong> Select "Pose" and follow the tutorial</li>
+                    <li><strong>Experiment 1 - Single Class:</strong> Train only one pose (e.g., hand up). Test it. <em>What happens when you test the opposite pose?</em></li>
+                    <li><strong>Experiment 2 - Increase Dataset:</strong> Add 2, 5, 10+ examples per class. <em>How does accuracy improve?</em></li>
+                    <li><strong>Experiment 3 - Test Diversity:</strong> Train with one hand; test with the other. <em>What happens with different data?</em></li>
                 </ol>
 
                 <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
-                    <strong>📝 Document Your Findings:</strong>
-                    <p style="margin-top: 10px;"><em>Question A: What happens if you only train one class? Why is this a problem?</em></p>
-                    <p style="margin-top: 15px;"><em>Question B: Describe what you observed as you increased your dataset from small to larger. How did accuracy change?</em></p>
-                    <p style="margin-top: 15px;"><em>Question C: What happened when your test data (different hand) was very different from your training data (one hand)? Why?</em></p>
+                    <strong>📝 Assignment Questions:</strong>
+                    <p style="margin-top: 10px;"><em>Q1: What happened when you trained only one class? Why was this a problem?</em></p>
+                    <p style="margin-top: 15px;"><em>Q2: Describe how accuracy changed as you increased your dataset size. What was the difference between 2 examples and 10 examples per class?</em></p>
+                    <p style="margin-top: 15px;"><em>Q3: What happened when your test data (different hand) differed significantly from your training data? Why did this occur?</em></p>
                 </div>
             </div>
 
             <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
                 <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity Part B: Dogs vs. Cats Classifier</h4>
                 
-                <p><strong>Objective:</strong> Build image classifiers with different training datasets and compare performance.</p>
+                <p><strong>Objective:</strong> Build and compare models trained on different datasets, then curate data to improve performance.</p>
 
-                <h5 style="margin-top: 20px; color: #ff6b35;">Phase 1: Initial Training Dataset</h5>
+                <h5 style="margin-top: 20px; color: #ff6b35;">Phase 1: Initial (Limited) Dataset</h5>
 
                 <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
-                    <li>Download the <strong>Initial Training Dataset</strong> (smaller, less diverse collection)</li>
-                    <li>Unzip the folder and organize dog/cat images</li>
+                    <li>Download the <strong>Initial Training Dataset</strong> (smaller, less diverse)</li>
                     <li>In Teachable Machine, create a new Image Project → Standard image model</li>
-                    <li>Upload dogs to Class 1; rename to "Dog"</li>
-                    <li>Upload cats to Class 2; rename to "Cat"</li>
+                    <li>Upload dog images → Class 1, rename to "Dog"</li>
+                    <li>Upload cat images → Class 2, rename to "Cat"</li>
                     <li>Train your model</li>
                 </ol>
 
                 <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                    <strong>📝 Document Dataset Characteristics:</strong>
-                    <p style="margin-top: 10px;"><em>For the Dog training dataset: How many images? How are they similar? How are they different?</em></p>
-                    <p style="margin-top: 10px;"><em>For the Cat training dataset: How many images? How are they similar? How are they different?</em></p>
+                    <strong>📝 Analyze Initial Dataset:</strong>
+                    <p style="margin-top: 10px;"><em>For Dogs: How many images? Describe their characteristics (color, size, breed, lighting, etc.) and differences.</em></p>
+                    <p style="margin-top: 10px;"><em>For Cats: How many images? Describe their characteristics and differences.</em></p>
                 </div>
 
-                <h5 style="margin-top: 25px; color: #ff6b35;">Phase 2: Testing Performance</h5>
+                <h5 style="margin-top: 25px; color: #ff6b35;">Phase 2: Test Performance</h5>
 
                 <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
                     <li>Download the Test Dataset</li>
-                    <li>In Teachable Machine Preview, change from Webcam to File</li>
-                    <li>Test each image one at a time and record results</li>
+                    <li>In Preview, change from Webcam to File</li>
+                    <li>Test each image and record results in the table below</li>
                 </ol>
 
                 <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                    <strong>📝 Record Test Results:</strong>
-                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                    <strong>📝 Record Results:</strong>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9em;">
                         <tr style="background-color: #e8f4f8;">
                             <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Filename</th>
-                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Classification (Cat/Dog)</th>
-                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Confidence Score (%)</th>
-                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Correct? (Y/N)</th>
+                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Classification</th>
+                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Confidence (%)</th>
+                            <th style="border: 1px solid #ccc; padding: 10px; text-align: left;">Correct?</th>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test1.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test2.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test3.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test4.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test5.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test6.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
                         <tr>
                             <td style="border: 1px solid #ccc; padding: 10px;">test7.png</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
-                            <td style="border: 1px solid #ccc; padding: 10px;">_____________</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">___</td>
+                            <td style="border: 1px solid #ccc; padding: 10px;">Y/N</td>
                         </tr>
-                    </table>
-                    <p style="margin-top: 15px;"><em>Question D: Which class (cats or dogs) did your classifier work better on? Why do you think that is?</em></p>
-                    <p style="margin-top: 10px;"><em>Question E: How could you improve performance with better training data?</em></p>
+</table>
+                    <p style="margin-top: 15px;"><em>Q1: Which class (cats or dogs) did your classifier perform better on? Why do you think that is?</em></p>
+                    <p style="margin-top: 10px;"><em>Q2: How could you improve performance with better training data?</em></p>
                 </div>
 
-                <h5 style="margin-top: 25px; color: #ff6b35;">Phase 3: Improved Dataset (Curation Experiment)</h5>
+                <h5 style="margin-top: 25px; color: #ff6b35;">Phase 3: Curated (Improved) Dataset</h5>
 
                 <ol style="margin-left: 20px; margin-top: 10px; line-height: 2;">
-                    <li>Download the <strong>Curated Training Dataset</strong> (larger, more diverse collection)</li>
-                    <li>Remove all samples from your initial classes</li>
-                    <li>Upload all dog images from the curated dataset</li>
-                    <li>Upload all cat images from the curated dataset</li>
-                    <li>Train your model again</li>
+                    <li>Download the <strong>Curated Training Dataset</strong> (larger, more diverse)</li>
+                    <li>In your Teachable Machine project, remove all samples from both classes</li>
+                    <li>Upload all dog images from the curated dataset → Class 1</li>
+                    <li>Upload all cat images from the curated dataset → Class 2</li>
+                    <li>Train the model again</li>
+                    <li>Test on the same test dataset as before</li>
                 </ol>
 
                 <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 15px;">
                     <strong>📝 Compare Results:</strong>
-                    <p style="margin-top: 10px;"><em>Repeat the test table above with the new model</em></p>
-                    <p style="margin-top: 15px;"><em>Question F: Did your classifier work better for one class? Or did it work the same for both?</em></p>
-                    <p style="margin-top: 10px;"><em>Question G: What specific improvements did you make to the training data, and how did they affect performance?</em></p>
-                    <p style="margin-top: 10px;"><em>Question H: How might you find additional images to further curate and improve your dataset?</em></p>
+                    <p style="margin-top: 10px;"><em>Repeat the test table above for the new model</em></p>
+                    <p style="margin-top: 20px;"><em>Q3: Did your classifier's performance improve? For which class(es)?</em></p>
+                    <p style="margin-top: 10px;"><em>Q4: What specific characteristics did you improve in the training data? (Size? Diversity? Balance?)</em></p>
+                    <p style="margin-top: 10px;"><em>Q5: How might you continue to improve the dataset further?</em></p>
                 </div>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">
+                    <span class="callout-icon">ℹ️</span>
+                    <span>Key Insight from This Activity</span>
+                </div>
+                <p>The difference in performance between the initial and curated models demonstrates that the neural network architecture stayed the same—only the training data changed. Yet performance likely improved significantly. This proves that <strong>training data is the dominant factor</strong> in machine learning performance.</p>
+            </div>
+        </div>
+
+        <!-- Formative Assessment -->
+        <div class="formative-assessment">
+            <div class="assessment-header">
+                <div class="target-icon">🎯</div>
+                <h3>Check Your Understanding: Lesson 1.3</h3>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 1 - Multiple Choice</div>
+                <div class="question-text">Which principle best describes the relationship between training data quality and machine learning model performance?</div>
+                <ul class="options">
+                    <li>A) The neural network architecture is more important than training data</li>
+                    <li>B) Garbage In, Garbage Out—poor training data produces poor predictions regardless of algorithm</li>
+                    <li>C) More processing power automatically improves model accuracy</li>
+                    <li>D) Training data quality matters only for small datasets</li>
+                </ul>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Correct Answer: B</strong>
+                    <p>"Garbage In, Garbage Out" is the fundamental principle of machine learning. No matter how sophisticated your algorithm, biased, incomplete, or poor quality training data will produce biased and poor predictions. This is why data curation is critical in ML.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 2 - True/False</div>
+                <div class="question-text">A machine learning model trained only on images of orange tabby cats would accurately identify all cats, including black cats and white fluffy cats.</div>
+                <ul class="options">
+                    <li>A) True</li>
+                    <li>B) False</li>
+                </ul>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Correct Answer: B (False)</strong>
+                    <p>A model trained only on orange tabbies would learn that "cats look like orange tabbies" and fail to recognize other cats. This demonstrates why <strong>diversity in training data is essential</strong>. The model learns surface-level patterns rather than the general concept of "cat."</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 3 - Matching</div>
+                <div class="question-text">Match each training data characteristic to its importance:</div>
+                <div style="margin-top: 15px;">
+                    <div class="matching-pair">
+                        <div class="matching-term"><strong>Size</strong></div>
+                        <div class="matching-definition">More examples help the model learn genuine patterns rather than memorizing specifics</div>
+                    </div>
+                    <div class="matching-pair">
+                        <div class="matching-term"><strong>Diversity</strong></div>
+                        <div class="matching-definition">Variety in data ensures the model generalizes to real-world scenarios it hasn't seen in training</div>
+                    </div>
+                    <div class="matching-pair">
+                        <div class="matching-term"><strong>Correct Labels</strong></div>
+                        <div class="matching-definition">Accurate answers prevent the model from learning wrong patterns</div>
+                    </div>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Correct Matches:</strong>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>Size</strong> → More examples help the model learn genuine patterns rather than memorizing specifics</li>
+                        <li><strong>Diversity</strong> → Variety in data ensures the model generalizes to real-world scenarios it hasn't seen in training</li>
+                        <li><strong>Correct Labels</strong> → Accurate answers prevent the model from learning wrong patterns</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 4 - Short Answer</div>
+                <div class="question-text">Based on your experiments with Teachable Machine, explain why the curated dataset likely improved model performance compared to the initial dataset.</div>
+                <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Sample Answer:</strong>
+                    <p style="margin-top: 10px;">The curated dataset was larger and more diverse. More examples helped the model learn deeper patterns rather than memorizing specific cases. Greater diversity meant the model encountered more variations of dogs and cats, so it learned essential characteristics rather than surface-level features. This improved generalization to new test images the model had never seen.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="whats-coming">
+            <h3>🚀 What's Coming Next</h3>
+            <p>You've now experienced how training data quality directly impacts model performance. But there's a critical question: <strong>What if your training data is biased?</strong> In Lesson 1.4, you'll explore one of the most serious ethical challenges in AI: how biases in training data get embedded into AI systems, leading to discriminatory predictions that affect real people. You'll analyze real-world cases and understand why addressing bias is essential.</p>
+            <div class="progress-indicator">Lesson 3 of 5 in Chapter 1 | 60% Complete</div>
+        </div>
+    </section>
+
+    <!-- LESSON 1.4: Understanding AI Bias -->
+    <section class="lesson">
+        <div class="lesson-header">
+            <div class="lesson-number">Lesson 4 of 5</div>
+            <h2 class="lesson-title">Lesson 1.4: AI Bias and Its Consequences</h2>
+            <div class="lesson-duration">⏱️ 14-15 minutes (includes case study analysis)</div>
+        </div>
+
+        <div class="learning-objectives">
+            <h3>Learning Objectives</h3>
+            <ul>
+                <li><code>LO1.4.1</code>: Define AI bias and explain how it originates in training data and algorithmic design</li>
+                <li><code>LO1.4.2</code>: Identify types of bias including training data bias, language bias, and selection bias</li>
+                <li><code>LO1.4.3</code>: Analyze real-world consequences of AI bias on people and societies</li>
+                <li><code>LO1.4.4</code>: Evaluate strategies for detecting and mitigating AI bias</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h3>What is AI Bias?</h3>
+
+            <p>AI systems can make unfair or inaccurate predictions affecting certain groups more than others. <strong>AI bias</strong> refers to systematic errors or unfair treatment embedded in machine learning systems—usually unintentionally.</p>
+
+            <div class="definition-box">
+                <strong>AI Bias:</strong> Systematic errors in machine learning predictions or decisions that disproportionately affect certain groups or demographics. Bias typically originates from biased training data, incomplete representation, or flawed assumptions in system design.
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">
+                    <span class="callout-icon">⚠️</span>
+                    <span>Bias ≠ Intentional Discrimination</span>
+                </div>
+                <p>Most AI bias isn't deliberate. It emerges from historical patterns in data, underrepresented groups in training data, or unconscious assumptions. However, the impact is the same: unfair and inaccurate outcomes for affected groups. Impact matters more than intent.</p>
+            </div>
+
+            <h3>Types of AI Bias</h3>
+
+            <h4 style="color: var(--primary-color); margin-top: 20px;">1. Training Data Bias</h4>
+            <p>Historical inequities get baked into training data, and machine learning systems learn and amplify them.</p>
+
+            <div class="example">
+                <div class="example-title">Example 1.4.1: Hiring Algorithm Bias</div>
+                
+                <div class="example-step">
+                    <strong>The Problem:</strong> A company trains a hiring algorithm on 20 years of historical data. In that data, 90% of executives were men (reflecting the male-dominated tech industry of that era).
+                </div>
+
+                <div class="example-step">
+                    <strong>What the Algorithm Learns:</strong> The system identifies patterns: "Executives have these characteristics... and those characteristics are associated with men." It learns to promote men.
+                </div>
+
+                <div class="example-step">
+                    <strong>Real Impact:</strong> The algorithm systematically rates female candidates lower. Amazon's hiring tool had exactly this problem and was abandoned.
+                </div>
+
+                <div class="example-step">
+                    <strong>The Lesson:</strong> Historical bias in data gets learned and automated by ML systems, perpetuating and amplifying historical discrimination.
+                </div>
+            </div>
+
+            <h4 style="color: var(--primary-color); margin-top: 20px;">2. Selection Bias</h4>
+            <p>When training data comes from limited sources or non-representative populations, the model fails for underrepresented groups.</p>
+
+            <div class="example">
+                <div class="example-title">Example 1.4.2: Face Recognition Bias</div>
+                
+                <div class="example-step">
+                    <strong>The Problem:</strong> A face recognition system is trained on millions of photos from social media and phone cameras. However, 80% of users are from wealthy countries and 90% of photos show lighter skin tones.
+                </div>
+
+                <div class="example-step">
+                    <strong>Result:</strong> The model has minimal exposure to darker skin tones, leading to poor recognition accuracy for people with darker skin.
+                </div>
+
+                <div class="example-step">
+                    <strong>Documented Reality:</strong> Major systems from Google, Microsoft, and IBM had error rates of 20-35% for darker-skinned women vs. 1-2% for lighter-skinned men.
+                </div>
+
+                <div class="example-step">
+                    <strong>Real-World Harm:</strong> Used in law enforcement, these systems are more likely to misidentify and wrongly arrest people with darker skin.
+                </div>
+            </div>
+
+            <h4 style="color: var(--primary-color); margin-top: 20px;">3. Language and Cultural Bias</h4>
+            <p>Language models trained on text from certain regions or cultures develop biased responses to others.</p>
+
+            <div class="example">
+                <div class="example-title">Example 1.4.3: Language Model Bias</div>
+                
+                <div class="example-step">
+                    <strong>The Problem:</strong> An AI chatbot is trained primarily on English text from Western sources (books, websites, forums from the US, UK, etc.).
+                </div>
+
+                <div class="example-step">
+                    <strong>What Happens:</strong> The system understands Western contexts well but struggles with non-Western contexts and references. It may provide culturally inappropriate or irrelevant advice.
+                </div>
+
+                <div class="example-step">
+                    <strong>Example:</strong> A student from India asking about university systems gets advice tailored to US universities. A user asking about traditional medicines is dismissed as unscientific.
+                </div>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">
+                    <span class="callout-icon">ℹ️</span>
+                    <span>The Feedback Loop Problem</span>
+                </div>
+                <p>AI bias creates dangerous feedback loops. If a hiring algorithm rejects more female candidates, those women don't get hired. Future training data shows even fewer women in those roles. The next model is even more biased. Without intervention, bias gets worse over time.</p>
+            </div>
+
+            <h3>Real-World Consequences of AI Bias</h3>
+
+            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
+                <h4 style="color: var(--warning-color); margin-top: 0;">🚨 Criminal Justice</h4>
+                <p>COMPAS, a risk assessment algorithm used in criminal courts, was found to have racial bias. It incorrectly classified Black defendants as high-risk at nearly twice the rate of white defendants. This directly affects sentencing decisions and affects whether someone goes to prison.</p>
+            </div>
+
+            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
+                <h4 style="color: var(--warning-color); margin-top: 0;">🏥 Healthcare</h4>
+                <p>An algorithm determining who receives expensive healthcare programs used race as a proxy for healthcare needs, systematically denying care to Black patients with the same medical conditions as white patients.</p>
+            </div>
+
+            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
+                <h4 style="color: var(--warning-color); margin-top: 0;">💰 Lending and Finance</h4>
+                <p>Algorithms have denied loans or offered worse terms to minority applicants with identical credit profiles to majority applicants who were approved.</p>
+            </div>
+
+            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
+                <h4 style="color: var(--warning-color); margin-top: 0;">💼 Employment</h4>
+                <p>Automated hiring systems have discriminated against women, people with disabilities, and older workers based on biased historical data.</p>
+            </div>
+
+            <h3>Strategies for Addressing AI Bias</h3>
+
+            <h4 style="color: var(--secondary-color); margin-top: 20px;">1. Collect Diverse, Representative Data</h4>
+            <p>Intentionally collect training data that includes adequate representation of all groups the system will affect. This requires effort but is foundational.</p>
+
+            <h4 style="color: var(--secondary-color); margin-top: 20px;">2. Audit and Test for Bias</h4>
+            <p>Before deploying an AI system, rigorously test it across different demographic groups. Look for performance disparities. If the system performs well for some groups but poorly for others, bias exists.</p>
+
+            <h4 style="color: var(--secondary-color); margin-top: 20px;">3. Define and Measure Fairness</h4>
+            <p>Different contexts require different fairness definitions:</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Equal Accuracy:</strong> System performs equally well for all groups</li>
+                <li><strong>Equal False Positive Rate:</strong> Incorrect positive predictions occur at similar rates</li>
+                <li><strong>Equal Opportunity:</strong> Qualified individuals from all groups have equal chances</li>
+            </ul>
+
+            <h4 style="color: var(--secondary-color); margin-top: 20px;">4. Involve Affected Communities</h4>
+            <p>Include people from affected communities in design, development, and testing. They identify potential harms that others might miss.</p>
+
+            <h4 style="color: var(--secondary-color); margin-top: 20px;">5. Transparency and Explainability</h4>
+            <p>Make AI systems transparent about how they reach decisions. This allows bias detection and provides affected individuals with explanations for decisions that affect them.</p>
+
+            <div class="callout callout-hint">
+                <div class="callout-title">
+                    <span class="callout-icon">💡</span>
+                    <span>Ongoing Process</span>
+                </div>
+                <p>Addressing AI bias is not a one-time fix. It requires continuous monitoring, regular audits, and willingness to adjust systems when new biases are discovered. As society and data change, new biases may emerge.</p>
+            </div>
+
+            <h3>Hands-On: Research and Analyze AI Bias</h3>
+
+            <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Assignment: Real-World Bias Case Study</h4>
+                
+                <p><strong>Objective:</strong> Find and analyze a documented example of AI bias and its impacts.</p>
+
+                <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Research Sources:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>News articles about AI bias (BBC, NPR, The Guardian, ProPublica)</li>
+                            <li>Academic papers on algorithmic fairness</li>
+                            <li>Documentaries: "Coded Bias" (Netflix)</li>
+                            <li>Books: "Weapons of Math Destruction" by Cathy O'Neil</li>
+                        </ul>
+                    </li>
+                    <li><strong>Select One Example:</strong> Choose a specific documented case of AI bias</li>
+                    <li><strong>Analyze and Document:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>What was the AI system designed to do?</li>
+                            <li>What bias was discovered?</li>
+                            <li>What was the cause? (data bias? selection bias? flawed design?)</li>
+                            <li>Who was affected and how?</li>
+                            <li>What actions were taken to address it?</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <strong>📝 Document Your Case Study:</strong>
+                    <p style="margin-top: 10px;"><strong>Example found:</strong> ___________________________________</p>
+                    <p style="margin-top: 10px;"><strong>Source:</strong> ___________________________________</p>
+                    <p style="margin-top: 10px;"><strong>Type of bias (training data / selection / language / other):</strong> ___________________________________</p>
+                    <p style="margin-top: 10px;"><strong>Impact (who was affected and how):</strong> ___________________________________</p>
+                    <p style="margin-top: 10px;"><strong>How it was addressed:</strong> ___________________________________</p>
+                </div>
+            </div>
+
+            <div class="video-embed">
+                <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: Training Data & Bias</div>
+                <div class="video-placeholder">▶ Training Data & Bias - 2:40</div>
+                <div class="video-description">Explores how bias originates in training data and how machine learning systems can amplify historical discrimination. (2 minutes 40 seconds)</div>
             </div>
         </div>
 
@@ -1454,272 +1498,202 @@
 
             <div class="question">
                 <div class="question-type">Question 1 - Multiple Choice</div>
-                <div class="question-text">What principle describes why poor training data leads to poor machine learning models?</div>
+                <div class="question-text">What is the primary cause of most AI bias in machine learning systems?</div>
                 <ul class="options">
-                    <li>A) The Law of Large Numbers</li>
-                    <li>B) Garbage In, Garbage Out</li>
-                    <li>C) The Central Limit Theorem</li>
-                    <li>D) Occam's Razor</li>
+                    <li>A) Intentional discrimination by AI researchers</li>
+                    <li>B) Neural networks being inherently biased by design</li>
+                    <li>C) Biased or unrepresentative training data that reflects historical inequities</li>
+                    <li>D) Computers being unable to process diverse data</li>
                 </ul>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
-                    <strong>Correct Answer: B</strong>
-                    <p>"Garbage In, Garbage Out" (GIGO) is the fundamental principle stating that if you feed poor quality input to a system, you'll get poor quality output. In machine learning, this means that no matter how sophisticated your algorithm, if your training data is poor, your model will be poor.</p>
+                    <strong>Correct Answer: C</strong>
+                    <p>Most AI bias stems from training data. ML systems learn patterns from historical data, and if that data reflects historical biases or lacks representation of certain groups, the system learns and perpetuates those biases. It's usually not intentional—it's a natural consequence of learning from biased data.</p>
                 </div>
             </div>
 
             <div class="question">
                 <div class="question-type">Question 2 - True/False</div>
-                <div class="question-text">A machine learning model trained only on orange tabby cats will accurately identify cats of all colors and fur types.</div>
+                <div class="question-text">AI bias typically makes the problem worse over time through feedback loops, where biased predictions lead to biased future training data.</div>
                 <ul class="options">
                     <li>A) True</li>
                     <li>B) False</li>
                 </ul>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
-                    <strong>Correct Answer: B (False)</strong>
-                    <p>The model would only learn patterns specific to orange tabby cats. It would likely fail to recognize cats of different colors or fur types because it never learned those patterns. This illustrates why training data diversity is critical.</p>
+                    <strong>Correct Answer: A (True)</strong>
+                    <p>AI bias often creates dangerous feedback loops. For example, if a hiring algorithm rejects more women, those women don't get hired, so the next training data shows fewer women in those roles, making the bias worse. This is why early intervention is critical.</p>
                 </div>
             </div>
 
             <div class="question">
                 <div class="question-type">Question 3 - Matching</div>
-                <div class="question-text">Match each training data characteristic to its importance:</div>
+                <div class="question-text">Match each type of bias to its description:</div>
                 <div style="margin-top: 15px;">
                     <div class="matching-pair">
-                        <div class="matching-term"><strong>Size</strong></div>
-                        <div class="matching-definition">More examples generally lead to better learning and pattern recognition</div>
+                        <div class="matching-term"><strong>Training Data Bias</strong></div>
+                        <div class="matching-definition">Historical inequities in data get learned and perpetuated by the ML system</div>
                     </div>
                     <div class="matching-pair">
-                        <div class="matching-term"><strong>Diversity</strong></div>
-                        <div class="matching-definition">Data should represent the variety of real-world scenarios the model will encounter</div>
+                        <div class="matching-term"><strong>Selection Bias</strong></div>
+                        <div class="matching-definition">Data comes from limited sources, leaving certain groups underrepresented</div>
                     </div>
                     <div class="matching-pair">
-                        <div class="matching-term"><strong>Accuracy of Labels</strong></div>
-                        <div class="matching-definition">Correct answers ensure the model learns correct patterns, not mistakes</div>
+                        <div class="matching-term"><strong>Language Bias</strong></div>
+                        <div class="matching-definition">System trained on text from certain regions develops biased responses to others</div>
                     </div>
                 </div>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
                     <strong>Correct Matches:</strong>
                     <ul style="margin-top: 10px; margin-left: 20px;">
-                        <li><strong>Size</strong> → More examples generally lead to better learning and pattern recognition</li>
-                        <li><strong>Diversity</strong> → Data should represent the variety of real-world scenarios the model will encounter</li>
-                        <li><strong>Accuracy of Labels</strong> → Correct answers ensure the model learns correct patterns, not mistakes</li>
+                        <li><strong>Training Data Bias</strong> → Historical inequities in data get learned and perpetuated by the ML system</li>
+                        <li><strong>Selection Bias</strong> → Data comes from limited sources, leaving certain groups underrepresented</li>
+                        <li><strong>Language Bias</strong> → System trained on text from certain regions develops biased responses to others</li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-type">Question 4 - Short Answer</div>
+                <div class="question-text">Explain how AI bias in hiring algorithms creates a feedback loop that makes discrimination worse over time.</div>
+                <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
+                <div class="answer-explanation">
+                    <strong>Sample Answer:</strong>
+                    <p style="margin-top: 10px;">If a hiring algorithm rejects more female candidates (due to biased historical data), fewer women get hired. This means the next version of the system trains on data showing even fewer women in those roles. The algorithm becomes more biased, rejecting even more women. The system perpetuates and amplifies the original discrimination without intervention.</p>
                 </div>
             </div>
         </div>
 
         <div class="whats-coming">
             <h3>🚀 What's Coming Next</h3>
-            <p>You've learned that training data directly determines model performance. But there's a critical problem: what if the training data is biased? In Lesson 1.5, you'll explore AI bias in depth—where it comes from, how it gets reinforced, and real-world consequences. You'll also learn what's being done to address bias in AI systems.</p>
-            <div class="progress-indicator">Lesson 4 of 5 in Chapter 1: What is AI, Really? | 80% Complete</div>
+            <p>You've now explored how AI systems learn, how computer vision works, why training data is critical, and the serious ethical challenges of AI bias. In your final lesson of this chapter, you'll bring everything together with <strong>Quick, Draw!</strong>—an interactive experience showing how neural networks recognize doodles and demonstrating that every interaction contributes to collective learning and responsibility.</p>
+            <div class="progress-indicator">Lesson 4 of 5 in Chapter 1 | 80% Complete</div>
         </div>
     </section>
 
-    <!-- LESSON 1.5: Understanding AI Bias -->
+    <!-- LESSON 1.5: Neural Networks in Action - Quick Draw -->
     <section class="lesson">
         <div class="lesson-header">
             <div class="lesson-number">Lesson 5 of 5</div>
-            <h2 class="lesson-title">Lesson 1.5: Understanding and Addressing AI Bias</h2>
-            <div class="lesson-duration">⏱️ 14-15 minutes (includes case study analysis)</div>
+            <h2 class="lesson-title">Lesson 1.5: AI Learning from Everyone - Quick, Draw!</h2>
+            <div class="lesson-duration">⏱️ 10-12 minutes (includes interactive activity)</div>
         </div>
 
         <div class="learning-objectives">
             <h3>Learning Objectives</h3>
             <ul>
-                <li><code>LO1.5.1</code>: Define AI bias and explain how it originates in training data and algorithmic decisions</li>
-                <li><code>LO1.5.2</code>: Identify different types of bias including training data bias, language bias, and selection bias</li>
-                <li><code>LO1.5.3</code>: Analyze real-world examples of AI bias and their societal impacts</li>
-                <li><code>LO1.5.4</code>: Understand strategies for detecting, measuring, and mitigating AI bias</li>
+                <li><code>LO1.5.1</code>: Understand how neural networks recognize hand-drawn images through pattern recognition</li>
+                <li><code>LO1.5.2</code>: Recognize that every interaction with AI systems contributes to their learning</li>
+                <li><code>LO1.5.3</code>: Reflect on the collective responsibility and impact when contributing to AI training datasets</li>
             </ul>
         </div>
 
         <div class="content-section">
-            <h3>What is AI Bias?</h3>
+            <h3>Can AI Recognize Your Doodles?</h3>
 
-            <p>AI systems can exhibit bias—systematic errors or unfair treatment of certain groups. This is one of the most important ethical concerns in AI development today.</p>
+            <p>Neural networks have a remarkable ability: they can learn to recognize patterns in images they've never seen before. In this final lesson, you'll experience this directly by teaching a neural network to recognize your hand-drawn doodles. Along the way, you'll contribute to one of the world's largest drawing datasets and see how collective human effort improves AI.</p>
+
+            <h3>How Quick, Draw! Works</h3>
+
+            <p><strong>Quick, Draw!</strong> is an interactive game where you doodle and a neural network tries to guess what you've drawn. Behind the scenes, several important things are happening:</p>
+
+            <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0; border: 2px solid var(--border-light);">
+                <p><strong>Step 1 - Your Drawing:</strong> You draw on a digital canvas. The system records your drawing as a series of pixels and coordinates.</p>
+                <p style="margin-top: 15px;"><strong>Step 2 - Neural Network Processes:</strong> A convolutional neural network (similar to what you learned in Lesson 1.2) processes your drawing in real-time, looking for patterns.</p>
+                <p style="margin-top: 15px;"><strong>Step 3 - Prediction:</strong> The network outputs confidence scores for different categories: Is it a cat? A tree? A cloud? It guesses based on learned patterns.</p>
+                <p style="margin-top: 15px;"><strong>Step 4 - Learning:</strong> Your drawing gets added to the world's largest public doodle dataset (if you consent), helping the neural network learn from your contribution.</p>
+            </div>
 
             <div class="definition-box">
-                <strong>AI Bias:</strong> Systematic errors in machine learning predictions or decisions that disproportionately affect certain groups or demographics, often resulting from biased training data, biased feature selection, or biased evaluation metrics.
+                <strong>Collective Learning:</strong> The process where machine learning systems improve by learning from data contributed by millions of people. Your individual data point is tiny, but millions of similar points create powerful patterns for AI to learn.
+            </strong>
             </div>
 
-            <div class="callout callout-warning">
-                <div class="callout-title">
-                    <span class="callout-icon">⚠️</span>
-                    <span>Important: Bias Doesn't Always Come from Malice</span>
-                </div>
-                <p>AI bias usually isn't intentional discrimination. Instead, it often emerges from historical patterns in data, underrepresented groups in training data, or unexamined assumptions. However, the impact is the same: unfair and inaccurate predictions for affected groups.</p>
-            </div>
-
-            <h3>Types of AI Bias</h3>
-
-            <h4 style="color: var(--primary-color); margin-top: 20px;">1. Training Data Bias</h4>
-
-            <p>The most common source of AI bias: the training data itself reflects historical inequities or lacks representation of certain groups.</p>
+            <h3>The Power of Collective Data</h3>
 
             <div class="example">
-                <div class="example-title">Example 1.5.1: Hiring Algorithm Bias</div>
+                <div class="example-title">Example 1.5.1: How Millions of Doodles Improve AI</div>
                 
                 <div class="example-step">
-                    <strong>The Problem:</strong> A company trains an AI hiring algorithm on 20 years of historical hiring data. In that data, 90% of executives are men (reflecting the male-dominated tech industry of that era).
+                    <strong>Early Stage:</strong> The neural network sees 100 examples of "trees" drawn by 100 different people. Trees have variation: some are triangles, some are circular, some are realistic, some are abstract.
                 </div>
 
                 <div class="example-step">
-                    <strong>What the Algorithm Learns:</strong> "Executives look like men. Men have more successful careers. Promote men." The algorithm picks up on correlations: which schools executives came from, which companies they worked at, and these correlate with gender.
+                    <strong>Growing Dataset:</strong> After 10,000 doodles of trees, the network has learned many patterns: "Trees often have a trunk at the bottom," "They might be green," "They have a roughly tree-shaped outline," etc.
+</div>
+<div class="example-step">
+                    <strong>Massive Dataset:</strong> After millions of doodles, the network has learned incredibly nuanced patterns about what makes a "tree," accounting for cultural differences, artistic styles, and individual variations.
                 </div>
 
                 <div class="example-step">
-                    <strong>Real-World Impact:</strong> The algorithm systematically rates female job candidates lower, perpetuating historical discrimination. Amazon experienced this exact problem with their hiring algorithm.
-                </div>
-
-                <div class="example-step">
-                    <strong>Lesson:</strong> Training data bias gets amplified and automated by machine learning systems.
+                    <strong>Result:</strong> The network can recognize your unique tree drawing even though it may never have seen anything exactly like it before.
                 </div>
             </div>
 
-            <h4 style="color: var(--primary-color); margin-top: 20px;">2. Language Bias</h4>
-
-            <p>Language models trained primarily on text from certain regions, cultures, or time periods develop biases in how they respond to different people.</p>
-
-            <div class="example">
-                <div class="example-title">Example 1.5.2: Chatbot Language Bias</div>
-                
-                <div class="example-step">
-                    <strong>The Problem:</strong> An AI chatbot is trained on English text predominantly from Western sources (books, websites, forums from the US, UK, etc.).
-                </div>
-
-                <div class="example-step">
-                    <strong>What Happens:</strong> The chatbot understands Western contexts, idioms, and references well, but struggles with non-Western contexts. It may provide poor advice on questions from other cultures.
-                </div>
-
-                <div class="example-step">
-                    <strong>Impact:</strong> A student from India asking about university systems gets advice tailored to US universities. A user asking about traditional medicine is dismissed because the training data emphasized Western medicine.
-                </div>
-            </div>
-
-            <h4 style="color: var(--primary-color); margin-top: 20px;">3. Selection Bias</h4>
-
-            <p>When training data comes from limited sources or only captures certain populations, the model learns incomplete or distorted patterns.</p>
-
-            <div class="example">
-                <div class="example-title">Example 1.5.3: Face Recognition Selection Bias</div>
-                
-                <div class="example-step">
-                    <strong>The Problem:</strong> A face recognition system is trained on millions of photos from social media and phone cameras. However, 80% of users are from wealthy countries and 90% of photos show lighter skin tones.
-                </div>
-
-                <div class="example-step">
-                    <strong>What Happens:</strong> The model learns faces characteristic of that dataset but has limited exposure to darker skin tones, leading to high error rates on darker-skinned individuals.
-                </div>
-
-                <div class="example-step">
-                    <strong>Real-World Impact:</strong> Research has documented that major face recognition systems from Google, Microsoft, and IBM had error rates of 20-35% for darker-skinned women versus only 1-2% for lighter-skinned men. This has serious implications for law enforcement and border control.
-                </div>
-            </div>
+            <h3>Your Role in AI Development</h3>
 
             <div class="callout callout-info">
                 <div class="callout-title">
                     <span class="callout-icon">ℹ️</span>
-                    <span>The Feedback Loop Problem</span>
+                    <span>Contributing to Collective Intelligence</span>
                 </div>
-                <p>AI bias often creates feedback loops that worsen over time. If a hiring algorithm systematically rejects female candidates, those women don't get hired, so future training data shows even fewer women in those roles, so the bias gets worse. Breaking these cycles requires intentional intervention.</p>
+                <p>When you participate in Quick, Draw!, you're not just having fun—you're contributing to AI research. Your drawings help improve machine learning systems. This demonstrates an important principle: AI systems aren't developed in isolation by researchers. They're developed through collective participation, and everyone who shares data plays a role.</p>
             </div>
 
-            <h3>Real-World Consequences of AI Bias</h3>
+            <h3>Hands-On: Play Quick, Draw! and Observe Neural Networks</h3>
 
-            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
-                <h4 style="color: var(--warning-color); margin-top: 0;">Criminal Justice</h4>
-                <p>COMPAS, a risk assessment algorithm used in criminal courts, was found to have racial bias: it incorrectly classified Black defendants as high-risk at nearly twice the rate of white defendants. This directly affects sentencing decisions.</p>
+            <div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
+                <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity: Quick, Draw!</h4>
+                
+                <p><strong>Objective:</strong> Experience how neural networks recognize patterns in drawings and understand the role of collective data in AI.</p>
+
+                <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Open Quick, Draw!:</strong> Go to <code>quickdraw.withgoogle.com</code></li>
+                    <li><strong>Click "Let's Draw!":</strong> Start the interactive tutorial</li>
+                    <li><strong>Follow the Instructions:</strong> The game will prompt you to draw six objects (typically things like houses, trees, clouds, etc.). Draw each one as quickly or carefully as you'd like.</li>
+                    <li><strong>Observe the Neural Network:</strong> Pay attention to:
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>When does it recognize your drawing? (immediately or after more strokes?)</li>
+                            <li>When does it get confused? (what misidentifications happen?)</li>
+                            <li>How confident is it in its guesses?</li>
+                        </ul>
+                    </li>
+                    <li><strong>Complete All Six Drawings:</strong> Finish the full set to get to the summary page</li>
+                    <li><strong>Review Your Results:</strong> On the summary page, you'll see:
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>How many doodles the network recognized correctly</li>
+                            <li>Your drawings displayed alongside what the network learned</li>
+                            <li>Examples of similar drawings from other people worldwide</li>
+                        </ul>
+                    </li>
+                    <li><strong>Click on One Drawing:</strong> Select one of your six drawings to see what the neural network "saw"—the patterns it detected and how it learned from examples drawn by others</li>
+                </ol>
+
+                <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
+                    <strong>📝 Assignment - Document Your Observations:</strong>
+                    
+                    <p style="margin-top: 15px;"><em>Part A: Take a screenshot of your 6-drawing summary page (showing all your doodles and how many the network recognized)</em></p>
+                    
+                    <p style="margin-top: 15px;"><em>Part B: Take a screenshot of one of your drawings showing what the neural network saw (the patterns it detected)</em></p>
+                    
+                    <p style="margin-top: 15px;"><em>Part C: Answer these reflection questions:</em></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Q1: How many of your doodles did the neural network correctly identify?</strong></li>
+                        <li><strong>Q2: What is a neural network? Use terminology from this chapter (layers, patterns, learning, training, etc.)</strong></li>
+                        <li><strong>Q3: How did the AI detect your drawings? Explain the process using what you've learned about computer vision and neural networks.</strong></li>
+                        <li><strong>Q4: Your participation in Quick, Draw! made the AI better for the next person. Why? What did they learn from your doodles?</strong></li>
+                    </ul>
+                </div>
             </div>
-
-            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
-                <h4 style="color: var(--warning-color); margin-top: 0;">Healthcare</h4>
-                <p>An algorithm that determines who receives expensive healthcare programs was found to use race as a proxy for healthcare needs, systematically denying care to Black patients with the same medical conditions as white patients.</p>
-            </div>
-
-            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
-                <h4 style="color: var(--warning-color); margin-top: 0;">Lending and Finance</h4>
-                <p>Algorithms have denied loans or offered worse terms to minority applicants with identical credit profiles to majority applicants who were approved.</p>
-            </div>
-
-            <div style="background-color: #fff5f5; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 5px solid var(--warning-color);">
-                <h4 style="color: var(--warning-color); margin-top: 0;">Employment</h4>
-                <p>As mentioned earlier, automated hiring systems have discriminated against women, people with disabilities, and older workers based on biased historical data.</p>
-            </div>
-
-            <h3>Strategies for Addressing AI Bias</h3>
-
-            <h4 style="color: var(--secondary-color); margin-top: 20px;">1. Collect More Diverse and Representative Data</h4>
-            <p>Ensure training data includes adequate representation of all groups the system will affect. This requires intentional effort and often specialized data collection.</p>
-
-            <h4 style="color: var(--secondary-color); margin-top: 20px;">2. Audit and Test for Bias</h4>
-            <p>Before deploying an AI system, rigorously test it for bias across different demographic groups. Look for performance disparities.</p>
-
-            <h4 style="color: var(--secondary-color); margin-top: 20px;">3. Use Fairness Metrics</h4>
-            <p>Define what "fairness" means for your specific application. Some common approaches:</p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><strong>Equal Accuracy:</strong> The system performs equally well for all groups</li>
-                <li><strong>Equal False Positive Rate:</strong> Incorrect positive predictions occur at similar rates across groups</li>
-                <li><strong>Equal Opportunity:</strong> Qualified individuals from all groups have equal chance of positive predictions</li>
-            </ul>
-
-            <h4 style="color: var(--secondary-color); margin-top: 20px;">4. Involve Affected Communities</h4>
-            <p>When possible, involve people from affected communities in the design, development, and testing of AI systems. They can identify potential harms that others might miss.</p>
-
-            <h4 style="color: var(--secondary-color); margin-top: 20px;">5. Transparency and Explainability</h4>
-            <p>Make AI systems more transparent about how they reach decisions. This allows for bias detection and provides affected individuals with explanations for decisions.</p>
 
             <div class="callout callout-hint">
                 <div class="callout-title">
                     <span class="callout-icon">💡</span>
-                    <span>Helpful Perspective</span>
+                    <span>Reflection: You Participated in AI Research</span>
                 </div>
-                <p>Addressing AI bias is not a one-time fix but an ongoing process. As society evolves, as data changes, and as systems are deployed in new contexts, new biases may emerge. Continuous monitoring and updating are essential.</p>
-            </div>
-
-            <h3>Hands-On: Analyzing Real-World AI Bias</ht>
-<div style="background-color: #fff5e6; border: 2px solid #ffa500; padding: 20px; border-radius: 5px; margin: 20px 0;">
-                <h4 style="color: #ff6b35; margin-bottom: 15px;">📋 Activity: Research and Analyze AI Bias Case Study</h4>
-                
-                <p><strong>Objective:</strong> Find and analyze a real-world example of AI bias that's been documented in news or academic sources.</p>
-
-                <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-                    <li><strong>Research:</strong> Search for news articles, academic papers, or documentaries about AI bias. Some starting points:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>"AI Bias" on news sites (BBC, NPR, The Guardian, etc.)</li>
-                            <li>"Algorithmic Bias" in academic databases</li>
-                            <li>Books like "Weapons of Math Destruction" by Cathy O'Neil</li>
-                            <li>Documentaries like "Coded Bias"</li>
-                        </ul>
-                    </li>
-                    <li><strong>Select an Example:</strong> Choose one specific case of documented AI bias</li>
-                    <li><strong>Analyze and Document:</strong> Answer the following questions:
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>What was the AI system designed to do?</li>
-                            <li>What bias was discovered?</li>
-                            <li>What was the cause of the bias?</li>
-                            <li>Who was affected and how?</li>
-                            <li>What actions were taken to address it?</li>
-                        </ul>
-                    </li>
-                </ol>
-
-                <div style="background-color: white; padding: 15px; border-radius: 5px; margin-top: 20px;">
-                    <strong>📝 Document Your Findings:</strong>
-                    <p style="margin-top: 10px;"><strong>Example you found:</strong> _________________________________</p>
-                    <p style="margin-top: 10px;"><strong>Source:</strong> _________________________________</p>
-                    <p style="margin-top: 10px;"><strong>Type of bias:</strong> _________________________________</p>
-                    <p style="margin-top: 10px;"><strong>Impact:</strong> _________________________________</p>
-                    <p style="margin-top: 10px;"><strong>How it was addressed (if at all):</strong> _________________________________</p>
-                </div>
-            </div>
-
-            <div class="video-embed">
-                <div style="font-weight: bold; margin-bottom: 10px;">📹 Video: Training Data & Bias</div>
-                <div class="video-placeholder">▶ Training Data & Bias - 2:40</div>
-                <div class="video-description">This video explores how bias originates in training data and how machine learning systems can amplify and automate discrimination. (2 minutes 40 seconds)</div>
+                <p>By playing Quick, Draw!, you contributed to real AI research. Your drawings are added (publicly available) to help train neural networks. This demonstrates how modern AI development is a collective effort. Millions of people contribute data—sometimes knowingly, sometimes unknowingly. Understanding this is crucial for appreciating both the power and the responsibility of AI systems.</p>
             </div>
         </div>
 
@@ -1732,23 +1706,23 @@
 
             <div class="question">
                 <div class="question-type">Question 1 - Multiple Choice</div>
-                <div class="question-text">Which of the following is the PRIMARY source of AI bias in most machine learning systems?</div>
+                <div class="question-text">In Quick, Draw!, how does your participation contribute to AI improvement?</div>
                 <ul class="options">
-                    <li>A) The neural network architecture being too complex</li>
-                    <li>B) Biased or unrepresentative training data that reflects historical inequities</li>
-                    <li>C) Computers being inherently biased by design</li>
-                    <li>D) AI researchers intentionally programming bias into systems</li>
+                    <li>A) Your drawings are used to train the neural network to recognize patterns better</li>
+                    <li>B) You help test the network's accuracy, which researchers use for debugging</li>
+                    <li>C) Your drawings are compared to others to identify common mistakes</li>
+                    <li>D) Your participation doesn't actually improve the AI in any meaningful way</li>
                 </ul>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
-                    <strong>Correct Answer: B</strong>
-                    <p>Most AI bias originates from training data. Machine learning systems learn patterns from historical data, and if that data reflects historical biases (e.g., fewer women in leadership positions historically), the system learns and perpetuates those biases. It's not intentional programming or architectural issues, but rather a natural consequence of learning from biased data.</p>
+                    <strong>Correct Answer: A</strong>
+                    <p>Your drawings become part of the training dataset (with your consent). When millions of people draw the same object in different styles, the neural network learns diverse patterns for that object. Your unique drawing style helps the network recognize variations it might not have seen before.</p>
                 </div>
             </div>
 
             <div class="question">
                 <div class="question-type">Question 2 - True/False</div>
-                <div class="question-text">Selection bias occurs when training data comes from limited sources and doesn't adequately represent the groups the AI system will serve.</div>
+                <div class="question-text">Collective learning means that large numbers of individual data points contributed by many people help AI systems learn more robust and generalizable patterns.</div>
                 <ul class="options">
                     <li>A) True</li>
                     <li>B) False</li>
@@ -1756,44 +1730,45 @@
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
                     <strong>Correct Answer: A (True)</strong>
-                    <p>Selection bias occurs when data is collected from non-representative sources or populations. For example, training a face recognition system mostly on light skin tones means darker skin tones are underrepresented, leading to poor performance on those groups.</p>
+                    <p>Collective learning is real and powerful. One person's drawing of a tree is useful; millions of people drawing trees in different styles teaches a network robust patterns that work across cultures, artistic styles, and individual variations. This is how modern AI becomes powerful.</p>
                 </div>
             </div>
 
             <div class="question">
                 <div class="question-type">Question 3 - Short Answer</div>
-                <div class="question-text">Describe how AI bias can create a feedback loop that makes the problem worse over time. Use a specific example.</div>
+                <div class="question-text">Explain why Quick, Draw! can recognize your unique doodle even though it's never seen that exact drawing before.</div>
                 <textarea class="short-answer" placeholder="Your answer here..."></textarea>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
                     <strong>Sample Answer:</strong>
-                    <p style="margin-top: 10px;"><em>Example: Hiring Algorithm Feedback Loop</em></p>
-                    <p style="margin-top: 10px;">An algorithm trained on historical data shows gender bias, rejecting more female candidates. This means fewer women get hired, so future training data shows even more men in those positions. This causes the next version of the algorithm to be even more biased. The system perpetuates and amplifies the original bias over time.</p>
-                    <p style="margin-top: 10px;"><strong>Why it matters:</strong> Feedback loops mean that bias doesn't stay static—it gets worse unless someone intervenes. This is why continuous monitoring and updating of AI systems is critical.</p>
+                    <p style="margin-top: 10px;">The neural network doesn't memorize specific drawings. Instead, it learns patterns that characterize each category (like "tree"). It has learned features like "tends to have a trunk at bottom," "often has a roughly triangular or circular top," "frequently contains curved and straight lines," etc. When you draw a tree, even in your unique style, the network recognizes these learned features and correctly identifies it.</p>
                 </div>
             </div>
 
             <div class="question">
-                <div class="question-type">Question 4 - Multiple Choice</div>
-                <div class="question-text">Which strategy is most fundamental for reducing AI bias?</div>
-                <ul class="options">
-                    <li>A) Using more complex neural networks</li>
-                    <li>B) Collecting more diverse and representative training data</li>
-                    <li>C) Running the system faster on better computers</li>
-                    <li>D) Having only AI experts make decisions about the system</li>
-                </ul>
+                <div class="question-type">Question 4 - Reflection</div>
+                <div class="question-text">What surprised you most about participating in Quick, Draw!? How does this experience change your understanding of how AI learns?</div>
+                <textarea class="short-answer" placeholder="Your reflection here..."></textarea>
                 <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Answer</button>
                 <div class="answer-explanation">
-                    <strong>Correct Answer: B</strong>
-                    <p>The most effective way to reduce AI bias is to address its source: improve the training data. More diverse, representative, and carefully collected data is the foundation for fair AI systems. More complex architectures, faster computers, and expert-only decisions don't address the fundamental problem of biased training data.</p>
+                    <strong>Possible Insights:</strong>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>How quickly the network recognized patterns (maybe instantaneously or after just a few strokes)</li>
+                        <li>How it sometimes misidentified drawings in interesting ways</li>
+                        <li>Realization that AI systems learn from human participation</li>
+                        <li>Understanding that "collective intelligence" is real—millions of contributions create powerful systems</li>
+                        <li>Appreciation for how much variation exists in how people draw the same thing</li>
+                        <li>Recognition that you participated in actual AI research</li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="whats-coming">
-            <h3>🚀 What's Coming Next</h3>
-            <p>You've completed Chapter 1: What is AI, Really? You've built a solid foundation understanding machine learning, neural networks, computer vision, the critical importance of training data, and the serious issue of AI bias. In Chapter 2, you'll shift gears and explore <strong>Creative Programming</strong>—learning to code and build your own computational creations. You'll apply coding fundamentals to solve real problems and see how programming enables you to create things that matter.</p>
-            <div class="progress-indicator">Lesson 5 of 5 in Chapter 1: What is AI, Really? | 100% Complete</div>
+            <h3>🚀 You've Completed Chapter 1!</h3>
+            <p>Congratulations! You've completed <strong>Chapter 1: What is AI, Really?</strong> You've built a solid understanding of how neural networks learn, how computer vision works, why training data is critical, and the serious ethical challenges of AI bias. You've also trained multiple AI models yourself and contributed to real research through Quick, Draw!</p>
+            <p style="margin-top: 20px;">In <strong>Chapter 2: Creative Programming</strong>, you'll shift gears and learn to code. You'll discover that programming is a creative tool—a way to express your ideas and solve problems. The skills you develop will complement your AI knowledge, enabling you to build intelligent systems and create computational artifacts.</p>
+            <div class="progress-indicator">Lesson 5 of 5 in Chapter 1 | 100% Complete 🎉</div>
         </div>
     </section>
 
@@ -1801,83 +1776,102 @@
     <div class="summary-section">
         <h2>📚 Chapter 1 Summary: Key Takeaways</h2>
         
-        <h3>What You've Learned</h3>
+        <h3>Core Concepts You've Learned</h3>
         <ul>
-            <li><strong>Machine Learning Fundamentals:</strong> Computers can learn patterns from data rather than following explicit rules. Supervised learning trains models on labeled examples, enabling them to make predictions on new data.</li>
+            <li><strong>Neural Networks Learn Patterns:</strong> Neural networks, inspired by biological brains, learn by adjusting connections between nodes. They identify patterns in training data and apply those patterns to make predictions on new data.</li>
             
-            <li><strong>Neural Networks:</strong> Neural networks, inspired by biological brains, are powerful tools that learn by adjusting connections between nodes. Deep learning uses many layers to learn hierarchical patterns.</li>
+            <li><strong>Computer Vision Enables Machines to See:</strong> Convolutional Neural Networks process images by detecting patterns at multiple levels of abstraction—from simple edges to complex objects. This enables applications from face recognition to medical diagnosis.</li>
             
-            <li><strong>Computer Vision:</strong> Convolutional Neural Networks enable machines to process images by detecting patterns at different levels of abstraction—from simple edges to complex objects. Real applications range from face recognition to medical diagnosis.</li>
-            
-            <li><strong>Training Data Matters Most:</strong> The quality, size, diversity, and accuracy of training data directly determines model performance. "Garbage In, Garbage Out"—no algorithm can overcome poor training data.</li>
+            <li><strong>Training Data Determines Everything:</strong> "Garbage In, Garbage Out"—the quality, size, diversity, and accuracy of training data directly determines model performance. No algorithm can overcome poor training data.</li>
             
             <li><strong>AI Bias is Real and Consequential:</strong> Machine learning systems inherit biases from training data and can amplify historical inequities. This has serious impacts on hiring, criminal justice, healthcare, and lending. Addressing bias requires diverse data, rigorous testing, and community involvement.</li>
+            
+            <li><strong>Collective Learning Powers Modern AI:</strong> Modern AI systems are improved through the collective contribution of millions of data points. When you use AI systems or contribute data, you're participating in this collective learning process.</li>
         </ul>
 
-        <h3>Skills You've Developed</h3>
+        <h3>Hands-On Skills You've Developed</h3>
         <ul>
-            <li>Understanding how AI and machine learning actually work at a conceptual level</li>
-            <li>Building and training your own machine learning models (AI for Oceans, Teachable Machine)</li>
-            <li>Recognizing how training data characteristics affect model performance</li>
-            <li>Identifying sources of bias and analyzing real-world impacts</li>
-            <li>Thinking critically about AI systems and their societal implications</li>
+            <li>✅ Built and trained your own image classifier (AI for Oceans)</li>
+            <li>✅ Experimented with how dataset size and diversity affect model performance (Teachable Machine)</li>
+            <li>✅ Identified weaknesses in training data and predicted their impact</li>
+            <li>✅ Analyzed real-world examples of AI bias and their consequences</li>
+            <li>✅ Contributed to AI research through Quick, Draw!</li>
+            <li>✅ Recognized the role of collective participation in AI development</li>
         </ul>
 
-        <h3>Course Learning Objectives Met</h3>
+        <h3>Course Learning Objectives Met This Chapter</h3>
         <ul>
             <li>✅ <strong>LO1:</strong> Describe basic technology used in artificial intelligence and machine learning</li>
             <li>✅ <strong>LO6:</strong> Evaluate the ethical, cultural, and social impacts of computing innovations on society</li>
             <li>✅ <strong>LO8:</strong> Use AI tools effectively and responsibly to enhance learning outcomes</li>
         </ul>
 
+        <h3>Critical Thinking Questions to Reflect On</h3>
+        <ul>
+            <li>How has your understanding of AI changed since the beginning of this chapter?</li>
+            <li>What surprised you most about how neural networks learn?</li>
+            <li>Can you think of an AI system you use regularly? Based on what you've learned, what could go wrong with it?</li>
+            <li>What ethical responsibilities do AI developers have regarding bias?</li>
+            <li>How might you use AI responsibly in future projects?</li>
+            <li>What questions do you still have about AI?</li>
+        </ul>
+
         <h3>Preparing for Chapter 2</h3>
-        <p>In Chapter 1, you learned <em>how AI works and why it matters</em>. In Chapter 2, you'll learn <em>how to create</em> using code. You'll discover that programming is a creative tool—a way to express your ideas and solve problems. The programming skills you'll develop will complement your AI knowledge, enabling you to build intelligent systems and computational artifacts.</p>
+        <p>In Chapter 1, you learned <em>how AI works and why it matters</em>. In Chapter 2, you'll learn <em>how to create using code</em>. You'll discover that programming is fundamentally a creative activity—a way to express your ideas and solve problems. The programming skills you develop will give you power to:</p>
+        <ul>
+            <li>Build your own applications and tools</li>
+            <li>Solve real-world problems through code</li>
+            <li>Combine what you've learned about AI with your coding skills to create intelligent systems</li>
+            <li>Express your creativity in computational form</li>
+        </ul>
     </div>
 
     <!-- Chapter Resources -->
     <div style="background-color: #f0f4f8; padding: 25px; border-radius: 8px; margin: 40px 0; border-left: 5px solid var(--info-color);">
-        <h3 style="color: var(--info-color); margin-bottom: 20px;">📚 Additional Resources</h3>
+        <h3 style="color: var(--info-color); margin-bottom: 20px;">📚 Additional Resources & Tools</h3>
         
         <p><strong>Interactive Tools Used in This Chapter:</strong></p>
         <ul style="margin-left: 20px; margin-top: 10px;">
-            <li>AI for Oceans (code.org/oceans) - Image classification tutorial</li>
-            <li>Teachable Machine (teachablemachine.withgoogle.com) - Train pose and image models</li>
-            <li>Quick, Draw! (quickdraw.withgoogle.com) - Neural network doodle recognition</li>
+            <li><strong>AI for Oceans</strong> (code.org/oceans) — Image classification to classify ocean creatures vs. trash</li>
+            <li><strong>Teachable Machine</strong> (teachablemachine.withgoogle.com) — Train pose detectors and image classifiers</li>
+            <li><strong>Quick, Draw!</strong> (quickdraw.withgoogle.com) — Neural network doodle recognition</li>
         </ul>
 
-        <p style="margin-top: 20px;"><strong>Recommended Further Reading:</strong></p>
+        <p style="margin-top: 20px;"><strong>Recommended Further Reading & Viewing:</strong></p>
         <ul style="margin-left: 20px; margin-top: 10px;">
-            <li><em>Weapons of Math Destruction</em> by Cathy O'Neil - Real-world examples of algorithmic bias</li>
-            <li><em>The Master Algorithm</em> by Pedro Domingos - Accessible explanation of machine learning approaches</li>
-            <li>"Coded Bias" documentary - Deep dive into algorithmic bias in facial recognition</li>
+            <li><em>Weapons of Math Destruction</em> by Cathy O'Neil — Real-world examples of algorithmic bias and its consequences</li>
+            <li><em>The Master Algorithm</em> by Pedro Domingos — Accessible explanation of different machine learning approaches</li>
+            <li>"Coded Bias" (Netflix documentary) — Deep dive into algorithmic bias in facial recognition and other systems</li>
+            <li>"AI and Bias" resources from AI Now Institute — Academic perspectives on fairness and bias in AI</li>
         </ul>
 
-        <p style="margin-top: 20px;"><strong>Key Concepts to Review:</strong></p>
+        <p style="margin-top: 20px;"><strong>Key Terminology to Review:</strong></p>
         <ul style="margin-left: 20px; margin-top: 10px;">
-            <li>Supervised learning vs. unsupervised learning</li>
-            <li>The difference between machine learning and traditional programming</li>
-            <li>How neural networks learn through backpropagation</li>
-            <li>Why diversity in training data matters</li>
-            <li>Types of bias: training data bias, language bias, selection bias</li>
-            <li>Strategies for mitigating AI bias</li>
+            <li>Neural Networks, Layers, Nodes, Weights</li>
+            <li>Training, Backpropagation, Learning Rate</li>
+            <li>Convolutional Neural Networks (CNNs), Feature Detection</li>
+            <li>Training Data, Test Data, Overfitting</li>
+            <li>Training Data Bias, Selection Bias, Language Bias</li>
+            <li>Feedback Loops, Fairness Metrics, Explainability</li>
+            <li>Collective Learning</li>
         </ul>
     </div>
 
     <!-- Reflection Prompt -->
     <div style="background-color: #f0fdf4; padding: 25px; border-radius: 8px; margin: 40px 0; border-left: 5px solid var(--secondary-color);">
-        <h3 style="color: var(--secondary-color); margin-bottom: 20px;">🤔 Reflection: Thinking Critically About AI</h3>
+        <h3 style="color: var(--secondary-color); margin-bottom: 20px;">🤔 Deep Reflection: Thinking Critically About AI</h3>
         
-        <p>Before moving to Chapter 2, take time to reflect on these questions:</p>
+        <p>Before moving to Chapter 2, take time to reflect deeply on these questions:</p>
         
         <ol style="margin-left: 20px; margin-top: 15px; line-height: 2;">
-            <li>What surprised you most about how machine learning actually works?</li>
-            <li>Can you think of an AI system you use regularly? Based on what you've learned, what could go wrong with it?</li>
-            <li>How has your understanding of AI changed since the beginning of this chapter?</li>
-            <li>What ethical questions about AI concern you most?</li>
-            <li>How might you use AI responsibly in future projects?</li>
+            <li><strong>Conceptual Understanding:</strong> How would you explain to someone who's never heard of neural networks how they learn and make predictions?</li>
+            <li><strong>Practical Application:</strong> Can you think of a real-world problem that could be solved with computer vision? What challenges might you face?</li>
+            <li><strong>Ethical Awareness:</strong> What concerns you most about AI systems in society? Why?</li>
+            <li><strong>Personal Responsibility:</strong> When you use or contribute data to AI systems, what responsibility do you have? What responsibility do companies developing AI have?</li>
+            <li><strong>Future Vision:</strong> How should society regulate AI systems to ensure they're fair and beneficial?</li>
         </ol>
 
-        <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">Consider writing your responses in a journal or discussing them with classmates. These reflections will deepen your understanding and inform your final project later in the course.</p>
+        <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">Consider writing your responses in a journal or discussing them in class. These reflections will deepen your understanding and inform your final project later in the course where you'll select a computing innovation to explore its impact on society.</p>
     </div>
 
     <!-- Footer -->
@@ -1885,10 +1879,13 @@
         <p><strong>Chapter 1: What is AI, Really?</strong></p>
         <p>CSC101 - Introduction to Computing & AI | Spring 2026</p>
         <p style="margin-top: 15px; font-size: 0.9em; color: #ccc;">
-            📚 This chapter includes hands-on activities, videos, and formative assessments to support your learning.
+            📚 This chapter includes hands-on activities, interactive demonstrations, and formative assessments throughout to support your learning.
         </p>
         <p style="margin-top: 10px; font-size: 0.9em; color: #ccc;">
-            💡 Need help? Post questions in the course discussion forum or attend virtual help hours.
+            💡 Need help? Post questions in the course discussion forum, check out the FAQ, or attend virtual help hours.
+        </p>
+        <p style="margin-top: 15px; font-size: 0.85em; color: #999;">
+            Ready for Chapter 2? You've built a strong foundation. Next, you'll learn to code and create. 🚀
         </p>
     </footer>
 </div>
@@ -1922,14 +1919,5 @@
             }
         });
     });
-
-    // Track progress (basic example)
-    document.addEventListener('scroll', function() {
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = window.scrollY;
-        const scrollPercent = scrollHeight > 0 ? (scrolled / scrollHeight) * 100 : 0;
-        
-        // Could update a progress bar here if needed
-    });
 </script>
-</body> </html>
+<body> <html>
