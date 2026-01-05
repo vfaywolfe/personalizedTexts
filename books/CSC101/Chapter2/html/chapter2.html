@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSC101 Week 0: How Tech is Changing the World</title>
+    <title>Chapter 0: How Tech is Changing the World | CSC101 Introduction to Computing & AI</title>
     <style>
         * {
             margin: 0;
@@ -11,1545 +11,2070 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #e6f0ff;
+            --dark-gray: #333333;
+            --light-gray: #f5f5f5;
+            --warning-red: #d32f2f;
+            --hint-green: #2e7d32;
+            --info-blue: #1565c0;
+            --success-green: #388e3c;
+            --accent-orange: #ff6f00;
+            --text-color: #333333;
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f7fa;
-            padding: 20px;
+            color: var(--text-color);
+            background-color: #ffffff;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Header and Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0052a3 100%);
             color: white;
-            padding: 40px 30px;
-            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
             font-weight: 700;
         }
 
-        .header p {
-            font-size: 1.1em;
+        .subtitle {
+            font-size: 1.1rem;
             opacity: 0.95;
         }
 
-        .content {
-            padding: 40px;
+        /* Main Container */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        h2 {
-            color: #667eea;
-            font-size: 1.8em;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
-            padding-left: 15px;
-        }
-
-        h3 {
-            color: #764ba2;
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        h4 {
-            color: #555;
-            font-size: 1.1em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        .introduction {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 30px;
+        /* Chapter Introduction */
+        .chapter-intro {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+            border-left: 5px solid var(--primary-blue);
+            padding: 2rem;
             border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
+            margin-bottom: 3rem;
         }
 
-        .introduction h2 {
-            border: none;
-            padding-left: 0;
-            color: #667eea;
-            margin-top: 0;
+        .chapter-intro h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
-        .learning-objectives {
-            background-color: #f9f9f9;
-            padding: 25px;
+        .chapter-intro p {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        /* Lesson Card */
+        .lesson {
+            background: white;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 30px;
-            border-left: 4px solid #667eea;
-        }
-
-        .learning-objectives h2 {
-            border: none;
-            padding-left: 0;
-        }
-
-        .learning-objectives h3 {
-            color: #667eea;
-            margin-top: 0;
-            font-size: 1.1em;
-        }
-
-        .objective {
-            margin-bottom: 12px;
-            padding: 8px;
-            background-color: white;
-            border-radius: 4px;
-            padding-left: 15px;
-            border-left: 3px solid #667eea;
-        }
-
-        .objective strong {
-            color: #667eea;
-            font-family: 'Courier New', monospace;
-        }
-
-        .section-objectives {
-            background-color: #e3f2fd;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border-left: 4px solid #2196f3;
-        }
-
-        .section-objectives h4 {
-            color: #1976d2;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-objectives h4:before {
-            content: "🎯";
-            margin-right: 10px;
-            font-size: 1.2em;
-        }
-
-        .section-objectives ul {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-
-        .section-objectives li {
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        .callout {
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-
-        .warning {
-            background-color: #fff3cd;
-            border-left-color: #ff6b6b;
-        }
-
-        .warning h4 {
-            color: #ff6b6b;
-            display: flex;
-            align-items: center;
-        }
-
-        .warning h4:before {
-            content: "⚠️";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-
-        .hint {
-            background-color: #e3f2fd;
-            border-left-color: #2196f3;
-        }
-
-        .hint h4 {
-            color: #2196f3;
-            display: flex;
-            align-items: center;
-        }
-
-        .hint h4:before {
-            content: "💡";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-
-        .info {
-            background-color: #f0f4ff;
-            border-left-color: #667eea;
-        }
-
-        .info h4 {
-            color: #667eea;
-            display: flex;
-            align-items: center;
-        }
-
-        .info h4:before {
-            content: "ℹ️";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-
-        .terms {
-            background-color: #f9f9f9;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .term {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 4px;
-            border-left: 3px solid #667eea;
-        }
-
-        .term strong {
-            color: #667eea;
-            font-size: 1.05em;
-        }
-
-        .term em {
-            display: block;
-            margin-top: 5px;
-            color: #666;
-            font-style: normal;
-            font-size: 0.95em;
-        }
-
-        .example {
-            background-color: #f0f4ff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .example h4 {
-            color: #667eea;
-            margin-top: 0;
-        }
-
-        .example-title {
-            font-weight: bold;
-            color: #667eea;
-            display: flex;
-            align-items: center;
-        }
-
-        .example-title:before {
-            content: "📋";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-
-        .step {
-            background-color: white;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border-left: 3px solid #764ba2;
-        }
-
-        .step strong {
-            color: #764ba2;
-        }
-
-        .assessment {
-            background-color: #f0f4ff;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border: 2px solid #667eea;
-        }
-
-        .assessment h3 {
-            color: #667eea;
-            margin-top: 0;
-        }
-
-        .question-group {
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: white;
-            border-radius: 4px;
-        }
-
-        .question {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 12px;
-        }
-
-        .option {
-            margin-left: 20px;
-            margin-bottom: 8px;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .option:hover {
-            background-color: #e3f2fd;
-        }
-
-        .option input {
-            margin-right: 8px;
-            cursor: pointer;
-        }
-
-        .answer-box {
-            background-color: #e8f5e9;
-            border: 1px dashed #4caf50;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .answer-box.show {
-            display: block;
-        }
-
-        .answer-box strong {
-            color: #2e7d32;
-        }
-
-        .show-answer-btn {
-            background-color: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .show-answer-btn:hover {
-            background-color: #764ba2;
-        }
-
-        .activity {
-            background-color: #fff9e6;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 30px 0;
-            border-left: 4px solid #ffc107;
-        }
-
-        .activity h3 {
-            color: #ff6f00;
-            display: flex;
-            align-items: center;
-            margin-top: 0;
-        }
-
-        .activity h3:before {
-            content: "🎯";
-            margin-right: 10px;
-            font-size: 1.3em;
-        }
-
-        .activity-instruction {
-            background-color: white;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 10px 0;
-            border-left: 3px solid #ffc107;
-        }
-
-        .summary {
-            background-color: #f0f4ff;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 40px;
-            border-left: 4px solid #667eea;
-        }
-
-        .summary h2 {
-            border: none;
-            padding-left: 0;
-        }
-
-        .summary ul {
-            margin-left: 20px;
-        }
-
-        .summary li {
-            margin-bottom: 12px;
-            line-height: 1.8;
-        }
-
-        .next-lesson {
-            background-color: #e8f5e9;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 30px;
-            border-left: 4px solid #4caf50;
-        }
-
-        .next-lesson h2 {
-            border: none;
-            padding-left: 0;
-            color: #2e7d32;
-        }
-
-        .video-embed {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-        }
-
-        .video-placeholder {
-            background-color: #e0e0e0;
-            aspect-ratio: 16/9;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 1.1em;
-            margin: 10px 0;
-        }
-
-        .video-title {
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 8px;
-        }
-
-        .video-duration {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 8px;
-        }
-
-        .impact-box {
-            background-color: #fff3e0;
-            border: 2px solid #ff6f00;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-
-        .impact-box h4 {
-            color: #ff6f00;
-            margin-top: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        th {
-            background-color: #667eea;
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-
-        td {
-            border: 1px solid #ddd;
-            padding: 12px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .footer {
-            background-color: #f5f7fa;
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #ddd;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .innovation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .innovation-card {
-            background-color: white;
-            border: 2px solid #667eea;
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .innovation-card h4 {
-            color: #667eea;
-            margin-top: 0;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            h2 {
-                font-size: 1.5em;
-            }
-
-            .innovation-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .print-friendly {
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             page-break-inside: avoid;
         }
 
+        .lesson-header {
+            border-bottom: 3px solid var(--primary-blue);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lesson-number {
+            background: var(--primary-blue);
+            color: white;
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .lesson-number.intro {
+            background: var(--accent-orange);
+        }
+
+        .lesson h2 {
+            color: var(--dark-gray);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .estimated-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+        }
+
+        /* Learning Objectives */
+        .learning-objectives {
+            background: #f9f9f9;
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .learning-objectives h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .objective-item {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .objective-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin: 2rem 0;
+        }
+
+        .content-section h3 {
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--secondary-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Video Section */
+        .video-embed {
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .video-placeholder {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .video-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .video-note {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        /* Callout Styles */
+        .callout {
+            border-left: 4px solid;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning-red);
+            background-color: #ffebee;
+        }
+
+        .callout.warning h4 {
+            color: var(--warning-red);
+        }
+
+        .callout.hint {
+            border-left-color: var(--hint-green);
+            background-color: #f1f8e9;
+        }
+
+        .callout.hint h4 {
+            color: var(--hint-green);
+        }
+
+        .callout.info {
+            border-left-color: var(--info-blue);
+            background-color: #e3f2fd;
+        }
+
+        .callout.info h4 {
+            color: var(--info-blue);
+        }
+
+        .callout h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .callout-icon {
+            font-size: 1.3rem;
+        }
+
+        /* Examples */
+        .example {
+            background: #fafafa;
+            border-left: 4px solid var(--accent-orange);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .example h4 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .example-content {
+            margin-bottom: 1rem;
+        }
+
+        .example-step {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .example-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            background: var(--accent-orange);
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Analysis Table */
+        .analysis-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .analysis-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .analysis-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .analysis-table tbody tr:hover {
+            background: var(--secondary-blue);
+        }
+
+        .analysis-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Formative Assessment */
+        .formative-assessment {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid var(--accent-orange);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .assessment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .assessment-target {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .assessment-header h3 {
+            color: var(--accent-orange);
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .question {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .question-number {
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .question-type {
+            display: inline-block;
+            background: var(--secondary-blue);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        .option input {
+            margin-top: 0.2rem;
+            cursor: pointer;
+        }
+
+        .short-answer {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .answer-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .answer-feedback.show {
+            display: block;
+        }
+
+        .answer-feedback.correct {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success-green);
+            color: #1b5e20;
+        }
+
+        .answer-feedback.info {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info-blue);
+            color: #0d47a1;
+        }
+
+        /* What's Coming Next */
+        .whats-next {
+            background: linear-gradient(135deg, #e6f0ff 0%, #f0f7ff 100%);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+
+        .whats-next h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .whats-next p {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        .next-lesson-teaser {
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            border-left: 3px solid var(--primary-blue);
+        }
+
+        .next-lesson-teaser strong {
+            color: var(--primary-blue);
+        }
+
+        /* Summary Section */
+        .chapter-summary {
+            background: linear-gradient(135deg, #f3e5f5 0%, #f9f7ff 100%);
+            border: 2px solid #9c27b0;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .chapter-summary h2 {
+            color: #7b1fa2;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
+        }
+
+        .summary-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .summary-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid #7b1fa2;
+        }
+
+        .summary-item strong {
+            color: #7b1fa2;
+        }
+
+        /* Activity Box */
+        .activity-box {
+            background: #fff8e1;
+            border: 2px dashed var(--accent-orange);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .activity-box h4 {
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-step {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .activity-step::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Syllabus Link */
+        .syllabus-reference {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border: 2px solid var(--primary-blue);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .syllabus-reference h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .syllabus-reference a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .syllabus-reference a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .lesson {
+                padding: 1.5rem;
+            }
+
+            .summary-list {
+                grid-template-columns: 1fr;
+            }
+
+            .assessment-target {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .analysis-table {
+                font-size: 0.9rem;
+            }
+
+            .analysis-table th,
+            .analysis-table td {
+                padding: 0.8rem;
+            }
+        }
+
+        /* Print Styles */
         @media print {
             body {
-                background-color: white;
+                background: white;
             }
 
-            .container {
+            .lesson {
+                page-break-inside: avoid;
                 box-shadow: none;
+                border: 1px solid #ccc;
             }
 
-            .show-answer-btn {
-                display: none;
-            }
-
-            .answer-box {
-                display: block !important;
+            header {
+                position: relative;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>How Tech is Changing the World</h1>
-            <p>Foundations of Computing and AI for the Modern Era</p>
+
+    <header>
+        <div class="header-content">
+            <div class="breadcrumb">CSC101: Introduction to Computing & AI</div>
+            <h1>Chapter 0: How Tech is Changing the World</h1>
+            <div class="subtitle">Week 0 • Foundation & Course Introduction</div>
         </div>
+    </header>
 
-        <!-- Main Content -->
-        <div class="content">
+    <main>
+        <!-- Syllabus Reference -->
+        <section class="syllabus-reference">
+            <h3>📋 Start Here: Course Overview</h3>
+            <p style="margin-bottom: 1rem;">Before diving into this chapter, please review the <strong>Course Syllabus</strong> to understand:</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                <li>Course format and expectations</li>
+                <li>Grading policies and assessment methods</li>
+                <li>Required materials and resources</li>
+                <li>Course learning outcomes</li>
+                <li>How discussions and assignments work</li>
+            </ul>
+            <p><strong>📎 Resource:</strong> <a href="#syllabus">Complete CSC101 Syllabus (see course Brightspace site)</a></p>
+            <p style="margin-top: 1rem; font-size: 0.95rem; color: #666;"><em>The syllabus is your guide for the entire course. Bookmark it and refer back to it throughout the semester.</em></p>
+        </section>
 
-            <!-- Introduction -->
-            <div class="introduction">
-                <h2>Chapter Introduction</h2>
-                
-                <p>We live in a time of unprecedented technological change. Every day, computers and artificial intelligence are reshaping how we work, learn, communicate, and solve problems. From self-driving cars to medical diagnosis systems, from personalized recommendations to climate modeling, technology is becoming woven into every aspect of society.</p>
+        <!-- Chapter Introduction -->
+        <section class="chapter-intro">
+            <h2>Welcome to the World of Computing & AI</h2>
+            <p><strong>What will you learn in this chapter?</strong></p>
+            <p>You're about to begin an exciting journey into the world of computing and artificial intelligence. In this introductory chapter, you'll explore how technology is transforming our world, learn to communicate effectively with AI systems, understand what computing innovations really are, and propose a meaningful project that will guide your learning throughout the entire course.</p>
+            <p><strong>Why does this matter?</strong></p>
+            <p>Artificial intelligence and computing innovations affect nearly every aspect of modern life—from healthcare to entertainment, education to business. By understanding how these technologies work and developing critical thinking skills about their impact, you'll be better equipped to navigate, evaluate, and even create technology that shapes our future.</p>
+            <p><strong>Here's what's ahead:</strong></p>
+            <p>This chapter contains 4 focused lessons that will take approximately 30-40 minutes total to complete. Each lesson includes hands-on activities, real-world examples, and assessment opportunities to check your understanding.</p>
+        </section>
 
-                <p>But technology doesn't develop in isolation. Behind every innovation are fundamental principles of computing—how information is processed, how decisions are made, and increasingly, how machines learn. In this week, you'll explore these foundations and discover how computing innovations are transforming the world.</p>
-
-                <p><strong>This is your starting point.</strong> This chapter welcomes you to CSC101 and invites you to:</p>
-                <ul style="margin-left: 20px; margin-top: 15px;">
-                    <li>Understand the breadth and impact of computing innovations on society</li>
-                    <li>Get hands-on experience interacting with AI tools</li>
-                    <li>Learn to think critically about how AI systems work and their implications</li>
-                    <li>Identify a topic you're passionate about to explore throughout the semester</li>
-                    <li>Reflect on your role as both a user and citizen in an AI-driven world</li>
-                </ul>
-
-                <p style="margin-top: 20px;"><strong>Why This Matters:</strong> Computing and AI aren't just for computer scientists anymore. Whether you're studying business, education, healthcare, environmental science, or any other field, understanding technology is essential. This course equips you with literacy in computing and AI—critical skills for the 21st century.</p>
+        <!-- ===== LESSON 0.1 ===== -->
+        <section class="lesson">
+            <div class="lesson-header">
+                <span class="lesson-number intro">Introduction</span>
+                <h2>Lesson 0.1: Welcome to Computing & AI</h2>
+                <p class="lesson-subtitle">Get oriented to the course and understand what computing innovations mean for society</p>
+                <span class="estimated-time">⏱ 5-7 minutes</span>
             </div>
 
             <!-- Learning Objectives -->
             <div class="learning-objectives">
-                <h2>Learning Objectives</h2>
-                <p>After completing this lesson, you will be able to:</p>
+                <h3>Learning Objectives</h3>
+                <div class="objective-item">
+                    <strong>LO0.1.1:</strong> Understand what computing and artificial intelligence are in the context of modern society
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.1.2:</strong> Recognize how computing innovations are shaping the world around you
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.1.3:</strong> Identify examples of computing innovations in everyday life
+                </div>
+            </div>
+
+            <!-- Video: Computer Science is Changing Everything -->
+            <div class="content-section">
+                <h3>🎬 Video: Computer Science is Changing Everything</h3>
+                <p>Start by watching this inspiring overview of how computer science is impacting society:</p>
                 
-                <div class="objective">
-                    <strong>LO0.1.1:</strong> Describe how computing and AI innovations are transforming different sectors of society
-                </div>
-
-                <div class="objective">
-                    <strong>LO0.1.2:</strong> Explain the basic concept of how AI systems process information and generate responses
-                </div>
-
-                <div class="objective">
-                    <strong>LO0.1.3:</strong> Recognize the importance of prompt clarity in communicating with AI systems
-                </div>
-
-                <div class="objective">
-                    <strong>LO0.1.4:</strong> Define "computing innovation" and provide examples from various fields
-                </div>
-
-                <div class="objective">
-                    <strong>LO0.1.5:</strong> Evaluate the accuracy and usefulness of AI responses critically
-                </div>
-
-                <div class="objective">
-                    <strong>LO0.1.6:</strong> Identify a computing innovation and its societal impact to explore throughout the semester
-                </div>
-            </div>
-
-            <!-- Concepts and Terms -->
-            <div class="terms">
-                <h2>Key Concepts and Terms</h2>
-
-                <div class="term">
-                    <strong>Computing Innovation:</strong>
-                    <em>A new or improved computing technology, technique, or application that has a significant impact on society. Examples include the internet, smartphones, social media, cloud computing, and artificial intelligence.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Artificial Intelligence (AI):</strong>
-                    <em>Computer systems designed to perform tasks that typically require human intelligence. AI systems can learn from data, recognize patterns, understand language, and make decisions based on their training.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Machine Learning:</strong>
-                    <em>A type of AI where computers learn from examples and data rather than being explicitly programmed with rules. The system improves its performance over time through experience.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Prompt Engineering:</strong>
-                    <em>The art and science of crafting clear, specific questions or instructions to get better responses from AI systems. More detailed prompts typically result in more accurate and useful answers.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Large Language Model (LLM):</strong>
-                    <em>An AI system trained on vast amounts of text data to understand and generate human language. Examples include ChatGPT, Claude, and Gemini.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Data:</strong>
-                    <em>Information or facts that AI systems use to learn patterns and make predictions. Data can be numbers, text, images, or any other form of information.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Bias (in AI):</strong>
-                    <em>Systematic errors or prejudices in AI systems that can lead to unfair or inaccurate results, often arising from biased training data or design choices.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Digital Divide:</strong>
-                    <em>The gap between people and communities that have access to computing technology and the internet, and those that don't. This creates unequal opportunities and access to information.</em>
-                </div>
-
-                <div class="term">
-                    <strong>Societal Impact:</strong>
-                    <em>The effect that a technology has on people, communities, and society—including economic, social, cultural, ethical, and environmental effects (both positive and negative).</em>
-                </div>
-
-                <div class="term">
-                    <strong>Ethics in Computing:</strong>
-                    <em>The principles and values that guide how technology should be developed, deployed, and used responsibly, considering impacts on individuals and society.</em>
-                </div>
-            </div>
-
-            <!-- SECTION 1: Computer Science is Changing Everything -->
-            <h2>Computer Science is Changing Everything</h2>
-
-            <div class="section-objectives">
-                <h4>Section Learning Objectives</h4>
-                <p>After completing this section, you will be able to:</p>
-                <ul>
-                    <li>Identify computing innovations across different sectors of society</li>
-                    <li>Explain how technology is transforming healthcare, education, business, environment, transportation, and research</li>
-                    <li>Recognize both positive opportunities and challenges created by computing innovations</li>
-                    <li>Ask critical questions about who benefits from innovation and who is affected negatively</li>
-                </ul>
-            </div>
-
-            <p>Look around. Computing is everywhere. The devices you use to communicate, the systems that manage hospitals and schools, the algorithms that recommend what you watch and buy—all are products of computer science innovation.</p>
-
-            <p>Computing innovations don't just make things faster or more convenient. They fundamentally change how we solve problems, understand the world, and relate to each other. They create new possibilities but also raise new challenges.</p>
-
-            <div class="video-embed">
-                <div class="video-title">📺 Computer Science is Changing Everything</div>
-                <div class="video-placeholder">
-                    [Embedded Video: Computer Science is Changing Everything - 4:30]<br>
-                    <small>Explore how computing innovations are transforming every sector of society</small>
-                </div>
-                <div class="video-duration">Duration: 4 minutes 30 seconds</div>
-            </div>
-
-            <h3>Where is Computing Innovation Happening?</h3>
-
-            <div class="innovation-grid">
-                <div class="innovation-card">
-                    <h4>Healthcare</h4>
-                    <p>AI assists in diagnosing diseases, developing new drugs, managing patient records, and providing personalized treatment plans. Telemedicine connects patients with doctors remotely.</p>
-                </div>
-                <div class="innovation-card">
-                    <h4>Education</h4>
-                    <p>Learning management systems, personalized tutoring AI, and virtual classrooms make education more accessible. AI can help identify students who need extra support.</p>
-                </div>
-                <div class="innovation-card">
-                    <h4>Business & Economics</h4>
-                    <p>AI optimizes supply chains, predicts market trends, automates customer service, and enables data-driven decision making. Blockchain technology enables cryptocurrency and secure transactions.</p>
-                </div>
-                <div class="innovation-card">
-                    <h4>Environment & Climate</h4>
-                    <p>Computing models predict climate change, optimize renewable energy, monitor deforestation, and help design sustainable solutions. Sensors track environmental data in real-time.</p>
-                </div>
-                <div class="innovation-card">
-                    <h4>Transportation</h4>
-                    <p>Autonomous vehicles promise safer roads and reduced emissions. GPS and traffic prediction systems optimize routes and reduce congestion.</p>
-                </div>
-                <div class="innovation-card">
-                    <h4>Science & Research</h4>
-                    <p>AI analyzes massive datasets, simulates complex systems, aids in drug discovery, and helps scientists make new discoveries in physics, biology, and astronomy.</p>
-                </div>
-            </div>
-
-            <div class="info">
-                <h4>The Dual Nature of Innovation</h4>
-                <p>Computing innovations create tremendous opportunities but also present significant challenges. Consider these questions:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>Who benefits?</strong> Does the innovation help everyone or just some groups?</li>
-                    <li><strong>What are the costs?</strong> What is lost or disrupted by this innovation?</li>
-                    <li><strong>Is it safe?</strong> What could go wrong?</li>
-                    <li><strong>Is it fair?</strong> Does it treat everyone equally?</li>
-                    <li><strong>Who decides?</strong> Who has power over how this technology is used?</li>
-                </ul>
-            </div>
-
-            <!-- SECTION 2: Problem Solving with AI -->
-            <h2>Problem Solving with AI: How Machines Think</h2>
-
-            <div class="section-objectives">
-                <h4>Section Learning Objectives</h4>
-                <p>After completing this section, you will be able to:</p>
-                <ul>
-                    <li>Explain how AI systems work through pattern recognition and prediction</li>
-                    <li>Describe the four-step process of how AI generates responses</li>
-                    <li>Understand that AI systems don't "know" or "understand" like humans do</li>
-                    <li>Recognize the concept of "hallucination" and why AI can confidently generate false information</li>
-                    <li>Apply prompt engineering principles to get better responses from AI</li>
-                </ul>
-            </div>
-
-            <p>When you ask an AI system a question, how does it come up with an answer? Understanding this—at least at a basic level—is essential for using AI effectively and thinking critically about its limitations.</p>
-
-            <div class="video-embed">
-                <div class="video-title">📺 Problem Solving with AI</div>
-                <div class="video-placeholder">
-                    [Embedded Video: Problem Solving with AI - 3:50]<br>
-                    <small>Learn how AI systems process information and solve problems</small>
-                </div>
-                <div class="video-duration">Duration: 3 minutes 50 seconds</div>
-            </div>
-
-            <h3>The Basics: Pattern Recognition and Prediction</h3>
-
-            <p>At their core, AI systems—especially language models—work through pattern recognition and prediction. Here's a simplified explanation:</p>
-
-            <div class="example">
-                <div class="example-title">How AI Generates Responses</div>
-                <div class="step">
-                    <strong>Step 1: Training on Data</strong> The AI is trained on millions of text examples from books, websites, and documents. It learns patterns about how words and ideas relate to each other.
-                </div>
-                <div class="step">
-                    <strong>Step 2: Understanding Your Prompt</strong> When you ask a question, the system analyzes the words and context to understand what you're asking for.
-                </div>
-                <div class="step">
-                    <strong>Step 3: Predicting the Next Word</strong> Based on patterns learned during training, the system predicts what word should come next. Then it predicts the next word, and the next, building a response one word at a time.
-                </div>
-                <div class="step">
-                    <strong>Step 4: Generating a Complete Response</strong> This process continues until the AI decides the response is complete, producing an answer that follows patterns from its training data.
-                </div>
-            </div>
-
-            <div class="warning">
-                <h4>Important Limitation: AI Doesn't "Know" Like Humans Do</h4>
-                <p>AI systems don't truly understand. They're sophisticated pattern-matching machines. They can generate text that sounds knowledgeable, confident, and even helpful—but they can also generate completely false information with the same confidence. This is called "hallucination." Always verify important information from reliable sources!</p>
-            </div>
-
-            <div class="hint">
-                <h4>Prompt Quality Matters Enormously</h4>
-                <p>The better your prompt (question), the better your response. Vague prompts get vague answers. Detailed prompts that specify context, format, and level of detail get much better responses. This is why "prompt engineering"—the art of crafting good prompts—is becoming a valuable skill.</p>
-            </div>
-
-            <!-- ACTIVITY 1: Talking to Machines -->
-            <div class="activity">
-                <h3>Activity 1: Talking to Machines - Learn How AI Generates Responses</h3>
-                
-                <p><strong>Scenario:</strong> You're going to interact directly with an AI system to learn how it responds to different types of prompts. This hands-on exploration will give you intuition about how AI systems work and help you recognize their capabilities and limitations.</p>
-
-                <div class="activity-instruction">
-                    <h4>Part A: Simple Prompts vs. Complex Context</h4>
-                    
-                    <p><strong>Tools Needed:</strong> Choose an AI tool to interact with. URI students may request access to <strong>LibreChat</strong> (safe environment protecting your data). Free alternatives include ChatGPT, Claude, Gemini, or Copilot. Consider the data you're entering and choose accordingly.</p>
-
-                    <p style="margin-top: 15px;"><strong>Instructions:</strong></p>
-                    <ol style="margin-left: 20px;">
-                        <li>Open your chosen AI tool in a new browser window</li>
-                        <li>Type in each of the following prompts exactly as written</li>
-                        <li>Record the AI's response</li>
-                        <li>Analyze the differences</li>
-                    </ol>
-
-                    <div style="margin-top: 20px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea; margin-bottom: 15px;">
-                        <p><strong>Prompt 1 (Simple greeting):</strong> "Hello"</p>
-                        <p style="margin-top: 10px;"><strong>AI Response:</strong></p>
-                        <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                        
-                        <p style="margin-top: 15px;"><strong>Your observation:</strong> How formal or informal was the response? Did the AI try to be helpful?</p>
-                        <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
+                <div class="video-embed">
+                    <div class="video-placeholder">
+                        <div class="video-icon">▶️</div>
+                        <div class="video-title">Computer Science is Changing Everything</div>
+                        <div class="video-duration">5:34 minutes</div>
+                        <div class="video-note">
+                            In this video, you'll see real-world examples of how computer science innovations are transforming industries and improving lives. Pay attention to the different sectors and applications mentioned.
+                        </div>
                     </div>
-
-                    <div style="margin-top: 15px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea; margin-bottom: 15px;">
-                        <p><strong>Prompt 2 (Vague question):</strong> "What is the weather like?"</p>
-                        <p style="margin-top: 10px;"><strong>AI Response:</strong></p>
-                        <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px; "></textarea>
-
-<p style="margin-top: 15px;"><strong>Your observation:</strong> What problem did the AI encounter? Why couldn't it answer?</p>
-                    <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
                 </div>
 
-                <div style="margin-top: 15px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Prompt 3 (Open-ended request):</strong> "Tell me about dogs"</p>
-                    <p style="margin-top: 10px;"><strong>AI Response (provide first 200 words):</strong></p>
-                    <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                    
-                    <p style="margin-top: 15px;"><strong>Your observation:</strong> How specific or general was the information? What choices did the AI make about what to include?</p>
-                    <textarea style="width: 100%; height: 60px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                </div>
-            </div>
-
-            <div class="activity-instruction">
-                <h4>Part B: Experimenting with Prompt Variations</h4>
-                
-                <p>Now try these prompt pairs and compare the responses. The goal is to understand how detail, context, and format affect AI outputs.</p>
-
-                <p style="margin-top: 20px;"><strong>Set A: Simple vs. Detailed Prompts</strong></p>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt A1:</strong> "Write a story"</p>
-                    <p style="margin-top: 5px;"><em>Response length (approximately): _____ words</em></p>
-                </div>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt A2:</strong> "Write a 100-word story about a robot learning to paint"</p>
-                    <p style="margin-top: 5px;"><em>Response length (approximately): _____ words</em></p>
-                </div>
-
-                <p style="margin-top: 15px;"><strong>Set B: Different Contexts (Audience Level)</strong></p>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt B1:</strong> "Explain photosynthesis"</p>
-                    <p style="margin-top: 5px;"><em>Complexity level (simple/moderate/advanced): _____</em></p>
-                </div>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt B2:</strong> "Explain photosynthesis to a 5-year-old"</p>
-                    <p style="margin-top: 5px;"><em>Complexity level (simple/moderate/advanced): _____</em></p>
-                </div>
-
-                <p style="margin-top: 15px;"><strong>Set C: Different Formats</strong></p>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt C1:</strong> "List benefits of exercise"</p>
-                    <p style="margin-top: 5px;"><em>Format used: _____</em></p>
-                </div>
-                <div style="margin-top: 10px; background-color: white; padding: 12px; border-radius: 4px; border-left: 3px solid #ffc107;">
-                    <p><strong>Prompt C2:</strong> "Create a poem about the benefits of exercise"</p>
-                    <p style="margin-top: 5px;"><em>Format used: _____</em></p>
-                </div>
-
-                <h5 style="margin-top: 25px;">Analysis Table</h5>
-                <table>
-                    <tr>
-                        <th>Prompt Pair</th>
-                        <th>What Changed?</th>
-                        <th>How Did Response Change?</th>
-                    </tr>
-                    <tr>
-                        <td><strong>A1 vs A2</strong></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><strong>B1 vs B2</strong></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><strong>C1 vs C2</strong></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                        <td><textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; height: 70px;"></textarea></td>
-                    </tr>
-                </table>
-
-                <div style="margin-top: 20px; background-color: #f0f4ff; padding: 15px; border-radius: 4px;">
-                    <p><strong>Reflection Question:</strong> In 2-3 sentences, explain what makes AI conversations different from human ones. What did you learn from these experiments?</p>
-                    <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- ASSESSMENT 1 -->
-        <div class="assessment">
-            <h3>Formative Assessment 0.1.1: Understanding AI Responses</h3>
-
-            <div class="section-objectives" style="margin-bottom: 20px;">
-                <h4>Assessment Objectives</h4>
-                <ul>
-                    <li>Verify understanding of how AI systems work (pattern recognition, not true understanding)</li>
-                    <li>Assess ability to apply prompt engineering principles</li>
-                    <li>Evaluate critical thinking about AI limitations</li>
-                    <li>Confirm learning of Section 2 concepts (Problem Solving with AI)</li>
-                </ul>
-            </div>
-            
-            <div class="question-group">
-                <div class="question">Question 1 (True/False): AI systems truly "understand" concepts the way humans do.</div>
-                <div class="option">
-                    <input type="radio" name="q1" value="true"> True
-                </div>
-                <div class="option">
-                    <input type="radio" name="q1" value="false"> False
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer1')">Show Answer</button>
-                <div id="answer1" class="answer-box">
-                    <strong>Answer: False</strong>
-                    <p>AI systems are sophisticated pattern-matching machines, not conscious entities with understanding. They generate responses based on patterns learned from training data. They can produce convincing, confident-sounding answers that are completely false. Always verify important information!</p>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <div class="question">Question 2 (Multiple Choice): What is the primary factor that improves AI response quality?</div>
-                <div class="option">
-                    <input type="radio" name="q2" value="a"> A) Asking longer questions
-                </div>
-                <div class="option">
-                    <input type="radio" name="q2" value="b"> B) Providing more specific context and detail in your prompt
-                </div>
-                <div class="option">
-                    <input type="radio" name="q2" value="c"> C) Using formal language only
-                </div>
-                <div class="option">
-                    <input type="radio" name="q2" value="d"> D) Repeating the same question multiple times
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer2')">Show Answer</button>
-                <div id="answer2" class="answer-box">
-                    <strong>Answer: B) Providing more specific context and detail in your prompt</strong>
-                    <p>You learned this in Activity 1. More specific prompts with context about audience, format, and detail get much better responses. This is the foundation of prompt engineering.</p>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <div class="question">Question 3 (Short Answer): Describe one limitation of AI that you discovered through Activity 1.</div>
-                <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer3')">Show Answer</button>
-                <div id="answer3" class="answer-box">
-                    <strong>Sample Answer:</strong>
-                    <p>AI systems can't provide real-time information (like current weather), can't access specific personal information without context, can generate false information confidently, or may misinterpret vague prompts. Any of these limitations discovered through your experiments is a valid answer.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 3: Exploring Computing Innovations -->
-        <h2>Exploring Computing Innovations</h2>
-
-        <div class="section-objectives">
-            <h4>Section Learning Objectives</h4>
-            <p>After completing this section, you will be able to:</p>
-            <ul>
-                <li>Apply critical evaluation skills to assess AI-generated information for accuracy</li>
-                <li>Use AI as a research tool while maintaining healthy skepticism</li>
-                <li>Synthesize information from multiple sources to define computing innovations</li>
-                <li>Explain why understanding computing innovations matters to society</li>
-                <li>Identify the dual nature (benefits and challenges) of computing innovations</li>
-            </ul>
-        </div>
-
-        <p>Now that you understand the basics of how AI works, let's explore computing innovations more deeply. A computing innovation is more than just a new gadget—it's a technology, tool, or technique that has a meaningful impact on how people live, work, and solve problems.</p>
-
-        <div class="info">
-            <h4>What Makes Something an Innovation?</h4>
-            <p>Not every new computer program or app is a computing innovation. True innovations typically:</p>
-            <ul style="margin-left: 20px; margin-top: 10px;">
-                <li>Solve a significant problem or meet an important need</li>
-                <li>Change how people do something substantially</li>
-                <li>Have broad impact across multiple groups or domains</li>
-                <li>Create both opportunities and challenges for society</li>
-            </ul>
-        </div>
-
-        <!-- ACTIVITY 2: Exploring Computing Innovations with AI -->
-        <div class="activity">
-            <h3>Activity 2: Exploring Computing Innovations with AI</h3>
-            
-            <p><strong>Scenario:</strong> You're going to use an AI tool to research computing innovations, practice refining your prompts, and develop your critical thinking about accuracy. This bridges your understanding of how AI works with a real research task.</p>
-
-            <div class="activity-instruction">
-                <h4>Part A: Initial Research</h4>
-                
-                <p><strong>Instructions:</strong></p>
-                <ol style="margin-left: 20px;">
-                    <li>Open your AI tool again (or start a new conversation)</li>
-                    <li>Craft an initial prompt asking about computing innovations</li>
-                    <li>Record your prompt and the AI's response</li>
-                </ol>
-
-                <div style="margin-top: 20px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Question 1: Your Initial Prompt</strong></p>
-                    <p style="margin-top: 10px;"><em>Write the exact prompt you used:</em></p>
-                    <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 15px;"><strong>AI Response (first 250 words):</strong></p>
-                    <textarea style="width: 100%; height: 120px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                </div>
-            </div>
-
-            <div class="activity-instruction">
-                <h4>Part B: Refining Your Prompt</h4>
-                
-                <p style="margin-top: 15px;">Good research is iterative. Ask follow-up questions or refine your prompt to get better results.</p>
-
-                <div style="margin-top: 20px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Question 2: How Did You Refine Your Prompt?</strong></p>
-                    <p style="margin-top: 10px;"><em>What did you change or add to get a better response?</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 15px;"><strong>Question 3: How Did the Response Improve?</strong></p>
-                    <p style="margin-top: 10px;"><em>Was it more specific? More relevant? More useful?</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                </div>
-            </div>
-
-            <div class="activity-instruction">
-                <h4>Part C: Evaluating Accuracy</h4>
-                
-                <p style="margin-top: 15px;">This is critical: Don't trust AI blindly. Verify information, especially when making decisions.</p>
-
-                <div style="margin-top: 20px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Question 4: Is the Information Accurate?</strong></p>
-                    <p style="margin-top: 10px;"><em>How would you verify the AI's claims? What sources would you check?</em></p>
-                    <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 15px;"><strong>Question 5: Define Computing Innovation in Your Own Words</strong></p>
-                    <p style="margin-top: 10px;"><em>Based on your AI research and what you've learned, write your own definition (100-200 words). Include an example.</em></p>
-                    <textarea style="width: 100%; height: 120px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 15px;"><strong>Question 6: Why Does It Matter?</strong></p>
-                    <p style="margin-top: 10px;"><em>Why is understanding computing innovations important? How does it affect you personally?</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- ASSESSMENT 2 -->
-        <div class="assessment">
-            <h3>Formative Assessment 0.1.2: Understanding Computing Innovations</h3>
-
-            <div class="section-objectives" style="margin-bottom: 20px;">
-                <h4>Assessment Objectives</h4>
-                <ul>
-                    <li>Test understanding of what constitutes a computing innovation</li>
-                    <li>Assess ability to evaluate dual impacts (positive and negative) of technology</li>
-                    <li>Evaluate critical thinking about societal impact</li>
-                    <li>Confirm learning of Section 3 concepts (Exploring Computing Innovations)</li>
-                </ul>
-            </div>
-            
-            <div class="question-group">
-                <div class="question">Question 1 (Multiple Choice): Which of the following is a computing innovation?</div>
-                <div class="option">
-                    <input type="radio" name="q4" value="a"> A) A new smartphone model with faster processing
-                </div>
-                <div class="option">
-                    <input type="radio" name="q4" value="b"> B) Blockchain technology enabling secure transactions and cryptocurrency
-                </div>
-                <div class="option">
-                    <input type="radio" name="q4" value="c"> C) A web browser update
-                </div>
-                <div class="option">
-                    <input type="radio" name="q4" value="d"> D) Both A and B are innovations; C is just a minor update
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer4')">Show Answer</button>
-                <div id="answer4" class="answer-box">
-                    <strong>Answer: D) Both A and B are innovations; C is just a minor update</strong>
-                    <p>Innovations have meaningful societal impact. Faster processing in phones and blockchain technology both fundamentally changed how people communicate, work, and solve problems. A browser update, while useful, doesn't typically rise to the level of an innovation.</p>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <div class="question">Question 2 (True/False): All computing innovations have only positive effects on society.</div>
-                <div class="option">
-                    <input type="radio" name="q5" value="true"> True
-                </div>
-                <div class="option">
-                    <input type="radio" name="q5" value="false"> False
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer5')">Show Answer</button>
-                <div id="answer5" class="answer-box">
-                    <strong>Answer: False</strong>
-                    <p>All technologies are double-edged swords. Social media connects people but also spreads misinformation and affects mental health. AI helps solve problems but can perpetuate bias. Understanding both positive and negative impacts is essential.</p>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <div class="question">Question 3 (Short Answer): Name one computing innovation and briefly describe one positive and one negative impact it has had on society.</div>
-                <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer6')">Show Answer</button>
-                <div id="answer6" class="answer-box">
-                    <strong>Sample Answer:</strong>
-                    <p><strong>Innovation: Smartphones</strong></p>
-                    <p><strong>Positive:</strong> Smartphones enable immediate communication, access to information and education, and emergency services. They've transformed how people connect globally.</p>
-                    <p><strong>Negative:</strong> Smartphone addiction affects mental health and sleep, especially in young people. They've also created digital divides where those without access are disadvantaged.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION 4: Your Final Project -->
-        <h2>Your Final Project: The Impact of Computing Innovations</h2>
-
-        <div class="section-objectives">
-            <h4>Section Learning Objectives</h4>
-            <p>After completing this section, you will be able to:</p>
-            <ul>
-                <li>Identify a computing innovation that genuinely interests you</li>
-                <li>Formulate meaningful research questions about technology's societal impact</li>
-                <li>Plan a semester-long research and creative project</li>
-                <li>Connect personal interests to broader themes of computing and society</li>
-                <li>Articulate why understanding a specific innovation matters</li>
-            </ul>
-        </div>
-
-        <p>Throughout this semester, you'll work on a final project exploring how a computing innovation impacts society. This is your opportunity to dive deep into a topic that matters to you—whether it's in your major field of study or just something you're curious about.</p>
-
-        <p>This week, you'll propose your topic. Over the following weeks, you'll research, analyze, create artifacts, and ultimately present your findings in both web and multimedia formats.</p>
-
-        <div class="impact-box">
-            <h4>Examples of Computing Innovation Topics</h4>
-            <p><strong>By Field of Study:</strong> The Impact of AI in Education / Business / Healthcare / Environmental Science / Engineering / Psychology / Art</p>
-            <p><strong>By Interest/Hobby:</strong> The Impact of AI in Photography / Gaming / Sports / Cooking / Travel / Fitness</p>
-            <p><strong>By Social Issue:</strong> The Impact of Social Media on Mental Health / The Digital Divide and Internet Access / Cybersecurity and Privacy / AI Bias in Hiring</p>
-            <p style="margin-top: 15px;"><strong>⚠️ Note:</strong> "The Impact of AI in Education" is used as a course-long example. If you want to research education, choose a specific subtopic like assessment, tutoring, academic integrity, or classroom management.</p>
-        </div>
-
-        <!-- ACTIVITY 3: Final Project Proposal -->
-        <div class="activity">
-            <h3>Activity 3: Propose Your Final Project Topic</h3>
-            
-            <p><strong>Scenario:</strong> You'll use AI research to explore potential topics and identify one that genuinely interests you. This is the foundation for your semester-long project.</p>
-
-            <div class="activity-instruction">
-                <h4>Step-by-Step Instructions</h4>
-                
-                <ol style="margin-left: 20px;">
-                    <li><strong>Brainstorm:</strong> What field of study or interest are you passionate about? List 3-5 possibilities.</li>
-                    <li><strong>Research with AI:</strong> For each possibility, use your AI tool to explore "The impact of computing/AI in [your topic]"</li>
-                    <li><strong>Take Notes:</strong> What surprised you? What aspects interest you most?</li>
-                    <li><strong>Narrow Focus:</strong> If your topic is broad (like "Education"), select a specific subtopic</li>
-                    <li><strong>Propose:</strong> Submit your final topic below</li>
-                </ol>
-
-                <div style="margin-top: 25px; background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Question 1: Possible Topics (List 3-5)</strong></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 20px;"><strong>Question 2: Why Did You Choose These Topics?</strong></p>
-                    <p style="margin-top: 10px;"><em>What interests you about these areas?</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 20px;"><strong>Question 3: What Did You Learn from AI Research?</strong></p>
-                    <p style="margin-top: 10px;"><em>What aspects of computing innovation in your topic area surprised you or interested you most?</em></p>
-                    <textarea style="width: 100%; height: 100px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 20px;"><strong>Question 4: Your Final Project Topic</strong></p>
-                    <p style="margin-top: 10px;"><em>State your chosen topic clearly. If it's broad, specify a narrower subtopic.</em></p>
-                    <input type="text" style="width: 100%; padding: 12px; border: 2px solid #667eea; border-radius: 4px; font-family: Arial; font-size: 1.1em;" placeholder="The Impact of [Computing Innovation] in [Field/Area]">
-
-                    <p style="margin-top: 20px;"><strong>Question 5: Why This Topic?</strong></p>
-                    <p style="margin-top: 10px;"><em>In 2-3 sentences, explain why this topic is meaningful to you and why you want to explore it throughout the semester.</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-
-                    <p style="margin-top: 20px;"><strong>Question 6: Initial Research Question</strong></p>
-                    <p style="margin-top: 10px;"><em>What's the core question you want to answer? (e.g., "How is AI changing X?" or "What are the ethical concerns around X?" or "Who benefits and who is disadvantaged by X?")</em></p>
-                    <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- ASSESSMENT 3 -->
-        <div class="assessment">
-            <h3>Formative Assessment 0.1.3: Final Project Readiness</h3>
-
-            <div class="section-objectives" style="margin-bottom: 20px;">
-                <h4>Assessment Objectives</h4>
-                <ul>
-                    <li>Verify that student has selected an appropriate computing innovation topic</li>
-                    <li>Assess readiness to conduct semester-long research</li>
-                    <li>Evaluate ability to formulate research questions</li>
-                    <li>Confirm understanding that final project can cover diverse topics beyond AI</li>
-                </ul>
-            </div>
-            
-            <div class="question-group">
-                <div class="question">Question 1 (True/False): Your final project topic must be about artificial intelligence specifically.</div>
-                <div class="option">
-                    <input type="radio" name="q6" value="true"> True
-                </div>
-                <div class="option">
-                    <input type="radio" name="q6" value="false"> False
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer7')">Show Answer</button>
-                <div id="answer7" class="answer-box">
-                    <strong>Answer: False</strong>
-                    <p>Your project should focus on a computing innovation and its societal impact. While AI is one computing innovation, so are smartphones, social media, cloud computing, blockchain, the internet itself, and many others. Choose a topic that genuinely interests you.</p>
-                </div>
-            </div>
-
-            <div class="question-group">
-                <div class="question">Question 2 (Multiple Choice): What makes a good final project topic?</div>
-                <div class="option">
-                    <input type="radio" name="q7" value="a"> A) It's broad enough to fill a semester
-                </div>
-                <div class="option">
-                    <input type="radio" name="q7" value="b"> B) It's something you're genuinely interested in and can find research on
-                </div>
-                <div class="option">
-                    <input type="radio" name="q7" value="c"> C) It has both positive and negative societal impacts worth exploring
-                </div>
-                <div class="option">
-                    <input type="radio" name="q7" value="d"> D) All of the above
-                </div>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer8')">Show Answer</button>
-                <div id="answer8" class="answer-box">
-                    <strong>Answer: D) All of the above </strong> 
-<p>A good final project topic should be interesting to you (so you'll stay engaged), has sufficient research available, covers a computing innovation with real societal impact, and is specific enough to research deeply but broad enough for a semester-long project.</p> </div> </div>
-<div class="question-group">
-                <div class="question">Question 3 (Short Answer): What's the difference between your topic idea and your research question?</div>
-                <textarea style="width: 100%; height: 80px; padding: 8px; font-family: Arial; border: 1px solid #ddd; border-radius: 4px; margin-top: 8px;"></textarea>
-                <button class="show-answer-btn" onclick="toggleAnswer('answer9')">Show Answer</button>
-                <div id="answer9" class="answer-box">
-                    <strong>Sample Answer:</strong>
-                    <p><strong>Topic:</strong> "The Impact of AI in Healthcare"</p>
-                    <p><strong>Research Questions (possible):</strong></p>
-                    <ul style="margin-left: 20px;">
-                        <li>"How is AI improving diagnostic accuracy in medical imaging?"</li>
-                        <li>"What are the ethical concerns about using AI in treatment decisions?"</li>
-                        <li>"How does AI affect healthcare access for underserved communities?"</li>
-                        <li>"Who benefits most and least from AI in healthcare?"</li>
+                <div class="callout info" style="margin-top: 1rem;">
+                    <h4><span class="callout-icon">ℹ️</span> After Watching</h4>
+                    <p style="margin-top: 0.5rem;">As you watch, think about:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>What sectors or industries are being transformed by computing?</li>
+                        <li>What problems are being solved?</li>
+                        <li>What computing innovations interest you most?</li>
                     </ul>
-                    <p>Your topic sets the domain; your research question guides your investigation within that domain.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- Chapter Summary -->
-        <div class="summary">
-            <h2>Chapter Summary</h2>
-            
-            <p>Welcome to CSC101! Here's what you've accomplished this week:</p>
+            <!-- Content -->
+            <div class="content-section">
+                <h3>Understanding Computing & AI</h3>
+                <p>Computing and artificial intelligence are no longer abstract concepts confined to tech companies and research labs. They're deeply woven into the fabric of everyday life—from the moment you wake up (alarm, weather app), through your work or school day (email, search engines, learning systems), to your evening entertainment (streaming recommendations, social media).</p>
+                
+                <p><strong>What is Computing?</strong> At its core, computing is the process of using computers and algorithms to solve problems, process information, and create new possibilities. It's about giving instructions to machines and having them execute those instructions automatically.</p>
+                
+                <p><strong>What is Artificial Intelligence?</strong> AI is a subset of computing where machines are designed to perform tasks that typically require human intelligence. This includes learning from examples, recognizing patterns, making predictions, and even being creative.</p>
+            </div>
 
-            <h3>Key Takeaways by Section</h3>
+            <!-- Key Concepts -->
+            <div class="content-section">
+                <h3>Key Concepts</h3>
+                <div class="callout info">
+                    <h4><span class="callout-icon">ℹ️</span> Computing Innovation</h4>
+                    <p>A computing innovation is the creation or modification of a computing artifact (something built using computing), process, or system that has a significant impact on society. Examples include social media platforms, streaming services, GPS navigation, medical diagnostic tools, and virtual assistants.</p>
+                </div>
 
-            <h4>Section 1: Computer Science is Changing Everything</h4>
-            <ul>
-                <li>Computing innovations are transforming every sector of society—healthcare, education, business, environment, transportation, and research</li>
-                <li>These innovations create both opportunities and challenges</li>
-                <li>Critical thinking about who benefits and who is disadvantaged is essential</li>
-            </ul>
+                <div class="callout hint">
+                    <h4><span class="callout-icon">💡</span> Real-World Examples</h4>
+                    <p><strong>Healthcare:</strong> AI systems that analyze medical images to detect cancer earlier than human doctors alone.</p>
+                    <p><strong>Education:</strong> Adaptive learning platforms that personalize the pace and style of instruction for each student.</p>
+                    <p><strong>Transportation:</strong> Autonomous vehicles that use computer vision and sensors to navigate safely.</p>
+                    <p><strong>Environment:</strong> AI systems that analyze climate data to predict weather patterns and identify environmental threats.</p>
+                </div>
+            </div>
 
-            <h4>Section 2: Problem Solving with AI</h4>
-            <ul>
-                <li>AI works through pattern recognition and prediction, not true understanding</li>
-                <li>AI generates responses word-by-word based on patterns from training data</li>
-                <li>AI can generate confident but false information ("hallucination")</li>
-                <li>Prompt quality directly affects response quality (prompt engineering matters)</li>
-            </ul>
+            <!-- Formative Assessment -->
+            <div class="formative-assessment">
+                <div class="assessment-header">
+                    <div class="assessment-target">🎯</div>
+                    <h3>Quick Check: Lesson 0.1</h3>
+                </div>
 
-            <h4>Section 3: Exploring Computing Innovations</h4>
-            <ul>
-                <li>Computing innovations solve significant problems and have broad societal impact</li>
-                <li>All technologies have dual impacts—opportunities and challenges</li>
-                <li>AI can be a useful research tool if used critically and verified carefully</li>
-            </ul>
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-type">True/False</div>
+                    <div class="question-text">Computing and artificial intelligence are only used by large technology companies.</div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="true" id="q1a">
+                        <label for="q1a">True</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q1" value="false" id="q1b">
+                        <label for="q1b">False</label>
+                    </div>
+                    <button onclick="checkAnswer('q1', 'false', 'Computing and AI are embedded in countless everyday applications—smartphones, cars, medical devices, home assistants, and more. Even small businesses use computing innovation to reach customers and manage operations.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
 
-            <h4>Section 4: Your Final Project</h4>
-            <ul>
-                <li>You've identified a computing innovation to explore all semester</li>
-                <li>Your project can focus on any computing innovation and its societal impact</li>
-                <li>You've formulated research questions to guide your investigation</li>
-            </ul>
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-type">Multiple Choice</div>
+                    <div class="question-text">Which of the following is an example of a computing innovation that impacts society?</div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="a" id="q2a">
+                        <label for="q2a">A) GPS navigation systems that help people find directions</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="b" id="q2b">
+                        <label for="q2b">B) Video streaming platforms that recommend content</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="c" id="q2c">
+                        <label for="q2c">C) Medical imaging systems that detect diseases</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q2" value="d" id="q2d">
+                        <label for="q2d">D) All of the above</label>
+                    </div>
+                    <button onclick="checkAnswer('q2', 'd', 'All of these are computing innovations with real societal impact. Each one uses computing to create new possibilities or improve existing processes.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
 
-            <h3>Skills You've Developed</h3>
-            <ul>
-                <li>Interacting effectively with AI systems and understanding their capabilities and limitations</li>
-                <li>Crafting clear, specific prompts to get better responses from AI (prompt engineering)</li>
-                <li>Evaluating AI responses critically and verifying information</li>
-                <li>Defining and identifying computing innovations with societal impact</li>
-                <li>Thinking about technology through a critical lens—both positive and negative effects</li>
-                <li>Formulating research questions and planning a semester-long research project</li>
-            </ul>
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-type">Short Answer</div>
+                    <div class="question-text">Name one computing innovation from your own life and briefly explain how it impacts you. (2-3 sentences)</div>
+                    <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                    <button onclick="showFeedback(this)">Check My Thinking</button>
+                    <div class="answer-feedback info">
+                        <strong>Reflection:</strong> Great! You've identified a real-world application of computing. As we move through this course, you'll develop a deeper understanding of how these innovations work and their broader impact on society.
+                    </div>
+                </div>
+            </div>
 
-            <h3>Learning Objectives Achieved</h3>
-            <p>You should now be able to:</p>
-            <ul>
-                <li>✓ <strong>LO0.1.1:</strong> Describe how computing and AI innovations are transforming different sectors</li>
-                <li>✓ <strong>LO0.1.2:</strong> Explain the basic concept of how AI systems process information</li>
-                <li>✓ <strong>LO0.1.3:</strong> Recognize the importance of prompt clarity in communicating with AI</li>
-                <li>✓ <strong>LO0.1.4:</strong> Define computing innovation and provide examples</li>
-                <li>✓ <strong>LO0.1.5:</strong> Evaluate AI responses critically for accuracy</li>
-                <li>✓ <strong>LO0.1.6:</strong> Identify a computing innovation and its societal impact for semester-long study</li>
-            </ul>
+            <!-- What's Coming Next -->
+            <div class="whats-next">
+                <h3>🚀 What's Coming Next</h3>
+                <p>Now that you understand what computing innovations are, let's dive deeper into how AI actually works. In the next lesson, you'll interact directly with an AI system and discover how machines process language and generate responses.</p>
+                <div class="next-lesson-teaser">
+                    <strong>Lesson 0.2: Talking to Machines</strong> — You'll practice communicating with AI and learn how small changes in your prompts can dramatically change the results you get. This is a hands-on, interactive lesson!
+                </div>
+            </div>
+        </section>
+<!-- ===== LESSON 0.2 ===== -->
+        <section class="lesson">
+            <div class="lesson-header">
+                <span class="lesson-number">Lesson 0.2</span>
+                <h2>Talking to Machines: How AI Responds</h2>
+                <p class="lesson-subtitle">Learn how artificial intelligence generates responses by recognizing patterns and making predictions</p>
+                <span class="estimated-time">⏱ 10-12 minutes</span>
+            </div>
 
-            <h3>What's Next?</h3>
-            <p>You're now ready for Week 1, where you'll go much deeper into how AI systems actually learn, what neural networks are, and how training data shapes AI behavior. You'll also understand bias in AI—why it happens and what the real-world consequences are.</p>
+            <!-- Learning Objectives -->
+            <div class="learning-objectives">
+                <h3>Learning Objectives</h3>
+                <div class="objective-item">
+                    <strong>LO0.2.1:</strong> Understand how AI systems generate responses through pattern recognition and prediction
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.2.2:</strong> Practice writing effective prompts to communicate with AI systems
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.2.3:</strong> Analyze how prompt refinement improves AI responses
+                </div>
+            </div>
+
+            <!-- Video: Problem Solving with AI -->
+            <div class="content-section">
+                <h3>🎬 Video: Problem Solving with AI</h3>
+                <p>Before diving into your own AI interactions, watch this video to understand the fundamentals of how AI approaches problem-solving:</p>
+                
+                <div class="video-embed">
+                    <div class="video-placeholder">
+                        <div class="video-icon">▶️</div>
+                        <div class="video-title">Problem Solving with AI</div>
+                        <div class="video-duration">3:13 minutes</div>
+                        <div class="video-note">
+                            This video explains the key strategies for effectively using AI to solve problems. Pay special attention to the steps involved in formulating good prompts and refining them for better results.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout hint" style="margin-top: 1rem;">
+                    <h4><span class="callout-icon">💡</span> Key Takeaways from the Video</h4>
+                    <p style="margin-top: 0.5rem;">As you watch, look for:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>How to structure a prompt for clarity</li>
+                        <li>The importance of iterative refinement</li>
+                        <li>How context improves AI responses</li>
+                        <li>Common mistakes to avoid</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Conceptual Content -->
+            <div class="content-section">
+                <h3>How AI "Thinks"</h3>
+                <p>When you type a message to an AI system like ChatGPT, Claude, or LibreChat, it doesn't think the way humans do. Instead, it uses probability and pattern recognition. The AI has been trained on enormous amounts of text from the internet and learned patterns about which words typically follow other words. When you send a prompt, the AI predicts the most likely next word, then the next word after that, building your response one word at a time.</p>
+
+                <p>Think of it like autocomplete on your phone—but much more sophisticated! It's learned not just individual word combinations, but also context, meaning, and structure.</p>
+
+                <div class="callout warning">
+                    <h4><span class="callout-icon">⚠️</span> Important: AI Has Limitations</h4>
+                    <p>AI systems are powerful but not perfect. They can:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>Make mistakes or generate false information with confidence</li>
+                        <li>Lack real-time information (their knowledge has a cutoff date)</li>
+                        <li>Reflect biases present in their training data</li>
+                        <li>Misunderstand context or nuanced questions</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Always verify important information from reliable sources!</strong></p>
+                </div>
+            </div>
+
+            <!-- The Art of Prompting -->
+            <div class="content-section">
+                <h3>Prompt Engineering: Getting Better Results</h3>
+                <p>The quality of your AI response depends heavily on the quality of your prompt. A vague prompt gets a vague response. A detailed, specific prompt gets a focused, useful response.</p>
+
+                <div class="example">
+                    <h4>Example 0.2.1: Comparing Prompts</h4>
+                    <div class="example-content">
+                        <p><strong>Vague Prompt:</strong> "Tell me about dogs"</p>
+                        <p style="margin-left: 1rem; color: #666; font-size: 0.95rem;">The AI might give a general overview, but it's unclear what you really want to know.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Improved Prompt:</strong> "Explain the differences between dog breeds commonly used as service animals (guide dogs, therapy dogs, detection dogs). Include what makes each breed suitable for their role."</p>
+                        <p style="margin-left: 1rem; color: #666; font-size: 0.95rem;">This prompt is specific about what you want to know, making it much easier for AI to provide relevant, focused information.</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <h4><span class="callout-icon">💡</span> Tips for Better Prompts</h4>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li><strong>Be specific:</strong> Instead of "write about AI," try "write a 100-word explanation of how machine learning differs from traditional programming"</li>
+                        <li><strong>Provide context:</strong> Let the AI know who you are and what you need it for ("I'm a college student learning about...")  </li>
+                        <li><strong>Specify format:</strong> Ask for the format you want—list, essay, poem, code, etc.</li>
+                        <li><strong>Set constraints:</strong> Use word count, length, or complexity level to guide the response</li>
+                        <li><strong>Refine iteratively:</strong> Don't settle for the first response. Ask follow-up questions or ask it to try again differently</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Hands-On Activity: Part 1 of Assignment -->
+            <div class="activity-box">
+                <h4>✏️ Part 1: Talking to Machines - Hands-On Activity</h4>
+                <p><strong>For this activity, you'll need access to an AI tool.</strong> Options include:</p>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>⭐ <strong>LibreChat</strong> (recommended for URI students for data privacy) - request access through your instructor</li>
+                    <li>ChatGPT, Claude, Gemini, Copilot, or similar free AI chatbots</li>
+                </ul>
+
+                <div class="callout warning" style="margin-top: 1rem;">
+                    <h4><span class="callout-icon">⚠️</span> Privacy Note</h4>
+                    <p style="margin-top: 0.5rem;">If using free versions of AI tools, be aware that some collect data. Avoid entering personal information, passwords, or sensitive data. LibreChat provides better privacy protection for educational use.</p>
+                </div>
+
+                <p style="margin-top: 1.5rem;"><strong>Your Task:</strong> Try a series of basic prompts to see how AI responds, then experiment with variations to understand how different prompt styles produce different results.</p>
+
+                <div class="activity-step" data-step="1">
+                    <strong>Step 1: Basic Prompts</strong><br>
+                    Open your AI tool and type each prompt exactly as written. Record the AI's responses in your answer document.
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Prompt 1:</strong> "Hello"</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record the AI's response...</em></p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Prompt 2:</strong> "What is the weather like?"</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record the AI's response...</em></p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Prompt 3:</strong> "Tell me about dogs"</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record the AI's response...</em></p>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="2">
+                    <strong>Step 2: Initial Reflection Questions</strong><br>
+                    Write answers to these reflection questions in your document:
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Question 1:</strong> How did the AI respond to your greetings? What did you notice?</p>
+                        <p style="margin-top: 1rem;"><strong>Question 2:</strong> What happened when you asked about the weather without giving your location?</p>
+                        <p style="margin-top: 1rem;"><strong>Question 3:</strong> How specific or general was the information about dogs?</p>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="3">
+                    <strong>Step 3: Experimenting with Prompt Variations</strong><br>
+                    Now try these three sets of prompt variations and compare the responses. For each pair, note what changed between the prompts and how the AI's response changed.
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Set A (Simple vs. Detailed Prompts):</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><strong>Ai:</strong> "Write a story"</li>
+                            <li><strong>Aii:</strong> "Write a 100 word story about a robot learning to paint"</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Set B (Different Contexts):</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><strong>Bi:</strong> "Explain photosynthesis"</li>
+                            <li><strong>Bii:</strong> "Explain photosynthesis to a 5 year old"</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Set C (Different Formats):</strong></p>
+                        <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                            <li><strong>Ci:</strong> "List benefits of exercise"</li>
+                            <li><strong>Cii:</strong> "Create a poem about the benefits of exercise"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="4">
+                    <strong>Step 4: Analysis Table</strong><br>
+                    Complete this analysis table in your document showing how the prompts changed the responses:
+                </div>
+            </div>
+
+            <!-- Analysis Table Template -->
+            <div style="margin: 1.5rem 0;">
+                <table class="analysis-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Prompt Pair</th>
+                            <th style="width: 42.5%;">What changed between the prompts?</th>
+                            <th style="width: 42.5%;">How did the AI's response change?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A (i vs ii)</strong></td>
+                            <td><em>Example: Prompt ii added specific length (100 words) and subject (robot painting)</em></td>
+                            <td><em>Record your observations...</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>B (i vs ii)</strong></td>
+                            <td><em>Record what changed...</em></td>
+                            <td><em>Record how response changed...</em></td>
+                        </tr>
+                        <tr>
+                            <td><strong>C (i vs ii)</strong></td>
+                            <td><em>Record what changed...</em></td>
+                            <td><em>Record how response changed...</em></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Additional Reflection -->
+            <div class="activity-box" style="margin-top: 2rem;">
+                <h4>📝 Reflection Question</h4>
+                <p style="margin-top: 1rem;">After completing your prompt experiments:</p>
+                <p style="margin-top: 0.8rem;"><strong>Question 4:</strong> In 1-3 sentences, explain what makes AI conversations different from human ones. What did you learn from your experiments about how AI responds?</p>
+                <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record your answer in your document...</em></p>
+            </div>
+
+            <!-- Formative Assessment -->
+            <div class="formative-assessment">
+                <div class="assessment-header">
+                    <div class="assessment-target">🎯</div>
+                    <h3>Quick Check: Lesson 0.2</h3>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-type">Multiple Choice</div>
+                    <div class="question-text">How does an AI system like ChatGPT generate responses?</div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="a" id="q3a">
+                        <label for="q3a">A) It thinks the same way humans think, using consciousness and reasoning</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="b" id="q3b">
+                        <label for="q3b">B) It predicts the most likely next word based on patterns learned during training</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="c" id="q3c">
+                        <label for="q3c">C) It looks up answers in a database of pre-written responses</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q3" value="d" id="q3d">
+                        <label for="q3d">D) It randomly generates words until they sound coherent</label>
+                    </div>
+                    <button onclick="checkAnswer('q3', 'b', 'Correct! AI systems use pattern recognition and probability to predict the next word, building your response incrementally. This is fundamentally different from human reasoning.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-type">True/False</div>
+                    <div class="question-text">A more specific, detailed prompt usually produces a better AI response than a vague one.</div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="true" id="q4a">
+                        <label for="q4a">True</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q4" value="false" id="q4b">
+                        <label for="q4b">False</label>
+                    </div>
+                    <button onclick="checkAnswer('q4', 'true', 'Absolutely true! Being specific about format, context, audience, and constraints helps the AI understand exactly what you need, leading to more useful responses.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-type">Short Answer</div>
+                    <div class="question-text">What is one limitation of AI systems that you should be aware of when using them?</div>
+                    <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                    <button onclick="showFeedback(this)">Check My Thinking</button>
+                    <div class="answer-feedback info">
+                        <strong>Great observation!</strong> Common limitations include: AI can generate false information confidently, lack real-time information, reflect training data biases, and struggle with nuance. Always verify critical information from reliable sources.
+                    </div>
+                </div>
+            </div>
+
+            <!-- What's Coming Next -->
+            <div class="whats-next">
+                <h3>🚀 What's Coming Next</h3>
+                <p>Now that you understand how to communicate with AI and have practiced with real prompts, let's put that knowledge to work! In the next lesson, you'll use AI as a research tool to explore computing innovations and develop your own understanding of what makes them important.</p>
+                <div class="next-lesson-teaser">
+                    <strong>Lesson 0.3: Exploring Computing Innovations with AI</strong> — You'll use your new prompt-writing skills to research computing innovations, learn to verify information, and develop a personal definition of what "computing innovation" means.
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== LESSON 0.3 ===== -->
+        <section class="lesson">
+            <div class="lesson-header">
+                <span class="lesson-number">Lesson 0.3</span>
+                <h2>Exploring Computing Innovations</h2>
+                <p class="lesson-subtitle">Use AI as a research tool and develop your own understanding of computing innovations</p>
+                <span class="estimated-time">⏱ 10-12 minutes</span>
+            </div>
+
+            <!-- Learning Objectives -->
+            <div class="learning-objectives">
+                <h3>Learning Objectives</h3>
+                <div class="objective-item">
+                    <strong>LO0.3.1:</strong> Use AI tools effectively as a research and learning assistant
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.3.2:</strong> Synthesize information from multiple AI responses to develop understanding
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.3.3:</strong> Evaluate the accuracy and usefulness of AI-generated information
+                </div>
+                <div class="objective-item">
+                    <strong>LO0.3.4:</strong> Articulate a personal definition of "computing innovation"
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content-section">
+                <h3>AI as Your Research Partner</h3>
+                <p>One of the most powerful uses of AI is as an intelligent research and learning tool. Rather than just providing answers, a good AI interaction is a conversation—you ask, it responds, you ask follow-up questions that go deeper, refine your understanding, and eventually develop your own synthesis of the topic.</p>
+
+                <p>This is exactly what you did in the previous lesson with your prompt refinement exercises. Now we'll apply that skill to a more substantive question: <strong>What really is a computing innovation?</strong></p>
+
+                <div class="callout info">
+                    <h4><span class="callout-icon">ℹ️</span> Information Literacy Note</h4>
+                    <p>Using AI as a research tool is different from using it as a final authority. Think of it as brainstorming with an intelligent colleague—it can help you explore ideas, but you should:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>Verify important facts with authoritative sources</li>
+                        <li>Cross-check information from multiple sources</li>
+                        <li>Think critically about whether the information makes sense</li>
+                        <li>Consider the context and potential biases</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Example Research Process -->
+            <div class="content-section">
+                <h3>A Research Example: Computing Innovations in Healthcare</h3>
+
+                <div class="example">
+                    <h4>Example 0.3.1: Iterative AI Research</h4>
+                    <div class="example-content">
+                        <div class="example-step" data-step="1">
+                            <strong>Initial Prompt (Too Broad):</strong><br>
+                            "Tell me about computing innovations in healthcare."<br>
+                            <em>Result: A very long, general overview</em>
+                        </div>
+
+                        <div class="example-step" data-step="2">
+                            <strong>Refined Prompt (More Specific):</strong><br>
+                            "Give me 3 specific examples of computing innovations that have improved healthcare outcomes in the last 10 years. For each, briefly explain what problem it solved."<br>
+                            <em>Result: Focused, actionable information</em>
+                        </div>
+
+                        <div class="example-step" data-step="3">
+                            <strong>Follow-Up Prompt (Going Deeper):</strong><br>
+                            "For the AI diagnostic imaging example you mentioned, what makes this a 'computing innovation' rather than just a technology? What problem did it solve that existing solutions couldn't?"<br>
+                            <em>Result: Understanding of what distinguishes innovations from ordinary tools</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hands-On Activity: Part 2 of Assignment -->
+            <div class="activity-box">
+                <h4>✏️ Part 2: Exploring Computing Innovations with AI - Hands-On Activity</h4>
+                <p><strong>Your Task:</strong> Conduct your own AI research using the iterative prompt refinement approach you learned in Lesson 0.2.</p>
+
+                <div class="activity-step" data-step="1">
+                    <strong>Step 1: Initial Prompt</strong><br>
+                    Open your AI tool and write your own initial prompt asking it to explain what computing innovations are. Write naturally—don't worry about perfection yet.<br>
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Your initial prompt:</strong></p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record your prompt in your answer document...</em></p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Paste the AI's response...</em></p>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="2">
+                    <strong>Step 2: Analyze the Response</strong><br>
+                    Read the AI's response carefully. Ask yourself:
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>Did it fully answer your question?</li>
+                        <li>Was it too general or too technical?</li>
+                        <li>Did it give examples?</li>
+                        <li>What could be clearer?</li>
+                    </ul>
+                </div>
+
+                <div class="activity-step" data-step="3">
+                    <strong>Step 3: Refine Your Prompt</strong><br>
+                    Write an improved version of your prompt that addresses what you found lacking in the first response. Some ideas:
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li>Maybe you want more concrete examples</li>
+                        <li>Perhaps you want it explained more simply or more technically</li>
+                        <li>You might want it in a specific format (bullet points, story, comparison, etc.)</li>
+                        <li>You could ask it to focus on a specific field or sector</li>
+                    </ul>
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Your refined prompt:</strong></p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record your improved prompt in your answer document...</em></p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Paste the AI's response to the refined prompt...</em></p>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="4">
+                    <strong>Step 4: Reflect on the Difference</strong><br>
+                    Answer these reflection questions in your document:
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Question 1:</strong> What was your initial prompt, and how did you refine it?</p>
+                        <p style="margin-top: 1rem;"><strong>Question 2:</strong> How did the AI's response change after refinement?</p>
+                        <p style="margin-top: 1rem;"><strong>Question 3:</strong> Is the response accurate? Identify at least one way you could verify the AI's response.</p>
+                    </div>
+                </div>
+
+                <div class="activity-step" data-step="5">
+                    <strong>Step 5: Write Your Own Definition</strong><br>
+                    Based on what you learned from the AI and your own thinking, write your own 100-200 word definition of what a "computing innovation" is and why it matters. This should be in your own words, synthesizing what you've learned.<br>
+                    <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                        <p><strong>Question 4:</strong> In your own words, what is a computing innovation, and why does it matter? (response should be 100-200 words)</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>Record your definition in your answer document...</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accuracy and Verification -->
+            <div class="content-section">
+                <h3>Verifying AI Information</h3>
+
+                <div class="callout warning">
+                    <h4><span class="callout-icon">⚠️</span> Always Verify Critical Information</h4>
+                    <p>AI systems can confidently provide incorrect information. Before using information from AI for important decisions or assignments, verify it through:</p>
+                    <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                        <li><strong>Academic sources:</strong> Peer-reviewed articles, textbooks, course materials</li>
+                        <li><strong>Authoritative websites:</strong> Government agencies, professional organizations, established news outlets</li>
+                        <li><strong>Multiple sources:</strong> If multiple reliable sources agree, the information is likely accurate</li>
+                        <li><strong>Common sense:</strong> Does it make logical sense? Are there any red flags?</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Formative Assessment -->
+            <div class="formative-assessment">
+                <div class="assessment-header">
+                    <div class="assessment-target">🎯</div>
+                    <h3>Quick Check: Lesson 0.3</h3>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-type">Multiple Choice</div>
+                    <div class="question-text">When using AI for research, what should be your next step after getting an initial response?</div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="a" id="q5a">
+                        <label for="q5a">A) Immediately use the information in your assignment without verification</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="b" id="q5b">
+                        <label for="q5b">B) Evaluate whether the response answers your question, then refine your prompt if needed</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="c" id="q5c">
+                        <label for="q5c">C) Assume all AI responses are equally accurate</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q5" value="d" id="q5d">
+                        <label for="q5d">D) Ask the same question repeatedly to get consistent answers</label>
+                    </div>
+                    <button onclick="checkAnswer('q5', 'b', 'Correct! Evaluating and refining is the key to effective AI use. This iterative process helps you get the information you actually need.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-type">True/False</div>
+                    <div class="question-text">You should verify important information from AI by checking multiple reliable sources.</div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="true" id="q6a">
+                        <label for="q6a">True</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="q6" value="false" id="q6b">
+                        <label for="q6b">False</label>
+                    </div>
+                    <button onclick="checkAnswer('q6', 'true', 'True! While AI is a great starting point, verifying through authoritative sources ensures accuracy, especially for important information.')">Show Answer</button>
+                    <div class="answer-feedback"></div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+<div class="question-type">Short Answer</div>
+<div class="question-text">What is one way you could verify information from an AI response about a computing innovation?</div>
+                <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                <button onclick="showFeedback(this)">Check My Thinking</button>
+                <div class="answer-feedback info">
+                    <strong>Good thinking!</strong> Valid approaches include: checking academic sources, looking for the innovation on official company websites, reading peer-reviewed articles, asking your instructor, or finding multiple independent sources that confirm the information.
+                </div>
+            </div>
         </div>
 
         <!-- What's Coming Next -->
-        <div class="next-lesson">
-            <h2>What's Coming Next: What is AI, Really?</h2>
-            
-            <p>You've gotten your feet wet! You've interacted with AI, explored how it works at a basic level, and identified a computing innovation to study. Next week, we go deeper.</p>
+        <div class="whats-next">
+            <h3>🚀 What's Coming Next</h3>
+            <p>You've explored computing innovations, learned how they work, and developed your own understanding. Now comes the exciting part: <strong>choosing your own computing innovation to investigate for your final project!</strong></p>
+            <div class="next-lesson-teaser">
+                <strong>Lesson 0.4: Proposing Your Final Project</strong> — You'll research the impact of a computing innovation in a field that interests YOU, and propose a project topic that will guide your learning throughout the entire course. This is your chance to investigate something meaningful!
+            </div>
+        </div>
+    </section>
 
-            <h3>Preview of Week 1: What is AI, Really?</h3>
-            <p>In Week 1, "What is AI, Really?", you'll discover:</p>
+    <!-- ===== LESSON 0.4 ===== -->
+    <section class="lesson">
+        <div class="lesson-header">
+            <span class="lesson-number">Lesson 0.4</span>
+            <h2>Proposing Your Final Project</h2>
+            <p class="lesson-subtitle">Choose a computing innovation that matters to you and propose a course-long research project</p>
+            <span class="estimated-time">⏱ 10-12 minutes</span>
+        </div>
 
-            <ul style="margin-left: 20px;">
-                <li><strong>The Foundations of Machine Learning:</strong> How computers learn from data rather than following pre-written rules. You'll understand the difference between AI and machine learning.</li>
-                
-                <li><strong>Neural Networks:</strong> The biological-brain-inspired computational systems that power modern AI. How do layers of artificial "neurons" process information?</li>
-                
-                <li><strong>Computer Vision:</strong> How machines "see" and interpret images. This enables facial recognition, medical imaging analysis, autonomous vehicles, and more.</li>
-                
-                <li><strong>The Critical Role of Training Data:</strong> Why data quality, quantity, and diversity determine AI system performance. Garbage data = garbage predictions.</li>
-                
-                <li><strong>Bias in AI:</strong> How AI systems inherit and amplify biases from training data and design choices. Why this matters ethically and practically.</li>
-                
-                <li><strong>Hands-On Practice:</strong> You'll train your own machine learning models using real tools and see how different training data affects performance.</li>
-            </ul>
-
-            <h3>How It Builds on This Week</h3>
-            <p>Everything you learned this week prepares you for Week 1:</p>
-
-            <ul style="margin-left: 20px;">
-                <li><strong>From "How does AI work?" to "How does AI learn?"</strong> This week you learned that AI predicts patterns. Next week you'll learn HOW systems develop those patterns through training.</li>
-                
-                <li><strong>From "AI can make mistakes" to "Understanding why AI makes mistakes"</strong> Next week, you'll see how biased training data causes biased predictions.</li>
-                
-                <li><strong>From "Prompting an LLM" to "Training any ML model"</strong> You'll move beyond language models to understand machine learning broadly.</li>
-                
-                <li><strong>Applied to Your Project:</strong> If your project involves AI, Week 1 will deepen your understanding of how that AI actually works.</li>
-            </ul>
-
-            <h3>Key Questions to Explore Next Week</h3>
-            <ul style="margin-left: 20px;">
-                <li>How do machines "learn"? What does that actually mean?</li>
-                <li>Why do some AI systems work perfectly while others fail spectacularly?</li>
-                <li>Can we build AI systems that aren't biased?</li>
-                <li>How much data does an AI system really need?</li>
-                <li>What can AI see that humans might miss? What do humans see that AI misses?</li>
-            </ul>
-
-            <div class="hint">
-                <h4>Getting Ahead (Optional)</h4>
-                <p>If you're curious, start noticing AI systems around you. When you use facial recognition, get product recommendations, or see content filtered by an algorithm—that's machine learning at work. Think about what data these systems might have learned from and what biases they might have absorbed.</p>
+        <!-- Learning Objectives -->
+        <div class="learning-objectives">
+            <h3>Learning Objectives</h3>
+            <div class="objective-item">
+                <strong>LO0.4.1:</strong> Identify a computing innovation relevant to your interests or field of study
+            </div>
+            <div class="objective-item">
+                <strong>LO0.4.2:</strong> Use research skills to explore the impact of a computing innovation on society
+            </div>
+            <div class="objective-item">
+                <strong>LO0.4.3:</strong> Articulate a meaningful final project topic that connects to your learning goals
+            </div>
+            <div class="objective-item">
+                <strong>LO0.4.4:</strong> Plan a course-long investigation of computing innovation impact
             </div>
         </div>
 
-        <!-- Additional Resources -->
-        <div style="background-color: #f9f9f9; padding: 30px; border-radius: 8px; margin-top: 40px; border-left: 4px solid #667eea;">
-            <h2 style="border: none; padding-left: 0; margin-top: 0;">Additional Resources and Support</h2>
-            
-            <h3>Tools and Platforms You Used This Week</h3>
-            <ul style="margin-left: 20px;">
-                <li><strong>LibreChat:</strong> Request access through your university for a secure, privacy-protecting AI environment</li>
-                <li><strong>ChatGPT:</strong> Free and paid versions at openai.com</li>
-                <li><strong>Claude:</strong> Free and paid versions at claude.ai</li>
-                <li><strong>Gemini (formerly Bard):</strong> Google's AI assistant at gemini.google.com</li>
-                <li><strong>Microsoft Copilot:</strong> Integrated into Bing and Office products</li>
+        <!-- Content -->
+        <div class="content-section">
+            <h3>Your Final Project: An Overview</h3>
+            <p>Throughout CSC101, you'll be working on a <strong>Final Project that explores the impact of a computing innovation on society.</strong> This isn't a one-shot assignment—it's a course-long investigation where you'll:</p>
+            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                <li>Research a computing innovation you find interesting</li>
+                <li>Analyze its positive and negative impacts</li>
+                <li>Create multimedia artifacts (presentations, videos, infographics, web pages) to communicate your findings</li>
+                <li>Present your research and analysis in both written and visual forms</li>
             </ul>
 
-            <h3>Recommended Reading and Viewing</h3>
-            <ul style="margin-left: 20px;">
-                <li><strong>Articles:</strong> Search for "computing innovation examples" or "AI impact on [your topic]" in reputable sources like MIT Technology Review, The New York Times Technology section, or academic databases</li>
-                <li><strong>Videos:</strong> YouTube channels like CrashCourse Computer Science, 3Blue1Brown, and Kurzgesagt have excellent accessible explanations</li>
-                <li><strong>Podcasts:</strong> "AI in Business," "Stuff You Should Know," and "The AI Podcast" explore how technology impacts society</li>
-            </ul>
+            <p style="margin-top: 1.5rem;"><strong>The key to a great project:</strong> Choose a topic that genuinely interests you! Whether it's related to your major, your hobbies, or something you're curious about, investing in a topic you care about will make the work more engaging and your project stronger.</p>
 
-            <h3>For Your Final Project</h3>
-            <ul style="margin-left: 20px;">
-                <li><strong>Research Databases:</strong> URI Library offers access to academic databases. Use them to find peer-reviewed articles on your topic.</li>
-                <li><strong>News Archives:</strong> Search Google News, BBC, or other outlets for articles about your computing innovation</li>
-                <li><strong>AI Tools as Research Assistants:</strong> Use AI to help find sources, summarize articles, and organize information (but verify everything!)</li>
-                <li><strong>Expert Interviews:</strong> Consider interviewing professionals working in your topic area</li>
-            </ul>
+            <div class="callout hint">
+                <h4><span class="callout-icon">💡</span> Your Project Grows Throughout the Course</h4>
+                <p style="margin-top: 0.5rem;">Notice that your final project topic (chosen in Chapter 0, Lesson 4) will be refined and developed across every chapter. As you learn about different aspects of computing:</p>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li><strong>Chapters 1-3 (AI & Society):</strong> Research how AI specifically impacts your chosen innovation</li>
+                    <li><strong>Chapters 4-6 (Programming):</strong> Understand the technical foundations</li>
+                    <li><strong>Chapters 7-9 (Security & Impacts):</strong> Explore ethical and security implications</li>
+                    <li><strong>Chapters 10-12 (Data):</strong> Create visualizations and data-driven arguments</li>
+                    <li><strong>Chapter 13:</strong> Present your completed project</li>
+                </ul>
+            </div>
+        </div>
 
-            <h3>Getting Help in This Course</h3>
-            <ul style="margin-left: 20px;">
-                <li>📝 <strong>Discussion Forum:</strong> Post questions on "General Discussion" or "Assignment Questions" in Brightspace</li>
-                <li>⏰ <strong>Virtual Help Hours:</strong> Attend scheduled sessions (posted on Brightspace)</li>
-                <li>📧 <strong>Email Your Instructor:</strong> For detailed questions after trying the forum</li>
-                <li>🤖 <strong>Use AI as a Tutor:</strong> Ask AI to explain concepts or clarify confusing material (but verify with course materials)</li>
-                <li>🏫 <strong>Academic Enhancement Center:</strong> URI's tutoring and writing services are available to you</li>
-            </ul>
+        <!-- Finding Your Topic -->
+        <div class="content-section">
+            <h3>Finding Your Topic</h3>
 
-            <h3>Data Privacy Considerations</h3>
-            <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #ff6b6b; margin-top: 15px;">
-                <p><strong>⚠️ Be Careful What You Share:</strong> Different AI tools have different privacy policies. Don't enter personal information, passwords, or sensitive data into free AI tools. Use LibreChat for protected privacy, or stick with general questions for other tools. Always read privacy policies!</p>
+            <div class="callout info">
+                <h4><span class="callout-icon">ℹ️</span> Topic Ideas by Category</h4>
+                <p style="margin-top: 1rem;"><strong>By Field of Study:</strong></p>
+                <ul style="margin-left: 1rem;">
+                    <li><strong>Business:</strong> Impact of AI in customer service, marketing automation, or supply chain optimization</li>
+                    <li><strong>Engineering:</strong> Autonomous vehicles, robots in manufacturing, or drone technology</li>
+                    <li><strong>Psychology:</strong> AI chatbots for mental health support, personalized learning systems, or social media algorithms</li>
+                    <li><strong>Biology:</strong> AI in drug discovery, genetic analysis, or precision medicine</li>
+                    <li><strong>Art & Design:</strong> AI-generated art, design tools, or creative applications</li>
+                    <li><strong>Environmental Science:</strong> AI for climate prediction, conservation monitoring, or renewable energy optimization</li>
+                    <li><strong>Textiles/Fashion:</strong> AI in fashion design, sustainable manufacturing, or supply chain management</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>By Interest/Hobby:</strong></p>
+                <ul style="margin-left: 1rem;">
+                    <li><strong>Sports:</strong> Performance analysis, injury prediction, or sports technology</li>
+                    <li><strong>Gaming:</strong> AI in video games, competitive AI, or game design</li>
+                    <li><strong>Fitness:</strong> Wearable technology, personalized workout apps, or health tracking</li>
+                    <li><strong>Cooking:</strong> Recipe recommendation systems or IoT kitchen devices</li>
+                    <li><strong>Travel:</strong> Recommendation engines, translation apps, or navigation systems</li>
+                    <li><strong>Photography:</strong> Image recognition, enhancement tools, or AI-generated imagery</li>
+                    <li><strong>Music:</strong> AI composition, recommendation systems, or music production tools</li>
+                </ul>
             </div>
 
-            <h3>Troubleshooting</h3>
-            <div style="margin-top: 20px;">
-                <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea; margin-bottom: 15px;">
-                    <p><strong>Q: The AI tool I chose isn't working or is blocked.</strong></p>
-                    <p>A: Try a different tool or open it in a different browser. Clear your cache. If using university resources, check if your URI account has the right access. Contact IT support if needed.</p>
+            <div class="callout hint">
+                <h4><span class="callout-icon">💡</span> Narrowing Your Focus</h4>
+                <p>Start broad, then narrow down. "AI" is too big. "AI in healthcare" is better. "AI in early cancer detection" is even better. As the course progresses, you may refine your topic further—that's expected and encouraged!</p>
+            </div>
+        </div>
+
+        <!-- Important Note -->
+        <div class="callout warning">
+            <h4><span class="callout-icon">⚠️</span> Special Note About Course Example Topic</h4>
+            <p>The example topic for this course is <strong>"The Impact of AI in Education."</strong> We'll use this as a course-long example throughout the lessons. You're welcome to pursue a topic in education if you choose, but if you do, please select a specific subtopic such as:</p>
+            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                <li>AI in student assessment and grading</li>
+                <li>AI for personalized tutoring and differentiated instruction</li>
+                <li>AI and academic integrity (detecting plagiarism, etc.)</li>
+                <li>AI in accessibility and inclusive education</li>
+                <li>AI in adaptive learning systems</li>
+            </ul>
+        </div>
+
+        <!-- Hands-On Activity: Part 3 of Assignment -->
+        <div class="activity-box">
+            <h4>✏️ Part 3: Researching Your Project Topic - Hands-On Activity</h4>
+            <p><strong>Your Task:</strong> Research potential final project topics and commit to one that genuinely interests you.</p>
+
+            <div class="activity-step" data-step="1">
+                <strong>Step 1: Brainstorm Topics</strong><br>
+                List 3-5 computing innovations that interest you. Think about:
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>Your major or field of study</li>
+                    <li>Hobbies and interests outside of school</li>
+                    <li>Technologies you use daily</li>
+                    <li>Emerging technologies you're curious about</li>
+                    <li>Problems you'd like to see solved with technology</li>
+                </ul>
+                <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <p style="color: #666; font-size: 0.9rem;"><em>List your brainstorming ideas in your answer document...</em></p>
                 </div>
-                <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea; margin-bottom: 15px;">
-                    <p><strong>Q: I'm not sure my final project topic is good enough.</strong></p>
-                    <p>A: Reach out to your instructor or TA. There's no "bad" topic—only topics that need refinement. We can help you narrow focus if needed.</p>
+            </div>
+
+            <div class="activity-step" data-step="2">
+                <strong>Step 2: Research Using AI</strong><br>
+                For each potential topic, craft an AI prompt to explore it. Try something like:
+                <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <p style="font-style: italic;">"What are the main positive and negative impacts of [computing innovation] on [field/society]? Give 2-3 examples of each."</p>
                 </div>
-                <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea; margin-bottom: 15px;">
-                    <p><strong>Q: I'm worried the AI information I found was inaccurate.</strong></p>
-                    <p>A: Great instinct! Always verify important information. Cross-reference with multiple sources, check dates to ensure information is current, and look for consensus among reliable sources.</p>
+                <p style="margin-top: 1rem;">Read the responses. Which topics generated responses that seemed most interesting, substantive, and worth exploring deeper?</p>
+                <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <p style="color: #666; font-size: 0.9rem;"><em>Record your research findings in your answer document...</em></p>
                 </div>
-                <div style="background-color: white; padding: 15px; border-radius: 4px; border-left: 3px solid #667eea;">
-                    <p><strong>Q: I don't feel like I understand how AI works yet.</strong></p>
-                    <p>A: That's completely normal! You're just getting started. Understanding develops over time and with multiple exposures. Week 1 will give you much deeper insight. For now, focus on recognizing that AI works through pattern recognition and prediction.</p>
+            </div>
+
+            <div class="activity-step" data-step="3">
+                <strong>Step 3: Narrow Your Focus</strong><br>
+                Choose your top choice and refine it. Rather than just "AI," make it specific. Examples of narrowed topics:
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>Instead of "AI in healthcare" → "AI in early cancer detection using medical imaging"</li>
+                    <li>Instead of "social media" → "How recommendation algorithms shape what we see on social media"</li>
+                    <li>Instead of "autonomous vehicles" → "The impact of self-driving cars on employment and urban planning"</li>
+                </ul>
+            </div>
+
+            <div class="activity-step" data-step="4">
+                <strong>Step 4: Consider Your Questions</strong><br>
+                For your chosen topic, think about:
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li>What do you want to know about this innovation?</li>
+                    <li>What impacts are you most interested in exploring (positive, negative, both)?</li>
+                    <li>Who is affected by this innovation?</li>
+                    <li>What might you investigate further?</li>
+                    <li>Why does this topic matter to you personally?</li>
+                </ul>
+                <div style="background: #f5f5f5; padding: 1rem; margin-top: 0.5rem; border-radius: 4px;">
+                    <p style="color: #666; font-size: 0.9rem;"><em>Record your reflections in your answer document...</em></p>
+                </div>
+            </div>
+
+            <div class="activity-step" data-step="5">
+                <strong>Step 5: Record Your Final Topic Proposal</strong><br>
+                Write your final project topic in your answer document, including:
+                <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                    <li><strong>Your topic:</strong> (in the format "The Impact of [Computing Innovation] on [Field/Society]")</li>
+                    <li><strong>Why it interests you:</strong> (2-3 sentences explaining your personal connection to this topic)</li>
+                    <li><strong>What you hope to learn:</strong> (What aspects of this topic are you most curious about?)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Formative Assessment -->
+        <div class="formative-assessment">
+            <div class="assessment-header">
+                <div class="assessment-target">🎯</div>
+                <h3>Quick Check: Lesson 0.4</h3>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 1</div>
+                <div class="question-type">Multiple Choice</div>
+                <div class="question-text">What is the best approach for choosing your final project topic?</div>
+                <div class="option">
+                    <input type="radio" name="q7" value="a" id="q7a">
+                    <label for="q7a">A) Choose the most popular computing innovation everyone is talking about</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q7" value="b" id="q7b">
+                    <label for="q7b">B) Pick something related to your interests, major, or something you're genuinely curious about</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q7" value="c" id="q7c">
+                    <label for="q7c">C) Choose based only on what will be easiest to research</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q7" value="d" id="q7d">
+                    <label for="q7d">D) Wait to see what your classmates choose</label>
+                </div>
+                <button onclick="checkAnswer('q7', 'b', 'Correct! Choosing a topic you care about makes the research more engaging and your project stronger. You have the freedom to explore what matters to you.')">Show Answer</button>
+                <div class="answer-feedback"></div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 2</div>
+                <div class="question-type">True/False</div>
+                <div class="question-text">Your final project topic must be extremely narrow from the start and cannot be refined as you learn more.</div>
+                <div class="option">
+                    <input type="radio" name="q8" value="true" id="q8a">
+                    <label for="q8a">True</label>
+                </div>
+                <div class="option">
+                    <input type="radio" name="q8" value="false" id="q8b">
+                    <label for="q8b">False</label>
+                </div>
+                <button onclick="checkAnswer('q8', 'false', 'False! Start with a broader topic, then narrow it as you research and learn. Your topic will likely evolve throughout the course as you discover more.')">Show Answer</button>
+                <div class="answer-feedback"></div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 3</div>
+                <div class="question-type">Short Answer</div>
+                <div class="question-text">What is your preliminary final project topic? (You can refine this later as you learn more.)</div>
+                <textarea class="short-answer" placeholder="Your answer here..."></textarea>
+                <button onclick="showFeedback(this)">Check My Thinking</button>
+                <div class="answer-feedback info">
+                    <strong>Excellent!</strong> You've identified a starting topic for your course-long project. As you progress through CSC101, you'll research this topic in depth, create artifacts, and present your findings. This is an exciting opportunity to explore something meaningful!
                 </div>
             </div>
         </div>
 
-        <!-- Key Concepts Reference -->
-        <div style="background-color: #fff9e6; padding: 30px; border-radius: 8px; margin-top: 40px; border-left: 4px solid #ffc107;">
-            <h2 style="border: none; padding-left: 0; margin-top: 0; color: #ff6f00;">Quick Reference: Key Concepts</h2>
-            
-            <p><strong>Bookmark this section!</strong> As the course progresses, you'll return to these definitions frequently.</p>
+        <!-- What's Coming Next -->
+        <div class="whats-next">
+            <h3>🚀 Chapter 0 Complete!</h3>
+            <p>Congratulations! You've completed Chapter 0. You now understand what computing innovations are, how to communicate with AI effectively, how to use it as a research tool responsibly, and you have a project topic you're excited to explore.</p>
+            <div class="next-lesson-teaser">
+                <strong>Chapter 1: What is AI, Really?</strong> — In the next chapter, we dive deeper into artificial intelligence. You'll learn how machine learning works, explore neural networks, understand computer vision, and discover how AI learns from data. Your understanding will grow from "I know what AI is" to "I understand how AI actually works."
+            </div>
+        </div>
+    </section>
 
-            <table style="margin-top: 20px;">
-                <tr>
-                    <th>Concept</th>
-                    <th>Simple Definition</th>
-                    <th>Why It Matters</th>
-                </tr>
-                <tr>
-                    <td><strong>Computing Innovation</strong></td>
-                    <td>A new technology with significant societal impact</td>
-                    <td>Identifies what we'll study all semester</td>
-                </tr>
-                <tr>
-                    <td><strong>AI</strong></td>
-                    <td>Machines that perform tasks requiring human intelligence</td>
-                    <td>Foundational concept for understanding modern technology</td>
-                </tr>
-                <tr>
-                    <td><strong>Machine Learning</strong></td>
-                    <td>AI that learns from data rather than pre-written rules</td>
-                    <td>Most powerful form of modern AI</td>
-                </tr>
-                <tr>
-                    <td><strong>Prompt Engineering</strong></td>
-                    <td>Writing clear questions to get better AI responses</td>
-                    <td>Practical skill for working with AI</td>
-                </tr>
-                <tr>
-                    <td><strong>Data</strong></td>
-                    <td>Information that AI systems learn from</td>
-                    <td>Quality of data determines quality of AI</td>
-                </tr>
-                <tr>
-                    <td><strong>Bias</strong></td>
-                    <td>Systematic errors in AI systems, often from biased data</td>
-                    <td>Critical ethical issue affecting real people</td>
-                </tr>
-                <tr>
-                    <td><strong>Digital Divide</strong></td>
-                    <td>Unequal access to technology and internet</td>
-                    <td>Not everyone benefits equally from innovation</td>
-                </tr>
-                <tr>
-                    <td><strong>Societal Impact</strong></td>
-                    <td>Effects of technology on people and communities</td>
-                    <td>Technology is never neutral—it affects how society functions</td>
-                </tr>
-            </table>
+    <!-- Chapter Summary -->
+    <section class="chapter-summary">
+        <h2>Chapter Summary: How Tech is Changing the World</h2>
+        <p style="margin-bottom: 1.5rem;"><strong>You've completed an important introductory chapter. Here's what you've accomplished:</strong></p>
+
+        <div class="summary-list">
+            <div class="summary-item">
+                <strong>Understanding Computing Innovation</strong><br>
+                You now understand what computing innovations are and can identify examples from everyday life
+            </div>
+            <div class="summary-item">
+                <strong>AI Communication Skills</strong><br>
+                You've learned how to craft effective prompts and refine them iteratively to get better results
+            </div>
+            <div class="summary-item">
+                <strong>Research & Critical Thinking</strong><br>
+                You know how to use AI as a research tool while maintaining healthy skepticism and verifying information
+            </div>
+            <div class="summary-item">
+                <strong>Project Foundation</strong><br>
+                You've identified a computing innovation that interests you and proposed a course-long research project
+            </div>
+            <div class="summary-item">
+                <strong>Learning Progression</strong><br>
+                You understand the basics needed to dive deeper into how AI and computing actually work
+            </div>
+            <div class="summary-item">
+                <strong>Foundational Skills</strong><br>
+                You're equipped with prompt engineering and information literacy skills you'll use throughout the course
+            </div>
         </div>
 
-    </div>
+        <div style="margin-top: 2rem; padding: 1.5rem; background: white; border-left: 4px solid #7b1fa2; border-radius: 4px;">
+            <h3 style="color: #7b1fa2; margin-bottom: 1rem;">Key Takeaways</h3>
+            <ul style="margin-left: 1rem; line-height: 1.8;">
+                <li><strong>Computing innovations</strong> are creations or modifications of computing artifacts, processes, or systems that have significant societal impact</li>
+                <li><strong>AI systems</strong> don't "think"—they predict likely next words based on patterns learned during training</li>
+                <li><strong>Prompt quality matters:</strong> More specific, detailed prompts produce more useful AI responses</li>
+                <li><strong>Information literacy:</strong> Always verify important information from reliable sources, don't blindly trust AI outputs</li>
+                <li><strong>Your project topic</strong> should be something that genuinely interests you for maximum engagement and learning</li>
+            </ul>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p><strong>CSC101: Intro to Computing & AI - Week 0: How Tech is Changing the World</strong></p>
-        <p>This chapter aligns with course learning outcomes: LO1, LO6, LO7, and LO8</p>
-        <p>For questions or concerns about course content, contact your instructor through Brightspace or email.</p>
-        <p style="margin-top: 15px; font-style: italic;">Last Updated: January 2025 | Estimated Duration: 8-10 hours including all activities and assignments</p>
-        <p style="margin-top: 10px; color: #999; font-size: 0.85em;">This chapter is the foundation for CSC101: Intro to Computing & AI at the University of Rhode Island, prepared with CuraCourse.</p>
-    </div>
+    <!-- Skills Developed -->
+    <section class="lesson" style="background: linear-gradient(135deg, #f3e5f5 0%, #f9f7ff 100%); border: 2px solid #9c27b0;">
+        <h3 style="color: #7b1fa2; margin-bottom: 1rem;">💪 Skills You've Developed in Chapter 0</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 3px solid #7b1fa2;">
+                <strong>Technical Skills:</strong>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <li>Using AI chatbots and tools</li>
+                    <li>Crafting effective prompts</li>
+                    <li>Iterative prompt refinement</li>
+                    <li>Evaluating AI responses</li>
+                </ul>
+            </div>
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 3px solid #7b1fa2;">
+                <strong>Critical Thinking Skills:</strong>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <li>Questioning AI accuracy</li>
+                    <li>Verifying information independently</li>
+                    <li>Synthesizing multiple sources</li>
+                    <li>Identifying computing innovations</li>
+                </ul>
+            </div>
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 3px solid #7b1fa2;">
+                <strong>Research & Literacy Skills:</strong>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <li>Using AI for research</li>
+                    <li>Source evaluation and verification</li>
+                    <li>Topic narrowing and refinement</li>
+                    <li>Information synthesis</li>
+                </ul>
+            </div>
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 3px solid #7b1fa2;">
+                <strong>Communication Skills:</strong>
+                <ul style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <li>Articulating ideas clearly</li>
+                    <li>Writing concise definitions</li>
+                    <li>Asking clarifying questions</li>
+                    <li>Providing detailed rationales</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
+    <!-- Course Learning Outcomes Alignment -->
+    <section class="lesson" style="background: #f0f7ff; border: 1px solid var(--primary-blue);">
+        <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">🎯 Course Learning Outcomes Addressed in Chapter 0</h3>
+        
+        <p style="margin-bottom: 1rem;">By completing Chapter 0, you're making progress toward several course-wide learning outcomes:</p>
+
+        <div style="display: grid; gap: 1rem;">
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 4px solid var(--primary-blue);">
+                <strong>LO1: Describe basic technology used in AI and machine learning</strong>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem;">✓ You've learned how AI systems generate responses through pattern recognition and prediction</p>
+            </div>
+
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 4px solid var(--primary-blue);">
+                <strong>LO6: Evaluate ethical, cultural, and social impacts of computing innovations</strong>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem;">✓ You've selected a computing innovation to analyze its societal impact throughout the course</p>
+            </div>
+
+            <div style="background: white; padding: 1rem; border-radius: 4px; border-left: 4px solid var(--primary-blue);">
+                <strong>LO8: Use AI tools effectively and responsibly</strong>
+                <p style="margin-top: 0.5rem; font-size: 0.95rem;">✓ You've developed skills in prompt crafting, information verification, and responsible AI use</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connection to Course Structure -->
+    <section class="lesson" style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border: 2px solid var(--hint-green);">
+        <h3 style="color: var(--hint-green); margin-bottom: 1rem;">🗺️ Your Learning Path Through CSC101</h3>
+
+        <p style="margin-bottom: 1.5rem;">Here's how Chapter 0 fits into your overall learning journey:</p>
+
+        <div style="position: relative; padding: 1rem 0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--accent-orange); text-align: center;">
+                    <div style="font-weight: bold; color: var(--accent-orange); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapter 0</div>
+                    <div style="font-size: 0.9rem;">How Tech is Changing the World</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Foundation & Introduction</div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--hint-green);">→</div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--primary-blue);">
+                    <div style="font-weight: bold; color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapters 1-3</div>
+                    <div style="font-size: 0.9rem;">Computing, AI & Society</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Deep dive into AI, ML, and related concepts</div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--hint-green);">→</div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--primary-blue);">
+                    <div style="font-weight: bold; color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapters 4-6</div>
+                    <div style="font-size: 0.9rem;">Creative Programming</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Build and create with code</div>
+                </div>
+
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--primary-blue);">
+                    <div style="font-weight: bold; color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapters 7-9</div>
+                    <div style="font-size: 0.9rem;">Cybersecurity & Impacts</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Internet, security, and emerging tech</div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--hint-green);">→</div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--primary-blue);">
+                    <div style="font-weight: bold; color: var(--primary-blue); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapters 10-12</div>
+                    <div style="font-size: 0.9rem;">Data & Storytelling</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Data analysis and visualization</div>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--hint-green);">→</div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; border-top: 4px solid var(--accent-orange);">
+                    <div style="font-weight: bold; color: var(--accent-orange); margin-bottom: 0.5rem; font-size: 1.1rem;">Chapter 13</div>
+                    <div style="font-size: 0.9rem;">Final Project & Exam</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Present your research & demonstrate mastery</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="callout hint" style="margin-top: 1.5rem;">
+            <h4><span class="callout-icon">💡</span> Your Project Throughout the Course</h4>
+            <p style="margin-top: 0.5rem;">Notice that your final project topic (chosen in Chapter 0, Lesson 4) will be refined and developed across every chapter. You'll create artifacts, conduct research, analyze impacts, and build multimedia presentations. By the end of the course, you'll have a comprehensive exploration of your computing innovation and its impact on society.</p>
+        </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="lesson">
+        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">📋 Before You Move to Chapter 1</h3>
+        
+        <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-orange);">
+<h4 style="color: var(--accent-orange); margin-bottom: 1rem;">✅ Completion Checklist</h4>
+<div style="display: grid; gap: 0.8rem;">
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Completed all 4 lessons (Lessons 0.1 - 0.4)</label>
 </div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Watched both videos (Computer Science is Changing Everything, Problem Solving with AI)</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Completed Part 1: Talking to Machines (basic prompts + analysis)</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Completed Part 2: Exploring Computing Innovations with AI</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Completed Part 3: Final Project Topic Proposal</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Reviewed the course syllabus</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Posted learner introduction in Discussion #0</label>
+</div>
+<div style="display: flex; align-items: center; gap: 0.8rem;">
+<input type="checkbox" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+<label style="cursor: pointer;">Submitted Assignment: Intro to Computing & AI (all parts)</label>
+</div>
+</div>
+</div>
+<div class="callout info" style="margin-top: 1.5rem;">
+            <h4><span class="callout-icon">ℹ️</span> Assignment Submission</h4>
+            <p style="margin-top: 0.5rem;"><strong>Due Date:</strong> Check your course syllabus and Brightspace calendar for exact deadlines</p>
+            <p style="margin-top: 0.5rem;"><strong>How to Submit:</strong></p>
+            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                <li>Go to your course Brightspace site</li>
+                <li>Find the "Chapter 0 Assignment" folder</li>
+                <li>Upload your completed answer document (make sure it's named correctly: lastname_intro)</li>
+                <li>Double-check that all parts (1, 2, and 3) are complete</li>
+            </ul>
+            <p style="margin-top: 0.5rem;"><strong>Format:</strong> Google Document, Word Document, or PDF</p>
+        </div>
+
+        <div class="callout hint" style="margin-top: 1.5rem;">
+            <h4><span class="callout-icon">💡</span> Pro Tips for Success</h4>
+            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                <li><strong>Save as you go:</strong> Don't lose your work—save frequently while working on the assignment</li>
+                <li><strong>Test your prompts:</strong> Spend time experimenting with AI prompts; the better you understand it now, the better you'll use it throughout the course</li>
+                <li><strong>Be thorough with reflection:</strong> Don't rush the reflection questions—they help you consolidate learning</li>
+                <li><strong>Choose a project topic you truly care about:</strong> You'll be working with this topic all semester, so make it something meaningful</li>
+                <li><strong>Check the rubric:</strong> Review the assignment rubric on Brightspace to understand exactly how your work will be graded</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Final Reflection -->
+    <section class="lesson">
+        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem;">📝 Chapter 0 Reflection: Looking Back & Looking Ahead</h3>
+        
+        <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px;">
+            <p style="margin-bottom: 1rem;"><strong>Take a moment to reflect on your learning before moving to Chapter 1:</strong></p>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 4px; margin-bottom: 1rem;">
+                <p style="margin-bottom: 0.8rem;"><strong>Reflection Question 1:</strong> What surprised you most about how AI works?</p>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #666;"><em>Take 2-3 minutes to write your thoughts...</em></p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px; margin-bottom: 1rem;">
+                <p style="margin-bottom: 0.8rem;"><strong>Reflection Question 2:</strong> How has your understanding of "computing innovation" changed after this chapter?</p>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #666;"><em>Consider what you thought before vs. now...</em></p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px; margin-bottom: 1rem;">
+                <p style="margin-bottom: 0.8rem;"><strong>Reflection Question 3:</strong> What's one way you'll use AI differently now that you understand how it works?</p>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #666;"><em>Think about your daily interactions with technology...</em></p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px;">
+                <p style="margin-bottom: 0.8rem;"><strong>Reflection Question 4:</strong> How confident are you about your final project topic? What additional information would help?</p>
+                <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #666;"><em>Be honest about your comfort level—this helps your instructor support you better...</em></p>
+            </div>
+        </div>
+
+        <div class="callout info" style="margin-top: 1.5rem;">
+            <h4><span class="callout-icon">ℹ️</span> Reflection Tip</h4>
+            <p style="margin-top: 0.5rem;">Writing reflections helps solidify your learning. Don't skip these! They don't need to be perfect—just honest and thoughtful. Consider including these reflections in your assignment document.</p>
+        </div>
+    </section>
+
+    <!-- Getting Help -->
+    <section class="lesson" style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); border: 2px solid var(--hint-green);">
+        <h3 style="color: var(--hint-green); margin-bottom: 1rem;">🤝 Getting Help in This Course</h3>
+
+        <p style="margin-bottom: 1.5rem;">If you get stuck or have questions, here are your resources:</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div style="background: white; padding: 1.5rem; border-radius: 4px;">
+                <h4 style="color: var(--hint-green); margin-bottom: 1rem;">📍 Discussion Forum</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.95rem;">Post questions in the "General Discussion" or "Assignment Questions" topics on the course Brightspace site. Your classmates and instructor monitor these regularly.</p>
+                <p style="font-size: 0.9rem; color: #666;"><strong>Best for:</strong> Content questions, assignment clarifications, technical issues</p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px;">
+                <h4 style="color: var(--hint-green); margin-bottom: 1rem;">🤖 AI as Tutor</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.95rem;">Use an AI tool (LibreChat, ChatGPT, Claude, etc.) to help explain concepts further or clarify instructions. Try prompts like "Explain [concept] in simpler terms" or "I'm confused about [topic], can you help?"</p>
+                <p style="font-size: 0.9rem; color: #666;"><strong>Best for:</strong> Understanding concepts, getting alternative explanations</p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px;">
+                <h4 style="color: var(--hint-green); margin-bottom: 1rem;">⏰ Virtual Help Hours</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.95rem;">Attend regularly scheduled virtual help hours posted in your course on Brightspace. You can ask questions in real-time and get immediate feedback.</p>
+                <p style="font-size: 0.9rem; color: #666;"><strong>Best for:</strong> Live interaction, detailed explanations, real-time feedback</p>
+            </div>
+
+            <div style="background: white; padding: 1.5rem; border-radius: 4px;">
+                <h4 style="color: var(--hint-green); margin-bottom: 1rem;">✉️ Email Your Instructor</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.95rem;">For course-related questions that need individual attention, email your instructor after trying the above methods first.</p>
+                <p style="font-size: 0.9rem; color: #666;"><strong>Best for:</strong> Personal concerns, grade appeals, special accommodations</p>
+            </div>
+        </div>
+
+        <div class="callout warning" style="margin-top: 1.5rem;">
+            <h4><span class="callout-icon">⚠️</span> Important Reminders</h4>
+            <ul style="margin-left: 1rem; margin-top: 0.5rem;">
+                <li><strong>Check syllabus first:</strong> Many common questions are answered in the syllabus—save everyone time by checking there first</li>
+                <li><strong>Be respectful:</strong> When posting in discussions, be kind and constructive. We're all learning together</li>
+                <li><strong>Use your resources:</strong> Don't struggle alone! The course is designed with support built in</li>
+                <li><strong>Plan ahead:</strong> Submit questions early rather than right before a deadline—you'll get better help</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Encouraging Message -->
+    <section class="lesson" style="background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%); border: 2px solid var(--primary-blue); text-align: center;">
+        <h3 style="color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.4rem;">🌟 Ready for the Journey?</h3>
+        
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            You've completed Chapter 0 and taken your first steps into the world of computing and AI. You now understand how these technologies work at a fundamental level, you've practiced communicating with AI systems, and you've chosen a meaningful project topic to explore throughout the course.
+        </p>
+
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+            In the chapters ahead, you'll dive deeper into how AI learns, how to code and create with computing, how to keep information secure, and how to tell powerful stories with data. By the end of CSC101, you'll have the knowledge and skills to understand, evaluate, and create computing innovations that impact society.
+        </p>
+
+        <p style="font-size: 1.1rem; color: var(--primary-blue); font-weight: 600; margin-bottom: 1rem;">
+            You've got this. Let's build something amazing together! 🚀
+        </p>
+
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 4px solid var(--primary-blue);">
+            <p style="font-size: 0.95rem; color: #666;"><strong>Questions before you go?</strong> Review the syllabus, check the discussion forum, or reach out to your instructor. We're here to support your learning!</p>
+        </div>
+    </section>
+
+    <!-- Footer with Course Info -->
+    <footer style="background: var(--dark-gray); color: white; padding: 2rem; margin-top: 3rem; text-align: center;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <h3 style="margin-bottom: 1rem; font-size: 1.3rem;">CSC101: Introduction to Computing & AI</h3>
+            <p style="margin-bottom: 0.8rem; font-size: 1rem;">Spring 2026 | Blended Learning Format</p>
+            <p style="margin-bottom: 1rem; font-size: 0.9rem; opacity: 0.9;">For questions or technical support, refer to the course Brightspace site or contact your instructor</p>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1.5rem; margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.8;">
+                <p>© 2026 University of Rhode Island | All rights reserved</p>
+                <p style="margin-top: 0.5rem;">Chapter 0: How Tech is Changing the World | Week 0</p>
+                <p style="margin-top: 0.3rem; font-size: 0.8rem;">Last Updated: January 2026</p>
+                <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
+                    Course Format: Blended Learning (Online asynchronous lectures + Weekly in-person labs)<br>
+                    Textbook: CuraCourse Intro to Computing & AI
+                </p>
+            </div>
+        </div>
+    </footer>
+</main>
 
 <!-- JavaScript for Interactive Elements -->
 <script>
-    function toggleAnswer(elementId) {
-        const answerBox = document.getElementById(elementId);
-        answerBox.classList.toggle('show');
+    // Function to check answer for multiple choice/true-false
+    function checkAnswer(radioName, correctValue, explanation) {
+        const selected = document.querySelector(`input[name="${radioName}"]:checked`);
+        
+        if (!selected) {
+            alert('Please select an answer before checking.');
+            return;
+        }
+
+        const question = selected.closest('.question');
+        const feedback = question.querySelector('.answer-feedback');
+        
+        if (selected.value === correctValue) {
+            feedback.classList.add('correct', 'show');
+            feedback.innerHTML = `
+                <strong>✓ Correct!</strong> ${explanation}
+            `;
+        } else {
+            feedback.classList.add('info', 'show');
+            feedback.innerHTML = `
+                <strong>Not quite right. Try again or</strong> ${explanation}
+            `;
+        }
     }
 
-    // Smooth scrolling for internal links
+    // Function to show feedback for short answer questions
+    function showFeedback(button) {
+        const question = button.closest('.question');
+        const feedback = question.querySelector('.answer-feedback');
+        
+        feedback.classList.add('show');
+    }
+
+    // Smooth scroll behavior
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 
-    // Track completion (basic example - would need backend in production)
-    const assessmentQuestions = document.querySelectorAll('input[type="radio"]');
-    let answeredCount = 0;
-
-    assessmentQuestions.forEach(question => {
-        question.addEventListener('change', function() {
-            const questionGroup = this.closest('.question-group');
-            if (questionGroup && questionGroup.querySelector('input[type="radio"]:checked')) {
-                answeredCount++;
+    // Add active state to navigation
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY + 100;
+        
+        document.querySelectorAll('.lesson').forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                // Could add visual indicator here
             }
         });
     });
 
-    // Add print functionality support
+    // Print-friendly functionality
     function printChapter() {
         window.print();
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('CSC101 Week 0 Chapter loaded successfully');
-        console.log('Students have completed:', answeredCount, 'assessment questions');
+    // Keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && e.target.matches('input[type="radio"]')) {
+            e.target.closest('.question').querySelector('button').click();
+        }
+    });
+
+    // Checkbox tracking for completion checklist (optional enhancement)
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            // Could add localStorage to persist checked state
+            localStorage.setItem(`checkbox-${checkbox.parentElement.textContent}`, checkbox.checked);
+        });
+    });
+
+    // Load saved checkbox states on page load
+    window.addEventListener('load', () => {
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            const saved = localStorage.getItem(`checkbox-${checkbox.parentElement.textContent}`);
+            if (saved) {
+                checkbox.checked = JSON.parse(saved);
+            }
+        });
+    });
+
+    // Add print button functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        // Could add a floating print button if desired
+        const printButton = document.createElement('button');
+        printButton.innerHTML = '🖨️ Print Chapter';
+        printButton.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 99;
+            transition: all 0.3s;
+        `;
+        printButton.addEventListener('mouseover', () => {
+            printButton.style.background = '#0052a3';
+            printButton.style.transform = 'scale(1.05)';
+        });
+        printButton.addEventListener('mouseout', () => {
+            printButton.style.background = 'var(--primary-blue)';
+            printButton.style.transform = 'scale(1)';
+        });
+        printButton.addEventListener('click', printChapter);
+        // Uncomment to enable:
+        // document.body.appendChild(printButton);
+    });
+
+    // Table of Contents generation (optional enhancement)
+    function generateTableOfContents() {
+        const toc = [];
+        document.querySelectorAll('h2, h3').forEach(heading => {
+            if (heading.textContent && !heading.closest('footer')) {
+                toc.push({
+                    level: heading.tagName,
+                    text: heading.textContent,
+                    id: heading.id || `heading-${Math.random().toString(36).substr(2, 9)}`
+                });
+                if (!heading.id) heading.id = `heading-${Math.random().toString(36).substr(2, 9)}`;
+            }
+        });
+        return toc;
+    }
+
+    // Video tracking (for LMS integration)
+    document.querySelectorAll('.video-embed').forEach(videoContainer => {
+        const videoTitle = videoContainer.querySelector('.video-title').textContent;
+        // Could send tracking data to LMS when videos are watched
+        console.log('Video available:', videoTitle);
     });
 </script>
-</body> </html>
+<body> <html>
