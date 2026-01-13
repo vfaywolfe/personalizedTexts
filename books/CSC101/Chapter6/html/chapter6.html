@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: The Internet - CSC101 Intro to Computing & AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .chapter-intro {
+            padding: 40px 30px;
+            background: #f9f9f9;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .chapter-intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .chapter-intro p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .learning-outcomes {
+            background: #e8f4f8;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .learning-outcomes h3 {
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+        
+        .learning-outcomes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .learning-outcomes li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        main {
+            padding: 40px 30px;
+        }
+        
+        .lesson {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f5f9ff;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .lesson-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .lesson h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .lesson-time {
+            color: #999;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .lesson-content {
+            margin: 25px 0;
+        }
+        
+        .learning-objective {
+            background: white;
+            padding: 20px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .learning-objective strong {
+            color: #28a745;
+        }
+        
+        .concept-box {
+            background: #fffbf0;
+            padding: 20px;
+            border-left: 4px solid #ff9800;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .concept-box h4 {
+            color: #ff9800;
+            margin-bottom: 10px;
+        }
+        
+        .callout {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 5px solid;
+        }
+        
+        .callout.warning {
+            background: #fff3cd;
+            border-left-color: #ff6b6b;
+        }
+        
+        .callout.warning h4 {
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+        
+        .callout.hint {
+            background: #e7f3ff;
+            border-left-color: #2196F3;
+        }
+        
+        .callout.hint h4 {
+            color: #2196F3;
+            margin-bottom: 8px;
+        }
+        
+        .callout.info {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+        
+        .callout.info h4 {
+            color: #4caf50;
+            margin-bottom: 8px;
+        }
+        
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: #000;
+        }
+        
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .example-box {
+            background: #f0f4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+        
+        .example-box code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .formative-assessment {
+            background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+        }
+        
+        .formative-assessment h4 {
+            color: #ff9800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3em;
+        }
+        
+        .assessment-question {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .assessment-question p {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .assessment-option {
+            margin: 10px 0;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .assessment-option input[type="radio"],
+        .assessment-option input[type="checkbox"] {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .assessment-answer {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 5px;
+        }
+        
+        .assessment-answer.show {
+            display: block;
+        }
+        
+        .assessment-answer h5 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+        
+        .show-answer-btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        
+        .show-answer-btn:hover {
+            background: #764ba2;
+        }
+        
+        .whats-next {
+            background: #e3f2fd;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 5px solid #2196F3;
+            border-radius: 5px;
+        }
+        
+        .whats-next h4 {
+            color: #1976d2;
+            margin-bottom: 12px;
+        }
+        
+        .guided-activity {
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+            padding: 30px;
+            margin: 30px 0;
+            border: 2px solid #00bcd4;
+            border-radius: 8px;
+        }
+        
+        .guided-activity h3 {
+            color: #00838f;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        
+        .guided-activity h4 {
+            color: #00838f;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+        
+        .activity-step {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #00bcd4;
+        }
+        
+        .activity-step h5 {
+            color: #00838f;
+            margin-bottom: 10px;
+        }
+        
+        .activity-step p {
+            margin: 8px 0;
+        }
+        
+        .summary-section {
+            background: #f0f4ff;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+            border-top: 4px solid #667eea;
+        }
+        
+        .summary-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        
+        .summary-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .summary-section li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .summary-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .key-terms {
+            background: #f5f9ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .key-terms h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .term {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .term strong {
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            main {
+                padding: 20px;
+            }
+            
+            .lesson {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chapter 6: The Internet</h1>
+            <p>How Billions of Devices Connect and Share Information Across the World</p>
+        </header>
+        
+        <!-- CHAPTER INTRODUCTION -->
+        <section class="chapter-intro">
+            <h2>Welcome to Chapter 6</h2>
+            <p>Every time you type a web address into your browser, send an email, watch a video, or use social media, you're using the Internet. But how does it actually work? In this chapter, you'll explore the technology that makes global connectivity possible.</p>
+            
+            <p>You'll discover the physical infrastructure that connects billions of devices—from fiber optic cables buried underground to wireless signals traveling through the air. You'll learn how data gets broken into tiny pieces called packets and travels across routers to reach its destination. You'll understand how domain names work and how your computer finds servers on the other side of the world.</p>
+            
+            <p>Beyond the technical "how," you'll also examine the <strong>digital divide</strong>—the gap between those with access to the Internet and those without—and explore web accessibility to ensure that the digital world is inclusive for everyone, including people with disabilities.</p>
+            
+            <p>By the end of this chapter, you'll create your own website using Google Sites, understanding not just how to build something, but how it actually exists and travels across the Internet. You'll be ready to engage thoughtfully with the technology that connects us all.</p>
+            
+            <div class="learning-outcomes">
+                <h3>Chapter 6 Learning Outcomes</h3>
+                <p>By the end of this chapter, you will be able to:</p>
+                <ul>
+                    <li><strong>LO6.1:</strong> Explain what the Internet is and how it differs from the World Wide Web</li>
+                    <li><strong>LO6.2:</strong> Describe how search engines work and how they tailor results to individual users</li>
+                    <li><strong>LO6.3:</strong> Identify the physical infrastructure that connects the Internet</li>
+                    <li><strong>LO6.4:</strong> Explain how data travels across networks using packets and routers</li>
+                    <li><strong>LO6.5:</strong> Understand IP addresses and the Domain Name System (DNS)</li>
+                    <li><strong>LO6.6:</strong> Describe how websites are stored and accessed using HTTP and HTML</li>
+                    <li><strong>LO6.7:</strong> Recognize the digital divide and its impact on society</li>
+                    <li><strong>LO6.8:</strong> Apply web accessibility principles to digital design</li>
+                    <li><strong>LO6.9:</strong> Create and publish a website using Google Sites</li>
+                </ul>
+            </div>
+        </section>
+        
+        <main>
+            <!-- LESSON 6.1 -->
+            <section class="lesson">
+                <div class="lesson-number">Lesson 6.1</div>
+                <h3>What Is the Internet, Really?</h3>
+                <div class="lesson-time">⏱️ 10-12 minutes</div>
+                
+                <div class="learning-objective">
+                    <strong>Learning Objective (LO6.1):</strong> Explain what the Internet is and how it differs from the World Wide Web
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Most people use the terms "Internet" and "World Wide Web" interchangeably, but they're not the same thing. Understanding the difference is your first step to understanding how digital connectivity works.</p>
+                    
+                    <div class="concept-box">
+                        <h4>The Internet: A Network of Networks</h4>
+                        <p>The <strong>Internet</strong> is the physical infrastructure—the actual hardware and connections—that links billions of devices together. It's like the roads, highways, and electrical lines that connect cities.</p>
+                        <p>Think of it as:</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Fiber optic cables running under oceans and across continents</li>
+                            <li>Satellites orbiting Earth</li>
+                            <li>WiFi routers and cellular towers</li>
+                            <li>Your computer, phone, smart watch, and millions of other devices</li>
+                            <li>Servers that store information</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h4>The World Wide Web: Information Shared Over the Internet</h4>
+                        <p>The <strong>World Wide Web (WWW)</strong> is just one service that uses the Internet. It's the collection of websites you view in your browser—created using HTML and transferred using HTTP.</p>
+                        <p>But the Internet also supports:</p>
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Email</li>
+                            <li>Video streaming (Netflix, YouTube)</li>
+                            <li>Online gaming</li>
+                            <li>Video calls (Zoom, FaceTime)</li>
+                            <li>Cloud storage (Google Drive, Dropbox)</li>
+                            <li>Social media</li>
+                        </ul>
+                    </div>
+                    
+                    <h4 style="margin-top: 30px; color: #667eea;">Watch: What Is the Internet?</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-style: italic; color: #666; margin-top: 10px;">Video: What Is the Internet? (3:44 min)</p>
+                    
+                    <div class="callout info">
+                        <h4>💡 Fun Fact</h4>
+                        <p>The Internet was created in 1969 as a U.S. military research project called ARPANET. It connected just 4 computers. Today, over 5 billion devices are connected to the Internet, and that number grows every day!</p>
+                    </div>
+                    
+                    <div class="example-box">
+                        <h4>Example: When You Send an Email</h4>
+                        <p><strong>Scenario:</strong> You write an email to your friend at another university and hit "send."</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Internet involvement:</strong> Your email travels through fiber optic cables, passes through multiple routers, crosses continents if necessary, and arrives at your friend's email server.</li>
+                            <li><strong>Web involvement:</strong> Neither you nor your friend need to use the "World Wide Web" to receive the email. Your email app uses the Internet, but not the web.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FORMATIVE ASSESSMENT 6.1 -->
+                <div class="formative-assessment">
+                    <h4>🎯 Lesson 6.1 Assessment</h4>
+                    
+                    <div class="assessment-question">
+                        <p><strong>Question 1 (True/False):</strong> The Internet and the World Wide Web are the same thing.</p>
+                        <div class="assessment-option">
+                            <input type="radio" id="q1a" name="q1" value="true">
+                            <label for="q1a">True</label>
+                        </div>
+                        <div class="assessment-option">
+                            <input type="radio" id="q1b" name="q1" value="false">
+                            <label for="q1b">False</label>
+                        </div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('answer1')">Show Answer</button>
+                        <div class="assessment-answer" id="answer1">
+                            <h5>Correct Answer: False</h5>
+                            <p>The Internet is the physical infrastructure (cables, routers, devices) that connects the world. The World Wide Web is one service that runs on top of the Internet. The Internet also supports email, video calls, streaming, and many other services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment-question">
+                        <p><strong>Question 2 (Multiple Choice):</strong> Which of the following is part of the physical Internet infrastructure?</p>
+                        <div class="assessment-option">
+                            <input type="radio" id="q2a" name="q2" value="a">
+                            <label for="q2a">A) HTML files</label>
+                        </div>
+                        <div class="assessment-option">
+                            <input type="radio" id="q2b" name="q2" value="b">
+                            <label for="q2b">B) Fiber optic cables and routers</label>
+                        </div>
+                        <div class="assessment-option">
+                            <input type="radio" id="q2c" name="q2" value="c">
+                            <label for="q2c">C) Web browsers</label>
+                        </div>
+                        <div class="assessment-option">
+                            <input type="radio" id="q2d" name="q2" value="d">
+                            <label for="q2d">D) Search engines</label>
+                        </div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('answer2')">Show Answer</button>
+                        <div class="assessment-answer" id="answer2">
+                            <h5>Correct Answer: B) Fiber optic cables and routers</h5>
+                            <p>These are the physical components that make up the Internet infrastructure. HTML, browsers, and search engines are all services or tools that use the Internet, but they're not part of the infrastructure itself.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment-question">
+                        <p><strong>Question 3 (Short Answer):</strong> Name two services (besides the World Wide Web) that run on the Internet.</p>
+                        <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('answer3')">Show Answer</button>
+                        <div class="assessment-answer" id="answer3">
+                            <h5>Possible Answers:</h5>
+                            <p>Email, video streaming (Netflix, YouTube), online gaming, video calls (Zoom), cloud storage, social media, online shopping, IoT (smart home devices), etc. Any two of these would be correct.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="whats-next">
+                    <h4>What's Coming Next →</h4>
+                    <p>Now that you understand <em>what</em> the Internet is, let's explore how you <em>use</em> it every day. In the next lesson, you'll learn how search engines work and how they find exactly what you're looking for among billions of web pages.</p>
+                </div>
+            </section>
+            
+            <!-- LESSON 6.2 -->
+            <section class="lesson">
+                <div class="lesson-number">Lesson 6.2</div>
+                <h3>How Search Engines Work and Personalize Results</h3>
+                <div class="lesson-time">⏱️ 11-13 minutes</div>
+                
+                <div class="learning-objective">
+                    <strong>Learning Objective (LO6.2):</strong> Describe how search engines work and how they tailor results to individual users
+                </div>
+                
+                <div class="lesson-content">
+                    <p>Every second, Google processes over 40,000 search queries. But how does it instantly return relevant results from billions of web pages? And why does the search result your friend sees look different from yours?</p>
+                    
+                    <div class="concept-box">
+                        <h4>How Search Engines Index the Web</h4>
+                        <p>Search engines use automated programs called <strong>crawlers</strong> or <strong>spiders</strong> that:</p>
+                        <ol style="margin-left: 20px; margin-top: 10px;">
+                            <li>Visit billions of web pages</li>
+                            <li>Read the content and metadata (information about the page)</li>
+                            <li>Store information in massive databases called <strong>indexes</strong></li>
+                            <li>Rank pages based on relevance, quality, and popularity</li>
+                        </ol>
+                        <p style="margin-top: 15px;">When you type a search query, you're not actually searching the live web—you're searching Google's index of the web.</p>
+                    </div>
+                    
+                    <div class="concept-box">
+                        <h4>Personalization: Why Your Results Are Unique</h4>
+                        <p>Search engines track information about you to customize results:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Search history:</strong> What you've searched for before</li>
+                            <li><strong>Location:</strong> Where you are now</li>
+                            <li><strong>Device:</strong> Phone, desktop, tablet</li>
+                            <li><strong>Time of day:</strong> When you're searching</li>
+                            <li><strong>Previous clicks:</strong> Which results you've clicked on</li>
+                        </ul>
+                    </div>
+                    
+                    <h4 style="margin-top: 30px; color: #667eea;">Watch: The Internet - How Search Works</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-style: italic; color: #666; margin-top: 10px;">Video: The Internet - How Search Works (5:12 min)</p>
+                    
+                    <div class="callout warning">
+                        <h4>⚠️ Important: Filter Bubbles</h4>
+                        <p>Because search engines personalize results based on your history, you might end up seeing mostly content that confirms what you already believe. This is called a <strong>filter bubble</strong>. It's important to:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>Search for opposing viewpoints</li>
+                            <li>Check multiple sources</li>
+                            <li>Be aware that your search results may not represent all perspectives</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="example-box">
+                        <h4>Example: Two Friends, Different Results</h4>
+                        <p><strong>Scenario:</strong> You and your friend both search "best restaurants near school" at the same time from the same location.</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Your results:</strong> Show Italian restaurants, vegan cafes, and upscale dining (because that's what you've searched for before)</li>
+                            <li><strong>Your friend's results:</strong> Show fast food, pizza places, and budget-friendly options (based on their search history)</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Why?</strong> Google's algorithm personalizes results based on individual user behavior and preferences.</p>
+                    </div>
+                    
+                    <div class="callout hint">
+                        <h4>💡 Tip: Finding Unbiased Results</h4>
+                        <p>Want to see search results without personalization? Try:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>Using private/incognito browsing mode</li>
+                            <li>Logging out of your Google account</li>
+                            <li>Using a different search engine like DuckDuckGo (which doesn't track you)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- FORMATIVE ASSESSMENT 6.2 -->
+                <div class="formative-assessment">
+                    <h4>🎯 Lesson 6.2 Assessment</h4>
+                    
+                    <div class="assessment-question">
+                        <p><strong>Question 1 (True/False):</strong> When you do a Google search, Google searches the entire live Internet to find your results.</p>
+                        <div class="assessment-option input[type="radio"],
+.assessment-option input[type="checkbox"] {
+cursor: pointer;
+width: 18px;
+height: 18px;
+}
+.assessment-answer {
+                        display: none;
+                        margin-top: 15px;
+                        padding: 15px;
+                        background: #e8f5e9;
+                        border-left: 4px solid #4caf50;
+                        border-radius: 5px;
+                    }
+                    
+                    .assessment-answer.show {
+                        display: block;
+                    }
+                    
+                    .assessment-answer h5 {
+                        color: #2e7d32;
+                        margin-bottom: 8px;
+                    }
+                    
+                    .show-answer-btn {
+                        background: #667eea;
+                        color: white;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        margin-top: 10px;
+                        transition: background 0.3s;
+                    }
+                    
+                    .show-answer-btn:hover {
+                        background: #764ba2;
+                    }
+                    
+                    .whats-next {
+                        background: #e3f2fd;
+                        padding: 25px;
+                        margin: 25px 0;
+                        border-left: 5px solid #2196F3;
+                        border-radius: 5px;
+                    }
+                    
+                    .whats-next h4 {
+                        color: #1976d2;
+                        margin-bottom: 12px;
+                    }
+                    
+                    .guided-activity {
+                        background: linear-gradient(135deg, #e0f7fa 0%, #b2dfdb 100%);
+                        padding: 30px;
+                        margin: 30px 0;
+                        border: 2px solid #00bcd4;
+                        border-radius: 8px;
+                    }
+                    
+                    .guided-activity h3 {
+                        color: #00838f;
+                        margin-bottom: 20px;
+                        font-size: 1.6em;
+                    }
+                    
+                    .guided-activity h4 {
+                        color: #00838f;
+                        margin-bottom: 15px;
+                        margin-top: 20px;
+                    }
+                    
+                    .activity-step {
+                        background: white;
+                        padding: 20px;
+                        margin: 15px 0;
+                        border-radius: 5px;
+                        border-left: 4px solid #00bcd4;
+                    }
+                    
+                    .activity-step h5 {
+                        color: #00838f;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .activity-step p {
+                        margin: 8px 0;
+                    }
+                    
+                    .summary-section {
+                        background: #f0f4ff;
+                        padding: 30px;
+                        margin: 30px 0;
+                        border-radius: 8px;
+                        border-top: 4px solid #667eea;
+                    }
+                    
+                    .summary-section h2 {
+                        color: #667eea;
+                        margin-bottom: 20px;
+                    }
+                    
+                    .summary-section ul {
+                        list-style: none;
+                        padding: 0;
+                    }
+                    
+                    .summary-section li {
+                        padding: 12px 0;
+                        padding-left: 30px;
+                        position: relative;
+                        margin-bottom: 10px;
+                    }
+                    
+                    .summary-section li:before {
+                        content: "→";
+                        position: absolute;
+                        left: 0;
+                        color: #667eea;
+                        font-weight: bold;
+                        font-size: 1.2em;
+                    }
+                    
+                    .key-terms {
+                        background: #f5f9ff;
+                        padding: 20px;
+                        margin: 20px 0;
+                        border-radius: 5px;
+                    }
+                    
+                    .key-terms h4 {
+                        color: #667eea;
+                        margin-bottom: 15px;
+                    }
+                    
+                    .term {
+                        margin: 15px 0;
+                        padding-left: 20px;
+                    }
+                    
+                    .term strong {
+                        color: #667eea;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <header>
+                        <h1>Chapter 6: The Internet</h1>
+                        <p>How Billions of Devices Connect and Share Information Across the World</p>
+                    </header>
+                    
+                    <!-- CHAPTER INTRODUCTION -->
+                    <section class="chapter-intro">
+                        <h2>Welcome to Chapter 6</h2>
+                        <p>Every time you type a web address into your browser, send an email, watch a video, or use social media, you're using the Internet. But how does it actually work? In this chapter, you'll explore the technology that makes global connectivity possible.</p>
+                        
+                        <p>You'll discover the physical infrastructure that connects billions of devices—from fiber optic cables buried underground to wireless signals traveling through the air. You'll learn how data gets broken into tiny pieces called packets and travels across routers to reach its destination. You'll understand how domain names work and how your computer finds servers on the other side of the world.</p>
+                        
+                        <p>Beyond the technical "how," you'll also examine the <strong>digital divide</strong>—the gap between those with access to the Internet and those without—and explore web accessibility to ensure that the digital world is inclusive for everyone, including people with disabilities.</p>
+                        
+                        <p>By the end of this chapter, you'll create your own website using Google Sites, understanding not just how to build something, but how it actually exists and travels across the Internet. You'll be ready to engage thoughtfully with the technology that connects us all.</p>
+                        
+                        <div class="learning-outcomes">
+                            <h3>Chapter 6 Learning Outcomes</h3>
+                            <p>By the end of this chapter, you will be able to:</p>
+                            <ul>
+                                <li><strong>LO6.1:</strong> Explain what the Internet is and how it differs from the World Wide Web</li>
+                                <li><strong>LO6.2:</strong> Describe how search engines work and how they tailor results to individual users</li>
+                                <li><strong>LO6.3:</strong> Identify the physical infrastructure that connects the Internet</li>
+                                <li><strong>LO6.4:</strong> Explain how data travels across networks using packets and routers</li>
+                                <li><strong>LO6.5:</strong> Understand IP addresses and the Domain Name System (DNS)</li>
+                                <li><strong>LO6.6:</strong> Describe how websites are stored and accessed using HTTP and HTML</li>
+                                <li><strong>LO6.7:</strong> Recognize the digital divide and its impact on society</li>
+                                <li><strong>LO6.8:</strong> Apply web accessibility principles to digital design</li>
+                                <li><strong>LO6.9:</strong> Create and publish a website using Google Sites</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <main>
+                        <!-- LESSON 6.1 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.1</div>
+                            <h3>What Is the Internet, Really?</h3>
+                            <div class="lesson-time">⏱️ 10-12 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.1):</strong> Explain what the Internet is and how it differs from the World Wide Web
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>Most people use the terms "Internet" and "World Wide Web" interchangeably, but they're not the same thing. Understanding the difference is your first step to understanding how digital connectivity works.</p>
+                                
+                                <div class="concept-box">
+                                    <h4>The Internet: A Network of Networks</h4>
+                                    <p>The <strong>Internet</strong> is the physical infrastructure—the actual hardware and connections—that links billions of devices together. It's like the roads, highways, and electrical lines that connect cities.</p>
+                                    <p>Think of it as:</p>
+                                    <ul style="margin-top: 10px; margin-left: 20px;">
+                                        <li>Fiber optic cables running under oceans and across continents</li>
+                                        <li>Satellites orbiting Earth</li>
+                                        <li>WiFi routers and cellular towers</li>
+                                        <li>Your computer, phone, smart watch, and millions of other devices</li>
+                                        <li>Servers that store information</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>The World Wide Web: Information Shared Over the Internet</h4>
+                                    <p>The <strong>World Wide Web (WWW)</strong> is just one service that uses the Internet. It's the collection of websites you view in your browser—created using HTML and transferred using HTTP.</p>
+                                    <p>But the Internet also supports:</p>
+                                    <ul style="margin-top: 10px; margin-left: 20px;">
+                                        <li>Email</li>
+                                        <li>Video streaming (Netflix, YouTube)</li>
+                                        <li>Online gaming</li>
+                                        <li>Video calls (Zoom, FaceTime)</li>
+                                        <li>Cloud storage (Google Drive, Dropbox)</li>
+                                        <li>Social media</li>
+                                    </ul>
+                                </div>
+                                
+                                <h4 style="margin-top: 30px; color: #667eea;">Watch: What Is the Internet?</h4>
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p style="font-style: italic; color: #666; margin-top: 10px;">Video: What Is the Internet? (3:44 min)</p>
+                                
+                                <div class="callout info">
+                                    <h4>💡 Fun Fact</h4>
+                                    <p>The Internet was created in 1969 as a U.S. military research project called ARPANET. It connected just 4 computers. Today, over 5 billion devices are connected to the Internet, and that number grows every day!</p>
+                                </div>
+                                
+                                <div class="example-box">
+                                    <h4>Example: When You Send an Email</h4>
+                                    <p><strong>Scenario:</strong> You write an email to your friend at another university and hit "send."</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Internet involvement:</strong> Your email travels through fiber optic cables, passes through multiple routers, crosses continents if necessary, and arrives at your friend's email server.</li>
+                                        <li><strong>Web involvement:</strong> Neither you nor your friend need to use the "World Wide Web" to receive the email. Your email app uses the Internet, but not the web.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMATIVE ASSESSMENT 6.1 -->
+                            <div class="formative-assessment">
+                                <h4>🎯 Lesson 6.1 Assessment</h4>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 1 (True/False):</strong> The Internet and the World Wide Web are the same thing.</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1a" name="q1" value="true">
+                                        <label for="q1a">True</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1b" name="q1" value="false">
+                                        <label for="q1b">False</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer1')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer1">
+                                        <h5>Correct Answer: False</h5>
+                                        <p>The Internet is the physical infrastructure (cables, routers, devices) that connects the world. The World Wide Web is one service that runs on top of the Internet. The Internet also supports email, video calls, streaming, and many other services.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 2 (Multiple Choice):</strong> Which of the following is part of the physical Internet infrastructure?</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2a" name="q2" value="a">
+                                        <label for="q2a">A) HTML files</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2b" name="q2" value="b">
+                                        <label for="q2b">B) Fiber optic cables and routers</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2c" name="q2" value="c">
+                                        <label for="q2c">C) Web browsers</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2d" name="q2" value="d">
+                                        <label for="q2d">D) Search engines</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer2')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer2">
+                                        <h5>Correct Answer: B) Fiber optic cables and routers</h5>
+                                        <p>These are the physical components that make up the Internet infrastructure. HTML, browsers, and search engines are all services or tools that use the Internet, but they're not part of the infrastructure itself.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 3 (Short Answer):</strong> Name two services (besides the World Wide Web) that run on the Internet.</p>
+                                    <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer3')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer3">
+                                        <h5>Possible Answers:</h5>
+                                        <p>Email, video streaming (Netflix, YouTube), online gaming, video calls (Zoom), cloud storage, social media, online shopping, IoT (smart home devices), etc. Any two of these would be correct.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whats-next">
+                                <h4>What's Coming Next →</h4>
+                                <p>Now that you understand <em>what</em> the Internet is, let's explore how you <em>use</em> it every day. In the next lesson, you'll learn how search engines work and how they find exactly what you're looking for among billions of web pages.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- LESSON 6.2 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.2</div>
+                            <h3>How Search Engines Work and Personalize Results</h3>
+                            <div class="lesson-time">⏱️ 11-13 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.2):</strong> Describe how search engines work and how they tailor results to individual users
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>Every second, Google processes over 40,000 search queries. But how does it instantly return relevant results from billions of web pages? And why does the search result your friend sees look different from yours?</p>
+                                
+                                <div class="concept-box">
+                                    <h4>How Search Engines Index the Web</h4>
+                                    <p>Search engines use automated programs called <strong>crawlers</strong> or <strong>spiders</strong> that:</p>
+                                    <ol style="margin-left: 20px; margin-top: 10px;">
+                                        <li>Visit billions of web pages</li>
+                                        <li>Read the content and metadata (information about the page)</li>
+                                        <li>Store information in massive databases called <strong>indexes</strong></li>
+                                        <li>Rank pages based on relevance, quality, and popularity</li>
+                                    </ol>
+                                    <p style="margin-top: 15px;">When you type a search query, you're not actually searching the live web—you're searching Google's index of the web.</p>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>Personalization: Why Your Results Are Unique</h4>
+                                    <p>Search engines track information about you to customize results:</p>
+                                    <ul style="margin-left: 20px; margin-top: 10px;">
+                                        <li><strong>Search history:</strong> What you've searched for before</li>
+                                        <li><strong>Location:</strong> Where you are now</li>
+                                        <li><strong>Device:</strong> Phone, desktop, tablet</li>
+                                        <li><strong>Time of day:</strong> When you're searching</li>
+                                        <li><strong>Previous clicks:</strong> Which results you've clicked on</li>
+                                    </ul>
+                                </div>
+                                
+                                <h4 style="margin-top: 30px; color: #667eea;">Watch: The Internet - How Search Works</h4>
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p style="font-style: italic; color: #666; margin-top: 10px;">Video: The Internet - How Search Works (5:12 min)</p>
+                                
+                                <div class="callout warning">
+                                    <h4>⚠️ Important: Filter Bubbles</h4>
+                                    <p>Because search engines personalize results based on your history, you might end up seeing mostly content that confirms what you already believe. This is called a <strong>filter bubble</strong>. It's important to:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Search for opposing viewpoints</li>
+                                        <li>Check multiple sources</li>
+                                        <li>Be aware that your search results may not represent all perspectives</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="example-box">
+                                    <h4>Example: Two Friends, Different Results</h4>
+                                    <p><strong>Scenario:</strong> You and your friend both search "best restaurants near school" at the same time from the same location.</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Your results:</strong> Show Italian restaurants, vegan cafes, and upscale dining (because that's what you've searched for before)</li>
+                                        <li><strong>Your friend's results:</strong> Show fast food, pizza places, and budget-friendly options (based on their search history)</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>Why?</strong> Google's algorithm personalizes results based on individual user behavior and preferences.</p>
+                                </div>
+                                
+                                <div class="callout hint">
+                                    <h4>💡 Tip: Finding Unbiased Results</h4>
+                                    <p>Want to see search results without personalization? Try:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Using private/incognito browsing mode</li>
+                                        <li>Logging out of your Google account</li>
+                                        <li>Using a different search engine like DuckDuckGo (which doesn't track you)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMATIVE ASSESSMENT 6.2 -->
+                            <div class="formative-assessment">
+                                <h4>🎯 Lesson 6.2 Assessment</h4>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 1 (True/False):</strong> When you do a Google search, Google searches the entire live Internet to find your results.</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1a_l2" name="q1_l2" value="true">
+                                        <label for="q1a_l2">True</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1b_l2" name="q1_l2" value="false">
+                                        <label for="q1b_l2">False</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l2')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer1_l2">
+                                        <h5>Correct Answer: False</h5>
+                                        <p>Google searches its pre-built index of the web, not the live Internet. Automated crawlers have already visited and cataloged billions of pages, so your search is searching that index and returning ranked results.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 2 (Multiple Choice):</strong> Which of the following factors does NOT affect how a search engine personalizes your results?</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2a_l2" name="q2_l2" value="a">
+                                        <label for="q2a_l2">A) Your search history</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2b_l2" name="q2_l2" value="b">
+                                        <label for="q2b_l2">B) Your current location</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2c_l2" name="q2_l2" value="c">
+                                        <label for="q2c_l2">C) The color of your computer</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2d_l2" name="q2_l2" value="d">
+                                        <label for="q2d_l2">D) Previous links you've clicked</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l2')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer2_l2">
+                                        <h5>Correct Answer: C) The color of your computer</h5>
+                                        <p>Search engines track behavior (search history, clicks), location, device type, and time—but they don't care about the physical appearance of your device. The color of your computer has no impact on search results.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 3 (Short Answer):</strong> Explain what a "filter bubble" is and why it might be a problem.</p>
+                                    <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l2')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer3_l2">
+                                        <h5>Sample Answer:</h5>
+                                        <p>A filter bubble is when search engines and social media show you primarily content that matches your existing beliefs and interests based on your history. This is a problem because it can prevent you from seeing different perspectives, limit your understanding of complex issues, and reinforce bias.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whats-next">
+                                <h4>What's Coming Next →</h4>
+                                <p>You've learned how to <em>use</em> the Internet to search for information. Now let's explore how that search actually works behind the scenes. Next, you'll discover your first hands-on activities: completing a digital divide practice set and searching for resources for your final project.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- GUIDED ACTIVITIES SECTION 1: After Lessons 6.1-6.2 -->
+                        <section class="guided-activity">
+                            <h3>📋 Guided Activities: Internet Basics & Search</h3>
+                            <p><strong>Lessons 1-2 Complete!</strong> You now understand what the Internet is and how search engines work. Let's practice with these activities.</p>
+                            
+                            <!-- ACTIVITY 1: DIGITAL DIVIDE PRACTICE -->
+                            <div class="activity-step">
+                                <h5>Activity 1: Digital Divide Practice Set (Khan Academy)</h5>
+                                <p><strong>Objective:</strong> Understand the scope and impact of the digital divide</p>
+                                <p><strong>Instructions:</strong></p>
+                                <ol style="margin-left: 20px;">
+                                    <li>Review the Khan Academy material on "The Digital Divide"</li>
+                                    <li>Complete the practice set: <strong>Practice: The Digital Divide</strong></li>
+                                    <li>Aim for at least 3/4 correct (75% proficiency)</li>
+                                    <li>Take a screenshot showing your username, the practice set title, and your score</li>
+                                    <li>Save the screenshot for your assignment submission</li>
+                                </ol>
+                                <p><strong>Time estimate:</strong> 15-20 minutes</p>
+                            </div>
+                            
+                            <!-- ACTIVITY 2: INTERNET SEARCH -->
+                            <div class="activity-step">
+                                <h5>Activity 2: Internet Search and Finding Resources for Your Project</h5>
+                                <p><strong>Objective:</strong> Practice using search engines effectively and find relevant resources for your final project</p>
+                                <p><strong>Instructions:</strong></p>
+                                <ol style="margin-left: 20px;">
+                                    <li><strong>Reflect:</strong> In 3-5 sentences, describe how search engines can be used to tailor results to individual users. Provide a specific example from your own experience.</li>
+                                    <li><strong>Search:</strong> Use Google Search to find a video relevant to your final project topic on the impact of AI or a computing innovation</li>
+                                    <li><strong>Filter:</strong> Try to find a video published within the last two years for current information</li>
+                                    <li><strong>Record:</strong> Save the video link and the publication date for your submission</li>
+                                </ol>
+                                <p><strong>Deliverable:</strong> Your written reflection and video link with publication date</p>
+                                <p><strong>Time estimate:</strong> 15-20 minutes</p>
+                            </div>
+                        </section>
+                        
+                        <!-- LESSON 6.3 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.3</div>
+                            <h3>The Physical Infrastructure: Wires, Cables, and WiFi</h3>
+                            <div class="lesson-time">⏱️ 9-11 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.3):</strong> Identify the physical infrastructure that connects the Internet
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>Right now, thousands of miles of fiber optic cable are running beneath your feet and under the ocean. Satellites are orbiting Earth. Routers and cell towers are sending wireless signals through the air. All of this infrastructure is what makes the Internet possible.</p>
+                                
+                                <div class="concept-box">
+                                    <h4>The Three Layers of Internet Infrastructure</h4>
+                                    <p><strong>Layer 1: Wired Connections</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Fiber optic cables:</strong> Hair-thin glass cables that transmit data as light. They're faster and more reliable than copper wire and can carry information across oceans.</li>
+                                        <li><strong>Copper cables:</strong> Older technology, still used for local connections.</li>
+                                        <li><strong>Submarine cables:</strong> Undersea cables that connect continents.</li>
+</ul>
+                                        <p style="margin-top: 15px;"><strong>Layer 2: Wireless Connections</strong></p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>WiFi:</strong> Wireless signals in homes and public places</li>
+                                            <li><strong>Cellular towers:</strong> 4G and 5G networks for mobile devices</li>
+                                            <li><strong>Satellites:</strong> For remote areas and global coverage</li>
+                                        </ul>
+                                        <p style="margin-top: 15px;"><strong>Layer 3: Routing Equipment</strong></p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Routers:</strong> Direct data to the correct destination</li>
+                                            <li><strong>Switches:</strong> Connect devices on local networks</li>
+                                            <li><strong>Data centers:</strong> Massive facilities that store servers and keep data flowing</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <h4 style="margin-top: 30px; color: #667eea;">Watch: The Internet - Wires, Cables and WiFi</h4>
+                                    <div class="video-embed">
+                                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <p style="font-style: italic; color: #666; margin-top: 10px;">Video: The Internet - Wires, Cables and WiFi (6:40 min)</p>
+                                    
+                                    <div class="callout info">
+                                        <h4>🌍 Global Scale</h4>
+                                        <p>There are over 1.3 million kilometers of submarine cables on the ocean floor connecting countries across the world. Google, Facebook, and Amazon are now investing in building their own undersea cables to improve connectivity.</p>
+                                    </div>
+                                    
+                                    <div class="example-box">
+                                        <h4>Example: Your Data's Journey</h4>
+                                        <p><strong>Scenario:</strong> You send a photo to a friend across the country.</p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Your WiFi router converts your data into signals</li>
+                                            <li>Your Internet Service Provider (ISP) sends it to their equipment</li>
+                                            <li>The data travels through fiber optic cables across your state</li>
+                                            <li>It reaches regional routing centers that direct it to the right path</li>
+                                            <li>It travels through submarine cables if crossing oceans</li>
+                                            <li>More routers guide it to your friend's ISP</li>
+                                            <li>Finally, it arrives at your friend's device via WiFi or cellular</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                
+                                <!-- FORMATIVE ASSESSMENT 6.3 -->
+                                <div class="formative-assessment">
+                                    <h4>🎯 Lesson 6.3 Assessment</h4>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 1 (True/False):</strong> Fiber optic cables transmit data as pulses of light.</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1a_l3" name="q1_l3" value="true">
+                                            <label for="q1a_l3">True</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1b_l3" name="q1_l3" value="false">
+                                            <label for="q1b_l3">False</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer1_l3')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer1_l3">
+                                            <h5>Correct Answer: True</h5>
+                                            <p>Fiber optic cables contain glass or plastic fibers that transmit data as light signals. This allows them to transmit data much faster and over longer distances than traditional copper cables.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 2 (Multiple Choice):</strong> Which type of infrastructure would be most important for connecting a remote island to the mainland?</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2a_l3" name="q2_l3" value="a">
+                                            <label for="q2a_l3">A) WiFi routers</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2b_l3" name="q2_l3" value="b">
+                                            <label for="q2b_l3">B) Submarine cables or satellites</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2c_l3" name="q2_l3" value="c">
+                                            <label for="q2c_l3">C) Local copper wiring</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2d_l3" name="q2_l3" value="d">
+                                            <label for="q2d_l3">D) Desktop computers</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer2_l3')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer2_l3">
+                                            <h5>Correct Answer: B) Submarine cables or satellites</h5>
+                                            <p>To connect across water, you need either underwater submarine cables or satellites. WiFi only works over short distances, copper wiring is for local connections, and desktop computers aren't infrastructure.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 3 (Matching):</strong> Match each infrastructure component with its primary function.</p>
+                                        <p style="margin-top: 15px; font-weight: 600;">Match the items:</p>
+                                        <div style="margin-left: 20px; margin-top: 15px;">
+                                            <p><strong>A. Router</strong></p>
+                                            <p><strong>B. Fiber optic cable</strong></p>
+                                            <p><strong>C. Cellular tower</strong></p>
+                                        </div>
+                                        <div style="margin-left: 20px; margin-top: 15px;">
+                                            <p>____ 1. Transmits data as light over long distances</p>
+                                            <p>____ 2. Sends wireless signals to mobile devices</p>
+                                            <p>____ 3. Directs data packets to correct destinations</p>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer3_l3')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer3_l3">
+                                            <h5>Correct Answers:</h5>
+                                            <p>B - 1 (Fiber optic cable transmits data as light)<br>C - 2 (Cellular tower sends wireless signals)<br>A - 3 (Router directs data packets)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="whats-next">
+                                    <h4>What's Coming Next →</h4>
+                                    <p>Now that you understand the physical infrastructure, let's see how data actually moves across it. In Lesson 6.4, you'll learn about packets and routers—the key to understanding how billions of messages travel simultaneously without getting tangled up.</p>
+                                </div>
+                            </section>
+                            
+                            <!-- LESSON 6.4 -->
+                            <section class="lesson">
+                                <div class="lesson-number">Lesson 6.4</div>
+                                <h3>Packets and Routers: How Data Travels</h3>
+                                <div class="lesson-time">⏱️ 10-12 minutes</div>
+                                
+                                <div class="learning-objective">
+                                    <strong>Learning Objective (LO6.4):</strong> Explain how data travels across networks using packets and routers
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <p>Have you ever wondered what happens to your data when you send it over the Internet? It doesn't travel in one continuous stream. Instead, it gets broken into tiny pieces and reassembled at the destination. Here's how.</p>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Packets: Breaking Data into Pieces</h4>
+                                        <p>When you send any data over the Internet—a photo, a message, a video stream—it's broken down into small chunks called <strong>packets</strong>. Each packet contains:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Data payload:</strong> The actual content (1-1500 bytes)</li>
+                                            <li><strong>Source address:</strong> Where the packet came from (your IP address)</li>
+                                            <li><strong>Destination address:</strong> Where it's going (recipient's IP address)</li>
+                                            <li><strong>Sequence number:</strong> The packet's order in the message</li>
+                                            <li><strong>Error checking:</strong> Info to detect corruption</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Why Break Data into Packets?</h4>
+                                        <p><strong>Efficiency:</strong> Multiple users can share the same network paths simultaneously. If your entire video was sent as one massive stream, it would monopolize the connection.</p>
+                                        <p style="margin-top: 10px;"><strong>Reliability:</strong> If one packet gets corrupted, only that packet is resent, not the entire message.</p>
+                                        <p style="margin-top: 10px;"><strong>Flexibility:</strong> Packets can take different routes to the destination. If one path is slow or damaged, another path can be used.</p>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>Routers: The Traffic Directors</h4>
+                                        <p><strong>Routers</strong> are devices that read the destination address on each packet and decide which direction to send it. Think of them as postal workers at distribution centers, sorting mail by zip code.</p>
+                                        <p style="margin-top: 10px;">When a packet arrives at a router, it:</p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Reads the destination IP address</li>
+                                            <li>Looks up that address in its routing table</li>
+                                            <li>Forwards the packet to the next router in the optimal path</li>
+                                            <li>The process repeats until the packet reaches its destination</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <h4 style="margin-top: 30px; color: #667eea;">Watch: The Internet - Packets and Routers</h4>
+                                    <div class="video-embed">
+                                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <p style="font-style: italic; color: #666; margin-top: 10px;">Video: The Internet - Packets and Routers (6:25 min)</p>
+                                    
+                                    <div class="callout hint">
+                                        <h4>💡 Analogy: The Postal System</h4>
+                                        <p>Think of the Internet like the postal system:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Your letter = a packet</strong> with your address (source) and recipient's address (destination)</li>
+                                            <li><strong>Postal workers = routers</strong> that read the address and send it in the right direction</li>
+                                            <li><strong>Mail sorting centers = network switches</strong> that direct mail between regions</li>
+                                            <li><strong>Different mail routes = network paths</strong> that can change based on congestion</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="example-box">
+                                        <h4>Example: A Message Takes a Journey</h4>
+                                        <p><strong>Scenario:</strong> You send a text message (200 bytes) from New York to California.</p>
+                                        <ol style="margin-left: 20px;">
+                                            <li><strong>Breaking into packets:</strong> Your message might be just one packet (since it's small)</li>
+                                            <li><strong>Adding headers:</strong> Your IP and the recipient's IP are added</li>
+                                            <li><strong>Router 1 (NYC):</strong> Reads the destination. "California? Send to Router 2 in Philadelphia"</li>
+                                            <li><strong>Router 2 (Philadelphia):</strong> "California? That's west. Send to Router 3 in Chicago"</li>
+                                            <li><strong>Router 3 (Chicago):</strong> "California? Send to Router 4 in Denver"</li>
+                                            <li><strong>Router 4 (Denver):</strong> "California! Send to the recipient's ISP in Los Angeles"</li>
+                                            <li><strong>Final delivery:</strong> Your friend's phone receives the message</li>
+                                        </ol>
+                                        <p style="margin-top: 15px;"><strong>Timeline:</strong> Entire journey takes milliseconds!</p>
+                                    </div>
+                                    
+                                    <div class="callout warning">
+                                        <h4>⚠️ Important: Packets Don't Travel in Order</h4>
+                                        <p>When you send a video or large file, it might be broken into 1000+ packets. These packets might take different routes and arrive out of order! Your computer's TCP/IP protocol reassembles them in the correct order at the destination. This is why packet loss or routing delays can cause buffering in videos.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- FORMATIVE ASSESSMENT 6.4 -->
+                                <div class="formative-assessment">
+                                    <h4>🎯 Lesson 6.4 Assessment</h4>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 1 (True/False):</strong> When you send an email, it travels as one continuous stream of data from your computer to the recipient's computer.</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1a_l4" name="q1_l4" value="true">
+                                            <label for="q1a_l4">True</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1b_l4" name="q1_l4" value="false">
+                                            <label for="q1b_l4">False</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer1_l4')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer1_l4">
+                                            <h5>Correct Answer: False</h5>
+                                            <p>Data is broken into packets, each with a source address, destination address, and sequence number. Multiple packets might take different routes and arrive out of order before being reassembled at the destination.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 2 (Multiple Choice):</strong> What is the primary job of a router on the Internet?</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2a_l4" name="q2_l4" value="a">
+                                            <label for="q2a_l4">A) Store data and files</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2b_l4" name="q2_l4" value="b">
+                                            <label for="q2b_l4">B) Read destination addresses and direct packets along the best path</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2c_l4" name="q2_l4" value="c">
+                                            <label for="q2c_l4">C) Encrypt data for security</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2d_l4" name="q2_l4" value="d">
+                                            <label for="q2d_l4">D) Create new data packets</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer2_l4')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer2_l4">
+                                            <h5>Correct Answer: B) Read destination addresses and direct packets along the best path</h5>
+                                            <p>Routers are traffic directors. They inspect each packet's destination address and forward it to the next router that's one step closer to the final destination.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 3 (Short Answer):</strong> Explain one advantage of breaking data into packets instead of sending it as one large stream.</p>
+                                        <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer3_l4')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer3_l4">
+                                            <h5>Sample Answers (any one is correct):</h5>
+                                            <p><strong>Efficiency:</strong> Multiple users can share the same network path. <strong>Reliability:</strong> If one packet is corrupted, only that packet needs to be resent. <strong>Flexibility:</strong> Packets can take different routes based on network conditions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="whats-next">
+                                    <h4>What's Coming Next →</h4>
+                                    <p>You now understand how packets travel across routers to reach their destination. But how does your computer know where to send them? That's where IP addresses come in. In the next guided activity, you'll find your own IP address and understand the network infrastructure around you.</p>
+                                </div>
+                            </section>
+                            
+                            <!-- GUIDED ACTIVITIES SECTION 2: After Lessons 6.3-6.4 -->
+                            <section class="guided-activity">
+                                <h3>📋 Guided Activities: Infrastructure & Networks</h3>
+                                <p><strong>Lessons 3-4 Complete!</strong> You now understand how Internet infrastructure works and how data travels across networks. Let's explore this firsthand.</p>
+                                
+                                <!-- ACTIVITY 3: FIND YOUR IP ADDRESS -->
+                                <div class="activity-step">
+                                    <h5>Activity 3: Finding Your IP Address and Understanding Networks</h5>
+                                    <p><strong>Objective:</strong> Understand IP addresses and your role in the Internet</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part A: Find Your IP Address</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Visit <code>whatismyipaddress.com</code></li>
+                                            <li>Record your public IP address</li>
+                                            <li>Write a 1-2 sentence description of what an IP address is and why it's important</li>
+                                            <li>Take a screenshot of the IP information page for your submission</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part B: Network Elements</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li><strong>Watch:</strong> "The Internet - Wires, Cables and WiFi" [6:40] and "The Internet - Packets and Routers" [6:25]</li>
+                                            <li>Identify at least TWO elements of a network (routers, cables, switches, towers, etc.)</li>
+                                            <li>Describe how each functions and how they interact to transfer information</li>
+                                            <li>Use concepts from the videos (packets, routing, etc.)</li>
+                                        </ol>
+                                    </div>
+                                    <p><strong>Deliverable:</strong> Your IP address description, screenshot, and network analysis</p>
+                                    <p><strong>Time estimate:</strong> 20-25 minutes</p>
+                                </div>
+                            </section>
+                            
+                            <!-- LESSON 6.5 -->
+                            <section class="lesson">
+                                <div class="lesson-number">Lesson 6.5</div>
+                                <h3>IP Addresses and the Domain Name System (DNS)</h3>
+                                <div class="lesson-time">⏱️ 11-13 minutes</div>
+                                
+                                <div class="learning-objective">
+                                    <strong>Learning Objective (LO6.5):</strong> Understand IP addresses and the Domain Name System (DNS)
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <p>Every device on the Internet needs a unique address, just like every house needs a street address. This is your IP address. But humans can't remember numbers, so we created domain names. Meet DNS—the system that bridges the gap.</p>
+                                    
+                                    <div class="key-terms">
+                                        <h4>Key Terms and Concepts</h4>
+                                        <div class="term">
+                                            <strong>IP Address (Internet Protocol Address):</strong> A unique numerical label assigned to every device connected to the Internet. Example: 192.168.1.1 (IPv4) or 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (IPv6)
+                                        </div>
+                                        <div class="term">
+                                            <strong>IPv4:</strong> The older standard using four sets of numbers (0-255). Example: 172.16.0.1. Soon to run out of available addresses as more devices connect.
+                                        </div>
+                                        <div class="term">
+                                            <strong>IPv6:</strong> The newer standard with 128 bits of information, allowing for billions of times more addresses than IPv4.
+                                        </div>
+                                        <div class="term">
+                                            <strong>Domain Name:</strong> A human-readable name for a website. Example: google.com, wikipedia.org, your-school.edu
+                                        </div>
+                                        <div class="term">
+                                            <strong>DNS (Domain Name System):</strong> The system that translates domain names (google.com) into IP addresses (142.250.185.46) so your computer can find the server.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>How IP Addresses Work</h4>
+                                        <p>Think of IP addresses like phone numbers. Each device needs a unique one so others can find it. When you connect to the Internet, your device is assigned an IP address by your Internet Service Provider (ISP) or your local network.</p>
+                                        <p style="margin-top: 15px;"><strong>Two types of IP addresses:</strong></p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Public IP address:</strong> Your device's address on the global Internet (assigned by ISP)</li>
+                                            <li><strong>Private IP address:</strong> Your device's address on your home or office network (assigned by your router)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="concept-box">
+                                        <h4>The DNS System: From Names to Numbers</h4>
+                                        <p><strong>Problem:</strong> You want to visit google.com, but routers only understand IP addresses, not domain names.</p>
+                                        <p style="margin-top: 10px;"><strong>Solution:</strong> When you type a URL into your browser:</p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Your browser sends a query to a DNS resolver (usually provided by your ISP)</li>
+                                            <li>The DNS resolver asks root nameservers where to find google.com</li>
+                                            <li>It's directed to TLD (Top-Level Domain) servers for .com domains</li>
+                                            <li>It's directed to Google's authoritative nameserver</li>
+                                            <li>Google's nameserver responds with the IP address: 142.250.185.46</li>
+                                            <li>Your browser now knows to connect to 142.250.185.46</li>
+                                            <li>Your request travels to Google's servers using routers and packets</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <h4 style="margin-top: 30px; color: #667eea;">Watch: IP Addresses and DNS</h4>
+                                    <div class="video-embed">
+                                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                    <p style="font-style: italic; color: #666; margin-top: 10px;">Video: IP Addresses and DNS (6:45 min)</p>
+                                    
+                                    <div class="callout info">
+                                        <h4>🌐 Fun Fact: Finding Your IP Address</h4>
+                                        <p>You can find your public IP address by visiting websites like whatismyipaddress.com or typing "what is my IP" into Google. Your private IP address can usually be found in your device's network settings or by typing <code>ipconfig</code> (Windows) or <code>ifconfig</code> (Mac/Linux) in terminal.</p>
+                                    </div>
+                                    
+                                    <div class="example-box">
+                                        <h4>Example: Your Google Sites Website</h4>
+                                        <p><strong>Scenario:</strong> You created a Google Site at https://sites.google.com/view/your-project</p>
+                                        <p style="margin-top: 15px;">When someone visits your site:</p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>They type your domain into their browser</li>
+                                            <li>Their browser's DNS resolver looks up the IP address of Google's servers</li>
+                                            <li>The DNS returns an IP address (e.g., 142.251.33.14 for Google)</li>
+                                            <li>Their browser connects to that IP address</li>
+                                            <li>Google's servers recognize the domain and serve your site</li>
+                                            <li>Your site appears in their browser</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <div class="callout hint">
+                                        <h4>💡 Tip: Buying Your Own Domain</h4>
+                                        <p>You can buy your own domain name (like yourname-project.com) from domain registrars like GoDaddy, Namecheap, or Google Domains. Once purchased, you point the domain's nameservers to your hosting service (in this case, Google Sites). Then visitors can use your custom domain instead of the long Google Sites URL.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- FORMATIVE ASSESSMENT 6.5 -->
+                                <div class="formative-assessment">
+                                    <h4>🎯 Lesson 6.5 Assessment</h4>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 1 (True/False):</strong> You can visit a website by typing its IP address directly into your browser instead of using a domain name.</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1a_l5" name="q1_l5" value="true">
+                                            <label for="q1a_l5">True</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1b_l5" name="q1_l5" value="false">
+                                            <label for="q1b_l5">False</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer1_l5')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer1_l5">
+                                            <h5>Correct Answer: True</h5>
+                                            <p>Domain names are just a human-friendly layer. Browsers ultimately communicate with IP addresses. You could theoretically type an IP address directly, but domain names are much easier to remember and use.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+<p><strong>Question 2 (Multiple Choice):</strong> What is the primary function of the DNS system?</p>
+<div class="assessment-option">
+<input type="radio" id="q2a_l5" name="q2_l5" value="a">
+<label for="q2a_l5">A) Store all website data</label>
+</div>
+<div class="assessment-option">
+<input type="radio" id="q2b_l5" name="q2_l5" value="b">
+<label for="q2b_l5">B) Translate domain names into IP addresses</label>
+</div>
+<div class="assessment-option">
+<input type="radio" id="q2c_l5" name="q2_l5" value="c">
+<label for="q2c_l5">C) Encrypt Internet traffic</label>
+</div>
+<div class="assessment-option">
+<input type="radio" id="q2d_l5" name="q2_l5" value="d">
+<label for="q2d_l5">D) Route packets between routers</label>
+</div>
+<button class="show-answer-btn" onclick="toggleAnswer('answer2_l5')">Show Answer</button>
+<div class="assessment-answer" id="answer2_l5">
+<h5>Correct Answer: B) Translate domain names into IP addresses</h5>
+<p>DNS stands for Domain Name System. Its core function is to convert human-readable domain names (like google.com) into machine-readable IP addresses (like 142.250.185.46) so that routers and devices can communicate.</p>
+</div>
+</div>
+<div class="assessment-question">
+                                    <p><strong>Question 3 (Short Answer):</strong> Why do we need domain names if computers only understand IP addresses?</p>
+                                    <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l5')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer3_l5">
+                                        <h5>Sample Answer:</h5>
+                                        <p>Domain names are much easier for humans to remember than long strings of numbers. It's easier to remember "google.com" than "142.250.185.46". Domain names also remain the same even if a website moves to a different server with a new IP address, so users don't have to learn new addresses.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whats-next">
+                                <h4>What's Coming Next →</h4>
+                                <p>Now you know how the Internet finds the right server to send your request to. In the next lesson, you'll learn what happens when you arrive at that server. We'll explore HTTP and HTML—the languages that make websites work—and understand how your browser displays web pages.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- LESSON 6.6 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.6</div>
+                            <h3>HTTP, HTML, and How Websites Are Delivered</h3>
+                            <div class="lesson-time">⏱️ 10-12 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.6):</strong> Describe how websites are stored and accessed using HTTP and HTML
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>Your browser is amazing—it can display images, text, videos, and interactive elements. But how does the server send all that information? Through two key technologies: HTTP and HTML.</p>
+                                
+                                <div class="key-terms">
+                                    <h4>Key Terms and Concepts</h4>
+                                    <div class="term">
+                                        <strong>HTTP (HyperText Transfer Protocol):</strong> The protocol (ruleset) that defines how web browsers and servers communicate. It's like a conversation in a language both understand.
+                                    </div>
+                                    <div class="term">
+                                        <strong>HTTPS:</strong> HTTP with added security (the "S" stands for Secure). Your data is encrypted so hackers can't intercept it.
+                                    </div>
+                                    <div class="term">
+                                        <strong>HTML (HyperText Markup Language):</strong> The code used to structure and display content on web pages. It's what tells your browser "this is a heading," "this is a paragraph," "this is an image."
+                                    </div>
+                                    <div class="term">
+                                        <strong>Web Server:</strong> A computer that stores website files and responds to requests from web browsers.
+                                    </div>
+                                    <div class="term">
+                                        <strong>URL (Uniform Resource Locator):</strong> The web address you type into your browser. Example: https://www.wikipedia.org/wiki/Internet
+                                    </div>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>How HTTP Works: A Request-Response Dance</h4>
+                                    <p><strong>Step 1: Browser sends an HTTP Request</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>You type a URL or click a link</li>
+                                        <li>Your browser sends a message saying "Hey, I want the file at /index.html"</li>
+                                        <li>The request includes your browser type, language preferences, and other info</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>Step 2: Server processes the request</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>The web server receives the request</li>
+                                        <li>It finds the requested file</li>
+                                        <li>It prepares an HTTP Response</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>Step 3: Server sends an HTTP Response</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>The server sends back the HTML file (and any associated files like CSS for styling, JavaScript for interactivity)</li>
+                                        <li>It includes a status code: 200 (success), 404 (not found), 500 (server error), etc.</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>Step 4: Browser renders the page</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Your browser reads the HTML code</li>
+                                        <li>It displays the content in a human-readable format</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>HTML: The Building Blocks of Web Pages</h4>
+                                    <p>HTML is code that uses "tags" to tell the browser what to display. Here's a simple example:</p>
+                                    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;"><code>&lt;html&gt;
+<head>
+<title>My Page</title>
+</head>
+<body>
+<h1>Welcome!</h1>
+<p>This is a paragraph.</p>
+<img src="photo.jpg">
+</body>
+</html></code></pre>
+<p style="margin-top: 15px;">The browser reads this code and displays:</p>
+<ul style="margin-left: 20px;">
+<li>A large heading saying "Welcome!"</li>
+<li>A paragraph of text</li>
+<li>An image from the file photo.jpg</li>
+</ul>
+</div>
+
+<h4 style="margin-top: 30px; color: #667eea;">Watch: The Internet - HTTP and HTML</h4>
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p style="font-style: italic; color: #666; margin-top: 10px;">Video: The Internet - HTTP and HTML (7:06 min)</p>
+                                
+                                <div class="callout hint">
+                                    <h4>💡 Tip: Check the Status Code</h4>
+                                    <p>When you visit a website, the server responds with a status code. Common ones:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>200 OK:</strong> Success! The page loaded.</li>
+                                        <li><strong>301/302:</strong> Redirect. "This page moved here."</li>
+                                        <li><strong>404 Not Found:</strong> Page doesn't exist.</li>
+                                        <li><strong>500 Server Error:</strong> Something went wrong on the server.</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="example-box">
+                                    <h4>Example: Visiting Your Google Site</h4>
+                                    <p><strong>Scenario:</strong> A friend visits your Google Site at https://sites.google.com/view/your-project</p>
+                                    <ol style="margin-left: 20px;">
+                                        <li>Friend types the URL into their browser</li>
+                                        <li>Browser sends an HTTP GET request: "Please get /view/your-project"</li>
+                                        <li>The request travels through packets and routers to Google's servers</li>
+                                        <li>Google's server finds your site's HTML files</li>
+                                        <li>Server sends back an HTTP Response with status "200 OK" and your HTML code</li>
+                                        <li>Friend's browser reads the HTML and renders your site</li>
+                                        <li>Your banner image, text, videos, and layout all appear in their browser</li>
+                                    </ol>
+                                </div>
+                                
+                                <div class="callout warning">
+                                    <h4>⚠️ Important: Always Use HTTPS</h4>
+                                    <p>Look for the padlock icon in your browser's address bar. HTTPS (with the S) means your connection is encrypted and secure. HTTP (without the S) sends data unencrypted. Always use HTTPS for sensitive information like passwords, payment info, or personal data. Google automatically provides HTTPS for Google Sites.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMATIVE ASSESSMENT 6.6 -->
+                            <div class="formative-assessment">
+                                <h4>🎯 Lesson 6.6 Assessment</h4>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 1 (True/False):</strong> HTTP and HTML are the same thing.</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1a_l6" name="q1_l6" value="true">
+                                        <label for="q1a_l6">True</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1b_l6" name="q1_l6" value="false">
+                                        <label for="q1b_l6">False</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l6')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer1_l6">
+                                        <h5>Correct Answer: False</h5>
+                                        <p>HTTP is a protocol for communication between browsers and servers. HTML is a language for structuring web page content. HTTP delivers the HTML to your browser, and your browser then interprets the HTML to display the page.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 2 (Multiple Choice):</strong> What does an HTTP status code of "404" mean?</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2a_l6" name="q2_l6" value="a">
+                                        <label for="q2a_l6">A) Success - the page loaded</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2b_l6" name="q2_l6" value="b">
+                                        <label for="q2b_l6">B) Page not found</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2c_l6" name="q2_l6" value="c">
+                                        <label for="q2c_l6">C) Server error</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2d_l6" name="q2_l6" value="d">
+                                        <label for="q2d_l6">D) Permission denied</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l6')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer2_l6">
+                                        <h5>Correct Answer: B) Page not found</h5>
+                                        <p>A 404 error means the server couldn't find the requested page. This usually happens when you've typed a wrong URL or the page has been deleted.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 3 (Short Answer):</strong> Describe what happens when you click a link on a website, from the moment you click to when the new page appears.</p>
+                                    <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="4" placeholder="Your answer here..."></textarea>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l6')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer3_l6">
+                                        <h5>Sample Answer:</h5>
+                                        <p>When you click a link: (1) Your browser prepares an HTTP GET request for the new page's URL, (2) The request travels through routers and packets to the web server, (3) The server receives the request and looks up the HTML file, (4) The server sends back an HTTP response with the HTML code and status "200 OK", (5) Your browser receives the HTML and renders it, displaying the new page with text, images, and other content.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whats-next">
+                                <h4>What's Coming Next →</h4>
+                                <p>You now understand the technical backbone of the Internet. But not everyone has equal access to it. In the next lesson, you'll explore the <strong>digital divide</strong>—the gap between those with Internet access and those without—and its real impact on society.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- LESSON 6.7 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.7</div>
+                            <h3>The Digital Divide: Access and Equity</h3>
+                            <div class="lesson-time">⏱️ 9-11 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.7):</strong> Recognize the digital divide and its impact on society
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>You've learned how amazing the Internet is. But not everyone has access to it. While you might take for granted downloading a video or attending a virtual class, billions of people worldwide don't have reliable Internet access. This gap is called the <strong>digital divide</strong>.</p>
+                                
+                                <div class="concept-box">
+                                    <h4>What Is the Digital Divide?</h4>
+                                    <p>The digital divide is the gap between those with access to the Internet and digital technology and those without. It's more complex than just having or not having internet—it includes:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Access:</strong> Do you have Internet available where you live?</li>
+                                        <li><strong>Affordability:</strong> Can you afford a connection and a device?</li>
+                                        <li><strong>Speed:</strong> Is your connection fast enough for today's needs?</li>
+                                        <li><strong>Reliability:</strong> Is the connection stable?</li>
+                                        <li><strong>Digital literacy:</strong> Do you know how to use the technology?</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>Who Is Affected?</h4>
+                                    <p>The digital divide isn't just about poor countries. It affects:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Rural communities:</strong> Limited broadband infrastructure in remote areas</li>
+                                        <li><strong>Low-income families:</strong> Can't afford devices or monthly bills</li>
+                                        <li><strong>Elderly people:</strong> May lack digital literacy or feel intimidated by technology</li>
+                                        <li><strong>People with disabilities:</strong> Lack of accessible, inclusive design</li>
+                                        <li><strong>Developing nations:</strong> Limited infrastructure investment</li>
+                                        <li><strong>Refugees and displaced people:</strong> No stable connectivity</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="callout info">
+                                    <h4>📊 The Numbers</h4>
+                                    <p>According to the International Telecommunication Union (ITU):</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Approximately 2.7 billion people worldwide do NOT have Internet access</li>
+                                        <li>In developed countries, about 87% have Internet access</li>
+                                        <li>In developing countries, only 45% have Internet access</li>
+                                        <li>Even in the U.S., about 21 million people lack broadband access</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="example-box">
+                                    <h4>Example: Impact on Education</h4>
+                                    <p><strong>Scenario 1 (Has access):</strong> Sarah lives in a suburb with broadband. During the pandemic, she attended virtual classes, submitted online assignments, and used Khan Academy to supplement her learning. She got to college.</p>
+                                    <p style="margin-top: 15px;"><strong>Scenario 2 (No access):</strong> Marcus lives in a rural area with no broadband. His school tried to send him home for online classes, but he couldn't participate. He fell behind, couldn't submit assignments, and dropped out.</p>
+                                    <p style="margin-top: 15px;"><strong>Same crisis, different outcomes—because of the digital divide.</strong></p>
+                                </div>
+                                
+                                <div class="callout warning">
+                                    <h4>⚠️ The Divide Widens Inequality</h4>
+                                    <p>The digital divide amplifies existing inequalities:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Economic:</strong> Without internet access, people have fewer job opportunities</li>
+                                        <li><strong>Educational:</strong> Students can't access online resources and classes</li>
+                                        <li><strong>Healthcare:</strong> Telemedicine and health information become inaccessible</li>
+                                        <li><strong>Civic:</strong> Can't participate in online government services or voting</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="callout hint">
+                                    <h4>💡 What's Being Done?</h4>
+                                    <p>Organizations and governments are working to bridge the divide:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Government programs:</strong> Investing in rural broadband infrastructure</li>
+                                        <li><strong>Public WiFi:</strong> Libraries and community centers providing free access</li>
+                                        <li><strong>Low-cost programs:</strong> ISPs offering subsidized internet for low-income families</li>
+                                        <li><strong>Device donations:</strong> Organizations giving refurbished computers to students</li>
+                                        <li><strong>Digital literacy training:</strong> Teaching skills to older adults and new users</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- FORMATIVE ASSESSMENT 6.7 -->
+                            <div class="formative-assessment">
+                                <h4>🎯 Lesson 6.7 Assessment</h4>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 1 (True/False):</strong> The digital divide only affects people in developing countries.</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1a_l7" name="q1_l7" value="true">
+                                        <label for="q1a_l7">True</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q1b_l7" name="q1_l7" value="false">
+                                        <label for="q1b_l7">False</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l7')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer1_l7">
+                                        <h5>Correct Answer: False</h5>
+                                        <p>The digital divide affects people worldwide, including developed countries like the United States. Rural communities, low-income families, elderly people, and people with disabilities all experience the digital divide even in wealthy nations.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 2 (Multiple Choice):</strong> Which of the following is NOT part of the digital divide?</p>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2a_l7" name="q2_l7" value="a">
+                                        <label for="q2a_l7">A) Access to Internet infrastructure</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2b_l7" name="q2_l7" value="b">
+                                        <label for="q2b_l7">B) The color of your computer monitor</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2c_l7" name="q2_l7" value="c">
+                                        <label for="q2c_l7">C) Affordability of devices and services</label>
+                                    </div>
+                                    <div class="assessment-option">
+                                        <input type="radio" id="q2d_l7" name="q2_l7" value="d">
+                                        <label for="q2d_l7">D) Digital literacy and skills</label>
+                                    </div>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l7')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer2_l7">
+                                        <h5>Correct Answer: B) The color of your computer monitor</h5>
+                                        <p>The digital divide involves access, affordability, speed, reliability, and literacy—but not the physical appearance of your device. The color of your monitor has no bearing on digital inequality.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="assessment-question">
+                                    <p><strong>Question 3 (Short Answer):</strong> Describe one way the digital divide can impact a student's education.</p>
+                                    <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l7')">Show Answer</button>
+                                    <div class="assessment-answer" id="answer3_l7">
+                                        <h5>Sample Answers (any is acceptable):</h5>
+                                        <p>Students without internet can't access online learning resources, submit assignments, attend virtual classes, research projects on reliable sources, or take advantage of educational tools. This leads to falling behind academically and reduced opportunities for college and careers.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="whats-next">
+                                <h4>What's Coming Next →</h4>
+                                <p>You've learned about access equity. Now let's explore another kind of accessibility: making the web usable for <em>everyone</em>, including people with disabilities. In the next lesson, you'll discover web accessibility and why inclusive design matters.</p>
+                            </div>
+                        </section>
+                        
+                        <!-- LESSON 6.8 -->
+                        <section class="lesson">
+                            <div class="lesson-number">Lesson 6.8</div>
+                            <h3>Web Accessibility: Designing for Everyone</h3>
+                            <div class="lesson-time">⏱️ 10-12 minutes</div>
+                            
+                            <div class="learning-objective">
+                                <strong>Learning Objective (LO6.8):</strong> Apply web accessibility principles to digital design
+                            </div>
+                            
+                            <div class="lesson-content">
+                                <p>Imagine trying to use a website designed only for people who can see and hear. What if you're blind? Deaf? Colorblind? Have motor disabilities? Web accessibility is about designing websites that everyone can use, regardless of their abilities.</p>
+                                
+                                <div class="concept-box">
+                                    <h4>Who Benefits from Accessible Design?</h4>
+                                    <p><strong>People with disabilities:</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Vision impairments (blind, low vision, colorblind)</li>
+                                        <li>Hearing impairments (deaf, hard of hearing)</li>
+                                        <li>Motor disabilities (difficulty using mouse/keyboard, tremors)</li>
+                                        <li>Cognitive disabilities (dyslexia, ADHD, autism)</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>Everyone else:</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Older adults with declining abilities</li>
+                                        <li>People with temporary injuries (broken arm)</li>
+                                        <li>People in environments where access is limited (bright sunlight, noisy offices)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="concept-box">
+                                    <h4>Core Accessibility Principles (WCAG)</h4>
+                                    <p>The Web Content Accessibility Guidelines (WCAG) define four principles. A website should be:</p>
+                                    <ul style="margin-left: 20px;">
+                                        <li><strong>Perceivable:</strong> Information is accessible to all senses (text for images, captions for videos)</li>
+                                        <li><strong>Operable:</strong> Users can navigate with keyboard (not just mouse)</li>
+                                        <li><strong>Understandable:</strong> Clear language, consistent design, obvious navigation</li>
+                                        <li><strong>Robust:</strong> Works with assistive technologies (screen readers, magnifiers)</li>
+                                    </ul>
+                                </div>
+                                
+                                <h4 style="margin-top: 30px; color: #667eea;">Watch: Web Accessibility Perspectives</h4>
+                                <div class="video-embed">
+                                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p style="font-style: italic; color: #666; margin-top: 10px;">Video: Web Accessibility Perspectives (7:36 min)</p>
+                                
+                                <div class="callout hint">
+                                    <h4>💡 Practical Accessibility Tips</h4>
+                                    <p><strong>For text and images:</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Use alt text for all images (describes the image for screen readers)</li>
+                                        <li>Use clear headings to structure content</li>
+                                        <li>Use high contrast colors (dark text on light background)</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>For videos and audio:</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Include captions for videos (helps deaf users and people in noisy environments)</li>
+                                        <li>Provide transcripts (helps deaf users and improves SEO)</li>
+                                    </ul>
+                                    <p style="margin-top: 15px;"><strong>For navigation:</strong></p>
+                                    <ul style="margin-left: 20px;">
+                                        <li>Ensure keyboard navigation (Tab key should work)</li>
+<li>Use descriptive link text ("Click here" vs. "Learn about digital privacy")</li>
+                                            <li>Avoid flashing content (can trigger seizures)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="example-box">
+                                        <h4>Example: Your Google Site - Accessibility Considerations</h4>
+                                        <p><strong>An accessible Google Site includes:</strong></p>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Descriptive headings:</strong> "Chapter 6: The Internet" (not just "Section 1")</li>
+                                            <li><strong>Alt text on images:</strong> "Screenshot showing DNS lookup process" (not just leaving it blank)</li>
+                                            <li><strong>Video captions:</strong> Adding captions to embedded videos so deaf users can follow</li>
+                                            <li><strong>Color + text:</strong> Don't rely only on color to convey meaning</li>
+                                            <li><strong>Readable fonts:</strong> Clear, sans-serif fonts that are easy to read</li>
+                                            <li><strong>Proper contrast:</strong> Dark text on light background (not light gray on white)</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="callout warning">
+                                        <h4>⚠️ Why Accessibility Matters</h4>
+                                        <p>Approximately 1 billion people worldwide live with some form of disability. Making the web inaccessible excludes them from:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li>Education and learning opportunities</li>
+                                            <li>Employment opportunities</li>
+                                            <li>Social connection and community</li>
+                                            <li>Access to government services</li>
+                                            <li>Shopping and commerce</li>
+                                        </ul>
+                                        <p style="margin-top: 15px;"><strong>Plus, in many countries, accessibility is a legal requirement.</strong> Websites that violate accessibility standards can face lawsuits.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- FORMATIVE ASSESSMENT 6.8 -->
+                                <div class="formative-assessment">
+                                    <h4>🎯 Lesson 6.8 Assessment</h4>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 1 (True/False):</strong> Web accessibility only benefits people with disabilities.</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1a_l8" name="q1_l8" value="true">
+                                            <label for="q1a_l8">True</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1b_l8" name="q1_l8" value="false">
+                                            <label for="q1b_l8">False</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer1_l8')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer1_l8">
+                                            <h5>Correct Answer: False</h5>
+                                            <p>Accessible design benefits everyone. Captions help people in noisy environments, keyboard navigation helps people with mouse problems, clear language helps non-native speakers, and high contrast helps people viewing on bright screens.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 2 (Multiple Choice):</strong> Which accessibility feature would help a deaf person use a website?</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2a_l8" name="q2_l8" value="a">
+                                            <label for="q2a_l8">A) Alternative text for images</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2b_l8" name="q2_l8" value="b">
+                                            <label for="q2b_l8">B) Captions and transcripts for videos</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2c_l8" name="q2_l8" value="c">
+                                            <label for="q2c_l8">C) Keyboard navigation</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2d_l8" name="q2_l8" value="d">
+                                            <label for="q2d_l8">D) Large fonts</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer2_l8')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer2_l8">
+                                            <h5>Correct Answer: B) Captions and transcripts for videos</h5>
+                                            <p>Captions and transcripts allow deaf users to understand audio content. While alt text, keyboard navigation, and large fonts are all important accessibility features, they address different needs than hearing loss.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 3 (Short Answer):</strong> Name two accessibility features you could add to a website to make it more inclusive.</p>
+                                        <textarea style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-family: inherit;" rows="3" placeholder="Your answer here..."></textarea>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer3_l8')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer3_l8">
+                                            <h5>Acceptable Answers (any two):</h5>
+                                            <p>Alt text for images, captions for videos, clear headings, high contrast colors, keyboard navigation, descriptive link text, readable fonts, transcripts for audio, skip navigation links, or clear language.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="whats-next">
+                                    <h4>What's Coming Next →</h4>
+                                    <p>Now you understand how the Internet works, who has access to it, and how to design for everyone. It's time to create something! In the next lesson, you'll design and launch your own website using Google Sites, putting all this knowledge into practice.</p>
+                                </div>
+                            </section>
+                            
+                            <!-- GUIDED ACTIVITIES SECTION 3: After Lessons 6.5-6.6 -->
+                            <section class="guided-activity">
+                                <h3>📋 Guided Activities: DNS, Domains & Website Delivery</h3>
+                                <p><strong>Lessons 5-6 Complete!</strong> You now understand IP addresses, DNS, HTTP, and HTML. Let's apply this knowledge to your own website.</p>
+                                
+                                <!-- ACTIVITY 4: DOMAIN NAMES AND DNS -->
+                                <div class="activity-step">
+                                    <h5>Activity 4: Understanding DNS and Finding Available Domains</h5>
+                                    <p><strong>Objective:</strong> Understand how domain names connect to IP addresses and explore domain registration</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part A: Find an Available Domain Name</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Visit <code>godaddy.com/domains</code> or <code>namecheap.com</code></li>
+                                            <li>Search for available domains combining your name and your final project topic</li>
+                                            <li>Try .com, .net, and .org extensions</li>
+                                            <li>Keep trying different combinations until you find an available domain</li>
+                                            <li>Take a screenshot showing an available domain with pricing (don't purchase it!)</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part B: DNS Explanation</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Write a paragraph explaining how a DNS server would connect your new domain name to a website's IP address</li>
+                                            <li>Use terminology from Lesson 6.5: DNS, domain name, IP address, nameserver, hostname, resolver</li>
+                                            <li>Explain what happens when someone types your domain name into their browser</li>
+                                            <li>Use a hypothetical example with a specific domain and IP address</li>
+                                        </ol>
+                                    </div>
+                                    <p><strong>Deliverable:</strong> Screenshot of available domain and DNS explanation paragraph</p>
+                                    <p><strong>Time estimate:</strong> 15-20 minutes</p>
+                                </div>
+                                
+                                <!-- ACTIVITY 5: WEBSITE STORAGE AND ACCESS -->
+                                <div class="activity-step">
+                                    <h5>Activity 5: How Websites Are Stored and Delivered</h5>
+                                    <p><strong>Objective:</strong> Understand the complete journey from browser request to website display</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <ol style="margin-left: 20px;">
+                                        <li><strong>Watch:</strong> "The Internet - HTTP and HTML" [7:06 min]</li>
+                                        <li><strong>Write:</strong> A paragraph (100-150 words) explaining how your Google Site is stored and how people access it</li>
+                                        <li><strong>Must include these terms:</strong> HTTP, HTTPS, HTML, URL, server, browser, request, response, web page</li>
+                                        <li><strong>Structure your explanation:</strong>
+                                            <ul style="margin-left: 30px;">
+                                                <li>Where your site is stored (Google's servers)</li>
+                                                <li>What happens when someone types your URL</li>
+                                                <li>How the browser and server communicate</li>
+                                                <li>What the HTML does</li>
+                                                <li>How security (HTTPS) protects the connection</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    <p><strong>Deliverable:</strong> Written explanation using proper terminology</p>
+                                    <p><strong>Time estimate:</strong> 15-20 minutes</p>
+                                </div>
+                            </section>
+                            
+                            <!-- LESSON 6.9 -->
+                            <section class="lesson">
+                                <div class="lesson-number">Lesson 6.9</div>
+                                <h3>Creating Your Website with Google Sites</h3>
+                                <div class="lesson-time">⏱️ 12-15 minutes</div>
+                                
+                                <div class="learning-objective">
+                                    <strong>Learning Objective (LO6.9):</strong> Create and publish a website using Google Sites
+                                </div>
+                                
+                                <div class="lesson-content">
+                                    <p>Everything you've learned about the Internet—domain names, servers, HTTP, accessibility—comes together when you create your own website. Let's put theory into practice.</p>
+                                    
+                                    <div class="concept-box">
+                                        <h4>What You'll Build</h4>
+                                        <p>You'll create a Google Site focused on your final project topic (the impact of a computing innovation on society). Your site will include:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li>A professional home page with your topic, name, and an elevator pitch</li>
+                                            <li>An "Impact" page with embedded video and description</li>
+                                            <li>Custom banner and logo</li>
+                                            <li>Accessibility features to ensure everyone can view it</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="callout hint">
+                                        <h4>💡 Tip: Google Sites Benefits</h4>
+                                        <ul style="margin-left: 20px;">
+                                            <li><strong>Free:</strong> No cost to create or host</li>
+                                            <li><strong>Easy:</strong> No coding required—drag-and-drop interface</li>
+                                            <li><strong>Hosted:</strong> Google manages the servers and infrastructure</li>
+                                            <li><strong>Accessible:</strong> Google Sites includes built-in accessibility features</li>
+                                            <li><strong>Secure:</strong> HTTPS encryption by default</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="example-box">
+                                        <h4>Example: Complete Your Site</h4>
+                                        <p>By the end of this lesson, your site will:</p>
+                                        <ul style="margin-left: 20px;">
+                                            <li>Have a custom domain URL (or Google's default URL)</li>
+                                            <li>Be stored on Google's servers with an IP address</li>
+                                            <li>Be accessible via HTTPS (encrypted connection)</li>
+                                            <li>Contain HTML that Google Sites generates for you</li>
+                                            <li>Be viewable by anyone with the link</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <!-- FORMATIVE ASSESSMENT 6.9 -->
+                                <div class="formative-assessment">
+                                    <h4>🎯 Lesson 6.9 Assessment</h4>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 1 (True/False):</strong> Google Sites creates a website that is hosted on Google's servers.</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1a_l9" name="q1_l9" value="true">
+                                            <label for="q1a_l9">True</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q1b_l9" name="q1_l9" value="false">
+                                            <label for="q1b_l9">False</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer1_l9')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer1_l9">
+                                            <h5>Correct Answer: True</h5>
+                                            <p>When you create a Google Site, your website is stored on Google's servers and served over the Internet using HTTP/HTTPS. When someone visits your site, their browser sends a request to Google's servers, which respond with your HTML and content.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="assessment-question">
+                                        <p><strong>Question 2 (Multiple Choice):</strong> Which of the following is NOT true about Google Sites?</p>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2a_l9" name="q2_l9" value="a">
+                                            <label for="q2a_l9">A) It's free to use</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2b_l9" name="q2_l9" value="b">
+                                            <label for="q2b_l9">B) It requires knowledge of HTML and CSS to use</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2c_l9" name="q2_l9" value="c">
+                                            <label for="q2c_l9">C) It automatically uses HTTPS encryption</label>
+                                        </div>
+                                        <div class="assessment-option">
+                                            <input type="radio" id="q2d_l9" name="q2_l9" value="d">
+                                            <label for="q2d_l9">D) It includes accessibility features</label>
+                                        </div>
+                                        <button class="show-answer-btn" onclick="toggleAnswer('answer2_l9')">Show Answer</button>
+                                        <div class="assessment-answer" id="answer2_l9">
+                                            <h5>Correct Answer: B) It requires knowledge of HTML and CSS to use</h5>
+                                            <p>Google Sites has a drag-and-drop interface that doesn't require any coding knowledge. The other options are all true—it's free, uses HTTPS, and includes accessibility features.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="whats-next">
+                                    <h4>What's Coming Next →</h4>
+                                    <p>Congratulations! You've completed all 9 lessons on the Internet. Now it's time to put it all together with your final guided activities—creating your Google Site and understanding how it works on the Internet infrastructure you've learned about.</p>
+                                </div>
+                            </section>
+                            
+                            <!-- GUIDED ACTIVITIES SECTION 4: After Lessons 6.7-6.9 (FINAL ACTIVITIES) -->
+                            <section class="guided-activity">
+                                <h3>📋 Guided Activities: Creating Your Website & Digital Equity</h3>
+                                <p><strong>Lessons 7-9 Complete!</strong> You understand digital divide, accessibility, and website creation. Now let's build your site while keeping equity and accessibility in mind.</p>
+                                
+                                <!-- ACTIVITY 6: CREATE GOOGLE SITE -->
+                                <div class="activity-step">
+                                    <h5>Activity 6: Create Your Google Site</h5>
+                                    <p><strong>Objective:</strong> Design and build a professional website using Google Sites</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Step 1: Set Up Your Site</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Go to <code>sites.google.com</code></li>
+                                            <li>Click "Create" and start a new site</li>
+                                            <li>Name your site with your final project topic (e.g., "The Impact of AI in Education")</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Step 2: Customize the Banner</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Click in the banner area and select the Image button</li>
+                                            <li>Choose "Select" from the dropdown</li>
+                                            <li>Upload or select a relevant banner image for your topic</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Step 3: Add Your Logo</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Click the site name text in the top left</li>
+                                            <li>Under "Logo," select "Upload"</li>
+                                            <li>Upload your AI-generated logo from a previous assignment</li>
+                                            <li>Close the settings</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Step 4: Build Your Home Page</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Add your topic name as the page title</li>
+                                            <li>Add text: "Created by [Your Full Name]"</li>
+                                            <li>Adjust font size, color, and style for visual appeal</li>
+                                            <li>Insert your website image (AI-generated from previous assignment)</li>
+                                            <li>Add your elevator pitch from a previous assignment</li>
+                                        </ol>
+                                    </div>
+                                    <p><strong>Deliverable:</strong> Published Google Site with home page</p>
+                                    <p><strong>Time estimate:</strong> 20-30 minutes</p>
+                                </div>
+                                
+                                <!-- ACTIVITY 7: IMPACT PAGE -->
+                                <div class="activity-step">
+                                    <h5>Activity 7: Create an "Impact" Page with Video</h5>
+                                    <p><strong>Objective:</strong> Add a second page demonstrating your understanding of your topic</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <ol style="margin-left: 20px;">
+                                        <li>Add a new page to your site called "Impact"</li>
+                                        <li>Embed the video you found in Activity 2 from earlier</li>
+                                        <li>Write 2-3 sentences explaining the video's relevance to your project topic</li>
+                                        <li><strong>Accessibility tip:</strong> Add a text description of the video for those who can't watch it</li>
+                                        <li>Format the page to be visually appealing and readable</li>
+                                    </ol>
+                                    <p><strong>Deliverable:</strong> Impact page with embedded video and description</p>
+                                    <p><strong>Time estimate:</strong> 10-15 minutes</p>
+                                </div>
+                                
+                                <!-- ACTIVITY 8: PUBLISH SITE -->
+                                <div class="activity-step">
+                                    <h5>Activity 8: Publish Your Google Site</h5>
+                                    <p><strong>Objective:</strong> Make your website publicly accessible on the Internet</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <ol style="margin-left: 20px;">
+                                        <li>Click the "Publish" button in the top right</li>
+                                        <li>Enter a URL name combining your first name and topic (e.g., jrivera-ai-education)</li>
+                                        <li>Click "Publish"</li>
+                                        <li>Verify that your site is now publicly viewable by opening the URL in a new tab</li>
+                                        <li>Copy and save the complete URL for your submission</li>
+                                        <li><strong>Important:</strong> Make sure privacy permissions allow your instructor to view it</li>
+                                    </ol>
+                                    <p><strong>Deliverable:</strong> Your published Google Site URL</p>
+                                    <p><strong>Time estimate:</strong> 5-10 minutes</p>
+                                </div>
+                                
+                                <!-- ACTIVITY 9: ACCESSIBILITY CHECK -->
+                                <div class="activity-step">
+                                    <h5>Activity 9: Web Accessibility Reflection</h5>
+                                    <p><strong>Objective:</strong> Apply web accessibility principles to your own site</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part A: Identify Accessibility Features (50-100 words)</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Review your Google Site</li>
+                                            <li>Describe how your site addresses at least TWO of the accessibility considerations from Lesson 6.8</li>
+                                            <li>Examples: headings, alt text on images, color contrast, captions on video, clear language, keyboard navigation</li>
+                                        </ol>
+                                    </div>
+                                    <div style="margin-top: 15px;">
+                                        <p><strong>Part B: Web Accessibility and Equity (50-100 words)</strong></p>
+                                        <ol style="margin-left: 20px;">
+                                            <li>Explain how the accessibility features you included help reduce equity deficits</li>
+                                            <li>Provide at least ONE specific example</li>
+                                            <li>Connect to concepts from Lesson 6.7 about digital divide and inclusion</li>
+                                        </ol>
+                                    </div>
+                                    <p><strong>Deliverable:</strong> Written reflections on accessibility and equity</p>
+                                    <p><strong>Time estimate:</strong> 15-20 minutes</p>
+                                </div>
+                                
+                                <!-- ACTIVITY 10: TROUBLESHOOTING -->
+                                <div class="activity-step">
+                                    <h5>Activity 10: Internet Troubleshooting Scenario</h5>
+                                    <p><strong>Objective:</strong> Apply your understanding of Internet infrastructure to real-world problems</p>
+                                    <p><strong>Scenario:</strong> Your friend enters the URL for your new Google Site into their browser, but the page doesn't appear. They see an error message or a blank screen.</p>
+                                    <p><strong>Instructions:</strong></p>
+                                    <ol style="margin-left: 20px;">
+                                        <li><strong>Identify potential causes:</strong> What could be wrong? Consider:
+                                            <ul style="margin-left: 30px;">
+                                                <li>DNS issues (domain name not resolving to IP address)</li>
+                                                <li>Network connectivity (no Internet connection)</li>
+                                                <li>Server issues (Google's servers are down)</li>
+                                                <li>Browser cache (old version of page stored)</li>
+                                                <li>URL typo (wrong website address)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Propose troubleshooting steps:</strong> What would you tell your friend to try?</li>
+                                        <li><strong>Write 200-300 words:</strong> Explain your troubleshooting approach using Internet terminology</li>
+                                    </ol>
+                                    <p><strong>Deliverable:</strong> Written troubleshooting explanation</p>
+                                    <p><strong>Time estimate:</strong> 20-25 minutes</p>
+                                </div>
+                            </section>
+                            
+                            <!-- CHAPTER SUMMARY -->
+                            <section class="summary-section">
+                                <h2>Chapter 6 Summary: Key Takeaways</h2>
+                                
+                                <h3 style="color: #667eea; margin-top: 25px;">Concepts You've Mastered</h3>
+                                <ul>
+                                    <li><strong>The Internet vs. the Web:</strong> The Internet is physical infrastructure; the Web is one service that runs on it</li>
+                                    <li><strong>Search Engines:</strong> Index the web and personalize results based on user behavior and preferences</li>
+                                    <li><strong>Physical Infrastructure:</strong> Fiber optic cables, routers, satellites, and data centers connect the world</li>
+                                    <li><strong>Packets and Routing:</strong> Data is broken into packets that travel different routes and are reassembled at the destination</li>
+                                    <li><strong>IP Addresses:</strong> Unique numerical labels for every device on the Internet</li>
+                                    <li><strong>DNS System:</strong> Translates human-readable domain names into machine-readable IP addresses</li>
+                                    <li><strong>HTTP and HTML:</strong> HTTP is the protocol for browser-server communication; HTML is the language for structuring web content</li>
+                                    <li><strong>Digital Divide:</strong> The gap between those with Internet access and those without—a major equity issue</li>
+                                    <li><strong>Web Accessibility:</strong> Designing websites that everyone can use, regardless of abilities</li>
+                                    <li><strong>Website Creation:</strong> Google Sites provides an easy, free platform to create and host websites</li>
+                                </ul>
+                                
+                                <h3 style="color: #667eea; margin-top: 25px;">Skills You've Developed</h3>
+                                <ul>
+                                    <li>Explaining how Internet infrastructure works</li>
+                                    <li>Using search engines effectively and critically</li>
+                                    <li>Understanding domain names and the DNS system</li>
+                                    <li>Creating and publishing websites</li>
+                                    <li>Applying accessibility principles to digital design</li>
+                                    <li>Troubleshooting Internet connection and website issues</li>
+                                    <li>Recognizing and addressing digital equity gaps</li>
+                                    <li>Finding your IP address and understanding networks</li>
+                                    <li>Explaining HTTP request-response cycles</li>
+                                    <li>Reflecting on how technology impacts society</li>
+                                </ul>
+                                
+                                <h3 style="color: #667eea; margin-top: 25px;">How This Connects to Your Final Project</h3>
+                                <p>You've created a website that showcases your final project topic. Your site is:</p>
+                                <ul>
+                                    <li>Stored on Google's servers with an IP address</li>
+                                    <li>Accessible via a domain name through the DNS system</li>
+                                    <li>Delivered to visitors using HTTP/HTTPS and HTML</li>
+                                    <li>Built with accessibility in mind to reach everyone</li>
+                                    <li>Connected to the global Internet infrastructure you've learned about</li>
+                                </ul>
+                                
+                                <h3 style="color: #667eea; margin-top: 25px;">The Bigger Picture: Computing and Society</h3>
+                                <p>This chapter explored not just <em>how</em> the Internet works, but <em>who</em> it works for. You've learned that:</p>
+                                <ul>
+                                    <li>The digital divide is real and affects billions of people</li>
+                                    <li>Technology design choices matter—accessibility benefits everyone</li>
+                                    <li>Understanding infrastructure helps us build more equitable systems</li>
+                                    <li>Your role as a digital creator includes responsibility to make the web inclusive</li>
+                                </ul>
+                                
+                                <h3 style="color: #667eea; margin-top: 25px;">Looking Forward</h3>
+                                <p>As you continue in this course and work on your final project, remember:</p>
+                                <ul>
+                                    <li>The technology you learn about has real impacts on real people</li>
+                                    <li>Equity and accessibility should be part of every design decision</li>
+                                    <li>Understanding how systems work helps you use them responsibly</li>
+                                    <li>Your website is now part of the global Internet—use it wisely</li>
+                                </ul>
+                            </section>
+                            
+                            <!-- ASSESSMENT SUMMARY -->
+                            <div style="background: #f0f4ff; padding:30px; margin: 30px 0; border-radius: 8px; border-top: 4px solid #667eea;">
+<h2 style="color: #667eea; margin-bottom: 20px;">Chapter 6 Assessment Summary</h2>
+<p><strong>Throughout this chapter, you completed:</strong></p>
+<ul style="margin-left: 20px;">
+<li>✅ 9 Lessons with focused learning objectives</li>
+<li>✅ 9 Formative assessments (27 questions total)</li>
+<li>✅ 10 Guided activities with real-world application</li>
+<li>✅ 1 Complete website creation and publication</li>
+<li>✅ Practical experience with IP addresses, DNS, domains, and accessibility</li>
+</ul>
+<p style="margin-top: 20px;"><strong>What you demonstrated:</strong> Understanding of Internet architecture, search algorithms, network infrastructure, data transmission via packets, DNS systems, HTTP/HTML protocols, digital divide issues, accessibility principles, and practical website creation and publication.</p>
+<p style="margin-top: 15px;"><strong>How you demonstrated it:</strong> Through formative assessments, hands-on activities, website creation, and reflective writing on equity and accessibility.</p>
+</div>
+</main>
+</div>
+
+<script>
+                    function toggleAnswer(id) {
+                        const answer = document.getElementById(id);
+                        if (answer) {
+                            answer.classList.toggle('show');
+                        }
+                    }
+                </script>
+            </body>
+        </html>
