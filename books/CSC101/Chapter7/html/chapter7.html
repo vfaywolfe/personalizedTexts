@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC101 Chapter 8: Cybersecurity - Staying Safe in a Connected World</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .chapter-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .learning-objectives {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .learning-objectives h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .objective {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .objective code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #764ba2;
+            font-weight: bold;
+        }
+        
+        .concepts-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .concepts-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .concept-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .concept-item:last-child {
+            border-bottom: none;
+        }
+        
+        .concept-term {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+        
+        .concept-definition {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .lessons-section {
+            margin-bottom: 40px;
+        }
+        
+        .lesson {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 5px solid #667eea;
+        }
+        
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .lesson-header h3 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        
+        .lesson-number {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .lesson-content {
+            padding: 30px;
+        }
+        
+        .learning-objective {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .learning-objective strong {
+            color: #764ba2;
+        }
+        
+        .content-section {
+            margin: 25px 0;
+        }
+        
+        .content-section h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .content-text {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .video-embed {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        
+        .video-embed p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        
+        .video-embed strong {
+            color: #667eea;
+        }
+        
+        .example {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #00a8e8;
+        }
+        
+        .example-title {
+            font-weight: bold;
+            color: #00a8e8;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        
+        .example-content {
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        .callout {
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+        
+        .callout.warning {
+            background: #fff3cd;
+            border-left-color: #ff6b6b;
+        }
+        
+        .callout.warning-title {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .callout.hint {
+            background: #d1ecf1;
+            border-left-color: #00a8e8;
+        }
+        
+        .callout.hint-title {
+            color: #00a8e8;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .callout.info {
+            background: #e7e8ea;
+            border-left-color: #667eea;
+        }
+        
+        .callout.info-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .assessment {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8f0ff 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 2px solid #667eea;
+        }
+        
+        .assessment h4 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .assessment-question {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .assessment-question:last-child {
+            border-bottom: none;
+        }
+        
+        .question-text {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .question-type {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        
+        .answer-option {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        
+        .answer-option input {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .answer-option label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .show-answer-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        
+        .show-answer-btn:hover {
+            background: #764ba2;
+        }
+        
+        .answer-feedback {
+            margin-top: 12px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            color: #155724;
+            display: none;
+        }
+        
+        .answer-feedback.show {
+            display: block;
+        }
+        
+        .whats-next {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 25px;
+        }
+        
+        .whats-next h5 {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            color: #555;
+        }
+        
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        table textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Arial;
+            resize: vertical;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: Arial;
+            margin-bottom: 10px;
+        }
+        
+        .summary-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .summary-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .summary-bullets {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .summary-bullets li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .summary-bullets li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .coming-next-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        .coming-next-section h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .coming-next-section p {
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .progress-indicator {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .progress-indicator p {
+            color: #667eea;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .scenario-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .scenario-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        
+        .activity-instruction {
+            background: #e7e8ea;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .activity-instruction strong {
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .lesson-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .lesson-number {
+                margin-top: 10px;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Chapter 8: Cybersecurity</h1>
+            <p>Staying Safe in a Connected World</p>
+        </header>
+        
+        <!-- Chapter Introduction -->
+        <div class="chapter-intro">
+            <h2>Welcome to Cybersecurity</h2>
+            <p>Every day, thousands of cyber attacks happen across the world, and many impact the websites and services you use—whether you know it or not. In our increasingly connected world, understanding how to protect your personal information and recognize threats is more important than ever.</p>
+            <p style="margin-top: 15px;">In this chapter, you'll learn the fundamentals of cybersecurity: how to identify what information is valuable and private, recognize common attack methods, create strong passwords, and understand the threats that exist online. By the end of this chapter, you'll have practical knowledge to protect yourself and your digital assets.</p>
+            <p style="margin-top: 15px;"><strong>What You'll Learn:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>What personally identifiable information (PII) is and why it matters</li>
+                <li>How to create and manage strong passwords</li>
+                <li>Common cyber attacks and how they work</li>
+                <li>Practical steps to protect your personal data</li>
+                <li>How to recognize and avoid phishing and social engineering attacks</li>
+            </ul>
+        </div>
+        
+        <!-- Learning Objectives -->
+        <div class="learning-objectives">
+            <h2>Learning Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective">
+                    <p><code>LO8.1.1</code> Identify and classify personally identifiable information (PII)</p>
+                </div>
+                <div class="objective">
+                    <p><code>LO8.1.2</code> Understand the characteristics of strong passwords and implement best practices</p>
+                </div>
+                <div class="objective">
+                    <p><code>LO8.1.3</code> Recognize and describe common cyber attacks (phishing, DDoS, DNS spoofing)</p>
+                </div>
+                <div class="objective">
+                    <p><code>LO8.1.4</code> Apply security recommendations to real-world scenarios</p>
+                </div>
+                <div class="objective">
+                    <p><code>LO8.1.5</code> Evaluate privacy concerns related to data collection and location tracking</p>
+                </div>
+                <div class="objective">
+                    <p><code>LO8.1.6</code> Develop a personal cybersecurity action plan</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Concepts and Terms -->
+        <div class="concepts-section">
+            <h2>Key Concepts and Terms</h2>
+            
+            <div class="concept-item">
+                <div class="concept-term">Cybersecurity</div>
+                <div class="concept-definition">The practice of protecting computers, networks, and data from unauthorized access, attack, or damage. It includes both technical measures (like firewalls and encryption) and human practices (like strong passwords and awareness).</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Personally Identifiable Information (PII)</div>
+                <div class="concept-definition">Any information that can be used to identify, contact, or locate a specific individual. Examples include your name, Social Security number, email address, phone number, home address, date of birth, and financial account numbers.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Phishing</div>
+                <div class="concept-definition">A cyber attack in which attackers send fraudulent emails, texts, or create fake websites to trick people into revealing sensitive information or clicking on malicious links.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Password</div>
+                <div class="concept-definition">A secret string of characters (letters, numbers, symbols) used to authenticate your identity and gain access to accounts, devices, or systems. Strong passwords are long, complex, and unique.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Brute Force Attack</div>
+                <div class="concept-definition">A cyber attack method in which an attacker tries many password combinations until they find the correct one. Longer and more complex passwords make brute force attacks impractical.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">DDoS (Distributed Denial of Service) Attack</div>
+                <div class="concept-definition">A cyber attack in which attackers overwhelm a website or server with traffic from many sources, making it unavailable to legitimate users.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">DNS Spoofing</div>
+                <div class="concept-definition">A cyber attack in which attackers redirect users to a fraudulent website by manipulating the Domain Name System (DNS), which normally translates website names into their true IP addresses.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Encryption</div>
+                <div class="concept-definition">The process of converting information into a code to prevent unauthorized access. Only someone with the decryption key can read the original information.</div>
+            </div>
+            
+            <div class="concept-item">
+                <div class="concept-term">Two-Factor Authentication (2FA)</div>
+                <div class="concept-definition">A security method that requires two different types of verification to access an account—typically something you know (password) and something you have (phone, security key, or authentication app).</div>
+            </div>
+        </div>
+        
+        <!-- Lessons -->
+        <div class="lessons-section">
+            
+            <!-- LESSON 1 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 1: The World of Cybersecurity</h3>
+                    <span class="lesson-number">Lesson 1 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Understand why cybersecurity matters and recognize the scope of cyber threats in our connected world.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Why Cybersecurity Matters</h4>
+                        <p class="content-text">Every time you use the internet, you're creating digital footprints and sharing information. Your email account, social media profiles, online banking, shopping habits, and location data all exist in the digital world. Cybercriminals are constantly trying to access this information for profit, identity theft, or other malicious purposes.</p>
+                        
+                        <p class="content-text">Consider these facts:</p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Data breaches are frequent:</strong> Major companies experience security breaches every year, exposing millions of users' personal information.</li>
+                            <li><strong>Human error is common:</strong> According to security experts, approximately 90% of successful hacks occur because of simple human mistakes—like clicking a malicious link or using a weak password.</li>
+                            <li><strong>Your data has value:</strong> Cybercriminals sell stolen information on the dark web for profit, using it for identity theft, fraud, or other crimes.</li>
+                            <li><strong>Attacks are diverse:</strong> From phishing emails to massive DDoS attacks, cybercriminals use many different tactics to compromise systems.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Understanding the Threat Landscape</h4>
+                        <p class="content-text">Cyber threats aren't just abstract digital problems—they affect real people and organizations:</p>
+                        
+                        <div class="example">
+                            <div class="example-title">Real-World Impact</div>
+                            <div class="example-content">
+                                <strong>Sarah's Story:</strong> Sarah received an email that appeared to be from her bank, asking her to "verify her account." She clicked the link and entered her login credentials. Two weeks later, she discovered fraudulent charges on her account. The email was a phishing attack designed to steal her banking information. This common scenario happens to thousands of people daily.
+                            </div>
+                        </div>
+                        
+                        <div class="example">
+                            <div class="example-title">Real-World Impact</div>
+                            <div class="example-content">
+                                <strong>Website Under Attack:</strong> A popular e-commerce website suddenly becomes unavailable for 12 hours. Customers can't shop, and the company loses hundreds of thousands of dollars. A DDoS attack—where attackers flooded the site with fake traffic—caused the outage. While the company recovers, customers' personal information remains at risk.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Your Role in Cybersecurity</h4>
+                        <p class="content-text">The good news? You have significant control over your digital security. While companies and organizations implement technical safeguards, your personal practices are equally important. Being aware of threats, using strong passwords, and recognizing suspicious activities are your first lines of defense.</p>
+                    </div>
+                    
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Cybersecurity Fundamentals</p>
+                        <p style="font-size: 0.9em; color: #999;">[Video: 5:01 minutes - Introduction to cybersecurity, threats, and why protection matters]</p>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: True or False? <span class="question-type">True/False</span></div>
+                            <p>According to security experts, approximately 90% of successful hacks occur due to human error rather than sophisticated technical exploits.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="q1" value="true" id="q1_true">
+                                    <label for="q1_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="q1" value="false" id="q1_false">
+                                    <label for="q1_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="answer1">
+                                <strong>Correct!</strong> This is true. Human error—such as clicking malicious links, using weak passwords, or falling for phishing—is the leading cause of security breaches. This means your personal awareness and practices are critical to cybersecurity.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: What is cybersecurity? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="q2" value="a" id="q2_a">
+                                <label for="q2_a">Only the responsibility of large corporations and government agencies</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="q2" value="b" id="q2_b">
+                                <label for="q2_b">The practice of protecting computers, networks, and data through technical and human practices</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="q2" value="c" id="q2_c">
+                                <label for="q2_c">A guarantee that your personal information will never be at risk</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="q2" value="d" id="q2_d">
+                                <label for="q2_d">Only about preventing viruses on your computer</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'answer2')">Show Answer</button>
+                            <div class="answer-feedback" id="answer2">
+                                <strong>Correct!</strong> The answer is B. Cybersecurity involves both technical measures (firewalls, encryption) and human practices (strong passwords, awareness). It's everyone's responsibility, not just large organizations.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: Short Answer</div>
+                            <p>Describe one way that cybercriminals might try to gain access to your personal information.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'answer3')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="answer3">
+                                <strong>Good thinking!</strong> There are many answers, including: phishing emails that trick you into revealing passwords, DDoS attacks that compromise websites, weak passwords that attackers can guess, data breaches at companies that store your information, or social engineering where attackers manipulate you into sharing information. Any of these—or similar examples—demonstrates understanding of cyber threats.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>Now that you understand why cybersecurity matters, let's get specific. In the next lesson, you'll learn to identify what information is most valuable to protect—your Personally Identifiable Information (PII). Ready to discover what makes your information a target?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 2 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 2: Understanding Personally Identifiable Information (PII)</h3>
+                    <span class="lesson-number">Lesson 2 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning
+<div class="learning-objective">
+                        <strong>Learning Objective:</strong> Identify and classify different types of personally identifiable information and understand why it's valuable to protect.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>What is PII?</h4>
+                        <p class="content-text">Personally Identifiable Information (PII) is any information that can directly or indirectly identify you as an individual. If someone has your PII, they can impersonate you, commit fraud, or use your information in other harmful ways.</p>
+                        
+                        <div class="callout hint">
+                            <div class="callout.hint-title">💡 Hint</div>
+                            <p>Think of PII like keys to your identity. The more keys a criminal has, the more damage they can do.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Types of PII</h4>
+                        <p class="content-text">PII comes in many forms. Here are the main categories:</p>
+                        
+                        <p style="margin-top: 20px; margin-bottom: 10px;"><strong>Direct Identifiers (Most Sensitive):</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Full Name:</strong> Your complete legal name uniquely identifies you</li>
+                            <li><strong>Social Security Number (SSN):</strong> The most sensitive piece of PII; can be used for identity theft and fraud</li>
+                            <li><strong>Date of Birth:</strong> Combined with other information, this can identify you and is often used for account verification</li>
+                            <li><strong>Driver's License Number:</strong> A government-issued ID that uniquely identifies you</li>
+                        </ul>
+                        
+                        <p style="margin-top: 20px; margin-bottom: 10px;"><strong>Contact Information:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Email Address:</strong> Often used to access multiple accounts and receive important information</li>
+                            <li><strong>Phone Number:</strong> Can be used to contact you or verify your identity fraudulently</li>
+                            <li><strong>Home Address:</strong> Reveals where you live and your physical location</li>
+                            <li><strong>IP Address:</strong> Identifies your device on the internet</li>
+                        </ul>
+                        
+                        <p style="margin-top: 20px; margin-bottom: 10px;"><strong>Financial Information:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Bank Account Numbers:</strong> Enable fraudulent transactions</li>
+                            <li><strong>Credit Card Numbers:</strong> Can be used to make unauthorized purchases</li>
+                            <li><strong>Credit Score:</strong> Reveals your financial health and creditworthiness</li>
+                        </ul>
+                        
+                        <p style="margin-top: 20px; margin-bottom: 10px;"><strong>Online Information:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Usernames and Passwords:</strong> Grant access to your accounts</li>
+                            <li><strong>Browsing History:</strong> Reveals your interests, habits, and potentially sensitive searches</li>
+                            <li><strong>Social Media Posts:</strong> Can contain personal information or be used for social engineering</li>
+                            <li><strong>Location Data:</strong> Shows where you are at specific times</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Why is PII Valuable to Criminals?</h4>
+                        
+                        <div class="example">
+                            <div class="example-title">Example: Why Criminals Target PII</div>
+                            <div class="example-content">
+                                <strong>Identity Theft Scenario:</strong> A criminal obtains your name, date of birth, and Social Security number through a data breach. Using this information, they can:
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Open new credit card accounts in your name</li>
+                                    <li>Take out loans they never intend to repay</li>
+                                    <li>File fraudulent tax returns</li>
+                                    <li>Sell your information to other criminals</li>
+                                </ul>
+                                <p style="margin-top: 10px;">The victim may not discover the fraud for months, by which time significant damage has been done.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="callout warning">
+                            <div class="callout.warning-title">⚠️ Warning</div>
+                            <p>Criminals don't need all your information at once. They collect PII gradually from different sources and combine it to build a complete profile for targeted attacks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="video-embed">
+                        <p><strong>Read:</strong> PII (Personally Identifiable Information)</p>
+                        <p style="font-size: 0.9em; color: #999;">[Khan Academy Article: Learn about different types of PII and why they're protected]</p>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: Which of the following is considered the MOST sensitive type of PII? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q1" value="a" id="pii_q1_a">
+                                <label for="pii_q1_a">Your email address</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q1" value="b" id="pii_q1_b">
+                                <label for="pii_q1_b">Your Social Security Number</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q1" value="c" id="pii_q1_c">
+                                <label for="pii_q1_c">Your phone number</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q1" value="d" id="pii_q1_d">
+                                <label for="pii_q1_d">Your first name</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pii_answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="pii_answer1">
+                                <strong>Correct!</strong> Your Social Security Number (SSN) is the most sensitive form of PII. Combined with other information, an SSN can be used to commit identity theft, open fraudulent accounts, and cause significant damage to your credit and finances.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Which category of information is NOT typically considered PII? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q2" value="a" id="pii_q2_a">
+                                <label for="pii_q2_a">Your bank account number</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q2" value="b" id="pii_q2_b">
+                                <label for="pii_q2_b">The title of a book on your favorite topic</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q2" value="c" id="pii_q2_c">
+                                <label for="pii_q2_c">Your date of birth</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pii_q2" value="d" id="pii_q2_d">
+                                <label for="pii_q2_d">Your credit score</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pii_answer2')">Show Answer</button>
+                            <div class="answer-feedback" id="pii_answer2">
+                                <strong>Correct!</strong> The title of a book on a public reading list is not PII. While your preferences might be personal, this general information doesn't directly identify you or enable fraud. All other options (bank account, date of birth, credit score) are forms of PII that should be protected.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: True or False? <span class="question-type">True/False</span></div>
+                            <p>Criminals need your complete information all at once to commit identity theft.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="pii_q3" value="true" id="pii_q3_true">
+                                    <label for="pii_q3_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="pii_q3" value="false" id="pii_q3_false">
+                                    <label for="pii_q3_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pii_answer3')">Show Answer</button>
+                            <div class="answer-feedback" id="pii_answer3">
+                                <strong>Correct!</strong> This is false. Criminals collect PII gradually from multiple sources and piece it together over time. They can use partial information to target you with phishing attacks or social engineering to get the rest. This is why even small pieces of personal information should be protected.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 4: Short Answer <span class="question-type">Short Answer</span></div>
+                            <p>Name two pieces of financial information that should be considered PII and explain why.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pii_answer4')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="pii_answer4">
+                                <strong>Great answer!</strong> Valid answers include: (1) Bank account numbers—can be used to transfer your money or commit fraud; (2) Credit card numbers—can be used for unauthorized purchases; (3) Credit scores—reveal your financial health and creditworthiness. Any two of these with explanations about how they could be misused demonstrates understanding.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You now understand what information needs protecting. In the next lesson, you'll practice identifying PII through guided Khan Academy activities. Ready to test your knowledge?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 3: Guided Activity - PII & Phishing Practice -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 3: Guided Activity – PII & Phishing Practice Sets</h3>
+                    <span class="lesson-number">Lesson 3 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Apply knowledge of PII and phishing attacks to real-world scenarios through guided practice activities.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Activity Overview</h4>
+                        <p class="content-text">In this lesson, you'll complete guided activities from Khan Academy to reinforce your understanding of PII and phishing. These practice exercises will help you identify sensitive information and recognize phishing attempts in real contexts.</p>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>These are hands-on learning activities. You'll be working through scenarios and answering questions about real situations. Your goal is to achieve at least 3/4 correct on each practice set.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Activity 1: PII (Personally Identifiable Information) Practice Set</h4>
+                        <p class="content-text"><strong>Objective:</strong> Identify what information is considered PII and understand privacy protection principles.</p>
+                        
+                        <div class="activity-instruction">
+                            <strong>DO THE FOLLOWING:</strong>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>➔ Review the Khan Academy material on PII (Personally Identifiable Information)</li>
+                                <li>➔ Complete the practice set: <strong>Practice: PII (Personally Identifiable Information)</strong></li>
+                                <li>➔ Take a screenshot of the results page including your username, the practice set title, and your score showing at least 3/4 correct</li>
+                            </ul>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>What to expect:</strong> You'll encounter questions about which types of information should be kept private, how to protect PII, and why certain information is more sensitive than others.</p>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Screenshot Submission Space</div>
+                            <p style="margin-top: 10px; color: #666;">📸 Insert screenshot of Khan Academy PII practice set results here:</p>
+                            <textarea style="width: 100%; height: 200px; border: 2px dashed #667eea; border-radius: 4px; padding: 10px;" placeholder="[Screenshot will be inserted in your submission document]"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Activity 2: Phishing Attacks Practice Set</h4>
+                        <p class="content-text"><strong>Objective:</strong> Recognize the characteristics of phishing attacks and learn how to identify suspicious emails and websites.</p>
+                        
+                        <div class="activity-instruction">
+                            <strong>DO THE FOLLOWING:</strong>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>➔ Review the Khan Academy article on Phishing Attacks</li>
+                                <li>➔ Complete the practice set: <strong>Practice: Phishing Attacks</strong></li>
+                                <li>➔ Take a screenshot of the results page including your username, the practice set title, and your score showing at least 3/4 correct</li>
+                            </ul>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>What to expect:</strong> You'll analyze suspicious emails, identify red flags, and learn how to verify that websites are legitimate before entering sensitive information.</p>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Screenshot Submission Space</div>
+                            <p style="margin-top: 10px; color: #666;">📸 Insert screenshot of Khan Academy Phishing Attacks practice set results here:</p>
+                            <textarea style="width: 100%; height: 200px; border: 2px dashed #667eea; border-radius: 4px; padding: 10px;" placeholder="[Screenshot will be inserted in your submission document]"></textarea>
+                        </div>
+                        
+                        <div class="callout hint">
+                            <div class="callout.hint-title">💡 Hint: Spotting Phishing</div>
+                            <p>Look for these red flags: Urgent language, requests for passwords or PII, generic greetings, misspelled URLs or email addresses, mismatched sender information, and suspicious links or attachments.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment">
+                        <h4>🎯 Completion Checklist</h4>
+                        <div style="margin-top: 15px;">
+                            <p style="margin-bottom: 12px;"><strong>Before moving to the next lesson, confirm that you have:</strong></p>
+                            <div style="margin-left: 20px;">
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="check1">
+                                    <label for="check1" style="cursor: pointer;">✓ Completed the Khan Academy PII practice set with at least 3/4 correct</label>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="check2">
+                                    <label for="check2" style="cursor: pointer;">✓ Completed the Khan Academy Phishing Attacks practice set with at least 3/4 correct</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="check3">
+                                    <label for="check3" style="cursor: pointer;">✓ Saved screenshots of both practice set results for your assignment submission</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You've practiced identifying PII and phishing. Now let's learn how to protect your accounts with strong passwords. In the next lesson, you'll discover what makes a password secure and test password strength.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 4 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 4: Creating and Managing Strong Passwords</h3>
+                    <span class="lesson-number">Lesson 4 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Understand the characteristics of strong passwords and implement best practices for password security.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Why Passwords Matter</h4>
+                        <p class="content-text">Your password is often the only thing standing between a criminal and access to your accounts. A weak password can be cracked in seconds using automated tools, while a strong password can resist attacks for years or longer. Your password protects your email, social media, banking, work accounts, and more.</p>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>Attackers use "brute force" attacks, trying many password combinations until they find the correct one. A computer can try billions of combinations per second, so the password's strength directly determines how long it takes to crack.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>The Two Factors That Make Passwords Strong</h4>
+                        <p class="content-text">Password strength depends on two primary factors: <strong>length</strong> and <strong>character complexity</strong>. Both matter, but research and real-world testing show that <strong>length is more important than complexity</strong>.</p>
+                        
+                        <div class="example">
+                            <div class="example-title">Comparing Password Strength</div>
+                            <div class="example-content">
+                                <p><strong>Scenario:</strong> Compare these four passwords using a password strength analyzer:</p>
+                                <ul style="margin-left: 20px; margin-top: 10px; font-family: monospace;">
+                                    <li style="margin-bottom: 8px;">Password 1: <code>rainbows</code> (8 lowercase only) → Time to crack: ~2.4 hours</li>
+                                    <li style="margin-bottom: 8px;">Password 2: <code>R4!nB0w5</code> (8 mixed, complex) → Time to crack: ~4.9 hours</li>
+                                    <li style="margin-bottom: 8px;">Password 3: <code>rainbowsinspring</code> (16 lowercase) → Time to crack: ~2,000 years</li>
+                                    <li style="margin-bottom: 8px;">Password 4: <code>R4!nB0w5!nSpr!ng</code> (16 mixed, complex) → Time to crack: ~100+ million years</li>
+                                </ul>
+                                <p style="margin-top: 15px;"><strong>Key insight:</strong> The 16-character lowercase password is infinitely more secure than the 8-character complex password. Adding length exponentially increases security!</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Characteristics of a Strong Password</h4>
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>A strong password:</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li><strong>Is at least 12 characters long</strong> (ideally 16+) — Length is your strongest defense</li>
+                            <li><strong>Uses a mix of character types</strong> — Include uppercase, lowercase, numbers, and special symbols</li>
+                            <li><strong>Avoids common patterns</strong> — Don't use dictionary words, names, or sequential numbers (abc, 123)</li>
+                            <li><strong>Is unique</strong> — Use different passwords for different accounts</li>
+                            <li><strong>Isn't based on personal information</strong> — Avoid birthdates, pet names, addresses, or other info that could be researched</li>
+                            <li><strong>Is memorable (or recorded securely)</strong> — You shouldn't write it on a sticky note, but you shouldn't forget it either</li>
+                        </ul>
+                        
+                        <div class="callout warning">
+                            <div class="callout.warning-title">⚠️ Warning: Weak Passwords to Avoid</div>
+                            <p style="margin-top: 8px;"><strong>Never use:</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li><code>123456, password, qwerty</code> — Most common passwords (easily guessed)</li>
+                                <li><code>YourName1990</code> — Based on personal information</li>
+                                <li><code>abc123, letmein</code> — Dictionary words or predictable patterns</li>
+                                <li><code>Password123!</code> — Too predictable (common pattern with year)</li>
+                                <li>Your pet's name, birthdate, or phone number — Searchable online</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Password Best Practices</h4>
+                        <p class="content-text"><strong>Create Strong Passwords:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Use a passphrase method:</strong> Combine 4+ random words with numbers/symbols: <code>purple-elephant-42-sunset!</code></li>
+                            <li><strong>Use a password manager:</strong> Tools like Bitwarden, 1Password, or LastPass generate and securely store complex passwords</li>
+                            <li><strong>Never reuse passwords:</strong> If one account is compromised, criminals will try that password on your other accounts</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Protect Your Passwords:</strong></p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Never share your passwords</strong> — Not with friends, family, or even IT support</li>
+                            <li><strong>Don't write passwords on paper or sticky notes</strong> — If you must write them, lock them in a secure location</li>
+                            <li><strong>Change passwords if compromised</strong> — If you suspect a data breach, change your password immediately</li>
+                            <li><strong>Enable two-factor authentication (2FA)</strong> — This adds a second layer of security beyond your password</li>
+                            <li><strong>Log out of public computers</strong> — Always sign out before leaving a shared device</li>
+                        </ul>
+                        
+                        <div class="callout hint">
+                            <div class="callout.hint-title">💡 Hint</div>
+                            <p>Password managers solve the "too many passwords" problem. They securely store your passwords behind one strong master password, so you only have to remember one password well.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Strong Passwords: The Key to Digital Security</p>
+                        <p style="font-size: 0.9em; color: #999;">[Video: 3:30 minutes - Why password strength matters and how to create secure passwords]</p>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: Which factor contributes MORE to password strength? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="pwd_q1" value="a" id="pwd_q1_a">
+                                <label for="pwd_q1_a">Using special characters and complexity</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pwd_q1" value="b" id="pwd_q1_b">
+                                <label for="pwd_q1_b">Password length</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pwd_answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="pwd_answer1">
+                                <strong>Correct!</strong> Password length is more important than complexity. A 16-character lowercase password is far more secure than an 8-character password with special characters. Each additional character exponentially increases the time needed to crack the password.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Which password is the STRONGEST? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="pwd_q2" value="a" id="pwd_q2_a">
+                                <label for="pwd_q2_a"><code>X9@mK#pL</code> (8 characters, very complex)</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pwd_q2" value="b" id="pwd_q2_b">
+                                <label for="pwd_q2_b"><code>blueskyflyingbirds</code> (19 characters, lowercase only)</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="pwd_q2" value="c" id="pwd_q2_c">
+                                <label for="pwd_q2_c"><code>Mybirthday1990!</code> (16 characters, personal info)</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pwd_answer2')">Show Answer</button>
+                            <div class="answer-feedback" id="pwd_answer2">
+                                <strong>Correct!</strong> The answer is B. The 19-character passphrase, even without special characters, is exponentially more secure than the 8-character complex password. While A looks "strong" due to complexity, length wins. Option C is weaker because it uses predictable personal information (birthdates are searchable online).
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: True or False? <span class="question-type">True/False</span></div>
+                            <p>It's okay to use the same strong password for all your accounts as long as it's very complex.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="pwd_q3" value="true" id="pwd_q3_true">
+                                    <label for="pwd_q3_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="pwd_q3" value="false" id="pwd_q3_false">
+                                    <label for="pwd_q3_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pwd_answer3')">Show Answer</button>
+                            <div class="answer-feedback" id="pwd_answer3">
+                                <strong>Correct!</strong> This is false. Even if your password is very strong, you should use unique passwords for different accounts. If one account is compromised in a data breach, attackers will immediately try that password on your other accounts (email, banking, social media). Unique passwords limit the damage if one is compromised.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text
+<div class="question-text">Question 4: Name one advantage of using a password manager. <span class="question-type">Short Answer</span></div>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'pwd_answer4')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="pwd_answer4">
+                                <strong>Excellent!</strong> Valid answers include: (1) Generates extremely complex passwords for you; (2) Securely stores multiple unique passwords so you only remember one; (3) Auto-fills login fields, saving time and reducing typing errors; (4) Alerts you if passwords are compromised; (5) Works across devices and browsers. Any of these demonstrates understanding of password manager benefits.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>Now that you understand password principles, it's time to test them in practice. In the next lesson, you'll use a password strength analyzer to create and evaluate passwords.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 5: Password Strength Testing Activity -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 5: Guided Activity – Password Strength Testing</h3>
+                    <span class="lesson-number">Lesson 5 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Test and compare password strength using real-world analysis tools to understand which factors make passwords secure.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Activity Overview</h4>
+                        <p class="content-text">In this hands-on activity, you'll create four different passwords and test them using a password strength analyzer. This will show you in real time how length and character complexity affect password security.</p>
+                        
+                        <div class="callout warning">
+                            <div class="callout.warning-title">⚠️ Caution</div>
+                            <p>It is good practice to NOT enter any passwords that you actually use in sites that promise to tell you how strong your password is. For this activity, create fictional passwords that you don't use anywhere.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Password Strength Testing Instructions</h4>
+                        
+                        <div class="activity-instruction">
+                            <strong>DO THE FOLLOWING:</strong>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>➔ Use the <strong>How Secure is My Password</strong> site to test passwords</li>
+                                <li>➔ Create four different test passwords according to the specifications below</li>
+                                <li>➔ Record the time-to-crack results for each password in the table</li>
+                                <li>➔ Use the table provided to record your responses</li>
+                            </ul>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Create and Test These Four Passwords:</strong></p>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Password Description</th>
+                                        <th>Example</th>
+                                        <th>Time-to-Crack (Your Results)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>8-character password using only lowercase characters (a-z)</td>
+                                        <td><code>rainbows</code></td>
+                                        <td><textarea placeholder="Record the time here..."></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>8-character password using any characters (uppercase, lowercase, numbers, symbols - use at least one of each)</td>
+                                        <td><code>R4!nB0w5</code></td>
+                                        <td><textarea placeholder="Record the time here..."></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>16-character password using only lowercase characters (a-z)</td>
+                                        <td><code>rainbowsinspring</code></td>
+                                        <td><textarea placeholder="Record the time here..."></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td>16-character password using any characters (uppercase, lowercase, numbers, symbols - use at least one of each)</td>
+                                        <td><code>R4!nB0w5!nSpr!ng</code></td>
+                                        <td><textarea placeholder="Record the time here..."></textarea></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Analysis Questions</h4>
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>After testing these passwords, answer the following reflection questions:</strong></p>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question A: Password Strength Factors</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">What seem to be the factors contributing to making a password difficult to crack?</p>
+                            <textarea style="width: 100%; height: 120px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question B: Length vs. Complexity</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">Which factor would you argue is more impactful in password creation than the other? Why? Use evidence from the password strength site to support your argument. (Hint: Think about if you would rather have a shorter password with special characters like R4!nB0w5 or a longer password without special characters like rainbowsinspring)</p>
+                            <textarea style="width: 100%; height: 150px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment">
+                        <h4>🎯 Completion Checklist</h4>
+                        <div style="margin-top: 15px;">
+                            <p style="margin-bottom: 12px;"><strong>Before moving to the next lesson, confirm that you have:</strong></p>
+                            <div style="margin-left: 20px;">
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="pwd_check1">
+                                    <label for="pwd_check1" style="cursor: pointer;">✓ Tested all four passwords using the password strength analyzer</label>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="pwd_check2">
+                                    <label for="pwd_check2" style="cursor: pointer;">✓ Recorded the time-to-crack results in the table above</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="pwd_check3">
+                                    <label for="pwd_check3" style="cursor: pointer;">✓ Answered both reflection questions with detailed observations</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You've now seen firsthand how password strength works. Next, you'll learn about the attacks themselves—how phishing, DDoS, and DNS spoofing actually work against you.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 6 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 6: Common Cyber Attacks and How They Work</h3>
+                    <span class="lesson-number">Lesson 6 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Recognize and describe common cyber attacks (phishing, DDoS, DNS spoofing) and understand their mechanisms and impacts.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Overview of Cyber Attacks</h4>
+                        <p class="content-text">Cybercriminals use diverse attack methods to compromise systems and steal information. While each attack differs in technique, they share a common goal: unauthorized access to data or systems. Let's explore the most common attacks you're likely to encounter.</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Attack 1: Phishing</h4>
+                        <p class="content-text">Phishing is a social engineering attack where criminals impersonate legitimate organizations to trick you into revealing sensitive information or clicking malicious links.</p>
+                        
+                        <div class="example">
+                            <div class="example-title">How Phishing Works</div>
+                            <div class="example-content">
+                                <strong>The Attack:</strong> You receive an email that appears to be from your bank, with official-looking logos and formatting. The email says: "Unusual activity detected on your account. Click here to verify your identity." You click the link, which takes you to a fake website that looks identical to your bank's. You enter your login credentials and account number. The criminals now have your banking information.
+                                <p style="margin-top: 15px;"><strong>Why It Works:</strong> People trust emails from familiar organizations. The fake website looks legitimate, creating a false sense of security.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="callout hint">
+                            <div class="callout.hint-title">💡 Hint: Spot Phishing</div>
+                            <p><strong>Red flags:</strong> Urgent language ("Act now!"), requests for passwords or PII via email, misspelled email addresses or URLs, generic greetings ("Dear Customer"), links that don't match the displayed text.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Attack 2: DDoS (Distributed Denial of Service)</h4>
+                        <p class="content-text">In a DDoS attack, criminals overwhelm a website or server with traffic from many sources, making it unavailable to legitimate users. The website doesn't get hacked, but it becomes inaccessible.</p>
+                        
+                        <div class="example">
+                            <div class="example-title">How DDoS Works</div>
+                            <div class="example-content">
+                                <strong>The Attack:</strong> A popular e-commerce website is hit by a DDoS attack. Thousands of compromised computers (called "bots") send massive amounts of traffic to the website simultaneously. The servers are overwhelmed and crash. Legitimate customers can't access the site to shop. The company loses thousands of dollars per hour while the attack continues.
+                                <p style="margin-top: 15px;"><strong>Why It Works:</strong> Servers have bandwidth limits. Too much traffic exceeds capacity, causing the server to crash or slow to a crawl.</p>
+                                <p style="margin-top: 15px;"><strong>Impact on Your Website:</strong> If your website were the target, customers couldn't reach it, your reputation would suffer, and you'd lose revenue during the outage.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="callout warning">
+                            <div class="callout.warning-title">⚠️ Warning</div>
+                            <p>DDoS attacks are illegal in most countries, but attackers often demand ransom ("DDoS ransom attacks") to stop. Legitimate companies never DDoS other businesses—it's a criminal tactic.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Attack 3: DNS Spoofing</h4>
+                        <p class="content-text">DNS spoofing is an attack where criminals intercept or manipulate the Domain Name System to redirect users to fraudulent websites. Normally, DNS translates website names (like google.com) into their actual IP addresses.</p>
+                        
+                        <div class="example">
+                            <div class="example-title">How DNS Spoofing Works</div>
+                            <div class="example-content">
+                                <strong>The Attack:</strong> You want to log into your email account, so you type "mail.google.com" into your browser. Normally, DNS servers redirect you to Google's legitimate servers. But in a DNS spoofing attack, criminals have manipulated DNS records. Your browser is redirected to a fake server controlled by attackers. The fake website looks exactly like the real one. You log in, giving attackers your credentials.
+                                <p style="margin-top: 15px;"><strong>Why It's Dangerous:</strong> You think you're on the real website because the URL looks correct, but you're actually on a fake one.</p>
+                                <p style="margin-top: 15px;"><strong>Impact on Your Website:</strong> If your Google Site were DNS spoofed, visitors typing your domain might end up on a fraudulent version that steals their information or spreads malware.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>DNS spoofing is also called "DNS cache poisoning." Attackers poison the DNS cache (memory) with incorrect information, causing all future requests to be redirected incorrectly.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>The Role of Human Error</h4>
+                        <p class="content-text">As mentioned earlier, approximately 90% of successful hacks involve human error. This might include:</p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li>Clicking suspicious links in emails</li>
+                            <li>Opening infected email attachments</li>
+                            <li>Falling for social engineering (manipulation tactics)</li>
+                            <li>Ignoring security warnings</li>
+                            <li>Using weak or reused passwords</li>
+                            <li>Leaving computers unlocked or unattended</li>
+                            <li>Not installing security updates</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Your awareness is your best defense against these attacks.</strong></p>
+                    </div>
+                    
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Cybersecurity: Understanding Common Attacks</p>
+                        <p style="font-size: 0.9em; color: #999;">[Video: 5:01 minutes - DDoS attacks, human error, DNS spoofing, and security best practices]</p>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: What is phishing? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q1" value="a" id="attack_q1_a">
+                                <label for="attack_q1_a">A type of fish found in the ocean</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q1" value="b" id="attack_q1_b">
+                                <label for="attack_q1_b">A social engineering attack using fraudulent emails or websites to steal information</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q1" value="c" id="attack_q1_c">
+                                <label for="attack_q1_c">A network security protocol</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q1" value="d" id="attack_q1_d">
+                                <label for="attack_q1_d">A type of malware virus</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'attack_answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="attack_answer1">
+                                <strong>Correct!</strong> The answer is B. Phishing is a social engineering attack where criminals impersonate legitimate organizations to trick people into revealing sensitive information. It relies on deception rather than technical exploits.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: In a DDoS attack, what happens to the target website? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q2" value="a" id="attack_q2_a">
+                                <label for="attack_q2_a">It becomes infected with a virus</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q2" value="b" id="attack_q2_b">
+                                <label for="attack_q2_b">It is overwhelmed with traffic and becomes unavailable</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q2" value="c" id="attack_q2_c">
+                                <label for="attack_q2_c">All of its data is stolen</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="attack_q2" value="d" id="attack_q2_d">
+                                <label for="attack_q2_d">The server's passwords are reset</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'attack_answer2')">Show Answer</button>
+                            <div class="answer-feedback" id="attack_answer2">
+                                <strong>Correct!</strong> The answer is B. In a DDoS attack, the website doesn't necessarily get hacked, but servers are overwhelmed with traffic and crash or become too slow for legitimate users. It's a disruption attack rather than a data theft attack.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: What happens in a DNS spoofing attack? <span class="question-type">Short Answer</span></div>
+                            <p>Explain in 2-3 sentences how DNS spoofing could redirect you to a fraudulent website.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'attack_answer3')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="attack_answer3">
+                                <strong>Excellent explanation!</strong> A correct answer should include: Criminals manipulate DNS records so that when you type a legitimate domain name, it redirects to a fake server. You think you're on the real website because the URL looks correct, but you're actually on a fraudulent one where attackers can steal your information. Any similar explanation demonstrates understanding.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 4: True or False? <span class="question-type">True/False</span></div>
+                            <p>According to security experts, most successful hacks are due to sophisticated technical attacks rather than human error.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="attack_q4" value="true" id="attack_q4_true">
+                                    <label for="attack_q4_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="attack_q4" value="false" id="attack_q4_false">
+                                    <label for="attack_q4_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'attack_answer4')">Show Answer</button>
+                            <div class="answer-feedback" id="attack_answer4">
+                                <strong>Correct!</strong> This is false. Approximately 90% of successful hacks involve human error—clicking links, using weak passwords, falling for phishing, not installing updates. This means your awareness and careful practices are essential to cybersecurity.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>Now that you understand how these attacks work, it's time to practice responding to security scenarios. In the next lesson, you'll develop security recommendations for real-world situations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 7: Security Scenarios Activity -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 7: Guided Activity – Security Scenarios & Recommendations</h3>
+                    <span class="lesson-number">Lesson 7 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Apply security recommendations to real-world scenarios, considering efficiency, feasibility, and ethical impacts.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Responding to Security Scenarios</h4>
+                        <p class="content-text">Cybersecurity isn't just about understanding attacks—it's about making good decisions when security issues arise. In this activity, you'll analyze three real-world scenarios and develop appropriate security recommendations.</p>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>When recommending security measures, consider three factors: (1) <strong>Efficiency:</strong> Does it actually solve the problem? (2) <strong>Feasibility:</strong> Is it practical and affordable? (3) <strong>Ethical impact:</strong> Are there privacy or fairness concerns?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Activity Instructions</h4>
+                        
+                        <div class="activity-instruction">
+                            <strong>DO THE FOLLOWING:</strong>
+                            <p style="margin-top: 10px;">For each scenario below, develop a security recommendation that addresses the problem. Consider factors such as <strong>efficiency, feasibility, and ethical impacts</strong> in your response.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Scenario 1: The Outdated Password</h4>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Scenario Details</div>
+                            <p style="margin-top: 10px; color: #333;">An employee has been using the same 6-digit lowercase password for over 10 years! Due to a recent security breach, the organization is requesting that employees reset their password to regain access to the system. The employee wants to know if they can use the same password as before.</p>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Your Security Recommendation:</strong></p>
+                        <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 150px; margin-bottom: 10px;" placeholder="Describe your security recommendation for this scenario..."></textarea>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Scenario 2: The Suspicious Email</h4>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Scenario Details</div>
+                            <p style="margin-top: 10px; color: #333;">Your friend receives an email from an address that she doesn't recognize. The email appears to be from a social media site asking her to login to her account using a link provided in the email. She's not sure if she should click on the link to login.</p>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Your Security Recommendation:</strong></p>
+                        <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 150px; margin-bottom: 10px;" placeholder="Describe your security recommendation for this scenario..."></textarea>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Scenario 3: The Ignored Update</h4>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Scenario Details</div>
+                            <p style="margin-top: 10px; color: #333;">Your teacher is prompted to install an important system security update on their computer, but they've been very busy and aren't sure if the update is really necessary, so they ignore it.</p>
+                        </div>
+                        
+                        <p class="content-text" style="margin-top: 20px;"><strong>Your Security Recommendation:</strong></p>
+                        <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 150px; margin-bottom: 10px;" placeholder="Describe your security recommendation for this scenario..."></textarea>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: In Scenario 1, why is it important that the employee creates a NEW password? <span class="question-type">Short Answer</span></div>
+                            <p>Explain your reasoning in 2-3 sentences.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'adv_answer1')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="adv_answer1">
+                                <strong>Good thinking!</strong> A correct answer should include: The old password was compromised in the security breach, so criminals may already have it. Using it again puts the account at immediate risk. A new, strong password prevents attackers from accessing the account even if they have records from the breach. Any similar explanation demonstrates understanding.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Why should your friend NOT click the link in the suspicious email? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="adv_q2" value="a" id="adv_q2_a">
+                                <label for="adv_q2_a">It will definitely give your computer a virus</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="adv_q2" value="b" id="adv_q2_b">
+                                <label for="adv_q2_b">The link might redirect to a fake phishing website designed to steal login credentials</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="adv_q2" value="c" id="adv_q2_c">
+                                <label for="adv_q2_c">Social media sites never send emails</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="adv_q2" value="d" id="adv_q2_d">
+                                <label for="adv_q2_d">She can click it if the email looks professional</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'adv_answer2')">Show Answer</button>
+                            <div class="answer-feedback" id="adv_answer2">
+                                <strong>Correct!</strong> The answer is B. Phishing links redirect to fake websites designed to steal credentials. Even professional-looking emails can be phishing attempts. The safest approach is always to visit websites directly by typing the URL or using a bookmark.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: True or False? <span class="question-type">True/False</span></div>
+                            <p>It's okay to skip security updates if you're too busy; you can install them later when you have more time.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="adv_q3" value="true" id="adv_q3_true">
+                                    <label for="adv_q3_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="adv_q3" value="false" id="adv_q3_false">
+                                    <label for="adv_q3_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'adv_answer3')">Show Answer</button>
+                            <div class="answer-feedback" id="adv_answer
+<div class="answer-feedback" id="adv_answer3">
+                                <strong>Correct!</strong> This is false. While you can schedule updates for off-hours, delaying them puts your system at risk. Security updates fix vulnerabilities that criminals actively exploit. The longer you wait, the more exposed you are. Install updates as soon as practical, even if it means restarting your computer.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment">
+                        <h4>🎯 Completion Checklist</h4>
+                        <div style="margin-top: 15px;">
+                            <p style="margin-bottom: 12px;"><strong>Before moving to the next lesson, confirm that you have:</strong></p>
+                            <div style="margin-left: 20px;">
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="scen_check1">
+                                    <label for="scen_check1" style="cursor: pointer;">✓ Provided security recommendations for all three scenarios</label>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="scen_check2">
+                                    <label for="scen_check2" style="cursor: pointer;">✓ Considered efficiency, feasibility, and ethical impacts in your recommendations</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="scen_check3">
+                                    <label for="scen_check3" style="cursor: pointer;">✓ Answered all assessment questions with thorough explanations</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You've learned to respond to common security scenarios. Now let's dig deeper into a more complex threat: location tracking and privacy concerns. In the next lesson, you'll analyze a case study about how your location data can be misused.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 8: Case Analysis Activity -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 8: Guided Case Analysis – Location Tracking and Privacy</h3>
+                    <span class="lesson-number">Lesson 8 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Evaluate privacy concerns related to data collection and location tracking, and develop appropriate responses to privacy threats.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>The Hidden Risks of Location Tracking</h4>
+                        <p class="content-text">While we often think of cybersecurity in terms of passwords and hacking, there are more subtle threats to your privacy. Location tracking—the collection and analysis of data about where you are and where you go—poses significant privacy risks that many people don't realize.</p>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>Location data can reveal intimate details about your life: where you worship, who you visit, your political affiliations, your health conditions (by visiting hospitals or clinics), your shopping habits, and more. This information can be misused for discrimination, manipulation, or targeted attacks.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Case Study: How Location Tracking Can Be Misused</h4>
+                        <p class="content-text"><strong>Read the article:</strong> "This is How Hackers Use Location Tracking Against You" (2018)</p>
+                        
+                        <div class="example">
+                            <div class="example-title">Key Insights from the Case Study</div>
+                            <div class="example-content">
+                                <p><strong>The Problem:</strong> Companies collect location data through apps, social media check-ins, and device location services. While this data collection might not be obvious to users, it creates detailed profiles of people's movements and habits.</p>
+                                <p style="margin-top: 10px;"><strong>Example from the Article:</strong> Social media companies like Facebook collect location data through their apps. This data can reveal where you are at any given moment, who you're with, and where you spend your time. While Facebook claims this data improves their services, it has also been misused in data breaches and sold to third parties.</p>
+                                <p style="margin-top: 10px;"><strong>The Risks:</strong></p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>Physical safety: Stalkers or criminals can track your location</li>
+                                    <li>Discrimination: Employers or insurers could use location data to discriminate against you</li>
+                                    <li>Manipulation: Advertisers can target you based on where you go</li>
+                                    <li>Identity theft: Location data combined with other information can enable targeted fraud</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Case Analysis Activity Instructions</h4>
+                        
+                        <div class="activity-instruction">
+                            <strong>DO THE FOLLOWING:</strong>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>📖 Read the article: <strong>This is How Hackers Use Location Tracking Against You (2018)</strong></li>
+                                <li>📝 Answer the analysis questions below based on the case study</li>
+                                <li>💭 Provide detailed responses that show your understanding of privacy concerns</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Case Analysis Questions</h4>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question A: Privacy Concerns in the Case Study</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">In 3-5 sentences, use an example from the case study to explain the privacy concerns related to the collection and generation of data through automated processes that may not be evident to users.</p>
+                            <textarea style="width: 100%; height: 140px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question B: Other Applications and Location Tracking</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">The article references security issues with Facebook. Identify a different application and explain in 3-5 sentences how it could be used to obtain sensitive information through location tracking.</p>
+                            <textarea style="width: 100%; height: 140px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question C: Protecting Your Information</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">The article recommends several ways to protect yourself. In 3-5 sentences, describe the appropriate actions you would take in response to a hacker trying to access your location information.</p>
+                            <textarea style="width: 100%; height: 140px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Question D: Privacy-Security Tradeoffs</div>
+                            <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">What are the tradeoffs when selecting and implementing the cybersecurity recommendations provided in the article? Provide at least one example from the article.</p>
+                            <textarea style="width: 100%; height: 140px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Protecting Your Location Privacy</h4>
+                        <p class="content-text"><strong>Steps recommended in the article and by security experts:</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li><strong>Check app permissions:</strong> Review which apps have access to your location and disable it for apps that don't need it</li>
+                            <li><strong>Turn off location sharing:</strong> Disable location sharing on social media and turn off background location access for apps</li>
+                            <li><strong>Use privacy settings:</strong> Adjust privacy settings on devices and apps to limit data collection</li>
+                            <li><strong>Limit social media check-ins:</strong> Avoid public check-ins that broadcast your location</li>
+                            <li><strong>Use a VPN:</strong> A Virtual Private Network can mask your location and encrypt your data</li>
+                            <li><strong>Use privacy-focused browsers and apps:</strong> Some browsers and apps prioritize privacy over data collection</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: Why is location tracking considered a privacy concern? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="loc_q1" value="a" id="loc_q1_a">
+                                <label for="loc_q1_a">It has no real privacy implications; companies just use it for navigation</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="loc_q1" value="b" id="loc_q1_b">
+                                <label for="loc_q1_b">Location data reveals intimate details about your life and can enable stalking, discrimination, or targeted fraud</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="loc_q1" value="c" id="loc_q1_c">
+                                <label for="loc_q1_c">It only matters if you're doing something illegal</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="loc_q1" value="d" id="loc_q1_d">
+                                <label for="loc_q1_d">Location tracking is always secure and can never be misused</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'loc_answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="loc_answer1">
+                                <strong>Correct!</strong> The answer is B. Location data reveals where you spend time, who you visit, and your habits. This information can reveal sensitive details and enable stalking, targeted discrimination, manipulation, or fraud. Everyone's location privacy matters, regardless of whether they're doing anything illegal.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Short Answer <span class="question-type">Short Answer</span></div>
+                            <p>Describe one privacy concern related to location data collection and provide one practical step to protect your location privacy.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'loc_answer2')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="loc_answer2">
+                                <strong>Excellent analysis!</strong> A complete answer should identify a concern (stalking, discrimination, targeted fraud, revealing habits) and describe a practical protection step (checking app permissions, disabling background location, using privacy settings, avoiding check-ins, using a VPN). Any specific combination demonstrates understanding of both the risks and solutions.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: What is a privacy-convenience tradeoff? <span class="question-type">Short Answer</span></div>
+                            <p>Give one example of a tradeoff between privacy and convenience regarding location data.</p>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'loc_answer3')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="loc_answer3">
+                                <strong>Great thinking!</strong> Valid examples include: (1) Allowing location tracking for real-time navigation updates vs. disabling it for privacy; (2) Using personalized recommendations (which requires location data) vs. accepting generic recommendations; (3) Getting timely notifications (which use location) vs. turning off location access. Any example that shows understanding of the choice between convenience and privacy is correct.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="assessment">
+                        <h4>🎯 Completion Checklist</h4>
+                        <div style="margin-top: 15px;">
+                            <p style="margin-bottom: 12px;"><strong>Before moving to the next lesson, confirm that you have:</strong></p>
+                            <div style="margin-left: 20px;">
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="case_check1">
+                                    <label for="case_check1" style="cursor: pointer;">✓ Read the location tracking case study article</label>
+                                </div>
+                                <div style="margin-bottom: 10px;">
+                                    <input type="checkbox" id="case_check2">
+                                    <label for="case_check2" style="cursor: pointer;">✓ Answered all four case analysis questions (A, B, C, D)</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="case_check3">
+                                    <label for="case_check3" style="cursor: pointer;">✓ Provided detailed responses showing understanding of privacy concerns</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You've analyzed specific privacy threats and security scenarios. Now it's time to put everything together and create your personal cybersecurity action plan in the final lessons.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 9: Personal Cybersecurity Action Plan -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 9: Your Personal Cybersecurity Action Plan</h3>
+                    <span class="lesson-number">Lesson 9 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Develop a practical personal cybersecurity action plan that addresses key security concerns and incorporates best practices.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Creating Your Action Plan</h4>
+                        <p class="content-text">Throughout this chapter, you've learned about cyber threats, strong passwords, privacy concerns, and practical security measures. Now it's time to put this knowledge into action. An effective cybersecurity action plan isn't about perfect security—it's about making smart, practical choices that protect your most valuable information.</p>
+                        
+                        <div class="callout info">
+                            <div class="callout.info-title">ℹ️ Info</div>
+                            <p>Your cybersecurity action plan should be personal and realistic. It should address your biggest vulnerabilities and be something you can actually maintain. Perfect security is impossible, but significantly reducing your risk is achievable.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Components of a Strong Action Plan</h4>
+                        
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>1. Password Security</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li>Audit your current passwords and identify weak ones</li>
+                            <li>Create a plan to update weak passwords to strong ones (12+ characters, mixed types)</li>
+                            <li>Set up a password manager to securely store and generate passwords</li>
+                            <li>Enable two-factor authentication on your most important accounts (email, banking, social media)</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>2. PII Protection</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li>Identify what personal information is most sensitive (Social Security number, banking details, etc.)</li>
+                            <li>Limit sharing of PII online—only provide it when absolutely necessary</li>
+                            <li>Be cautious about what you post on social media that could identify you</li>
+                            <li>Check privacy settings on social media and apps to limit data sharing</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>3. Threat Awareness</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li>Recognize and avoid phishing emails (never click suspicious links)</li>
+                            <li>Be skeptical of requests for personal information via email or phone</li>
+                            <li>Keep software and operating systems updated with security patches</li>
+                            <li>Use reliable antivirus/anti-malware software</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>4. Privacy Management</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li>Review app permissions and disable location access for apps that don't need it</li>
+                            <li>Turn off background location tracking</li>
+                            <li>Limit social media check-ins and avoid broadcasting your location</li>
+                            <li>Consider using a VPN for public Wi-Fi networks</li>
+                        </ul>
+                        
+                        <p class="content-text" style="margin-bottom: 15px;"><strong>5. Regular Maintenance</strong></p>
+                        <ul style="margin-left: 20px; color: #555; margin-bottom: 20px;">
+                            <li>Check account activity regularly for unauthorized access</li>
+                            <li>Review privacy settings periodically (apps and websites change them)</li>
+                            <li>Update passwords if you suspect compromise</li>
+                            <li>Stay informed about cybersecurity best practices</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Prioritizing Your Actions</h4>
+                        <p class="content-text">You don't need to do everything at once. Prioritize based on urgency and impact. Start with these high-impact actions:</p>
+                        
+                        <div class="example">
+                            <div class="example-title">Recommended Priority Order</div>
+                            <div class="example-content">
+                                <p><strong>Week 1 (Immediate - Do These Now):</strong></p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>✓ Change weak or reused passwords to strong, unique ones</li>
+                                    <li>✓ Enable two-factor authentication on email account (most critical)</li>
+                                    <li>✓ Review and decline unnecessary app permissions (especially location)</li>
+                                </ul>
+                                
+                                <p style="margin-top: 15px;"><strong>Week 2-4 (Important - Plan These):</strong></p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>→ Set up a password manager</li>
+                                    <li>→ Enable two-factor authentication on banking and social media accounts</li>
+                                    <li>→ Adjust privacy settings on social media platforms</li>
+                                </ul>
+                                
+                                <p style="margin-top: 15px;"><strong>Ongoing (Maintenance):</strong></p>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>→ Install security updates when prompted</li>
+                                    <li>→ Monitor accounts for suspicious activity</li>
+                                    <li>→ Stay aware of new threats and scams</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="callout hint">
+                            <div class="callout.hint-title">💡 Hint: Start Small, Build Habits</div>
+                            <p>Don't try to implement everything at once. Start with the highest-impact actions. As these become habits, add more. Small, consistent improvements compound over time into significant security improvements.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>What to Do If You're Compromised</h4>
+                        <p class="content-text">Despite your best efforts, a compromise might still occur. Here's how to respond:</p>
+                        <ul style="margin-left: 20px; color: #555;">
+                            <li><strong>Suspected password compromise:</strong> Change the password immediately from a different device; check for unauthorized account activity</li>
+                            <li><strong>Phishing attack / Clicked suspicious link:</strong> Run antivirus software; change relevant passwords; monitor accounts for fraud</li>
+                            <li><strong>Data breach notification:</strong> Change passwords; monitor credit reports; consider placing a fraud alert or credit freeze</li>
+                            <li><strong>Identity theft suspected:</strong> Report to the Federal Trade Commission (FTC) at IdentityTheft.gov; contact your bank and creditors</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Check Your Understanding</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: What is the first step you should take when creating your personal cybersecurity action plan? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q1" value="a" id="plan_q1_a">
+                                <label for="plan_q1_a">Do everything at once to achieve perfect security</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q1" value="b" id="plan_q1_b">
+                                <label for="plan_q1_b">Prioritize high-impact actions and start with those you can do immediately</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q1" value="c" id="plan_q1_c">
+                                <label for="plan_q1_c">Only focus on password security</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q1" value="d" id="plan_q1_d">
+                                <label for="plan_q1_d">Skip personal action planning and only use company-provided security</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'plan_answer1')">Show Answer</button>
+                            <div class="answer-feedback" id="plan_answer1">
+                                <strong>Correct!</strong> The answer is B. Effective cybersecurity is built gradually with prioritized, realistic actions. Starting with high-impact items you can do immediately (strong passwords, 2FA) creates momentum and protects your most critical assets. Trying to do everything at once is overwhelming and unsustainable.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Name two of the five main components of a strong cybersecurity action plan. <span class="question-type">Short Answer</span></div>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'plan_answer2')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="plan_answer2">
+                                <strong>Excellent!</strong> Valid components include: (1) Password security, (2) PII protection, (3) Threat awareness, (4) Privacy management, (5) Regular maintenance. Any two of these with brief explanations demonstrates understanding of comprehensive cybersecurity planning.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: What should you do immediately if you suspect your password has been compromised? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q3" value="a" id="plan_q3_a">
+                                <label for="plan_q3_a">Wait and see if anything bad happens before taking action</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q3" value="b" id="plan_q3_b">
+                                <label for="plan_q3_b">Change the password immediately from a different device and check account activity</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q3" value="c" id="plan_q3_c">
+                                <label for="plan_q3_c">Delete the account entirely</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="plan_q3" value="d" id="plan_q3_d">
+                                <label for="plan_q3_d">Tell all your friends but don't change anything yourself</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'plan_answer3')">Show Answer</button>
+                            <div class="answer-feedback" id="plan_answer3">
+                                <strong>Correct!</strong> The answer is B. Immediate action is critical. Changing the password quickly from a different device limits damage, and checking account activity helps you identify any unauthorized access. Waiting or ignoring the issue allows attackers more time to misuse the compromised account.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>What's Coming Next?</h5>
+                        <p>You've learned all the components of cybersecurity and created your action plan. The final lesson brings it all together with a comprehensive review and synthesis of everything you've learned.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- LESSON 10: Chapter Synthesis & Review -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <h3>Lesson 10: Chapter Synthesis & Final Review</h3>
+                    <span class="lesson-number">Lesson 10 of 10</span>
+                </div>
+                <div class="lesson-content">
+                    
+                    <div class="learning-objective">
+                        <strong>Learning Objective:</strong> Synthesize all cybersecurity knowledge and demonstrate comprehensive understanding through final review and personal action commitments.
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Chapter Synthesis</h4>
+                        <p class="content-text">Congratulations on completing Chapter 8! You've journeyed from understanding basic cyber threats to developing a comprehensive personal cybersecurity action plan. Let's review what you've learned and how it all connects.</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>The Cybersecurity Framework You've Built</h4>
+                        
+                        <div class="example">
+                            <div class="example-title">How Everything Connects</div>
+                            <div class="example-content">
+                                <p><strong>Understanding the Threats (Lessons 1, 6):</strong> You learned that cybersecurity matters because attacks are common and human error is the leading cause of breaches. You understand specific attack methods (phishing, DDoS, DNS spoofing).</p>
+                                
+                                <p style="margin-top: 15px;"><strong>Protecting What Matters (Lessons 2, 4, 5):</strong> You identified what information criminals target (PII) and learned the strongest defense—long, unique passwords managed securely. You tested these principles with real password strength analyzers.</p>
+                                
+                                <p style="margin-top: 15px;"><strong>Recognizing Danger (Lesson 3, 6):</strong> You practiced identifying phishing attacks and other common threats so you can spot them in real emails and websites.</p>
+                                
+                                <p style="margin-top: 15px;"><strong>Making Good Decisions (Lessons 7, 8, 9):</strong> You analyzed real-world scenarios and evaluated tradeoffs between security, convenience, and privacy. You developed recommendations based on efficiency, feasibility, and ethical impacts.</p>
+                                
+                                <p style="margin-top: 15px;"><strong>Taking Action (Lesson 9):</strong> You created a prioritized, realistic action plan that you can actually implement and maintain.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Your Cybersecurity Commitment</h4>
+                        <p class="content-text">Now is the time to commit to taking action. Review the checklist below and identify which actions you commit to implementing in the next 30 days:</p>
+                        
+                        <div class="scenario-box">
+                            <div class="scenario-title">Personal Commitment Checklist</div>
+                            <p style="margin-top: 15px; margin-bottom: 10px; color: #666;"><strong>Which of these actions will you commit to in the next 30 days? Check the
+<p style="margin-top: 15px; margin-bottom: 10px; color: #666;"><strong>Which of these actions will you commit to in the next 30 days? Check the ones you will do:</strong></p>
+                            <div style="margin-left: 20px;">
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit1">
+                                    <label for="commit1" style="cursor: pointer;">☐ Audit my passwords and identify weak ones that need updating</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit2">
+                                    <label for="commit2" style="cursor: pointer;">☐ Create strong, unique passwords (12+ characters) for my most critical accounts</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit3">
+                                    <label for="commit3" style="cursor: pointer;">☐ Enable two-factor authentication on my email account</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit4">
+                                    <label for="commit4" style="cursor: pointer;">☐ Review app permissions and disable location access where unnecessary</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit5">
+                                    <label for="commit5" style="cursor: pointer;">☐ Check and adjust privacy settings on social media platforms</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit6">
+                                    <label for="commit6" style="cursor: pointer;">☐ Set up a password manager to generate and store secure passwords</label>
+                                </div>
+                                <div style="margin-bottom: 12px;">
+                                    <input type="checkbox" id="commit7">
+                                    <label for="commit7" style="cursor: pointer;">☐ Be more cautious about phishing emails and suspicious links</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="commit8">
+                                    <label for="commit8" style="cursor: pointer;">☐ Install pending security updates on my devices</label>
+                                </div>
+                            </div>
+                            
+                            <p style="margin-top: 20px; margin-bottom: 10px; color: #666;"><strong>Reflection: In the space below, write 2-3 sentences about why cybersecurity matters to you personally and which action you're most committed to taking:</strong></p>
+                            <textarea style="width: 100%; height: 120px; border: 1px solid #ddd; border-radius: 4px; padding: 10px; font-family: Arial;"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h4>Key Principles to Remember</h4>
+                        <p class="content-text">As you move forward, keep these core principles in mind:</p>
+                        
+                        <ul style="margin-left: 20px; color: #555; line-height: 2;">
+                            <li><strong>Human error is the leading cause of breaches.</strong> Your awareness and careful practices are your most valuable security tools.</li>
+                            <li><strong>Length beats complexity for passwords.</strong> A long passphrase is more secure than a short password with symbols.</li>
+                            <li><strong>Unique passwords matter.</strong> If one account is compromised, strong, unique passwords on other accounts prevent criminals from accessing everything.</li>
+                            <li><strong>Privacy is a choice.</strong> You control what data you share and which permissions you grant to apps.</li>
+                            <li><strong>Perfect security is impossible; significant risk reduction is achievable.</strong> Start with high-impact actions and build from there.</li>
+                            <li><strong>Security requires ongoing attention.</strong> Regularly review settings, update passwords, and stay informed about new threats.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Formative Assessment -->
+                    <div class="assessment">
+                        <h4>🎯 Final Chapter Assessment</h4>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 1: Why is cybersecurity everyone's responsibility? <span class="question-type">Short Answer</span></div>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 80px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'final_answer1')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="final_answer1">
+                                <strong>Excellent reflection!</strong> Valid answers should include: 90% of breaches involve human error, so individual awareness and practices are critical; threats are diverse and common; data breaches can happen to anyone; your security practices affect others (shared networks, family members, coworkers); companies implement technical safeguards, but personal vigilance is equally important. Any comprehensive answer demonstrates chapter mastery.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 2: Describe one real-world scenario where you would apply cybersecurity knowledge. <span class="question-type">Short Answer</span></div>
+                            <textarea style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ddd; font-family: Arial; height: 100px;"></textarea>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'final_answer2')">Show Possible Answer</button>
+                            <div class="answer-feedback" id="final_answer2">
+                                <strong>Great application of learning!</strong> Valid scenarios include: receiving a suspicious email asking to verify account credentials; deciding whether to check in at a location on social media; choosing a password for a new account; reviewing app permissions; deciding whether to click a link in a text message; responding to a request to share personal information over the phone. Any real-world scenario with specific cybersecurity application demonstrates understanding.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 3: True or False? <span class="question-type">True/False</span></div>
+                            <p>Once you implement a cybersecurity action plan, you don't need to think about security again because you're fully protected.</p>
+                            <div>
+                                <div class="answer-option">
+                                    <input type="radio" name="final_q3" value="true" id="final_q3_true">
+                                    <label for="final_q3_true">True</label>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" name="final_q3" value="false" id="final_q3_false">
+                                    <label for="final_q3_false">False</label>
+                                </div>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'final_answer3')">Show Answer</button>
+                            <div class="answer-feedback" id="final_answer3">
+                                <strong>Correct!</strong> This is false. Security requires ongoing attention. New threats emerge, passwords need updating, apps change their privacy settings, and habits need reinforcing. Cybersecurity is an ongoing practice, not a one-time fix. Regular maintenance and awareness are essential.
+                            </div>
+                        </div>
+                        
+                        <div class="assessment-question">
+                            <div class="question-text">Question 4: Which is the most important piece of advice you've learned in this chapter? <span class="question-type">Multiple Choice</span></div>
+                            <div class="answer-option">
+                                <input type="radio" name="final_q4" value="a" id="final_q4_a">
+                                <label for="final_q4_a">Use long passwords and keep them unique across accounts</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="final_q4" value="b" id="final_q4_b">
+                                <label for="final_q4_b">Be skeptical of unexpected emails and requests for personal information</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="final_q4" value="c" id="final_q4_c">
+                                <label for="final_q4_c">Protect your location data and review app permissions regularly</label>
+                            </div>
+                            <div class="answer-option">
+                                <input type="radio" name="final_q4" value="d" id="final_q4_d">
+                                <label for="final_q4_d">All of the above are equally important</label>
+                            </div>
+                            <button class="show-answer-btn" onclick="showAnswer(this, 'final_answer4')">Show Answer</button>
+                            <div class="answer-feedback" id="final_answer4">
+                                <strong>Correct!</strong> The answer is D. All these practices work together to create comprehensive security. No single practice is sufficient—strong passwords, threat awareness, and privacy management are all essential components of effective cybersecurity.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="whats-next">
+                        <h5>Chapter Complete!</h5>
+                        <p>You've successfully completed Chapter 8: Cybersecurity. You now have comprehensive knowledge of cyber threats, practical security practices, and a personal action plan to protect yourself online. Great work!</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <h2>Chapter 8 Summary: Key Takeaways</h2>
+            
+            <p style="color: #666; margin-bottom: 20px;"><strong>Congratulations!</strong> You've completed Chapter 8: Cybersecurity. Here's what you've learned:</p>
+            
+            <h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px; font-size: 1.3em;">Core Concepts</h3>
+            <ul class="summary-bullets">
+                <li><strong>Cybersecurity matters:</strong> 90% of successful hacks involve human error, making awareness and good practices essential</li>
+                <li><strong>PII is valuable:</strong> Personally identifiable information (names, SSNs, financial data, location) should be protected from unauthorized access</li>
+                <li><strong>Strong passwords are powerful:</strong> Length is more important than complexity; use 12+ characters with mixed types</li>
+                <li><strong>Common attacks are predictable:</strong> Phishing, DDoS, and DNS spoofing follow patterns you can learn to recognize</li>
+                <li><strong>Privacy and convenience involve tradeoffs:</strong> You must balance security with usability based on your personal values</li>
+                <li><strong>Security requires ongoing attention:</strong> It's a practice, not a one-time fix—regularly update settings, review permissions, and stay informed</li>
+            </ul>
+            
+            <h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px; font-size: 1.3em;">Skills You've Developed</h3>
+            <ul class="summary-bullets">
+                <li>Identify and classify different types of personally identifiable information</li>
+                <li>Create and manage strong, unique passwords using best practices</li>
+                <li>Recognize phishing emails, DDoS attacks, and other common cyber threats</li>
+                <li>Test password strength using real-world analysis tools</li>
+                <li>Apply security recommendations to real-world scenarios</li>
+                <li>Evaluate privacy concerns and make informed decisions about data sharing</li>
+                <li>Develop a practical personal cybersecurity action plan</li>
+                <li>Respond appropriately if your accounts or data are compromised</li>
+            </ul>
+            
+            <h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px; font-size: 1.3em;">Practical Actions You Can Take Today</h3>
+            <ul class="summary-bullets">
+                <li>Audit your current passwords and update weak ones to strong, unique passwords</li>
+                <li>Enable two-factor authentication on your email account (most critical)</li>
+                <li>Review app permissions and disable location access for unnecessary apps</li>
+                <li>Be skeptical of unexpected emails asking for personal information</li>
+                <li>Install pending security updates on your devices</li>
+                <li>Check and adjust privacy settings on social media platforms</li>
+                <li>Start researching and evaluating password managers</li>
+            </ul>
+            
+            <h3 style="color: #667eea; margin-top: 25px; margin-bottom: 15px; font-size: 1.3em;">Remember</h3>
+            <div style="background: #f0f4ff; padding: 20px; border-radius: 6px; border-left: 4px solid #667eea;">
+                <p style="margin: 0; color: #333; line-height: 1.8;">
+                    Cybersecurity isn't about achieving perfect security—it's about making smart, practical choices that significantly reduce your risk. You don't need to implement everything at once. Start with high-impact actions, build habits, and continuously improve. Your awareness and careful practices are your most valuable security tools. The knowledge you've gained in this chapter will serve you well throughout your digital life.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Coming Next Section -->
+        <div class="coming-next-section">
+            <h2>Coming Next: Chapter 9 – Data & Storytelling</h2>
+            <p>You've learned how to protect data. Now learn where data comes from, how it's analyzed, and how to tell compelling stories with numbers.</p>
+            <p style="margin-top: 15px; font-size: 0.95em; opacity: 0.95;">
+                Chapter 9 will introduce you to data collection, analysis, and visualization—skills that are essential in our data-driven world. Discover how organizations use data to understand problems, make decisions, and communicate insights. You'll learn to collect data responsibly, analyze it meaningfully, and present findings in visually compelling ways.
+            </p>
+            <div class="progress-indicator">
+                <p>📚 You have completed 3 of 4 major units in CSC101</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- JavaScript for interactive elements -->
+    <script>
+        function showAnswer(button, answerId) {
+            const answerDiv = document.getElementById(answerId);
+            answerDiv.classList.toggle('show');
+            
+            // Change button text based on state
+            if (answerDiv.classList.contains('show')) {
+                button.textContent = 'Hide Answer';
+            } else {
+                button.textContent = 'Show Answer';
+            }
+        }
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
