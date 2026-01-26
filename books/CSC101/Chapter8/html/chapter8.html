@@ -1,0 +1,2423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Intro to Programming - CSC101</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --warning-color: #ef4444;
+            --info-color: #3b82f6;
+            --light-bg: #f3f4f6;
+            --border-color: #e5e7eb;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header Styles */
+        .chapter-header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .chapter-title {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.3em;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .chapter-intro {
+            font-size: 1.05em;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .learning-objectives-overview {
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* Lesson Styles */
+        .lesson {
+            margin-bottom: 60px;
+            page-break-inside: avoid;
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .lesson-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .lesson-title {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .lesson-time {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        .learning-objective {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--info-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .objective-label {
+            font-weight: bold;
+            color: var(--info-color);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .objective-text {
+            font-size: 1.05em;
+            color: var(--text-dark);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        /* Content Styles */
+        .content-section {
+            margin: 25px 0;
+            line-height: 1.8;
+        }
+
+        .content-section h3 {
+            color: var(--secondary-color);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .content-section ul, 
+        .content-section ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .content-section li {
+            margin-bottom: 10px;
+        }
+
+        /* Callout Styles */
+        .callout {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+            display: flex;
+            gap: 15px;
+        }
+
+        .callout-icon {
+            font-size: 1.8em;
+            flex-shrink: 0;
+        }
+
+        .callout-content {
+            flex: 1;
+        }
+
+        .callout-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .callout.hint {
+            background-color: #fef3c7;
+            border-color: var(--accent-color);
+            color: #78350f;
+        }
+
+        .callout.warning {
+            background-color: #fee2e2;
+            border-color: var(--warning-color);
+            color: #7f1d1d;
+        }
+
+        .callout.info {
+            background-color: #dbeafe;
+            border-color: var(--info-color);
+            color: #0c2d6b;
+        }
+
+        /* Video/Reading Embed */
+        .video-container {
+            background-color: var(--light-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 2px solid var(--border-color);
+        }
+
+        .video-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .video-duration {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .video-placeholder {
+            background-color: #000;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Example Problem */
+        .example {
+            background-color: #f0fdf4;
+            border: 2px solid var(--success-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: var(--success-color);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-step {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .example-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 5px;
+        }
+
+        .example-code {
+            background-color: #1f2937;
+            color: #10b981;
+            padding: 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        /* Formative Assessment */
+        .formative-assessment {
+            background-color: #fef3c7;
+            border: 3px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .assessment-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .option:hover {
+            background-color: var(--light-bg);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            cursor: pointer;
+        }
+
+        .answer-reveal {
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            margin-top: 12px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .answer-reveal.show {
+            display: block;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            color: var(--success-color);
+            margin-bottom: 8px;
+        }
+
+        .show-answer-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .show-answer-btn:hover {
+            background-color: #d97706;
+        }
+
+        /* What's Coming Next */
+        .preview-next {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.05) 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .preview-label {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .preview-text {
+            font-size: 1.05em;
+            color: var(--text-dark);
+        }
+
+        /* Guided Activity Section */
+        .guided-activity {
+            background-color: #f9f5ff;
+            border: 3px solid #8b5cf6;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 40px 0;
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #8b5cf6;
+        }
+
+        .activity-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .activity-title {
+            font-size: 1.6em;
+            color: #7c3aed;
+            margin: 0;
+        }
+
+        .activity-instructions {
+            background-color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .activity-instructions h4 {
+            color: #7c3aed;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .activity-instructions ol {
+            margin-left: 25px;
+        }
+
+        .activity-instructions li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .activity-tips {
+            background-color: #fef3c7;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+
+        .deliverable {
+            background-color: #dbeafe;
+            border-left: 4px solid var(--info-color);
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .deliverable-label {
+            font-weight: bold;
+            color: var(--info-color);
+            margin-bottom: 8px;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            color: var(--text-light);
+        }
+
+        .progress-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        /* Section divider */
+        .section-divider {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 3px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .section-divider h2 {
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .chapter-title {
+                font-size: 1.8em;
+            }
+
+            .lesson-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .lesson-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .video-placeholder {
+                padding: 40px 15px;
+            }
+
+            .callout {
+                flex-direction: column;
+            }
+
+            .formative-assessment,
+            .guided-activity {
+                padding: 20px;
+            }
+
+            .activity-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .activity-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .lesson {
+                page-break-inside: avoid;
+            }
+
+            .answer-reveal {
+                display: block !important;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Chapter Header -->
+        <div class="chapter-header">
+            <h1 class="chapter-title">📚 Chapter 8: Introduction to Programming</h1>
+            <p class="chapter-subtitle">Learning to Think Like a Programmer</p>
+            <p class="chapter-intro">
+                Welcome to the world of programming! In this chapter, you'll discover that programming isn't as mysterious as it might seem. By the end of this week, you'll have created your own dance parties and musical compositions using block-based programming. You'll understand core programming concepts like algorithms, variables, loops, conditionals, and functions. Most importantly, you'll see how the visual blocks you use translate into real JavaScript code—the language that powers interactive experiences across the web.
+            </p>
+            <div class="learning-objectives-overview">
+                <strong>By the end of this chapter, you will be able to:</strong>
+                <ul style="margin-top: 15px; margin-left: 20px;">
+                    <li>Explain what programming is and why it matters</li>
+                    <li>Use block-based programming to create interactive experiences</li>
+                    <li>Design and refine a program through systematic testing</li>
+                    <li>Define and apply core programming concepts (algorithms, variables, loops, conditionals, functions)</li>
+                    <li>Understand how visual block programming translates to text-based code</li>
+                    <li>Collect and incorporate user feedback to improve programs</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 1: Programming & Algorithms ==================== -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">1</div>
+                <div>
+                    <h2 class="lesson-title">What is Programming & Algorithms</h2>
+                    <p class="lesson-time">⏱️ 14 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Lesson 1 of 7
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.1.1: Understand what programming is and its role in creating interactive experiences<br>
+                    LO8.1.2: Define algorithms and understand why order and sequence matter in programming
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>What is Programming?</h3>
+                <p>
+                    At its core, <strong>programming is giving instructions to a computer</strong>. Just as you follow a recipe to bake a cake or follow directions to get somewhere, a programmer writes a set of instructions (called a "program" or "code") that tells a computer exactly what to do.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Think of it this way:</div>
+                        <p>If you wanted to make someone laugh, you might tell a joke. If you wanted to program a computer to make someone laugh, you'd have to write out every instruction: "Display words on screen. Wait for user to read. Play a sound. Animate a character."</p>
+                    </div>
+                </div>
+
+                <h3>Why Does Programming Matter?</h3>
+                <p>Programming is everywhere:</p>
+                <ul>
+                    <li><strong>Entertainment:</strong> Video games, streaming services (Netflix), music apps (Spotify)</li>
+                    <li><strong>Communication:</strong> Social media, email, messaging apps</li>
+                    <li><strong>Learning:</strong> Educational apps, virtual classrooms, AI tutors</li>
+                    <li><strong>Healthcare:</strong> Patient records, diagnosis tools, fitness trackers</li>
+                    <li><strong>Transportation:</strong> GPS, self-driving cars, ride-sharing apps</li>
+                </ul>
+
+                <h3>Programming Makes Things Interactive</h3>
+                <p>
+                    Without programming, websites would just be static text and images. Programming makes them respond to you—it's what allows you to click a button and see something happen, type in a search box and get results, send a message and see it appear on someone else's screen, or play a game and watch characters respond to your inputs.
+                </p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-title">
+                    🎥 Watch: Computer Science is Changing Everything
+                    <span class="video-duration">5:44</span>
+                </div>
+                <div class="video-placeholder">
+                    [Video: Computer Science is Changing Everything - 5:44]<br>
+                    <small>Discover how programming is transforming the world around us</small>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>What is an Algorithm?</h3>
+                <p>
+                    An <strong>algorithm</strong> is a set of step-by-step instructions to solve a problem or accomplish a task. The key word is <strong>step-by-step</strong>—each step must be completed before moving to the next, and the order matters!
+                </p>
+
+                <div class="example">
+                    <div class="example-title">✓ Example: Making a Sandwich (Algorithm)</div>
+                    <div class="example-step">
+                        <div class="step-number">Step 1:</div>
+                        <p>Get two slices of bread from the bag</p>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-number">Step 2:</div>
+                        <p>Lay both slices on a plate</p>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-number">Step 3:</div>
+                        <p>Spread peanut butter on the first slice</p>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-number">Step 4:</div>
+                        <p>Spread jelly on the second slice</p>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-number">Step 5:</div>
+                        <p>Press the slices together with peanut butter and jelly facing each other</p>
+                    </div>
+                </div>
+
+                <h3>Why Algorithms Matter in Programming</h3>
+                <p>
+                    When you write a program, you're writing an algorithm for a computer to follow. The computer reads your instructions from top to bottom and does exactly what you tell it—no more, no less. This is why order matters, clarity matters, and completeness matters.
+                </p>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Common Mistake:</div>
+                        <p>Students often think computers are "smart" enough to figure things out. They're not! A computer will do EXACTLY what you tell it—nothing more, nothing less. If your algorithm is wrong, your program is wrong.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-title">
+                    🎥 Watch: What is an Algorithm and Why Should You Care?
+                    <span class="video-duration">5:27</span>
+                </div>
+                <div class="video-placeholder">
+                    [Video: What is an Algorithm and Why Should You Care? - 5:27]<br>
+                    <small>Learn why algorithms are the foundation of all programming</small>
+                </div>
+            </div>
+
+            <div class="formative-assessment">
+                <div class="assessment-title">🎯 Check Your Understanding</div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text"><strong>True or False:</strong> Programming is only for creating video games.</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q1_l1" value="true"> True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l1" value="false"> False
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l1')">Show Answer</button>
+                    <div class="answer-reveal" id="answer1_l1">
+                        <div class="answer-label">✓ Correct Answer: False</div>
+                        <p>Programming is used in entertainment, communication, healthcare, transportation, education, and countless other fields. While video games are one use of programming, it's just a small part of what's possible.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text"><strong>True or False:</strong> When writing an algorithm, the order of steps doesn't matter as long as you do them all eventually.</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q2_l1" value="true"> True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l1" value="false"> False
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l1')">Show Answer</button>
+                    <div class="answer-reveal" id="answer2_l1">
+                        <div class="answer-label">✓ Correct Answer: False</div>
+                        <p>Order is critical in algorithms. Following steps out of order can produce wrong results. For example, if you paint a wall and then hang a picture, vs. hanging a picture and then painting, you'll get different results!</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text"><strong>Short Answer:</strong> Describe one area of your daily life where programming affects you.</div>
+                    <textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 80px; margin: 10px 0;" placeholder="Your answer here..."></textarea>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l1')">Show Example Answer</button>
+                    <div class="answer-reveal" id="answer3_l1">
+                        <div class="answer-label">✓ Example Answer:</div>
+                        <p><strong>Area:</strong> Social media (like Instagram or TikTok)<br>
+                        <strong>How it affects me:</strong> Programming allows me to upload photos, see my friends' posts, comment on them, and get notifications. Without programming, none of these interactive features would exist.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Coming Next</div>
+                <div class="preview-text">
+                    Now that you understand what programming is and how algorithms work, let's learn the four core programming concepts that power virtually every program ever written: variables, loops, conditionals, and functions!
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 2: Core Concepts Overview ==================== -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">2</div>
+                <div>
+                    <h2 class="lesson-title">Core Programming Concepts: An Overview</h2>
+                    <p class="lesson-time">⏱️ 11 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Lesson 2 of 7
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.2.1: Identify the four core programming concepts and understand their purpose<br>
+                    LO8.2.2: Recognize how these concepts work together to create programs
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>The Four Pillars of Programming</h3>
+                <p>
+                    Every program you've ever used—from games to social media to your phone's weather app—is built using just four core concepts. Learn these four concepts, and you can understand (and create!) any program.
+                </p>
+
+                <h3>1. Variables 📦</h3>
+                <p>
+                    <strong>Variables</strong> are containers that store information. Think of them as labeled boxes where you put data that you want to use or change later.
+                </p>
+                <div class="example">
+                    <div class="example-title">✓ Variable Examples</div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> playerScore | <strong>Value:</strong> 100</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> backgroundColor | <strong>Value:</strong> Blue</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> isGameOver | <strong>Value:</strong> False</p>
+                    </div>
+                </div>
+
+                <h3>2. Loops 🔄</h3>
+                <p>
+                    <strong>Loops</strong> let you repeat actions without writing the same code over and over. Instead of copying and pasting instructions 100 times, you can say "repeat this 100 times."
+                </p>
+<div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <p><strong>Real-world example:</strong> If you wanted to make a dancer do the same move 10 times, you could use a loop: "repeat the dance move 10 times" instead of programming the same move 10 separate times.</p>
+                    </div>
+                </div>
+
+                <h3>3. Conditionals ❓</h3>
+                <p>
+                    <strong>Conditionals</strong> let your program make decisions based on what happens. They use "if-then" logic: "IF this condition is true, THEN do this."
+                </p>
+                <div class="example">
+                    <div class="example-title">✓ Conditional Examples</div>
+                    <div class="example-step">
+                        <p>IF score is greater than 100, THEN play a winning sound</p>
+                    </div>
+                    <div class="example-step">
+                        <p>IF user clicks the red button, THEN change the background to red</p>
+                    </div>
+                    <div class="example-step">
+                        <p>IF health is 0, THEN end the game</p>
+                    </div>
+                </div>
+
+                <h3>4. Functions 🔧</h3>
+                <p>
+                    <strong>Functions</strong> are reusable blocks of code that do a specific job. Instead of writing the same code in 5 different places, you create a function once and call it whenever you need it.
+                </p>
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-content">
+                        <p>Think of functions like kitchen appliances: Instead of manually mixing ingredients with a spoon 50 times, you use a blender once. Functions are like programming "appliances"—tools that do a job when you need them.</p>
+                    </div>
+                </div>
+
+                <h3>How They Work Together</h3>
+                <p>
+                    These four concepts work together to create powerful programs. Here's a simple example:
+                </p>
+                <div class="example">
+                    <div class="example-title">✓ Example: A Simple Music Player</div>
+                    <div class="example-step">
+                        <p><strong>VARIABLE:</strong> Store the current volume level in a variable called "volumeLevel"</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>LOOP:</strong> Repeat the music playback 5 times</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>CONDITIONAL:</strong> IF user clicks the pause button, THEN stop the music</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>FUNCTION:</strong> Create a "playMusic" function that you can call anytime you want to start playing</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <div class="video-title">
+                    🎥 Watch: Make Music, Learn Code
+                    <span class="video-duration">2:02</span>
+                </div>
+                <div class="video-placeholder">
+                    [Video: Make Music, Learn Code - 2:02]<br>
+                    <small>See how programming concepts create interactive music experiences</small>
+                </div>
+            </div>
+
+            <div class="formative-assessment">
+                <div class="assessment-title">🎯 Check Your Understanding</div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text"><strong>Matching:</strong> Match each concept to its description.</div>
+                    <div style="margin: 15px 0; padding: 15px; background-color: white; border-radius: 4px;">
+                        <p style="margin-bottom: 12px;"><strong>1. Variable</strong> — A) Repeat code multiple times</p>
+                        <p style="margin-bottom: 12px;"><strong>2. Loop</strong> — B) Reusable block of code that performs a specific task</p>
+                        <p style="margin-bottom: 12px;"><strong>3. Conditional</strong> — C) Container that stores a value</p>
+                        <p style="margin-bottom: 12px;"><strong>4. Function</strong> — D) Decision-making (IF-THEN)</p>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l2')">Show Answer</button>
+                    <div class="answer-reveal" id="answer1_l2">
+                        <div class="answer-label">✓ Correct Answers:</div>
+                        <p>
+                            1. Variable → C) Container that stores a value<br>
+                            2. Loop → A) Repeat code multiple times<br>
+                            3. Conditional → D) Decision-making (IF-THEN)<br>
+                            4. Function → B) Reusable block of code that performs a specific task
+                        </p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text"><strong>Multiple Choice:</strong> You want to program a game where every time a player jumps, they earn 10 points. You'll need to check this thousands of times while the game runs. Which concept(s) would you use?</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q2_l2" value="a"> A) A variable to store the score
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l2" value="b"> B) A conditional to check IF the player jumped
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l2" value="c"> C) A loop to repeat the jump check
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l2" value="d"> D) All of the above
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l2')">Show Answer</button>
+                    <div class="answer-reveal" id="answer2_l2">
+                        <div class="answer-label">✓ Correct Answer: D) All of the above</div>
+                        <p>You'd use a VARIABLE to track the score, a CONDITIONAL to check IF a jump happened, and a LOOP to continuously check for jumps throughout the game. This is how programming concepts work together!</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text"><strong>Short Answer:</strong> Explain in your own words: Why would you use a function instead of just writing the same code multiple times?</div>
+                    <textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 80px; margin: 10px 0;" placeholder="Your answer here..."></textarea>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l2')">Show Example Answer</button>
+                    <div class="answer-reveal" id="answer3_l2">
+                        <div class="answer-label">✓ Example Answer:</div>
+                        <p>Using a function is better because: 1) You write the code once, saving time, 2) If you need to change the code, you only change it in one place instead of many, 3) It makes your program easier to read and understand, and 4) You reduce the chance of making mistakes by copying and pasting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Coming Next</div>
+                <div class="preview-text">
+                    After the guided activity in the next section, we'll dive deeper into each of these concepts! But first, let's get hands-on with block-based programming in the Dance Party tutorials.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACTIVITY 1: Dance Party Basics to AI Edition ==================== -->
+        <div class="lesson guided-activity">
+            <div class="lesson-header">
+                <div class="lesson-number">A1</div>
+                <div>
+                    <h2 class="lesson-title">Dance Party Basics → AI-Powered Programming</h2>
+                    <p class="lesson-time">⏱️ 90 minutes (tutorials + simple program)</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Activity 1 of 5 — Guided Tutorial
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.A1.1: Complete foundational block-based programming tutorials<br>
+                    LO8.A1.2: Understand how AI-powered programming extends traditional programming capabilities
+                </div>
+            </div>
+
+            <div class="activity-header">
+                <div class="activity-icon">💃</div>
+                <div>
+                    <h3 class="activity-title">Activity 1A: Dance Party Basics Tutorial</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Getting Started</h4>
+                <ol>
+                    <li>Sign into Code.org using your school-provided Google Account</li>
+                    <li>Navigate to Code.org's <strong>Dance Party</strong> activity</li>
+                    <li>Watch the introductory video (don't skip it!)</li>
+                    <li>Complete all 10 steps of the Dance Party tutorial in order</li>
+                    <li>Some steps include short videos with important information—watch these carefully</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Step 10: Create Your First Dance Party</h4>
+                <p>For Step 10, create a simple dance party. Don't worry about making it elaborate yet—focus on getting comfortable with the interface and blocks. You're applying the <strong>core programming concepts</strong> from Lesson 2!</p>
+                <ol>
+                    <li>Choose a dancer or two</li>
+                    <li>Make them do at least 3 different moves</li>
+                    <li>Test your program to make sure it works</li>
+                    <li>When it's working, click <strong>Finish</strong> on the Congratulations window</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Getting Your Certificate</h4>
+                <ol>
+                    <li>After clicking Finish, you'll see the Certificate page</li>
+                    <li>Enter your first and last name</li>
+                    <li>Click Submit to generate your personalized certificate</li>
+                    <li><strong>Take a screenshot of your certificate showing your name</strong></li>
+                </ol>
+            </div>
+
+            <div class="activity-tips">
+                <strong>💡 Tips for Success:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li>Take your time with each step—rushing will cause confusion later</li>
+                    <li>When a video appears, watch it completely. It explains important concepts</li>
+                    <li>Experiment with blocks—try dragging different blocks together to see what happens</li>
+                    <li>Don't be afraid to try things that might not work; that's how you learn!</li>
+                </ul>
+            </div>
+
+            <div class="activity-header" style="margin-top: 40px;">
+                <div class="activity-icon">🤖</div>
+                <div>
+                    <h3 class="activity-title">Activity 1B: AI-Powered Programming</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Explore AI-Powered Programming</h4>
+                <ol>
+                    <li>While logged into Code.org, navigate to <strong>Dance Party: AI Edition</strong></li>
+                    <li>Watch the introductory video to understand how AI can enhance your programs</li>
+                    <li>Complete all 10 steps of the AI Edition tutorial in order</li>
+                    <li>Pay special attention to steps that show AI-generated effects</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Step 10: Create an AI-Powered Dance Party</h4>
+                <p>For this step, create a simple dance party that incorporates AI-generated effects:</p>
+                <ol>
+                    <li>Choose dancers and set up basic moves</li>
+                    <li>Add at least one AI-generated effect (the "AI generate effect" block)</li>
+                    <li>Test your program thoroughly</li>
+                    <li>When it's working, run your program and <strong>take a screenshot of your complete code</strong></li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Reflect on AI in Programming</h4>
+                <ol>
+                    <li>What features does the "generate effect" block add that traditional blocks don't?</li>
+                    <li>How is combining your code with AI-generated code helpful for a programmer?</li>
+                    <li>Can you think of real-world applications where AI helps programmers create better programs faster?</li>
+                </ol>
+            </div>
+
+            <div class="deliverable">
+                <div class="deliverable-label">📦 What to Submit:</div>
+                <p>
+                    1. Screenshot of Dance Party certificate (with your name)<br>
+                    2. Screenshot of AI Edition Dance Party code (including username)<br>
+                    3. Code.org project link for your AI Edition program
+                </p>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Next</div>
+                <div class="preview-text">
+                    Great start! You've gotten hands-on with block-based programming. Now let's dive deeper into the core concepts, starting with <strong>Variables</strong>—how to store and change data in your programs.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 3: Variables ==================== -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">3</div>
+                <div>
+                    <h2 class="lesson-title">Variables: Storing and Changing Data</h2>
+                    <p class="lesson-time">⏱️ 10 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Lesson 3 of 7
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objective</div>
+                <div class="objective-text">LO8.3.1: Understand how variables work and recognize variables used in programming</div>
+            </div>
+
+            <div class="content-section">
+                <h3>What is a Variable?</h3>
+                <p>
+                    A <strong>variable</strong> is like a labeled container or box where you store information (data) that your program needs to use and change. The "variable" part means the value can change.
+                </p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Think of variables like this:</div>
+                        <p>A mailbox has a label (the variable name) and can hold different letters inside (the value). You can change what's inside without changing the mailbox itself.</p>
+                    </div>
+                </div>
+
+                <h3>Variable Names and Values</h3>
+                <p>Every variable has two parts:</p>
+                <ul>
+                    <li><strong>Variable Name:</strong> The label on the box (e.g., "score", "playerName", "backgroundColor")</li>
+                    <li><strong>Variable Value:</strong> What's inside the box (e.g., 100, "Sarah", "Blue")</li>
+                </ul>
+
+                <div class="example">
+                    <div class="example-title">✓ Real Examples from Music Lab</div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> Volume<br><strong>Possible Values:</strong> Full, Medium, Low</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> BeatPace<br><strong>Possible Values:</strong> 60, 90, 120 (beats per minute)</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Variable Name:</strong> InstrumentType<br><strong>Possible Values:</strong> Guitar, Piano, Drums, Trumpet</p>
+                    </div>
+                </div>
+
+                <h3>How Variables Are Used in Programs</h3>
+                <p>
+                    Variables let you:
+                </p>
+                <ul>
+                    <li><strong>Store information:</strong> Keep track of data you need (scores, names, colors, etc.)</li>
+                    <li><strong>Change information:</strong> Update the value when something happens (score increases, volume changes)</li>
+                    <li><strong>Reuse information:</strong> Use the same variable in multiple places in your code</li>
+                </ul>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Common Confusion:</div>
+                        <p>The variable NAME stays the same (that's the label), but the VALUE can change. For example, a "score" variable stays named "score" but its value might go from 0 to 10 to 25 as you earn points.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Reading Material</h3>
+                <div class="video-container">
+                    <div class="video-title">
+                        📖 Read: What is a Variable?
+                    </div>
+                    <p style="padding: 15px 0;">This reading explains how variables store different types of data and why they're essential to programming.</p>
+                </div>
+            </div>
+
+            <div class="formative-assessment">
+                <div class="assessment-title">🎯 Check Your Understanding</div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text"><strong>True or False:</strong> Once you set a variable's value, it can never change.</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q1_l3" value="true"> True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l3" value="false"> False
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l3')">Show Answer</button>
+                    <div class="answer-reveal" id="answer1_l3">
+                        <div class="answer-label">✓ Correct Answer: False</div>
+                        <p>Variables are called "variables" BECAUSE they can change! That's the whole point—you set an initial value and then update it as needed.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text"><strong>Multiple Choice:</strong> Which of these would best be stored as a variable?</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q2_l3" value="a"> A) The number of times a dancer will move (because it might change)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l3" value="b"> B) The color of the background (because it might change)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l3" value="c"> C) The speed of the music (because it might change)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l3" value="d"> D) All of the above
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l3')">Show Answer</button>
+                    <div class="answer-reveal" id="answer2_l3">
+                        <div class="answer-label">✓ Correct Answer: D) All of the above</div>
+                        <p>All of these things might change during your dance party program, so they should all be stored as variables. This makes it easy to update them without rewriting your code.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text"><strong>Short Answer:</strong> Create your own variable. Give it a name and list 3 possible values it might have.</div>
+                    <textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 80px; margin: 10px 0;" placeholder="Variable Name: _____\nPossible Values: 1) _____ 2) _____ 3) _____"></textarea>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l3')">Show Example Answer</button>
+                    <div class="answer-reveal" id="answer3_l3">
+                        <div class="answer-label">✓ Example Answer:</div>
+                        <p><strong>Variable Name:</strong> DancerSize<br><strong>Possible Values:</strong> 1) Small (25% size) 2) Medium (50% size) 3) Large (100% size)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Coming Next</div>
+                <div class="preview-text">
+                    Now that you understand variables, let's learn about <strong>loops</strong>—the feature that lets you repeat code without writing it over and over!
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 4: Loops ==================== -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">4</div>
+                <div>
+                    <h2 class="lesson-title">Loops: Repeating Code Efficiently</h2>
+                    <p class="lesson-time">⏱️ 11 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Lesson 4 of 7
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objective</div>
+                <div class="objective-text">LO8.4.1: Understand loops and recognize when to use them to avoid repetitive code</div>
+            </div>
+
+            <div class="content-section">
+                <h3>What is a Loop?</h3>
+                <p>
+                    A <strong>loop</strong> is a way to repeat a block of code multiple times without writing it out repeatedly. It's one of the most powerful features in programming because it saves time and makes code cleaner.
+                </p>
+
+                <div class="example">
+                    <div class="example-title">✓ Problem Without a Loop</div>
+                    <div class="example-step">
+                        <p>If you want a chorus to repeat 4 times, without a loop you'd write:</p>
+                        <div class="example-code">
+Play Chorus<br>
+Play Chorus<br>
+Play Chorus<br>
+Play Chorus
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <div class="example-title">✓ Solution With a Loop</div>
+                    <div class="example-step">
+                        <p>With a loop, you write it once and tell the computer how many times to repeat it:</p>
+                        <div class="example-code">
+Repeat 4 times:<br>
+&nbsp;&nbsp;Play Chorus
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Why Loops Matter</h3>
+                <p>Imagine you wanted to repeat something 1,000 times. Without loops, you'd write the same code 1,000 times. With a loop, you write it once!</p>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Real-World Connection:</div>
+                        <p>When you watch an animated movie, scenes repeat: the same walk cycle, the same background loop, the same music phrase. All of that repetition is created using loops in the animation software!</p>
+                    </div>
+                </div>
+
+                <h3>Types of Loops</h3>
+                <p>
+                    There are different types of loops, but the most common in block-based programming is the <strong>repeat loop</strong>. It says: "Do this block of code X number of times."
+                </p>
+
+                <div class="example">
+                    <div class="example-title">✓ Loop Examples</div>
+                    <div class="example-step">
+                        <p>Repeat 5 times: Make a dancer move</p>
+                    </div>
+                    <div class="example-step">
+                        <p>Repeat 12 times: Play a musical note</p>
+                    </div>
+                    <div class="example-step">
+                        <p>Repeat 100 times: Draw a circle on the screen</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-content">
+                        <div class="callout-title">Watch Out!</div>
+                        <p>Be careful not to create an "infinite loop"—a loop that never stops. If you forget to tell the loop when to stop, it will repeat forever and your program will freeze!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Reading Material</h3>
+                <div class="video-container">
+                    <div class="video-title">
+                        📖 Read: What is a Loop?
+                    </div>
+                    <p style="padding: 15px 0;">This reading provides more examples of loops and different loop patterns used in programming.</p>
+                </div>
+            </div>
+
+            <div class="formative-assessment">
+                <div class="assessment-title">🎯 Check Your Understanding</div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text"><strong>True or False:</strong> Loops are mainly used to save typing and make code look cleaner.</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q1_l4" value="true"> True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l4" value="false"> False
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l4')">Show Answer</button>
+                    <div class="answer-reveal" id="answer1_l4">
+                        <div class="answer-label">✓ Correct Answer: True</div>
+                        <p>While that's a benefit, loops are also essential for programming efficiently. Without loops, creating programs that repeat actions thousands or millions of times would be impossible!</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text"><strong>Multiple Choice:</strong> You want to create a song with a verse that plays 8 times. What's the best approach?</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q2_l4" value="a"> A) Copy and paste the verse code 8 times
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l4" value="b"> B) Use a loop that repeats the verse 8 times
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l4" value="c"> C) Write 8 separate instructions to play the verse
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2_l4" value="d"> D) Any of the above—they all work the same
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l4')">Show Answer</button>
+                    <div class="answer-reveal" id="answer2_l4">
+                        <div class="answer-label">✓ Correct Answer: B) Use a loop that repeats the verse 8 times</div>
+                        <p>While the other approaches would work, using a loop is the best practice because it's cleaner, easier to modify, and reduces errors.</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+<div class="question-text"><strong>Short Answer:</strong> Describe a situation where you would use a loop to repeat an action multiple times.</div>
+<textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 80px; margin: 10px 0;" placeholder="Your answer here..."></textarea>
+<button class="show-answer-btn" onclick="toggleAnswer('answer3_l4')">Show Example Answer</button>
+<div class="answer-reveal" id="answer3_l4">
+<div class="answer-label">✓ Example Answer:</div>
+<p>In a music program, I would use a loop to repeat the chorus 4 times. Instead of copying the chorus code 4 times, I use a "repeat 4 times" block with the chorus code inside it. This makes my code cleaner and easier to change if I wanted the chorus to repeat a different number of times.</p>
+</div>
+</div>
+</div>
+<div class="preview-next">
+            <div class="preview-label">🚀 What's Coming Next</div>
+            <div class="preview-text">
+                Next, we'll learn about <strong>conditionals</strong>—how to make your programs smarter by letting them make decisions based on what happens!
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 5: Conditionals ==================== -->
+    <div class="lesson">
+        <div class="lesson-header">
+            <div class="lesson-number">5</div>
+            <div>
+                <h2 class="lesson-title">Conditionals: Making Decisions in Code</h2>
+                <p class="lesson-time">⏱️ 12 minutes</p>
+            </div>
+        </div>
+
+        <div class="progress-indicator">
+            <span class="progress-dot"></span>
+            Lesson 5 of 7
+        </div>
+
+        <div class="learning-objective">
+            <div class="objective-label">Learning Objective</div>
+            <div class="objective-text">LO8.5.1: Understand conditionals and use if-then logic to make programs respond to events</div>
+        </div>
+
+        <div class="content-section">
+            <h3>What is a Conditional?</h3>
+            <p>
+                A <strong>conditional</strong> is a way for your program to make decisions. It uses "if-then" logic: <strong>IF something happens, THEN do this.</strong> This makes programs interactive and responsive.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-content">
+                    <div class="callout-title">Real-World Example:</div>
+                    <p>IF it's raining THEN take an umbrella. IF the traffic light is green THEN proceed. IF your battery is low THEN charge your phone. These are all conditionals!</p>
+                </div>
+            </div>
+
+            <h3>How Conditionals Work</h3>
+            <p>
+                A conditional checks a condition (is something true or false?) and then decides what to do:
+            </p>
+
+            <div class="example">
+                <div class="example-title">✓ Conditional Structure</div>
+                <div class="example-step">
+                    <p><strong>IF</strong> [condition is true]</p>
+                    <p><strong>THEN</strong> [do this action]</p>
+                </div>
+            </div>
+
+            <h3>Real Programming Examples</h3>
+
+            <div class="example">
+                <div class="example-title">✓ Dance Party Conditionals</div>
+                <div class="example-step">
+                    <p>IF user clicks the button THEN make the dancer spin</p>
+                </div>
+                <div class="example-step">
+                    <p>IF the music is playing THEN show the music icon</p>
+                </div>
+                <div class="example-step">
+                    <p>IF dancer's position is at the edge THEN bounce back</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-title">✓ Music Lab Conditionals</div>
+                <div class="example-step">
+                    <p>IF user clicks the play button THEN start the music</p>
+                </div>
+                <div class="example-step">
+                    <p>IF volume is too high THEN warn the user</p>
+                </div>
+                <div class="example-step">
+                    <p>IF song finishes THEN play the next track</p>
+                </div>
+            </div>
+
+            <h3>Triggers: Events That Activate Conditionals</h3>
+            <p>
+                In your programming work, you've seen <strong>triggers</strong> (also called "events"). A trigger is something that HAPPENS, and a conditional is how you respond to it.
+            </p>
+
+            <ul>
+                <li><strong>Trigger:</strong> User clicks a button</li>
+                <li><strong>Conditional:</strong> IF button is clicked, THEN change the color</li>
+            </ul>
+
+            <div class="callout hint">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <div class="callout-title">Connection:</div>
+                    <p>Triggers are events (things that happen), and conditionals are how your program decides what to do when those events occur. Together, they make your program interactive!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>Reading Material</h3>
+            <div class="video-container">
+                <div class="video-title">
+                    📖 Read: What is a Conditional?
+                </div>
+                <p style="padding: 15px 0;">This reading explores more complex conditionals with multiple conditions.</p>
+            </div>
+        </div>
+
+        <div class="formative-assessment">
+            <div class="assessment-title">🎯 Check Your Understanding</div>
+
+            <div class="question">
+                <div class="question-number">Question 1</div>
+                <div class="question-text"><strong>True or False:</strong> Conditionals let your program respond to events and make decisions.</div>
+                <div style="margin: 15px 0;">
+                    <label class="option">
+                        <input type="radio" name="q1_l5" value="true"> True
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1_l5" value="false"> False
+                    </label>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer('answer1_l5')">Show Answer</button>
+                <div class="answer-reveal" id="answer1_l5">
+                    <div class="answer-label">✓ Correct Answer: True</div>
+                    <p>Conditionals are what make programs interactive. Without them, programs would just do the same thing every time with no ability to respond to user input or changing conditions.</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 2</div>
+                <div class="question-text"><strong>Multiple Choice:</strong> Which is an example of a conditional?</div>
+                <div style="margin: 15px 0;">
+                    <label class="option">
+                        <input type="radio" name="q2_l5" value="a"> A) Repeat the song 5 times
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2_l5" value="b"> B) Store the song volume in a variable
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2_l5" value="c"> C) IF the user clicks play THEN start the song
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2_l5" value="d"> D) Create a function called "playSong"
+                    </label>
+                </div>
+                <button class="show-answer-btn" onclick="toggleAnswer('answer2_l5')">Show Answer</button>
+                <div class="answer-reveal" id="answer2_l5">
+                    <div class="answer-label">✓ Correct Answer: C) IF the user clicks play THEN start the song</div>
+                    <p>This is the IF-THEN structure of a conditional. It checks if something happened (IF user clicks) and then decides what to do (THEN start the song).</p>
+                </div>
+            </div>
+
+            <div class="question">
+                <div class="question-number">Question 3</div>
+                <div class="question-text"><strong>Short Answer:</strong> Write your own conditional statement for a dance party. Use the format: "IF _____ THEN _____"</div>
+                <textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 80px; margin: 10px 0;" placeholder="IF _____ THEN _____"></textarea>
+                <button class="show-answer-btn" onclick="toggleAnswer('answer3_l5')">Show Example Answer</button>
+                <div class="answer-reveal" id="answer3_l5">
+                    <div class="answer-label">✓ Example Answer:</div>
+                    <p>IF the user clicks the red button THEN change the background to red and make the dancer jump.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-next">
+            <div class="preview-label">🚀 What's Coming Next</div>
+            <div class="preview-text">
+                We're almost there! After a guided activity where you'll create and refine your own original dance party, we'll learn about <strong>functions</strong>—the final core programming concept.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ACTIVITY 2: Testing, Refining & User Feedback ==================== -->
+    <div class="lesson guided-activity">
+        <div class="lesson-header">
+            <div class="lesson-number">A2</div>
+            <div>
+                <h2 class="lesson-title">Testing, Refining & User Feedback</h2>
+                <p class="lesson-time">⏱️ 90 minutes (creation, testing, refinement, feedback)</p>
+            </div>
+        </div>
+
+        <div class="progress-indicator">
+            <span class="progress-dot"></span>
+            Activity 2 of 5 — Application Activity
+        </div>
+
+        <div class="learning-objective">
+            <div class="objective-label">Learning Objectives</div>
+            <div class="objective-text">
+                LO8.A2.1: Apply systematic testing and refinement to improve programs<br>
+                LO8.A2.2: Collect and interpret user feedback for program improvement
+            </div>
+        </div>
+
+        <div class="activity-header">
+            <div class="activity-icon">✨</div>
+            <div>
+                <h3 class="activity-title">Activity 2A: Create & Refine Your Original Dance Party</h3>
+            </div>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Step 1: Watch the Refinement Strategy Video</h4>
+            <ol>
+                <li>Watch: <strong>Systematically Testing & Refining: Dance Party Example</strong> (4:59)</li>
+                <li>Pay attention to how the programmer tests ONE piece at a time</li>
+                <li>Notice how they make small changes and test after each change</li>
+                <li>This is called "agile programming"—building and improving iteratively</li>
+            </ol>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Step 2: Create Your Original Dance Party</h4>
+            <ol>
+                <li>Return to the AI Edition tutorial, Step 10 (from Activity 1)</li>
+                <li>Click the <strong>Remix</strong> button at the top left to save your own copy</li>
+                <li>Delete all the existing blocks (keeping only the setup block)</li>
+                <li>Build your own dance party from scratch</li>
+            </ol>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Your Dance Party Must Include:</h4>
+            <ul style="margin-left: 20px;">
+                <li>✓ At least 12 blocks total</li>
+                <li>✓ At least 5 different kinds of blocks (more encouraged!)</li>
+                <li>✓ AI generate effect block used at least 2 times</li>
+                <li>✓ At least 2 different dancers</li>
+                <li>✓ At least one property change for a dancer (size, color, etc.)</li>
+                <li>✓ At least 2 event blocks (things that trigger actions)</li>
+                <li>✓ At least 1 repeat block (loop)</li>
+                <li>✓ Your personal creativity and fun!</li>
+            </ul>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Step 3: Test & Refine (The Most Important Step!)</h4>
+            <ol>
+                <li>Start with ONE feature and test it thoroughly</li>
+                <li>Add another feature, then test everything</li>
+                <li>Continue this pattern: Add → Test → Refine</li>
+                <li>If something doesn't work:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Stop and examine the problem</li>
+                        <li>Make a small change</li>
+                        <li>Test again</li>
+                        <li>Repeat until it works</li>
+                    </ul>
+                </li>
+                <li>Don't try to build everything at once!</li>
+            </ol>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Step 4: Share Your Project</h4>
+            <ol>
+                <li>When you're satisfied with your dance party, click <strong>Share</strong> at the top left</li>
+                <li>Click <strong>Copy link to project</strong></li>
+                <li>Save this link—you'll need it for submission</li>
+            </ol>
+        </div>
+
+        <div class="activity-tips">
+            <strong>💡 Testing & Refinement Tips:</strong>
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li><strong>Test Early, Test Often:</strong> Don't wait until everything is done to test</li>
+                <li><strong>Change One Thing at a Time:</strong> If you change 5 things and something breaks, you won't know which change caused the problem</li>
+                <li><strong>Document Your Changes:</strong> Write down what you changed and what happened (helps with debugging!)</li>
+                <li><strong>Watch Your Program Run:</strong> Pay attention to what actually happens vs. what you intended</li>
+                <li><strong>Break Complex Tasks Into Smaller Steps:</strong> Don't try to do everything at once</li>
+            </ul>
+        </div>
+
+        <div class="activity-tips">
+            <strong>🎯 Agile Programming Reminder:</strong>
+            <p style="margin-top: 10px;">Agile programming means you plan loosely, build iteratively, and refine continuously. Your vision might change as you build—that's expected and called "iteration." It's not a failure; it's how real programmers work!</p>
+        </div>
+
+        <div class="activity-header" style="margin-top: 40px;">
+            <div class="activity-icon">👥</div>
+            <div>
+                <h3 class="activity-title">Activity 2B: Collect User Feedback</h3>
+            </div>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Get Feedback from Others</h4>
+            <ol>
+                <li>Show your Dance Party program to at least one other person (friend, family member, classmate)</li>
+                <li>Ask them to suggest ONE change based on these options:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Number of dancers</li>
+                        <li>Size of the dancers</li>
+                        <li>Music selection</li>
+                        <li>Background color or image</li>
+                        <li>Speed of movements</li>
+                    </ul>
+                </li>
+                <li>Listen carefully to their suggestion</li>
+                <li>Ask follow-up questions if you need clarification</li>
+            </ol>
+        </div>
+
+        <div class="activity-instructions">
+            <h4>Reflect on Feedback</h4>
+            <ol>
+                <li>Record the suggested change they recommended</li>
+                <li>Think about how you would implement it in your program</li>
+                <li>Write down the specific blocks or changes you'd need to make</li>
+                <li>Explain why this feedback is valuable for improving your program</li>
+            </ol>
+        </div>
+
+        <div class="activity-tips">
+            <strong>💡 Feedback Tips:</strong>
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li>When you get feedback, thank the person! They're helping you improve.</li>
+                <li>You don't have to implement ALL feedback, but consider each suggestion</li>
+                <li>Professional programmers use feedback constantly to improve their work</li>
+                <li>Feedback isn't criticism—it's information to help you make better programs</li>
+            </ul>
+        </div>
+
+        <div class="deliverable">
+            <div class="deliverable-label">📦 What to Submit:</div>
+            <p>
+                1. Link to your Code.org Dance Party project<br>
+                2. Screenshot of your completed dance party code<br>
+                3. Description of testing/refinement process (3-5 sentences with specific examples)<br>
+                4. Suggested change from your user<br>
+                5. How you would implement it (specific blocks/changes)<br>
+                6. Why this feedback is valuable (2-3 sentences)
+            </p>
+        </div>
+
+        <div class="preview-next">
+            <div class="preview-label">🚀 What's Next</div>
+            <div class="preview-text">x
+                Excellent work on your dance party! After we explore JavaScript code, you'll learn the final core concept: <strong>Functions</strong>. Then we'll apply everything to music programming!
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== LESSON 6: Functions ==================== -->
+    <div class="lesson">
+        <div class="lesson-header">
+            <div class="lesson-number">6</div>
+            <div>
+                <h2 class="lesson-title">Functions: Reusable Code Blocks</h2>
+                <p class="lesson-time">⏱️ 11 minutes</p>
+            </div>
+        </div>
+
+        <div class="progress-indicator">
+            <span class="progress-dot"></span>
+            Lesson 6 of 7
+        </div>
+
+        <div class="learning-objective">
+            <div class="objective-label">Learning Objective</div>
+            <div class="objective-text">LO8.6.1: Understand functions and recognize how they create reusable, organized code</div>
+        </div>
+
+        <div class="content-section">
+            <h3>What is a Function?</h3>
+            <p>
+                A <strong>function</strong> is a reusable block of code that performs a specific task. You write the code once, and then you can "call" or use it many times throughout your program.
+            </p>
+
+            <div class="callout info">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-content">
+                    <div class="callout-title">Kitchen Appliance Analogy:</div>
+                    <p>Think of functions like appliances. A blender is a tool you create once. Whenever you want to blend something, you don't build a new blender—you use the one you already made. Functions work the same way!</p>
+                </div>
+            </div>
+
+            <h3>Function Parts</h3>
+            <p>Functions have two parts:</p>
+            <ul>
+                <li><strong>Define the function:</strong> Create it and tell it what to do (write the instructions)</li>
+                <li><strong>Call the function:</strong> Use it when you need it (activate the blender)</li>
+            </ul>
+
+            <div class="example">
+                <div class="example-title">✓ Example: Creating and Using a Function</div>
+                <div class="example-step">
+                    <p><strong>Step 1 - Define:</strong> Create a function called "makeDancerSpin" that spins a dancer</p>
+                    <div class="example-code">
+:</p>
+                        <div class="example-code">
+for (let i = 0; i < 5; i++) {<br>
+&nbsp;&nbsp;// code here repeats 5 times<br>
+}
+                        </div>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>BLOCK:</strong> If button clicked, then move dancer</p>
+                        <p><strong>JAVASCRIPT:</strong></p>
+                        <div class="example-code">
+if (buttonClicked) {<br>
+&nbsp;&nbsp;moveDancer();<br>
+}
+                        </div>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>BLOCK:</strong> Set score to 100</p>
+                        <p><strong>JAVASCRIPT:</strong></p>
+                        <div class="example-code">
+let score = 100;
+                        </div>
+                    </div>
+                </div>
+
+                <h3>What You've Learned</h3>
+                <p>
+                    Throughout this chapter, you've learned the essential building blocks of programming. Let's review:
+                </p>
+
+                <div class="example">
+                    <div class="example-title">✓ Chapter 8 Learning Summary</div>
+                    <div class="example-step">
+                        <p><strong>Lessons 1-2:</strong> Programming is giving computers step-by-step instructions (algorithms), and order matters.</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Lessons 3-6:</strong> Four core concepts power all programs: Variables (store data), Loops (repeat code), Conditionals (make decisions), Functions (reuse code).</p>
+                    </div>
+                    <div class="example-step">
+                        <p><strong>Lesson 7:</strong> The blocks you use translate into real JavaScript code that programmers use daily.</p>
+                    </div>
+                </div>
+
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>Programming is giving computers precise, step-by-step instructions</li>
+                    <li>Algorithms are the foundation—order matters!</li>
+                    <li>Variables store data that can change</li>
+                    <li>Loops repeat code without repetition</li>
+                    <li>Conditionals make programs responsive and interactive</li>
+                    <li>Functions are reusable blocks of code</li>
+                    <li>Block-based programming teaches the same concepts as text-based programming</li>
+                    <li>Testing and refining is a crucial part of programming</li>
+                </ul>
+            </div>
+
+            <div class="formative-assessment">
+                <div class="assessment-title">🎯 Final Check: Chapter Concepts</div>
+
+                <div class="question">
+                    <div class="question-number">Question 1</div>
+                    <div class="question-text"><strong>Multiple Choice:</strong> Which of the following BEST describes what programming is?</div>
+                    <div style="margin: 15px 0;">
+                        <label class="option">
+                            <input type="radio" name="q1_l7" value="a"> A) Creating games on computers
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l7" value="b"> B) Giving a computer precise, step-by-step instructions to perform tasks
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l7" value="c"> C) Using special software that only experts can understand
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1_l7" value="d"> D) Writing code that computers automatically figure out
+                        </label>
+                    </div>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer1_l7')">Show Answer</button>
+                    <div class="answer-reveal" id="answer1_l7">
+                        <div class="answer-label">✓ Correct Answer: B) Giving a computer precise, step-by-step instructions to perform tasks</div>
+                        <p>Programming is about clarity and precision. You tell the computer EXACTLY what to do, step by step. Games are just one application of programming!</p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 2</div>
+                    <div class="question-text"><strong>Matching:</strong> Match each programming concept to its purpose.</div>
+                    <div style="margin: 15px 0; padding: 15px; background-color: white; border-radius: 4px;">
+                        <p style="margin-bottom: 12px;"><strong>1. Algorithm</strong></p>
+                        <p style="margin-bottom: 12px;"><strong>2. Conditional</strong></p>
+                        <p style="margin-bottom: 12px;"><strong>3. Loop</strong></p>
+                        <p style="margin-bottom: 12px;"><strong>4. Function</strong></p>
+                        <p style="margin-bottom: 12px;"><strong>5. Variable</strong></p>
+                    </div>
+                    <p style="padding: 0 0 0 15px; margin-top: -60px; margin-bottom: 12px;">A) Stores data that can change</p>
+                    <p style="padding: 0 0 0 15px; margin-bottom: 12px;">B) Makes decisions based on conditions (IF-THEN)</p>
+                    <p style="padding: 0 0 0 15px; margin-bottom: 12px;">C) A step-by-step process to solve a problem</p>
+                    <p style="padding: 0 0 0 15px; margin-bottom: 12px;">D) Reusable block of code</p>
+                    <p style="padding: 0 0 0 15px; margin-bottom: 12px;">E) Repeats code multiple times</p>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer2_l7')">Show Answer</button>
+                    <div class="answer-reveal" id="answer2_l7">
+                        <div class="answer-label">✓ Correct Answers:</div>
+                        <p>
+                            1. Algorithm → C) A step-by-step process to solve a problem<br>
+                            2. Conditional → B) Makes decisions based on conditions (IF-THEN)<br>
+                            3. Loop → E) Repeats code multiple times<br>
+                            4. Function → D) Reusable block of code<br>
+                            5. Variable → A) Stores data that can change
+                        </p>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">Question 3</div>
+                    <div class="question-text"><strong>Reflection:</strong> Which concept from this chapter do you think will be most useful in your upcoming projects? Why?</div>
+                    <textarea style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; min-height: 100px; margin: 10px 0;" placeholder="Your reflection here..."></textarea>
+                    <button class="show-answer-btn" onclick="toggleAnswer('answer3_l7')">Show Example Answer</button>
+                    <div class="answer-reveal" id="answer3_l7">
+                        <div class="answer-label">✓ Example Reflection:</div>
+                        <p>I think loops will be most useful because in my music program, I want a lot of repetition (verses repeating, beats repeating). Using loops means I don't have to copy the same code over and over—I can write it once and just loop it. This saves time and makes my code cleaner!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 Ready for More Activities!</div>
+                <div class="preview-text">
+                    You've learned all the foundational concepts! Now it's time to explore JavaScript code, then apply everything to create original music compositions. Let's continue!
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACTIVITY 3: JavaScript & Code Reflection ==================== -->
+        <div class="lesson guided-activity">
+            <div class="lesson-header">
+                <div class="lesson-number">A3</div>
+                <div>
+                    <h2 class="lesson-title">JavaScript Code Exploration & Reflection</h2>
+                    <p class="lesson-time">⏱️ 30 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Activity 3 of 5 — Code Investigation
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.A3.1: Understand how block-based code translates to JavaScript<br>
+                    LO8.A3.2: Recognize programming patterns in real code
+                </div>
+            </div>
+
+            <div class="activity-header">
+                <div class="activity-icon">📝</div>
+                <div>
+                    <h3 class="activity-title">Activity 3: See Your Blocks as Real Code</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Explore Your JavaScript Code</h4>
+                <ol>
+                    <li>Make sure your Dance Party program from Activity 2 is still open</li>
+                    <li>Click <strong>Show Code</strong> button in the upper right corner</li>
+                    <li>This reveals the JavaScript code behind your blocks!</li>
+                    <li><strong>Take a screenshot of the JavaScript code</strong></li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>If Your Program is Closed:</h4>
+                <ol>
+                    <li>Go to https://studio.code.org/projects</li>
+                    <li>Find your Dance Party project in the list</li>
+                    <li>Click to open it</li>
+                    <li>Then follow the steps above</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Analyze the Code</h4>
+                <p>Write 3-5 sentences that:</p>
+                <ol>
+                    <li>Describe what you see in the code</li>
+                    <li>Point out something you recognize from your block program</li>
+                    <li>Explain the connection between blocks and JavaScript</li>
+                    <li>Note any patterns you observe (like loops, conditionals, function calls)</li>
+                </ol>
+            </div>
+
+            <div class="callout hint">
+                <div class="callout-icon">💡</div>
+                <div class="callout-content">
+                    <p>You don't need to understand every line of JavaScript! Just notice patterns. For example: Can you find where it says "repeat" or "for"? Can you find variable names? Can you see if-then logic?</p>
+                </div>
+            </div>
+
+            <div class="deliverable">
+                <div class="deliverable-label">📦 What to Submit:</div>
+                <p>
+                    1. Screenshot of your JavaScript code<br>
+                    2. Analysis (3-5 sentences explaining what you see and connecting it to your blocks)
+                </p>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Next</div>
+                <div class="preview-text">
+                    Perfect! You've now seen how your visual blocks become real programming code. Next, you'll apply all your programming knowledge to create original music compositions using the same concepts and practices you've learned!
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACTIVITY 4: Music Programming ==================== -->
+        <div class="lesson guided-activity">
+            <div class="lesson-header">
+                <div class="lesson-number">A4</div>
+                <div>
+                    <h2 class="lesson-title">Music Programming: Jam Session & Original Composition</h2>
+                    <p class="lesson-time">⏱️ 120 minutes (tutorials + original composition)</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Activity 4 of 5 — Creative Application
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.A4.1: Apply programming concepts to create interactive music<br>
+                    LO8.A4.2: Use functions, loops, and variables in musical composition
+                </div>
+            </div>
+
+            <div class="activity-header">
+                <div class="activity-icon">🎵</div>
+                <div>
+                    <h3 class="activity-title">Activity 4A: Music Lab Jam Session</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Complete the Jam Session Tutorial</h4>
+                <ol>
+                    <li>While logged into Code.org, navigate to <strong>Music Lab: Jam Session</strong></li>
+                    <li>Watch the introductory video</li>
+                    <li>Complete all 17 steps of the tutorial in order</li>
+                    <li>Some steps repeat from earlier tutorials—that's okay, complete them anyway</li>
+                    <li>Pay special attention to how the programming blocks work with musical concepts (think about <strong>variables</strong> controlling tempo/volume, <strong>loops</strong> repeating musical phrases, and <strong>functions</strong> creating reusable song sections)</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Step 17: Create a Simple Song</h4>
+                <ol>
+                    <li>For Step 17, experiment with what you learned to create a simple song</li>
+                    <li>Don't worry about making it perfect—this is your learning phase</li>
+                    <li>Include at least 3 different musical elements (different instruments, notes, or effects)</li>
+                    <li>Test your song by playing it</li>
+                    <li><strong>Take a screenshot of your code from Step 17</strong></li>
+                </ol>
+            </div>
+
+            <div class="activity-tips">
+                <strong>💡 Music Lab Tips:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Notice the concepts:</strong> How do variables, loops, and functions apply to music?</li>
+                    <li><strong>Repeat blocks:</strong> A "repeat" block in music means the notes or beat repeat multiple times</li>
+                    <li><strong>Functions for structure:</strong> Functions let you create song sections (intro, verse, chorus) that you can reuse</li>
+                    <li><strong>Variables for variation:</strong> Variables can control tempo (speed), volume (loudness), or which instrument plays</li>
+                </ul>
+            </div>
+
+            <div class="activity-header" style="margin-top: 40px;">
+                <div class="activity-icon">🎼</div>
+                <div>
+                    <h3 class="activity-title">Activity 4B: Create Your Original Song</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Watch the Overview Video</h4>
+                <ol>
+                    <li>Watch: <strong>Make Music, Learn Code</strong> (2:02 minutes)</li>
+                    <li>This video shows how programming and music creativity work together</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Complete the Music Lab Expansion Tutorial</h4>
+                <ol>
+                    <li>While logged into Code.org, navigate to <strong>Music Lab Expansion Tutorial</strong></li>
+                    <li>Complete all 15 steps in order</li>
+                    <li>Some steps may repeat—complete them all for practice</li>
+                    <li>Pay attention to new features and capabilities that expand what you can do</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Step 15: Create Your Original Song</h4>
+                <p>For this step, create a more elaborate song using everything you've learned. Apply the testing and refinement strategies from Activity 2!</p>
+                <ol>
+                    <li>You can:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Recreate a song you know</li>
+                            <li>Mix beats to create something new</li>
+                            <li>Compose an entirely original piece</li>
+                        </ul>
+                    </li>
+                    <li>Be creative and have fun!</li>
+                    <li>Give your music program a meaningful name:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Click <strong>Rename</strong> button at top left</li>
+                            <li>Enter a name that describes your song</li>
+                            <li>Click Save</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Your Music Program Must Include:</h4>
+                <ul style="margin-left: 20px;">
+                    <li>✓ At least 20 blocks total</li>
+                    <li>✓ At least 5 different kinds of blocks (more encouraged!)</li>
+                    <li>✓ 5 different functions (e.g., intro, verse, chorus, bridge, outro) — Review Lesson 6 on Functions!</li>
+                    <li>✓ "Play together" block used at least 2 times</li>
+                    <li>✓ Repeat block (loop) used at least 1 time — Review Lesson 4 on Loops!</li>
+                    <li>✓ AI-generated beat used at least 1 time</li>
+                    <li>✓ At least one trigger/event block — Review Lesson 5 on Conditionals!</li>
+                </ul>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Test & Refine Your Song</h4>
+                <ol>
+                    <li>Play your song multiple times from start to finish</li>
+                    <li>Listen for:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>Do different sections flow well together?</li>
+                            <li>Is the tempo/speed appropriate? (Think: Variables controlling tempo)</li>
+                            <li>Do the instruments work well together?</li>
+                            <li>Does it match your original vision?</li>
+                        </ul>
+                    </li>
+                    <li>Make adjustments as needed</li>
+                    <li>Remember: agile programming means iterating and improving!</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Share Your Music Program</h4>
+                <ol>
+                    <li>Click <strong>Share</strong> button at top left</li>
+                    <li>Click <strong>Copy link to project</strong></li>
+                    <li>Save this link for submission</li>
+                </ol>
+            </div>
+
+            <div class="activity-tips">
+                <strong>💡 Music Composition Tips:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Use Functions:</strong> Each song section (intro, verse, chorus) should be its own function. You'll call these functions to build your song.</li>
+                    <li><strong>Create Variety:</strong> Don't make every section the same—vary instruments, tempo, or volume using variables</li>
+                    <li><strong>Test Sections:</strong> Test each section individually before combining them</li>
+                    <li><strong>Listen for Flow:</strong> Does one section transition smoothly to the next?</li>
+                    <li><strong>Consider Your Audience:</strong> Will others enjoy listening to this?</li>
+                </ul>
+            </div>
+
+            <div class="callout info">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-content">
+                    <div class="callout-title">Connection to Real Programming:</div>
+                    <p>Professional music production software (like what music producers use) works the same way as Music Lab! They use loops, variables, functions, and automation (conditionals) to create complex pieces. You're learning real industry techniques that professionals use every day!</p>
+                </div>
+            </div>
+
+            <div class="deliverable">
+                <div class="deliverable-label">📦 What to Submit:</div>
+                <p>
+                    1. Link to your Code.org Music Lab project<br>
+                    2. Screenshot of your completed music program code<br>
+                    3. Description of your song (2-3 sentences): What is it about? How does it flow? What makes it interesting?
+                </p>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🚀 What's Next</div>
+                <div class="preview-text">
+                    Excellent work! You've created both a dance party and an original song using all the core programming concepts. In the final activity, we'll reflect on your learning and explicitly connect all your work back to the concepts you learned in the lessons.
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACTIVITY 5: Core Concepts Connection ==================== -->
+        <div class="lesson guided-activity">
+            <div class="lesson-header">
+                <div class="lesson-number">A5</div>
+                <div>
+                    <h2 class="lesson-title">Core Concepts Connection & Final Reflection</h2>
+                    <p class="lesson-time">⏱️ 60 minutes</p>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <span class="progress-dot"></span>
+                Activity 5 of 5 — Final Synthesis & Reflection
+            </div>
+
+            <div class="learning-objective">
+                <div class="objective-label">Learning Objectives</div>
+                <div class="objective-text">
+                    LO8.A5.1: Connect programming concepts to actual programs created<br>
+                    LO8.A5.2: Reflect on learning and identify applications of programming knowledge
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h3>Connecting Theory to Practice</h3>
+                <p>
+                    In the lessons, you learned about algorithms, variables, loops, conditionals, and functions. In your activities, you've been using all of these concepts to create actual programs! Now let's make those connections explicit by reflecting on your work and seeing how the concepts you studied showed up in the programs you built.
+                </p>
+            </div>
+
+            <div class="activity-header">
+                <div class="activity-icon">🔗</div>
+                <div>
+                    <h3 class="activity-title">Reflect on Your Programs & Core Concepts</h3>
+                </div>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Concept #1: Algorithms (Review Lesson 1)</h4>
+                <p style="margin-bottom: 15px;"><strong>Before answering:</strong> Review Lesson 1: What is Programming & Algorithms. Focus on the definition and examples.</p>
+                <p style="margin-bottom: 15px;"><strong>Reflect on your music program:</strong></p>
+                <ol>
+                    <li>Describe the algorithm you used in your own words by explaining the step-by-step process your program follows from start to finish</li>
+                    <li>What happens if you rearrange the order of your music blocks? Does the sequence matter? Explain why</li>
+                    <li>Think about a simple everyday task (like brushing your teeth or getting ready for school). Explain how that task is similar to the algorithm in your program</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Concept #2: Variables (Review Lesson 3)</h4>
+                <p style="margin-bottom: 15px;"><strong>Before answering:</strong> Review Lesson 3: Variables. Focus on the definition and examples from Music Lab.</p>
+                <p style="margin-bottom: 15px;"><strong>Reflect on your programs:</strong></p>
+                <ol>
+                    <li>One example of a variable in Music Lab is Volume (values: Full, Medium, Low). Provide another example of a variable and its value that you used in your music or dance program</li>
+                    <li>Explain what setting that variable to that value does in your program</li>
+                    <li>Can you think of a situation where changing a variable would significantly change how your program works?</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Concept #3: Loops (Review Lesson 4)</h4>
+                <p style="margin-bottom: 15px;"><strong>Before answering:</strong> Review Lesson 4: Loops. Focus on the examples and why loops are useful.</p>
+                <p style="margin-bottom: 15px;"><strong>Reflect on your programs:</strong></p>
+                <ol>
+                    <li>Describe an example from your music or dance program where you used repetition (a loop)</li>
+                    <li>If a chorus repeats 4 times, is it better to copy-paste the code 4 times or use a loop? Why?</li>
+                    <li>How did loops make your programming more efficient?</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Concept #4: Conditionals (Review Lesson 5)</h4>
+                <p style="margin-bottom: 15px;"><strong>Before answering:</strong> Review Lesson 5: Conditionals. Focus on the IF-THEN structure and examples.</p>
+                <p style="margin-bottom: 15px;"><strong>Reflect on your programs:</strong></p>
+                <ol>
+                    <li>Describe how you used a trigger (event) in your program. For example, did something happen when a button was clicked or when you clicked play?</li>
+                    <li>Explain how this relates to the "if-then" concept of conditional decision-making</li>
+                    <li>Can you think of other situations where conditionals would make a program more interactive?</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Concept #5: Functions (Review Lesson 6)</h4>
+                <p style="margin-bottom: 15px;"><strong>Before answering:</strong> Review Lesson 6: Functions. Focus on how functions are defined and called multiple times.</p>
+                <p style="margin-bottom: 15px;"><strong>Reflect on your programs:</strong></p>
+                <ol>
+                    <li>Describe how you used a function in your music program. Include:
+                        <ul style="margin-top: 10px; margin-left: 20px;">
+                            <li>The function name</li>
+                            <li>What the function does</li>
+                            <li>How many times you called/used it</li>
+                        </ul>
+                    </li>
+                    <li>If you were to develop a music app (like Spotify), what functions might you create? List 3 example functions and briefly describe their purpose</li>
+                </ol>
+            </div>
+
+            <div class="activity-instructions">
+                <h4>Final Reflection: Your Programming Journey</h4>
+                <p style="margin-bottom: 15px;">Write a final reflection (3-4 paragraphs) that addresses:</p>
+                <ol>
+                    <li>What was the most challenging concept for you to understand? Why was it challenging? How did you overcome that challenge?</li>
+                    <li>Which concept do you think is the most powerful/useful? Why?</li>
+                    <li>How have your ideas about programming changed since the beginning of this chapter?</li>
+                    <li>What do you want to learn or create next with programming?</li>
+                </ol>
+            </div>
+
+            <div class="activity-tips">
+                <strong>💡 Reflection Tips:</strong>
+                <ul style="margin-top: 10px; margin-left: 20px;">
+                    <li><strong>Be specific:</strong> Reference your actual programs (dance party and music), not generic examples</li>
+                    <li><strong>Show understanding:</strong> Explain WHY concepts matter, not just THAT they exist</li>
+                    <li><strong>Make connections:</strong> Link concepts from lessons to your actual code and what you see in the "Show Code" JavaScript</li>
+                    <li><strong>Be honest:</strong> If you struggled with a concept, that's okay—explain what made it challenging and how you worked through it</li>
+                </ul>
+            </div>
+
+            <div class="callout info">
+                <div class="callout-icon">ℹ️</div>
+                <div class="callout-content">
+                    <div class="callout-title">Going Deeper:</div>
+                    <p>Professional programmers do this reflection all the time. They review their code, think about how it could be better, and consider how to apply concepts in new and creative ways. You're already thinking like a real programmer!</p>
+                </div>
+            </div>
+
+            <div class="deliverable">
+                <div class="deliverable-label">📦 What to Submit:</div>
+                <p>
+                    Complete written responses to all 5 concept sections plus final reflection. Your responses should:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>✓ Be specific to your programs (reference your dance party and music)</li>
+                        <li>✓ Show understanding of the concepts</li>
+                        <li>✓ Include all requested information for each concept</li>
+                        <li>✓ Be well-organized and clear</li>
+                        <li>✓ Total length: 3-4 pages</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="preview-next">
+                <div class="preview-label">🎉 Congratulations!</div>
+                <div class="preview-text">
+                    You've completed Chapter 8: Introduction to Programming! You've learned foundational programming concepts, created interactive programs, worked with AI, tested and refined your code, collected user feedback, explored JavaScript code, and reflected on your learning. You're now ready to apply these skills to more advanced projects. Well done! 🚀
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CHAPTER SUMMARY ==================== -->
+        <div style="margin-top: 80px; padding: 40px; background-color: var(--light-bg); border-radius: 8px; border: 2px solid var(--primary-color);">
+            <h2 style="color: var(--primary-color); text-align: center; margin-bottom: 30px;">📊 Chapter 8 Summary: What You've Accomplished</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+<div style="background-color: white; padding: 20px; border-radius: 6px; border-left: 4px solid var(--primary-color);">
+<h3 style="color: var(--primary-color); margin-bottom: 15px;">Concepts Learned</h3>
+<ul style="margin-left: 20px;">
+<li>✓ What programming is and why it matters</li>
+<li>✓ Algorithms and step-by-step problem solving</li>
+<li>✓ Variables for storing and changing data</li>
+<li>✓ Loops for efficient repetition</li>
+<li>✓ Conditionals for decision-making</li>
+<li>✓ Functions for reusable code</li>
+<li>✓ How visual blocks translate to JavaScript</li>
+</ul>
+</div>
+<div style="background-color: white; padding: 20px; border-radius: 6px; border-left: 4px solid var(--success-color);">
+                <h3 style="color: var(--success-color); margin-bottom: 15px;">Programs Created</h3>
+                <ul style="margin-left: 20px;">
+                    <li>✓ Dance Party (Basic Tutorial)</li>
+                    <li>✓ AI-Powered Dance Party</li>
+                    <li>✓ Original Dance Party (designed, tested, refined)</li>
+                    <li>✓ Music Lab Jam Session</li>
+                    <li>✓ Complex multi-section original song</li>
+                    <li>✓ Explored JavaScript code translation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background-color: white; padding: 20px; border-radius: 6px; border-left: 4px solid var(--info-color);">
+            <h3 style="color: var(--info-color); margin-bottom: 15px;">Skills Developed</h3>
+            <ul style="margin-left: 20px;">
+                <li>🎯 <strong>Computational Thinking:</strong> Breaking problems into steps and solving them systematically</li>
+                <li>🎯 <strong>Creative Problem-Solving:</strong> Using programming concepts to create something new and original</li>
+                <li>🎯 <strong>Testing & Debugging:</strong> Systematically identifying and fixing problems in code</li>
+                <li>🎯 <strong>User-Centered Design:</strong> Collecting feedback and using it to improve programs</li>
+                <li>🎯 <strong>Agile Development:</strong> Building iteratively and refining continuously</li>
+                <li>🎯 <strong>Code Literacy:</strong> Understanding how visual blocks connect to real programming language</li>
+                <li>🎯 <strong>Communication:</strong> Explaining your code and your thinking to others</li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background-color: #fef3c7; border-radius: 6px; border-left: 4px solid var(--accent-color);">
+            <p style="color: var(--text-dark); font-size: 1.05em; margin: 0;">
+                <strong>Key Insight:</strong> Programming is a creative skill that combines logical thinking, problem-solving, and imagination. Every program you write teaches you something new. The more you program, the better you become!
+            </p>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background-color: #dbeafe; border-radius: 6px; border-left: 4px solid var(--info-color);">
+            <h4 style="color: var(--info-color); margin-top: 0;">🚀 Next Steps in Your Programming Journey:</h4>
+            <ul style="margin-left: 20px;">
+                <li>Continue exploring Code.org tutorials to deepen your skills</li>
+                <li>Experiment with creating more complex programs</li>
+                <li>Try different programming languages (Python, JavaScript, Java)</li>
+                <li>Join programming communities online</li>
+                <li>Create programs that solve real-world problems</li>
+                <li>Consider pursuing computer science further in your studies</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== INTERACTIVE SCRIPTS ==================== -->
+    <script>
+        function toggleAnswer(elementId) {
+            const element = document.getElementById(elementId);
+            element.classList.toggle('show');
+            
+            // Scroll to reveal answer
+            element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Optional: Auto-hide answers when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.question')) {
+                // Don't auto-hide; let user control visibility
+            }
+        });
+
+        // Print styles hint
+        window.addEventListener('beforeprint', function() {
+            // Show all answers before printing
+            const allAnswers = document.querySelectorAll('.answer-reveal');
+            allAnswers.forEach(answer => answer.classList.add('show'));
+        });
+    </script>
+</div>
+<body> <html>
