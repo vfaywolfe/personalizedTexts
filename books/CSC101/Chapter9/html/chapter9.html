@@ -1,0 +1,2709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Python Programming</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .chapter-intro {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .chapter-intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .chapter-intro p {
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .learning-outcomes {
+            background: #e8f4f8;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 30px;
+            border-radius: 5px;
+        }
+
+        .learning-outcomes h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .learning-outcomes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learning-outcomes li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .lesson {
+            margin-bottom: 50px;
+            padding: 25px;
+            background: #fafbfc;
+            border-radius: 8px;
+            border: 2px solid #e8ecf1;
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .lesson-number {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .lesson-title {
+            flex-grow: 1;
+        }
+
+        .lesson-title h2 {
+            color: #2c3e50;
+            font-size: 1.6em;
+            margin: 0;
+        }
+
+        .lesson-duration {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-top: 5px;
+        }
+
+        .learning-objective {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .learning-objective strong {
+            color: #1976d2;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .learning-objective p {
+            margin: 0;
+            color: #1565c0;
+        }
+
+        .key-terms {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .key-terms h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .term {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ffe0b2;
+        }
+
+        .term:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .term-name {
+            font-weight: bold;
+            color: #e65100;
+        }
+
+        .term-definition {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+
+        .callout {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+            border-left: 4px solid;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .callout.warning {
+            background: #ffebee;
+            border-color: #d32f2f;
+        }
+
+        .callout.warning .callout-icon {
+            color: #d32f2f;
+            font-size: 1.3em;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .callout.hint {
+            background: #e8f5e9;
+            border-color: #388e3c;
+        }
+
+        .callout.hint .callout-icon {
+            color: #388e3c;
+            font-size: 1.3em;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .callout.info {
+            background: #e3f2fd;
+            border-color: #1976d2;
+        }
+
+        .callout.info .callout-icon {
+            color: #1976d2;
+            font-size: 1.3em;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .callout-text {
+            flex-grow: 1;
+        }
+
+        .callout-text p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            border-left: 4px solid #667eea;
+        }
+
+        .code-block.output {
+            background: #34495e;
+            border-left-color: #2ecc71;
+        }
+
+        .example-block {
+            background: #f0f8ff;
+            border: 2px solid #4a90e2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .example-block h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .example-step {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #d0e0f5;
+        }
+
+        .example-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .step-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .step-code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+        }
+
+        .step-explanation {
+            color: #555;
+            font-size: 0.95em;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .video-embed {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .video-embed h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder {
+            background: #333;
+            width: 100%;
+            height: 300px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .video-info {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .formative-assessment {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: 3px solid #e91e63;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .formative-assessment h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .target-icon {
+            font-size: 1.5em;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.95);
+            color: #2c3e50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 6px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #e91e63;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .question-options {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .question-options li {
+            padding: 8px;
+            margin: 5px 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin-left: 20px;
+        }
+
+        .question-options li:before {
+            content: "○ ";
+            margin-right: 8px;
+            color: #e91e63;
+        }
+
+        .answer-toggle {
+            background: #fff;
+            color: #e91e63;
+            border: 2px solid #e91e63;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .answer-toggle:hover {
+            background: #e91e63;
+            color: white;
+        }
+
+        .answer-content {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border-left: 3px solid #fff;
+            display: none;
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        .whats-next {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .whats-next h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whats-next p {
+            color: #1b5e20;
+            margin: 8px 0;
+        }
+
+        .guided-activity {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border: 3px solid #ff9800;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .guided-activity h3 {
+            color: #e65100;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-steps {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 6px;
+            color: #2c3e50;
+        }
+
+        .activity-step {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ffe0b2;
+        }
+
+        .activity-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .activity-step-number {
+            background: #ff9800;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.85em;
+        }
+
+        .activity-step-text {
+            display: inline;
+        }
+
+        .summary-section {
+            background: #f0f0f0;
+            border: 2px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .summary-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .summary-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-list li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #2c3e50;
+        }
+
+        .summary-list li:before {
+            content: "▪";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .lesson-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .lesson-number {
+                margin-bottom: 10px;
+            }
+
+            .video-placeholder {
+                height: 200px;
+            }
+        }
+
+        .progress-indicator {
+            color: #7f8c8d;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Chapter 9: Python Programming</h1>
+            <p>Your First Steps into Text-Based Coding</p>
+        </header>
+
+        <!-- Chapter Introduction -->
+        <div class="chapter-intro">
+            <h2>Welcome to Python Programming!</h2>
+            <p>
+                Throughout this course, you've been using block-based programming to create projects without worrying about the underlying code. Now it's time to take the next step! In this chapter, you'll learn <strong>Python</strong>, a powerful, text-based programming language that's used by data scientists, web developers, and AI engineers around the world.
+            </p>
+            <p>
+                Python is designed to be easy to learn and easy to read, making it perfect for beginners. You'll discover that the same programming concepts you've already learned—<strong>variables, loops, conditionals, and functions</strong>—work in Python too. By the end of this chapter, you'll be able to write your own Python programs, debug errors when they occur, and see how these fundamental skills power the apps and games you use every day.
+            </p>
+
+            <div class="learning-outcomes">
+                <h3>By the End of This Chapter, You'll Be Able To:</h3>
+                <ul>
+                    <li>Write Python code to print data and perform calculations</li>
+                    <li>Understand and work with different data types (strings, integers, floats)</li>
+                    <li>Create and use variables to store information</li>
+                    <li>Write comments to explain your code</li>
+                    <li>Debug errors using error messages and stack traces</li>
+                    <li>Create and manipulate lists in Python</li>
+                    <li>Use loops to automate repetitive tasks</li>
+                    <li>Build a complete Python program that combines multiple concepts</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+
+            <!-- LESSON 9.1 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">1</div>
+                    <div class="lesson-title">
+                        <h2>Getting Started: Your First Python Program</h2>
+                        <div class="lesson-duration">⏱️ 10 minutes | Lesson 1 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.1.1:</strong>
+                    <p>Write a simple Python program using print statements to display text and perform basic calculations.</p>
+                </div>
+
+                <h3>What is Python?</h3>
+                <p>
+                    Python is a <strong>text-based programming language</strong>. Instead of dragging and dropping blocks like in Code.org or other visual environments, you write actual code commands that the computer reads and executes. Don't worry—it's much more straightforward than it might look!
+                </p>
+                <p>
+                    Python got its name from the British comedy series "Monty Python," and its creator wanted the language to be as entertaining and easy to use as a comedy show. Python is used everywhere:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Data Science:</strong> Analyzing massive datasets</li>
+                    <li><strong>Machine Learning:</strong> Training AI models</li>
+                    <li><strong>Web Development:</strong> Building websites and applications</li>
+                    <li><strong>Automation:</strong> Creating scripts to do repetitive tasks</li>
+                </ul>
+
+                <h3>The Print Statement: Your First Command</h3>
+                <p>
+                    The simplest way to start programming in Python is with the <code>print()</code> statement. It tells Python to display something on the screen.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">Print Statement</div>
+                        <div class="term-definition">A command that displays output on the screen. In Python, you write <code>print()</code> followed by what you want to display in parentheses.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">String</div>
+                        <div class="term-definition">Text data in Python, always enclosed in quotation marks (either single '' or double ""). Example: <code>"Hello, World!"</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Expression</div>
+                        <div class="term-definition">A combination of values and operations that Python can evaluate to produce a result. Example: <code>2025 - 1990</code></div>
+                    </div>
+                </div>
+
+                <h3>Simple Examples</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.1.1: Printing Text</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Write a print statement with text</div>
+                        <div class="step-code">print("Hello, World!")</div>
+                        <div class="step-explanation">The text inside the quotation marks will display exactly as written.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: When you run this program, Python outputs:</div>
+                        <div class="code-block output">Hello, World!</div>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Example 9.1.2: Printing Numbers</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Write a print statement with a number</div>
+                        <div class="step-code">print(2024)</div>
+                        <div class="step-explanation">Numbers don't need quotation marks.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Output:</div>
+                        <div class="code-block output">2024</div>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Example 9.1.3: Python as a Calculator</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Write an expression that Python will evaluate</div>
+                        <div class="step-code">print(2025 - 1990)</div>
+                        <div class="step-explanation">Python evaluates (solves) the math problem and prints the result.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Output:</div>
+                        <div class="code-block output">35</div>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Pro Tip:</strong> Always use the same type of quotation marks at the start and end. If you open with a double quote, close with a double quote: <code>"like this"</code></p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Watch: Print Statements and Expressions</h4>
+                    <div class="video-placeholder">
+                        ▶️ Khan Academy Video - Print Statements [4:49 min]
+                    </div>
+                    <div class="video-info">
+                        Watch this video to see print statements in action and learn how Python evaluates expressions.
+                    </div>
+                </div>
+
+                <!-- Formative Assessment 9.1 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What will Python output when you run this code?</div>
+                        <div class="code-block">print("The year is " + "2024")</div>
+                        <ul class="question-options">
+                            <li>The year is 2024</li>
+                            <li>The year is + 2024</li>
+                            <li>Error: cannot add strings</li>
+                            <li>2024 The year is</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: The year is 2024</strong>
+                            <p style="margin-top: 8px;">When you use the + operator with strings, Python combines them together (called concatenation). The quotation marks just tell Python these are strings; they don't print.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">True or False: In Python, numbers must always be in quotation marks.</div>
+                        <ul class="question-options">
+                            <li>True</li>
+                            <li>False</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: False</strong>
+                            <p style="margin-top: 8px;">Numbers can be written without quotation marks. If you put them in quotes like <code>"42"</code>, Python treats them as text, not as a number you can do math with.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What will this code output? <code>print(100 + 50)</code></div>
+                        <ul class="question-options">
+                            <li>150</li>
+                            <li>"100 + 50"</li>
+                            <li>100 + 50</li>
+                            <li>Error</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 150</strong>
+                            <p style="margin-top: 8px;">Since the numbers aren't in quotation marks, Python knows they're actual numbers and performs the math. 100 + 50 = 150.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Now that you know how to print things, let's talk about different types of data Python can work with. Strings, numbers, and more—each type behaves differently and has its own rules. Ready to explore?</p>
+                    <div class="progress-indicator">Next: Lesson 9.2 - Understanding Data Types</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.2 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">2</div>
+                    <div class="lesson-title">
+                        <h2>Understanding Data Types</h2>
+                        <div class="lesson-duration">⏱️ 8 minutes | Lesson 2 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.2.1:</strong>
+                    <p>Identify and work with different Python data types (strings, integers, floats) and understand how each one behaves.</p>
+                </div>
+
+                <h3>What are Data Types?</h3>
+                <p>
+                    Every piece of information your program uses has a <strong>type</strong>. Think of data types like different ingredients in a recipe—you need to know whether you're working with flour (a solid), milk (a liquid), or an egg (something different altogether). Python needs to know the same thing about your data.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Data Types in Python</h4>
+                    <div class="term">
+                        <div class="term-name">String (str)</div>
+                        <div class="term-definition">Text data enclosed in quotation marks. Examples: <code>"Alice"</code>, <code>'Hello'</code>, <code>"123 Main Street"</code>. Even though the last example contains numbers, it's a string because it's in quotes.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Integer (int)</div>
+                        <div class="term-definition">A whole number with no decimal point. Can be positive or negative. Examples: <code>42</code>, <code>-10</code>, <code>0</code>, <code>2024</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Float (float)</div>
+                        <div class="term-definition">A number with a decimal point. Examples: <code>3.14</code>, <code>2.5</code>, <code>-0.5</code>, <code>98.6</code></div>
+                    </div>
+                </div>
+
+<h3>Why Data Types Matter</h3>
+                <p>
+                    Python treats different data types differently. Watch what happens:
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.2.1: Strings vs. Integers</h4>
+                    <div class="example-step">
+                        <div class="step-label">With strings:</div>
+                        <div class="step-code">print("5" + "3")</div>
+                        <div class="step-explanation">Python combines the text: outputs <code>53</code></div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">With integers:</div>
+                        <div class="step-code">print(5 + 3)</div>
+                        <div class="step-explanation">Python adds the numbers: outputs <code>8</code></div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Common Mistake:</strong> Don't mix quotes for numbers! <code>print("5" + 3)</code> will cause an error because Python can't add a string and a number—they're different types.</p>
+                    </div>
+                </div>
+
+                <h3>Working with Different Data Types</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.2.2: Floats for Precise Calculations</h4>
+                    <div class="example-step">
+                        <div class="step-label">Calculating an average with floats:</div>
+                        <div class="step-code">print((90.5 + 87.3 + 92.1) / 3)</div>
+                        <div class="step-explanation">Using floats allows for decimal precision. Output: <code>89.96666666666667</code></div>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-text">
+                        <p><strong>Fun Fact:</strong> You can convert between data types! Python provides functions like <code>int()</code>, <code>str()</code>, and <code>float()</code> to convert data from one type to another. We'll use these soon!</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read: What are Data Types?</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        📖 Read the Khan Academy article "What are Data Types?" to deepen your understanding of how Python categorizes different kinds of information.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.2 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">Which of the following is a string?</div>
+                        <ul class="question-options">
+                            <li>42</li>
+                            <li>"42"</li>
+                            <li>42.0</li>
+                            <li>42 + 8</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: "42"</strong>
+                            <p style="margin-top: 8px;">Strings are always in quotation marks. Even though it looks like a number, the quotes make it a string of text.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What will this code output? <code>print(10.5 + 2.3)</code></div>
+                        <ul class="question-options">
+                            <li>10.5 + 2.3</li>
+                            <li>12</li>
+                            <li>12.8</li>
+                            <li>12.80</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 12.8</strong>
+                            <p style="margin-top: 8px;">These are floats (numbers with decimals), so Python adds them mathematically. 10.5 + 2.3 = 12.8</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">True or False: <code>print("10" + "5")</code> will output <code>15</code></div>
+                        <ul class="question-options">
+                            <li>True</li>
+                            <li>False</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: False</strong>
+                            <p style="margin-top: 8px;">Both values are strings (they're in quotes), so Python concatenates them. It outputs <code>105</code>, not 15.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Now you understand that different data types behave differently. The next step is to learn how to store this data so you can use it later in your program. Enter: variables!</p>
+                    <div class="progress-indicator">Next: Lesson 9.3 - Creating and Using Variables</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.3 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">3</div>
+                    <div class="lesson-title">
+                        <h2>Creating and Using Variables</h2>
+                        <div class="lesson-duration">⏱️ 10 minutes | Lesson 3 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.3.1:</strong>
+                    <p>Create variables to store data and use them in Python programs to make code more flexible and reusable.</p>
+                </div>
+
+                <h3>What is a Variable?</h3>
+                <p>
+                    A <strong>variable</strong> is like a labeled box where you can store information. Instead of writing the same value over and over, you store it once in a variable and then use the variable name whenever you need it.
+                </p>
+                <p>
+                    Think of it like saving a contact in your phone. Instead of typing out someone's full phone number every time you want to call them, you just tap their name. The name is like a variable—it represents the phone number stored underneath.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">Variable</div>
+                        <div class="term-definition">A named storage location that holds a value. You create a variable by writing: <code>variable_name = value</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Assignment</div>
+                        <div class="term-definition">The process of giving a variable a value. The <code>=</code> sign is called the assignment operator.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Variable Name</div>
+                        <div class="term-definition">The label you give to your variable. Should be descriptive. Examples: <code>age</code>, <code>name</code>, <code>score</code>, <code>birth_year</code></div>
+                    </div>
+                </div>
+
+                <h3>Creating Variables</h3>
+                <p>
+                    The syntax (format) is simple:
+                </p>
+
+                <div class="code-block">variable_name = value</div>
+
+                <div class="example-block">
+                    <h4>Example 9.3.1: Creating and Using Variables</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a variable to store a name</div>
+                        <div class="step-code">name = "Alice"</div>
+                        <div class="step-explanation">The variable <code>name</code> now holds the string <code>"Alice"</code></div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Create a variable to store an age</div>
+                        <div class="step-code">age = 18</div>
+                        <div class="step-explanation">The variable <code>age</code> holds the integer <code>18</code></div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 3: Use variables in print statements</div>
+                        <div class="step-code">print(name)
+print(age)</div>
+                        <div class="step-explanation">When you use the variable name without quotes, Python prints the value stored in the variable.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">Alice
+18</div>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Example 9.3.2: Using Variables in Expressions</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create variables</div>
+                        <div class="step-code">birth_year = 2006
+current_year = 2024</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Use variables in a calculation</div>
+                        <div class="step-code">age = current_year - birth_year
+print(age)</div>
+                        <div class="step-explanation">Instead of calculating manually, let Python do the math using your variables.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">18</div>
+                    </div>
+                </div>
+
+                <h3>Variable Naming Rules</h3>
+                <p>
+                    Python has rules about variable names. Following these rules will save you from errors:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Variable names must start with a letter or underscore (_)</li>
+                    <li>Variable names can contain letters, numbers, and underscores</li>
+                    <li>Variable names cannot contain spaces (use underscores instead: <code>birth_year</code>, not <code>birth year</code>)</li>
+                    <li>Variable names are case-sensitive: <code>Name</code> and <code>name</code> are different variables</li>
+                    <li>Use descriptive names: <code>student_score</code> is better than <code>ss</code></li>
+                </ul>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Best Practice:</strong> Use lowercase with underscores for variable names (called "snake_case"). For example: <code>favorite_color</code>, <code>total_score</code>, <code>is_active</code></p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Watch: Variables and Assignments</h4>
+                    <div class="video-placeholder">
+                        ▶️ Khan Academy Video - Variables and Assignments [4:44 min]
+                    </div>
+                    <div class="video-info">
+                        Watch to see variables in action and learn how to assign and use them in Python programs.
+                    </div>
+                </div>
+
+                <!-- Formative Assessment 9.3 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">school = "URI"
+print("I attend " + school)</div>
+                        <ul class="question-options">
+                            <li>I attend</li>
+                            <li>I attend school</li>
+                            <li>I attend URI</li>
+                            <li>Error: cannot concatenate</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: I attend URI</strong>
+                            <p style="margin-top: 8px;">When you use a variable name without quotes, Python inserts the value stored in that variable. So <code>school</code> becomes <code>"URI"</code>, and the strings concatenate.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">Which variable name is valid in Python?</div>
+                        <ul class="question-options">
+                            <li>2ndName</li>
+                            <li>my-name</li>
+                            <li>my_name</li>
+                            <li>my name</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: my_name</strong>
+                            <p style="margin-top: 8px;">Variable names can't start with numbers, can't contain hyphens or spaces. Underscores are allowed and recommended to separate words.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What does this program do?</div>
+                        <div class="code-block">price = 15.99
+tax = 1.50
+total = price + tax
+print(total)</div>
+                        <ul class="question-options">
+                            <li>Stores price and tax, then calculates the total and prints it</li>
+                            <li>Prints the price and tax separately</li>
+                            <li>Prints "price + tax"</li>
+                            <li>Creates an error because you can't add variables</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: Stores price and tax, then calculates the total and prints it</strong>
+                            <p style="margin-top: 8px;">The program creates three variables, uses math on two of them to create a third, and then prints the result. Output would be: <code>17.49</code></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Now you can create variables and print them individually. But what if you want to combine them with other text in a single print statement? We'll learn how to concatenate and format strings with your variables.</p>
+                    <div class="progress-indicator">Next: Lesson 9.4 - Combining Variables with Strings</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.4 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">4</div>
+                    <div class="lesson-title">
+                        <h2>Combining Variables with Strings</h2>
+                        <div class="lesson-duration">⏱️ 12 minutes | Lesson 4 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.4.1:</strong>
+                    <p>Combine variables with strings using concatenation and type conversion to create meaningful output messages.</p>
+                </div>
+
+                <h3>Creating Meaningful Output</h3>
+                <p>
+                    Printing just the variable value isn't very helpful: <code>print(age)</code> outputs <code>18</code>. But what does 18 represent? To make your program more informative, you need to combine variables with explanatory text.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">Concatenation</div>
+                        <div class="term-definition">Combining strings together using the <code>+</code> operator. Example: <code>"Hello" + " " + "World"</code> becomes <code>"Hello World"</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Type Conversion</div>
+                        <div class="term-definition">Converting a value from one data type to another. Use <code>str()</code> to convert numbers to strings, so they can be concatenated with text.</div>
+                    </div>
+                </div>
+
+                <h3>The Challenge: Numbers Aren't Strings</h3>
+                <p>
+                    Remember from Lesson 9.2 that you can't concatenate strings with numbers directly. This won't work:
+                </p>
+
+                <div class="code-block">age = 18
+print("I am " + age + " years old")  # ❌ ERROR!</div>
+
+                <p>
+                    Python says: "I can't add a string and a number!" You need to convert the number to a string first using the <code>str()</code> function.
+                </p>
+
+                <h3>Solution: Use str() to Convert Numbers</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.4.1: Converting Numbers to Strings</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create variables</div>
+                        <div class="step-code">name = "Bob"
+age = 25
+gpa = 3.85</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Convert numbers to strings and concatenate</div>
+                        <div class="step-code">print("My name is " + name)
+print("I am " + str(age) + " years old")
+print("My GPA is " + str(gpa))</div>
+                        <div class="step-explanation">The <code>str()</code> function converts the integer and float to strings so they can be combined with the text.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">My name is Bob
+I am 25 years old
+My GPA is 3.85</div>
+                    </div>
+                </div>
+
+                <div class="example-block">
+                    <h4>Example 9.4.2: A Complete Personal Profile</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Define all variables</div>
+                        <div class="step-code">name = "Sarah"
+age = 19
+birth_year = 2005
+current_year = 2024</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Create a calculated variable</div>
+                        <div class="step-code">calculated_year = current_year - age</div>
+                        <div class="step-explanation">Use variables in expressions to calculate new values.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 3: Print using concatenation</div>
+                        <div class="step-code">print("Hello, my name is " + name)
+print("I am " + str(age) + " years old")
+print("I was born in " + str(birth_year))</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">Hello, my name is Sarah
+I am 19 years old
+I was born in 2005</div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Remember:</strong> You only need to use <code>str()</code> when concatenating with <code>+</code>. If you're just printing a number by itself, no conversion is needed!</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Pro Tip:</strong> Python also has f-strings (formatted strings) that make this easier: <code>print(f"I am {age} years old")</code> works without str()! But let's master concatenation first.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Watch: Variables and Assignments (Review)</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        Review the Khan Academy video to reinforce the concepts of variables and how to use them in programs.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.4 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">year = 2024
+print("The year is " + str(year))</div>
+                        <ul class="question-options">
+                            <li>The year is 2024</li>
+                            <li>The year is year</li>
+                            <li>Error: cannot concatenate</li>
+                            <li>The year is str(2024)</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: The year is 2024</strong>
+                            <p style="margin-top: 8px;">The <code>str()</code> function converts 2024 to the string "2024", which can then be concatenated with the text.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">Which line will cause an error?</div>
+                        <ul class="question-options">
+                            <li>print("Score: " + str(95))</li>
+                            <li>print("Score: " + "95")</li>
+                            <li>print("Score: " + 95)</li>
+                            <li>Both A and B are fine</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: print("Score: " + 95)</strong>
+                            <p style="margin-top: 8px;">You can't concatenate a string with an integer (95 without quotes). You need to convert it first: either use str(95) or write it as "95" (a string).</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">score = 92
+print("My score is " + str(score) + " out of 100")</div>
+                        <ul class="question-options">
+                            <li>My score is 92 out of 100</li>
+                            <li>My score is str(92) out of 100</li>
+                            <li>My score is 92str out of 100</li>
+                            <li>Error</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: My score is 92 out of 100</strong>
+                            <p style="margin-top: 8px;">You can concatenate multiple strings. <code>str(score)</code> becomes "92", which is concatenated with the text before and after it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Writing code that works is great, but what happens when something goes wrong? The next lesson teaches you how to understand error messages and write comments to make your code clearer for yourself and others.</p>
+                    <div class="progress-indicator">Next: Lesson 9.5 - Comments and Debugging</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.5 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">5</div>
+                    <div class="lesson-title">
+                        <h2>Comments and Debugging Your Code</h2>
+                        <div class="lesson-duration">⏱️ 12 minutes | Lesson 5 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.5.1:</strong>
+                    <p>Write comments to document code and use error messages and stack traces to identify and fix bugs in Python programs.</p>
+                </div>
+
+                <h3>Why Comments Matter</h3>
+                <p>
+                    Imagine reading a recipe with no explanations—just a list of steps. Comments are like notes in a recipe that explain what you're doing and why. They're especially important when:
+                </p>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>You come back to old code months later and need to understand it</li>
+                    <li>Someone else reads your code</li>
+                    <li>You're debugging and need to understand what each section does</li>
+                </ul>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">Comment</div>
+                        <div class="term-definition">A note in your code that Python ignores. Starts with <code>#</code>. Example: <code># This is a comment</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Bug</div>
+                        <div class="term-definition">An error in your code that prevents it from running correctly.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Stack Trace</div>
+                        <div class="term-definition">The error message Python displays when something goes wrong. It tells you what the error is and where it happened.</div>
+                    </div>
+                </div>
+
+                <h3>Writing Comments</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.5.1: Using Comments to Explain Code</h4>
+                    <div class="example-step">
+                        <div class="step-label">Code with helpful comments:</div>
+                        <div class="step-code"># Store student information
+name = "Michael"
+age = 20
+
+# Calculate birth year
+current_year = 2024
+birth_year = current_year - age
+
+# Display the information
+print("Student: " + name)
+print("Birth year: " + str(birth_year))</div>
+                        <div class="step-explanation">Comments (lines starting with #) explain what each section does. Python ignores them completely.</div>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Comment Best Practices:</strong> Use comments to explain WHY you did something, not WHAT the code does. The code itself shows what it does. "# Calculate the person's age" is better than "# age = 2024 - birth_year" (that's just repeating the code).</p>
+                    </div>
+                </div>
+
+                <h3>Understanding Errors and Stack Traces</h3>
+                <p>
+                    When Python encounters an error, it gives you helpful information. Let's learn how to read these error messages:
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.5.2: Reading a Stack Trace</h4>
+                    <div class="example-step">
+                        <div class="step-label">Buggy code:</div>
+                        <div class="step-code">name = "Jordan"
+age = 21
+print("My name is " + name + age)</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Error message you'd see:</div>
+                        <div class="code-block output">TypeError: can only concatenate str (not "int") to str
+  at line 3</div>
+                        <div class="step-explanation">Python says: "You're trying to add a string and an integer. That doesn't work!" The error tells you the problem AND where it happened (line 3).</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Fixed code:</div>
+                        <div class="step-code">name = "
+Jordan"
+age = 21
+print("My name is " + name + " and I am " + str(age))</div>
+                        <div class="step-explanation">Convert the integer to a string using str(age). Now all parts are strings and can be concatenated.</div>
+                    </div>
+                </div>
+
+                <h3>Common Python Errors</h3>
+                <p>
+                    Here are errors you might encounter and what they mean:
+                </p>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>SyntaxError:</strong> You made a typo in your code. Common causes: missing quotes, missing parentheses, misspelled keywords. Python can't even try to run the program.</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>NameError:</strong> You used a variable name that doesn't exist. Either you misspelled it or forgot to create it. Example: <code>print(names)</code> when you created <code>name</code> (without the 's').</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>TypeError:</strong> You tried to do an operation with the wrong types. Example: adding a string and an integer, or trying to do math on text.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read & Watch: Comments and Debugging</h4>
+                    <div style="margin: 15px 0; color: #2c3e50;">
+                        <p>📖 Read: "What are Comments in Python?"</p>
+                        <p style="margin-top: 10px;">▶️ Watch: "Debugging with Stack Traces" [5:50 min]</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">These resources will teach you how to read error messages and understand what went wrong in your code.</p>
+                    </div>
+                </div>
+
+                <!-- Formative Assessment 9.5 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What is the purpose of a comment?</div>
+                        <ul class="question-options">
+                            <li>To make Python run faster</li>
+                            <li>To explain your code to yourself or others</li>
+                            <li>To convert strings to integers</li>
+                            <li>To find errors in your code</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: To explain your code to yourself or others</strong>
+                            <p style="margin-top: 8px;">Comments are purely for humans. Python ignores them completely. They help you remember why you wrote something a certain way.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What does this error message mean? <code>NameError: name 'student' is not defined</code></div>
+                        <ul class="question-options">
+                            <li>You misspelled the word "student"</li>
+                            <li>You used a variable that hasn't been created yet</li>
+                            <li>You need to convert student to a string</li>
+                            <li>You can't use the name "student" as a variable</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: You used a variable that hasn't been created yet</strong>
+                            <p style="margin-top: 8px;">NameError means Python can't find that variable. Either you forgot to create it or you misspelled the variable name.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">True or False: Comments are executed by Python</div>
+                        <ul class="question-options">
+                            <li>True</li>
+                            <li>False</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: False</strong>
+                            <p style="margin-top: 8px;">Python completely ignores comments. They're just for humans to read and understand the code.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Now that you understand variables and comments, let's practice fixing buggy code! The next guided activity will have you identifying and fixing errors in a real Python program.</p>
+                    <div class="progress-indicator">Next: Lesson 9.6 - Guided Activity: Debugging Your Profile Program</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.6 - GUIDED ACTIVITY -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-title">
+                        <h2>Guided Activity: Debugging Your Profile Program</h2>
+                        <div class="lesson-duration">⏱️ 15 minutes | Lesson 6 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.6.1:</strong>
+                    <p>Apply debugging strategies to identify and fix errors in Python code, then customize the program with personal information.</p>
+                </div>
+
+                <h3>Your Challenge</h3>
+                <p>
+                    You're given a program that should display a student profile, but it has 3 intentional bugs! Your job is to:
+                </p>
+                <ol style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Identify what the errors are</li>
+                    <li>Fix them</li>
+                    <li>Update the program with your own information</li>
+                    <li>Run it successfully</li>
+                </ol>
+
+                <div class="guided-activity">
+                    <h3>🎯 Fix My Code Challenge!</h3>
+                    <div class="activity-steps">
+                        <div class="activity-step">
+                            <span class="activity-step-number">1</span>
+                            <span class="activity-step-text"><strong>Access the starter code:</strong> Log into Khan Academy and open the "Fix My Code!" program. Click the "Spin-Off" button to create your own copy. Name it "[yourname] Profile v2"</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">2</span>
+                            <span class="activity-step-text"><strong>Examine the buggy code:</strong> Look at the code carefully. Try to run it. What errors do you get?</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">3</span>
+                            <span class="activity-step-text"><strong>Fix the errors:</strong> The hints below will help you find the 3 errors. Common issues: missing quotes, missing parentheses, misspelled variable names.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">4</span>
+                            <span class="activity-step-text"><strong>Customize your profile:</strong> Replace the example data with your own name, age, favorite subject, and GPA. Create additional variables if you'd like!</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">5</span>
+                            <span class="activity-step-text"><strong>Run and test:</strong> Make sure your program runs without errors and displays your information correctly.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">6</span>
+                            <span class="activity-step-text"><strong>Take a screenshot:</strong> Capture your working code and its output. Submit this with your assignment.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Hints for finding the bugs:</strong></p>
+                        <ul style="margin-top: 8px; margin-left: 15px;">
+                            <li>Bug #1: Look for a variable name that's misspelled</li>
+                            <li>Bug #2: Find a print statement missing parentheses</li>
+                            <li>Bug #3: Look for a string missing quotation marks</li>
+                        </ul>
+                    </p>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-text">
+                        <p><strong>Remember:</strong> When you see an error message, read it carefully! It tells you what line the error is on and what type of error it is. Start debugging from the first error listed.</p>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You've mastered debugging individual variables. Now let's learn how to work with multiple pieces of information at once using lists—a powerful way to organize data!</p>
+                    <div class="progress-indicator">Next: Lesson 9.7 - Creating and Using Lists</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.7 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">7</div>
+                    <div class="lesson-title">
+                        <h2>Creating and Using Lists</h2>
+                        <div class="lesson-duration">⏱️ 11 minutes | Lesson 7 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.7.1:</strong>
+                    <p>Create lists to store multiple values and access individual items using indexing.</p>
+                </div>
+
+                <h3>What is a List?</h3>
+                <p>
+                    A <strong>list</strong> is like a container that holds multiple pieces of information. Instead of creating separate variables for each item, you can store them all together in one list.
+                </p>
+                <p>
+                    Think of a shopping list: instead of having separate sticky notes for "milk," "eggs," and "bread," you write them all on one piece of paper. Similarly, in Python, a list lets you organize related data in one place.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">List</div>
+                        <div class="term-definition">A collection of values in a specific order, enclosed in square brackets. Example: <code>["apple", "banana", "orange"]</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Index</div>
+                        <div class="term-definition">The position of an item in a list, starting from 0. The first item is at index 0, the second at index 1, etc.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Element</div>
+                        <div class="term-definition">An individual item in a list.</div>
+                    </div>
+                </div>
+
+                <h3>Creating a List</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.7.1: Creating Lists</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list of strings</div>
+                        <div class="step-code">fruits = ["apple", "banana", "orange", "grape"]</div>
+                        <div class="step-explanation">Square brackets [ ] contain the list. Items are separated by commas.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Create a list of numbers</div>
+                        <div class="step-code">scores = [95, 87, 92, 88, 91]</div>
+                        <div class="step-explanation">Lists can contain any data type—strings, integers, floats, or even a mix!</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 3: Create a list with mixed types</div>
+                        <div class="step-code">student_info = ["Alice", 20, 3.85]</div>
+                        <div class="step-explanation">This list contains a string, an integer, and a float all together.</div>
+                    </div>
+                </div>
+
+                <h3>Accessing Items in a List (Indexing)</h3>
+                <p>
+                    To get a specific item from a list, you use its index (position). Remember: <strong>Python starts counting at 0</strong>.
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.7.2: Using Indexes</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list</div>
+                        <div class="step-code">courses = ["Python", "Web Design", "Data Science", "AI"]</div>
+                        <div class="step-explanation">The list has 4 items at indexes 0, 1, 2, and 3.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Access items by index</div>
+                        <div class="step-code">print(courses[0])  # First item
+print(courses[1])  # Second item
+print(courses[3])  # Fourth item</div>
+                        <div class="step-explanation">Use square brackets with the index number to get an item.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">Python
+Web Design
+AI</div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Off-by-One Error:</strong> A common mistake! If your list has 4 items, the last index is 3, not 4. Using <code>courses[4]</code> would cause an IndexError.</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Negative Indexing:</strong> Python also allows negative indexes! <code>list[-1]</code> gets the last item, <code>list[-2]</code> gets the second-to-last, and so on.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read: What are Lists?</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        📖 Read the Khan Academy article on "What are Lists?" to learn more about how lists work and why they're useful.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.7 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">animals = ["cat", "dog", "bird", "fish"]
+print(animals[2])</div>
+                        <ul class="question-options">
+                            <li>bird</li>
+                            <li>dog</li>
+                            <li>fish</li>
+                            <li>cat</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: bird</strong>
+                            <p style="margin-top: 8px;">Index 2 is the third item (remember, counting starts at 0). So index 0 is "cat", index 1 is "dog", and index 2 is "bird".</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">If a list has 5 items, what is the highest valid index?</div>
+                        <ul class="question-options">
+                            <li>5</li>
+                            <li>4</li>
+                            <li>1</li>
+                            <li>0</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 4</strong>
+                            <p style="margin-top: 8px;">Indexes go from 0 to length-1. With 5 items, valid indexes are 0, 1, 2, 3, and 4. Using index 5 would cause an error.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">Which is a valid Python list?</div>
+                        <ul class="question-options">
+                            <li>[1, 2, 3,]</li>
+                            <li>["apple", "banana", "cherry"]</li>
+                            <li>(1, 2, 3)</li>
+                            <li>"apple", "banana"</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: ["apple", "banana", "cherry"]</strong>
+                            <p style="margin-top: 8px;">Lists use square brackets [ ]. While (1, 2, 3) is a valid tuple, the question asks for a list. The option with strings is the correct list syntax.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You can now access individual items from a list. But what if you want to do something with EVERY item in the list? That's where loops come in—let's automate repetitive tasks!</p>
+                    <div class="progress-indicator">Next: Lesson 9.8 - For Loops: Repeating Actions</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.8 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">8</div>
+                    <div class="lesson-title">
+                        <h2>For Loops: Repeating Actions</h2>
+                        <div class="lesson-duration">⏱️ 12 minutes | Lesson 8 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.8.1:</strong>
+                    <p>Write for loops to iterate through lists and automate repetitive tasks in Python.</p>
+                </div>
+
+                <h3>What is a Loop?</h3>
+                <p>
+                    Imagine you have a list of 100 students and want to print each name. Would you write 100 separate print statements? No! That's what <strong>loops</strong> are for. A loop repeats code automatically, once for each item in a list.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">For Loop</div>
+                        <div class="term-definition">A loop that repeats code once for each item in a list. Syntax: <code>for item in list:</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Iteration</div>
+                        <div class="term-definition">One complete cycle through the loop. If you loop over a 5-item list, there are 5 iterations.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Loop Variable</div>
+                        <div class="term-definition">The variable that holds the current item. Example: in <code>for fruit in fruits:</code>, <code>fruit</code> is the loop variable.</div>
+                    </div>
+                </div>
+
+                <h3>For Loop Syntax</h3>
+
+                <div class="code-block">for item in list:
+    # Code here runs for each item
+    print(item)</div>
+
+                <p style="margin-top: 15px; color: #e65100;">
+                    <strong>Important:</strong> Notice the colon (:) at the end of the for statement and the indentation (spaces) on the next line. This tells Python that the indented code belongs to the loop.
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.8.1: Simple For Loop</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list</div>
+                        <div class="step-code">colors = ["red", "blue", "green", "yellow"]</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Write a for loop to print each color</div>
+                        <div class="step-code">for color in colors:
+    print(color)</div>
+                        <div class="step-explanation">For each item in the colors list, print it. The loop runs 4 times (once for each color).</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">red
+blue
+green
+yellow</div>
+                    </div>
+                </div>
+
+                <h3>Making Loops More Interesting</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.8.2: Loops with String Concatenation</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list of courses</div>
+                        <div class="step-code">courses = ["Python", "Web Design", "Data Science"]</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Loop and add formatting</div>
+                        <div class="step-code">print("My Courses:")
+for course in courses:
+    print("- " + course)</div>
+                        <div class="step-explanation">Add text formatting to make the output look better.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">My Courses:
+- Python
+- Web Design
+- Data Science</div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Indentation is Critical!</strong> Python uses indentation to determine which code belongs to the loop. If you forget to indent, you'll get an error or unexpected behavior.</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Choose Meaningful Loop Variable Names:</strong> Use <code>for student in students:</code> instead of <code>for s in students:</code>. It makes your code easier to understand.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read: What is a For Loop in Python?</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        📖 Read the Khan Academy article to learn more about for loops and how they work with lists.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.8 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">How many times will this loop run?</div>
+                        <div class="code-block">numbers = [10, 20, 30, 40, 50]
+for num in numbers:
+    print(num)</div>
+                        <ul class="question-options">
+                            <li>1 time</li>
+                            <li>5 times</li>
+                            <li>50 times</li>
+                            <li>Until there are no more numbers</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 5 times</strong>
+                            <p style="margin-top: 8px;">The loop runs once for each item in the list. Since there are 5 numbers, the loop iterates 5 times.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">names = ["Alice", "Bob", "Carol"]
+for name in names:
+    print("Hello, " + name + "!")</div>
+                        <ul class="question-options">
+                            <li>Hello, Alice!Hello, Bob!Hello, Carol!</li>
+                            <li>Hello, names!</li>
+                            <li>Hello, Alice!
+Hello, Bob!
+Hello, Carol!</li>
+                            <li>Error</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: Hello, Alice!
+Hello, Bob!
+Hello, Carol!</strong>
+                            <p style="margin-top: 8px;">The loop runs 3 times. Each time, <code>name</code> becomes a different value, and print() displays each greeting on a new line.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What is wrong with this code?</div>
+                        <div class="code-block">fruits = ["apple", "banana"]
+for fruit in fruits:
+print(fruit)</div>
+                        <ul class="question-options">
+                            <li>Missing colon after for</li>
+                            <li>Missing indentation before print</li>
+                            <li>Invalid list syntax</li>
+                            <li>Nothing, it's correct</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: Missing indentation before print</strong>
+                            <p style="margin-top: 8px;">The line print(fruit) needs to be indented (have spaces at the beginning). This tells Python it belongs to the loop.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You now know how to work with lists and loop through them! Let's put it all together in a final guided activity where you'll enhance your profile program with lists and loops.</p>
+                    <div class="progress-indicator">Next: Lesson 9.9 - Guided Activity: Complete Profile with Lists and Loops</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.9 - GUIDED ACTIVITY -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">9</div>
+                    <div class="lesson-title">
+                        <h2>Guided Activity: Your Complete Python Profile Program</h2>
+                        <div class="lesson-duration">⏱️ 20 minutes | Lesson 9 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.9.1:</strong>
+                    <p>Combine variables, lists, loops, and comments to create a complete Python program that displays a personal profile with course information.</p>
+                </div>
+
+                <h3>Project Overview</h3>
+                <p>
+                    It's time to bring everything together! You're going to enhance your Profile v2 program by adding a list of courses and using a loop to display them. This is a real-world example of how professional programmers combine multiple concepts to solve problems.
+                </p>
+
+                <div class="guided-activity">
+                    <h3>🎯 Build Your Complete Profile</h3>
+                    <div class="activity-steps">
+                        <div class="activity-step">
+                            <span class="activity-step-number">1</span>
+                            <span class="activity-step-text"><strong>Open your Profile v2 program:</strong> Go to Khan Academy and find your saved "Profile v2" program. If you haven't created it yet, create a new program and copy your working profile code.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">2</span>
+                            <span class="activity-step-text"><strong>Add a comment for the Jordan"
+age = 21
+print("My name is " + name + " and I am " + str(age))</div>
+                        <div class="step-explanation">Convert the integer to a string using str(age). Now all parts are strings and can be concatenated.</div>
+                    </div>
+                </div>
+
+                <h3>Common Python Errors</h3>
+                <p>
+                    Here are errors you might encounter and what they mean:
+                </p>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>SyntaxError:</strong> You made a typo in your code. Common causes: missing quotes, missing parentheses, misspelled keywords. Python can't even try to run the program.</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>NameError:</strong> You used a variable name that doesn't exist. Either you misspelled it or forgot to create it. Example: <code>print(names)</code> when you created <code>name</code> (without the 's').</p>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>TypeError:</strong> You tried to do an operation with the wrong types. Example: adding a string and an integer, or trying to do math on text.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read & Watch: Comments and Debugging</h4>
+                    <div style="margin: 15px 0; color: #2c3e50;">
+                        <p>📖 Read: "What are Comments in Python?"</p>
+                        <p style="margin-top: 10px;">▶️ Watch: "Debugging with Stack Traces" [5:50 min]</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">These resources will teach you how to read error messages and understand what went wrong in your code.</p>
+                    </div>
+                </div>
+
+                <!-- Formative Assessment 9.5 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What is the purpose of a comment?</div>
+                        <ul class="question-options">
+                            <li>To make Python run faster</li>
+                            <li>To explain your code to yourself or others</li>
+                            <li>To convert strings to integers</li>
+                            <li>To find errors in your code</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: To explain your code to yourself or others</strong>
+                            <p style="margin-top: 8px;">Comments are purely for humans. Python ignores them completely. They help you remember why you wrote something a certain way.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What does this error message mean? <code>NameError: name 'student' is not defined</code></div>
+                        <ul class="question-options">
+                            <li>You misspelled the word "student"</li>
+                            <li>You used a variable that hasn't been created yet</li>
+                            <li>You need to convert student to a string</li>
+                            <li>You can't use the name "student" as a variable</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: You used a variable that hasn't been created yet</strong>
+                            <p style="margin-top: 8px;">NameError means Python can't find that variable. Either you forgot to create it or you misspelled the variable name.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">True or False: Comments are executed by Python</div>
+                        <ul class="question-options">
+                            <li>True</li>
+                            <li>False</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: False</strong>
+                            <p style="margin-top: 8px;">Python completely ignores comments. They're just for humans to read and understand the code.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>Now that you understand variables and comments, let's practice fixing buggy code! The next guided activity will have you identifying and fixing errors in a real Python program.</p>
+                    <div class="progress-indicator">Next: Lesson 9.6 - Guided Activity: Debugging Your Profile Program</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.6 - GUIDED ACTIVITY -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-title">
+                        <h2>Guided Activity: Debugging Your Profile Program</h2>
+                        <div class="lesson-duration">⏱️ 15 minutes | Lesson 6 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.6.1:</strong>
+                    <p>Apply debugging strategies to identify and fix errors in Python code, then customize the program with personal information.</p>
+                </div>
+
+                <h3>Your Challenge</h3>
+                <p>
+                    You're given a program that should display a student profile, but it has 3 intentional bugs! Your job is to:
+                </p>
+                <ol style="margin-left: 20px; margin-bottom: 15px;">
+                    <li>Identify what the errors are</li>
+                    <li>Fix them</li>
+                    <li>Update the program with your own information</li>
+                    <li>Run it successfully</li>
+                </ol>
+
+                <div class="guided-activity">
+                    <h3>🎯 Fix My Code Challenge!</h3>
+                    <div class="activity-steps">
+                        <div class="activity-step">
+                            <span class="activity-step-number">1</span>
+                            <span class="activity-step-text"><strong>Access the starter code:</strong> Log into Khan Academy and open the "Fix My Code!" program. Click the "Spin-Off" button to create your own copy. Name it "[yourname] Profile v2"</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">2</span>
+                            <span class="activity-step-text"><strong>Examine the buggy code:</strong> Look at the code carefully. Try to run it. What errors do you get?</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">3</span>
+                            <span class="activity-step-text"><strong>Fix the errors:</strong> The hints below will help you find the 3 errors. Common issues: missing quotes, missing parentheses, misspelled variable names.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">4</span>
+                            <span class="activity-step-text"><strong>Customize your profile:</strong> Replace the example data with your own name, age, favorite subject, and GPA. Create additional variables if you'd like!</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">5</span>
+                            <span class="activity-step-text"><strong>Run and test:</strong> Make sure your program runs without errors and displays your information correctly.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">6</span>
+                            <span class="activity-step-text"><strong>Take a screenshot:</strong> Capture your working code and its output. Submit this with your assignment.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Hints for finding the bugs:</strong></p>
+                        <ul style="margin-top: 8px; margin-left: 15px;">
+                            <li>Bug #1: Look for a variable name that's misspelled</li>
+                            <li>Bug #2: Find a print statement missing parentheses</li>
+                            <li>Bug #3: Look for a string missing quotation marks</li>
+                        </ul>
+                    </p>
+                    </div>
+                </div>
+
+                <div class="callout info">
+                    <div class="callout-icon">ℹ️</div>
+                    <div class="callout-text">
+                        <p><strong>Remember:</strong> When you see an error message, read it carefully! It tells you what line the error is on and what type of error it is. Start debugging from the first error listed.</p>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You've mastered debugging individual variables. Now let's learn how to work with multiple pieces of information at once using lists—a powerful way to organize data!</p>
+                    <div class="progress-indicator">Next: Lesson 9.7 - Creating and Using Lists</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.7 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">7</div>
+                    <div class="lesson-title">
+                        <h2>Creating and Using Lists</h2>
+                        <div class="lesson-duration">⏱️ 11 minutes | Lesson 7 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.7.1:</strong>
+                    <p>Create lists to store multiple values and access individual items using indexing.</p>
+                </div>
+
+                <h3>What is a List?</h3>
+                <p>
+                    A <strong>list</strong> is like a container that holds multiple pieces of information. Instead of creating separate variables for each item, you can store them all together in one list.
+                </p>
+                <p>
+                    Think of a shopping list: instead of having separate sticky notes for "milk," "eggs," and "bread," you write them all on one piece of paper. Similarly, in Python, a list lets you organize related data in one place.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">List</div>
+                        <div class="term-definition">A collection of values in a specific order, enclosed in square brackets. Example: <code>["apple", "banana", "orange"]</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Index</div>
+                        <div class="term-definition">The position of an item in a list, starting from 0. The first item is at index 0, the second at index 1, etc.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Element</div>
+                        <div class="term-definition">An individual item in a list.</div>
+                    </div>
+                </div>
+
+                <h3>Creating a List</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.7.1: Creating Lists</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list of strings</div>
+                        <div class="step-code">fruits = ["apple", "banana", "orange", "grape"]</div>
+                        <div class="step-explanation">Square brackets [ ] contain the list. Items are separated by commas.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Create a list of numbers</div>
+                        <div class="step-code">scores = [95, 87, 92, 88, 91]</div>
+                        <div class="step-explanation">Lists can contain any data type—strings, integers, floats, or even a mix!</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 3: Create a list with mixed types</div>
+                        <div class="step-code">student_info = ["Alice", 20, 3.85]</div>
+                        <div class="step-explanation">This list contains a string, an integer, and a float all together.</div>
+                    </div>
+                </div>
+
+                <h3>Accessing Items in a List (Indexing)</h3>
+                <p>
+                    To get a specific item from a list, you use its index (position). Remember: <strong>Python starts counting at 0</strong>.
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.7.2: Using Indexes</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list</div>
+                        <div class="step-code">courses = ["Python", "Web Design", "Data Science", "AI"]</div>
+                        <div class="step-explanation">The list has 4 items at indexes 0, 1, 2, and 3.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Access items by index</div>
+                        <div class="step-code">print(courses[0])  # First item
+print(courses[1])  # Second item
+print(courses[3])  # Fourth item</div>
+                        <div class="step-explanation">Use square brackets with the index number to get an item.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">Python
+Web Design
+AI</div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Off-by-One Error:</strong> A common mistake! If your list has 4 items, the last index is 3, not 4. Using <code>courses[4]</code> would cause an IndexError.</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Negative Indexing:</strong> Python also allows negative indexes! <code>list[-1]</code> gets the last item, <code>list[-2]</code> gets the second-to-last, and so on.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read: What are Lists?</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        📖 Read the Khan Academy article on "What are Lists?" to learn more about how lists work and why they're useful.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.7 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">animals = ["cat", "dog", "bird", "fish"]
+print(animals[2])</div>
+                        <ul class="question-options">
+                            <li>bird</li>
+                            <li>dog</li>
+                            <li>fish</li>
+                            <li>cat</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: bird</strong>
+                            <p style="margin-top: 8px;">Index 2 is the third item (remember, counting starts at 0). So index 0 is "cat", index 1 is "dog", and index 2 is "bird".</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">If a list has 5 items, what is the highest valid index?</div>
+                        <ul class="question-options">
+                            <li>5</li>
+                            <li>4</li>
+                            <li>1</li>
+                            <li>0</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 4</strong>
+                            <p style="margin-top: 8px;">Indexes go from 0 to length-1. With 5 items, valid indexes are 0, 1, 2, 3, and 4. Using index 5 would cause an error.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">Which is a valid Python list?</div>
+                        <ul class="question-options">
+                            <li>[1, 2, 3,]</li>
+                            <li>["apple", "banana", "cherry"]</li>
+                            <li>(1, 2, 3)</li>
+                            <li>"apple", "banana"</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: ["apple", "banana", "cherry"]</strong>
+                            <p style="margin-top: 8px;">Lists use square brackets [ ]. While (1, 2, 3) is a valid tuple, the question asks for a list. The option with strings is the correct list syntax.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You can now access individual items from a list. But what if you want to do something with EVERY item in the list? That's where loops come in—let's automate repetitive tasks!</p>
+                    <div class="progress-indicator">Next: Lesson 9.8 - For Loops: Repeating Actions</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.8 -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">8</div>
+                    <div class="lesson-title">
+                        <h2>For Loops: Repeating Actions</h2>
+                        <div class="lesson-duration">⏱️ 12 minutes | Lesson 8 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.8.1:</strong>
+                    <p>Write for loops to iterate through lists and automate repetitive tasks in Python.</p>
+                </div>
+
+                <h3>What is a Loop?</h3>
+                <p>
+                    Imagine you have a list of 100 students and want to print each name. Would you write 100 separate print statements? No! That's what <strong>loops</strong> are for. A loop repeats code automatically, once for each item in a list.
+                </p>
+
+                <div class="key-terms">
+                    <h4>📚 Key Terms</h4>
+                    <div class="term">
+                        <div class="term-name">For Loop</div>
+                        <div class="term-definition">A loop that repeats code once for each item in a list. Syntax: <code>for item in list:</code></div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Iteration</div>
+                        <div class="term-definition">One complete cycle through the loop. If you loop over a 5-item list, there are 5 iterations.</div>
+                    </div>
+                    <div class="term">
+                        <div class="term-name">Loop Variable</div>
+                        <div class="term-definition">The variable that holds the current item. Example: in <code>for fruit in fruits:</code>, <code>fruit</code> is the loop variable.</div>
+                    </div>
+                </div>
+
+                <h3>For Loop Syntax</h3>
+
+                <div class="code-block">for item in list:
+    # Code here runs for each item
+    print(item)</div>
+
+                <p style="margin-top: 15px; color: #e65100;">
+                    <strong>Important:</strong> Notice the colon (:) at the end of the for statement and the indentation (spaces) on the next line. This tells Python that the indented code belongs to the loop.
+                </p>
+
+                <div class="example-block">
+                    <h4>Example 9.8.1: Simple For Loop</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list</div>
+                        <div class="step-code">colors = ["red", "blue", "green", "yellow"]</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Write a for loop to print each color</div>
+                        <div class="step-code">for color in colors:
+    print(color)</div>
+                        <div class="step-explanation">For each item in the colors list, print it. The loop runs 4 times (once for each color).</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">red
+blue
+green
+yellow</div>
+                    </div>
+                </div>
+
+                <h3>Making Loops More Interesting</h3>
+
+                <div class="example-block">
+                    <h4>Example 9.8.2: Loops with String Concatenation</h4>
+                    <div class="example-step">
+                        <div class="step-label">Step 1: Create a list of courses</div>
+                        <div class="step-code">courses = ["Python", "Web Design", "Data Science"]</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Step 2: Loop and add formatting</div>
+                        <div class="step-code">print("My Courses:")
+for course in courses:
+    print("- " + course)</div>
+                        <div class="step-explanation">Add text formatting to make the output look better.</div>
+                    </div>
+                    <div class="example-step">
+                        <div class="step-label">Output:</div>
+                        <div class="code-block output">My Courses:
+- Python
+- Web Design
+- Data Science</div>
+                    </div>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-icon">⚠️</div>
+                    <div class="callout-text">
+                        <p><strong>Indentation is Critical!</strong> Python uses indentation to determine which code belongs to the loop. If you forget to indent, you'll get an error or unexpected behavior.</p>
+                    </div>
+                </div>
+
+                <div class="callout hint">
+                    <div class="callout-icon">💡</div>
+                    <div class="callout-text">
+                        <p><strong>Choose Meaningful Loop Variable Names:</strong> Use <code>for student in students:</code> instead of <code>for s in students:</code>. It makes your code easier to understand.</p>
+                    </div>
+                </div>
+
+                <div class="video-embed">
+                    <h4>📺 Read: What is a For Loop in Python?</h4>
+                    <p style="margin: 15px 0; color: #2c3e50;">
+                        📖 Read the Khan Academy article to learn more about for loops and how they work with lists.
+                    </p>
+                </div>
+
+                <!-- Formative Assessment 9.8 -->
+                <div class="formative-assessment">
+                    <h3><span class="target-icon">🎯</span> Check Your Understanding</h3>
+
+                    <div class="question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">How many times will this loop run?</div>
+                        <div class="code-block">numbers = [10, 20, 30, 40, 50]
+for num in numbers:
+    print(num)</div>
+                        <ul class="question-options">
+                            <li>1 time</li>
+                            <li>5 times</li>
+                            <li>50 times</li>
+                            <li>Until there are no more numbers</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: 5 times</strong>
+                            <p style="margin-top: 8px;">The loop runs once for each item in the list. Since there are 5 numbers, the loop iterates 5 times.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What will this code output?</div>
+                        <div class="code-block">names = ["Alice", "Bob", "Carol"]
+for name in names:
+    print("Hello, " + name + "!")</div>
+                        <ul class="question-options">
+                            <li>Hello, Alice!Hello, Bob!Hello, Carol!</li>
+                            <li>Hello, names!</li>
+                            <li>Hello, Alice!
+Hello, Bob!
+Hello, Carol!</li>
+                            <li>Error</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: Hello, Alice!
+Hello, Bob!
+Hello, Carol!</strong>
+                            <p style="margin-top: 8px;">The loop runs 3 times. Each time, <code>name</code> becomes a different value, and print() displays each greeting on a new line.</p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">What is wrong with this code?</div>
+                        <div class="code-block">fruits = ["apple", "banana"]
+for fruit in fruits:
+print(fruit)</div>
+                        <ul class="question-options">
+                            <li>Missing colon after for</li>
+                            <li>Missing indentation before print</li>
+                            <li>Invalid list syntax</li>
+                            <li>Nothing, it's correct</li>
+                        </ul>
+                        <button class="answer-toggle">Show Answer</button>
+                        <div class="answer-content">
+                            <strong>Answer: Missing indentation before print</strong>
+                            <p style="margin-top: 8px;">The line print(fruit) needs to be indented (have spaces at the beginning). This tells Python it belongs to the loop.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h4>🚀 What's Coming Next</h4>
+                    <p>You now know how to work with lists and loop through them! Let's put it all together in a final guided activity where you'll enhance your profile program with lists and loops.</p>
+                    <div class="progress-indicator">Next: Lesson 9.9 - Guided Activity: Complete Profile with Lists and Loops</div>
+                </div>
+            </div>
+
+            <!-- LESSON 9.9 - GUIDED ACTIVITY -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <div class="lesson-number">9</div>
+                    <div class="lesson-title">
+                        <h2>Guided Activity: Your Complete Python Profile Program</h2>
+                        <div class="lesson-duration">⏱️ 20 minutes | Lesson 9 of 9</div>
+                    </div>
+                </div>
+
+                <div class="learning-objective">
+                    <strong>LO9.9.1:</strong>
+                    <p>Combine variables, lists, loops, and comments to create a complete Python program that displays a personal profile with course information.</p>
+                </div>
+
+                <h3>Project Overview</h3>
+                <p>
+                    It's time to bring everything together! You're going to enhance your Profile v2 program by adding a list of courses and using a loop to display them. This is a real-world example of how professional programmers combine multiple concepts to solve problems.
+                </p>
+
+                <div class="guided-activity">
+                    <h3>🎯 Build Your Complete Profile</h3>
+                    <div class="activity-steps">
+                        <div class="activity-step">
+                            <span class="activity-step-number">1</span>
+                            <span class="activity-step-text"><strong>Open your Profile v2 program:</strong> Go to Khan Academy and find your saved "Profile v2" program. If you haven't created it yet, create a new program and copy your working profile code.</span>
+                        </div>
+
+                        <div class="activity-step">
+                            <span class="activity-step-number">2</span>
+                            <span class="activity-step-text"><strong>Add a comment for the new section:</strong> After your existing profile code, add a comment: <code># Display all courses</code></span>
+</div>
+<div class="activity-step">
+                        <span class="activity-step-number">3</span>
+                        <span class="activity-step-text"><strong>Add a header:</strong> Use print to display a section header: <code>print("Current Courses:")</code></span>
+                    </div>
+
+                    <div class="activity-step">
+                        <span class="activity-step-number">4</span>
+                        <span class="activity-step-text"><strong>Create a list of courses:</strong> Add a variable that stores your courses as a list. For example: <code>courses = ["Intro to Computing", "College Algebra", "English Composition"]</code> Use 3-5 courses you're taking or have taken.</span>
+                    </div>
+
+                    <div class="activity-step">
+                        <span class="activity-step-number">5</span>
+                        <span class="activity-step-text"><strong>Write a for loop:</strong> Add code that loops through your courses and prints each one with a bullet point: <code>for course in courses: print("- " + course)</code> Remember to indent the print statement!</span>
+                    </div>
+
+                    <div class="activity-step">
+                        <span class="activity-step-number">6</span>
+                        <span class="activity-step-text"><strong>Test your code:</strong> Run your program and verify it works. Your output should display your profile information AND a list of courses with bullet points.</span>
+                    </div>
+
+                    <div class="activity-step">
+                        <span class="activity-step-number">7</span>
+                        <span class="activity-step-text"><strong>Debug if needed:</strong> If there are errors, read the error message and use your debugging skills to fix them. Common issues: missing colon, incorrect indentation, missing quotation marks.</span>
+                    </div>
+
+                    <div class="activity-step">
+                        <span class="activity-step-number">8</span>
+                        <span class="activity-step-text"><strong>Save and screenshot:</strong> Save your program. Take a screenshot showing both your complete code AND the output when you run it. This is what you'll submit!</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Expected Output</h3>
+            <p>
+                Your program should produce output similar to this:
+            </p>
+
+            <div class="code-block output">Hello, my name is [Your Name]
+I am [your age] years old
+I was born in [your birth year]
+Current Courses:
+	•	Course 1
+	•	Course 2
+	•	Course 3
+	•	Course 4</div>
+<div class="callout info">
+              <div class="callout-icon">ℹ️</div>
+              <div class="callout-text">
+                  <p><strong>Enhancement Ideas:</strong> Want to go further? Try adding:</p>
+                  <ul style="margin-top: 8px; margin-left: 15px;">
+                      <li>A list of your favorite subjects</li>
+                      <li>A list of your hobbies, and display them with a loop</li>
+                      <li>Comments explaining each section of your code</li>
+                  </ul>
+              </p>
+              </div>
+          </div>
+
+          <div class="callout warning">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-text">
+                  <p><strong>Remember Indentation:</strong> The print statement inside your for loop MUST be indented. If it's not indented, Python won't know it belongs to the loop!</p>
+              </div>
+          </div>
+
+          <div class="whats-next">
+              <h4>🚀 Congratulations!</h4>
+              <p>You've completed Chapter 9! You now understand the fundamental building blocks of Python programming: print statements, data types, variables, comments, debugging, lists, and loops. These concepts are used in professional programming every single day.</p>
+              <div class="progress-indicator">Next: Chapter 10 - Advanced Programming Concepts and Real-World Applications</div>
+          </div>
+      </div>
+
+  </div>
+
+  <!-- Chapter Summary -->
+  <div class="summary-section" style="margin: 30px;">
+      <h3>📚 Chapter Summary: Python Programming</h3>
+      <p style="margin-bottom: 15px;">
+          You've completed a comprehensive introduction to Python programming. Here are the key concepts you've mastered:
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+          <div>
+              <h4 style="color: #667eea; margin-bottom: 10px;">Concepts Learned</h4>
+              <ul class="summary-list">
+                  <li><strong>Print Statements:</strong> Display output to the screen</li>
+                  <li><strong>Data Types:</strong> Strings, integers, and floats each have different behaviors</li>
+                  <li><strong>Variables:</strong> Store and reuse information efficiently</li>
+                  <li><strong>Concatenation:</strong> Combine strings using the + operator</li>
+                  <li><strong>Type Conversion:</strong> Convert data types with str(), int(), float()</li>
+                  <li><strong>Comments:</strong> Document your code for clarity</li>
+                  <li><strong>Error Messages:</strong> Understand and fix bugs using stack traces</li>
+              </ul>
+          </div>
+
+          <div>
+              <h4 style="color: #667eea; margin-bottom: 10px;">Skills You Can Now Do</h4>
+              <ul class="summary-list">
+                  <li>Write Python programs using proper syntax</li>
+                  <li>Create variables to store information</li>
+                  <li>Combine variables with text to create messages</li>
+                  <li>Debug errors by reading error messages</li>
+                  <li>Create lists to organize multiple pieces of data</li>
+                  <li>Use for loops to automate repetitive tasks</li>
+                  <li>Build complete programs that combine multiple concepts</li>
+              </ul>
+          </div>
+      </div>
+
+      <div style="margin-top: 20px; padding: 15px; background: #fff3e0; border-left: 4px solid #ff9800; border-radius: 4px;">
+          <h4 style="color: #e65100; margin-bottom: 10px;">💡 How These Concepts Connect to Real Programming</h4>
+          <p>
+              The concepts you've learned in this chapter—variables, data types, loops, and lists—are fundamental to <strong>every</strong> programming language. Whether you're building a mobile app, analyzing data, creating a website, or training an AI model, you'll use these same concepts. Python is just a starting point. The logical thinking you've developed is what truly matters, and that transfers to any programming language or computing field.
+          </p>
+      </div>
+  </div>
+
+  <!-- Reflection Assignment -->
+  <div class="summary-section" style="margin: 30px; background: #e3f2fd; border-color: #2196f3;">
+      <h3>🔍 Reflection Assignment</h3>
+      <p style="margin-bottom: 15px;">
+          Now that you understand Python programming concepts, think about how they're used in applications you love. Choose an app or program you use regularly and answer these questions:
+      </p>
+
+      <div style="background: white; padding: 20px; border-radius: 6px; margin: 15px 0;">
+          <ol style="margin-left: 20px;">
+              <li style="margin-bottom: 15px;">
+                  <strong>Describe the app:</strong> What is the app called? What does it do? Provide a link to its description.
+              </li>
+              <li style="margin-bottom: 15px;">
+                  <strong>Variables:</strong> What information does this app store? How might it use variables? (Think: usernames, scores, settings, user preferences)
+              </li>
+              <li style="margin-bottom: 15px;">
+                  <strong>Lists:</strong> What lists of information might this app use? (Think: friend lists, playlists, search results, comments)
+              </li>
+              <li style="margin-bottom: 15px;">
+                  <strong>Loops:</strong> Where might the programmers have used loops? (Think: displaying items, repeating animations, updating constantly)
+              </li>
+              <li style="margin-bottom: 0;">
+                  <strong>Debugging:</strong> Have you ever encountered an error or bug in this app? Describe it. How might the programmers have debugged it?
+              </li>
+          </ol>
+      </div>
+
+      <p style="margin-top: 15px; font-size: 0.95em; color: #555;">
+          <strong>Submit your answers in a document.</strong> Write 2-3 sentences for each question. This reflection helps you see how professional programmers apply the same concepts you just learned.
+      </p>
+  </div>
+
+  <!-- Key Resources -->
+  <div class="summary-section" style="margin: 30px; background: #f3e5f5; border-color: #9c27b0;">
+      <h3>📚 Key Resources Used in This Chapter</h3>
+      <ul class="summary-list">
+          <li><strong>Khan Academy - Intro to Computer Science (Python):</strong> Videos and practice problems</li>
+          <li><strong>Data Types Reading:</strong> Understanding how Python categorizes information</li>
+          <li><strong>Print Statements and Expressions Video:</strong> How to display output and perform calculations</li>
+          <li><strong>Variables and Assignments Video:</strong> Creating and using variables</li>
+          <li><strong>Tracing Program Execution:</strong> Following how Python runs your code</li>
+          <li><strong>Debugging with Stack Traces:</strong> Understanding error messages</li>
+          <li><strong>Comments Reading:</strong> Documenting your code</li>
+          <li><strong>Lists and For Loops Resources:</strong> Working with collections and automation</li>
+      </ul>
+  </div>
+	•	</div> <!-- Footer --> <footer> <p>&copy; 2024 CSC101: Introduction to Computing & AI</p> <p>Chapter 9: Python Programming | A Comprehensive Introduction to Text-Based Coding</p> <p>For questions or technical support, visit your course's Help Forum or contact your instructor.</p> </footer> <script> // Toggle answer visibility document.querySelectorAll('.answer-toggle').forEach(button => { button.addEventListener('click', function() { const answerContent = this.nextElementSibling; answerContent.classList.toggle('show'); this.textContent = answerContent.classList.contains('show') ? 'Hide Answer' : 'Show Answer'; }); }); </script>
+</body> </html>
