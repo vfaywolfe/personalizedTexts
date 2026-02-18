@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Vibe Coding - Making Your Code Smarter and More Creative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .chapter-intro {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+        }
+
+        .chapter-intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .chapter-intro p {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .learning-outcomes {
+            background: #e8f4f8;
+            border-left: 5px solid #17a2b8;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+        }
+
+        .learning-outcomes h3 {
+            color: #17a2b8;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .learning-outcomes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .learning-outcomes li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .learning-outcomes li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #17a2b8;
+            font-weight: bold;
+        }
+
+        .lesson {
+            margin-bottom: 50px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .lesson-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lesson-number {
+            font-size: 1.3em;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .lesson-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .lesson-body {
+            padding: 30px;
+        }
+
+        .objective {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        .objective h4 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .objective p {
+            color: #856404;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .content-section h4 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.15em;
+        }
+
+        .callout {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 5px solid;
+        }
+
+        .callout.warning {
+            background: #fff5f5;
+            border-left-color: #e74c3c;
+            color: #c0392b;
+        }
+
+        .callout.warning::before {
+            content: "⚠️ ";
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .callout.hint {
+            background: #e8f8f5;
+            border-left-color: #27ae60;
+            color: #1e8449;
+        }
+
+        .callout.hint::before {
+            content: "💡 ";
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .callout.info {
+            background: #ebf5fb;
+            border-left-color: #3498db;
+            color: #1e5a96;
+        }
+
+        .callout.info::before {
+            content: "ℹ️ ";
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .video-embed {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .video-embed h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .video-placeholder {
+            background: #333;
+            color: white;
+            padding: 80px 20px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-placeholder svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+            opacity: 0.7;
+        }
+
+        .duration {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .example {
+            background: #f0f0f0;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .example h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .example-step {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .example-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #667eea;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.4;
+            margin: 10px 0;
+        }
+
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .comment { color: #6272a4; }
+        .function { color: #50fa7b; }
+        .number { color: #bd93f9; }
+
+        .assessment {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            border: 3px solid #ffa500;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            color: white;
+        }
+
+        .assessment h3 {
+            color: white;
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .assessment h3::before {
+            content: "🎯";
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+
+        .question {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border-left: 5px solid #ffa500;
+        }
+
+        .question h4 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+        }
+
+        .question-type {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .options {
+            margin-top: 12px;
+        }
+
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background: #e8e8e8;
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .answer-box {
+            background: #f9f9f9;
+            border: 2px dashed #667eea;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .answer-box.show {
+            display: block;
+        }
+
+        .answer-box h5 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .answer-box p {
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .show-answer-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .show-answer-btn:hover {
+            background: #764ba2;
+        }
+
+        .next-lesson {
+            background: #e8f5e9;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+
+        .next-lesson h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .next-lesson p {
+            color: #2e7d32;
+            margin: 0;
+        }
+
+        .guided-activity-intro {
+            background: #f3e5f5;
+            border-left: 5px solid #9c27b0;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+        }
+
+        .guided-activity-intro h3 {
+            color: #6a1b9a;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .activity-steps {
+            background: #fafafa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .activity-step {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .activity-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .activity-step h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .activity-step h4::before {
+            content: attr(data-number);
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        .chapter-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 8px;
+        }
+
+        .chapter-summary h2 {
+            font-size: 1.8em;
+            margin-bottom: 25px;
+        }
+
+        .summary-section {
+            margin-bottom: 25px;
+        }
+
+        .summary-section h3 {
+            color: #ffd89b;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .summary-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .summary-section li {
+            padding-left: 25px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .summary-section li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffd89b;
+            font-weight: bold;
+        }
+
+        .what-next {
+            background: #fff9e6;
+            border-left: 5px solid #ff9800;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 5px;
+        }
+
+        .what-next h3 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .what-next p {
+            color: #bf360c;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            border-radius: 3px;
+        }
+
+        .definitions {
+            background: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .definition-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .definition-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .definition-term {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.05em;
+        }
+
+        .definition-def {
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-button:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            .lesson {
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .lesson-title {
+                font-size: 1.3em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .lesson-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .lesson-number {
+                margin-bottom: 10px;
+            }
+
+            .lesson-title {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>Chapter 10: Vibe Coding</h1>
+            <p>Making Your Code Smarter and More Creative with Conditionals, Functions, and AI</p>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="content">
+            <!-- CHAPTER INTRODUCTION -->
+            <div class="chapter-intro">
+                <h2>Welcome to Vibe Coding</h2>
+                <p><strong>What You'll Learn in This Chapter:</strong></p>
+                <p>In this chapter, you'll level up your Python programming skills by learning how to make your code more intelligent and reusable. You'll discover how <strong>conditionals</strong> allow your programs to make decisions, how <strong>functions</strong> let you write code once and use it many times, and how <strong>vibe coding</strong> with AI can turn your creative ideas into working programs.</p>
+                <p>By the end of this chapter, you'll be able to write programs that respond to different situations, organize your code into reusable functions, understand how complex programs work, and even use AI as your coding partner to bring your own program ideas to life.</p>
+                <p><strong>Real-World Connection:</strong> Every app, game, and website uses these concepts. When you check your grade and see different messages based on your GPA, that's a conditional. When Netflix recommends shows, it's running functions. And more and more developers use AI tools to help them code—just like you will!</p>
+            </div>
+
+            <!-- CHAPTER LEARNING OUTCOMES -->
+            <div class="learning-outcomes">
+                <h3>By the End of This Chapter, You Will Be Able To:</h3>
+                <ul>
+                    <li><strong>LO10.1:</strong> Understand and use if, if-elif-else conditionals to make decisions in code</li>
+                    <li><strong>LO10.2:</strong> Define and call functions to create reusable code blocks</li>
+                    <li><strong>LO10.3:</strong> Combine conditionals and functions to build more complex programs</li>
+                    <li><strong>LO10.4:</strong> Read and understand existing code by deconstructing its components</li>
+                    <li><strong>LO10.5:</strong> Use "vibe coding" with AI to create programs from your own ideas</li>
+                    <li><strong>LO10.6:</strong> Test, modify, and debug programs you create with AI assistance</li>
+                </ul>
+            </div>
+
+            <!-- LESSON 10.1: CONDITIONALS - FROM IF TO IF-ELIF-ELSE -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.1</span>
+                    <div class="lesson-title">Conditionals: Making Decisions in Code</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 12.5%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objective (LO10.1)</h4>
+                        <p>Understand and use if, if-elif-else conditionals to make decisions in your code based on different conditions.</p>
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="content-section">
+                        <h3>What Are Conditionals?</h3>
+                        <p>A <strong>conditional</strong> is a programming structure that allows your code to make decisions. Just like you make different choices based on circumstances ("If it's raining, I'll bring an umbrella. Otherwise, I won't."), your code can do the same thing.</p>
+                        
+                        <p>Conditionals use a simple question: "Is this condition true?" If the answer is yes, the code does one thing. If the answer is no, it does something else (or nothing at all).</p>
+
+                        <div class="callout hint">
+                            <strong>Think of it like a flowchart in your head:</strong> Your program encounters a decision point → asks a yes/no question → follows one path if true, another if false → continues.
+                        </div>
+                    </div>
+
+                    <!-- VIDEO SECTION 1 -->
+                    <div class="content-section">
+                        <h4>Understanding If Statements</h4>
+                        <div class="video-embed">
+                            <h4>📺 If Statements Explained</h4>
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <p><strong>Watch: If Statements</strong></p>
+                                <p>Duration: 4:38 minutes</p>
+                            </div>
+                            <p class="duration">📹 In this video, you'll learn how if statements work and how to write your first conditional.</p>
+                        </div>
+
+                        <p><strong>Key Concepts from the Video:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>An <strong>if statement</strong> checks if a condition is true</li>
+                            <li>If the condition is true, the code inside the if block runs</li>
+                            <li>If the condition is false, the code is skipped</li>
+                            <li>The condition uses <strong>comparison operators</strong> like <code>==</code>, <code>></code>, <code><</code>, <code>!=</code></li>
+                        </ul>
+                    </div>
+
+                    <!-- EXAMPLE 1 -->
+                    <div class="example">
+                        <h4>Example 10.1.1: Simple If Statement</h4>
+                        <div class="example-step" data-step="1">
+                            <strong>The Code:</strong>
+                            <div class="code-block">
+gpa = <span class="number">3.8</span>
+
+<span class="keyword">if</span> gpa >= <span class="number">3.7</span>:
+    <span class="function">print</span>(<span class="string">"Great job! You made the Dean's List!"</span>)
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="2">
+                            <strong>What Happens:</strong>
+                            <p>The program checks: "Is 3.8 >= 3.7?" YES, it is. So the print statement inside the if block runs.</p>
+                            <p><strong>Output:</strong> <code>Great job! You made the Dean's List!</code></p>
+                        </div>
+                    </div>
+
+                    <!-- CONTENT SECTION 2 -->
+                    <div class="content-section">
+                        <h4>Adding Alternatives with If-Elif-Else</h4>
+                        
+                        <div class="video-embed">
+                            <h4>📺 If-Elif-Else Explained</h4>
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <p><strong>Watch: If-Elif-Else</strong></p>
+                                <p>Duration: 4:46 minutes</p>
+                            </div>
+                            <p class="duration">📹 Learn how to create multiple paths in your code with if-elif-else statements.</p>
+                        </div>
+
+                        <p>What if you want to handle multiple possibilities? That's where <strong>if-elif-else</strong> comes in:</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>if:</strong> Check the first condition</li>
+                            <li><strong>elif:</strong> (else if) Check another condition if the first is false</li>
+                            <li><strong>else:</strong> Do this if ALL previous conditions are false</li>
+                        </ul>
+
+                        <div class="callout info">
+                            <strong>Think of it like a vending machine:</strong> If the first button is pressed, do that. Else if a different button is pressed, do something else. Else (if nothing matches), return the money.
+                        </div>
+                    </div>
+
+                    <!-- EXAMPLE 2 -->
+                    <div class="example">
+                        <h4>Example 10.1.2: If-Elif-Else Statement</h4>
+                        <div class="example-step" data-step="1">
+                            <strong>The Code:</strong>
+                            <div class="code-block">
+gpa = <span class="number">3.2</span>
+
+<span class="keyword">if</span> gpa >= <span class="number">3.7</span>:
+    <span class="function">print</span>(<span class="string">"Congratulations! You made the Dean's List!"</span>)
+<span class="keyword">elif</span> gpa >= <span class="number">3.0</span>:
+    <span class="function">print</span>(<span class="string">"You're in good academic standing."</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Consider meeting with an academic advisor."</span>)
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="2">
+                            <strong>What Happens:</strong>
+                            <p>The program checks: "Is 3.2 >= 3.7?" NO. So it checks the elif: "Is 3.2 >= 3.0?" YES, it is!</p>
+                            <p><strong>Output:</strong> <code>You're in good academic standing.</code></p>
+                        </div>
+                        <div class="example-step" data-step="3">
+                            <strong>If We Changed gpa to 2.5:</strong>
+                            <p>"Is 2.5 >= 3.7?" NO. "Is 2.5 >= 3.0?" NO. So we reach the else.</p>
+                            <p><strong>Output:</strong> <code>Consider meeting with an academic advisor.</code></p>
+                        </div>
+                    </div>
+
+                    <!-- WARNING CALLOUT -->
+                    <div class="callout warning">
+                        <strong>Common Mistake:</strong> Students often forget the colon (:) at the end of if, elif, and else lines. Python requires this! Also remember: indentation matters—the code inside the if block must be indented.
+                    </div>
+
+                    <!-- KEY TERMS -->
+                    <div class="content-section">
+                        <h3>Key Terms and Definitions</h3>
+                        <div class="definitions">
+                            <div class="definition-item">
+                                <div class="definition-term">Conditional</div>
+                                <div class="definition-def">A code structure that performs different actions based on whether a condition is true or false.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">If Statement</div>
+                                <div class="definition-def">A conditional that checks if a condition is true. If it is, the code block runs. If not, it's skipped.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Elif (Else If)</div>
+                                <div class="definition-def">Used to check additional conditions if the previous if or elif condition was false.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Else</div>
+                                <div class="definition-def">Executed if all previous if and elif conditions are false. It's your "catch-all" option.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Comparison Operator</div>
+                                <div class="definition-def">Symbols like ==, !=, >, <, >=, <= that compare two values and return true or false.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Formative Assessment 10.1</h3>
+
+                        <div class="question">
+                            <span class="question-type">True/False</span>
+                            <h4>Question 1: Understanding If Statements</h4>
+                            <p>An if statement will always execute the code inside its block, regardless of whether the condition is true or false.</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="true"> True
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="false"> False
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans1')">Show Answer</button>
+                            <div class="answer-box" id="ans1">
+                                <h5>Answer: False</h5>
+                                <p>An if statement only executes its code block if the condition is true. If the condition is false, the code is skipped.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 2: Using If-Elif-Else</h4>
+                            <p>What would be the output of this code if age = 16?</p>
+                            <div class="code-block">
+<span class="keyword">if</span> age >= <span class="number">18</span>:
+    <span class="function">print</span>(<span class="string">"You can vote."</span>)
+<span class="keyword">elif</span> age >= <span class="number">13</span>:
+    <span class="function">print</span>(<span class="string">"You're a teenager."</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"You're under 13."</span>)
+                            </div>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="a"> You can vote.
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> You're a teenager.
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> You're under 13.
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="d"> Nothing (no output)
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans2')">Show Answer</button>
+                            <div class="answer-box" id="ans2">
+                                <h5>Answer: B) You're a teenager.</h5>
+                                <p>Since 16 is not >= 18, the first condition is false. But 16 IS >= 13, so the elif condition is true, and "You're a teenager." is printed.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 3: Writing Conditionals</h4>
+                            <p>Write an if-elif-else statement that checks a variable called <code>score</code> and prints:</p>
+                            <ul style="margin-left: 20px;">
+                                <li>"Excellent!" if score >= 90</li>
+                                <li>"Good job!" if score >= 80</li>
+                                <li>"Keep trying!" if score < 80</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><em>Write your answer in the space below:</em></p>
+                            <textarea style="width: 100%; height: 120px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans3')">Show Answer</button>
+                            <div class="answer-box" id="ans3">
+                                <h5>Sample Answer:</h5>
+                                <div class="code-block">
+<span class="keyword">if</span> score >= <span class="number">90</span>:
+    <span class="function">print</span>(<span class="string">"Excellent!"</span>)
+<span class="keyword">elif</span> score >= <span class="number">80</span>:
+    <span class="function">print</span>(<span class="string">"Good job!"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Keep trying!"</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Lesson 10.2: Functions—Code You Can Reuse</strong></p>
+                        <p>You've learned how to make decisions with conditionals. Now imagine if you could write that academic standing code once and use it over and over. That's the power of functions! In the next lesson, you'll learn how to create and use functions to organize your code and make it more powerful.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10.2: FUNCTIONS -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.2</span>
+                    <div class="lesson-title">Functions: Creating Reusable Code</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 25%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objective (LO10.2)</h4>
+                        <p>Define and call functions to create reusable blocks of code that perform specific tasks.</p>
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="content-section">
+                        <h3>What Are Functions?</h3>
+                        <p>A <strong>function</strong> is a reusable block of code that performs a specific task. Instead of writing the same code multiple times, you write it once as a function and call it whenever you need it.</p>
+
+                        <div class="callout hint">
+                            <strong>Think of a function like a recipe:</strong> You write down the steps once. Then whenever you want to make that dish, you just follow the recipe instead of figuring it out from scratch every time.
+                        </div>
+
+                        <p><strong>Why use functions?</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Reusability:</strong> Write once, use many times</li>
+                            <li><strong>Organization:</strong> Your code is cleaner and easier to understand</li>
+                            <li><strong>Maintenance:</strong> If you need to fix a bug, you fix it in one place</li>
+                            <li><strong>Testing:</strong> Easier to test small pieces of code</li>
+                        </ul>
+                    </div>
+
+                    <!-- VIDEO -->
+                    <div class="content-section">
+                        <h4>Understanding Functions</h4>
+                        <div class="video-embed">
+                            <h4>📺 Functions Explained</h4>
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <p><strong>Watch: Functions</strong></p>
+                                <p>Duration: 4:41 minutes</p>
+                            </div>
+                            <p class="duration">📹 Learn how to define functions, use parameters, and return values.</p>
+                        </div>
+                    </div>
+
+                    <!-- FUNCTION ANATOMY -->
+                    <div class="content-section">
+                        <h3>Parts of a Function</h3>
+                        
+                        <div class="example">
+                            <h4>The Structure of a Function</h4>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">function_name</span>(parameter1, parameter2):
+    <span class="comment"># Function body - the code that runs</span>
+    result = parameter1 + parameter2
+    <span class="keyword">return</span> result
+                            </div>
+                        </div>
+
+                        <p><strong>Breaking it down:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>def:</strong> Keyword that means "define a function"</li>
+                            <li><strong>function_name:</strong> A name you choose for your function (use descriptive names!)</li>
+                            <li><strong>parameters:</strong> Variables that receive values when the function is called (optional)</li>
+                            <li><strong>:</strong> Colon at the end of the definition line</li>
+                            <li><strong>body:</strong> Indented code that runs when the function is called</li>
+                            <li><strong>return:</strong> Sends a value back to the code that called the function (optional)</li>
+                        </ul>
+                    </div>
+
+                    <!-- EXAMPLE 1: SIMPLE FUNCTION -->
+                    <div class="example">
+                        <h4>Example 10.2.1: A Simple Function Without Parameters</h4>
+                        <div class="example-step" data-step="1">
+                            <strong>Define the Function:</strong>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">greet</span>():
+    <span class="function">print</span>(<span class="string">"Hello! Welcome to Python!"</span>)
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="2">
+                            <strong>Call the Function:</strong>
+                            <div class="code-block">
+greet()
+greet()
+greet()
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="3">
+                            <strong>Output:</strong>
+                            <div class="code-block">
+Hello! Welcome to Python!
+Hello! Welcome to Python!
+Hello! Welcome to Python!
+                            </div>
+                            <p>The same message prints three times! We called the function three times, and each time it ran the code inside.</p>
+                        </div>
+                    </div>
+
+                    <!-- EXAMPLE 2: FUNCTION WITH PARAMETERS -->
+                    <div class="example">
+                        <h4>Example 10.2.2: Function With Parameters (Our Academic Standing Function!)</h4>
+                        <div class="example-step" data-step="1">
+                            <strong>Define the Function:</strong>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">academic_standing</span>(student_gpa):
+    <span class="keyword">if</span> student_gpa >= <span class="number">3.7</span>:
+        <span class="keyword">return</span> <span class="string">"Congratulations! Dean's List!"</span>
+    <span class="keyword">elif</span> student_gpa >= <span class="number">3.0</span>:
+        <span class="keyword">return</span> <span class="string">"Good academic standing."</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Meet with an advisor."</span>
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="2">
+                            <strong>Call the Function With Different Values:</strong>
+                            <div class="code-block">
+message1 = <span class="function">academic_standing</span>(<span class="number">3.8</span>)
+<span class="function">print</span>(message1)
+
+message2 = <span class="function">academic_standing</span>(<span class="number">3.2</span>)
+<span class="function">print</span>(message2)
+
+message3 = <span class="function">academic_standing</span>(<span class="number">2.5</span>)
+<span class="function">print</span>(message3)
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="3">
+                            <strong>Output:</strong>
+                            <div class="code-block">
+Congratulations! Dean's List!
+Good academic standing.
+Meet with an advisor.
+                            </div>
+                            <p>Each call to the function returns a different message based on the GPA passed in!</p>
+                        </div>
+                    </div>
+
+                    <!-- CALLOUT -->
+                    <div class="callout warning">
+                        <strong>Remember:</strong> First you <strong>define</strong> a function (write what it does), then you <strong>call</strong> a function (use it). You can define a function once and call it many times!
+                    </div>
+
+                    <!-- KEY TERMS -->
+                    <div class="content-section">
+                        <h3>Key Terms</h3>
+                        <div class="definitions">
+                            <div class="definition-item">
+                                <div class="definition-term">Function</div>
+                                <div class="definition-def">A reusable block of code that performs a specific task. Defined once, called many times.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Parameter</div>
+                                <div class="definition-def">A variable listed in the function definition that receives a value when the function is called.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Argument</div>
+                                <div class="definition-def">The actual value passed to a function when you call it. If parameters are the placeholder, arguments are the actual values.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Return Value</div>
+                                <div class="definition-def">The value that a function sends back to the code that called it using the return keyword.</div>
+                            </div>
+                            <div class="definition-item">
+                                <div class="definition-term">Function Call</div>
+                                <div class="definition-def">When you use a function by typing its name followed by parentheses, like function_name()</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Formative Assessment 10.2</h3>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 1: Understanding Parameters vs Arguments</h4>
+                            <p>In the function definition below, what is <code>name</code>?</p>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">greet</span>(name):
+    <span class="function">print</span>(<span class="string">"Hello, "</span> + name)
+                            </div>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="a"> A parameter
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="b"> An argument
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="c"> A function
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="d"> A return value
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_2_1')">Show Answer</button>
+                            <div class="answer-box" id="ans10_2_1">
+                                <h5>Answer: A) A parameter</h5>
+                                <p>Parameters are the variables in the function definition. When you call the function with <code>greet("Alice")</code>, "Alice" would be the argument.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">True/False</span>
+                            <h4>Question 2: Function Return Values</h4>
+                            <p>A function must always use the return keyword.</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="true"> True
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="false"> False
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_2_2')">Show Answer</button>
+                            <div class="answer-box" id="ans10_2_2">
+                                <h5>Answer: False</h5>
+                                <p>Functions don't need to return a value. Some functions (like one that just prints something) can run code without returning anything. The return keyword is optional.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 3: Function Calls</h4>
+                            <p>What will be output by this code?</p>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">double</span>(number):
+    <span class="keyword">return</span> number * <span class="number">2</span>
+
+result = <span class="function">double</span>(<span class="number">5</span>)
+<span class="function">print</span>(result)
+                            </div>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q3" value="a"> 5
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="b"> 10
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="c"> number * 2
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="d"> Nothing (no output)
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_2_3')">Show Answer</button>
+                            <div class="answer-box" id="ans10_2_3">
+                                <h5>Answer: B) 10</h5>
+                                <p>The function doubles 5 (5 * 2 = 10) and returns 10. This value is stored in result, which is then printed.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Lesson 10.3: Combining Conditionals and Functions</strong></p>
+                        <p>Now you've learned conditionals and functions separately. But they're most powerful when used together! In the next lesson, you'll create complex programs by combining what you've learned. You'll also learn how to read and understand code that other people (or AI) have written.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10.3: COMBINING CONDITIONALS AND FUNCTIONS -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.3</span>
+                    <div class="lesson-title">Combining Conditionals and Functions</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 37.5%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objective (LO10.3)</h4>
+                        <p>Combine conditionals and functions to create more powerful and intelligent programs.</p>
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="content-section">
+                        <h3>The Power of Combining Concepts</h3>
+                        <p>Now that you understand both conditionals and functions, you can combine them to create programs that are both intelligent and reusable. This is where programming gets really interesting!</p>
+
+                        <p>When you put conditionals inside functions, your functions can:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>Make intelligent decisions based on the input they receive</li>
+                            <li>Return different values depending on conditions</li>
+                            <li>Handle multiple scenarios with clean, organized code</li>
+                        </ul>
+                    </div>
+
+                    <!-- COMPLETE EXAMPLE -->
+                    <div class="example">
+                        <h4>Example 10.3.1: Building a Personal Profile Program</h4>
+                        <div class="example-step" data-step="1">
+                            <strong>Setup: User Variables</strong>
+                            <div class="code-block">
+<span class="comment"># User data</span>
+name = <span class="string">"Alex"</span>
+age = <span class="number">20</span>
+gpa = <span class="number">3.5</span>
+major = <span class="string">"Computer Science"</span>
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="2">
+                            <strong>Define a Function With Conditionals:</strong>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">get_academic_standing</span>(student_gpa):
+    <span class="keyword">if</span> student_gpa >= <span class="number">3.7</span>:
+        <span class="keyword">return</span> <span class="string">"Dean's List"</span>
+    <span class="keyword">elif</span> student_gpa >= <span class="number">3.0</span>:
+        <span class="keyword">return</span> <span class="string">"Good Standing"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Needs Improvement"</span>
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="3">
+                            <strong>Use the Function to Display Profile:</strong>
+                            <div class="code-block">
+standing = <span class="function">get_academic_standing</span>(gpa)
+
+<span class="function">print</span>(<span class="string">"=== STUDENT PROFILE ==="</span>)
+<span class="function">print</span>(<span class="string">"Name: "</span> + name)
+<span class="function">print</span>(<span class="string">"Age: "</span> + <span class="function">str</span>(age))
+<span class="function">print</span>(<span class="string">"Major: "</span> + major)
+<span class="function">print</span>(<span class="string">"GPA: "</span> + <span class="function">str</span>(gpa))
+<span class="function">print</span>(<span class="string">"Standing: "</span> + standing)
+                            </div>
+                        </div>
+                        <div class="example-step" data-step="4">
+                            <strong>Output:</strong>
+                            <div class="code-block">
+=== STUDENT PROFILE ===
+Name: Alex
+Age: 20
+Major: Computer Science
+GPA: 3.5
+Standing: Good Standing
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="callout hint">
+                        <strong>Pro Tip:</strong> By putting your academic standing logic in a function, if you want to check standing for multiple students, you just call the function multiple times with different GPAs. Much cleaner than writing the if-elif-else over and over!
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Formative Assessment 10.3</h3>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 1: Design a Function</h4>
+                            <p>Design a function called <code>get_letter_grade</code> that takes a numeric score (0-100) and returns a letter grade:</p>
+                            <ul style="margin-left: 20px;">
+                                <li>A: 90-100</li>
+                                <li>B: 80-89</li>
+                                <li>C: 70-79</li>
+                                <li>F: Below 70</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><em>Write your answer below:</em></p>
+                            <textarea style="width: 100%; height: 140px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_3_1')">Show Answer</button>
+                            <div class="answer-box" id="ans10_3_1">
+                                <h5>Sample Answer:</h5>
+                                <div class="code-block">
+<span class="keyword">def</span> <span class="function">get_letter_grade</span>(score):
+    <span class="keyword">if</span> score >= <span class="number">90</span>:
+        <span class="keyword">return</span> <span class="string">"A"</span>
+    <span class="keyword">elif</span> score >= <span class="number">80</span>:
+        <span class="keyword">return</span> <span class="string">"B"</span>
+    <span class="keyword">elif</span> score >= <span class="number">70</span>:
+        <span class="keyword">return</span> <span class="string">"C"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"F"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 2: Reading Code</h4>
+                            <p>Look at this code. What will print if you call <code>check_membership(15)</code>?</p>
+                            <div class="code-block">
+<span class="keyword">def</span> <span class="function">check_membership</span>(age):
+    <span class="keyword">if</span> age >= <span class="number">18</span>:
+        <span class="keyword">return</span> <span class="string">"Adult membership"</span>
+    <span class="keyword">elif</span> age >= <span class="number">13</span>:
+        <span class="keyword">return</span> <span class="string">"Teen membership"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Child membership"</span>
+
+<span class="function">print</span>(<span class="function">check_membership</span>(<span class="number">15</span>))
+                            </div>
+                            <div class="options">
+                                <label
+<label class="option">
+                                    <input type="radio" name="q2" value="a"> Adult membership
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> Teen membership
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> Child membership
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="d"> Nothing
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_3_2')">Show Answer</button>
+                            <div class="answer-box" id="ans10_3_2">
+                                <h5>Answer: B) Teen membership</h5>
+                                <p>Since 15 is not >= 18, the first condition fails. But 15 IS >= 13, so the elif is true and "Teen membership" is returned and printed.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">True/False</span>
+                            <h4>Question 3: Understanding Program Flow</h4>
+                            <p>In a function with if-elif-else, if the first condition is true, Python will also check the elif and else conditions.</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q3" value="true"> True
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q3" value="false"> False
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_3_3')">Show Answer</button>
+                            <div class="answer-box" id="ans10_3_3">
+                                <h5>Answer: False</h5>
+                                <p>Once one condition is true, Python executes that block and skips all remaining elif and else blocks. This is called "short-circuit" evaluation.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Lesson 10.4: Deconstructing Code—Reading What Others Have Written</strong></p>
+                        <p>Before you create programs with AI, you need to understand how to read and analyze code. In the next lesson, you'll take apart a complete program and identify all the parts you've learned: variables, lists, functions, conditionals, and loops. This skill is crucial for understanding and modifying AI-generated code!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10.4: PROGRAM DECONSTRUCTION -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.4</span>
+                    <div class="lesson-title">Reading and Understanding Existing Code</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 50%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objective (LO10.4)</h4>
+                        <p>Read, analyze, and understand complex code by identifying its key components and how they work together.</p>
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="content-section">
+                        <h3>Why Learn to Read Code?</h3>
+                        <p>A crucial skill in programming is being able to read and understand code that you didn't write. This becomes especially important when:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>You use AI to generate code for you</li>
+                            <li>You work on a team and need to understand others' code</li>
+                            <li>You debug your own programs by tracing through what's happening</li>
+                            <li>You want to modify or improve existing code</li>
+                        </ul>
+
+                        <div class="callout info">
+                            <strong>Think of it like reading a foreign language:</strong> You can't speak fluent Spanish yet, but by learning key words and grammar, you can start reading Spanish texts. Same with code!
+                        </div>
+                    </div>
+
+                    <!-- DECONSTRUCTION EXAMPLE -->
+                    <div class="content-section">
+                        <h3>Program Deconstruction: A Complete Example</h3>
+                        <p>Let's analyze this complete program step by step:</p>
+
+                        <div class="example">
+                            <h4>A Temperature Comfort Analyzer Program</h4>
+                            <div class="code-block">
+<span class="comment"># List of temperatures to analyze</span>
+temperatures = [<span class="number">32</span>, <span class="number">72</span>, <span class="number">55</span>, <span class="number">95</span>]
+city = <span class="string">"Providence"</span>
+
+<span class="comment"># Function to determine comfort level</span>
+<span class="keyword">def</span> <span class="function">get_comfort_level</span>(temp):
+    <span class="keyword">if</span> temp >= <span class="number">80</span>:
+        <span class="keyword">return</span> <span class="string">"hot"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">60</span>:
+        <span class="keyword">return</span> <span class="string">"comfortable"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">40</span>:
+        <span class="keyword">return</span> <span class="string">"cool"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"cold"</span>
+
+<span class="comment"># Main program</span>
+<span class="function">print</span>(<span class="string">"Weather Analysis for "</span> + city)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">30</span>)
+
+<span class="keyword">for</span> temp <span class="keyword">in</span> temperatures:
+    comfort = <span class="function">get_comfort_level</span>(temp)
+    <span class="function">print</span>(<span class="string">f"</span>{temp}°F is {comfort}<span class="string">"</span>)
+                            </div>
+                        </div>
+
+                        <p><strong>Output of this program:</strong></p>
+                        <div class="code-block">
+Weather Analysis for Providence
+==============================
+32°F is cold
+72°F is comfortable
+55°F is cool
+95°F is hot
+                        </div>
+                    </div>
+
+                    <!-- BREAKDOWN SECTION -->
+                    <div class="content-section">
+                        <h3>Breaking Down the Program</h3>
+
+                        <div class="definitions" style="margin-bottom: 20px;">
+                            <div class="definition-item">
+                                <div class="definition-term">📍 Line 1-2: Variables</div>
+                                <div class="definition-def">
+                                    <p><code>temperatures = [32, 72, 55, 95]</code> - A list containing 4 temperature values</p>
+                                    <p><code>city = "Providence"</code> - A string variable storing the city name</p>
+                                    <p><strong>Purpose:</strong> Store the data we'll analyze</p>
+                                </div>
+                            </div>
+
+                            <div class="definition-item">
+                                <div class="definition-term">🔧 Lines 4-14: Function Definition</div>
+                                <div class="definition-def">
+                                    <p><code>def get_comfort_level(temp):</code> - Defines a function that takes one parameter: temp</p>
+                                    <p><strong>What it does:</strong> Uses if-elif-else to return a comfort level based on the temperature</p>
+                                    <p><strong>Purpose:</strong> Reusable logic to categorize any temperature</p>
+                                </div>
+                            </div>
+
+                            <div class="definition-item">
+                                <div class="definition-term">🔄 Lines 17-22: Loop</div>
+                                <div class="definition-def">
+                                    <p><code>for temp in temperatures:</code> - Loops through each temperature in the list</p>
+                                    <p><code>comfort = get_comfort_level(temp)</code> - Calls the function for each temperature</p>
+                                    <p><strong>Purpose:</strong> Process every temperature in the list and print results</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HOW THEY WORK TOGETHER -->
+                    <div class="content-section">
+                        <h3>How All the Pieces Work Together</h3>
+                        <ol style="margin-left: 20px;">
+                            <li>The program starts with data (temperatures list and city name)</li>
+                            <li>It defines a function that knows how to categorize temperatures</li>
+                            <li>It loops through each temperature in the list</li>
+                            <li>For each temperature, it calls the function to get a comfort level</li>
+                            <li>It prints the result in a nicely formatted way</li>
+                        </ol>
+
+                        <div class="callout hint">
+                            <strong>Reading strategy:</strong> Start at the top and trace through what happens. When you see a function call, jump to the function definition to see what it does, then come back to where it was called.
+                        </div>
+                    </div>
+
+                    <!-- MODIFICATION PRACTICE -->
+                    <div class="content-section">
+                        <h3>Understanding Through Modification</h3>
+                        <p>One of the best ways to understand code is to modify it and predict what will happen. Consider:</p>
+                        
+                        <p><strong>Change 1: What if we changed the city to "Miami"?</strong></p>
+                        <p>The output would show "Weather Analysis for Miami" instead. All the temperature analysis would be identical.</p>
+
+                        <p><strong>Change 2: What if we added a temperature of 50°F to the list?</strong></p>
+                        <p>We'd get a new line in the output: "50°F is cool" because the function would classify 50°F as cool (>= 40 but < 60).</p>
+
+                        <p><strong>Change 3: What if we added a new comfort level called "freezing" for temperatures below 32°F?</strong></p>
+                        <p>We'd need to modify the function's if-elif-else statement to add another condition at the beginning or modify the final else.</p>
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Formative Assessment 10.4</h3>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 1: Identifying Program Components</h4>
+                            <p>Looking at the temperature program above, answer these questions:</p>
+                            <p><strong>a)</strong> What data type is the "temperatures" variable?</p>
+                            <p><strong>b)</strong> What is the function name?</p>
+                            <p><strong>c)</strong> What parameter does the function take?</p>
+                            <p><strong>d)</strong> How many times does the loop execute?</p>
+                            <textarea style="width: 100%; height: 120px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_4_1')">Show Answer</button>
+                            <div class="answer-box" id="ans10_4_1">
+                                <h5>Answers:</h5>
+                                <p><strong>a)</strong> List</p>
+                                <p><strong>b)</strong> get_comfort_level</p>
+                                <p><strong>c)</strong> temp (temperature)</p>
+                                <p><strong>d)</strong> 4 times (once for each temperature in the list)</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 2: Predicting Output</h4>
+                            <p>If we changed line 2 to: <code>temperatures = [75, 85]</code></p>
+                            <p>What would the program output?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="a"> Weather Analysis for Providence<br/>==============================<br/>75°F is comfortable<br/>85°F is hot
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> Weather Analysis for Providence<br/>==============================<br/>75°F is hot<br/>85°F is hot
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> 75°F is comfortable<br/>85°F is hot
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="d"> An error would occur
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_4_2')">Show Answer</button>
+                            <div class="answer-box" id="ans10_4_2">
+                                <h5>Answer: A)</h5>
+                                <p>75°F is >= 60 but < 80, so it's "comfortable". 85°F is >= 80, so it's "hot".</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 3: Code Modification</h4>
+                            <p>How would you modify the program to add a "freezing" category for temperatures below 32°F?</p>
+                            <p><em>Write the code for just the function modification:</em></p>
+                            <textarea style="width: 100%; height: 140px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_4_3')">Show Answer</button>
+                            <div class="answer-box" id="ans10_4_3">
+                                <h5>Sample Answer:</h5>
+                                <div class="code-block">
+<span class="keyword">def</span> <span class="function">get_comfort_level</span>(temp):
+    <span class="keyword">if</span> temp < <span class="number">32</span>:
+        <span class="keyword">return</span> <span class="string">"freezing"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">80</span>:
+        <span class="keyword">return</span> <span class="string">"hot"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">60</span>:
+        <span class="keyword">return</span> <span class="string">"comfortable"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">40</span>:
+        <span class="keyword">return</span> <span class="string">"cool"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"cold"</span>
+                                </div>
+                                <p>Note: The freezing condition should be checked first because it's the most specific.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Lesson 10.5: Introduction to Vibe Coding</strong></p>
+                        <p>You've learned to read and understand code. Now it's time to create your own! In the next lesson, you'll learn "vibe coding"—a powerful technique where you describe what you want your program to do, and AI helps you write the code. This is your bridge from learning programming to actually building programs with your own creative ideas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10.5: INTRODUCTION TO VIBE CODING -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.5</span>
+                    <div class="lesson-title">Vibe Coding: Your Ideas, AI's Hands</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 62.5%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objective (LO10.5)</h4>
+                        <p>Understand and use "vibe coding"—describing what you want in plain English so AI can help you write the code.</p>
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="content-section">
+                        <h3>What Is Vibe Coding?</h3>
+                        <p><strong>Vibe Coding</strong> is when you describe what you want your program to do in plain English (or whatever language you prefer), and an AI assistant helps you write the code. It's like having a coding partner who can translate your ideas into working Python!</p>
+
+                        <div class="callout info">
+                            <strong>Real-world example:</strong> Professional developers use AI tools like GitHub Copilot, ChatGPT, and Claude every single day to help them code. This is a real skill you're learning right now!
+                        </div>
+
+                        <p><strong>Why does this work?</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>AI models understand both human language and programming language</li>
+                            <li>You don't need to know all the syntax (exact rules) to get started</li>
+                            <li>You can focus on the logic and ideas, not memorizing syntax</li>
+                            <li>It makes programming much more accessible</li>
+                        </ul>
+                    </div>
+
+                    <!-- VIDEO -->
+                    <div class="content-section">
+                        <h4>See Vibe Coding in Action</h4>
+                        <div class="video-embed">
+                            <h4>📺 Vibe Coding Demo</h4>
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                <p><strong>Watch: Vibe Coding Demo</strong></p>
+                                <p>Duration: Varies (check course materials)</p>
+                            </div>
+                            <p class="duration">📹 See a real example of vibe coding in action using Google Colab and the Gemini AI assistant.</p>
+                        </div>
+                    </div>
+
+                    <!-- HOW TO VIBE CODE -->
+                    <div class="content-section">
+                        <h3>The Vibe Coding Process</h3>
+
+                        <div class="example">
+                            <h4>Example 10.5.1: Vibe Coding a Quiz Generator</h4>
+                            <div class="example-step" data-step="1">
+                                <strong>Step 1: Have an Idea</strong>
+                                <p>You want to create a quiz program that asks random questions and keeps score.</p>
+                            </div>
+
+                            <div class="example-step" data-step="2">
+                                <strong>Step 2: Write a Clear Prompt</strong>
+                                <p>You write something like:</p>
+                                <div class="code-block">
+<span class="string">"Create a simple Python program that:
+- Has a list of 5 quiz questions and answers
+- Randomly picks one question to ask
+- Checks if the user's answer is correct
+- Keeps track of the score
+- Uses functions to organize the code"</span>
+                                </div>
+                            </div>
+
+                            <div class="example-step" data-step="3">
+                                <strong>Step 3: AI Generates Code</strong>
+                                <p>The AI assistant reads your prompt and generates working Python code that does what you asked.</p>
+                            </div>
+
+                            <div class="example-step" data-step="4">
+                                <strong>Step 4: Run and Test</strong>
+                                <p>You run the code in Google Colab to see if it works. If something's not quite right, you tell the AI what to fix.</p>
+                            </div>
+
+                            <div class="example-step" data-step="5">
+                                <strong>Step 5: Understand and Modify</strong>
+                                <p>You read through the code to understand how it works, then make modifications to make it your own.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BEST PRACTICES -->
+                    <div class="content-section">
+                        <h3>Writing Good Vibe Coding Prompts</h3>
+
+                        <div class="callout hint">
+                            <strong>Clear prompts = Better code!</strong> The better you describe what you want, the better the AI can help you.
+                        </div>
+
+                        <p><strong>✅ DO THIS:</strong></p>
+                        <ul style="margin-left: 20px; color: #27ae60;">
+                            <li>Be specific about what you want</li>
+                            <li>List features as bullet points</li>
+                            <li>Mention the programming concepts to use (functions, loops, conditionals, etc.)</li>
+                            <li>Mention size constraints ("under 40 lines" or "simple program")</li>
+                            <li>Ask for comments in the code</li>
+                        </ul>
+
+                        <p><strong>❌ DON'T DO THIS:</strong></p>
+                        <ul style="margin-left: 20px; color: #c0392b;">
+                            <li>Be vague ("create a program")</li>
+                            <li>Ask for something too complex</li>
+                            <li>Forget to mention what programming concepts to use</li>
+                            <li>Copy-paste massive requirements without organizing them</li>
+                        </ul>
+                    </div>
+
+                    <!-- PROMPT TEMPLATE -->
+                    <div class="content-section">
+                        <h3>Your Vibe Coding Prompt Template</h3>
+                        <div class="example">
+                            <h4>Template for Effective Prompts</h4>
+                            <div class="code-block">
+<span class="string">Create a simple Python program that [MAIN PURPOSE].
+
+The program should:
+- [Feature 1]
+- [Feature 2]
+- [Feature 3]
+
+Use only these programming concepts: variables, loops, lists, 
+conditionals, and functions.
+
+Keep the code under 40 lines and add comments explaining 
+the code.</span>
+                            </div>
+                        </div>
+
+                        <div class="callout warning">
+                            <strong>Remember:</strong> The more specific you are, the better the results. Don't be shy—tell the AI exactly what you want!
+                        </div>
+                    </div>
+
+                    <!-- IMPORTANT SKILLS -->
+                    <div class="content-section">
+                        <h3>The Skills You Need for Vibe Coding</h3>
+                        <p>While AI helps you write code, you still need to:</p>
+                        <ul style="margin-left: 20px;">
+                            <li><strong>Understand the code:</strong> Read what AI generates and make sure it makes sense</li>
+                            <li><strong>Test it:</strong> Run the code and check if it works as expected</li>
+                            <li><strong>Debug it:</strong> If something's wrong, tell the AI what the problem is</li>
+                            <li><strong>Modify it:</strong> Make changes to personalize the program and make it your own</li>
+                            <li><strong>Explain it:</strong> Be able to talk about what the code does and why</li>
+                        </ul>
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Formative Assessment 10.5</h3>
+
+                        <div class="question">
+                            <span class="question-type">True/False</span>
+                            <h4>Question 1: Understanding Vibe Coding</h4>
+                            <p>When you use vibe coding with AI, you don't need to understand the code that gets generated—you can just run it.</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q1" value="true"> True
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q1" value="false"> False
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_5_1')">Show Answer</button>
+                            <div class="answer-box" id="ans10_5_1">
+                                <h5>Answer: False</h5>
+                                <p>This is a critical misconception! You absolutely need to understand the code. If you don't understand it, you can't debug it, modify it, or learn from it. Understanding is part of responsible AI use in programming.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 2: Writing Vibe Coding Prompts</h4>
+                            <p>Which of these is the BEST prompt for vibe coding?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="q2" value="a"> "Make me a program"
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="b"> "Create a simple Python program that generates random compliments. The program should: store 5 compliments in a list, randomly pick one, print it, ask if the user wants another, repeat if yes. Use functions and keep it under 30 lines with comments."
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="c"> "I need code for something with lists and loops"
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="q2" value="d"> "Write me the best program ever"
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_5_2')">Show Answer</button>
+                            <div class="answer-box" id="ans10_5_2">
+                                <h5>Answer: B)</h5>
+                                <p>Option B is detailed, specific, includes features, mentions programming concepts, sets size constraints, and asks for comments. The AI will have a much better chance of creating exactly what you want!</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 3: Vibe Coding Workflow</h4>
+                            <p>List the 5 steps of the vibe coding process in order:</p>
+                            <textarea style="width: 100%; height: 140px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ans10_5_3')">Show Answer</button>
+                            <div class="answer-box" id="ans10_5_3">
+                                <h5>The 5 Steps:</h5>
+                                <ol style="margin-left: 20px;">
+                                    <li>Have an idea</li>
+                                    <li>Write a clear prompt</li>
+                                    <li>AI generates code</li>
+                                    <li>Run and test the code</li>
+                                    <li>Understand and modify</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Lesson 10.6: Guided Vibe Coding Activity</strong></p>
+                        <p>Now that you understand the concept, it's time to actually DO it! In the next lesson, you'll work through hands-on guided activities where you'll use vibe coding to create your own programs. Get ready to bring your ideas to life!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LESSON 10.6: VIBE CODING GUIDED ACTIVITIES -->
+            <div class="lesson">
+                <div class="lesson-header">
+                    <span class="lesson-number">Lesson 10.6</span>
+                    <div class="lesson-title">Guided Vibe Coding Activities</div>
+                </div>
+
+                <div class="lesson-body">
+                    <!-- PROGRESS BAR -->
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+
+                    <!-- LEARNING OBJECTIVE -->
+                    <div class="objective">
+                        <h4>Learning Objectives (LO10.5 & LO10.6)</h4>
+                        <p>Use "vibe coding" with AI to create programs, test them, modify them, and understand how they work.</p>
+                    </div>
+
+                    <!-- INTRODUCTION -->
+                    <div class="guided-activity-intro">
+                        <h3>Part 1: Your Personal Profile Program (Enhanced)</h3>
+                        <p><strong>Objective:</strong> Build upon your previous Python skills by adding conditionals and functions to enhance your personal profile program.</p>
+                        <p>In this first guided activity, you'll improve your existing program using the concepts you just learned, then compare your approach to how AI might generate similar code.</p>
+                    </div>
+
+                    <!-- PART 1 ACTIVITIES -->
+                    <div class="activity-steps">
+                        <div class="activity-step" data-number="1">
+<h4>Add Conditionals to Your Profile</h4>
+                            <p><strong>What to do:</strong></p>
+                            <ol style="margin-left: 20px;">
+                                <li>Open your "Profile v2" program from your previous assignments</li>
+                                <li>Add a section that displays your academic standing based on your GPA using if-elif-else</li>
+                                <li>Use these criteria:
+                                    <ul style="margin-left: 20px; margin-top: 10px;">
+                                        <li>GPA >= 3.7: "Congratulations! You made the Dean's List!"</li>
+                                        <li>GPA >= 3.0: "You're in good academic standing."</li>
+                                        <li>GPA < 3.0: "Consider meeting with an academic advisor."</li>
+                                    </ul>
+                                </li>
+                                <li>Test your program by changing the GPA values to 3.8, 3.2, and 2.5</li>
+                                <li>Take a screenshot showing your working code and the output</li>
+                            </ol>
+                            <p style="margin-top: 15px;"><strong>💾 Save this screenshot for your assignment submission.</strong></p>
+                        </div>
+
+                        <div class="activity-step" data-number="2">
+                            <h4>Create a Function for Academic Standing</h4>
+                            <p><strong>What to do:</strong></p>
+                            <ol style="margin-left: 20px;">
+                                <li>With your updated profile program still open, create a function called <code>academic_standing(student_gpa)</code></li>
+                                <li>Move your if-elif-else logic into this function</li>
+                                <li>Have the function RETURN the appropriate message (not print it)</li>
+                                <li>Replace your old if-elif-else section with a call to this function</li>
+                                <li>Test it with different GPA values to make sure it still works correctly</li>
+                                <li>Copy the URL of your working program</li>
+                            </ol>
+                            <p style="margin-top: 15px;"><strong>📎 You'll paste this link in your assignment document.</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- PART 2 HEADING -->
+                    <div class="guided-activity-intro">
+                        <h3>Part 2: Program Deconstruction Analysis</h3>
+                        <p><strong>Objective:</strong> Learn to read and analyze complex code by breaking it down into its component parts.</p>
+                        <p>This activity teaches you a critical skill: understanding code that someone else wrote (or that AI generated). This skill is essential for vibe coding success!</p>
+                    </div>
+
+                    <!-- PART 2 ACTIVITIES -->
+                    <div class="activity-steps">
+                        <div class="activity-step" data-number="3">
+                            <h4>Analyze a Weather Program</h4>
+                            <p><strong>Study this program:</strong></p>
+                            <div class="code-block">
+<span class="comment"># Temperature tracking program</span>
+temperatures = [<span class="number">32</span>, <span class="number">45</span>, <span class="number">68</span>, <span class="number">78</span>, <span class="number">92</span>]
+days = [<span class="string">"Monday"</span>, <span class="string">"Tuesday"</span>, <span class="string">"Wednesday"</span>, <span class="string">"Thursday"</span>, <span class="string">"Friday"</span>]
+
+<span class="keyword">def</span> <span class="function">describe_weather</span>(temp):
+    <span class="keyword">if</span> temp >= <span class="number">85</span>:
+        <span class="keyword">return</span> <span class="string">"hot"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">70</span>:
+        <span class="keyword">return</span> <span class="string">"warm"</span>
+    <span class="keyword">elif</span> temp >= <span class="number">50</span>:
+        <span class="keyword">return</span> <span class="string">"mild"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"cold"</span>
+
+<span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(<span class="function">len</span>(temperatures)):
+    temp = temperatures[i]
+    day = days[i]
+    weather = <span class="function">describe_weather</span>(temp)
+    <span class="function">print</span>(<span class="string">f"</span>{day}: {temp}°F - {weather}<span class="string">"</span>)
+                            </div>
+
+                            <p><strong>Answer these questions in your assignment document:</strong></p>
+                            <ol style="margin-left: 20px;">
+                                <li><strong>Identify where a list is used.</strong> (There are two lists—name them both)</li>
+                                <li><strong>Where is the function defined?</strong> (Line numbers)</li>
+                                <li><strong>What is the function name?</strong></li>
+                                <li><strong>What parameter does the function take?</strong></li>
+                                <li><strong>What value does the function return? Is it an integer or a string?</strong></li>
+                                <li><strong>Where is the conditional statement used?</strong> (Line numbers)</li>
+                                <li><strong>Describe what the conditional statement does.</strong></li>
+                                <li><strong>Where is a loop used?</strong> (Line numbers)</li>
+                                <li><strong>Describe what the loop does.</strong></li>
+                            </ol>
+                        </div>
+
+                        <div class="activity-step" data-number="4">
+                            <h4>Predict Program Changes</h4>
+                            <p><strong>For each scenario, predict what would happen to the output. Be specific!</strong></p>
+
+                            <p><strong>Scenario 1:</strong> What would happen if you changed the city name to your own hometown?</p>
+                            <p style="margin-left: 20px;"><em>Be specific about what would change in the console output.</em></p>
+
+                            <p style="margin-top: 15px;"><strong>Scenario 2:</strong> What if you added a new temperature, 55°F, to the list?</p>
+                            <p style="margin-left: 20px;"><em>Explain exactly what the console would display for this new temperature.</em></p>
+
+                            <p style="margin-top: 15px;"><strong>Scenario 3:</strong> How would you add a new comfort level called "freezing" for temperatures below 32°F?</p>
+                            <p style="margin-left: 20px;"><em>Explain in your own words (you don't need to write code) how you would modify the program.</em></p>
+                        </div>
+                    </div>
+
+                    <!-- PART 3 HEADING -->
+                    <div class="guided-activity-intro">
+                        <h3>Part 3: Vibe Coding Your Own Program!</h3>
+                        <p><strong>Objective:</strong> Create a simple program using vibe coding with AI. This is where you bring your own ideas to life!</strong></p>
+                        <p>You'll use Google Colab and Gemini AI to write code based on YOUR idea. You'll learn to prompt AI effectively, understand the generated code, test it, modify it, and reflect on the process.</p>
+                    </div>
+
+                    <!-- PART 3 ACTIVITIES -->
+                    <div class="activity-steps">
+                        <div class="activity-step" data-number="5">
+                            <h4>Brainstorm Your Program Idea</h4>
+                            <p><strong>Think of a simple program idea that interests YOU.</strong></p>
+
+                            <p><strong>Constraints to keep in mind:</strong></p>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 15px 0;">
+                                <div style="background: #e8f5e9; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #27ae60; margin-bottom: 10px;">✅ KEEP THESE:</h5>
+                                    <ul style="margin-left: 15px; font-size: 0.95em;">
+                                        <li>3-5 variables max</li>
+                                        <li>1-2 loops (for or while)</li>
+                                        <li>1-2 lists</li>
+                                        <li>2-4 conditionals</li>
+                                        <li>1-2 functions</li>
+                                        <li>20-40 lines of code</li>
+                                        <li>Runs in under 1 minute</li>
+                                    </ul>
+                                </div>
+                                <div style="background: #fff5f5; padding: 15px; border-radius: 5px;">
+                                    <h5 style="color: #c0392b; margin-bottom: 10px;">❌ AVOID THESE:</h5>
+                                    <ul style="margin-left: 15px; font-size: 0.95em;">
+                                        <li>Reading/writing files</li>
+                                        <li>External libraries (except random)</li>
+                                        <li>Complex math/algorithms</li>
+                                        <li>Functions calling each other</li>
+                                        <li>Nested loops</li>
+                                        <li>Complex data structures</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <p><strong>Example Ideas:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li><strong>Study Buddy Quiz:</strong> Creates random quizzes from a list of questions</li>
+                                <li><strong>Daily Affirmation Generator:</strong> Randomly displays positive messages</li>
+                                <li><strong>Recipe Scaler:</strong> Adjusts ingredient amounts based on servings</li>
+                                <li><strong>Word Scrambler Game:</strong> Scrambles words and lets you guess</li>
+                                <li><strong>Playlist Randomizer:</strong> Shuffles and displays your favorite songs</li>
+                                <li><strong>Recommendation Engine:</strong> Suggests activities based on mood and time available</li>
+                                <li><strong>Grade Calculator:</strong> Averages test scores and determines overall grade</li>
+                            </ul>
+
+                            <p style="margin-top: 20px;"><strong>Choose your idea and write it down for the next step.</strong></p>
+                        </div>
+
+                        <div class="activity-step" data-number="6">
+                            <h4>Write Your Vibe Coding Prompt</h4>
+                            <p><strong>Using the template below, write a clear prompt describing your program:</strong></p>
+
+                            <div class="code-block" style="margin: 20px 0;">
+<span class="string">Create a simple Python program that [YOUR MAIN PURPOSE].
+
+The program should:
+- [Feature 1]
+- [Feature 2]
+- [Feature 3]
+
+Use only these programming concepts: variables, loops, lists, 
+conditionals, and functions.
+
+Keep the code under 40 lines and add comments explaining 
+the code.</span>
+                            </div>
+
+                            <p><strong>Fill in your prompt:</strong></p>
+                            <textarea style="width: 100%; height: 180px; padding: 10px; font-family: 'Courier New', monospace; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px; resize: vertical;"></textarea>
+
+                            <p style="margin-top: 15px;"><strong>💡 Tips for better prompts:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li>Be as specific as possible</li>
+                                <li>Break features into bullet points</li>
+                                <li>Mention the size constraint (under 40 lines)</li>
+                                <li>Ask for comments in the code</li>
+                                <li>List the programming concepts to use</li>
+                            </ul>
+                        </div>
+
+                        <div class="activity-step" data-number="7">
+                            <h4>Generate and Test Your Code</h4>
+                            <p><strong>What to do:</strong></p>
+                            <ol style="margin-left: 20px;">
+                                <li>Open <strong>Google Colab</strong> (colab.research.google.com)</li>
+                                <li>Click "New Notebook"</li>
+                                <li>Rename your notebook to: <code>Lastname_VibeCoding</code></li>
+                                <li>Click the <strong>Gemini toggle button</strong> at the bottom of the screen to open the AI assistant</li>
+                                <li>Copy your prompt from the previous step and paste it into the Gemini chat</li>
+                                <li>Read the generated code carefully. Does it match what you asked for?</li>
+                                <li>Click "Accept & Run" to execute the code</li>
+                                <li>Test the program with different inputs to make sure it works correctly</li>
+                                <li>If something doesn't work, tell the AI specifically what's wrong (e.g., "The loop runs forever" or "The function doesn't return the right value")</li>
+                            </ol>
+
+                            <div class="callout warning">
+                                <strong>Important:</strong> Don't just run code without reading it! You need to understand what it does. If something looks wrong, ask the AI to fix it or explain it to you.
+                            </div>
+                        </div>
+
+                        <div class="activity-step" data-number="8">
+                            <h4>Understand and Modify Your Code</h4>
+                            <p><strong>What to do:</strong></p>
+                            <ol style="margin-left: 20px;">
+                                <li><strong>Read through the entire code:</strong> Can you identify the variables, loops, lists, conditionals, and functions?</li>
+                                <li><strong>Ask the AI to explain:</strong> If there's anything confusing, ask Gemini "Can you explain what the [section] does?"</li>
+                                <li><strong>Make at least 2 modifications:</strong> This is crucial! Change something to make the program your own. Ideas:
+                                    <ul style="margin-left: 20px; margin-top: 10px;">
+                                        <li>Change a message displayed to users</li>
+                                        <li>Adjust a range of numbers or values</li>
+                                        <li>Add another feature or piece of data</li>
+                                        <li>Personalize the data (use your own names, preferences, etc.)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Test your modifications:</strong> Run the code again to make sure your changes work</li>
+                                <li><strong>Share your notebook:</strong> Click "Share" and set it to "Anyone with the link can view"</li>
+                            </ol>
+
+                            <p style="margin-top: 20px;"><strong>Note the following information for your assignment:</strong></p>
+                            <ul style="margin-left: 20px;">
+                                <li>Program Title</li>
+                                <li>Program Description (2-3 sentences)</li>
+                                <li>Modification #1 (what you changed)</li>
+                                <li>Modification #2 (what you changed)</li>
+                                <li>Your Colab Notebook Link</li>
+                            </ul>
+                        </div>
+
+                        <div class="activity-step" data-number="9">
+                            <h4>Reflection: Vibe Coding in the Real World</h4>
+                            <p><strong>Consider these questions and write your thoughts:</strong></p>
+
+                            <p><strong>Question 1: Positive Aspects</strong></p>
+                            <p>Describe one positive aspect of using AI to generate code. How might this help you or other programmers?</p>
+                            <textarea style="width: 100%; height: 100px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; resize: vertical;"></textarea>
+
+                            <p style="margin-top: 20px;"><strong>Question 2: Challenges and Concerns</strong></p>
+                            <p>Describe one challenge or negative aspect of using AI to generate code. What's something you need to be careful about?</p>
+                            <textarea style="width: 100%; height: 100px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; margin: 10px 0; resize: vertical;"></textarea>
+
+                            <div class="callout info">
+                                <strong>Things to consider:</strong>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>Do you really understand what the code does?</li>
+                                    <li>What if the AI makes a mistake?</li>
+                                    <li>Are you developing programming skills, or just copy-pasting?</li>
+                                    <li>How is this used in the real world?</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORMATIVE ASSESSMENT -->
+                    <div class="assessment">
+                        <h3>🎯 Guided Activity Formative Assessment</h3>
+
+                        <div class="question">
+                            <span class="question-type">Multiple Choice</span>
+                            <h4>Question 1: Vibe Coding Skills</h4>
+                            <p>When using vibe coding, which skill is MOST important?</p>
+                            <div class="options">
+                                <label class="option">
+                                    <input type="radio" name="ga1" value="a"> Being able to write complex code from scratch
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="ga1" value="b"> Remembering all Python syntax perfectly
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="ga1" value="c"> Understanding, testing, and modifying the generated code
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="ga1" value="d"> Running the code without looking at it
+                                </label>
+                            </div>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ansga1')">Show Answer</button>
+                            <div class="answer-box" id="ansga1">
+                                <h5>Answer: C) Understanding, testing, and modifying the generated code</h5>
+                                <p>The whole point of vibe coding is that AI helps you write code, but you still need to understand what it does, test it, and be able to modify it. This is responsible AI use in programming.</p>
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <span class="question-type">Short Answer</span>
+                            <h4>Question 2: Your Vibe Coding Experience</h4>
+                            <p>What was the most challenging part of the vibe coding activities? How did you overcome it?</p>
+                            <textarea style="width: 100%; height: 120px; padding: 10px; border: 2px solid #ddd; border-radius: 5px; margin-top: 10px; resize: vertical;"></textarea>
+                            <button class="show-answer-btn" onclick="toggleAnswer('ansga2')">Show Answer</button>
+                            <div class="answer-box" id="ansga2">
+                                <h5>This is your reflection—there's no single "right" answer!</h5>
+                                <p>Common challenges include: understanding complex code, writing clear prompts, debugging AI-generated code, or making meaningful modifications. The important thing is that you identified a challenge and worked through it.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT'S COMING NEXT -->
+                    <div class="next-lesson">
+                        <h4>✨ What's Coming Next</h4>
+                        <p><strong>Chapter 11: Looking Ahead</strong></p>
+                        <p>You've completed Chapter 10 and mastered the fundamentals of conditionals, functions, and vibe coding! You now have powerful tools to create intelligent, reusable programs. In the next chapter, you'll explore how these concepts connect to real-world applications, continue building more complex projects, and deepen your understanding of how technology impacts society.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER SUMMARY -->
+            <div class="chapter-summary">
+                <h2>Chapter 10 Summary: You've Leveled Up! 🎉</h2>
+
+                <div class="summary-section">
+                    <h3>What You Learned</h3>
+                    <ul>
+                        <li><strong>Conditionals (If-Elif-Else):</strong> How to make your code make decisions based on different conditions</li>
+                        <li><strong>Functions:</strong> How to write reusable code blocks that perform specific tasks</li>
+                        <li><strong>Combining Concepts:</strong> How conditionals inside functions create powerful, intelligent programs</li>
+                        <li><strong>Reading Code:</strong> How to analyze and understand complex programs by identifying their key components</li>
+                        <li><strong>Vibe Coding:</strong> How to describe what you want in plain English and have AI help you write the code</li>
+                        <li><strong>Responsible AI Use:</strong> Why understanding, testing, and modifying AI-generated code is essential</li>
+                    </ul>
+                </div>
+
+                <div class="summary-section">
+                    <h3>Key Programming Concepts</h3>
+                    <ul>
+                        <li><strong>Conditionals:</strong> if, elif, else statements</li>
+                        <li><strong>Comparison Operators:</strong> ==, !=, >, <, >=, <=</li>
+                        <li><strong>Functions:</strong> def, parameters, return values</li>
+                        <li><strong>Program Structure:</strong> Variables, loops, lists, conditionals, functions working together</li>
+                        <li><strong>Code Analysis:</strong> Reading and deconstructing programs</li>
+                    </ul>
+                </div>
+
+                <div class="summary-section">
+                    <h3>Real-World Applications</h3>
+                    <ul>
+                        <li>Student information systems that categorize students by standing</li>
+                        <li>Recommendation engines that suggest content based on preferences</li>
+                        <li>Grading systems that calculate and categorize student performance</li>
+                        <li>AI-assisted development—professional developers use vibe coding every day!</li>
+                        <li>Debugging and maintaining existing code</li>
+                    </ul>
+                </div>
+
+                <div class="summary-section">
+                    <h3>Skills You've Developed</h3>
+                    <ul>
+                        <li>🎯 Writing conditional logic to solve problems</li>
+                        <li>🔧 Creating and using functions to organize code</li>
+                        <li>🔍 Reading and analyzing complex programs</li>
+                        <li>💡 Thinking algorithmically about problems</li>
+                        <li>🤖 Collaborating with AI tools responsibly</li>
+                        <li>🐛 Debugging and testing code</li>
+                        <li>✏️ Communicating programming ideas clearly</li>
+                    </ul>
+                </div>
+
+                <div class="summary-section">
+                    <h3>Essential Takeaways</h3>
+                    <ul>
+                        <li><strong>Conditionals + Functions = Power:</strong> These two concepts are the foundation of most programs</li>
+                        <li><strong>Always Understand Your Code:</strong> Whether you wrote it or AI did, you must understand what it does</li>
+                        <li><strong>Practice Makes Perfect:</strong> The more you code, the better you get at spotting patterns and writing efficient solutions</li>
+                        <li><strong>AI is a Tool, Not a Replacement:</strong> Vibe coding makes programming more accessible, but your thinking and problem-solving skills are what matter</li>
+                        <li><strong>Start Simple:</strong> Begin with small, focused programs before trying complex projects</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- WHAT'S COMING IN THE COURSE -->
+            <div class="what-next">
+                <h3>🔮 Looking Ahead in CSC101</h3>
+                <p>You've now completed the <strong>Creative Programming</strong> section of CSC101. You've mastered the fundamentals of conditionals, functions, and even started using AI to generate code.</p>
+                <p><strong>What's Next in the Course:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 15px;">
+                    <li><strong>Cybersecurity & Global Impacts:</strong> Learn how the internet works and how to stay safe online</li>
+                    <li><strong>Data & Storytelling:</strong> Collect, analyze, and visualize data to tell compelling stories</li>
+                    <li><strong>Final Project:</strong> Use everything you've learned to create a project about computing innovations and their impact on society</li>
+                </ul>
+                <p style="margin-top: 20px;"><strong>Keep building on these skills!</strong> Everything you learn in the next sections will work together with what you've learned in this chapter. Conditionals and functions will help you work with data. Your ability to understand code will help you analyze AI-generated solutions. You're on an amazing learning journey! 🚀</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('show');
+        }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+
+        // Tab functionality
+        function openTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove('active');
+            }
+            const tabbuttons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove('active');
+            }
+            const element = document.getElementById(tabName);
+            if (element) {
+                element.classList.add('active');
+            }
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
+            }
+        }
+
+        // Print functionality
+        function printChapter() {
+            window.print();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add data-step attributes to example steps
+            document.querySelectorAll('.example-step').forEach((step, index) => {
+                if (!step.getAttribute('data-step')) {
+                    step.setAttribute('data-step', index + 1);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
