@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC101 Chapter 13: Data Visualization – Tell a Story with Data</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.95; }
+
+        .chapter-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #11998e;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chapter-intro h2 { color: #11998e; margin-bottom: 15px; font-size: 1.8em; }
+
+        .learning-objectives {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .learning-objectives h2 { color: #11998e; margin-bottom: 20px; font-size: 1.8em; }
+        .objectives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .objective {
+            background: #eafaf3;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #11998e;
+        }
+        .objective code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #38ef7d;
+            font-weight: bold;
+            color: #0b7a52;
+        }
+
+        .concepts-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .concepts-section h2 { color: #11998e; margin-bottom: 20px; font-size: 1.8em; }
+        .concept-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .concept-item:last-child { border-bottom: none; }
+        .concept-term { color: #0b7a52; font-weight: bold; font-size: 1.1em; margin-bottom: 8px; }
+        .concept-definition { color: #555; line-height: 1.7; }
+
+        .lessons-section { margin-bottom: 40px; }
+
+        .lesson {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 5px solid #11998e;
+        }
+        .lesson-header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lesson-header h3 { font-size: 1.5em; margin: 0; }
+        .lesson-number {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .lesson-content { padding: 30px; }
+
+        .learning-objective {
+            background: #eafaf3;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #11998e;
+        }
+        .learning-objective strong { color: #0b7a52; }
+
+        .content-section { margin: 25px 0; }
+        .content-section h4 { color: #11998e; margin-bottom: 15px; font-size: 1.2em; }
+        .content-text { color: #555; line-height: 1.8; margin-bottom: 15px; }
+
+        .video-embed {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        .video-embed p { color: #666; margin-bottom: 10px; font-size: 0.95em; }
+        .video-embed strong { color: #11998e; }
+
+        .reading-embed {
+            background: #fffbea;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 2px solid #f0c060;
+            text-align: center;
+        }
+        .reading-embed p { color: #666; margin-bottom: 10px; font-size: 0.95em; }
+        .reading-embed strong { color: #b07000; }
+
+        .example {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #00a8e8;
+        }
+        .example-title { font-weight: bold; color: #00a8e8; margin-bottom: 10px; font-size: 1.05em; }
+        .example-content { color: #333; line-height: 1.7; }
+
+        .callout { padding: 20px; border-radius: 6px; margin: 20px 0; border-left: 4px solid; }
+        .callout.warning { background: #fff3cd; border-left-color: #ff6b6b; }
+        .callout.warning .callout-title { color: #ff6b6b; font-weight: bold; margin-bottom: 8px; }
+        .callout.hint { background: #d1ecf1; border-left-color: #00a8e8; }
+        .callout.hint .callout-title { color: #00a8e8; font-weight: bold; margin-bottom: 8px; }
+        .callout.info { background: #e7e8ea; border-left-color: #11998e; }
+        .callout.info .callout-title { color: #11998e; font-weight: bold; margin-bottom: 8px; }
+
+        .assessment {
+            background: linear-gradient(135deg, #eafaf3 0%, #f0fff4 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 2px solid #11998e;
+        }
+        .assessment h4 {
+            color: #11998e;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .assessment-question { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #ddd; }
+        .assessment-question:last-child { border-bottom: none; }
+        .question-text { font-weight: bold; color: #333; margin-bottom: 12px; }
+        .question-type {
+            display: inline-block;
+            background: #11998e;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        .answer-option {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .answer-option input { margin-right: 10px; cursor: pointer; }
+        .answer-option label { cursor: pointer; flex: 1; }
+
+        .show-answer-btn {
+            background: #11998e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        .show-answer-btn:hover { background: #0b7a52; }
+
+        .answer-feedback {
+            margin-top: 12px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            color: #155724;
+            display: none;
+        }
+        .answer-feedback.show { display: block; }
+
+        .whats-next {
+            background: linear-gradient(135deg, #0b7a52 0%, #11998e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 25px;
+        }
+        .whats-next h5 { margin-bottom: 10px; font-size: 1.05em; }
+
+        .table-responsive { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        table th { background: #11998e; color: white; padding: 12px; text-align: left; font-weight: bold; }
+        table td { border: 1px solid #ddd; padding: 12px; color: #555; }
+        table tr:nth-child(even) { background: #f8f9fa; }
+        table textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; resize: vertical; }
+
+        .scenario-box {
+            background: #eafaf3;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #11998e;
+        }
+        .scenario-title { color: #11998e; font-weight: bold; margin-bottom: 10px; font-size: 1.05em; }
+
+        .activity-instruction {
+            background: #e7e8ea;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #11998e;
+        }
+        .activity-instruction strong { color: #11998e; }
+
+        .summary-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .summary-section h2 { color: #11998e; margin-bottom: 20px; font-size: 1.8em; }
+        .summary-bullets { list-style: none; margin-bottom: 20px; }
+        .summary-bullets li { padding: 12px 0; padding-left: 30px; position: relative; color: #555; line-height: 1.7; }
+        .summary-bullets li:before { content: "✓"; position: absolute; left: 0; color: #11998e; font-weight: bold; font-size: 1.2em; }
+
+        .coming-next-section {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .coming-next-section h2 { color: white; margin-bottom: 15px; font-size: 1.8em; }
+        .coming-next-section p { font-size: 1.05em; line-height: 1.8; }
+        .progress-indicator {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .progress-indicator p { color: #11998e; font-weight: bold; margin: 0; }
+
+        .chart-type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .chart-card {
+            background: #f8f9fa;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            border-top: 4px solid #11998e;
+        }
+        .chart-card .chart-icon { font-size: 1.8rem; margin-bottom: 6px; }
+        .chart-card .chart-name { font-weight: bold; color: #0b7a52; font-size: .95rem; margin-bottom: 4px; }
+        .chart-card .chart-use { font-size: .88rem; color: #555; }
+        .chart-card .chart-example { font-size: .82rem; color: #888; margin-top: 5px; font-style: italic; }
+
+        .infographic-req-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin: 15px 0; }
+        .req-card { background: white; border: 1.5px solid #ddd; border-radius: 8px; padding: 12px; text-align: center; }
+        .req-card .req-icon { font-size: 1.5rem; margin-bottom: 5px; }
+        .req-card .req-label { font-size: .83rem; font-weight: bold; color: #0b7a52; }
+        .req-card .req-desc { font-size: .77rem; color: #666; margin-top: 3px; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .chart-type-grid { grid-template-columns: 1fr; }
+            .lesson-header { flex-direction: column; text-align: center; }
+            .lesson-number { margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header>
+        <h1>Chapter 13: Data Visualization</h1>
+        <p>Tell a Story with Data</p>
+    </header>
+
+    <!-- ═══════════════ CHAPTER INTRO ═══════════════ -->
+    <div class="chapter-intro">
+        <h2>Welcome to Data Visualization</h2>
+        <p>Numbers alone rarely tell a story. Imagine trying to spot a pattern in a spreadsheet with 500 rows — your eyes glaze over within seconds. Data visualization transforms those numbers into charts, graphs, and infographics that make patterns instantly visible and insights shareable with anyone, regardless of their technical background.</p>
+        <p style="margin-top: 15px;">This chapter sits at the final content stage of the data science process you've been building all semester: you asked a question, collected survey data, cleaned and analyzed it — and now it's time to <strong>communicate</strong> what you found. By the end of this chapter, you'll have created real charts from your own survey data, written a summative analysis, and designed an infographic that tells your data story.</p>
+        <p style="margin-top: 15px;"><strong>What You'll Learn:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>Why data visualization is a critical part of the data science process</li>
+            <li>How to choose the right chart type for your data and question</li>
+            <li>What makes a chart effective and easy to read</li>
+            <li>How to interpret patterns and trends from visualizations</li>
+            <li>How to write a summative analysis and communicate your data story</li>
+            <li>How to design an infographic using Canva</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════ LEARNING OBJECTIVES ═══════════════ -->
+    <div class="learning-objectives">
+        <h2>Learning Objectives</h2>
+        <div class="objectives-grid">
+            <div class="objective">
+                <p><code>LO13.1.1</code> Explain why data visualization is a critical step in the data science process</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.1.2</code> Identify where visualization fits within the data science workflow</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.2.1</code> Describe the purpose and best use case for scatter, line, bar, and other common chart types</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.2.2</code> Match a data question to the most appropriate chart type</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.2.3</code> Identify the essential elements every chart must include</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.3.1</code> Interpret patterns, trends, and relationships revealed by data visualizations</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.3.2</code> Construct a summative analysis with evidence-based conclusions</p>
+            </div>
+            <div class="objective">
+                <p><code>LO13.3.3</code> Design an effective infographic using Canva that communicates a data story</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ CONCEPTS & TERMS ═══════════════ -->
+    <div class="concepts-section">
+        <h2>Key Concepts and Terms</h2>
+
+        <div class="concept-item">
+            <div class="concept-term">Data Visualization</div>
+            <div class="concept-definition">A graphical representation of data or information — such as charts, graphs, maps, and infographics — that makes patterns and trends easier to see and understand than looking at raw numbers.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Exploratory Visualization</div>
+            <div class="concept-definition">Charts made for yourself during the analysis phase to discover patterns, outliers, and trends in data before drawing final conclusions. These don't need to be polished — their purpose is to help you understand the data.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Explanatory Visualization</div>
+            <div class="concept-definition">Polished charts and graphics made for an audience to clearly communicate a specific finding or conclusion. These need clear titles, labels, and legends.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Scatter Chart</div>
+            <div class="concept-definition">A chart that shows the relationship between two numeric variables. Each point represents one data record, with one variable on the x-axis and another on the y-axis. Best used to explore whether two things are related (correlation).</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Line Chart</div>
+            <div class="concept-definition">A chart that shows how data changes over time or across a continuous variable by connecting data points with lines. Best used for trends and changes over time.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Bar Chart</div>
+            <div class="concept-definition">A chart that uses rectangular bars to compare values across distinct categories or groups. One of the most versatile and commonly used chart types.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Infographic</div>
+            <div class="concept-definition">A visual representation that combines graphics, statistics, and brief text to communicate information quickly and clearly to a broad audience. Used in the Communicate Results stage of the data science process.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Data Story</div>
+            <div class="concept-definition">A narrative built around data findings that combines visualizations, statistics, and context to convey a meaningful message to an audience.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Correlation</div>
+            <div class="concept-definition">A statistical relationship between two variables — as one changes, the other tends to change as well. Important: correlation does not mean one variable causes the other (correlation ≠ causation).</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Summative Analysis</div>
+            <div class="concept-definition">A comprehensive conclusion that ties together your research question, data collection process, patterns found, and overall findings into a coherent, evidence-based narrative.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ LESSONS ═══════════════ -->
+    <div class="lessons-section">
+
+        <!-- ══ LESSON 13.1 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.1: Why Data Visualization Matters</h3>
+                <span class="lesson-number">Lesson 1 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO13.1.1 — Explain why data visualization is a critical step in the data science process. LO13.1.2 — Identify where visualization fits within the data science workflow and distinguish between exploratory and explanatory visualization.
+                </div>
+
+                <div class="content-section">
+                    <h4>The Data Science Process</h4>
+                    <p class="content-text">All semester, you've been following the data science process: you asked a question about a computing innovation, gathered and organized survey data, modeled that data with pivot tables, and analyzed it. Now you've reached the final two stages: <strong>Analyze &amp; Synthesize</strong> and <strong>Communicate Results</strong>. Data visualization lives in both.</p>
+                    <p class="content-text">In the <em>Analyze &amp; Synthesize</em> stage, you create quick, rough charts for yourself — exploratory visualizations — to spot patterns you might miss in a spreadsheet. In the <em>Communicate Results</em> stage, you refine those findings into polished charts and infographics that help others understand your conclusions.</p>
+
+                    <div class="callout info">
+                        <div class="callout-title">ℹ️ The Data Science Workflow</div>
+                        <p><strong>Ask Questions → Gather &amp; Organize Data → Model → Analyze &amp; Synthesize → Communicate Results</strong></p>
+                        <p style="margin-top: 8px;">Visualization appears in both the Analyze and Communicate stages — first to help you understand your data, then to share your conclusions with others.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Why Visualize? The Power of a Picture</h4>
+                    <p class="content-text">Good visualizations help people make sense of data sets that are too large to interpret by looking at raw numbers. When you see 30 rows of survey responses in a spreadsheet, it's hard to tell whether older people rated AI differently than younger people. When you plot those same responses on a scatter chart, a trend becomes immediately visible.</p>
+
+                    <div class="example">
+                        <div class="example-title">Example 13.1.1: Exploratory vs. Explanatory Visualization</div>
+                        <div class="example-content">
+                            <p><strong>Exploratory (for you):</strong> You create a quick bar chart in Google Sheets to see which age group gave the highest impact ratings. The chart looks rough — no proper title, axes aren't fully labeled — but you can immediately see that the 18–24 group rated higher than the 50+ group. You now know where to focus your analysis.</p>
+                            <p style="margin-top: 12px;"><strong>Explanatory (for your audience):</strong> You refine that same chart with a descriptive title, proper axis labels, a legend, and clean formatting. You add it to your infographic alongside a key statistic and a brief conclusion sentence. Your audience can now understand your finding without any explanation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>📖 Assigned Reading &amp; Videos</h4>
+
+                    <div class="reading-embed">
+                        <p><strong>Read:</strong> Data Visualization 101 — How to Design Charts and Graphs</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Reading — Familiarize yourself with different chart types, paying particular attention to scatter, line, and bar charts]</p>
+                    </div>
+
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> The Art of Data Visualization | Off Book | PBS Digital Studios</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 7:47 min — How design and data combine to create meaningful visual communication]</p>
+                    </div>
+
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> The Age of Insight: Telling Stories with Data</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 4:16 min — Explore how data-driven storytelling shapes decisions and public understanding]</p>
+                    </div>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Watch with a Purpose</div>
+                        <p>While watching, ask yourself: <em>What makes a visualization easy to understand versus confusing?</em> You'll apply this judgment when creating your own charts and infographic.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Exploring vs. Communicating</h4>
+                    <p class="content-text">Not all visualizations have the same job. When data scientists first receive a dataset, they create quick, rough charts to <em>explore</em> patterns. When they're ready to share findings, they refine those into polished <em>explanatory</em> visuals designed for a specific audience.</p>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Common Mistake</div>
+                        <p>Students often think the goal of a chart is to look impressive. The real goal is <strong>clarity</strong>. A simple, well-labeled bar chart that answers your question beats a flashy 3-D pie chart that confuses everyone. Always ask: <em>Can my audience understand this in 10 seconds?</em></p>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 13.1 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 13.1</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">True / False</span></div>
+                        <p>Data visualization is only useful at the very end of the data science process, after all analysis is complete.</p>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1t"><label for="l1q1t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1f"><label for="l1q1f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q1"><strong>Correct — False!</strong> Visualization is used in both the Analyze &amp; Synthesize stage (exploratory, for you) and the Communicate Results stage (explanatory, for your audience). It helps you understand your data AND share your conclusions.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">Multiple Choice</span></div>
+                        <p>Which term describes a rough chart you create for yourself to discover patterns in data before drawing conclusions?</p>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2a"><label for="l1q2a">A) Explanatory visualization</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2b"><label for="l1q2b">B) Infographic</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2c"><label for="l1q2c">C) Exploratory visualization</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2d"><label for="l1q2d">D) Data story</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q2"><strong>Correct — C!</strong> Exploratory visualizations are quick charts made for you during analysis. Explanatory visualizations are polished and made to communicate specific conclusions to an audience.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Multiple Choice</span></div>
+                        <p>What is the primary goal of a good data visualization?</p>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3a"><label for="l1q3a">A) To look visually impressive and colorful</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3b"><label for="l1q3b">B) To clearly and accurately communicate information</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3c"><label for="l1q3c">C) To include as much data as possible</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3d"><label for="l1q3d">D) To use the most advanced chart type available</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q3')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q3"><strong>Correct — B!</strong> Clarity always wins. A simple, well-labeled chart that answers your question is more effective than a flashy one that confuses the audience.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Short Answer</span></div>
+                        <p>In your own words, describe the difference between an exploratory visualization and an explanatory visualization. Give one example of each.</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:80px;"></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q4')">Show Possible Answer</button>
+                        <div class="answer-feedback" id="a_l1q4"><strong>Sample Answer:</strong> Exploratory visualizations are rough charts you create for yourself to discover patterns — for example, a quick scatter chart in Google Sheets to see if there's a trend between age and AI impact rating in your survey data. Explanatory visualizations are polished charts created for an audience — for example, a cleanly titled and labeled bar chart in your infographic that shows your key finding to someone unfamiliar with your project.</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>You know <em>why</em> visualization matters — now let's learn <em>how</em> to pick the right chart. In the next lesson, you'll explore the most common chart types and discover which questions each one answers best.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 13.2 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.2: Choosing the Right Chart Type</h3>
+                <span class="lesson-number">Lesson 2 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO13.2.1 — Describe the purpose and best use case for scatter, line, bar, and other common chart types. LO13.2.2 — Match a data question to the most appropriate chart type. LO13.2.3 — Identify the essential elements every chart must include.
+                </div>
+
+                <div class="content-section">
+                    <h4>Matching Your Chart to Your Question</h4>
+                    <p class="content-text">There are dozens of chart types, and picking the wrong one can actually <em>mislead</em> your audience — even unintentionally. The key is to match your chart type to the <strong>kind of comparison or relationship</strong> you want to show.</p>
+
+                    <div class="chart-type-grid">
+                        <div class="chart-card">
+                            <div class="chart-icon">📊</div>
+                            <div class="chart-name">Bar Chart</div>
+                            <div class="chart-use">Comparing values across distinct categories or groups</div>
+                            <div class="chart-example">Example: How do AI impact ratings differ by gender?</div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-icon">📈</div>
+                            <div class="chart-name">Line Chart</div>
+                            <div class="chart-use">Showing trends or change over time (continuous variable)</div>
+                            <div class="chart-example">Example: How have AI adoption rates changed by age group over time?</div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-icon">⚫</div>
+                            <div class="chart-name">Scatter Chart</div>
+                            <div class="chart-use">Exploring the relationship between two numeric variables</div>
+                            <div class="chart-example">Example: Is there a relationship between age and impact rating?</div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-icon">🥧</div>
+                            <div class="chart-name">Pie / Donut Chart</div>
+                            <div class="chart-use">Showing proportions of a whole (use sparingly — max 5 slices)</div>
+                            <div class="chart-example">Example: What percentage of respondents were each gender?</div>
+                        </div>
+                    </div>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Pie Chart Warning</div>
+                        <p>Pie charts become very hard to read with more than 4–5 slices. When in doubt, a bar chart is almost always clearer and allows easier comparison. Ask yourself: <em>Can the reader instantly tell which value is bigger?</em> If not, use a bar chart instead.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Essential Elements Every Chart Must Have</h4>
+                    <p class="content-text">No matter which chart type you use, every effective chart must include:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>Title</strong> — Describes what the chart shows. For your assignment, include your full name in the title.</li>
+                        <li><strong>Axis Labels</strong> — Clearly label the x-axis (horizontal) and y-axis (vertical), including units where applicable.</li>
+                        <li><strong>Legend</strong> — Explains colors or symbols when multiple data series are present (e.g., Male vs. Female).</li>
+                        <li><strong>Appropriate Scale</strong> — Bar chart y-axes should start at zero to avoid visually distorting comparisons.</li>
+                    </ul>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 The One-Sentence Test</div>
+                        <p>Before finalizing a chart, try describing it in one sentence: <em>"This chart shows [X] compared to [Y], and the main finding is [Z]."</em> If you can't fill in all three parts, your chart needs a clearer title or better labels.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Worked Example</h4>
+
+                    <div class="example">
+                        <div class="example-title">Example 13.2.1: Choosing the Right Chart for Survey Data</div>
+                        <div class="example-content">
+                            <p><strong>Scenario:</strong> You surveyed 30 people on AI's impact on society. Your data includes each respondent's age (numeric) and their impact rating from 1–5 (numeric). You want to know: <em>Does impact rating change with age?</em></p>
+                            <p style="margin-top: 12px;"><strong>Step 1 — Identify your variables:</strong> Age and impact rating are both continuous numbers — not categories or time-based data.</p>
+                            <p style="margin-top: 8px;"><strong>Step 2 — What relationship are you exploring?</strong> You want to see if two numeric variables are related — not compare categories, not track time.</p>
+                            <p style="margin-top: 8px;"><strong>Step 3 — Choose the chart:</strong> A <strong>Scatter Chart</strong> is the right fit. Each point represents one respondent, with Age on the x-axis and Impact Rating on the y-axis.</p>
+                            <p style="margin-top: 8px;"><strong>Step 4 — Add required elements:</strong> Title: "The Impact of AI on Society Based on Age — [Your Name]" | x-axis: "Age" | y-axis: "Impact Rating (1–5)" | Legend: colors for Male/Female/Prefer not to say.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 13.2 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 13.2</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">Multiple Choice</span></div>
+                        <p>You want to compare opinions about AI across four age groups (18–24, 25–34, 35–49, 50+). Which chart type is most appropriate?</p>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1a"><label for="l2q1a">A) Scatter chart</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1b"><label for="l2q1b">B) Line chart</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1c"><label for="l2q1c">C) Bar chart</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1d"><label for="l2q1d">D) Pie chart</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q1"><strong>Correct — C!</strong> Bar charts are ideal for comparing values across distinct categories like age groups. A scatter chart needs two numeric variables; a line chart implies a continuous time trend.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">True / False</span></div>
+                        <p>A pie chart with 10 different slices is generally easy for an audience to read and compare.</p>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2t"><label for="l2q2t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2f"><label for="l2q2f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q2"><strong>Correct — False!</strong> Pie charts become very hard to read with more than 4–5 slices. A bar chart would be far clearer and allow easier comparison of all 10 values.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Matching</span></div>
+                        <p>Match each question to the best chart type. Write Bar, Line, or Scatter next to each.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>Data Question</th><th>Best Chart Type (write your answer)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>How do COVID-19 cases change month by month?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                    <tr><td>Do older respondents rate AI more negatively?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                    <tr><td>How many survey respondents are in each age group?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q3')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q3"><strong>Answers:</strong> COVID cases over months → <strong>Line chart</strong> (time trend). Age vs. AI rating → <strong>Scatter chart</strong> (relationship between two numeric variables). Count per age group → <strong>Bar chart</strong> (comparing categories).</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Multiple Choice</span></div>
+                        <p>Which of the following is NOT a required element of an effective chart?</p>
+                        <div class="answer-option"><input type="radio" name="l2q4" id="l2q4a"><label for="l2q4a">A) Chart title</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q4" id="l2q4b"><label for="l2q4b">B) Axis labels</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q4" id="l2q4c"><label for="l2q4c">C) A 3-D visual effect to look professional</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q4" id="l2q4d"><label for="l2q4d">D) Legend (when multiple data series are present)</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q4')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q4"><strong>Correct — C!</strong> 3-D effects are decorative and often make charts harder to read, not easier. Title, axis labels, and legends are all genuinely essential to chart clarity.</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>You can choose the right chart — now put it all together. In the next lesson, you'll practice analyzing what charts tell you and learn how to communicate conclusions through a summative analysis and an infographic.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 13.3 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.3: Analyzing &amp; Communicating Your Data Story</h3>
+                <span class="lesson-number">Lesson 3 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO13.3.1 — Interpret patterns, trends, and relationships revealed by data visualizations. LO13.3.2 — Construct a summative analysis with evidence-based conclusions. LO13.3.3 — Design an effective infographic using Canva that communicates a data story.
+                </div>
+
+                <div class="content-section">
+                    <h4>Reading a Chart: What to Look For</h4>
+                    <p class="content-text">Creating a chart is just the beginning. A data scientist's real skill is <em>reading</em> what the chart says — identifying what the data shows, what it doesn't show, and how to communicate those conclusions honestly and clearly.</p>
+
+                    <div class="reading-embed">
+                        <p><strong>Read:</strong> What is an Infographic? (PDF)</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Reading — Principles of visual communication through infographics]</p>
+                    </div>
+
+                    <p class="content-text">When analyzing a chart, ask yourself these questions systematically:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>Overall trend:</strong> Is the data generally going up, down, or staying flat?</li>
+                        <li><strong>Outliers:</strong> Are there any unusual data points that don't fit the pattern?</li>
+                        <li><strong>Clusters:</strong> Do certain groups of responses appear together?</li>
+                        <li><strong>Range:</strong> How spread out is the data — is there a wide variation or are values close together?</li>
+                        <li><strong>Connection to your question:</strong> What does this tell me about my original research question?</li>
+                    </ul>
+
+                    <div class="example">
+                        <div class="example-title">Example 13.3.1: Interpreting a Scatter Chart</div>
+                        <div class="example-content">
+                            <p><strong>Scenario:</strong> Your scatter chart shows Age on the x-axis and AI Impact Rating (1–5) on the y-axis, with points colored by gender.</p>
+                            <p style="margin-top: 10px;"><strong>Step 1 — Look for a trend:</strong> Do the points generally slope upward (older = higher rating) or downward (older = lower rating), or is there no clear pattern?</p>
+                            <p style="margin-top: 8px;"><strong>Step 2 — Check for clusters:</strong> Are female respondents clustered at higher or lower ratings than male respondents?</p>
+                            <p style="margin-top: 8px;"><strong>Step 3 — Note any outliers:</strong> Is there one 60-year-old who gave a 5/5 when everyone else their age gave 2–3?</p>
+                            <p style="margin-top: 8px;"><strong>Step 4 — Write a careful conclusion:</strong> "Based on our survey of 30 respondents aged 20–62, younger respondents (under 30) tended to rate AI's impact more positively (avg. 4.1) compared to older respondents (avg. 3.2), suggesting possible generational differences in AI perception."</p>
+                        </div>
+                    </div>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Correlation ≠ Causation</div>
+                        <p>Just because two things appear related in your chart does not mean one <em>causes</em> the other. Your data can show that older people tend to rate AI lower, but it can't tell you <em>why</em>. Always say <em>"the data suggests..."</em> rather than <em>"this proves..."</em></p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Summative Analysis: Tying It All Together</h4>
+                    <p class="content-text">A summative analysis combines everything you've learned from your data into a coherent, evidence-based narrative. It answers four key questions — each in 3–5 sentences:</p>
+                    <ol style="margin-left: 20px; color: #555;">
+                        <li style="margin-bottom: 10px;"><strong>Finalized Question:</strong> Revisit "What impact does [TOPIC] have on society?" — did your findings cause you to refine it?</li>
+                        <li style="margin-bottom: 10px;"><strong>Data Collection Process:</strong> Describe how you collected, modeled, and analyzed your data (tools + techniques — Google Forms, Sheets, pivot tables, charts).</li>
+                        <li style="margin-bottom: 10px;"><strong>Trend or Pattern:</strong> What was the most significant pattern in your data? Offer a possible explanation for it.</li>
+                        <li style="margin-bottom: 10px;"><strong>Summative Conclusion:</strong> What does your data analysis say about your computing innovation's impact on society?</li>
+                    </ol>
+                </div>
+
+                <div class="content-section">
+                    <h4>Infographic Design Principles</h4>
+                    <p class="content-text">An infographic communicates your entire data story to someone unfamiliar with your project. Good infographics follow these principles:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>Keep it simple:</strong> Include only critical information that supports your conclusion — if you need too much text, visualize it instead.</li>
+                        <li><strong>Make it clear:</strong> Easy to read at a glance; no cluttered text blocks.</li>
+                        <li><strong>In some cases, a simple table is better than a chart</strong> — don't force a chart if a table communicates more clearly.</li>
+                        <li><strong>Use text strategically:</strong> Brief text guides the reader, but visuals do the heavy lifting.</li>
+                        <li><strong>Provide enough context:</strong> Someone completely unfamiliar with your project should be able to understand your main point.</li>
+                    </ul>
+
+                    <div class="callout info">
+                        <div class="callout-title">📌 Canva Tutorials — Watch Before Building</div>
+                        <p>Before creating your infographic, complete these required Canva tutorials (linked on Brightspace): <strong>Welcome Home [1:34 min]</strong> · <strong>Start Designing [1:40 min]</strong> · <strong>Easy Editing [1:36 min]</strong> · and watch the <strong>Infographic Demo using Canva [6:19 min]</strong>.</p>
+                    </div>
+
+                    <p class="content-text" style="margin-top: 15px;"><strong>Your infographic must meet ALL of these minimum requirements:</strong></p>
+                    <div class="infographic-req-grid">
+                        <div class="req-card"><div class="req-icon">❓</div><div class="req-label">Question / Impact Statement</div><div class="req-desc">Your research question featured prominently</div></div>
+                        <div class="req-card"><div class="req-icon">👤</div><div class="req-label">Your Name</div><div class="req-desc">Clearly included</div></div>
+                        <div class="req-card"><div class="req-icon">🤖</div><div class="req-label">Innovation Description</div><div class="req-desc">Brief description of your computing topic</div></div>
+                        <div class="req-card"><div class="req-icon">🖼️</div><div class="req-label">Icon or Graphic</div><div class="req-desc">At least one from Canva's library</div></div>
+                        <div class="req-card"><div class="req-icon">📋</div><div class="req-label">Survey Reference</div><div class="req-desc">Number of responses, age range, etc.</div></div>
+                        <div class="req-card"><div class="req-icon">🔢</div><div class="req-label">One Key Statistic</div><div class="req-desc">A specific number from your data</div></div>
+                        <div class="req-card"><div class="req-icon">📊</div><div class="req-label">Original Visualization</div><div class="req-desc">Your chart or summary table</div></div>
+                        <div class="req-card"><div class="req-icon">📖</div><div class="req-label">Summative Conclusion</div><div class="req-desc">Brief story about what your data shows</div></div>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 13.3 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 13.3</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">Multiple Choice</span></div>
+                        <p>Your scatter chart shows that as age increases, respondents tend to give lower AI impact ratings. What is the most accurate way to state this conclusion?</p>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1a"><label for="l3q1a">A) Older age causes people to dislike AI.</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1b"><label for="l3q1b">B) The data suggests a negative relationship between age and positive AI perception in our sample.</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1c"><label for="l3q1c">C) AI is objectively worse for older people.</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1d"><label for="l3q1d">D) The chart must be wrong because everyone likes AI.</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q1"><strong>Correct — B!</strong> Always frame conclusions carefully. The data "suggests" a relationship in your sample — it cannot prove causation. Option A is a causal claim that your chart cannot support.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">True / False</span></div>
+                        <p>An infographic is most effective when it includes as much data and text as possible so the reader has all the information they could need.</p>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2t"><label for="l3q2t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2f"><label for="l3q2f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q2"><strong>Correct — False!</strong> Infographics are most effective when simple and focused on the key message. Including only critical information that supports your conclusion makes it easier to read. Too much text defeats the purpose of visual communication.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Short Answer</span></div>
+                        <p>Write one sentence describing a trend from your survey data using careful language that avoids claiming causation.</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:70px;" placeholder="Example format: 'The data suggests that [group A] tended to [rate/respond/score] [higher/lower/differently] than [group B], though the small sample size of [N] means this should be interpreted cautiously.'"></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q3')">Show Sample Answer</button>
+                        <div class="answer-feedback" id="a_l3q3"><strong>Sample Answer:</strong> "The data suggests that female respondents in our survey of 30 participants tended to rate AI's impact on employment more negatively (avg. 2.9) than male respondents (avg. 3.5), though the small sample size means this finding should be interpreted cautiously."</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Multiple Choice</span></div>
+                        <p>Which is a required element of the infographic for this assignment?</p>
+                        <div class="answer-option"><input type="radio" name="l3q4" id="l3q4a"><label for="l3q4a">A) A 3-D pie chart showing all survey responses</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q4" id="l3q4b"><label for="l3q4b">B) At least one original visualization from your data analysis</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q4" id="l3q4c"><label for="l3q4c">C) A 200-word paragraph explaining your full methodology</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q4" id="l3q4d"><label for="l3q4d">D) Interactive animations</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q4')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q4"><strong>Correct — B!</strong> The infographic must include your name, question/impact statement, computing innovation description, survey reference, at least one statistic, at least one original chart or summary table, and a summative conclusion.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 5 <span class="question-type">Short Answer</span></div>
+                        <p>You find a visualization online related to your topic. List two specific questions you should ask yourself to evaluate whether it is effective.</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:70px;"></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q5')">Show Sample Answer</button>
+                        <div class="answer-feedback" id="a_l3q5"><strong>Sample Questions:</strong> (1) Can I understand what this visualization is communicating within 10 seconds of looking at it? (2) Does it have a clear title, labeled axes, and a legend that explain what the data represents and what the key finding is?</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>You've learned everything you need to know. Now it's your turn — the next three lessons are guided activities where you'll apply all of this to your own survey data, write your summative analysis, and build your infographic in Canva.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 13.4 — GUIDED ACTIVITY: Visualizing Survey Data ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.4: Guided Activity — Visualizing Your Survey Data (Part 1)</h3>
+                <span class="lesson-number">Lesson 4 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objective:</strong> Apply chart selection and design principles to create meaningful visualizations from your own real survey data using Google Sheets.
+                </div>
+
+                <div class="content-section">
+                    <h4>Activity Overview</h4>
+                    <p class="content-text">In this activity, you will use the skills you learned from the lessons on data visualization to create meaningful data analysis on your survey data. Good visualizations help people make sense of data sets that are too large to interpret by looking at the raw data — and that's exactly what you'll do here.</p>
+
+                    <div class="callout info">
+                        <div class="callout-title">ℹ️ Preparation</div>
+                        <p>Make a copy of the assignment document. Rename it <strong>lastname_visualization</strong> (your last name). You will place all answers and screenshots in that Google Document. The steps below tell you what to put in your answer document.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 1: Complete the Data Visualization Tutorial</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Complete the tutorial on Data Visualizations (link in Brightspace)</li>
+                            <li>➔ Provide the Share link to your completed tutorial (your visualizations created from your copy of the "MovieRating_AvgRatingByAgeGender" dataset)</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">📎 Tutorial Share Link</div>
+                        <p style="margin-top: 10px; color: #666;">Paste your Google Sheets tutorial link in your answer document here:</p>
+                        <textarea style="width:100%;height:50px;border:2px dashed #11998e;border-radius:4px;padding:10px;" placeholder="[Insert your Share link here]"></textarea>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 2: Watch the Video Demonstrations</h4>
+
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Scatter Chart Demonstration</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 2:14 min — Creating a scatter chart from survey data]</p>
+                    </div>
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Line Chart Demonstration</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 2:11 min — Creating a line chart from survey data]</p>
+                    </div>
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Bar Chart Demonstration</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 2:22 min — Creating a bar chart from survey data]</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 3: Create a Chart from Your Survey Data</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Open the working copy of your survey responses (from the previous assignment)</li>
+                            <li>➔ Create a Scatter, Line, Bar, or other appropriate chart using your survey data</li>
+                            <li>➔ Your chart <strong>must include</strong> the following:
+                                <ul style="margin-left: 20px; margin-top: 6px;">
+                                    <li>A title with your full name</li>
+                                    <li>An appropriate legend</li>
+                                    <li>Appropriate axis labels</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">📸 Chart Screenshot</div>
+                        <p style="margin-top: 10px; color: #666;">Insert a screenshot showing the chart you created from your survey data:</p>
+                        <textarea style="width:100%;height:180px;border:2px dashed #11998e;border-radius:4px;padding:10px;" placeholder="[Insert screenshot here in your answer document]"></textarea>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 4: Analyze and Synthesize — Reflect on Your Chart</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <p style="margin-top: 8px;">Respond to the following question prompts in your answer document:</p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <tbody>
+                                <tr><td style="width:35%;"><strong>What does your chart help you notice about the data?</strong></td><td><textarea placeholder="Type your response here..."></textarea></td></tr>
+                                <tr><td><strong>What connections and trends can you see in your chart?</strong></td><td><textarea placeholder="Type your response here..."></textarea></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 5: Find a Relevant External Visualization</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Search the Internet for a data visualization related to your final project topic</li>
+                            <li>➔ Provide a screenshot of the visualization that you found</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">📸 External Visualization Screenshot</div>
+                        <p style="margin-top: 10px; color: #666;">Insert screenshot of the visualization you found:</p>
+                        <textarea style="width:100%;height:180px;border:2px dashed #11998e;border-radius:4px;padding:10px;" placeholder="[Insert screenshot here in your answer document]"></textarea>
+                    </div>
+
+                    <div class="table-responsive" style="margin-top: 15px;">
+                        <table>
+                            <tbody>
+                                <tr><td style="width:35%;"><strong>What search tool did you use? What search terms did you use?</strong></td><td><textarea placeholder="Type your response here..."></textarea></td></tr>
+                                <tr><td><strong>What is this visualization trying to communicate?</strong></td><td><textarea placeholder="Type your response here..."></textarea></td></tr>
+                                <tr><td><strong>Is this visualization effective? Why?</strong></td><td><textarea placeholder="Type your response here..."></textarea></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="assessment">
+                    <h4>🎯 Completion Checklist</h4>
+                    <div style="margin-top: 15px;">
+                        <p style="margin-bottom: 12px;"><strong>Before moving to the next lesson, confirm you have:</strong></p>
+                        <div style="margin-left: 20px;">
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p1_c1"><label for="p1_c1" style="cursor:pointer;"> ✓ Completed the data visualization tutorial and provided the share link</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p1_c2"><label for="p1_c2" style="cursor:pointer;"> ✓ Watched all three chart demo videos (Scatter, Line, Bar)</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p1_c3"><label for="p1_c3" style="cursor:pointer;"> ✓ Created a chart from your survey data with title, legend, and labels</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p1_c4"><label for="p1_c4" style="cursor:pointer;"> ✓ Inserted a screenshot of your chart</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p1_c5"><label for="p1_c5" style="cursor:pointer;"> ✓ Responded to the chart reflection prompts</label></div>
+                            <div><input type="checkbox" id="p1_c6"><label for="p1_c6" style="cursor:pointer;"> ✓ Found an external visualization and answered all three reflection prompts</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>Great work! You've created and analyzed your own charts. In the next lesson, you'll write your summative analysis — pulling together your question, process, patterns, and conclusions into a complete data story.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 13.5 — GUIDED ACTIVITY: Summative Analysis ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.5: Guided Activity — Summative Analysis (Part 2)</h3>
+                <span class="lesson-number">Lesson 5 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objective:</strong> Synthesize all data science work from the semester into a comprehensive summative analysis that draws evidence-based conclusions about your computing innovation topic.
+                </div>
+
+                <div class="content-section">
+                    <h4>Bringing It All Together</h4>
+                    <p class="content-text">In this part of the assignment you will reflect on the entire data science process based on your final project topic — including your original question, the data you collected from your survey, and the visualizations you created to draw conclusions from your data.</p>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Revisit All Your Evidence</div>
+                        <p>Before writing your analysis, go back and review: (1) your automated visualizations/models of survey data, (2) your pivot table, and (3) the chart you created in Part 1. Use all three together — one piece of evidence alone isn't enough for a strong summative analysis.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Summative Analysis Questions</h4>
+                    <p class="content-text">Answer the following in your Google Document (3–5 sentences each):</p>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Revisit your original question: <em>"What impact does [TOPIC] have on society?"</em></li>
+                            <li>➔ Revisit the automated visualizations/models of your survey data</li>
+                            <li>➔ Revisit the summary (pivot) table you created</li>
+                            <li>➔ Revisit the original chart you created in Part 1</li>
+                            <li>➔ Answer the following question prompts to complete your summative analysis</li>
+                        </ul>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead><tr><th colspan="2">Summative Analysis</th></tr></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:35%;"><strong>What is your finalized question?</strong><br><span style="font-size:.85em;color:#888;">(Will you refine your original question based on your findings?)</span></td>
+                                    <td><textarea style="min-height:80px;" placeholder="Type your response here (3-5 sentences)..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Describe the process used to collect, model, and analyze your data.</strong><br><span style="font-size:.85em;color:#888;">(Include the computing tools and techniques used)</span></td>
+                                    <td><textarea style="min-height:100px;" placeholder="Type your response here (3-5 sentences)..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Describe a trend, pattern, or relationship you found within your data.</strong><br><span style="font-size:.85em;color:#888;">(Include a possible explanation for the trend or pattern)</span></td>
+                                    <td><textarea style="min-height:100px;" placeholder="Type your response here (3-5 sentences)..."></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Provide a summative conclusion based on your findings.</strong><br><span style="font-size:.85em;color:#888;">(What point about the impact of your computing innovation does your data analysis make?)</span></td>
+                                    <td><textarea style="min-height:100px;" placeholder="Type your response here (3-5 sentences)..."></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="assessment">
+                    <h4>🎯 Completion Checklist</h4>
+                    <div style="margin-top: 15px;">
+                        <div style="margin-left: 20px;">
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p2_c1"><label for="p2_c1" style="cursor:pointer;"> ✓ Revisited all previous data and visualizations before writing</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p2_c2"><label for="p2_c2" style="cursor:pointer;"> ✓ Responded to all four summative analysis prompts (3–5 sentences each)</label></div>
+                            <div><input type="checkbox" id="p2_c3"><label for="p2_c3" style="cursor:pointer;"> ✓ Conclusions are based on evidence from your data, not just opinion</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>Your analysis is complete — now it's time to communicate it! In the final activity lesson, you'll use Canva to design an infographic that turns your data story into a compelling visual presentation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 13.6 — GUIDED ACTIVITY: Infographic ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 13.6: Guided Activity — Communicating Your Data Story with an Infographic (Part 3)</h3>
+                <span class="lesson-number">Lesson 6 of 6</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objective:</strong> Design and produce an infographic in Canva that communicates a complete, evidence-based data story about your computing innovation topic.
+                </div>
+
+                <div class="content-section">
+                    <h4>Communicating Your Data Story</h4>
+                    <p class="content-text">We collect data to learn about the world and test our hypotheses about the patterns and relationships that might otherwise be invisible. Computational tools make it possible to quickly collect and analyze vast amounts of data, but those processes still depend on knowledgeable and thoughtful people who understand the data and can clearly present the conclusions drawn from it.</p>
+                    <p class="content-text">In this final part, you will visualize your data story by creating an infographic using Canva that clearly communicates the conclusions drawn from your survey data analysis.</p>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Infographic Design Tips</div>
+                        <ul style="margin-left: 20px; margin-top: 6px;">
+                            <li><strong>Keep it simple!</strong> Be brief and only include critical information that supports your data story.</li>
+                            <li>Make your infographic clear and easy to read.</li>
+                            <li>In some instances, a simple table may be better than a chart.</li>
+                            <li>Use text along with your visual to help explain your data story — but limit the amount of text you use.</li>
+                            <li>The infographic needs enough context to communicate to someone completely unfamiliar with this project.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 1: Watch the Canva Tutorials</h4>
+
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Canva — Welcome Home</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 1:34 min]</p>
+                    </div>
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Canva — Start Designing</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 1:40 min]</p>
+                    </div>
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Canva — Easy Editing</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 1:36 min]</p>
+                    </div>
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Infographic Demo using Canva</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 6:19 min — Full walkthrough of building an infographic in Canva]</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 2: Build Your Infographic in Canva</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Open Canva in a new browser tab</li>
+                            <li>➔ Browse the Infographic templates and select one to use as a starting point</li>
+                            <li>➔ Begin editing the template using your own information based on your computing innovation topic</li>
+                            <li>➔ Be sure to meet the <strong>minimum requirements</strong> listed below</li>
+                        </ul>
+                    </div>
+
+                    <p class="content-text" style="margin-top: 15px;"><strong>Minimum Requirements — your infographic must include ALL of the following:</strong></p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li>Your question/impact statement</li>
+                        <li>Your name</li>
+                        <li>A description of the computing innovation</li>
+                        <li>At least one icon or graphic from Canva</li>
+                        <li>A reference to your survey data (number of responses, age range, etc.)</li>
+                        <li>At least one relevant statistic from your data</li>
+                        <li>At least one original visualization from your analysis (chart, summary table, etc.)</li>
+                        <li>A summative conclusion that tells a story about your data</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 3: Screenshot &amp; Share Link</h4>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">📸 Infographic Screenshot</div>
+                        <p style="margin-top: 10px; color: #666;">Provide a screenshot of your completed infographic:</p>
+                        <textarea style="width:100%;height:220px;border:2px dashed #11998e;border-radius:4px;padding:10px;" placeholder="[Insert infographic screenshot here in your answer document]"></textarea>
+                    </div>
+
+                    <div class="activity-instruction" style="margin-top: 15px;">
+                        <strong>🔗 Share Link:</strong> Click Share at the top right of Canva → click "View-only link" → click Copy. Paste the link into your answer document below.
+                    </div>
+                    <textarea style="width:100%;height:50px;border:2px dashed #11998e;border-radius:4px;padding:10px;" placeholder="[Insert Canva View-only link here]"></textarea>
+                </div>
+
+                <div class="assessment">
+                    <h4>🎯 Completion Checklist — Full Assignment</h4>
+                    <div style="margin-top: 15px;">
+                        <p style="margin-bottom: 12px;"><strong>Before submitting, confirm your lastname_visualization document includes:</strong></p>
+                        <div style="margin-left: 20px;">
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p3_c1"><label for="p3_c1" style="cursor:pointer;"> ✓ Part 1: Tutorial share link, chart screenshot, chart reflection answers, external visualization screenshot and reflection</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p3_c2"><label for="p3_c2" style="cursor:pointer;"> ✓ Part 2: All four summative analysis responses (3–5 sentences each)</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p3_c3"><label for="p3_c3" style="cursor:pointer;"> ✓ Part 3: Infographic meets ALL minimum requirements</label></div>
+                            <div style="margin-bottom: 10px;"><input type="checkbox" id="p3_c4"><label for="p3_c4" style="cursor:pointer;"> ✓ Infographic screenshot inserted</label></div>
+                            <div><input type="checkbox" id="p3_c5"><label for="p3_c5" style="cursor:pointer;"> ✓ Canva View-only share link provided</label></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>Chapter Complete — Great Work!</h5>
+                    <p>You've successfully completed all parts of the Data Visualization assignment. Your data story is now ready to share with the world. In the next and final chapter, you'll bring everything you've built all semester together into your Impact of AI Final Project.</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /lessons-section -->
+
+    <!-- ═══════════════ SUMMARY ═══════════════ -->
+    <div class="summary-section">
+        <h2>Chapter 13 Summary: Key Takeaways</h2>
+        <p style="color:#666;margin-bottom:20px;"><strong>Congratulations!</strong> You've completed Chapter 13: Data Visualization. Here's what you've learned:</p>
+
+        <h3 style="color:#11998e;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Core Concepts</h3>
+        <ul class="summary-bullets">
+            <li><strong>Visualization serves two purposes:</strong> Exploratory (for you, to discover patterns) and explanatory (for your audience, to communicate conclusions)</li>
+            <li><strong>Choose the right chart type:</strong> Bar = comparing categories; Line = time trends; Scatter = relationship between two numeric variables</li>
+            <li><strong>Every chart needs:</strong> A clear title, axis labels, and a legend when multiple data series are present</li>
+            <li><strong>Correlation ≠ causation:</strong> Always say "the data suggests…" rather than "this proves…"</li>
+            <li><strong>Infographics communicate data stories:</strong> Simple, focused, and designed for your audience</li>
+        </ul>
+
+        <h3 style="color:#11998e;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Skills You've Developed</h3>
+        <ul class="summary-bullets">
+            <li>Identify which chart type best matches a given data question</li>
+            <li>Create scatter, line, and bar charts in Google Sheets from real survey data</li>
+            <li>Interpret patterns, trends, outliers, and clusters in data visualizations</li>
+            <li>Write a summative analysis with evidence-based conclusions</li>
+            <li>Design and produce an infographic in Canva that communicates a data story</li>
+            <li>Evaluate external data visualizations for clarity and effectiveness</li>
+        </ul>
+
+        <h3 style="color:#11998e;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Remember</h3>
+        <div style="background:#eafaf3;padding:20px;border-radius:6px;border-left:4px solid #11998e;">
+            <p style="margin:0;color:#333;line-height:1.8;">Data visualization is not about making the fanciest chart — it's about communicating truth clearly. A simple, well-labeled bar chart that answers your question is more valuable than any elaborate visualization that confuses its audience. The goal is always: <em>Can my audience understand this in 10 seconds?</em></p>
+        </div>
+    </div>
+
+    <!-- ═══════════════ COMING NEXT ═══════════════ -->
+    <div class="coming-next-section">
+        <h2>Coming Next: Chapter 14 – Impact of AI (Final Project)</h2>
+        <p>You've spent the whole semester building skills — AI, programming, cybersecurity, data, and now visualization. In Chapter 14, you'll bring it all together into a polished final project: a multi-page Google Site and a presentation that critically examines the real-world impact of a computing innovation you care about.</p>
+        <p style="margin-top:15px;font-size:0.95em;opacity:0.95;">Chapter 14 will walk you through adding new research prompts and an AI ethics statement to your website, and guide you through recording and delivering an effective 5–8 minute presentation tour of your site.</p>
+        <div class="progress-indicator">
+            <p>📚 You have completed 13 of 14 chapters in CSC101</p>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+<script>
+    function toggleAnswer(id) {
+        const el = document.getElementById(id);
+        const btn = el.previousElementSibling;
+        el.classList.toggle('show');
+        btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+    }
+</script>
+</body>
+</html>
