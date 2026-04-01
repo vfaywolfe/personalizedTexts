@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC101 Chapter 14: Impact of AI — Final Project</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+        header {
+            background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.95; }
+
+        .chapter-intro {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4a00e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chapter-intro h2 { color: #4a00e0; margin-bottom: 15px; font-size: 1.8em; }
+
+        .learning-objectives {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .learning-objectives h2 { color: #4a00e0; margin-bottom: 20px; font-size: 1.8em; }
+        .objectives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .objective {
+            background: #f3eeff;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #4a00e0;
+        }
+        .objective code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #4a00e0;
+            font-weight: bold;
+        }
+
+        .concepts-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .concepts-section h2 { color: #4a00e0; margin-bottom: 20px; font-size: 1.8em; }
+        .concept-item { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .concept-item:last-child { border-bottom: none; }
+        .concept-term { color: #4a00e0; font-weight: bold; font-size: 1.1em; margin-bottom: 8px; }
+        .concept-definition { color: #555; line-height: 1.7; }
+
+        .lessons-section { margin-bottom: 40px; }
+
+        .lesson {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 5px solid #4a00e0;
+        }
+        .lesson-header {
+            background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%);
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lesson-header h3 { font-size: 1.5em; margin: 0; }
+        .lesson-number {
+            background: rgba(255,255,255,0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .lesson-content { padding: 30px; }
+
+        .learning-objective {
+            background: #f3eeff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4a00e0;
+        }
+        .learning-objective strong { color: #4a00e0; }
+
+        .content-section { margin: 25px 0; }
+        .content-section h4 { color: #4a00e0; margin-bottom: 15px; font-size: 1.2em; }
+        .content-text { color: #555; line-height: 1.8; margin-bottom: 15px; }
+
+        .video-embed {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+        }
+        .video-embed p { color: #666; margin-bottom: 10px; font-size: 0.95em; }
+        .video-embed strong { color: #4a00e0; }
+
+        .example {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #00a8e8;
+        }
+        .example-title { font-weight: bold; color: #00a8e8; margin-bottom: 10px; font-size: 1.05em; }
+        .example-content { color: #333; line-height: 1.7; }
+
+        .callout { padding: 20px; border-radius: 6px; margin: 20px 0; border-left: 4px solid; }
+        .callout.warning { background: #fff3cd; border-left-color: #ff6b6b; }
+        .callout.warning .callout-title { color: #ff6b6b; font-weight: bold; margin-bottom: 8px; }
+        .callout.hint { background: #d1ecf1; border-left-color: #00a8e8; }
+        .callout.hint .callout-title { color: #00a8e8; font-weight: bold; margin-bottom: 8px; }
+        .callout.info { background: #f3eeff; border-left-color: #4a00e0; }
+        .callout.info .callout-title { color: #4a00e0; font-weight: bold; margin-bottom: 8px; }
+
+        .assessment {
+            background: linear-gradient(135deg, #f3eeff 0%, #faf0ff 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border: 2px solid #4a00e0;
+        }
+        .assessment h4 {
+            color: #4a00e0;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .assessment-question { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #ddd; }
+        .assessment-question:last-child { border-bottom: none; }
+        .question-text { font-weight: bold; color: #333; margin-bottom: 12px; }
+        .question-type {
+            display: inline-block;
+            background: #4a00e0;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        .answer-option {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .answer-option input { margin-right: 10px; cursor: pointer; }
+        .answer-option label { cursor: pointer; flex: 1; }
+
+        .show-answer-btn {
+            background: #4a00e0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+        .show-answer-btn:hover { background: #3500a8; }
+
+        .answer-feedback {
+            margin-top: 12px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 4px;
+            border-left: 4px solid #28a745;
+            color: #155724;
+            display: none;
+        }
+        .answer-feedback.show { display: block; }
+
+        .whats-next {
+            background: linear-gradient(135deg, #3500a8 0%, #4a00e0 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 6px;
+            margin-top: 25px;
+        }
+        .whats-next h5 { margin-bottom: 10px; font-size: 1.05em; }
+
+        .table-responsive { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        table th { background: #4a00e0; color: white; padding: 12px; text-align: left; font-weight: bold; }
+        table td { border: 1px solid #ddd; padding: 12px; color: #555; }
+        table tr:nth-child(even) { background: #f8f9fa; }
+        table textarea { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; font-family: Arial; resize: vertical; }
+
+        .scenario-box {
+            background: #f3eeff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 4px solid #4a00e0;
+        }
+        .scenario-title { color: #4a00e0; font-weight: bold; margin-bottom: 10px; font-size: 1.05em; }
+
+        .activity-instruction {
+            background: #e7e8ea;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #4a00e0;
+        }
+        .activity-instruction strong { color: #4a00e0; }
+
+        /* Website page cards */
+        .page-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 20px 0; }
+        .page-card { background: #f8f9fa; border: 2px solid #ddd; border-radius: 8px; padding: 15px; }
+        .page-card.new { border-color: #4a00e0; background: #f3eeff; }
+        .page-card .pg-icon { font-size: 1.6rem; margin-bottom: 6px; }
+        .page-card .pg-name { font-weight: bold; color: #4a00e0; font-size: .92rem; margin-bottom: 4px; }
+        .page-card .pg-req { font-size: .82rem; color: #555; }
+        .new-badge { display: inline-block; background: #4a00e0; color: white; font-size: .72rem; padding: 1px 6px; border-radius: 10px; margin-left: 5px; vertical-align: middle; }
+
+        /* Ethics cards */
+        .ethics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 15px 0; }
+        .ethics-card { border-radius: 8px; padding: 15px; text-align: center; }
+        .ethics-card .ec-icon { font-size: 1.8rem; margin-bottom: 5px; }
+        .ethics-card .ec-title { font-weight: bold; font-size: .93rem; margin-bottom: 5px; }
+        .ethics-card .ec-q { font-size: .82rem; color: #555; }
+        .ec-t { background: #fff3e0; border: 1.5px solid #ffb74d; }
+        .ec-t .ec-title { color: #e65100; }
+        .ec-a { background: #e8f5e9; border: 1.5px solid #81c784; }
+        .ec-a .ec-title { color: #2e7d32; }
+        .ec-r { background: #e3f2fd; border: 1.5px solid #64b5f6; }
+        .ec-r .ec-title { color: #1565c0; }
+        .ec-au { background: #f3eeff; border: 1.5px solid #ce93d8; }
+        .ec-au .ec-title { color: #4a00e0; }
+
+        /* Prompt blocks */
+        .prompt-block { background: #f8f9fa; border: 1.5px solid #ddd; border-radius: 8px; padding: 15px; margin: 10px 0; border-left: 4px solid #4a00e0; }
+        .prompt-letter { font-family: monospace; font-size: .9rem; background: #4a00e0; color: white; padding: 2px 7px; border-radius: 3px; margin-right: 8px; font-weight: bold; }
+        .prompt-title { font-weight: bold; color: #333; font-size: .97rem; }
+        .prompt-desc { font-size: .88rem; color: #555; margin-top: 6px; }
+
+        /* Req checklist */
+        .req-list { list-style: none; padding: 0; margin: 10px 0; }
+        .req-list li { display: flex; gap: 8px; padding: 7px 8px; border-radius: 5px; font-size: .93rem; }
+        .req-list li:nth-child(odd) { background: #f8f9fa; }
+        .req-list li::before { content: '☐'; color: #4a00e0; font-size: 1rem; flex-shrink: 0; }
+
+        .summary-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .summary-section h2 { color: #4a00e0; margin-bottom: 20px; font-size: 1.8em; }
+        .summary-bullets { list-style: none; margin-bottom: 20px; }
+        .summary-bullets li { padding: 12px 0; padding-left: 30px; position: relative; color: #555; line-height: 1.7; }
+        .summary-bullets li:before { content: "✓"; position: absolute; left: 0; color: #4a00e0; font-weight: bold; font-size: 1.2em; }
+
+        .coming-next-section {
+            background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        .coming-next-section h2 { color: white; margin-bottom: 15px; font-size: 1.8em; }
+        .coming-next-section p { font-size: 1.05em; line-height: 1.8; }
+        .progress-indicator {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .progress-indicator p { color: #4a00e0; font-weight: bold; margin: 0; }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8em; }
+            .objectives-grid { grid-template-columns: 1fr; }
+            .page-grid { grid-template-columns: 1fr 1fr; }
+            .ethics-grid { grid-template-columns: 1fr 1fr; }
+            .lesson-header { flex-direction: column; text-align: center; }
+            .lesson-number { margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header>
+        <h1>Chapter 14: Impact of AI</h1>
+        <p>Final Project — Website &amp; Presentation</p>
+    </header>
+
+    <!-- ═══════════════ CHAPTER INTRO ═══════════════ -->
+    <div class="chapter-intro">
+        <h2>Welcome to the Final Project</h2>
+        <p>The computing innovation of AI impacts our lives in ways that require considerable study and reflection to fully understand. In the beginning of the course, you were instructed to choose a final project topic of the "Impact of AI" in your field of study or area of interest. Now, you will use the skills you've learned during the course to create a website and presentation that examines your topic with a critical lens — demonstrating a deep understanding of the innovation, its development, its functionality, and its impact on people and society.</p>
+        <p style="margin-top: 15px;">Successful projects will exhibit evidence of <strong>critical thinking supported by research</strong> — not just descriptions or opinions. Several assignments throughout the semester have already contributed digital artifacts for use in your project, including graphics, video, data visualizations, question prompts, and your Google Site.</p>
+        <p style="margin-top: 15px;"><strong>What You'll Complete:</strong></p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li>Add new research content and prompts to your existing Google Site (Home, Impact, and Survey pages)</li>
+            <li>Create a brand-new References page with an AI ethics statement and cited sources</li>
+            <li>Deliver a 5–8 minute presentation (in-person or video) taking the audience on a tour of your website</li>
+        </ul>
+    </div>
+
+    <!-- ═══════════════ LEARNING OBJECTIVES ═══════════════ -->
+    <div class="learning-objectives">
+        <h2>Learning Objectives</h2>
+        <div class="objectives-grid">
+            <div class="objective">
+                <p><code>LO14.1.1</code> Describe the two required components of the final project and their purpose</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.1.2</code> Distinguish between descriptive writing and critical analysis, and apply critical thinking supported by research</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.2.1</code> Identify the content requirements for each page of the final project website</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.2.2</code> Research and respond to all six prompts (A–F) with appropriate depth and evidence</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.2.3</code> Explain the four AI ethics principles and write an original AI ethics statement</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.2.4</code> Format and cite reliable references that meet course requirements</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.3.1</code> Plan and deliver an effective 5–8 minute website tour presentation</p>
+            </div>
+            <div class="objective">
+                <p><code>LO14.3.2</code> Explain how Google Sites stores, edits, and publishes a website on the internet</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ CONCEPTS & TERMS ═══════════════ -->
+    <div class="concepts-section">
+        <h2>Key Concepts and Terms</h2>
+
+        <div class="concept-item">
+            <div class="concept-term">Computing Innovation</div>
+            <div class="concept-definition">The specific AI-powered technology you are researching and analyzing — for example, AI in healthcare diagnostics, AI in creative writing, AI in agriculture, AI in education, etc.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Critical Analysis</div>
+            <div class="concept-definition">Examining a topic from multiple perspectives with evidence — not just describing what it is, but evaluating its effects, risks, benefits, and broader implications for people and society. The strongest final projects go beyond "AI is used in X" to examine why it matters and who is affected.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Digital Artifact</div>
+            <div class="concept-definition">A product created using digital tools. In this course, your digital artifacts include: AI-generated images, data visualizations, infographics, embedded videos, survey results, and your Google Site.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">AI Ethics</div>
+            <div class="concept-definition">Principles that guide responsible and fair use of AI tools. For this project, you must address four principles: Transparency, Attribution, Responsibility, and Authenticity.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Transparency (AI Ethics)</div>
+            <div class="concept-definition">Being open and honest about when and how you used AI tools in your research and content creation process.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Attribution (AI Ethics)</div>
+            <div class="concept-definition">Giving proper credit for any AI-generated content or AI-assisted work included in your project.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Responsibility (AI Ethics)</div>
+            <div class="concept-definition">Verifying the accuracy of AI-generated information and taking ownership of your final work — you are responsible for everything in your project, even if AI helped create it.</div>
+        </div>
+        <div class="concept-item">
+            <div class="concept-term">Authenticity (AI Ethics)</div>
+            <div class="concept-definition">Ensuring your project reflects your own genuine understanding and analysis, even when using AI assistance. The thinking must be yours.</div>
+        </div>
+    </div>
+
+    <!-- ═══════════════ LESSONS ═══════════════ -->
+    <div class="lessons-section">
+
+        <!-- ══ LESSON 14.1 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 14.1: The Final Project — Overview &amp; Expectations</h3>
+                <span class="lesson-number">Lesson 1 of 5</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO14.1.1 — Describe the two required components of the final project and their purpose. LO14.1.2 — Distinguish between descriptive writing and critical analysis supported by research.
+                </div>
+
+                <div class="content-section">
+                    <h4>Watch First: Final Project Description</h4>
+
+                    <div class="video-embed">
+                        <p><strong>Watch:</strong> Final Project Description</p>
+                        <p style="font-size: 0.9em; color: #999;">[Required Video — 6:43 min — A complete walkthrough of the final project requirements, format, and expectations. Watch this before reading further.]</p>
+                    </div>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Watch This First</div>
+                        <p>The Final Project Description video gives you a complete tour of everything required. Watch it before reading further — it will make all of the written requirements much clearer.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>What Is the Final Project?</h4>
+                    <p class="content-text">Your final project examines the <em>impact of AI</em> in your chosen field of study or area of interest. There are two required components:</p>
+
+                    <div class="example">
+                        <div class="example-title">The Two Required Components</div>
+                        <div class="example-content">
+                            <p><strong>Part 1: Website (Google Sites)</strong> — A multi-page Google Site with a Home page, Impact page, Survey page, and a new References page. Each page will include new research content and digital artifacts from throughout the semester.</p>
+                            <p style="margin-top: 12px;"><strong>Part 2: Presentation</strong> — A 5–8 minute tour of your website (in-person or as a recorded video) that walks the audience through all prompts A–F, explains your research, and showcases the tools and techniques you used.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Your Website — What's Already Built vs. What's New</h4>
+                    <p class="content-text">Throughout the semester, you've created digital artifacts that feed directly into your final project. Here's a summary of each page:</p>
+
+                    <div class="page-grid">
+                        <div class="page-card">
+                            <div class="pg-icon">🏠</div>
+                            <div class="pg-name">Home Page</div>
+                            <div class="pg-req">Already has: Logo, banner image, AI-generated image, elevator pitch<br><br><em>Add new:</em> Prompts A &amp; B + supporting images/video</div>
+                        </div>
+                        <div class="page-card">
+                            <div class="pg-icon">🌍</div>
+                            <div class="pg-name">Impact Page</div>
+                            <div class="pg-req">Already has: Embedded video + text description<br><br><em>Add new:</em> Prompts C, D &amp; E + infographic image</div>
+                        </div>
+                        <div class="page-card">
+                            <div class="pg-icon">📊</div>
+                            <div class="pg-name">Survey Page</div>
+                            <div class="pg-req">Already has: Embedded survey + relevance description<br><br><em>Add new:</em> Chart image + relevance sentence</div>
+                        </div>
+                        <div class="page-card new">
+                            <div class="pg-icon">📚</div>
+                            <div class="pg-name">References Page <span class="new-badge">NEW</span></div>
+                            <div class="pg-req">Create brand new: AI ethics statement (Prompt F) + at least 3 cited sources</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Critical Analysis vs. Description — Know the Difference</h4>
+                    <p class="content-text">The most important distinction in this project is between <em>describing</em> AI and <em>critically analyzing</em> its impact. Responses that only describe what AI is will not demonstrate the depth of thinking required.</p>
+
+                    <div class="example">
+                        <div class="example-title">Example 14.1.1: Descriptive vs. Critical Response</div>
+                        <div class="example-content">
+                            <p><strong>Weak (descriptive):</strong><br>
+                            <em>"AI is used in healthcare. It helps doctors. There are some risks."</em></p>
+                            <p style="margin-top: 12px;"><strong>Strong (critical analysis):</strong><br>
+                            <em>"AI diagnostic tools can analyze medical imaging with accuracy comparable to experienced radiologists, reducing diagnostic delays in under-resourced hospitals that lack specialists (Smith, 2023). However, a 2022 study found several AI diagnostic tools perform significantly worse on images from patients of color, raising serious equity concerns. Responsible deployment in healthcare therefore requires diverse training data, independent audits, and transparent reporting of performance gaps across demographic groups."</em></p>
+                            <p style="margin-top: 10px; font-size: .9em; color: #666;">Notice: specific technology → specific benefit → specific concern → specific recommendation, all supported by research.</p>
+                        </div>
+                    </div>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Key Reminder</div>
+                        <p>Successful final projects exhibit evidence of <strong>critical thinking supported by research</strong> — not just descriptive or opinion-based writing. You need at least three cited, reliable sources on your References page.</p>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 14.1 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 14.1</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">Multiple Choice</span></div>
+                        <p>How many required components does the final project have?</p>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1a"><label for="l1q1a">A) One: the website only</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1b"><label for="l1q1b">B) Two: the website and the presentation</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1c"><label for="l1q1c">C) Three: website, presentation, and exam</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q1" id="l1q1d"><label for="l1q1d">D) Four: one for each page of the site</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q1"><strong>Correct — B!</strong> The final project has two required components: a multi-page Google Site (Part 1) and a 5–8 minute presentation in-person or video (Part 2).</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">True / False</span></div>
+                        <p>A strong final project response can be based entirely on personal opinions about AI without needing to cite any research.</p>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2t"><label for="l1q2t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q2" id="l1q2f"><label for="l1q2f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q2"><strong>Correct — False!</strong> Successful projects exhibit evidence of critical thinking supported by research — not just descriptions or opinions. You need at least three cited reliable sources on your References page.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Multiple Choice</span></div>
+                        <p>Which page must students create brand new for the final project?</p>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3a"><label for="l1q3a">A) Home page</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3b"><label for="l1q3b">B) Impact page</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3c"><label for="l1q3c">C) Survey page</label></div>
+                        <div class="answer-option"><input type="radio" name="l1q3" id="l1q3d"><label for="l1q3d">D) References page</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q3')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l1q3"><strong>Correct — D!</strong> The Home, Impact, and Survey pages already exist from previous assignments. The References page is brand new and must include the AI ethics statement (Prompt F) and at least three cited sources.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Short Answer</span></div>
+                        <p>In 2–3 sentences, explain the difference between a descriptive response and a critical analysis response in the context of this final project.</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:80px;"></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l1q4')">Show Possible Answer</button>
+                        <div class="answer-feedback" id="a_l1q4"><strong>Sample Answer:</strong> A descriptive response only states what AI is or does ("AI is used in healthcare to read X-rays"). A critical analysis examines its actual effects, risks, and implications with specific evidence ("AI diagnostic tools can increase early cancer detection in underserved areas, but risk reinforcing bias if trained on non-diverse datasets — raising equity and accountability questions"). The critical response is supported by research, not just general claims.</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>You know the big picture — now let's get specific. In the next lesson, you'll walk through every page of your website and learn exactly what content each page requires, including all six research prompts and the AI ethics statement.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 14.2 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 14.2: Website Content — The Six Research Prompts &amp; AI Ethics</h3>
+                <span class="lesson-number">Lesson 2 of 5</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO14.2.1 — Identify content requirements for each page. LO14.2.2 — Research and respond to all six prompts (A–F) with depth and evidence. LO14.2.3 — Explain the four AI ethics principles and write an ethics statement. LO14.2.4 — Format and cite reliable references.
+                </div>
+
+                <div class="content-section">
+                    <h4>Response Guidelines</h4>
+
+                    <div class="callout info">
+                        <div class="callout-title">ℹ️ Response Length</div>
+                        <p>No single prompt response should exceed <strong>200 words</strong>. Quality beats quantity — a focused, evidence-backed 150-word response is more effective than an unfocused 300-word one. Think: specific technology → specific benefit or concern → specific evidence.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>🏠 Home Page — Add Prompts A &amp; B</h4>
+                    <p class="content-text">This page already includes your logo, banner image, AI-generated image, and elevator pitch. Add the following two prompts plus any supporting images or video:</p>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">A</span>
+                        <span class="prompt-title">Background &amp; Context</span>
+                        <div class="prompt-desc">Describe the AI technologies that are currently being used in your chosen topic area. What problems do they solve, and what opportunities do they create? Briefly explain how AI has developed in this field.</div>
+                    </div>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">B</span>
+                        <span class="prompt-title">CS Connections</span>
+                        <div class="prompt-desc">How do other computer science areas (Cybersecurity, Data Science, Programming, and The Internet) relate to AI in your chosen topic area? How do these areas support or limit AI use?</div>
+                    </div>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Prompt B Connection Tip</div>
+                        <p>Think back to earlier chapters: cybersecurity (Ch. 8), data science (Ch. 10–12), programming (Ch. 4–6), and the internet (Ch. 7). Each of those connects to AI in your topic. Use specific examples — e.g., "AI diagnostic tools in healthcare require large datasets (Data Science) and must protect patient records (Cybersecurity)."</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>🌍 Impact Page — Add Prompts C, D &amp; E + Infographic Image</h4>
+                    <p class="content-text">This page already has your embedded video and text description. Add these three prompts and an image of your infographic from the Data Visualization assignment:</p>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">C</span>
+                        <span class="prompt-title">Benefits &amp; Concerns</span>
+                        <div class="prompt-desc">What are the main benefits of using AI in your chosen field? What are the main concerns or risks? Give specific examples of both.</div>
+                    </div>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">D</span>
+                        <span class="prompt-title">Impact on Society</span>
+                        <div class="prompt-desc">How is AI in your chosen topic area affecting society, the economy, and/or culture? Consider the effect on jobs, accessibility and equity, social interactions, cultural practices, and/or the economic opportunities and disruptions that may emerge.</div>
+                    </div>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">E</span>
+                        <span class="prompt-title">Future Outlook</span>
+                        <div class="prompt-desc">Based on your research and analysis, what do you predict for the future of AI in your topic area over the next 5–10 years? What advice would you give to people in this field about using AI?</div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>📊 Survey Page — Add Your Chart</h4>
+                    <p class="content-text">This page already has your embedded survey and relevance description. Add:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li>An image of the chart you generated from your survey data analysis (from the Data Visualization assignment)</li>
+                        <li>One sentence explaining how the chart is relevant to your topic</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h4>📚 References Page (NEW) — Prompt F &amp; Sources</h4>
+                    <p class="content-text">Create a brand-new page called "References." It contains two things:</p>
+
+                    <div class="prompt-block">
+                        <span class="prompt-letter">F</span>
+                        <span class="prompt-title">AI Ethics Statement</span>
+                        <div class="prompt-desc">Describe how you used AI tools to complete your final project website (consider both research and content creation). In your description, address each of the four AI ethics principles: Transparency, Attribution, Responsibility, and Authenticity. Provide specific examples to support your statement.</div>
+                    </div>
+
+                    <h4 style="margin-top: 20px;">The Four AI Ethics Principles</h4>
+
+                    <div class="ethics-grid">
+                        <div class="ethics-card ec-t">
+                            <div class="ec-icon">🔍</div>
+                            <div class="ec-title">Transparency</div>
+                            <div class="ec-q">Did you clearly identify when and how you used AI tools in your research?</div>
+                        </div>
+                        <div class="ethics-card ec-a">
+                            <div class="ec-icon">📝</div>
+                            <div class="ec-title">Attribution</div>
+                            <div class="ec-q">How did you give proper credit for any AI-generated content or AI-assisted work?</div>
+                        </div>
+                        <div class="ethics-card ec-r">
+                            <div class="ec-icon">✅</div>
+                            <div class="ec-title">Responsibility</div>
+                            <div class="ec-q">How did you verify the accuracy of AI-generated information and take ownership of your final work?</div>
+                        </div>
+                        <div class="ethics-card ec-au">
+                            <div class="ec-icon">🎓</div>
+                            <div class="ec-title">Authenticity</div>
+                            <div class="ec-q">How did you ensure your project reflects your own understanding and analysis, even when using AI assistance?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>References — Format &amp; Source Requirements</h4>
+                    <p class="content-text">List at least <strong>three</strong> reliable sources. For each source provide:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>Author</strong></li>
+                        <li><strong>Title</strong></li>
+                        <li><strong>Website address</strong> (as a hyperlink)</li>
+                        <li><strong>Year of publication</strong> (or access date if no publication date is available)</li>
+                    </ul>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Source Quality Matters</div>
+                        <p>Use reliable sources: peer-reviewed articles, reputable news outlets (BBC, NPR, Reuters, NYT), government or university publications, or well-known research organizations. Avoid Wikipedia, random blogs, or AI chatbot outputs as primary sources. If an AI chatbot gave you a statistic, trace it back to the original source and cite that instead — AI can "hallucinate" inaccurate facts.</p>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 14.2 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 14.2</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">Multiple Choice</span></div>
+                        <p>What is the maximum recommended word count for any single prompt response (A–F) on your website?</p>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1a"><label for="l2q1a">A) 100 words</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1b"><label for="l2q1b">B) 200 words</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1c"><label for="l2q1c">C) 500 words</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q1" id="l2q1d"><label for="l2q1d">D) There is no limit</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q1"><strong>Correct — B!</strong> No single prompt response should exceed 200 words. Focus on quality, evidence, and clarity rather than length. A focused, evidence-backed response is always more effective than a long, unfocused one.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">Multiple Choice</span></div>
+                        <p>Prompt F, the AI Ethics Statement, must address four principles. Which of the following is NOT one of them?</p>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2a"><label for="l2q2a">A) Transparency</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2b"><label for="l2q2b">B) Attribution</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2c"><label for="l2q2c">C) Profitability</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q2" id="l2q2d"><label for="l2q2d">D) Authenticity</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q2"><strong>Correct — C!</strong> The four AI ethics principles for this assignment are Transparency, Attribution, Responsibility, and Authenticity. Profitability is not one of them.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Matching</span></div>
+                        <p>Match each AI ethics principle to the question it asks you to address. Write Transparency, Attribution, Responsibility, or Authenticity next to each.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>Question</th><th>Ethics Principle (write your answer)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>How did you verify AI-generated information and take ownership of your work?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                    <tr><td>Did you clearly identify when and how you used AI tools?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                    <tr><td>How did you ensure the project reflects your own understanding?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                    <tr><td>How did you give proper credit for AI-generated content?</td><td><textarea style="height:40px;" placeholder="Your answer..."></textarea></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q3')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q3"><strong>Answers:</strong><br>
+                        Verify accuracy + take ownership → <strong>Responsibility</strong><br>
+                        Identify when/how you used AI → <strong>Transparency</strong><br>
+                        Reflects your own understanding → <strong>Authenticity</strong><br>
+                        Give credit for AI-generated content → <strong>Attribution</strong></div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Short Answer</span></div>
+                        <p>You used an AI chatbot to help you research your topic and it gave you a statistic. What should you do before including that statistic in your project?</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:70px;"></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q4')">Show Possible Answer</button>
+                        <div class="answer-feedback" id="a_l2q4"><strong>Sample Answer:</strong> You should verify the statistic by finding the original source the chatbot referenced, or a reliable publication that confirms the same data. AI chatbots can "hallucinate" — inventing plausible-sounding but incorrect facts. Always trace a statistic back to a credible, citable source before using it in your project, and cite that real source, not the chatbot.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 5 <span class="question-type">True / False</span></div>
+                        <p>Wikipedia is an acceptable primary source to cite in your References page for the final project.</p>
+                        <div class="answer-option"><input type="radio" name="l2q5" id="l2q5t"><label for="l2q5t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l2q5" id="l2q5f"><label for="l2q5f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l2q5')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l2q5"><strong>Correct — False!</strong> Wikipedia is not a reliable primary source because anyone can edit it. However, you can use Wikipedia as a starting point — trace the information back to the original sources cited in the Wikipedia article and cite those reliable sources instead.</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>Your website content is mapped out — now let's talk about how to <em>present</em> it. In the next lesson, you'll learn how to structure an effective 5–8 minute presentation that takes your audience on a tour of your site.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 14.3 ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 14.3: Your Presentation — Structure &amp; Delivery</h3>
+                <span class="lesson-number">Lesson 3 of 5</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objectives:</strong> LO14.3.1 — Plan and deliver an effective 5–8 minute website tour presentation. LO14.3.2 — Explain how Google Sites stores, edits, and publishes a website on the internet.
+                </div>
+
+                <div class="content-section">
+                    <h4>The Presentation Format</h4>
+                    <p class="content-text">Rather than creating a separate slide deck, you will take your audience on a <strong>live tour of your website</strong> — visiting each page and explaining your research, analysis, and conclusions out loud in your own words.</p>
+                    <p class="content-text">Your instructor will provide guidance on the format: in-person presentations or recorded video. For online sections, you will record a video using a screen-recording tool.</p>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Don't Just Read the Website</div>
+                        <p>A common mistake is reading the website word-for-word. Instead, use brief speaker notes to <em>summarize and expand</em> on key points. The website is your visual aid — you are the narrator who brings it to life with insight and explanation.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Presentation Requirements</h4>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li>Length: <strong>5–8 minutes</strong></li>
+                        <li>Must address <strong>all prompts A–F</strong> by visiting each page of your website</li>
+                        <li>Must briefly describe how you created your Google Site (stored, edited, and accessed on the web)</li>
+                        <li>Must briefly describe the graphics and videos used (tools and techniques)</li>
+                        <li>On the Survey page, explain how you used Google Forms and Google Sheets to collect and analyze data</li>
+                        <li>On the References page, follow a link to your most useful source to show the audience where you found your information</li>
+                    </ul>
+                </div>
+
+                <div class="content-section">
+                    <h4>Recommended Presentation Structure</h4>
+
+                    <div class="example">
+                        <div class="example-title">Example 14.3.1: How to Structure Your 5–8 Minute Presentation</div>
+                        <div class="example-content">
+                            <p><strong>Opening (~30 sec):</strong> Briefly introduce your topic and why you chose it.</p>
+                            <p style="margin-top: 8px;"><strong>Google Sites overview (~30 sec):</strong> Explain that your site is stored on Google's cloud servers, edited via the Sites browser editor, and accessed via a public URL after publishing.</p>
+                            <p style="margin-top: 8px;"><strong>Graphics &amp; video (~30 sec):</strong> Briefly describe your AI-generated image, any videos, and your infographic — the tools used to create or find them.</p>
+                            <p style="margin-top: 8px;"><strong>Home page — Prompts A &amp; B (~1.5 min):</strong> State each prompt question, then summarize your key points. Don't read verbatim.</p>
+                            <p style="margin-top: 8px;"><strong>Impact page — Prompts C, D &amp; E (~2.5 min):</strong> State each prompt, summarize your key findings and analysis. Mention your infographic.</p>
+                            <p style="margin-top: 8px;"><strong>Survey page (~1 min):</strong> Explain how you used Google Forms and Sheets to collect and analyze data. Show your chart and describe what it reveals.</p>
+                            <p style="margin-top: 8px;"><strong>References page — Prompt F (~1 min):</strong> Summarize your AI ethics statement. Navigate to your most useful source and show the audience where you got your information.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>How Google Sites Works</h4>
+                    <p class="content-text">Your presentation must briefly explain how your Google Site is stored, edited, and accessed. Here is a quick reference:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>Stored:</strong> Your site lives on Google's cloud servers — no software to install, no files that can be lost locally.</li>
+                        <li><strong>Edited:</strong> Via the Google Sites editor in your browser — a drag-and-drop interface that saves changes in real time.</li>
+                        <li><strong>Accessed:</strong> Anyone with the link can view it via a unique URL on the web (but only after you click <strong>Publish</strong>).</li>
+                        <li><strong>Published vs. Draft:</strong> You must click "Publish" for others to see your changes. Changes in draft mode are not visible to visitors.</li>
+                    </ul>
+
+                    <div class="callout info">
+                        <div class="callout-title">ℹ️ Don't Forget to Publish</div>
+                        <p>After making all your final changes to your Google Site, always click the <strong>Publish</strong> button in the top-right corner. Check the live URL in a new browser tab (or incognito window) to confirm everything looks correct before submitting the link.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Recording Your Video (Video Sections)</h4>
+                    <p class="content-text">For video presentations, screen-record yourself navigating your website while speaking through each section. Recommended tools:</p>
+                    <ul style="margin-left: 20px; color: #555;">
+                        <li><strong>ClipChamp</strong> — Free version produces 480p video (sufficient for this assignment)</li>
+                        <li><strong>iMovie</strong> or <strong>ShotCut</strong> — Other free video recording/editing options</li>
+                    </ul>
+                    <p class="content-text">Upload your completed video to <strong>Google Drive</strong> or <strong>YouTube</strong> to obtain a shareable URL for submission.</p>
+
+                    <div class="callout hint">
+                        <div class="callout-title">💡 Practice First</div>
+                        <p>Do a full practice run before recording. If your practice run goes over 8 minutes, cut content from your explanations. If it goes under 5 minutes, add more depth and analysis to your discussion of the prompts — don't just rush through them.</p>
+                    </div>
+                </div>
+
+                <!-- FORMATIVE ASSESSMENT 14.3 -->
+                <div class="assessment">
+                    <h4>🎯 Check Your Understanding — Lesson 14.3</h4>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 1 <span class="question-type">True / False</span></div>
+                        <p>The best presentation strategy is to read your website word-for-word to make sure you don't miss any content.</p>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1t"><label for="l3q1t">True</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q1" id="l3q1f"><label for="l3q1f">False</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q1')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q1"><strong>Correct — False!</strong> You should summarize and expand on key points in your own words, not read the website verbatim. The website is your visual backdrop — you are the narrator who brings it to life.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 2 <span class="question-type">Multiple Choice</span></div>
+                        <p>How long must the final project presentation be?</p>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2a"><label for="l3q2a">A) 1–3 minutes</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2b"><label for="l3q2b">B) 3–5 minutes</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2c"><label for="l3q2c">C) 5–8 minutes</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q2" id="l3q2d"><label for="l3q2d">D) 10–15 minutes</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q2')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q2"><strong>Correct — C!</strong> The presentation must be 5–8 minutes. Too short and you won't cover all prompts adequately; going over 8 minutes suggests you need to be more concise.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 3 <span class="question-type">Multiple Choice</span></div>
+                        <p>On your Survey page during the presentation, what should you specifically explain?</p>
+                        <div class="answer-option"><input type="radio" name="l3q3" id="l3q3a"><label for="l3q3a">A) How you chose your topic at the beginning of the semester</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q3" id="l3q3b"><label for="l3q3b">B) How you used Google Forms and Google Sheets to collect and analyze data</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q3" id="l3q3c"><label for="l3q3c">C) How to use Canva to design infographics</label></div>
+                        <div class="answer-option"><input type="radio" name="l3q3" id="l3q3d"><label for="l3q3d">D) How Google Sites stores and publishes websites</label></div>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q3')">Show Answer</button>
+                        <div class="answer-feedback" id="a_l3q3"><strong>Correct — B!</strong> On the Survey page, explain your data collection and analysis process — the tools (Google Forms, Sheets) and the techniques (pivot tables, charts). This is where you show your data science skills.</div>
+                    </div>
+
+                    <div class="assessment-question">
+                        <div class="question-text">Question 4 <span class="question-type">Short Answer</span></div>
+                        <p>In one sentence each, describe how a Google Site is (a) stored, (b) edited, and (c) accessed on the web.</p>
+                        <textarea style="width:100%;padding:10px;border-radius:4px;border:1px solid #ddd;font-family:Arial;height:80px;" placeholder="(a) Stored: ...&#10;(b) Edited: ...&#10;(c) Accessed: ..."></textarea>
+                        <button class="show-answer-btn" onclick="toggleAnswer('a_l3q4')">Show Possible Answer</button>
+                        <div class="answer-feedback" id="a_l3q4"><strong>Sample Answer:</strong><br>(a) Stored: A Google Site lives on Google's cloud servers, so no local files or software are needed.<br>(b) Edited: It is edited through the Google Sites browser editor, which auto-saves changes in real time.<br>(c) Accessed: Anyone with the URL can view a published Google Site on any device with an internet connection.</div>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>You understand everything required — now it's time to do it! The next two lessons are your guided activities: building out your website and recording your presentation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 14.4 — GUIDED ACTIVITY: Website ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 14.4: Guided Activity — Complete Your Final Project Website (Part 1)</h3>
+                <span class="lesson-number">Lesson 4 of 5</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objective:</strong> Apply all chapter concepts to finalize all four pages of your Google Site with new research content, prompts A–F, an AI ethics statement, and properly cited references.
+                </div>
+
+                <div class="content-section">
+                    <h4>Assignment Preparation</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Make a copy of the assignment document. Rename it <strong>lastname_final</strong> (your last name).</li>
+                            <li>➔ You will place all answers, screenshots, and links in this Google Document.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Home Page — Add Prompts A &amp; B</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Confirm your Home page already includes: your logo, banner image, AI-generated image, and elevator pitch</li>
+                            <li>➔ Add Prompt A (Background &amp; Context) — under 200 words, with supporting images or video</li>
+                            <li>➔ Add Prompt B (CS Connections) — under 200 words, with supporting images or video</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Impact Page — Add Prompts C, D &amp; E + Infographic</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Confirm your Impact page already includes: your embedded video and text description</li>
+                            <li>➔ Add Prompt C (Benefits &amp; Concerns) — under 200 words with specific examples</li>
+                            <li>➔ Add Prompt D (Impact on Society) — under 200 words, consider jobs, equity, culture</li>
+                            <li>➔ Add Prompt E (Future Outlook) — under 200 words, include your prediction and advice</li>
+                            <li>➔ Add an image of your Impact of AI infographic (created in the Data Visualization assignment)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Survey Page — Add Your Chart</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Confirm your Survey page already includes: your embedded survey and relevance description</li>
+                            <li>➔ Add an image of the chart generated from your survey data analysis</li>
+                            <li>➔ Add one sentence describing the chart's relevance to your topic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>References Page (NEW) — Prompt F &amp; Sources</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Create a new page called <strong>"References"</strong> on your Google Site</li>
+                            <li>➔ Write and add your AI Ethics Statement (Prompt F) — address all four principles (Transparency, Attribution, Responsibility, Authenticity) with specific examples</li>
+                            <li>➔ List at least <strong>three</strong> reliable sources, each including: Author, Title, Website address (hyperlinked), Year of publication (or access date)</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout warning">
+                        <div class="callout-title">⚠️ Publish Before Submitting</div>
+                        <p>After making all changes, click <strong>Publish</strong> in the top-right corner of the Google Sites editor. Confirm the live URL looks correct in a new browser tab before submitting.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Submit Your Website URL</h4>
+                    <div class="scenario-box">
+                        <div class="scenario-title">🔗 Website Link</div>
+                        <p style="margin-top: 10px; color: #666;">Provide the public URL of your published Google Site:</p>
+                        <textarea style="width:100%;height:50px;border:2px dashed #4a00e0;border-radius:4px;padding:10px;" placeholder="[Paste your Google Site URL here]"></textarea>
+                    </div>
+                </div>
+
+                <div class="assessment">
+                    <h4>🎯 Completion Checklist — Website</h4>
+                    <div style="margin-top: 15px;">
+                        <p style="margin-bottom: 12px;"><strong>Before moving on, confirm your Google Site includes:</strong></p>
+                        <ul class="req-list">
+                            <li>Home page has Prompts A &amp; B (under 200 words each) + supporting images/video</li>
+                            <li>Impact page has Prompts C, D &amp; E (under 200 words each) + infographic image</li>
+                            <li>Survey page has chart image + relevance sentence</li>
+                            <li>References page (NEW) has AI Ethics Statement (Prompt F) addressing all 4 principles with specific examples</li>
+                            <li>References page has at least 3 reliable, properly formatted sources</li>
+                            <li>Site is published and the live URL is confirmed to work</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>What's Coming Next?</h5>
+                    <p>Your website is complete and published — excellent work! In the final lesson, you'll prepare your speaker notes and record (or deliver) your 5–8 minute presentation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LESSON 14.5 — GUIDED ACTIVITY: Presentation ══ -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <h3>Lesson 14.5: Guided Activity — Record &amp; Submit Your Presentation (Part 2)</h3>
+                <span class="lesson-number">Lesson 5 of 5</span>
+            </div>
+            <div class="lesson-content">
+
+                <div class="learning-objective">
+                    <strong>Learning Objective:</strong> Prepare, record, and submit an effective 5–8 minute presentation that tours your completed final project website and demonstrates understanding of all six prompts and the tools used.
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 1: Prepare Your Speaker Notes</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ For each page and prompt, write brief bullet-point notes summarizing your key points</li>
+                            <li>➔ Practice talking through them without reading them verbatim</li>
+                            <li>➔ Time yourself — aim for 5–8 minutes total</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">📝 Speaker Notes Planning Space</div>
+                        <p style="margin-top: 10px; margin-bottom: 10px; color: #666;">Use this space (or a separate document) to draft your speaker notes for each section:</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>Section</th><th>Key Points (your speaker notes)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Opening + Google Sites overview</td><td><textarea style="min-height:60px;" placeholder="Brief intro to your topic + how Sites stores, edits, publishes..."></textarea></td></tr>
+                                    <tr><td>Home page — Prompts A &amp; B</td><td><textarea style="min-height:70px;" placeholder="Your key points for each prompt..."></textarea></td></tr>
+                                    <tr><td>Impact page — Prompts C, D &amp; E</td><td><textarea style="min-height:80px;" placeholder="Your key findings and analysis..."></textarea></td></tr>
+                                    <tr><td>Survey page — data collection process + chart</td><td><textarea style="min-height:60px;" placeholder="How you used Google Forms + Sheets + what your chart shows..."></textarea></td></tr>
+                                    <tr><td>References page — Prompt F + sources</td><td><textarea style="min-height:60px;" placeholder="Your ethics statement summary + navigate to your best source..."></textarea></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 2: Record Your Video (Video Sections)</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Use <strong>ClipChamp</strong>, iMovie, ShotCut, or another screen-recording tool</li>
+                            <li>➔ Capture your screen as you navigate through your published website</li>
+                            <li>➔ Speak clearly and confidently using your notes as a guide, not a script</li>
+                            <li>➔ Ensure your microphone is working before you begin recording</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout info">
+                        <div class="callout-title">ℹ️ Recording Tips</div>
+                        <p>Most laptops have a built-in microphone — check that it picks up your voice clearly before recording your final version. Close unnecessary tabs and applications before starting your recording to avoid distractions.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h4>Step 3: Upload &amp; Submit</h4>
+
+                    <div class="activity-instruction">
+                        <strong>DO THE FOLLOWING:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>➔ Upload your video to Google Drive or YouTube to obtain a shareable URL</li>
+                            <li>➔ Paste the video link into your lastname_final Google Document</li>
+                        </ul>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">🎥 Video Presentation Link</div>
+                        <p style="margin-top: 10px; color: #666;">Provide the URL of your video presentation on YouTube or Google Drive:</p>
+                        <textarea style="width:100%;height:50px;border:2px dashed #4a00e0;border-radius:4px;padding:10px;" placeholder="[Paste your video URL here]"></textarea>
+                    </div>
+                </div>
+
+                <div class="assessment">
+                    <h4>🎯 Final Completion Checklist</h4>
+                    <div style="margin-top: 15px;">
+                        <p style="margin-bottom: 12px;"><strong>Before submitting your lastname_final document, confirm your presentation:</strong></p>
+                        <ul class="req-list">
+                            <li>Is 5–8 minutes in length</li>
+                            <li>Explains how your Google Site is stored, edited, and accessed on the web</li>
+                            <li>Briefly describes the graphics and video tools used</li>
+                            <li>Addresses all prompts A–F by visiting each website page</li>
+                            <li>Explains how Google Forms and Sheets were used to collect and analyze data (on Survey page)</li>
+                            <li>Navigates to your most useful web source on the References page</li>
+                            <li>Speaks in your own words — does not read the website verbatim</li>
+                            <li>Video URL is shareable and accessible</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top: 20px; background: white; border-radius: 8px; padding: 20px; border: 2px dashed #4a00e0;">
+                        <p style="font-weight: bold; color: #4a00e0; margin-bottom: 10px;">📎 Final Submission</p>
+                        <p style="color: #555; font-size: .93rem;">Submit your completed <strong>lastname_final</strong> Google Document (containing your website URL and video presentation link) via Brightspace by the due date specified by your instructor.</p>
+                    </div>
+                </div>
+
+                <div class="whats-next">
+                    <h5>🎓 Course Complete — Congratulations!</h5>
+                    <p>You've successfully completed CSC101 — Intro to Computing &amp; AI. From AI fundamentals to programming, cybersecurity, data science, visualization, and now your final project — you've built a genuine, broad understanding of how computing shapes the world. Go share that story!</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /lessons-section -->
+
+    <!-- ═══════════════ SUMMARY ═══════════════ -->
+    <div class="summary-section">
+        <h2>Chapter 14 Summary: Key Takeaways</h2>
+        <p style="color:#666;margin-bottom:20px;"><strong>Congratulations!</strong> You've completed Chapter 14: Impact of AI — Final Project. Here's what you've accomplished:</p>
+
+        <h3 style="color:#4a00e0;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Core Concepts</h3>
+        <ul class="summary-bullets">
+            <li><strong>Two required components:</strong> A multi-page Google Site and a 5–8 minute presentation (Part 1 and Part 2)</li>
+            <li><strong>Critical analysis vs. description:</strong> Successful projects examine impacts, risks, and evidence — not just describe what AI is</li>
+            <li><strong>Six research prompts (A–F):</strong> Background, CS Connections, Benefits/Concerns, Impact on Society, Future Outlook, and AI Ethics Statement</li>
+            <li><strong>Four AI ethics principles:</strong> Transparency, Attribution, Responsibility, and Authenticity — all must be addressed in Prompt F</li>
+            <li><strong>Source reliability matters:</strong> Always verify AI-generated information against credible, citable sources</li>
+            <li><strong>Google Sites:</strong> Stored on Google's cloud, edited in the browser, accessed via a public URL after publishing</li>
+        </ul>
+
+        <h3 style="color:#4a00e0;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Skills You've Demonstrated</h3>
+        <ul class="summary-bullets">
+            <li>Research and critically analyze the impact of a computing innovation on society</li>
+            <li>Build a multi-page Google Site incorporating digital artifacts from across the semester</li>
+            <li>Write an AI ethics statement addressing all four principles with specific examples</li>
+            <li>Cite reliable sources in proper format</li>
+            <li>Deliver a clear, organized 5–8 minute presentation touring your website in your own words</li>
+            <li>Connect all course topics (AI, programming, cybersecurity, data, visualization) through a unified project</li>
+        </ul>
+
+        <h3 style="color:#4a00e0;margin-top:25px;margin-bottom:15px;font-size:1.3em;">Remember</h3>
+        <div style="background:#f3eeff;padding:20px;border-radius:6px;border-left:4px solid #4a00e0;">
+            <p style="margin:0;color:#333;line-height:1.8;">Your final project is not just an assignment — it's evidence of what you've learned to do. You've gone from knowing little about computing to being able to critically examine how AI shapes society, collect and visualize data, build a website, and communicate your findings. That's the kind of thinking that matters in a world increasingly shaped by computing innovations.</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════ COMING NEXT ═══════════════ -->
+    <div class="coming-next-section">
+        <h2>🎓 Course Complete!</h2>
+        <p>You've reached the end of CSC101 — Intro to Computing &amp; AI. From Week 0 to Week 14, you've explored artificial intelligence, programming, cybersecurity, the internet, data science, and how all of these shape society.</p>
+        <p style="margin-top: 15px; font-size: 0.95em; opacity: 0.95;">Don't forget: your final exam reviews concepts from across all 14 chapters. Use your study guide and course materials to prepare — the knowledge you've built this semester is your foundation.</p>
+        <div class="progress-indicator">
+            <p>🏆 You have completed all 14 chapters of CSC101!</p>
+        </div>
+    </div>
+
+</div><!-- /container -->
+
+<script>
+    function toggleAnswer(id) {
+        const el = document.getElementById(id);
+        const btn = el.previousElementSibling;
+        el.classList.toggle('show');
+        btn.textContent = el.classList.contains('show') ? 'Hide Answer' : 'Show Answer';
+    }
+</script>
+</body>
+</html>
