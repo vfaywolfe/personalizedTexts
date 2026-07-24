@@ -1,0 +1,2 @@
+From my GitHub repo vfaywolfe/personalizedTexts, read the file(s) in email_templates/. Then pull the HubSpot contact record for [Name] with his properties and recent activity, 
+and using the template's rules and his record, draft an appropriate email and create it as a draft in the connected Gmail account.
