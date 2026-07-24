@@ -41,8 +41,7 @@
 
 ## Body — Tier 2 (name + department only)
 
-Subject options: "The {{discipline}} textbook you'd actually edit" ·
-"CuraCourse: An interactive textbook for {{discipline}}" · "{{discipline}} students, learning by doing"
+Subject "CuraCourse Teach Your Way - Author Your Own Textbook Quickly and Easily"
 Hi Professor {{lastname}},
 
 I'm writing to {{discipline}} faculty at {{institution}} because most of us teach from a textbook that almost works — a chapter that doesn't fit the syllabus, examples that feel dated, no way to just edit the thing.
